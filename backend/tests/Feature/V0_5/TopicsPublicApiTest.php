@@ -82,22 +82,30 @@ final class TopicsPublicApiTest extends TestCase
         $bytes = file_get_contents(base_path('content_assets/public_content_53/'.$name));
         $sha = hash('sha256', "fermatmind.traditional_topics.v1\n".$name."\n".hash('sha256', $bytes)."\n");
         $row = app(PublicContent53Package::class)->read(base_path(), $sha)['candidates'][0];
+        $slug = $row['identity']['slug'];
         $original = $row['source_snapshot'];
         $source = new TopicProfile;
         $source->forceFill([
-            'id' => $row['source_id'], 'org_id' => 0, 'slug' => 'big-five', 'topic_code' => 'big-five',
+            'id' => $row['source_id'], 'org_id' => 0, 'slug' => $slug, 'topic_code' => $row['native_draft']['profile']['topic_code'],
             'locale' => 'zh-CN', 'status' => 'published', 'is_public' => true, 'is_indexable' => true,
         ] + array_intersect_key($original, array_flip(['title', 'subtitle', 'excerpt', 'hero_kicker', 'hero_quote', 'cover_image_url'])))->save();
         $source->sections()->createMany($original['sections']);
         $source->seoMeta()->create(['seo_title' => $original['seo_text']['title'], 'seo_description' => $original['seo_text']['description']]);
-        $originalEntry = $original['entry_groups']['tests'][0];
-        $source->entries()->create([
-            'entry_type' => 'scale', 'group_key' => 'tests', 'target_key' => $originalEntry['target_key'],
-            'title_override' => $originalEntry['title'], 'excerpt_override' => $originalEntry['excerpt'],
-            'badge_label' => $originalEntry['badge_label'], 'cta_label' => $originalEntry['cta_label'],
-            'is_featured' => true, 'is_enabled' => true,
-        ]);
-        $this->createScaleRegistryRow($originalEntry['target_key'], basename($originalEntry['url']));
+        $sortOrder = 0;
+        foreach ($original['entry_groups'] as $groupKey => $entries) {
+            foreach ($entries as $entry) {
+                $source->entries()->create([
+                    'entry_type' => $entry['entry_type'], 'group_key' => $groupKey, 'target_key' => $entry['target_key'],
+                    'title_override' => $entry['title'], 'excerpt_override' => $entry['excerpt'],
+                    'badge_label' => $entry['badge_label'], 'cta_label' => $entry['cta_label'],
+                    'is_featured' => $entry['is_featured'], 'is_enabled' => true, 'sort_order' => ++$sortOrder,
+                    'target_url_override' => $entry['entry_type'] === 'custom_link' ? $entry['url'] : null,
+                ]);
+                if ($entry['entry_type'] === 'scale') {
+                    $this->createScaleRegistryRow($entry['target_key'], basename($entry['url']));
+                }
+            }
+        }
         $digest = str_repeat('a', 64);
         $context = new PromotionContext('content_assets/public_content_53', $sha, 'W3', 'PUBLIC-CONTENT-53',
             str_repeat('b', 40), $digest, $digest, '1', 1, $digest, 1, $digest);
@@ -108,15 +116,20 @@ final class TopicsPublicApiTest extends TestCase
         $result = DB::transaction(fn () => $writer->publish($context, $before));
         $this->assertSame(1, $result['created_count']);
         $states->assertPublished([$row], $result['state']);
-        $this->getJson('/api/v0.5/topics/big-five?locale=zh-TW')->assertOk()
+        $public = $this->getJson('/api/v0.5/topics/'.$slug.'?locale=zh-TW')->assertOk()
             ->assertJsonPath('profile.title', $row['snapshot']['title'])
-            ->assertJsonPath('entry_groups.tests.0.url', $row['snapshot']['entry_groups']['tests'][0]['url'])
+            ->assertJsonPath('sections', $row['snapshot']['sections'])
             ->assertJsonPath('seo_meta.robots', 'noindex,follow');
+        foreach ($row['snapshot']['entry_groups'] as $groupKey => $entries) {
+            foreach ($entries as $index => $entry) {
+                $public->assertJsonPath('entry_groups.'.$groupKey.'.'.$index.'.url', $entry['url']);
+            }
+        }
         $this->assertSame(0, DB::transaction(fn () => $writer->publish($context, $result['state']))['written_count']);
 
         DB::transaction(fn () => $writer->restore($context, $before, $result['state']));
-        $this->getJson('/api/v0.5/topics/big-five?locale=zh-TW')->assertNotFound();
-        $this->getJson('/api/v0.5/topics/big-five?locale=zh-CN')->assertOk()->assertJsonPath('profile.title', $original['title']);
+        $this->getJson('/api/v0.5/topics/'.$slug.'?locale=zh-TW')->assertNotFound();
+        $this->getJson('/api/v0.5/topics/'.$slug.'?locale=zh-CN')->assertOk()->assertJsonPath('profile.title', $original['title']);
         $retained = $states->read($sha);
         $this->assertTrue($retained[$row['page_id']]['retained_draft']);
         $this->assertSame(1, DB::transaction(fn () => $writer->publish($context, $retained))['written_count']);

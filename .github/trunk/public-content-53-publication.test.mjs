@@ -680,11 +680,12 @@ test('Taiwan topic publishes the native body and exact public reader links with 
  assert.equal(row.new_traditional_topic,true);
  assert.equal(row.identity.locale,'zh-TW');
  const path=pathFor(row);
- const target=row.snapshot.entry_groups.tests[0].url;
- const html=`<html lang="zh-TW"><head><meta charset="utf-8"><link rel="canonical" href="https://fermatmind.com${path}"><meta name="robots" content="noindex,follow"></head><body><main><h1>${row.snapshot.title}</h1>${row.snapshot.sections.map(section=>`<h2>${section.title}</h2>`).join('')}<a href="/zh-TW/topics">主題總覽</a><a href="/zh/topics/big-five">简体中文</a><a href="/en/topics/big-five">English</a><a href="${target}">開始測驗</a></main></body></html>`;
+ const targets=Object.values(row.snapshot.entry_groups).flat().map(entry=>entry.url);
+ assert.ok(targets.length>0 && targets.every(target=>target.startsWith('/zh-TW/')));
+ const html=`<html lang="zh-TW"><head><meta charset="utf-8"><link rel="canonical" href="https://fermatmind.com${path}"><meta name="robots" content="noindex,follow"></head><body><main><h1>${row.snapshot.title}</h1>${row.snapshot.sections.map(section=>`<h2>${section.title}</h2>`).join('')}<a href="/zh-TW/topics">主題總覽</a><a href="/zh/topics/${row.identity.slug}">简体中文</a><a href="/en/topics/${row.identity.slug}">English</a>${targets.map(target=>`<a href="${target}">開始測驗</a>`).join('')}</main></body></html>`;
  assert.doesNotThrow(()=>assertDom(row,html,{missing:true},'production'));
  assert.throws(()=>assertDom(row,html.replace('noindex','index'),{missing:true},'production'),/TRADITIONAL_TOPIC_DOM/);
- assert.throws(()=>assertDom(row,html.replace(target,target.replace('/zh-TW/','/zh/')),{missing:true},'production'),/TRADITIONAL_TOPIC_DOM/);
+ assert.throws(()=>assertDom(row,html.replace(targets[0],targets[0].replace('/zh-TW/','/zh/')),{missing:true},'production'),/TRADITIONAL_TOPIC_DOM/);
 });
 
 test('new sample SEO requires exact reciprocal routes, environment robots, schema and visible prose',()=>{
