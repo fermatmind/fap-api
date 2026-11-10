@@ -455,10 +455,13 @@ export function assertDom(row,html,before,environment, {articleSsr=false}={}) {
         || (testSlug && !(dom.link_labels['/en/tests/'+testSlug] ?? []).some(label=>compact(label) === '開始測驗')))
         throw new Error('PUBLIC_CONTENT_53_TRADITIONAL_ENGLISH_READER_LINK');
     }
-    const assessment = row.source_expectations?.source_snapshot_kind === 'published_projection'
-      && !row.editorial_package_v1?.cta_slots?.length && row.article_metadata?.related_test_slug;
-    if (assessment && !(dom.link_labels['/zh/tests/'+assessment] ?? []).some(label=>compact(label) === '開始測驗'))
-      throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_ARTICLE_ASSESSMENT_LINK_${row.page_id}`);
+    if (row.source_expectations?.source_snapshot_kind === 'published_projection' && !row.editorial_package_v1?.cta_slots?.length) {
+      // A related-test identifier can be present without a published CTA.
+      const related = row.article_metadata?.related_test_slug;
+      const assessments = row.reviewed_default_assessment_ctas ?? (related ? ['/zh/tests/'+related] : []);
+      if (assessments.some(href=>!(dom.link_labels[href] ?? []).some(label=>compact(label) === '開始測驗')))
+        throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_ARTICLE_ASSESSMENT_LINK_${row.page_id}`);
+    }
     const editorial = row.snapshot.editorial_projection;
     if (editorial && (editorial.faq.some(({question})=>!body.includes(compact(question)) && !body.includes(compact(plain(question))))
       || editorial.ctas?.some(({href,label})=>!(dom.link_labels[href] ?? []).some(value=>compact(value) === compact(label)))))

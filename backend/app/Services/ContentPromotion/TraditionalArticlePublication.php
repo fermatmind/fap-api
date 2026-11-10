@@ -315,6 +315,9 @@ final class TraditionalArticlePublication
             'staging_source_article_id' => $proofs['staging']['source']['id'],
             'staging_source_taxonomy' => $batch && $environment === 'staging' ? $stagingTaxonomy : null,
             'source_expectations' => $proofs[$environment] + ($projectedBatch ? ['source_snapshot_kind' => $sourceSnapshotKind] : []),
+            'reviewed_default_assessment_ctas' => isset($proofs['production']['editorial_cta_targets'])
+                ? array_column(array_filter($proofs['production']['editorial_cta_targets'], static fn (array $cta): bool => $cta['kind'] === 'start_test'), 'href')
+                : null,
             'allow_staging_prepared_root' => $environment === 'staging',
             'article_metadata' => $article,
             'editorial_package_v1' => $editorial,

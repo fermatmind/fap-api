@@ -1633,3 +1633,25 @@ test('Traditional relationship and guide articles preserve reviewed FAQs and exa
   assert.equal(Object.hasOwn(rows[4].source_expectations.source,'legacy_cover_image_alt'),environment==='production');
  }
 });
+
+test('Traditional article uses the reviewed visible assessment CTA rather than a related-test identifier',()=>{
+ const root=resolve(fileURLToPath(new URL('../../backend',import.meta.url)));
+ const selection='traditional-article-relationship-and-guides';
+ const binding=inspectPackage(root,selection);
+ for (const environment of ['staging','production']) {
+  const rows=readCandidateRows(root,binding.package_sha256,environment).candidates;
+  const article=rows.find(row=>row.identity.slug==='seven-deadly-sins-and-seven-virtues');
+  assert.equal(article.article_metadata.related_test_slug,'seven-sins-virtues-test');
+  assert.equal(article.source_expectations.editorial_cta_targets.some(cta=>cta.kind==='start_test'),false);
+  const fixture={...article,snapshot:{content_md:'繁體文章'}};
+  const html='<html lang="zh-TW"><head><meta charset="utf-8"><meta name="robots" content="noindex"><link rel="canonical" href="https://fermatmind.com'+pathFor(article)+'"></head><body><main><h1>繁體文章</h1></main></body></html>';
+  assert.doesNotThrow(()=>assertDom(fixture,html,{missing:true},environment));
+
+  const iq=rows.find(row=>row.identity.slug==='can-chatgpt-estimate-your-iq');
+  const href=iq.source_expectations.editorial_cta_targets.find(cta=>cta.kind==='start_test').href;
+  const iqFixture={...iq,snapshot:{content_md:'繁體文章'}};
+  const iqHtml=html.replace(pathFor(article),pathFor(iq));
+  assert.throws(()=>assertDom(iqFixture,iqHtml,{missing:true},environment),/TRADITIONAL_ARTICLE_ASSESSMENT_LINK/);
+  assert.doesNotThrow(()=>assertDom(iqFixture,iqHtml.replace('</main>','<a href="'+href+'">開始測驗</a></main>'),{missing:true},environment));
+ }
+});
