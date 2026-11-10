@@ -144,7 +144,7 @@ export async function recoverPreviousStagingIndex(env, {
     || command('git', ['rev-parse', 'HEAD']) !== env.DEPLOY_SHA) {
     throw new Error('PUBLIC_CONTENT_53_PREVIOUS_STAGING_SCOPE_INVALID');
   }
-  const backendRoot = resolve('backend');
+  const backendRoot = fileURLToPath(new URL('../../backend', import.meta.url));
   const digest = packageDigest(backendRoot, selection);
   const expected = readCandidateRows(backendRoot, digest, 'staging').candidates
     .map(row => new URL(row.traditional_article_index.target.canonical).pathname).sort();
