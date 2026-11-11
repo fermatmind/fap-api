@@ -8,6 +8,7 @@ use App\Models\Attempt;
 use App\Models\ReportSnapshot;
 use App\Models\Result;
 use App\Services\Report\Pdf\Mbti\MbtiPdfPayloadBuilder;
+use App\Services\Report\ReportAccess;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Mpdf\Mpdf;
@@ -56,6 +57,17 @@ final class ReportPdfDocumentService
     {
         return strtoupper(trim((string) $attempt->scale_code)) === 'BIG5_OCEAN'
             && in_array(strtolower(trim((string) $attempt->locale)), ['zh', 'zh-cn'], true);
+    }
+
+    public static function supportsTraditionalIqPdf(Attempt $attempt): bool
+    {
+        return ReportAccess::isIqScale((string) $attempt->scale_code)
+            && $attempt->locale === 'zh-CN';
+    }
+
+    public static function supportsTraditionalReportPdf(Attempt $attempt): bool
+    {
+        return self::supportsTraditionalBigFivePdf($attempt) || self::supportsTraditionalIqPdf($attempt);
     }
 
     public static function supportsTraditionalMbtiResultPagePdf(Attempt $attempt): bool
@@ -387,7 +399,7 @@ final class ReportPdfDocumentService
      */
     public function getOrGenerate(Attempt $attempt, array $gate, ?Result $result = null, ?string $displayLocale = null): array
     {
-        if ($displayLocale !== null && ($displayLocale !== 'zh-TW' || ! self::supportsTraditionalBigFivePdf($attempt))) {
+        if ($displayLocale !== null && ($displayLocale !== 'zh-TW' || ! self::supportsTraditionalReportPdf($attempt))) {
             throw new \InvalidArgumentException('Unsupported report PDF display locale.');
         }
 
@@ -421,6 +433,9 @@ final class ReportPdfDocumentService
         }
         if ($iqView !== null) {
             $manifestHash = hash('sha256', json_encode([$manifestHash, $iqView], JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+            if ($displayLocale === 'zh-TW') {
+                $manifestHash = hash('sha256', $manifestHash.'|zh-TW|'.IqReportPdfRenderer::TAIWAN_COPY_VERSION.'|'.BigFiveTaiwanPdfCopy::revision());
+            }
         }
         $path = $this->artifactStore->path(
             (string) ($attempt->scale_code ?? 'UNKNOWN'),
@@ -478,7 +493,7 @@ final class ReportPdfDocumentService
         $normEvidence = is_array($report['norms'] ?? null) ? $report['norms'] : [];
 
         $pdfBinary = match ($scaleCode) {
-            'IQ_RAVEN', 'IQ_INTELLIGENCE_QUOTIENT' => app(IqReportPdfRenderer::class)->render($iqView),
+            'IQ_RAVEN', 'IQ_INTELLIGENCE_QUOTIENT' => app(IqReportPdfRenderer::class)->render($iqView, $displayLocale),
             'BIG5_OCEAN' => app(BigFiveReportPdfRenderer::class)->render($report, $displayLocale ?? (string) $attempt->locale, $locked),
             'MBTI' => $this->buildMbtiDocument($attempt, $result, $locked),
             default => $this->buildDocument(

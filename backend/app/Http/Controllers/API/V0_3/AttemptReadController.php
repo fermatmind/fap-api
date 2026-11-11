@@ -1244,6 +1244,7 @@ class AttemptReadController extends Controller
             'pdf_state' => $pdfState,
             ...(ReportPdfDocumentService::supportsTraditionalMbtiResultPagePdf($attempt)
                 || ReportPdfDocumentService::supportsTraditionalBigFivePdf($attempt)
+                || ($pdfState === 'ready' && ReportPdfDocumentService::supportsTraditionalIqPdf($attempt))
                 ? ['pdf_display_locales' => ['zh-TW']] : []),
             'reason_code' => $reasonCode !== '' ? $reasonCode : null,
             'projection_version' => $projectionVersion,
@@ -3149,14 +3150,14 @@ class AttemptReadController extends Controller
         $locked = (bool) ($gate['locked'] ?? false);
         $pdfMetadata = $this->reportPdfDocumentService->metadata($attempt, $gate, $result);
         $displayLocale = $request->query('display_locale');
-        if ($displayLocale !== null && ($displayLocale !== 'zh-TW' || ! ReportPdfDocumentService::supportsTraditionalBigFivePdf($attempt))) {
+        if ($displayLocale !== null && ($displayLocale !== 'zh-TW' || ! ReportPdfDocumentService::supportsTraditionalReportPdf($attempt))) {
             return $this->privateNoStoreJson([
                 'ok' => false, 'error_code' => 'PDF_DISPLAY_LOCALE_UNAVAILABLE',
                 'message' => 'The requested PDF display language is unavailable for this report.',
             ], 422);
         }
         $fileName = $displayLocale === 'zh-TW'
-            ? 'fermatmind-big-five-zh-TW.pdf'
+            ? (ReportPdfDocumentService::supportsTraditionalIqPdf($attempt) ? 'fermatmind-iq-zh-TW.pdf' : 'fermatmind-big-five-zh-TW.pdf')
             : $this->reportPdfDocumentService->fileNameForAttempt($attempt, $gate, $result);
         if ($displayLocale === 'zh-TW') {
             $pdfMetadata['filename_hint'] = $fileName;

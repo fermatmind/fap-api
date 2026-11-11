@@ -193,6 +193,34 @@ final class IqReportPdfTest extends TestCase
         $this->assertStringContainsString('fermatmind-iq-original30-zh.pdf', $response->headers->get('Content-Disposition'));
     }
 
+    public function test_taiwan_pdf_keeps_scored_content_and_uses_a_private_separate_artifact(): void
+    {
+        [$attempt, $result, $gate] = $this->fixture('zh-CN', persist: true);
+        $view = app(IqReportPdfProjection::class)->project($attempt, $result, $gate);
+        $html = app(IqReportPdfRenderer::class)->html($view, 'zh-TW');
+        foreach (['lang="zh-TW"', '原創 30 題矩陣推理報告', '視覺空間模式推理', '解讀限制',
+            '21 / 30', '70%', '02:10', 'owner30_design_anchors_2026_10_14_v1'] as $text) {
+            $this->assertStringContainsString($text, $html);
+        }
+
+        Storage::fake('local');
+        $headers = $this->ownerHeaders((string) $attempt->anon_id);
+        $path = '/api/v0.3/attempts/'.$attempt->id;
+        $this->withHeaders($headers)->getJson($path.'/report-access')
+            ->assertOk()->assertJsonPath('pdf_display_locales', ['zh-TW']);
+        $source = $this->get($path.'/report.pdf')->assertOk()->assertHeader('X-Pdf-Artifact-Cache', 'MISS');
+        $taiwan = $this->get($path.'/report.pdf?display_locale=zh-TW')->assertOk()
+            ->assertHeader('Content-Disposition', 'attachment; filename="fermatmind-iq-zh-TW.pdf"')
+            ->assertHeader('X-Pdf-Artifact-Cache', 'MISS');
+        $this->assertStringContainsString('no-store', $taiwan->headers->get('Cache-Control'));
+        $this->assertNotSame($source->getContent(), $taiwan->getContent());
+        $cached = $this->get($path.'/report.pdf?display_locale=zh-TW')->assertOk()
+            ->assertHeader('X-Pdf-Artifact-Cache', 'HIT');
+        $this->assertSame($taiwan->getContent(), $cached->getContent());
+        $this->withHeaders($this->ownerHeaders('synthetic-other-owner'))
+            ->get($path.'/report.pdf?display_locale=zh-TW')->assertNotFound();
+    }
+
     public function test_generation_failure_is_private_sanitized_and_does_not_write_an_artifact(): void
     {
         [$a, $r] = $this->fixture('en', persist: true);
