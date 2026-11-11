@@ -679,7 +679,7 @@ $stagingHost = host('staging')
     ->set('nginx_site', '/etc/nginx/sites-enabled/fap-api-staging')
     ->set('php_fpm_service', getenv('PHP_FPM_SERVICE_STG') ?: 'php8.4-fpm')
     ->set('career_recommendation_publish_required', false)
-    ->set('keep_releases', 3)
+    ->set('keep_releases', 2)
     ->set('queue_supervisor_required_programs', [
         'fap-queue-reports',
     ])

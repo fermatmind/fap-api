@@ -79,6 +79,25 @@ PHP;
     }
 
     #[Test]
+    public function staging_keeps_two_recent_releases_and_all_protected_releases(): void
+    {
+        $source = (string) file_get_contents(dirname(__DIR__, 3).'/deploy.php');
+        $staging = substr($source, strpos($source, '$stagingHost = host('));
+        self::assertMatchesRegularExpression("/->set\('keep_releases', 2\)/", strstr($staging, ']);', true));
+        self::assertStringContainsString("set('keep_releases', 5);", $source);
+        self::assertSame(1, preg_match('/function deployReleaseRetentionCandidates\(.*?\n\}\n/s', $source, $function));
+        $cases = <<<'PHP'
+echo json_encode([
+    deployReleaseRetentionCandidates(['r3', 'r2', 'r1'], 2, ['r3', 'r2']),
+    deployReleaseRetentionCandidates(['r3', 'r2', 'r1'], 2, ['r3', 'r1']),
+]);
+PHP;
+        $process = new Process([PHP_BINARY, '-r', $function[0].$cases]);
+        $process->mustRun();
+        self::assertSame([['r1'], []], json_decode($process->getOutput(), true, flags: JSON_THROW_ON_ERROR));
+    }
+
+    #[Test]
     public function failed_candidates_do_not_displace_live_rollback_or_prepared_releases(): void
     {
         $result = $this->exercise(false);

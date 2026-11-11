@@ -34,7 +34,7 @@ Production API 的运行约束：
 
 - backend/CMS/public API 是文章、landing、personality、Career、metadata、sitemap 和 llms enumeration authority。
 - managed deploy 结构保持 `releases`、`current` symlink、shared env、shared storage 与 shared content packages。
-- production backend `keep_releases=5`；staging `keep_releases=3`。
+- production backend `keep_releases=5`；staging `keep_releases=2`。序列化清理额外保护当前版本、回滚版本及已准备的候选版本。
 - release activation 前会删除 allowlisted 的非 runtime 目录，避免 `.agents`、`.github`、`.vscode`、`docs`、`tests` 与 `backend/tests` 长期占用发布盘。
 - Greenfield baseline 是迁移/恢复包，不是 runtime page-rendering fallback。当前基线故意保留 342 tracked / 30 public Career projection，不能被解释为 1046 authority。
 
