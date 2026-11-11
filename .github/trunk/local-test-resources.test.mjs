@@ -157,7 +157,7 @@ const classifierToolSetup=()=>readFileSync(join(root,'.github/workflows/ci.yml')
 
 test('classifier APT fetches are visible, bounded and strict about partial update failure',()=>{
  const script=classifierToolSetup();
- const commands=script.split('\n').filter(line=>line.startsWith('sudo apt-get '));
+ const commands=script.split('\n').map(line=>line.trim()).filter(line=>line.startsWith('sudo apt-get '));
  assert.equal(commands.length,2);
  for(const command of commands){
   assert.match(command,/-o Acquire::Retries=0/);
@@ -172,12 +172,14 @@ test('classifier APT fetches are visible, bounded and strict about partial updat
 test('classifier tool preparation preserves success and stops on acquisition or final guard failures',async t=>{
  const bash=spawnSync('bash',['-c','command -v bash'],{encoding:'utf8'}).stdout.trim();
  for(const scenario of [
-  {name:'success',status:0,aptCalls:2,phpCalls:1},
-  {name:'strict partial update failure',update:100,status:100,aptCalls:1,phpCalls:0},
-  {name:'acquisition timeout failure',update:100,status:100,aptCalls:1,phpCalls:0},
-  {name:'install failure',install:100,status:100,aptCalls:2,phpCalls:0},
-  {name:'missing required rg',missing:'rg',status:127,aptCalls:2,phpCalls:0},
-  {name:'missing SQLite extension',php:1,status:1,aptCalls:2,phpCalls:1},
+  {name:'runner tools present',status:0,aptCalls:0,phpCalls:2},
+  {name:'missing rg uses verified release',missing:'rg',status:0,aptCalls:0,phpCalls:2,download:true},
+  {name:'rg checksum mismatch stops before extraction',missing:'rg',checksum:1,status:1,aptCalls:0,phpCalls:1,download:true},
+  {name:'strict partial update failure',missing:'lsof',update:100,status:100,aptCalls:1,phpCalls:0},
+  {name:'acquisition timeout failure',missing:'lsof',update:100,status:100,aptCalls:1,phpCalls:0},
+  {name:'install failure',missing:'lsof',install:100,status:100,aptCalls:2,phpCalls:0},
+  {name:'missing required tool after install',missing:'lsof',status:127,aptCalls:2,phpCalls:0},
+  {name:'missing SQLite extension after install',php:1,status:1,aptCalls:2,phpCalls:2},
  ])await t.test(scenario.name,()=>{
   const directory=mkdtempSync(join(tmpdir(),'fm-classifier-tools-'));const bin=join(directory,'bin');
   try{
@@ -193,14 +195,29 @@ case " $* " in
  *) exit 99;;
 esac`);
    executable('php',`printf 'php\\n' >> "$PHP_PROBE_LOG"; exit ${scenario.php??0}`);
-   const aptLog=join(directory,'apt.log'),phpLog=join(directory,'php.log');
+   const release='ripgrep-15.1.0-x86_64-unknown-linux-musl';
+   mkdirSync(join(directory,release));
+   executable('curl','printf "curl\\n" >> "$RG_PROBE_LOG"');
+   executable('sha256sum',`read -r digest archive
+[[ "$digest" == 1c9297be4a084eea7ecaedf93eb03d058d6faae29bbc57ecdaf5063921491599 ]]
+[[ "$archive" == "$RUNNER_TEMP/${release}.tar.gz" ]]
+printf 'sha256sum\\n' >> "$RG_PROBE_LOG"
+exit ${scenario.checksum??0}`);
+   executable('tar',`printf 'tar\\n' >> "$RG_PROBE_LOG"
+printf '#!%s\\nexit 0\\n' "${bash}" > "$RUNNER_TEMP/${release}/rg"
+"$CHMOD" 755 "$RUNNER_TEMP/${release}/rg"`);
+   const aptLog=join(directory,'apt.log'),phpLog=join(directory,'php.log'),rgLog=join(directory,'rg.log'),githubPath=join(directory,'github.path');
+   const chmod=spawnSync('bash',['-c','command -v chmod'],{encoding:'utf8'}).stdout.trim();
    const result=spawnSync(bash,['-e','-o','pipefail','-c',classifierToolSetup()],{
-    cwd:directory,encoding:'utf8',env:{PATH:bin,APT_PROBE_LOG:aptLog,PHP_PROBE_LOG:phpLog},timeout:5000,
+    cwd:directory,encoding:'utf8',env:{PATH:bin,RUNNER_TEMP:directory,GITHUB_PATH:githubPath,CHMOD:chmod,APT_PROBE_LOG:aptLog,PHP_PROBE_LOG:phpLog,RG_PROBE_LOG:rgLog},timeout:5000,
    });
+   const calls=file=>existsSync(file)?readFileSync(file,'utf8').trim().split('\n'):[];
    assert.equal(result.status,scenario.status,result.stderr);
-   assert.equal(readFileSync(aptLog,'utf8').trim().split('\n').length,scenario.aptCalls);
-   assert.equal(existsSync(phpLog)?readFileSync(phpLog,'utf8').trim().split('\n').length:0,scenario.phpCalls);
-   if(scenario.missing)assert.match(result.stderr,/missing required tool: rg/);
+   assert.equal(calls(aptLog).length,scenario.aptCalls);
+   assert.equal(calls(phpLog).length,scenario.phpCalls);
+   assert.deepEqual(calls(rgLog),scenario.download?(scenario.checksum?['curl','sha256sum']:['curl','sha256sum','tar']):[]);
+   assert.deepEqual(calls(githubPath),scenario.download&&!scenario.checksum?[join(directory,release)]:[]);
+   if(scenario.missing==='lsof')assert.match(result.stderr,/missing required tool: lsof/);
   }finally{rmSync(directory,{recursive:true,force:true});}
  });
 });
