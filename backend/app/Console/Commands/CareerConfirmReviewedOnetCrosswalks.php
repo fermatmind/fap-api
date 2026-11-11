@@ -15,7 +15,7 @@ use Throwable;
 final class CareerConfirmReviewedOnetCrosswalks extends Command
 {
     protected $signature = 'career:confirm-reviewed-onet-crosswalks
-        {--report= : Path to the reviewed 618-occupation evidence report}
+        {--report= : Path to the frozen occupation evidence report}
         {--sha256= : SHA-256 of those exact report bytes}
         {--apply : Confirm the selected crosswalks in one transaction}';
 
@@ -32,10 +32,12 @@ final class CareerConfirmReviewedOnetCrosswalks extends Command
             }
 
             $report = json_decode($bytes, true, flags: JSON_THROW_ON_ERROR);
+            $batchThree = ($report['schema'] ?? null) === 'career.onet-crosswalk-review.batch-3.v1';
+            $cohortSize = $batchThree ? 157 : 618;
             $authority = $reader->authority();
             $manifest = $authority['manifest'];
             if (($report['career_manifest_sha256'] ?? null) !== $manifest['aggregate_sha256']
-                || count($report['rows'] ?? []) !== 618) {
+                || count($report['rows'] ?? []) !== $cohortSize) {
                 throw new RuntimeException('Review report does not match the installed Career manifest and cohort.');
             }
 
@@ -55,24 +57,27 @@ final class CareerConfirmReviewedOnetCrosswalks extends Command
                     || isset($manifest['identity_scopes'][$slug])
                     || preg_match('/^\d{2}-\d{4}\.\d{2}$/D', $code) !== 1
                     || ($row['soc'] ?? null) !== substr($code, 0, 7)
-                    || ! in_array($row['title_evidence'] ?? null, ['official_title', 'unique_alias'], true)
+                    || ! $this->hasTitleEvidence($row, $batchThree)
                     || count(array_unique($row['official_core_task_ids'] ?? [])) < 2
                     || count($row['bilingual_task_counts'] ?? []) !== 2
                     || min($row['bilingual_task_counts']) < 3
                     || count($row['vector'] ?? []) !== 6
+                    || ($batchThree && ! $this->hasBoundEvidence($row, $authority['entries'][$slug]))
                     || ! $reader->hasPublicBody($slug, 'en') || ! $reader->hasPublicBody($slug, 'zh-CN')) {
                     throw new RuntimeException("Invalid mapping evidence for {$slug}.");
                 }
                 $selected[$slug] = $code;
             }
-            if ($selected === [] || count($selected) !== ($report['review_pass'] ?? null)) {
+            if ((! $batchThree && $selected === []) || count($selected) !== ($report['review_pass'] ?? null)) {
                 throw new RuntimeException('Reviewed selection count does not match.');
             }
             ksort($selected);
             $apply = (bool) $this->option('apply');
 
-            $changes = DB::transaction(function () use ($selected, $apply): array {
+            $result = DB::transaction(function () use ($selected, $apply, $batchThree): array {
                 $changes = [];
+                $confirmedSlugs = [];
+                $held = [];
                 foreach ($selected as $slug => $code) {
                     $occupation = Occupation::query()->where('canonical_slug', $slug)->lockForUpdate()->first();
                     $rows = $occupation?->crosswalks()->whereIn('source_system', ['us_soc', 'onet_soc_2019'])->lockForUpdate()->get();
@@ -82,12 +87,24 @@ final class CareerConfirmReviewedOnetCrosswalks extends Command
                     $soc = $socRows?->first();
                     if ($onetRows?->count() !== 1 || $socRows?->count() !== 1 || $onet->source_code !== $code
                         || $soc->source_code !== substr($code, 0, 7) || $soc->mapping_type !== 'direct_match') {
+                        if ($batchThree) {
+                            $held[$slug] = 'live_crosswalk_differs';
+
+                            continue;
+                        }
                         throw new RuntimeException("Live crosswalk differs for {$slug}.");
                     }
                     if ($onet->mapping_type === 'direct_match' && $onet->confidence_score >= 0.8) {
+                        $confirmedSlugs[] = $slug;
+
                         continue;
                     }
                     if ($onet->mapping_type !== 'directory_candidate' || $onet->confidence_score !== 0.5) {
+                        if ($batchThree) {
+                            $held[$slug] = 'live_mapping_status_differs';
+
+                            continue;
+                        }
                         throw new RuntimeException("Live mapping status differs for {$slug}.");
                     }
 
@@ -102,16 +119,21 @@ final class CareerConfirmReviewedOnetCrosswalks extends Command
                     }
                 }
 
-                return $changes;
+                return ['changes' => $changes, 'confirmed' => $confirmedSlugs, 'held' => $held];
             });
 
-            $this->line(json_encode([
+            $receipt = [
                 'report_sha256' => $digest,
                 'mode' => $apply ? 'apply' : 'dry_run',
                 'selected' => count($selected),
-                'already_confirmed' => count($selected) - count($changes),
-                'changed_or_planned' => $changes,
-            ], JSON_THROW_ON_ERROR));
+                'already_confirmed' => count($result['confirmed']),
+                'changed_or_planned' => $result['changes'],
+            ];
+            if ($batchThree) {
+                $receipt['already_confirmed_slugs'] = $result['confirmed'];
+                $receipt['held'] = $result['held'];
+            }
+            $this->line(json_encode($receipt, JSON_THROW_ON_ERROR));
 
             return self::SUCCESS;
         } catch (Throwable $exception) {
@@ -119,5 +141,31 @@ final class CareerConfirmReviewedOnetCrosswalks extends Command
 
             return self::FAILURE;
         }
+    }
+
+    private function hasTitleEvidence(array $row, bool $batchThree): bool
+    {
+        return in_array($row['title_evidence'] ?? null, ['official_title', 'unique_alias'], true)
+            || ($batchThree && ($row['title_evidence'] ?? null) === 'reviewed_scope'
+                && trim((string) ($row['scope_evidence'] ?? '')) !== '');
+    }
+
+    private function hasBoundEvidence(array $row, array $entries): bool
+    {
+        $fingerprints = $row['body_fingerprints'] ?? [];
+        foreach (['en', 'zh-CN'] as $locale) {
+            if (! isset($fingerprints[$locale], $entries[$locale]['source_content_sha256'])
+                || $fingerprints[$locale] !== $entries[$locale]['source_content_sha256']) {
+                return false;
+            }
+        }
+
+        foreach ($row['vector'] as $value) {
+            if ((! is_int($value) && ! is_float($value)) || $value < 1 || $value > 7) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

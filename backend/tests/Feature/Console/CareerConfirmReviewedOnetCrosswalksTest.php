@@ -70,6 +70,32 @@ final class CareerConfirmReviewedOnetCrosswalksTest extends TestCase
         }
     }
 
+    public function test_batch_three_binds_the_live_body_and_confirms_only_matching_rows(): void
+    {
+        $path = database_path('data/career_onet_crosswalk_review_batch3_20261111.json');
+        $report = json_decode(file_get_contents($path), true, flags: JSON_THROW_ON_ERROR);
+        $rows = array_values(array_filter($report['rows'], static fn (array $row): bool => $row['status'] === 'review_pass'));
+        $eligible = $this->occupation($rows[0]['slug'], $rows[0]['onet']);
+        $changed = $this->occupation($rows[1]['slug'], $rows[1]['onet']);
+        $changed->update(['confidence_score' => 0.4]);
+        $args = ['--report' => $path, '--sha256' => hash_file('sha256', $path)];
+
+        $this->assertSame(0, Artisan::call('career:confirm-reviewed-onet-crosswalks', $args));
+        $receipt = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
+        $this->assertSame([$rows[0]['slug']], $receipt['changed_or_planned']);
+        $this->assertSame('live_mapping_status_differs', $receipt['held'][$rows[1]['slug']]);
+        $this->assertSame('directory_candidate', $eligible->fresh()->mapping_type);
+
+        $this->assertSame(0, Artisan::call('career:confirm-reviewed-onet-crosswalks', $args + ['--apply' => true]));
+        $this->assertSame('direct_match', $eligible->fresh()->mapping_type);
+        $this->assertSame('directory_candidate', $changed->fresh()->mapping_type);
+
+        $this->assertSame(0, Artisan::call('career:confirm-reviewed-onet-crosswalks', $args + ['--apply' => true]));
+        $receipt = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
+        $this->assertSame([], $receipt['changed_or_planned']);
+        $this->assertSame([$rows[0]['slug']], $receipt['already_confirmed_slugs']);
+    }
+
     private function occupation(string $slug, string $code): OccupationCrosswalk
     {
         $family = OccupationFamily::query()->firstOrCreate(['canonical_slug' => 'mapping-family'], ['title_en' => 'Family', 'title_zh' => '职业族']);
