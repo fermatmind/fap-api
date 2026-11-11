@@ -12,6 +12,7 @@ test("directory gzip uses the existing same-SHA staging and production deploymen
   assert.match(task, /get\('nginx_site'\)/);
   assert.match(task, /get\('healthcheck_host'\)/);
   assert.match(deploy, /before\('reload:nginx', 'ensure:career-directory-gzip'\)/);
-  assert.match(ci, /install -y --no-install-recommends nginx-light/);
-  assert.match(ci, /test_career_directory_gzip\.py/);
+  const check = ci.slice(ci.indexOf("- name: Verify Career directory compression and rollback"), ci.indexOf("- name: Validate workflow source when deployment control changed"));
+  assert.match(check, /if ! command -v nginx[^\n]+\n\s+sudo apt-get[^\n]+update\n\s+sudo apt-get[^\n]+install -y --no-install-recommends nginx-light\n\s+fi/);
+  assert.match(check, /nginx -v\n\s+python3 -m unittest discover -v -s backend\/tests\/Sre -p test_career_directory_gzip\.py/);
 });
