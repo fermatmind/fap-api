@@ -10,7 +10,7 @@
     <p style="margin:0 0 16px;">點選下方連結即可回到你的 FermatMind 結果頁。連結有使用期限，請勿轉寄給他人。</p>
 
     @if(!empty($result_access_url))
-        <p style="margin:0 0 12px;"><a href="{{ $result_access_url }}">查看結果（簡體中文）</a></p>
+        <p style="margin:0 0 12px;"><a href="{{ $result_access_url }}">查看結果@if (str_starts_with((string) parse_url($result_access_url, PHP_URL_PATH), '/zh/result/'))（簡體中文）@endif</a></p>
     @endif
     @if(!empty($result_access_token_expires_at))
         <p style="margin:0 0 24px;font-size:13px;color:#52606d;">有效期限：{{ $result_access_token_expires_at }}</p>

@@ -154,6 +154,10 @@ final class ResultEmailLookupService
                     continue;
                 }
 
+                if (strtolower(trim((string) $locale)) === 'zh-tw' && str_starts_with($resultUrl, '/zh/result/')) {
+                    $resultUrl = '/zh-TW'.substr($resultUrl, strlen('/zh'));
+                }
+
                 $this->emailOutbox->queueResultAccessLink(
                     $binding,
                     $email,

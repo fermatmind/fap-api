@@ -192,7 +192,7 @@ final class ResultEmailLookupTest extends TestCase
         $this->assertNotNull($row);
         $this->assertSame('zh-TW', $row->locale);
         $payload = json_decode((string) app(PiiCipher::class)->decrypt((string) $row->payload_enc), true, 64, JSON_THROW_ON_ERROR);
-        $this->assertStringStartsWith('/zh/result/'.$attempt.'?access_token=', $payload['result_access_url']);
+        $this->assertStringStartsWith('/zh-TW/result/'.$attempt.'?access_token=', $payload['result_access_url']);
         $this->assertStringNotContainsString($payload['result_access_token'], (string) $row->payload_json);
     }
 
