@@ -68,7 +68,7 @@ final class CareerConfirmReviewedOnetCrosswalks extends Command
                     || min($row['bilingual_task_counts']) < 3
                     || count($row['vector'] ?? []) !== 6
                     || ($boundEvidence && ! $this->hasBoundEvidence($row, $authority['entries'][$slug]))
-                    || ($batchFive && ! $this->hasTaskBindings($row))
+                    || ($batchFive && ! $this->hasTaskBindings($row, $reader))
                     || ! $reader->hasPublicBody($slug, 'en') || ! $reader->hasPublicBody($slug, 'zh-CN')) {
                     throw new RuntimeException("Invalid mapping evidence for {$slug}.");
                 }
@@ -149,7 +149,7 @@ final class CareerConfirmReviewedOnetCrosswalks extends Command
         }
     }
 
-    private function hasTaskBindings(array $row): bool
+    private function hasTaskBindings(array $row, CareerContentV3CanonicalReader $reader): bool
     {
         $ids = $row['official_core_task_ids'];
         if (! array_is_list($ids) || count($ids) !== count(array_unique($ids))) {
@@ -162,14 +162,65 @@ final class CareerConfirmReviewedOnetCrosswalks extends Command
                 || count($bindings) !== count(array_unique($bindings))) {
                 return false;
             }
+            $page = $reader->page($row['slug'], $locale);
+            $tasks = $this->citedResponsibilities($page, $row['onet']);
+            if (count(array_unique($tasks)) < 3) {
+                return false;
+            }
             foreach ($bindings as $pointer) {
-                if (! is_string($pointer) || preg_match('~^/blocks/\d+/items/\d+/data/entries/\d+$~D', $pointer) !== 1) {
+                if (! is_string($pointer) || ! isset($tasks[$pointer])) {
                     return false;
                 }
+            }
+            if (count(array_unique(array_map(static fn (string $pointer): string => $tasks[$pointer], $bindings))) !== count($bindings)) {
+                return false;
             }
         }
 
         return true;
+    }
+
+    /** @return array<string, string> */
+    private function citedResponsibilities(array $page, string $code): array
+    {
+        $sourceIds = [];
+        $items = [];
+        foreach ($page['blocks'] as $blockIndex => $block) {
+            if ($block['availability'] !== 'available') {
+                continue;
+            }
+            foreach ($block['items'] as $itemIndex => $item) {
+                if ($item['availability'] !== 'available') {
+                    continue;
+                }
+                if ($item['copy_key'] === 'career.item.responsibilities-block') {
+                    $items["/blocks/{$blockIndex}/items/{$itemIndex}"] = $item;
+                }
+                if ($item['type'] !== 'sources') {
+                    continue;
+                }
+                foreach ($item['data']['entries'] as $source) {
+                    if (preg_match('~^https://(?:www\\.)?onetonline\\.org/link/(?:summary|details|custom)/([^/?#]+)(?:[/?#]|$)~', $source['url'] ?? '', $match)) {
+                        $sourceIds[$source['id']] = $match[1];
+                    }
+                }
+            }
+        }
+
+        $tasks = [];
+        foreach ($items as $pointer => $item) {
+            $codes = array_intersect_key($sourceIds, array_flip($item['source_refs'] ?? []));
+            if ($codes === [] || array_values(array_unique($codes)) !== [$code]) {
+                continue;
+            }
+            foreach ($item['data']['entries'] as $index => $text) {
+                if (is_string($text) && trim($text) !== '') {
+                    $tasks["{$pointer}/data/entries/{$index}"] = trim($text);
+                }
+            }
+        }
+
+        return $tasks;
     }
 
     private function hasTitleEvidence(array $row, bool $batchThree): bool

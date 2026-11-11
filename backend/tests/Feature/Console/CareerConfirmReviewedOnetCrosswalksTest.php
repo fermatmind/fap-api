@@ -115,7 +115,8 @@ final class CareerConfirmReviewedOnetCrosswalksTest extends TestCase
 
         $invalid = tempnam(sys_get_temp_dir(), 'career-batch-five-');
         try {
-            $report['rows'][0]['task_bindings']['zh-CN'] = [];
+            $coreId = $report['rows'][0]['official_core_task_ids'][0];
+            $report['rows'][0]['task_bindings']['zh-CN'][$coreId] = '/blocks/0/items/0/data/entries/999';
             file_put_contents($invalid, json_encode($report, JSON_THROW_ON_ERROR));
             $this->assertSame(1, Artisan::call('career:confirm-reviewed-onet-crosswalks', [
                 '--report' => $invalid,
