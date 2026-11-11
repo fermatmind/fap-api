@@ -96,6 +96,46 @@ final class CareerConfirmReviewedOnetCrosswalksTest extends TestCase
         $this->assertSame([$rows[0]['slug']], $receipt['already_confirmed_slugs']);
     }
 
+    public function test_batch_five_dry_run_binds_evidence_and_is_idempotent(): void
+    {
+        $path = database_path('data/career_onet_crosswalk_review_batch51_20261111.json');
+        $report = json_decode(file_get_contents($path), true, flags: JSON_THROW_ON_ERROR);
+        $rows = $report['rows'];
+        $selected = array_map(fn (array $row) => $this->occupation($row['slug'], $row['onet']), $rows);
+        $args = ['--report' => $path, '--sha256' => hash_file('sha256', $path)];
+
+        $this->assertSame(0, Artisan::call('career:confirm-reviewed-onet-crosswalks', $args));
+        $receipt = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
+        $this->assertSame(6, $receipt['selected']);
+        $this->assertCount(6, $receipt['changed_or_planned']);
+        $this->assertSame([], $receipt['held']);
+        foreach ($selected as $item) {
+            $this->assertSame('directory_candidate', $item->fresh()->mapping_type);
+        }
+
+        $invalid = tempnam(sys_get_temp_dir(), 'career-batch-five-');
+        try {
+            $report['rows'][0]['task_bindings']['zh-CN'] = [];
+            file_put_contents($invalid, json_encode($report, JSON_THROW_ON_ERROR));
+            $this->assertSame(1, Artisan::call('career:confirm-reviewed-onet-crosswalks', [
+                '--report' => $invalid,
+                '--sha256' => hash_file('sha256', $invalid),
+                '--apply' => true,
+            ]));
+        } finally {
+            unlink($invalid);
+        }
+
+        $this->assertSame(0, Artisan::call('career:confirm-reviewed-onet-crosswalks', $args + ['--apply' => true]));
+        foreach ($selected as $item) {
+            $this->assertSame('direct_match', $item->fresh()->mapping_type);
+        }
+        $this->assertSame(0, Artisan::call('career:confirm-reviewed-onet-crosswalks', $args + ['--apply' => true]));
+        $receipt = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
+        $this->assertSame([], $receipt['changed_or_planned']);
+        $this->assertSame(6, $receipt['already_confirmed']);
+    }
+
     private function occupation(string $slug, string $code): OccupationCrosswalk
     {
         $family = OccupationFamily::query()->firstOrCreate(['canonical_slug' => 'mapping-family'], ['title_en' => 'Family', 'title_zh' => '职业族']);

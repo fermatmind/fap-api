@@ -1,0 +1,250 @@
+{
+  "schema": "career.onet-crosswalk-review.batch-5.v1",
+  "onet_version": "31.0",
+  "career_manifest_sha256": "fe5ba9ebe7257a859c505f4f34f9e6bec7d83a50f9a1a1a9682edb6392bbfb55",
+  "source_sha256": {
+    "occupation": "a09eae1d6609686e44e05b7290993a1c8b523d8ca224bc0eedc194c855c3ee02",
+    "titles": "75a3b46d6edc5996117c10c9ed488c9a06f7495d02969e9d12873ab14a21540c",
+    "tasks": "4568e14d8db6f05551ad37e056e909b13ebae4a26bcb5ff915bb5f281d582c57",
+    "soc": "bfc6722a92c2d607e5a99dee88b7826cf5aa91f7c0453182e0c8268e32a20a19",
+    "interests": "19f452d51b81a4d59389b500f85baf252563858f596124fe446dd436a9f41206"
+  },
+  "reviewed": 6,
+  "review_pass": 6,
+  "rows": [
+    {
+      "slug": "energy-auditors",
+      "onet": "47-4011.01",
+      "soc": "47-4011",
+      "interest": "CRI",
+      "vector": [
+        4.53,
+        4.17,
+        1.0,
+        1.89,
+        3.34,
+        5.93
+      ],
+      "title_evidence": "official_title",
+      "official_core_task_ids": [
+        "18071",
+        "18084"
+      ],
+      "bilingual_task_counts": [
+        6,
+        6
+      ],
+      "body_fingerprints": {
+        "en": "69ffc763823385c986ad7cddcca40b0b64bf642b4e19f44b103e01db2e82872f",
+        "zh-CN": "72780d8172ac14b0f8d41383b20438fa62deb5b76e354730e8f5a8ff4d53987e"
+      },
+      "task_bindings": {
+        "en": {
+          "18071": "/blocks/1/items/2/data/entries/2",
+          "18084": "/blocks/1/items/2/data/entries/3"
+        },
+        "zh-CN": {
+          "18071": "/blocks/1/items/2/data/entries/2",
+          "18084": "/blocks/1/items/2/data/entries/3"
+        }
+      },
+      "status": "review_pass",
+      "reasons": []
+    },
+    {
+      "slug": "environmental-science-and-protection-technicians-including-health",
+      "onet": "19-4042.00",
+      "soc": "19-4042",
+      "interest": "RIC",
+      "vector": [
+        5.83,
+        5.6,
+        1.23,
+        1.93,
+        1.35,
+        4.93
+      ],
+      "title_evidence": "official_title",
+      "official_core_task_ids": [
+        "1553",
+        "1561"
+      ],
+      "bilingual_task_counts": [
+        6,
+        6
+      ],
+      "body_fingerprints": {
+        "en": "382d1e3e074fd7054733b6c84d3413980995e5e41c654a061dbe9642bfa31bcc",
+        "zh-CN": "2b9f91e9e488c593f122c15dbf2156ed79656b9c7f90a647e163e35649777e2a"
+      },
+      "task_bindings": {
+        "en": {
+          "1553": "/blocks/1/items/2/data/entries/4",
+          "1561": "/blocks/1/items/2/data/entries/5"
+        },
+        "zh-CN": {
+          "1553": "/blocks/1/items/2/data/entries/4",
+          "1561": "/blocks/1/items/2/data/entries/5"
+        }
+      },
+      "status": "review_pass",
+      "reasons": []
+    },
+    {
+      "slug": "equal-opportunity-representatives-and-officers",
+      "onet": "13-1041.03",
+      "soc": "13-1041",
+      "interest": "ECS",
+      "vector": [
+        1.23,
+        3.01,
+        1.73,
+        4.24,
+        5.37,
+        5.21
+      ],
+      "title_evidence": "official_title",
+      "official_core_task_ids": [
+        "10866",
+        "20720"
+      ],
+      "bilingual_task_counts": [
+        6,
+        6
+      ],
+      "body_fingerprints": {
+        "en": "5e3fda9ecc0a7fe5f1a0068f5cc7456daa37a213ae6968e77d28f7fb69566aab",
+        "zh-CN": "bb912dcedc79fc9311f42d645c7b09db68fa296d9fbce053825bf64f4bbc2ea4"
+      },
+      "task_bindings": {
+        "en": {
+          "10866": "/blocks/1/items/2/data/entries/2",
+          "20720": "/blocks/1/items/2/data/entries/1"
+        },
+        "zh-CN": {
+          "10866": "/blocks/1/items/2/data/entries/2",
+          "20720": "/blocks/1/items/2/data/entries/1"
+        }
+      },
+      "status": "review_pass",
+      "reasons": []
+    },
+    {
+      "slug": "opticians-dispensing",
+      "onet": "29-2081.00",
+      "soc": "29-2081",
+      "interest": "CR",
+      "vector": [
+        4.35,
+        2.28,
+        1.41,
+        3.05,
+        3.33,
+        5.43
+      ],
+      "title_evidence": "unique_alias",
+      "official_core_task_ids": [
+        "4201",
+        "4204"
+      ],
+      "bilingual_task_counts": [
+        4,
+        4
+      ],
+      "body_fingerprints": {
+        "en": "9ff4fe8e36934dbfd720eff7d6f85b97392bccfbbb8973be319376c804af80bc",
+        "zh-CN": "436646c0629a1d7d9a38319ba6953a5b9d368754254408251a6998e292f538da"
+      },
+      "task_bindings": {
+        "en": {
+          "4201": "/blocks/1/items/1/data/entries/1",
+          "4204": "/blocks/1/items/1/data/entries/2"
+        },
+        "zh-CN": {
+          "4201": "/blocks/1/items/1/data/entries/1",
+          "4204": "/blocks/1/items/1/data/entries/2"
+        }
+      },
+      "status": "review_pass",
+      "reasons": []
+    },
+    {
+      "slug": "production-planning-and-expediting-clerks",
+      "onet": "43-5061.00",
+      "soc": "43-5061",
+      "interest": "CE",
+      "vector": [
+        3.12,
+        1.2,
+        1.14,
+        2.11,
+        4.91,
+        5.92
+      ],
+      "title_evidence": "official_title",
+      "official_core_task_ids": [
+        "11370",
+        "11364"
+      ],
+      "bilingual_task_counts": [
+        6,
+        6
+      ],
+      "body_fingerprints": {
+        "en": "dd9414b492fde2ebd046fd48f190649f5e00dc251fada914da8c6ca044af1842",
+        "zh-CN": "39ef2fec659cd7ef71a76c44e41b7e7b4c939accef010bf5a30b09f9f1fb598e"
+      },
+      "task_bindings": {
+        "en": {
+          "11370": "/blocks/1/items/2/data/entries/2",
+          "11364": "/blocks/1/items/2/data/entries/3"
+        },
+        "zh-CN": {
+          "11370": "/blocks/1/items/2/data/entries/2",
+          "11364": "/blocks/1/items/2/data/entries/3"
+        }
+      },
+      "status": "review_pass",
+      "reasons": []
+    },
+    {
+      "slug": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel",
+      "onet": "41-3091.00",
+      "soc": "41-3091",
+      "interest": "ECS",
+      "vector": [
+        1.07,
+        1.94,
+        1.45,
+        3.75,
+        6.73,
+        5.07
+      ],
+      "title_evidence": "official_title",
+      "official_core_task_ids": [
+        "23228",
+        "23233"
+      ],
+      "bilingual_task_counts": [
+        6,
+        6
+      ],
+      "body_fingerprints": {
+        "en": "fe7e3bfdc9f16c02d9386b2dbeb0d344f85534c22051fa7bf2b6561b4d20c4ae",
+        "zh-CN": "49667103b19de9f2775d5b45d9c579d5b1ab133cf0a4acef587676f682faa745"
+      },
+      "task_bindings": {
+        "en": {
+          "23228": "/blocks/1/items/2/data/entries/1",
+          "23233": "/blocks/1/items/2/data/entries/4"
+        },
+        "zh-CN": {
+          "23228": "/blocks/1/items/2/data/entries/1",
+          "23233": "/blocks/1/items/2/data/entries/4"
+        }
+      },
+      "status": "review_pass",
+      "reasons": []
+    }
+  ]
+}
