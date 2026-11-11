@@ -165,6 +165,22 @@ final class BigFivePdfDeliveryTest extends TestCase
         $this->assertStringContainsString('/FontFile2', $pdf);
         $response->assertHeader('X-Pdf-Surface-Version', 'big5.private_result_pdf.v3');
 
+        $this->getJson('/api/v0.3/attempts/'.$attemptId.'/report-access')->assertOk()
+            ->assertJsonPath('pdf_display_locales.0', 'zh-TW');
+        $path = '/api/v0.3/attempts/'.$attemptId.'/report.pdf';
+        $traditional = $this->get($path.'?display_locale=zh-TW')
+            ->assertOk()
+            ->assertHeader('Content-Type', 'application/pdf')
+            ->assertHeader('X-Report-Variant', 'full')
+            ->assertHeader('X-Report-Filename-Hint', 'fermatmind-big-five-zh-TW.pdf')
+            ->assertHeader('X-Pdf-Artifact-Cache', 'MISS');
+        $this->assertStringStartsWith('%PDF-', $traditional->getContent());
+        $this->assertNotSame($pdf, $traditional->getContent());
+        $this->get($path.'?display_locale=zh-TW')->assertOk()->assertHeader('X-Pdf-Artifact-Cache', 'HIT');
+        $this->assertSame($pdf, $this->get($path)->assertOk()->getContent());
+        $this->getJson($path.'?display_locale=en')->assertStatus(422)
+            ->assertJsonPath('error_code', 'PDF_DISPLAY_LOCALE_UNAVAILABLE');
+
         $this->assertGreaterThan(
             0,
             DB::table('events')

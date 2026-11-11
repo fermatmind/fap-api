@@ -1243,6 +1243,7 @@ class AttemptReadController extends Controller
             'report_state' => $reportState,
             'pdf_state' => $pdfState,
             ...(ReportPdfDocumentService::supportsTraditionalMbtiResultPagePdf($attempt)
+                || ReportPdfDocumentService::supportsTraditionalBigFivePdf($attempt)
                 ? ['pdf_display_locales' => ['zh-TW']] : []),
             'reason_code' => $reasonCode !== '' ? $reasonCode : null,
             'projection_version' => $projectionVersion,
@@ -3147,7 +3148,19 @@ class AttemptReadController extends Controller
         $variant = $this->reportPdfDocumentService->normalizeVariant((string) ($gate['variant'] ?? 'free'));
         $locked = (bool) ($gate['locked'] ?? false);
         $pdfMetadata = $this->reportPdfDocumentService->metadata($attempt, $gate, $result);
-        $fileName = $this->reportPdfDocumentService->fileNameForAttempt($attempt, $gate, $result);
+        $displayLocale = $request->query('display_locale');
+        if ($displayLocale !== null && ($displayLocale !== 'zh-TW' || ! ReportPdfDocumentService::supportsTraditionalBigFivePdf($attempt))) {
+            return $this->privateNoStoreJson([
+                'ok' => false, 'error_code' => 'PDF_DISPLAY_LOCALE_UNAVAILABLE',
+                'message' => 'The requested PDF display language is unavailable for this report.',
+            ], 422);
+        }
+        $fileName = $displayLocale === 'zh-TW'
+            ? 'fermatmind-big-five-zh-TW.pdf'
+            : $this->reportPdfDocumentService->fileNameForAttempt($attempt, $gate, $result);
+        if ($displayLocale === 'zh-TW') {
+            $pdfMetadata['filename_hint'] = $fileName;
+        }
         $inline = in_array(strtolower(trim((string) $request->query('inline', '0'))), ['1', 'true', 'yes', 'on'], true);
         $disposition = $inline ? 'inline' : 'attachment';
 
@@ -3169,7 +3182,9 @@ class AttemptReadController extends Controller
         }
 
         try {
-            $generated = $this->reportPdfDocumentService->getOrGenerate($attempt, $gate, $result);
+            $generated = $displayLocale === null
+                ? $this->reportPdfDocumentService->getOrGenerate($attempt, $gate, $result)
+                : $this->reportPdfDocumentService->getOrGenerate($attempt, $gate, $result, $displayLocale);
         } catch (\Throwable $e) {
             if (ReportAccess::isIqScale($scaleCode)) {
                 return $this->privateNoStoreJson([
@@ -3211,7 +3226,7 @@ class AttemptReadController extends Controller
                 : '',
         ];
 
-        if (ReportAccess::isIqScale($scaleCode)) {
+        if ($displayLocale === 'zh-TW' || ReportAccess::isIqScale($scaleCode)) {
             $responseHeaders['X-Pdf-Artifact-Cache'] = $generated['cached'] ? 'HIT' : 'MISS';
         }
 

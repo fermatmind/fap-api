@@ -82,6 +82,24 @@ final class BigFiveReportPdfContentTest extends TestCase
         $this->assertStringNotContainsString('LEGACY_PAID_CONTENT', $renderer->html($report, 'zh-CN', true));
     }
 
+    public function test_taiwan_pdf_localizes_visible_legacy_text_without_recomposing_it(): void
+    {
+        $report = ['sections' => [
+            ['key' => 'summary', 'title' => '原报告摘要', 'access_level' => 'free', 'blocks' => [
+                ['body' => '使用软件打开报告，保留 20.5 和 https://example.test/软件', 'provenance' => 'PRIVATE_LEGACY_ID'],
+            ]],
+            ['key' => 'private', 'title' => '隐藏付费章节', 'access_level' => 'paid', 'blocks' => [
+                ['body' => 'PRIVATE_PAID'],
+            ]],
+        ]];
+        $html = app(BigFiveReportPdfRenderer::class)->html($report, 'zh-TW', true);
+
+        $this->assertStringContainsString('大五人格報告', $html);
+        $this->assertStringContainsString('原報告摘要', $html);
+        $this->assertStringContainsString('使用軟體開啟報告，保留 20.5 和 https://example.test/软件', $html);
+        $this->assertStringNotContainsString('PRIVATE_', $html);
+    }
+
     public function test_provisional_norms_do_not_expose_precise_percentiles(): void
     {
         $report = $this->report();

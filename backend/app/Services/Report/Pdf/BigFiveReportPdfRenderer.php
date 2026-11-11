@@ -41,7 +41,7 @@ final class BigFiveReportPdfRenderer
             'autoScriptToLang' => true, 'autoLangToFont' => true,
             'margin_left' => 18, 'margin_right' => 18, 'margin_top' => 18, 'margin_bottom' => 18,
         ]);
-        $pdf->SetTitle(str_starts_with($locale, 'zh') ? '大五人格报告' : 'Big Five Report');
+        $pdf->SetTitle($this->title($locale));
         $pdf->SetAuthor('FermatMind');
         $pdf->SetHTMLFooter('<div style="text-align:right;color:#64748b;font-size:9pt">FermatMind · {PAGENO} / {nbpg}</div>');
         $pdf->WriteHTML($html);
@@ -52,14 +52,15 @@ final class BigFiveReportPdfRenderer
     public function html(array $report, string $locale, bool $locked): string
     {
         $language = str_starts_with(strtolower($locale), 'zh') ? 0 : 1;
+        $taiwan = $locale === 'zh-TW' ? new BigFiveTaiwanPdfCopy : null;
         $precise = ! $locked && ($report['norms']['show_precise_percentiles'] ?? false) === true;
         $html = '<!doctype html><html><head><meta charset="utf-8"><style>'
             .'body{font-family:sans-serif;color:#172033;font-size:11pt;line-height:1.6}'
             .'h1{font-size:25pt;color:#123d34}h2{font-size:18pt;border-bottom:2px solid #d9eadf;padding-bottom:8px;page-break-after:avoid}'
             .'h3{font-size:12pt;margin:12px 0 6px;page-break-after:avoid}p{margin:0 0 9px}li{margin:4px 0}'
             .'.chapter{page-break-before:always}.block{margin-bottom:14px}.metric{color:#475569}'
-            .'</style></head><body><p>FermatMind · 费马测试</p><h1>'
-            .($language === 0 ? '大五人格报告' : 'Big Five Report').'</h1>';
+             .'</style></head><body><p>'.$this->escape('FermatMind · 费马测试', $taiwan).'</p><h1>'
+            .$this->title($locale).'</h1>';
         $count = 0;
         // Only the gate-selected sections are reader content. The _meta engine may contain full, locked material.
         foreach ((array) ($report['sections'] ?? []) as $section) {
@@ -72,19 +73,19 @@ final class BigFiveReportPdfRenderer
                     : ($section['access_level'] ?? 'free') === 'paid'))) {
                 continue;
             }
-            $html .= '<section'.($count++ > 0 ? ' class="chapter"' : '').'><h2>'.$this->escape($title).'</h2>';
+            $html .= '<section'.($count++ > 0 ? ' class="chapter"' : '').'><h2>'.$this->escape($title, $taiwan).'</h2>';
             foreach ((array) ($section['blocks'] ?? []) as $block) {
                 $copy = is_array($block['resolved_copy'] ?? null) ? $block['resolved_copy'] : ($canonical ? [] : $block);
                 $trait = (string) data_get($block, 'analytics.trait_code', '');
                 $html .= '<div class="block">';
                 if (($block['kind'] ?? '') === 'trait_atomic' && isset(self::DOMAINS[$trait])) {
-                    $html .= '<h3>'.self::DOMAINS[$trait][$language].'</h3>';
+                    $html .= '<h3>'.$this->escape(self::DOMAINS[$trait][$language], $taiwan).'</h3>';
                     $percentile = data_get($block, 'analytics.percentile');
                     if ($precise && is_numeric($percentile)) {
                         $html .= '<p class="metric">'.($language === 0 ? '百分位：' : 'Percentile: ').$this->escape((string) $percentile).'</p>';
                     }
                 }
-                $html .= $this->copyHtml($copy).'</div>';
+                $html .= $this->copyHtml($copy, $taiwan).'</div>';
             }
             $html .= '</section>';
         }
@@ -95,21 +96,21 @@ final class BigFiveReportPdfRenderer
         return $html.'</body></html>';
     }
 
-    private function copyHtml(array $copy): string
+    private function copyHtml(array $copy, ?BigFiveTaiwanPdfCopy $taiwan): string
     {
         $html = '';
         if (($copy['comparison_allowed'] ?? false) === true) {
             foreach (['sample_label', 'match_label', 'norm_version', 'sample_n'] as $field) {
                 $value = $copy[$field] ?? '';
                 if ((is_string($value) || is_int($value)) && (string) $value !== '') {
-                    $html .= '<p>'.$this->escape((string) $value).'</p>';
+                    $html .= '<p>'.$this->escape((string) $value, $field === 'norm_version' || $field === 'sample_n' ? null : $taiwan).'</p>';
                 }
             }
         }
         // Explicit display fields, matching the web report; never dump provenance, analytics, IDs or raw payloads.
         foreach (['label', 'title', 'label_zh', 'headline', 'identity', 'status_label'] as $field) {
             if (is_string($copy[$field] ?? null) && trim($copy[$field]) !== '') {
-                $html .= '<h3>'.$this->escape($copy[$field]).'</h3>';
+                $html .= '<h3>'.$this->escape($copy[$field], $taiwan).'</h3>';
             }
         }
         foreach (['body', 'body_core', 'snapshot_line', 'definition', 'gloss', 'default_style', 'relative_meaning',
@@ -118,19 +119,19 @@ final class BigFiveReportPdfRenderer
             'why_priority', 'why_recommended', 'completion_signal', 'time_horizon_label', 'difficulty_label',
             'interpretation_qualifier', 'percentile_explanation', 'unavailable_explanation'] as $field) {
             if (is_string($copy[$field] ?? null) && trim($copy[$field]) !== '') {
-                $html .= '<p>'.nl2br($this->escape($copy[$field])).'</p>';
+                $html .= '<p>'.nl2br($this->escape($copy[$field], $taiwan)).'</p>';
             }
         }
         foreach (['strengths', 'costs', 'items', 'bullets', 'tips', 'tags'] as $field) {
             $value = $copy[$field] ?? [];
             if (is_string($value)) {
-                $html .= '<p>'.$this->escape($value).'</p>';
+                $html .= '<p>'.$this->escape($value, $taiwan).'</p>';
             } elseif (is_array($value)) {
                 foreach ($value as $item) {
                     if (is_string($item)) {
-                        $html .= '<p>• '.$this->escape($item).'</p>';
+                        $html .= '<p>• '.$this->escape($item, $taiwan).'</p>';
                     } elseif (is_array($item)) {
-                        $html .= '<div class="block">'.$this->copyHtml($item).'</div>';
+                        $html .= '<div class="block">'.$this->copyHtml($item, $taiwan).'</div>';
                     }
                 }
             }
@@ -139,8 +140,17 @@ final class BigFiveReportPdfRenderer
         return $html;
     }
 
-    private function escape(string $text): string
+    private function title(string $locale): string
     {
-        return htmlspecialchars($text, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+        return match (true) {
+            $locale === 'zh-TW' => '大五人格報告',
+            str_starts_with($locale, 'zh') => '大五人格报告',
+            default => 'Big Five Report',
+        };
+    }
+
+    private function escape(string $text, ?BigFiveTaiwanPdfCopy $taiwan = null): string
+    {
+        return htmlspecialchars($taiwan?->text($text) ?? $text, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
     }
 }

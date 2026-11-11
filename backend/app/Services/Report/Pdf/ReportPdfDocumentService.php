@@ -52,6 +52,12 @@ final class ReportPdfDocumentService
         return str_ends_with($baseHash, $suffix) ? $baseHash : $baseHash.$suffix;
     }
 
+    public static function supportsTraditionalBigFivePdf(Attempt $attempt): bool
+    {
+        return strtoupper(trim((string) $attempt->scale_code)) === 'BIG5_OCEAN'
+            && in_array(strtolower(trim((string) $attempt->locale)), ['zh', 'zh-cn'], true);
+    }
+
     public static function supportsTraditionalMbtiResultPagePdf(Attempt $attempt): bool
     {
         return strtoupper(trim((string) $attempt->scale_code)) === 'MBTI'
@@ -379,8 +385,12 @@ final class ReportPdfDocumentService
      * @param  array<string,mixed>  $gate
      * @return array{binary:string,storage_path:string,variant:string,locked:bool,manifest_hash:string,cached:bool}
      */
-    public function getOrGenerate(Attempt $attempt, array $gate, ?Result $result = null): array
+    public function getOrGenerate(Attempt $attempt, array $gate, ?Result $result = null, ?string $displayLocale = null): array
     {
+        if ($displayLocale !== null && ($displayLocale !== 'zh-TW' || ! self::supportsTraditionalBigFivePdf($attempt))) {
+            throw new \InvalidArgumentException('Unsupported report PDF display locale.');
+        }
+
         // Both MBTI actions must render the same authorized, ready print surface.
         // The legacy v2 token is not accepted by the current private print route.
         // Engine failure must not substitute legacy copy or technical card tags.
@@ -405,6 +415,9 @@ final class ReportPdfDocumentService
             // Resolve approved reading copy before looking up an artifact. Gate-selected body and
             // its read revision are part of the cache identity, including partial/locked sections.
             [$manifestHash, $report] = $this->bigFiveReadingManifest($manifestHash, $report);
+            if ($displayLocale === 'zh-TW') {
+                $manifestHash = hash('sha256', $manifestHash.'|zh-TW|v1|'.BigFiveTaiwanPdfCopy::revision());
+            }
         }
         if ($iqView !== null) {
             $manifestHash = hash('sha256', json_encode([$manifestHash, $iqView], JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
@@ -466,7 +479,7 @@ final class ReportPdfDocumentService
 
         $pdfBinary = match ($scaleCode) {
             'IQ_RAVEN', 'IQ_INTELLIGENCE_QUOTIENT' => app(IqReportPdfRenderer::class)->render($iqView),
-            'BIG5_OCEAN' => app(BigFiveReportPdfRenderer::class)->render($report, (string) $attempt->locale, $locked),
+            'BIG5_OCEAN' => app(BigFiveReportPdfRenderer::class)->render($report, $displayLocale ?? (string) $attempt->locale, $locked),
             'MBTI' => $this->buildMbtiDocument($attempt, $result, $locked),
             default => $this->buildDocument(
                 (string) $attempt->id,
