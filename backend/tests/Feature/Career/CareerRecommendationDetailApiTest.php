@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Career;
 
+use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Domain\Career\Transition\TransitionPathPayload;
 use App\Models\CareerCompileRun;
 use App\Models\CareerImportRun;
@@ -14,6 +15,7 @@ use App\Services\Career\CareerTransitionPreviewReadinessLookup;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Mockery;
 use Tests\Fixtures\Career\CareerFoundationFixture;
+use Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture;
 use Tests\TestCase;
 
 final class CareerRecommendationDetailApiTest extends TestCase
@@ -100,6 +102,26 @@ final class CareerRecommendationDetailApiTest extends TestCase
         $this->assertArrayNotHasKey('summary', $matchedJobs[0]);
         $this->assertArrayNotHasKey('fit_bucket', $matchedJobs[0]);
         $this->assertArrayNotHasKey('score_bundle', $matchedJobs[0]);
+    }
+
+    public function test_taiwan_recommendation_titles_use_published_career_names_and_keep_match_identity(): void
+    {
+        $this->app->instance(
+            CareerRuntimePublishProjectionVisibility::class,
+            new CareerRuntimePublishProjectionVisibilityFixture(defaultItemPublished: true),
+        );
+        $this->compileRecommendationChain(
+            CareerFoundationFixture::seedHighTrustCompleteChain(['slug' => 'accountants-and-auditors'])
+        );
+        $uri = '/api/v0.5/career/recommendations/mbti/intj';
+
+        $simplified = $this->getJson($uri.'?locale=zh-CN')->assertOk()->assertJsonCount(1, 'matched_jobs');
+        $traditional = $this->getJson($uri.'?locale=zh-TW')->assertOk()->assertJsonCount(1, 'matched_jobs');
+        $expected = $simplified->json('matched_jobs.0');
+        $expected['title_zh_tw'] = '會計師和審計師';
+
+        $this->assertSame($expected, $traditional->json('matched_jobs.0'));
+        $this->getJson($uri.'?locale=en')->assertOk()->assertJsonMissingPath('matched_jobs.0.title_zh_tw');
     }
 
     public function test_it_omits_non_public_matched_jobs_from_recommendation_detail(): void

@@ -131,6 +131,17 @@ final class CareerFilePageReader
         ]);
     }
 
+    public function traditionalTitle(string $slug): ?string
+    {
+        $projection = $this->publication->filePagePublication($slug, 'zh-CN');
+        if (! $this->publication->jobDetailProjectionItemIsPublished($projection)
+            || ! isset($this->content->authority()['entries'][$slug]['zh-TW'])) {
+            return null;
+        }
+
+        return $this->content->subjectName($slug, 'zh-TW');
+    }
+
     public static function cacheKey(array $page): string
     {
         return self::cacheKeyFromIdentity(

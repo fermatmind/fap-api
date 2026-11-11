@@ -151,6 +151,7 @@ final class CareerFilePageReaderTest extends TestCase
             $reader = app(CareerFilePageReader::class);
 
             self::assertNull($reader->read('actors', 'zh-TW'));
+            self::assertNull($reader->traditionalTitle('actors'));
             self::assertNull($reader->read('actors', 'zh-tw', presenceOnly: true));
             self::assertSame(['en', 'zh-CN'], $reader->read('actors', 'zh-CN')['locale_policy']['available_locales']);
             $this->getJson('/api/v0.5/career/jobs/actors?locale=zh-TW')->assertNotFound();
@@ -167,6 +168,7 @@ final class CareerFilePageReaderTest extends TestCase
             $this->installLocaleFixture($backendRoot, CareerContentV3Contract::LOCALES);
             $this->publication(true);
 
+            self::assertSame('演員', app(CareerFilePageReader::class)->traditionalTitle('actors'));
             $traditionalUri = '/api/v0.5/career/jobs/actors?locale=zh-TW';
             $traditional = $this->getJson($traditionalUri)->assertOk()
                 ->assertJsonPath('identity.canonical_slug', 'actors')
@@ -194,6 +196,7 @@ final class CareerFilePageReaderTest extends TestCase
                 ]);
             $this->publication(false);
             $this->getJson($traditionalUri)->assertNotFound();
+            self::assertNull(app(CareerFilePageReader::class)->traditionalTitle('actors'));
         } finally {
             File::deleteDirectory($backendRoot);
         }
