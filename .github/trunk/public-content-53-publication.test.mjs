@@ -1019,16 +1019,21 @@ test('AI method hreflang acceptance requires its exact reciprocal pair and keeps
  }
 });
 
-test('Traditional CMS package selects twenty-seven reviewed variants with exact environment sources and verifies complete noindex DOM',()=>{
+test('Traditional CMS package selects eleven reviewed variants with exact environment sources and verifies complete noindex DOM',()=>{
  const paths=['backend/content_assets/public_content_53/traditional-pages.json','backend/content_assets/public_content_53/traditional-pages-review.json'];
  assert.equal(selectPublicContentPackage(paths),'traditional-pages');
  assert.throws(()=>selectPublicContentPackage([...paths,'backend/content_assets/public_content_53/translation-batch.json']),/MULTIPLE_PACKAGES/);
  const binding=inspectPackage(root,'traditional-pages');
- assert.equal(binding.expected_row_count,27);
+ assert.equal(binding.expected_row_count,11);
  const rows=readCandidateRows(root,binding.package_sha256).candidates;
- assert.deepEqual(rows.map(row=>row.identity.slug),['about','brand','charter','careers','privacy','terms','method-boundaries','science','help-contact','foundation','policies','help-faq','help-about','help-team','help-used-and-mentioned','help-for-business-and-research','common-misconceptions','data-privacy','help-data-deletion','help-payment-refund','help-privacy-data','help-result-recovery','help-unlock-failure','item-design-notes','reliability-validity','methodology','source-review-policy']);
+ assert.deepEqual(rows.map(row=>row.identity.slug),['common-misconceptions','data-privacy','help-data-deletion','help-payment-refund','help-privacy-data','help-result-recovery','help-unlock-failure','item-design-notes','reliability-validity','methodology','source-review-policy']);
+ const fixtureRoot=resolve(root,'tests/Fixtures/TraditionalContentPagePublication');
+ const reviewedRows=JSON.parse(readFileSync(resolve(fixtureRoot,'content_assets/public_content_53/traditional-pages.json'))).candidates;
+ assert.equal(reviewedRows.length,27);
+ const withoutPackageDigest=({package_sha256,...row})=>row;
+ assert.deepEqual(rows.map(withoutPackageDigest),reviewedRows.slice(16).map(row=>withoutPackageDigest({...row,kind:'page'})));
  const escape=value=>String(value).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
- for(const original of rows) {
+ for(const original of reviewedRows) {
   for(const environment of ['staging','production']) {
   const row=environment==='staging'&&original.staging_snapshot?{...original,snapshot:original.staging_snapshot}:original;
   assert.equal(row.identity.locale,'zh-TW');

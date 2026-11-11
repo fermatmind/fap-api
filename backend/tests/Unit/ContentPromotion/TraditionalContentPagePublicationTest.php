@@ -23,6 +23,21 @@ final class TraditionalContentPagePublicationTest extends TestCase
 {
     use RefreshDatabase;
 
+    private string $backendRoot;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->backendRoot = base_path();
+        $this->app->setBasePath($this->backendRoot.'/tests/Fixtures/TraditionalContentPagePublication');
+    }
+
+    protected function tearDown(): void
+    {
+        $this->app->setBasePath($this->backendRoot);
+        parent::tearDown();
+    }
+
     private function context(string $commit = 'a'): PromotionContext
     {
         $chain = TraditionalContentPagePublication::SCHEMA."\n";
@@ -314,7 +329,7 @@ final class TraditionalContentPagePublicationTest extends TestCase
             new \App\Services\Cms\CmsTranslationWorkflowException('private message', ['private blocker'])] as $unknown) {
             $this->assertSame('public_content_53_publication_failed', TraditionalContentPagePublication::failureCode($unknown));
         }
-        $this->assertStringContainsString('TraditionalContentPagePublication::failureCode($error)', file_get_contents(base_path('scripts/deploy/run_public_content_53_publish.php')));
+        $this->assertStringContainsString('TraditionalContentPagePublication::failureCode($error)', file_get_contents($this->backendRoot.'/scripts/deploy/run_public_content_53_publish.php'));
     }
 
     public function test_source_diagnostics_identify_the_failed_condition_without_disclosing_values(): void
