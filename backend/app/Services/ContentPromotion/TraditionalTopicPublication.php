@@ -6,23 +6,33 @@ namespace App\Services\ContentPromotion;
 
 use App\Filament\Ops\Resources\TopicProfileResource\Support\TopicWorkspace;
 use App\Models\TopicProfile;
+use App\TopicsCms\Baseline\TopicBaselineImporter;
+use App\TopicsCms\Baseline\TopicBaselineNormalizer;
 use DomainException;
+use Illuminate\Support\Facades\DB;
 
 final class TraditionalTopicPublication
 {
     public function read(array $row, bool $lock): array
     {
         $source = $this->find($row, 'zh-CN', $lock);
-        $sourceRow = $row;
-        $sourceRow['identity']['locale'] = 'zh-CN';
-        $sourceRow['snapshot'] = $row['source_snapshot'];
-        $states = app(PublicContent53State::class);
-        if ($source?->id !== $row['source_id']
-            || $states->hash($states->projection($sourceRow)) !== $states->hash($row['source_snapshot'])) {
-            throw new DomainException('traditional_topic_source_drift');
-        }
-
         $target = $this->find($row, 'zh-TW', $lock);
+        $originals = $row['staging_originals'] ?? null;
+        if ($originals !== null) {
+            $english = $this->find($row, 'en', $lock);
+            if ($target && (! $source || ! $english)) {
+                throw new DomainException('traditional_topic_staging_source_missing');
+            }
+            if ($english) {
+                $this->assertSource($row, $english, 'en', $originals['english_snapshot'] ?? []);
+            }
+        }
+        if ($source || $originals === null) {
+            if ($originals === null && $source?->id !== $row['source_id']) {
+                throw new DomainException('traditional_topic_source_drift');
+            }
+            $this->assertSource($row, $source, 'zh-CN', $row['source_snapshot']);
+        }
         if (! $target) {
             return ['table' => 'topic_profiles', 'missing' => true];
         }
@@ -60,6 +70,10 @@ final class TraditionalTopicPublication
             return false;
         }
 
+        if (($row['staging_originals'] ?? null) !== null) {
+            $this->prepareStagingOriginals($row);
+        }
+
         $target = $before['missing'] ? new TopicProfile : $this->find($row, 'zh-TW', true);
         $draft = $row['native_draft'];
         $target->fill($row['identity'] + $draft['profile'] + [
@@ -93,6 +107,44 @@ final class TraditionalTopicPublication
         $target = $this->find($row, 'zh-TW', true);
         $target->update(['status' => TopicProfile::STATUS_DRAFT, 'is_public' => false, 'published_at' => null]);
         $this->recordRevision($target, $row, $context);
+    }
+
+    private function assertSource(array $row, ?TopicProfile $source, string $locale, array $snapshot): void
+    {
+        $row['identity']['locale'] = $locale;
+        $row['snapshot'] = $snapshot;
+        $states = app(PublicContent53State::class);
+        if (! $source || $source->slug !== $row['identity']['slug']
+            || $source->topic_code !== $row['native_draft']['profile']['topic_code']
+            || $states->hash($states->projection($row)) !== $states->hash($snapshot)) {
+            throw new DomainException('traditional_topic_source_drift');
+        }
+    }
+
+    private function prepareStagingOriginals(array $row): void
+    {
+        if (DB::transactionLevel() < 1 || PublicContent53Package::environment() !== 'staging'
+            || $row['identity']['slug'] !== 'england-post16-options'
+            || $row['native_draft']['profile']['topic_code'] !== 'england-post16-options') {
+            throw new DomainException('traditional_topic_staging_source_forbidden');
+        }
+
+        $documents = $row['staging_originals']['documents'] ?? [];
+        $profiles = app(TopicBaselineNormalizer::class)->normalizeDocuments($documents);
+        if (array_column($profiles, 'locale') !== ['en', 'zh-CN']) {
+            throw new DomainException('traditional_topic_staging_source_identity_invalid');
+        }
+        foreach ($profiles as $profile) {
+            if ($profile['slug'] !== $row['identity']['slug'] || $profile['topic_code'] !== $row['identity']['slug']) {
+                throw new DomainException('traditional_topic_staging_source_identity_invalid');
+            }
+        }
+
+        app(TopicBaselineImporter::class)->import($profiles, [
+            'dry_run' => false, 'upsert' => false, 'status' => TopicBaselineImporter::STATUS_PUBLISHED,
+        ]);
+        $this->assertSource($row, $this->find($row, 'zh-CN', true), 'zh-CN', $row['source_snapshot']);
+        $this->assertSource($row, $this->find($row, 'en', true), 'en', $row['staging_originals']['english_snapshot']);
     }
 
     private function find(array $row, string $locale, bool $lock): ?TopicProfile

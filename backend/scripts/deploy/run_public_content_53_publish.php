@@ -100,6 +100,8 @@ try {
         'app/Services/ContentPromotion/TraditionalCareerGuideSource.php',
         'app/Services/ContentPromotion/TraditionalCareerGuideTarget.php',
         'app/Services/ContentPromotion/TraditionalTopicPublication.php',
+        'app/TopicsCms/Baseline/TopicBaselineImporter.php',
+        'app/TopicsCms/Baseline/TopicBaselineNormalizer.php',
         'app/Filament/Ops/Resources/TopicProfileResource/Support/TopicWorkspace.php',
         'app/Services/Cms/TopicEntryResolverService.php',
         'app/Services/Cms/TopicProfileService.php',

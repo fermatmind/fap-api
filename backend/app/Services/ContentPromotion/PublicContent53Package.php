@@ -253,9 +253,13 @@ final class PublicContent53Package
                     $slug = $row['identity']['slug'] ?? '';
                     $id = 'TRADITIONAL-TOPIC-'.$slug;
                     $draft = $row['native_draft'] ?? [];
+                    $stagingOriginals = $environment === 'staging' && $slug === 'england-post16-options'
+                        ? ($row['staging_originals'] ?? null)
+                        : null;
+                    $sourceId = $row['source_ids'][$environment] ?? null;
                     if (! in_array($slug, ['big-five', 'england-post16-options', 'iq-eq', 'mbti'], true)
                         || isset($candidates[$id]) || ($row['identity'] ?? null) !== ['org_id' => 0, 'slug' => $slug, 'locale' => 'zh-TW']
-                        || ! is_int($row['source_ids'][$environment] ?? null) || ($row['source_ids'][$environment] ?? 0) < 1
+                        || ($stagingOriginals === null ? (! is_int($sourceId) || $sourceId < 1) : ! is_array($stagingOriginals))
                         || ! is_array($row['source_snapshots'][$environment] ?? null) || ! is_array($row['snapshot'] ?? null)
                         || ($draft['seo_meta']['robots'] ?? null) !== 'noindex,follow'
                         || ($draft['seo_meta']['canonical_url'] ?? null) !== '/zh-TW/topics/'.$slug
@@ -267,7 +271,8 @@ final class PublicContent53Package
                     $candidates[$id] = [
                         'page_id' => $id, 'kind' => 'profile', 'identity' => $row['identity'],
                         'new_traditional_topic' => true, 'native_draft' => $draft, 'snapshot' => $row['snapshot'],
-                        'source_id' => $row['source_ids'][$environment], 'source_snapshot' => $row['source_snapshots'][$environment],
+                        'source_id' => $sourceId, 'source_snapshot' => $row['source_snapshots'][$environment],
+                        'staging_originals' => $stagingOriginals,
                     ];
                 }
 

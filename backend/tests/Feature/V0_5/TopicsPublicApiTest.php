@@ -162,6 +162,65 @@ final class TopicsPublicApiTest extends TestCase
         $states->assertBaseline([$row]);
     }
 
+    public function test_england_topic_package_bootstraps_only_staging_originals(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com', 'content_promotion.public_content_53_environment' => 'staging']);
+        $name = 'traditional-topics.json';
+        $bytes = file_get_contents(base_path('content_assets/public_content_53/'.$name));
+        $sha = hash('sha256', "fermatmind.traditional_topics.v1\n".$name."\n".hash('sha256', $bytes)."\n");
+        $package = app(PublicContent53Package::class);
+        $row = $package->read(base_path(), $sha, 'staging')['candidates'][0];
+        $slug = $row['identity']['slug'];
+        $this->assertSame('england-post16-options', $slug);
+        $production = $package->read(base_path(), $sha, 'production')['candidates'][0];
+        $this->assertNull($production['staging_originals']);
+        $this->assertGreaterThan(0, $production['source_id']);
+
+        foreach (['en' => $row['staging_originals']['english_snapshot'], 'zh-CN' => $row['source_snapshot'], 'zh-TW' => $row['snapshot']] as $locale => $snapshot) {
+            foreach (array_merge(...array_values($snapshot['entry_groups'])) as $entry) {
+                $this->createArticle([
+                    'locale' => $locale, 'slug' => $entry['target_key'], 'cover_image_url' => $entry['image_url'],
+                    'status' => 'published', 'is_public' => true,
+                ]);
+            }
+            $this->getJson('/api/v0.5/topics/'.$slug.'?locale='.$locale)->assertNotFound();
+        }
+
+        $states = app(PublicContent53State::class);
+        $writer = app(PublicContent53Writer::class);
+        $digest = str_repeat('a', 64);
+        $context = new PromotionContext('content_assets/public_content_53', $sha, 'W3', 'PUBLIC-CONTENT-53',
+            str_repeat('b', 40), $digest, $digest, '1', 1, $digest, 1, $digest);
+        $states->assertBaseline([$row]);
+        $before = $states->read($sha);
+        $this->assertTrue($before[$row['page_id']]['missing']);
+        $this->assertSame(0, TopicProfile::query()->withoutGlobalScopes()->where('org_id', 0)->where('slug', $slug)->count());
+
+        $invalid = $row;
+        $invalid['staging_originals']['english_snapshot']['title'] = 'Changed English source';
+        try {
+            DB::transaction(fn () => app(\App\Services\ContentPromotion\TraditionalTopicPublication::class)
+                ->publish($invalid, $before[$row['page_id']], $context));
+            $this->fail('Expected source projection mismatch');
+        } catch (DomainException $exception) {
+            $this->assertSame('traditional_topic_source_drift', $exception->getMessage());
+        }
+        $this->assertSame(0, TopicProfile::query()->withoutGlobalScopes()->where('org_id', 0)->where('slug', $slug)->count());
+
+        $published = DB::transaction(fn () => $writer->publish($context, $before));
+        $states->assertPublished([$row], $published['state']);
+        $this->assertSame(1, $published['created_count']);
+        $this->assertSame(3, TopicProfile::query()->withoutGlobalScopes()->where('org_id', 0)->where('slug', $slug)->count());
+        $this->getJson('/api/v0.5/topics/'.$slug.'?locale=zh-TW')->assertOk()
+            ->assertJsonPath('profile.title', $row['snapshot']['title'])
+            ->assertJsonPath('seo_meta.robots', 'noindex,follow');
+        $this->assertSame(0, DB::transaction(fn () => $writer->publish($context, $published['state']))['written_count']);
+        DB::transaction(fn () => $writer->restore($context, $before, $published['state']));
+        $this->getJson('/api/v0.5/topics/'.$slug.'?locale=zh-TW')->assertNotFound();
+        $this->getJson('/api/v0.5/topics/'.$slug.'?locale=zh-CN')->assertOk();
+        $this->getJson('/api/v0.5/topics/'.$slug.'?locale=en')->assertOk();
+    }
+
     public function test_single_locale_topic_has_only_real_alternates_and_no_unrelated_cta(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);
