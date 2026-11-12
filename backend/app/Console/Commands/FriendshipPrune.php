@@ -17,6 +17,12 @@ final class FriendshipPrune extends Command
     {
         $count = DB::transaction(function () {
             $ids = DB::table('friendship_challenges')->where('expires_at', '<=', now())->orderBy('expires_at')->limit(1000)->lockForUpdate()->pluck('id');
+            $expiredGrants = DB::table('friendship_browser_grants')->where('expires_at', '<=', now())
+                ->orderBy('expires_at')->limit(1000)->lockForUpdate()->get(['session_hash', 'challenge_id', 'role']);
+            foreach ($expiredGrants as $grant) {
+                DB::table('friendship_browser_grants')->where((array) $grant)->delete();
+            }
+            DB::table('friendship_browser_grants')->whereIn('challenge_id', $ids)->delete();
             DB::table('friendship_entries')->whereIn('challenge_id', $ids)->delete();
 
             return DB::table('friendship_challenges')->whereIn('id', $ids)->delete();

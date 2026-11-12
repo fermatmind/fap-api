@@ -24,6 +24,7 @@ final class FriendshipQuizTest extends TestCase
         parent::setUp();
         (require database_path('migrations/2026_10_26_150000_create_friendship_challenges.php'))->up();
         (require database_path('migrations/2026_10_26_180000_create_friendship_progress.php'))->up();
+        (require database_path('migrations/2026_11_12_130000_create_friendship_browser_grants.php'))->up();
         $this->owner = bin2hex(random_bytes(32));
         $this->friend = bin2hex(random_bytes(32));
         $pack = app(FriendshipQuiz::class)->catalog();
@@ -41,6 +42,42 @@ final class FriendshipQuizTest extends TestCase
         $this->withToken($this->owner)->postJson($this->base, $this->payload)->assertOk();
 
         return $this->base.'/'.$this->payload['id'];
+    }
+
+    public function test_browser_migrates_owner_and_player_separately_and_revokes_on_delete(): void
+    {
+        $url = $this->create();
+        $this->withToken($this->friend)->postJson($url.'/answers', ['nickname' => 'Friend', 'index' => 0, 'guess' => 0])->assertOk();
+        $this->flushHeaders();
+        $session = bin2hex(random_bytes(32));
+        $this->withHeader('X-Friendship-Browser-Session', $session);
+        $this->postJson($url.'/browser-grant', ['role' => 'player', 'legacy' => $this->friend])->assertOk();
+        $this->getJson($url.'/progress')->assertOk()->assertJsonCount(1, 'guesses');
+        $this->getJson($url.'/manage')->assertUnauthorized();
+        $this->postJson($url.'/backup')->assertUnauthorized();
+        $this->postJson($url.'/browser-grant', ['role' => 'owner', 'legacy' => $this->friend])->assertNotFound();
+        $this->postJson($url.'/browser-grant', ['role' => 'owner', 'legacy' => $this->owner])->assertOk()->assertExactJson(['granted' => true]);
+        $this->postJson($url.'/backup')->assertOk()->assertJsonPath('key', $this->owner)
+            ->assertHeader('Cache-Control', 'no-store, private');
+        $stored = DB::table('friendship_browser_grants')->where('role', 'owner')->first();
+        self::assertSame(hash('sha256', $session), $stored->session_hash);
+        self::assertNotSame($this->owner, $stored->encrypted_key);
+        $this->patchJson($url.'/manage', ['closed' => true])->assertOk()->assertJsonPath('closed', true);
+        $this->patchJson($url.'/manage', ['closed' => false])->assertOk()->assertJsonPath('closed', false);
+        $this->deleteJson($url.'/manage')->assertOk();
+        self::assertSame(0, DB::table('friendship_browser_grants')->count());
+    }
+
+    public function test_browser_draft_survives_creation_retry_and_preserves_legacy_owner_key(): void
+    {
+        $url = $this->base.'/'.$this->payload['id'];
+        $this->withHeader('X-Friendship-Browser-Session', bin2hex(random_bytes(32)));
+        $this->postJson($url.'/browser-grant', ['role' => 'owner', 'draft' => true, 'legacy' => $this->owner])->assertOk();
+        $first = $this->postJson($this->base, $this->payload)->assertOk()->json();
+        $this->postJson($url.'/browser-grant', ['role' => 'owner', 'draft' => true])->assertOk();
+        $this->postJson($this->base, $this->payload)->assertOk()->assertExactJson($first);
+        $this->flushHeaders();
+        $this->withToken($this->owner)->getJson($url.'/manage')->assertOk();
     }
 
     public function test_sequential_feedback_reveals_only_locked_choices_and_restores_combos(): void
@@ -241,6 +278,7 @@ final class FriendshipQuizTest extends TestCase
             $queries = $connection->pretend(function () {
                 (require database_path('migrations/2026_10_26_150000_create_friendship_challenges.php'))->up();
                 (require database_path('migrations/2026_10_26_180000_create_friendship_progress.php'))->up();
+                (require database_path('migrations/2026_11_12_130000_create_friendship_browser_grants.php'))->up();
             });
         } finally {
             \Illuminate\Support\Facades\Schema::swap($original);
