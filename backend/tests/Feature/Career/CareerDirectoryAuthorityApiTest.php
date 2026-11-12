@@ -141,10 +141,10 @@ final class CareerDirectoryAuthorityApiTest extends TestCase
 
     public function test_current_source_scope_survives_legacy_transport_cleanup(): void
     {
-        $slug = 'insulation-workers-mechanical';
+        $slug = 'library-assistants-clerical';
         $expected = app(\App\Domain\Career\Display\CareerContentV3CanonicalReader::class)->page($slug, 'zh-CN');
         self::assertStringContainsString('industry_proxy', json_encode($expected));
-        $this->createDirectoryOccupation($slug, 'Insulation Workers, Mechanical', '机械保温隔热工', 'construction', 'Construction');
+        $this->createDirectoryOccupation($slug, 'Library Assistants, Clerical', '图书馆事务助理', 'office-and-administration', 'Office and Administration');
         $this->publishRuntimeProjection([$slug]);
 
         $public = $this->getJson('/api/v0.5/career/jobs/'.$slug.'?locale=zh-CN')
