@@ -19,13 +19,20 @@ final class StagingArticleOriginals
 {
     public const FILE = 'staging-article-originals.json';
 
+    public const TAIWAN_DELTA_FILE = 'staging-article-originals-taiwan-delta.json';
+
     public const SCHEMA = 'fermatmind.staging_article_originals.v1';
 
-    public static function package(string $bytes): array
+    public static function package(string $bytes, string $file = self::FILE): array
     {
+        [$expectedRows, $expectedRoots] = match ($file) {
+            self::FILE => [17, 15],
+            self::TAIWAN_DELTA_FILE => [4, 2],
+            default => throw new DomainException('public_content_53_staging_article_original_package_invalid'),
+        };
         $package = json_decode($bytes, true, 64, JSON_THROW_ON_ERROR);
         $rows = $package['articles'] ?? [];
-        if (($package['schema'] ?? null) !== self::SCHEMA || ! is_array($rows) || ! array_is_list($rows) || count($rows) !== 17
+        if (($package['schema'] ?? null) !== self::SCHEMA || ! is_array($rows) || ! array_is_list($rows) || count($rows) !== $expectedRows
             || preg_match('/\A[a-f0-9]{40}\z/', $package['production_source_revision'] ?? '') !== 1) {
             throw new DomainException('public_content_53_staging_article_original_package_invalid');
         }
@@ -72,7 +79,7 @@ final class StagingArticleOriginals
                 'staging_article_original' => $row,
             ];
         }
-        if (count($roots) !== 15) {
+        if (count($roots) !== $expectedRoots) {
             throw new DomainException('public_content_53_staging_article_original_package_invalid');
         }
 

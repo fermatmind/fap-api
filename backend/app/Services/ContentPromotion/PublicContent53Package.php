@@ -133,12 +133,14 @@ final class PublicContent53Package
                 return TraditionalArticleIndexPackage::read($bytes, $environment);
             }
         }
-        $stagingOriginals = StagingArticleOriginals::FILE;
-        if (is_file($root.'/'.self::PACKAGE.'/'.$stagingOriginals)) {
+        foreach ([StagingArticleOriginals::FILE, StagingArticleOriginals::TAIWAN_DELTA_FILE] as $stagingOriginals) {
+            if (! is_file($root.'/'.self::PACKAGE.'/'.$stagingOriginals)) {
+                continue;
+            }
             $bytes = $this->bytes($root, $stagingOriginals);
             $chain = StagingArticleOriginals::SCHEMA."\n".$stagingOriginals."\n".hash('sha256', $bytes)."\n";
             if (hash_equals($expectedSha256, hash('sha256', $chain))) {
-                $package = StagingArticleOriginals::package($bytes);
+                $package = StagingArticleOriginals::package($bytes, $stagingOriginals);
                 foreach ($package['candidates'] as &$candidate) {
                     $candidate['package_sha256'] = $expectedSha256;
                 }

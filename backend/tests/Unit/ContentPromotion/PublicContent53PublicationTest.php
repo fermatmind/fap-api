@@ -96,7 +96,16 @@ final class PublicContent53PublicationTest extends TestCase
         self::assertSame($expected, $actual);
     }
 
-    public function test_staging_originals_restore_and_republish_only_unchanged_owned_drafts(): void
+    public static function stagingOriginalPackages(): array
+    {
+        return [
+            'historical sources' => [StagingArticleOriginals::FILE, 17],
+            'Taiwan delta sources' => [StagingArticleOriginals::TAIWAN_DELTA_FILE, 4],
+        ];
+    }
+
+    #[\PHPUnit\Framework\Attributes\DataProvider('stagingOriginalPackages')]
+    public function test_staging_originals_restore_and_republish_only_unchanged_owned_drafts(string $file, int $expectedRows): void
     {
         config(['content_promotion.public_content_53_environment' => 'staging']);
         $slug = 'holland-career-interest-test-riasec';
@@ -106,23 +115,22 @@ final class PublicContent53PublicationTest extends TestCase
         ScaleSlug::withoutGlobalScopes()->updateOrCreate(['org_id' => 0, 'slug' => $slug], [
             'scale_code' => 'RIASEC', 'is_primary' => true,
         ]);
-        $file = StagingArticleOriginals::FILE;
         $root = base_path(PublicContent53Package::PACKAGE);
         $sha = hash('sha256', StagingArticleOriginals::SCHEMA."\n".$file."\n".hash_file('sha256', $root.'/'.$file)."\n");
         $context = new PromotionContext($root, $sha, 'W3', 'PUBLIC-CONTENT-53', str_repeat('a', 40),
-            str_repeat('b', 64), str_repeat('c', 64), '12345', 1, str_repeat('d', 64), 17, str_repeat('e', 64));
+            str_repeat('b', 64), str_repeat('c', 64), '12345', 1, str_repeat('d', 64), $expectedRows, str_repeat('e', 64));
         $states = app(PublicContent53State::class);
         $writer = app(PublicContent53Writer::class);
         $rows = app(PublicContent53Package::class)->read(base_path(), $sha, 'staging')['candidates'];
         $states->assertBaseline($rows);
         $before = $states->read($sha);
         $published = DB::transaction(fn () => $writer->publish($context, $before));
-        self::assertSame(17, $published['created_count']);
+        self::assertSame($expectedRows, $published['created_count']);
         $states->assertPublished($rows, $published['state']);
 
         DB::transaction(fn () => $writer->restore($context, $before, $published['state']));
         $restored = $states->read($sha);
-        self::assertCount(17, array_filter(array_column($restored, 'retained_draft')));
+        self::assertCount($expectedRows, array_filter(array_column($restored, 'retained_draft')));
         self::assertSame(0, Article::withoutGlobalScopes()->where('is_public', true)->count());
 
         try {
@@ -136,7 +144,7 @@ final class PublicContent53PublicationTest extends TestCase
         }
 
         $retry = DB::transaction(fn () => $writer->publish($context, $restored));
-        self::assertSame(17, $retry['written_count']);
+        self::assertSame($expectedRows, $retry['written_count']);
         self::assertSame(0, $retry['created_count']);
         $states->assertPublished($rows, $retry['state']);
     }

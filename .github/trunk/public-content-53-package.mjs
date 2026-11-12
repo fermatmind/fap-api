@@ -9,6 +9,7 @@ export const packagePath = 'content_assets/public_content_53';
 const packages = {
   'traditional-article-index': ['fermatmind.traditional_article_index.v1', ['traditional-article-index.json']],
   'staging-article-originals': ['fermatmind.staging_article_originals.v1', ['staging-article-originals.json']],
+  'staging-article-originals-taiwan-delta': ['fermatmind.staging_article_originals.v1', ['staging-article-originals-taiwan-delta.json']],
   'support-contact': ['fermatmind.public_support_contact.v1', ['support-contact.json','support-contact-review.json']],
   'pricing-refund': ['fermatmind.public_content_pricing_refund.v1', ['pricing-refund.json','pricing-refund-review.json']],
   'traditional-article-batch': ['fermatmind.traditional_article_batch.v1', ['traditional-article-batch.json','traditional-article-batch-review.json']],
