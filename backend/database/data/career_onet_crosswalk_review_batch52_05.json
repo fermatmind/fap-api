@@ -1,0 +1,373 @@
+{
+  "schema": "career.onet-crosswalk-review.batch-5.v1",
+  "onet_version": "31.0",
+  "career_manifest_sha256": "913135fedb7003a15a8ea9f3b75d099b125c3ce0e854fe43eca0206ae98a55fe",
+  "source_sha256": {
+    "occupation": "a09eae1d6609686e44e05b7290993a1c8b523d8ca224bc0eedc194c855c3ee02",
+    "titles": "75a3b46d6edc5996117c10c9ed488c9a06f7495d02969e9d12873ab14a21540c",
+    "tasks": "4568e14d8db6f05551ad37e056e909b13ebae4a26bcb5ff915bb5f281d582c57",
+    "soc": "bfc6722a92c2d607e5a99dee88b7826cf5aa91f7c0453182e0c8268e32a20a19",
+    "interests": "19f452d51b81a4d59389b500f85baf252563858f596124fe446dd436a9f41206"
+  },
+  "reviewed": 8,
+  "review_pass": 8,
+  "rows": [
+    {
+      "slug": "wellhead-pumpers",
+      "onet": "53-7073.00",
+      "soc": "53-7073",
+      "interest": "RC",
+      "vector": [
+        6.92,
+        2.26,
+        1.0,
+        1.11,
+        1.77,
+        4.29
+      ],
+      "title_evidence": "official_title",
+      "official_core_task_ids": [
+        21159,
+        21160,
+        5019,
+        5013
+      ],
+      "status": "review_pass",
+      "reasons": [],
+      "body_fingerprints": {
+        "en": "0cc30446ff1581663ad8e0076a04f6bdae60b5696d31402649719325b2b48d01",
+        "zh-CN": "4d2e00422afc7a5a234343eb0503b03a684888279e74f6ef65f08dfadddbe509"
+      },
+      "bilingual_task_counts": [
+        4,
+        4
+      ],
+      "task_bindings": {
+        "en": {
+          "21159": "/blocks/1/items/50/data/entries/0",
+          "21160": "/blocks/1/items/50/data/entries/1",
+          "5019": "/blocks/1/items/50/data/entries/2",
+          "5013": "/blocks/1/items/50/data/entries/3"
+        },
+        "zh-CN": {
+          "21159": "/blocks/1/items/50/data/entries/0",
+          "21160": "/blocks/1/items/50/data/entries/1",
+          "5019": "/blocks/1/items/50/data/entries/2",
+          "5013": "/blocks/1/items/50/data/entries/3"
+        }
+      }
+    },
+    {
+      "slug": "wind-energy-development-managers",
+      "onet": "11-9199.10",
+      "soc": "11-9199",
+      "interest": "EC",
+      "vector": [
+        3.44,
+        3.86,
+        1.66,
+        2.38,
+        6.71,
+        4.82
+      ],
+      "title_evidence": "official_title",
+      "official_core_task_ids": [
+        15836,
+        15834,
+        15827,
+        15838
+      ],
+      "status": "review_pass",
+      "reasons": [],
+      "body_fingerprints": {
+        "en": "6e51371db3022cac3e6de9116dfb86fdf82f71d3876eb661d4048a91305b3a0a",
+        "zh-CN": "b86fd677a75e8c182fffa80417279b3beffc878ab4e00b151bd56493ce151ba0"
+      },
+      "bilingual_task_counts": [
+        4,
+        4
+      ],
+      "task_bindings": {
+        "en": {
+          "15836": "/blocks/1/items/50/data/entries/0",
+          "15834": "/blocks/1/items/50/data/entries/1",
+          "15827": "/blocks/1/items/50/data/entries/2",
+          "15838": "/blocks/1/items/50/data/entries/3"
+        },
+        "zh-CN": {
+          "15836": "/blocks/1/items/50/data/entries/0",
+          "15834": "/blocks/1/items/50/data/entries/1",
+          "15827": "/blocks/1/items/50/data/entries/2",
+          "15838": "/blocks/1/items/50/data/entries/3"
+        }
+      }
+    },
+    {
+      "slug": "wind-energy-engineers",
+      "onet": "17-2199.10",
+      "soc": "17-2199",
+      "interest": "RIC",
+      "vector": [
+        5.9,
+        4.54,
+        2.22,
+        1.43,
+        3.12,
+        4.12
+      ],
+      "title_evidence": "official_title",
+      "official_core_task_ids": [
+        16559,
+        16549,
+        16560
+      ],
+      "status": "review_pass",
+      "reasons": [],
+      "body_fingerprints": {
+        "en": "b8840693ee8ed2e91fb3f57ea8d26906cd71e4698f57d00fd0c8bdaf42cfdb7f",
+        "zh-CN": "83a76faca4efff1c6c80f0ed843f0020b42eac23b6b1f06317ec5647ba5e831c"
+      },
+      "bilingual_task_counts": [
+        3,
+        3
+      ],
+      "task_bindings": {
+        "en": {
+          "16559": "/blocks/1/items/50/data/entries/0",
+          "16549": "/blocks/1/items/50/data/entries/1",
+          "16560": "/blocks/1/items/50/data/entries/2"
+        },
+        "zh-CN": {
+          "16559": "/blocks/1/items/50/data/entries/0",
+          "16549": "/blocks/1/items/50/data/entries/1",
+          "16560": "/blocks/1/items/50/data/entries/2"
+        }
+      }
+    },
+    {
+      "slug": "wind-energy-operations-managers",
+      "onet": "11-9199.09",
+      "soc": "11-9199",
+      "interest": "ECR",
+      "vector": [
+        4.16,
+        3.04,
+        1.0,
+        2.34,
+        6.47,
+        5.24
+      ],
+      "title_evidence": "official_title",
+      "official_core_task_ids": [
+        15822,
+        15808,
+        15809,
+        15823
+      ],
+      "status": "review_pass",
+      "reasons": [],
+      "body_fingerprints": {
+        "en": "1b0fdc1be016166c42c0eff95e75b140ec4e14e83a915eac7ba498c8c5f353d6",
+        "zh-CN": "366b73d47ac0083242cd4b9b9eb1d5b2576d8f97a0161e751e3d66c4983ecb11"
+      },
+      "bilingual_task_counts": [
+        4,
+        4
+      ],
+      "task_bindings": {
+        "en": {
+          "15822": "/blocks/1/items/50/data/entries/0",
+          "15808": "/blocks/1/items/50/data/entries/1",
+          "15809": "/blocks/1/items/50/data/entries/2",
+          "15823": "/blocks/1/items/50/data/entries/3"
+        },
+        "zh-CN": {
+          "15822": "/blocks/1/items/50/data/entries/0",
+          "15808": "/blocks/1/items/50/data/entries/1",
+          "15809": "/blocks/1/items/50/data/entries/2",
+          "15823": "/blocks/1/items/50/data/entries/3"
+        }
+      }
+    },
+    {
+      "slug": "wind-turbine-service-technicians",
+      "onet": "49-9081.00",
+      "soc": "49-9081",
+      "interest": "RCI",
+      "vector": [
+        7.0,
+        3.6,
+        1.0,
+        1.62,
+        1.77,
+        4.29
+      ],
+      "title_evidence": "official_title",
+      "official_core_task_ids": [
+        17806,
+        17809,
+        17808,
+        17811
+      ],
+      "status": "review_pass",
+      "reasons": [],
+      "body_fingerprints": {
+        "en": "f0bc070d9154b23869796726657e67b2858d65b1d4e72fe9e56384580a62aef3",
+        "zh-CN": "b29dcf079a217729e773abad8a3845d98d52750f3d2119da196d4bf312ea4143"
+      },
+      "bilingual_task_counts": [
+        4,
+        4
+      ],
+      "task_bindings": {
+        "en": {
+          "17806": "/blocks/1/items/50/data/entries/0",
+          "17809": "/blocks/1/items/50/data/entries/1",
+          "17808": "/blocks/1/items/50/data/entries/2",
+          "17811": "/blocks/1/items/50/data/entries/3"
+        },
+        "zh-CN": {
+          "17806": "/blocks/1/items/50/data/entries/0",
+          "17809": "/blocks/1/items/50/data/entries/1",
+          "17808": "/blocks/1/items/50/data/entries/2",
+          "17811": "/blocks/1/items/50/data/entries/3"
+        }
+      }
+    },
+    {
+      "slug": "word-processors-and-typists",
+      "onet": "43-9022.00",
+      "soc": "43-9022",
+      "interest": "C",
+      "vector": [
+        2.87,
+        1.94,
+        2.26,
+        2.23,
+        1.86,
+        6.59
+      ],
+      "title_evidence": "official_title",
+      "official_core_task_ids": [
+        794,
+        805,
+        791,
+        799
+      ],
+      "status": "review_pass",
+      "reasons": [],
+      "body_fingerprints": {
+        "en": "4dbeae2db974b27ca863c427f3a540e6756925f42ff25b2e008b8fcee76e12e8",
+        "zh-CN": "347e4a781ea5e23aada04eba172f17719e6c17ef8ab20fc91b45a679d1ee4ced"
+      },
+      "bilingual_task_counts": [
+        4,
+        4
+      ],
+      "task_bindings": {
+        "en": {
+          "794": "/blocks/1/items/50/data/entries/0",
+          "805": "/blocks/1/items/50/data/entries/1",
+          "791": "/blocks/1/items/50/data/entries/2",
+          "799": "/blocks/1/items/50/data/entries/3"
+        },
+        "zh-CN": {
+          "794": "/blocks/1/items/50/data/entries/0",
+          "805": "/blocks/1/items/50/data/entries/1",
+          "791": "/blocks/1/items/50/data/entries/2",
+          "799": "/blocks/1/items/50/data/entries/3"
+        }
+      }
+    },
+    {
+      "slug": "writers-and-authors",
+      "onet": "27-3043.00",
+      "soc": "27-3043",
+      "interest": "AE",
+      "vector": [
+        1.0,
+        3.25,
+        6.68,
+        2.86,
+        4.75,
+        3.34
+      ],
+      "title_evidence": "official_title",
+      "official_core_task_ids": [
+        22671,
+        22668,
+        22654,
+        22664
+      ],
+      "status": "review_pass",
+      "reasons": [],
+      "body_fingerprints": {
+        "en": "7851203a61dc36e8ec12687482d5fc8abab04d02fac13450488d0dbbb5536896",
+        "zh-CN": "27920e1c4d442a1300d4a423541f17edf6b3056f18e75792ee9afc86adb13ee2"
+      },
+      "bilingual_task_counts": [
+        4,
+        4
+      ],
+      "task_bindings": {
+        "en": {
+          "22671": "/blocks/1/items/50/data/entries/0",
+          "22668": "/blocks/1/items/50/data/entries/1",
+          "22654": "/blocks/1/items/50/data/entries/2",
+          "22664": "/blocks/1/items/50/data/entries/3"
+        },
+        "zh-CN": {
+          "22671": "/blocks/1/items/50/data/entries/0",
+          "22668": "/blocks/1/items/50/data/entries/1",
+          "22654": "/blocks/1/items/50/data/entries/2",
+          "22664": "/blocks/1/items/50/data/entries/3"
+        }
+      }
+    },
+    {
+      "slug": "zoologists-and-wildlife-biologists",
+      "onet": "19-1023.00",
+      "soc": "19-1023",
+      "interest": "IR",
+      "vector": [
+        5.43,
+        6.99,
+        2.31,
+        2.55,
+        2.33,
+        3.7
+      ],
+      "title_evidence": "official_title",
+      "official_core_task_ids": [
+        1493,
+        1496,
+        23957,
+        1492
+      ],
+      "status": "review_pass",
+      "reasons": [],
+      "body_fingerprints": {
+        "en": "c4bdbab0b1adcd76b6dbf262ed77fa9553dec246abef28e37b8260e5d836fcf5",
+        "zh-CN": "d9e491273cdc907a56faf72ac668c54e5ad86ac5d21f7981d97681c179a97d7a"
+      },
+      "bilingual_task_counts": [
+        4,
+        4
+      ],
+      "task_bindings": {
+        "en": {
+          "1493": "/blocks/1/items/50/data/entries/0",
+          "1496": "/blocks/1/items/50/data/entries/1",
+          "23957": "/blocks/1/items/50/data/entries/2",
+          "1492": "/blocks/1/items/50/data/entries/3"
+        },
+        "zh-CN": {
+          "1493": "/blocks/1/items/50/data/entries/0",
+          "1496": "/blocks/1/items/50/data/entries/1",
+          "23957": "/blocks/1/items/50/data/entries/2",
+          "1492": "/blocks/1/items/50/data/entries/3"
+        }
+      }
+    }
+  ]
+}
