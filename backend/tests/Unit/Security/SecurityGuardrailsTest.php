@@ -27,6 +27,8 @@ final class SecurityGuardrailsTest extends TestCase
         '/api/v0.3/friendship/challenges',
         '/api/v0.3/friendship/challenges/{id}/entries',
         '/api/v0.3/friendship/challenges/{id}/answers',
+        // Enrollment starts anonymously; owner migration verifies the challenge's existing key.
+        '/api/v0.3/friendship/challenges/{id}/browser-grant',
         // Account bootstrap verifies signed Google credentials or one-time email proofs, not an existing session.
         '/api/v0.3/auth/google/challenge',
         '/api/v0.3/auth/google',
