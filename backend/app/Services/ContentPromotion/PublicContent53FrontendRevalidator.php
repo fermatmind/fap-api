@@ -44,7 +44,7 @@ final class PublicContent53FrontendRevalidator
             $requests[] = ['kind' => 'discovery', 'identity' => ['locale' => 'en', 'slug' => 'articles']];
         }
         foreach ($requests as $row) {
-            if (($row['new_traditional_article'] ?? false) || ($row['new_traditional_guide'] ?? false) || ($row['new_traditional_topic'] ?? false)) {
+            if ((($row['new_traditional_article'] ?? false) && ! ($row['blog_translation'] ?? false)) || ($row['new_traditional_guide'] ?? false) || ($row['new_traditional_topic'] ?? false)) {
                 // The zh-TW page uses no-store. Its original readers are handled above.
                 continue;
             }
@@ -67,6 +67,11 @@ final class PublicContent53FrontendRevalidator
                     $revision = $article->workingRevision;
                 }
                 if (! $revision && ($row['new_article'] ?? false) && RiasecCodeSampleArticles::isRestored($article->getRawOriginal(), (string) $article->workingRevision?->authority_package_sha256)) {
+                    $revision = $article->workingRevision;
+                }
+                if (! $revision && ($row['blog_translation'] ?? false) && ! $article->is_public && $article->status === 'draft'
+                    && $article->workingRevision?->authority_asset_key === $row['page_id']
+                    && $article->workingRevision?->authority_package_sha256 === $row['package_sha256']) {
                     $revision = $article->workingRevision;
                 }
                 if (! $revision) {

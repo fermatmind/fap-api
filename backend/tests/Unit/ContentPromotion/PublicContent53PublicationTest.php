@@ -20,6 +20,7 @@ use App\Models\TopicProfile;
 use App\Models\TopicProfileEntry;
 use App\Models\TopicProfileSection;
 use App\Models\TopicProfileSeoMeta;
+use App\Services\Cms\ArticleReviewedCounterpartService;
 use App\Services\ContentPromotion\Adapters\PublicContent53PromotionAdapter;
 use App\Services\ContentPromotion\ExactPackagePromotionService;
 use App\Services\ContentPromotion\PromotionContext;
@@ -29,6 +30,7 @@ use App\Services\ContentPromotion\PublicContent53Package;
 use App\Services\ContentPromotion\PublicContent53State;
 use App\Services\ContentPromotion\PublicContent53Writer;
 use App\Services\ContentPromotion\StagingArticleOriginals;
+use App\Services\ContentPromotion\TraditionalArticlePublication;
 use Database\Seeders\ScaleRegistrySeeder;
 use DomainException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -44,6 +46,50 @@ use Tests\TestCase;
 final class PublicContent53PublicationTest extends TestCase
 {
     use RefreshDatabase;
+
+    public function test_missing_blog_translation_uses_the_reviewed_group_and_retains_independent_same_slug_article(): void
+    {
+        $base = ['org_id' => 0];
+        $copy = ['title' => 'Source', 'excerpt' => 'Original summary', 'content_md' => 'Original body.'];
+        $source = $this->article($base + ['slug' => 'same-name', 'locale' => 'zh-CN'], $copy, 'chinese-source', 'zh-CN');
+        $source->forceFill(['working_revision_id' => $source->published_revision_id])->saveQuietly();
+        $independent = $this->article($base + ['slug' => 'same-name', 'locale' => 'en'], $copy + ['seo_title' => 'Independent'], 'english-source', 'en');
+        $traditional = $this->article($base + ['slug' => 'same-name', 'locale' => 'zh-TW'], $copy, 'chinese-source', 'zh-CN');
+        $traditional->forceFill(['source_article_id' => $source->id, 'translated_from_article_id' => $source->id])->saveQuietly();
+        $traditional->publishedRevision->forceFill(['source_article_id' => $source->id])->saveQuietly();
+        $proof = static fn (Article $article): array => $article->only(['id', 'locale', 'slug', 'translation_group_id', 'published_revision_id', 'source_article_id'])
+            + ['body_sha256' => hash('sha256', $article->publishedRevision->content_md)];
+        $sha = $this->digest();
+        $row = [
+            'identity' => $base + ['slug' => 'same-name-six-tools', 'locale' => 'en'],
+            'page_id' => 'BLOG-TRANSLATION-same-name-six-tools',
+            'blog_translation' => true, 'package_sha256' => $sha,
+            'allow_staging_prepared_root' => false,
+            'source_expectations' => ['source' => $proof($source), 'traditional' => $proof($traditional)],
+            'source_identity' => ['source_article_id' => $source->id],
+            'taxonomy_display' => ['category' => ['id' => null], 'tags' => []],
+            'article_metadata' => [],
+            'snapshot' => ['title' => 'Translated title', 'excerpt' => 'Summary', 'content_md' => 'English translation.',
+                'seo_text' => ['seo_title' => 'Translated title', 'seo_description' => 'Summary', 'og_title' => 'Translated title',
+                    'og_description' => 'Summary', 'og_image_url' => null]],
+        ];
+        $publisher = app(TraditionalArticlePublication::class);
+        $before = $publisher->read($row, false);
+        self::assertTrue($before['missing']);
+        self::assertTrue(DB::transaction(fn () => $publisher->publish($row, $before, $this->context())));
+        $created = Article::query()->where($row['identity'])->sole();
+        self::assertSame('en', $created->publishedRevision->locale);
+        self::assertSame('https://fermatmind.com/en/articles/same-name-six-tools', $created->seoMeta->canonical_url);
+        self::assertFalse($created->is_indexable);
+        $languageLinks = ['zh-CN' => 'same-name', 'zh-TW' => 'same-name', 'en' => 'same-name-six-tools'];
+        $readers = app(ArticleReviewedCounterpartService::class);
+        foreach ([$source, $traditional, $created] as $member) {
+            self::assertSame($languageLinks, $readers->readerLanguageSlugs($member));
+        }
+        self::assertSame('english-source', $independent->fresh()->translation_group_id);
+        DB::transaction(fn () => $publisher->restore($row, ['target_id' => $created->id]));
+        self::assertTrue($publisher->read($row, false)['retained_draft']);
+    }
 
     private function digest(): string
     {

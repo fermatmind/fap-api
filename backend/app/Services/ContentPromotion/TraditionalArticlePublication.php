@@ -22,6 +22,53 @@ final class TraditionalArticlePublication
 
     public const BATCH_SCHEMA = 'fermatmind.traditional_article_batch.v1';
 
+    public const BLOG_BATCH_SCHEMA = 'fermatmind.blog_missing_translations.v1';
+
+    public static function blogBatch(string $bytes, string $environment): array
+    {
+        $batch = json_decode($bytes, true, 64, JSON_THROW_ON_ERROR);
+        if (($batch['schema'] ?? null) !== self::BLOG_BATCH_SCHEMA || ! array_is_list($batch['articles'] ?? [])
+            || count($batch['articles']) !== 5 || ! in_array($environment, ['staging', 'production'], true)) {
+            throw new DomainException('blog_missing_translations_package_invalid');
+        }
+
+        $rows = [];
+        foreach ($batch['articles'] as $item) {
+            $identity = $item['identity'];
+            $proof = $item['proof'][$environment];
+            $source = $proof['source'];
+            $locale = $identity['locale'];
+            $slug = $identity['slug'];
+            $key = $locale.':'.$slug;
+            if (! in_array($locale, ['zh-CN', 'en'], true) || $source['locale'] !== ($locale === 'en' ? 'zh-CN' : 'en')
+                || preg_match('/\A[a-z0-9]+(?:-[a-z0-9]+)*\z/', $slug) !== 1 || isset($rows[$key])
+                || $proof['traditional']['locale'] !== 'zh-TW'
+                || $source['translation_group_id'] !== $proof['traditional']['translation_group_id']) {
+                throw new DomainException('blog_missing_translations_identity_invalid');
+            }
+            $rows[$key] = [
+                'page_id' => 'BLOG-TRANSLATION-'.$slug,
+                'kind' => 'article',
+                'identity' => ['org_id' => 0, 'slug' => $slug, 'locale' => $locale],
+                'new_traditional_article' => true,
+                'blog_translation' => true,
+                'traditional_article_batch' => true,
+                'before' => [], 'staging_before' => [],
+                'source_identity' => ['source_article_id' => $source['id'], 'source_locale' => $source['locale'],
+                    'translation_group_id' => $source['translation_group_id']],
+                'staging_source_article_id' => $item['proof']['staging']['source']['id'],
+                'source_expectations' => $proof,
+                'allow_staging_prepared_root' => $environment === 'staging',
+                'article_metadata' => $item['article_metadata'],
+                'taxonomy_display' => $item['taxonomy'][$environment],
+                'editorial_package_v1' => $item['editorial_package_v1'] ?? null,
+                'snapshot' => $item['snapshot'],
+            ];
+        }
+
+        return ['candidates' => array_values($rows)];
+    }
+
     public static function package(string $bytes, string $reviewBytes, string $environment): array
     {
         $package = json_decode($bytes, true, 64, JSON_THROW_ON_ERROR);
@@ -428,25 +475,35 @@ final class TraditionalArticlePublication
 
     public function read(array $row, bool $lock): array
     {
+        $proof = $row['source_expectations'];
+        $blogTranslation = $row['blog_translation'] ?? false;
         $guard = app(TraditionalArticleSourcePreflight::class);
-        $source = $guard->assertSource($row['source_expectations'], $lock, ($row['allow_staging_prepared_root'] ?? false) === true);
+        $source = $blogTranslation
+            ? $this->readBlogSource($proof, $lock, $row['allow_staging_prepared_root'])
+            : $guard->assertSource($proof, $lock, ($row['allow_staging_prepared_root'] ?? false) === true);
         $target = Article::query()->withoutGlobalScopes()->withTrashed()
             ->where($row['identity'])->when($lock, fn ($query) => $query->lockForUpdate())->first();
         $targetSlug = $row['identity']['slug'];
-        $expectedSlug = $source->slug;
-        if ($source->locale === 'en' && isset($row['source_expectations']['existing_chinese'])
-            && ! self::usesChineseSourceCopy($row['source_expectations'])) {
-            $expectedSlug .= '-english-source';
-        }
-        if ($targetSlug !== $expectedSlug) {
-            throw new DomainException('traditional_article_target_collision');
-        }
-        if ($target === null) {
-            $guard->assertTargetVacant($source, $lock, $targetSlug);
+        if ($blogTranslation) {
+            $targets = ArticleSourceTargetSnapshot::capture($source, $lock, $row['identity']['locale'], $targetSlug);
+            if (array_column($targets, 'article_id') !== ($target === null ? [] : [(int) $target->id])) {
+                throw new DomainException('blog_missing_translations_target_collision');
+            }
         } else {
-            $targets = ArticleSourceTargetSnapshot::capture($source, $lock, 'zh-TW', $targetSlug);
-            if (count($targets) !== 1 || $targets[0]['article_id'] !== $target->id) {
+            $expectedSlug = $source->slug;
+            if ($source->locale === 'en' && isset($proof['existing_chinese']) && ! self::usesChineseSourceCopy($proof)) {
+                $expectedSlug .= '-english-source';
+            }
+            if ($targetSlug !== $expectedSlug) {
                 throw new DomainException('traditional_article_target_collision');
+            }
+            if ($target === null) {
+                $guard->assertTargetVacant($source, $lock, $targetSlug);
+            } else {
+                $targets = ArticleSourceTargetSnapshot::capture($source, $lock, 'zh-TW', $targetSlug);
+                if (count($targets) !== 1 || $targets[0]['article_id'] !== $target->id) {
+                    throw new DomainException('traditional_article_target_collision');
+                }
             }
         }
 
@@ -471,6 +528,37 @@ final class TraditionalArticlePublication
             'target_id' => $target?->id,
             'target_state_sha256' => $target === null ? null : ArticleSourceTargetSnapshot::publicationHash($target, $lock),
         ];
+    }
+
+    private function readBlogSource(array $proof, bool $lock, bool $allowPreparedRoot): Article
+    {
+        $read = static function (array $expected) use ($lock): Article {
+            $article = Article::query()->withoutGlobalScopes()->publiclyReadable()
+                ->where('org_id', 0)->whereKey($expected['id'])->when($lock, fn ($query) => $query->lockForUpdate())->firstOrFail();
+            $revision = $article->publishedRevision()->withoutGlobalScopes()
+                ->when($lock, fn ($query) => $query->lockForUpdate())->firstOrFail();
+            $identity = array_diff_key($expected, ['body_sha256' => true]);
+            if ($article->only(array_keys($identity)) !== $identity
+                || ! hash_equals($expected['body_sha256'], hash('sha256', (string) $revision->content_md))) {
+                throw new DomainException('blog_missing_translations_public_revision_changed');
+            }
+
+            return $article;
+        };
+        $source = $read($proof['source']);
+        $traditional = $read($proof['traditional']);
+        if ((! $source->isSourceArticle() && ! ($allowPreparedRoot
+                && $source->translation_status === Article::TRANSLATION_STATUS_APPROVED
+                && $source->locale === $source->source_locale && $source->source_article_id === null
+                && $source->translated_from_article_id === null))
+            || (int) $traditional->source_article_id !== (int) $source->id
+            || $traditional->translation_group_id !== $source->translation_group_id
+            || (int) $source->working_revision_id !== (int) $source->published_revision_id
+            || ! is_string($source->source_version_hash) || $source->source_version_hash === '') {
+            throw new DomainException('blog_missing_translations_source_lineage_changed');
+        }
+
+        return $source;
     }
 
     public function assertBaseline(array $state): void
@@ -516,8 +604,10 @@ final class TraditionalArticlePublication
         ];
         $revisionCopy = array_intersect_key($copy, array_flip(['title', 'excerpt', 'content_md']))
             + array_intersect_key($seo, array_flip(['seo_title', 'seo_description']));
+        $locale = $row['identity']['locale'];
+        $segment = $locale === 'zh-CN' ? 'zh' : $locale;
         $seoCopy = [
-            'org_id' => 0, 'locale' => 'zh-TW', 'canonical_url' => 'https://fermatmind.com/zh-TW/articles/'.$row['identity']['slug'],
+            'org_id' => 0, 'locale' => $locale, 'canonical_url' => 'https://fermatmind.com/'.$segment.'/articles/'.$row['identity']['slug'],
             'is_indexable' => false, 'robots' => 'noindex,follow', ...$seo,
             ...(($row['editorial_package_v1'] ?? null) === null ? [] : ['schema_json' => ['editorial_package_v1' => $row['editorial_package_v1']]]),
         ];
@@ -538,7 +628,7 @@ final class TraditionalArticlePublication
         }
         $revision ??= ArticleTranslationRevision::query()->withoutGlobalScopes()->create([
             'org_id' => 0, 'article_id' => $target->id, 'source_article_id' => $source->id,
-            'locale' => 'zh-TW', 'source_locale' => $source->locale, 'translation_group_id' => $source->translation_group_id,
+            'locale' => $locale, 'source_locale' => $source->locale, 'translation_group_id' => $source->translation_group_id,
             'source_version_hash' => $source->source_version_hash, 'translated_from_version_hash' => $source->source_version_hash,
             'revision_number' => (int) ArticleTranslationRevision::query()->withoutGlobalScopes()->where('article_id', $target->id)->max('revision_number') + 1,
             'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED, 'supersedes_revision_id' => $target->working_revision_id,

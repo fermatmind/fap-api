@@ -501,7 +501,7 @@ export function assertDom(row,html,before,environment, {articleSsr=false}={}) {
     const publicTitle = title => row.new_traditional_article && row.identity.slug.startsWith('big-five-')
       ? (title.trim().replace(/(?:\s*\|\s*FermatMind)+\s*$/iu, '').trim() || title.trim()) : title;
     const documentTitle = row.kind === 'guide' ? guideDocumentTitle(seo.seo_title,row.new_traditional_guide ? '費馬測試' : 'FermatMind')
-      : `${publicTitle(seo.seo_title)} | ${row.new_traditional_article ? '費馬測試' : 'FermatMind'}`;
+      : `${publicTitle(seo.seo_title)} | ${row.new_traditional_article && !row.blog_translation ? '費馬測試' : 'FermatMind'}`;
     if (!equal(dom.title.map(compact),[compact(documentTitle)])
       || !equal(dom.description.map(compact),[compact(seo.seo_description)])
       || !equal(dom.og_title.map(compact),[compact(publicTitle(seo.og_title))])
@@ -637,7 +637,13 @@ export function assertDom(row,html,before,environment, {articleSsr=false}={}) {
       || (traditionalPolicyType(row) ? schemas.length !== 0 : !webPage || !breadcrumb) || (row.identity.slug === 'about' && !['創始人與博士顧問團隊','劉福威','賈睿璇','李琛'].every(text=>body.includes(compact(text)))))
       throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_PAGE_SEO_OR_TEAM_${row.page_id}`);
   }
-  if (row.new_traditional_article) {
+  if (row.blog_translation) {
+    const robots=dom.robots.join(',').toLowerCase().split(',').map(value=>value.trim());
+    if (dom.language !== (row.identity.locale === 'zh-CN' ? 'zh' : 'en')
+      || !equal(dom.canonical,['https://fermatmind.com'+pathFor(row)]) || !robots.includes('noindex') || robots.includes('index'))
+      throw new Error(`PUBLIC_CONTENT_53_BLOG_TRANSLATION_SEO_${row.page_id}`);
+  }
+  if (row.new_traditional_article && !row.blog_translation) {
     const robots=dom.robots.join(',').toLowerCase().split(',').map(value=>value.trim());
     if (dom.language !== 'zh-TW' || !equal(dom.canonical,['https://fermatmind.com'+pathFor(row)])
       || !robots.includes('noindex') || robots.includes('index') || dom.alternate_entries.some(entry=>entry.hreflang))
@@ -810,7 +816,18 @@ export async function verifyOnlineCandidates(environment,backendRoot,fetcher=fet
       || native.translation_group_id !== row.source_identity.translation_group_id
       || native.source_article_id !== (environment === 'staging' ? row.staging_source_article_id : row.source_identity.source_article_id)
       || !Number.isInteger(native.published_revision_id))) throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_ARTICLE_QUALIFICATION_${row.page_id}`);
-    if (row.new_traditional_article && row.source_identity?.source_locale === 'en') {
+    if (row.blog_translation) {
+      const peers=[row.source_expectations.source,row.source_expectations.traditional];
+      const expected=Object.fromEntries([...peers,row.identity].map(item=>[item.locale,item.slug]));
+      if (!equal(data.reader_language_slugs,expected)) throw new Error('PUBLIC_CONTENT_53_BLOG_TRANSLATION_READER_LINKS');
+      for (const peer of peers) {
+        const response=parseApi(await read(api+apiPath({kind:'article',identity:peer}),fetcher));
+        if (response.ok !== true || response.article?.id !== peer.id || response.article.published_revision_id !== peer.published_revision_id
+          || !equal(response.reader_language_slugs,expected))
+          throw new Error('PUBLIC_CONTENT_53_BLOG_TRANSLATION_READER_LINKS');
+      }
+    }
+    if (row.new_traditional_article && !row.blog_translation && row.source_identity?.source_locale === 'en') {
       const source=row.source_expectations.source;
       const original=parseApi(await read(api+'/api/v0.5/articles/'+source.slug+'?locale=en&org_id=0',fetcher));
       const expected={en:source.slug,'zh-TW':row.identity.slug};

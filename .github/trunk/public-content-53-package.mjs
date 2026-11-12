@@ -7,6 +7,7 @@ import { canonical } from './iq-public-scale-package.mjs';
 export const packagePath = 'content_assets/public_content_53';
 // Selection comes from the existing exact-range classifier, never file presence.
 const packages = {
+  'blog-missing-translations': ['fermatmind.blog_missing_translations.v1', ['blog-missing-translations.json']],
   'traditional-article-index': ['fermatmind.traditional_article_index.v1', ['traditional-article-index.json']],
   'staging-article-originals': ['fermatmind.staging_article_originals.v1', ['staging-article-originals.json']],
   'staging-article-originals-taiwan-delta': ['fermatmind.staging_article_originals.v1', ['staging-article-originals-taiwan-delta.json']],

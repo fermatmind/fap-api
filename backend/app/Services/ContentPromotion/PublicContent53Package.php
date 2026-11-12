@@ -186,6 +186,20 @@ final class PublicContent53Package
                 return TraditionalLandingSurfacePublication::featuredOrder($bytes, $environment, $directory, $articles);
             }
         }
+        $blogBatch = 'blog-missing-translations.json';
+        if (is_file($root.'/'.self::PACKAGE.'/'.$blogBatch)) {
+            $bytes = $this->bytes($root, $blogBatch);
+            $chain = TraditionalArticlePublication::BLOG_BATCH_SCHEMA."\n".$blogBatch."\n".hash('sha256', $bytes)."\n";
+            if (hash_equals($expectedSha256, hash('sha256', $chain))) {
+                $package = TraditionalArticlePublication::blogBatch($bytes, $environment);
+                foreach ($package['candidates'] as &$row) {
+                    $row['package_sha256'] = $expectedSha256;
+                }
+                unset($row);
+
+                return $package;
+            }
+        }
         foreach (['traditional-article-batch', 'traditional-article-featured', 'traditional-article-career-eq', 'traditional-article-big-five', 'traditional-article-assessment-guides', 'traditional-article-interpretation', 'traditional-article-cross-group', 'traditional-article-reading-research', 'traditional-article-big-five-application', 'traditional-article-assessment-reading', 'traditional-article-enneagram-career-guides', 'traditional-article-admissions-and-reading', 'traditional-article-relationship-and-guides', 'traditional-article-admissions-checklists', 'traditional-article-evidence-and-ai', 'traditional-article-source-lineage', 'traditional-article-taiwan-delta', 'traditional-article-localized-media'] as $name) {
             if (! is_file($root.'/'.self::PACKAGE.'/'.$name.'.json')) {
                 continue;
