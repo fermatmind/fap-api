@@ -28,6 +28,7 @@ const packages = {
   'traditional-article-admissions-checklists': ['fermatmind.traditional_article_batch.v1', ['traditional-article-admissions-checklists.json','traditional-article-admissions-checklists-review.json']],
   'traditional-article-evidence-and-ai': ['fermatmind.traditional_article_batch.v1', ['traditional-article-evidence-and-ai.json','traditional-article-evidence-and-ai-review.json']],
   'traditional-article-source-lineage': ['fermatmind.traditional_article_batch.v1', ['traditional-article-source-lineage.json','traditional-article-source-lineage-review.json']],
+  'traditional-article-taiwan-delta': ['fermatmind.traditional_article_batch.v1', ['traditional-article-taiwan-delta.json','traditional-article-taiwan-delta-review.json']],
   'traditional-article-localized-media': ['fermatmind.traditional_article_batch.v1', ['traditional-article-localized-media.json','traditional-article-localized-media-review.json']],
   'traditional-article-featured': ['fermatmind.traditional_article_batch.v1', ['traditional-article-featured.json','traditional-article-featured-review.json']],
   'traditional-article-english': ['fermatmind.traditional_article.v1', ['traditional-article-english.json','traditional-article-english-review.json']],
