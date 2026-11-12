@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Console;
 
+use App\Domain\Career\Display\CareerContentV3AuthorityPackage;
 use App\Domain\Career\Display\CareerContentV3CanonicalReader;
 use App\Models\Occupation;
 use App\Models\OccupationCrosswalk;
 use App\Models\OccupationFamily;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use Mockery;
 use Tests\TestCase;
 
 final class CareerConfirmReviewedOnetCrosswalksTest extends TestCase
@@ -74,6 +76,7 @@ final class CareerConfirmReviewedOnetCrosswalksTest extends TestCase
     {
         $path = database_path('data/career_onet_crosswalk_review_batch3_20261111.json');
         $report = json_decode(file_get_contents($path), true, flags: JSON_THROW_ON_ERROR);
+        $this->bindHistoricalManifest($report['career_manifest_sha256']);
         $rows = array_values(array_filter($report['rows'], static fn (array $row): bool => $row['status'] === 'review_pass'));
         $eligible = $this->occupation($rows[0]['slug'], $rows[0]['onet']);
         $changed = $this->occupation($rows[1]['slug'], $rows[1]['onet']);
@@ -100,6 +103,7 @@ final class CareerConfirmReviewedOnetCrosswalksTest extends TestCase
     {
         $path = database_path('data/career_onet_crosswalk_review_batch51_20261111.json');
         $report = json_decode(file_get_contents($path), true, flags: JSON_THROW_ON_ERROR);
+        $this->bindHistoricalManifest($report['career_manifest_sha256']);
         $rows = $report['rows'];
         $selected = array_map(fn (array $row) => $this->occupation($row['slug'], $row['onet']), $rows);
         $args = ['--report' => $path, '--sha256' => hash_file('sha256', $path)];
@@ -135,6 +139,45 @@ final class CareerConfirmReviewedOnetCrosswalksTest extends TestCase
         $receipt = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
         $this->assertSame([], $receipt['changed_or_planned']);
         $this->assertSame(6, $receipt['already_confirmed']);
+    }
+
+    public function test_second_batch_five_report_binds_current_dual_locale_evidence(): void
+    {
+        $path = database_path('data/career_onet_crosswalk_review_batch51_wave2_20261111.json');
+        $report = json_decode(file_get_contents($path), true, flags: JSON_THROW_ON_ERROR);
+        $this->bindHistoricalManifest($report['career_manifest_sha256']);
+        $rows = $report['rows'];
+        $selected = array_map(fn (array $row) => $this->occupation($row['slug'], $row['onet']), $rows);
+        $args = ['--report' => $path, '--sha256' => hash_file('sha256', $path)];
+
+        $this->assertSame(0, Artisan::call('career:confirm-reviewed-onet-crosswalks', $args));
+        $receipt = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
+        $this->assertSame(6, $receipt['selected']);
+        $this->assertCount(6, $receipt['changed_or_planned']);
+        $this->assertSame([], $receipt['held']);
+        foreach ($selected as $item) {
+            $this->assertSame('directory_candidate', $item->fresh()->mapping_type);
+        }
+
+        $this->assertSame(0, Artisan::call('career:confirm-reviewed-onet-crosswalks', $args + ['--apply' => true]));
+        foreach ($selected as $item) {
+            $this->assertSame('direct_match', $item->fresh()->mapping_type);
+        }
+    }
+
+    private function bindHistoricalManifest(string $hash): void
+    {
+        $authority = app(CareerContentV3CanonicalReader::class)->authority();
+        if ($authority['manifest']['aggregate_sha256'] === $hash) {
+            return;
+        }
+
+        // Historical reports pin the release-wide aggregate. The reader still checks
+        // the installed pages and the command still verifies each selected fingerprint.
+        $authority['manifest']['aggregate_sha256'] = $hash;
+        $reader = Mockery::mock(CareerContentV3CanonicalReader::class, [app(CareerContentV3AuthorityPackage::class)])->makePartial();
+        $reader->shouldReceive('authority')->andReturn($authority);
+        $this->instance(CareerContentV3CanonicalReader::class, $reader);
     }
 
     private function occupation(string $slug, string $code): OccupationCrosswalk
