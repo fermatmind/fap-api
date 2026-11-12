@@ -186,10 +186,11 @@ class AttemptStartService
             || strtoupper($scaleCode) === IqOwnerOriginal30BankService::SCALE_CODE
         ) {
             $requestedBankId = is_array($dto->meta ?? null) ? (string) ($dto->meta['bank_id'] ?? '') : '';
-            if ($this->iqOwnerOriginal30Bank()->isOwnerOriginalRequest($dto->formCode, $requestedBankId)) {
+            $iqBank = $this->iqOwnerOriginal30Bank()->forRequest($dto->formCode, $requestedBankId);
+            if ($iqBank->isOwnerOriginalRequest($dto->formCode, $requestedBankId)) {
                 $dirVersion = IqOwnerOriginal30BankService::DIR_VERSION;
-                $resolvedFormCode = IqOwnerOriginal30BankService::FORM_CODE;
-                $resolvedQuestionCount = $this->iqOwnerOriginal30Bank()->questionCount();
+                $resolvedFormCode = $iqBank->formCode();
+                $resolvedQuestionCount = $iqBank->questionCount();
             }
         }
 
@@ -197,7 +198,7 @@ class AttemptStartService
             throw new ApiProblemException(500, 'CONTENT_PACK_ERROR', 'scale pack not configured.');
         }
 
-        $questionCount = $this->resolveQuestionCount(
+        $questionCount = ($resolvedFormCode === IqOwnerOriginal30BankService::MERGED_FORM_CODE ? $resolvedQuestionCount : null) ?? $this->resolveQuestionCount(
             $scaleCode,
             $packId,
             $dirVersion,
@@ -310,10 +311,10 @@ class AttemptStartService
         }
 
         $answersMeta = is_array($answersSummaryMeta) ? $answersSummaryMeta : [];
-        if (($resolvedFormCode ?? null) === IqOwnerOriginal30BankService::FORM_CODE) {
+        if (in_array($resolvedFormCode ?? null, [IqOwnerOriginal30BankService::FORM_CODE, IqOwnerOriginal30BankService::MERGED_FORM_CODE], true)) {
             $answersMeta = array_merge(
                 $answersMeta,
-                $this->iqOwnerOriginal30Bank()->startMetadata($packId, $dirVersion)
+                $this->iqOwnerOriginal30Bank()->forRequest($resolvedFormCode)->startMetadata($packId, $dirVersion)
             );
         }
         if ($resolvedFormCode !== null && $resolvedFormCode !== '') {

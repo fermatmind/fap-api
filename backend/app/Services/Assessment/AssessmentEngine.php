@@ -351,7 +351,7 @@ class AssessmentEngine
         $bankId = is_string($bankIdValue) || is_numeric($bankIdValue)
             ? (string) $bankIdValue
             : null;
-        $service = app(IqOwnerOriginal30BankService::class);
+        $service = app(IqOwnerOriginal30BankService::class)->forRequest($formCode, $bankId);
         if (! $service->isOwnerOriginalRequest($formCode, $bankId)) {
             return null;
         }

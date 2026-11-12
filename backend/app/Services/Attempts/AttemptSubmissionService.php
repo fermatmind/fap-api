@@ -334,7 +334,7 @@ final class AttemptSubmissionService
             return;
         }
 
-        $this->iqOwnerOriginal30Bank->validateSubmit($attempt, $dto);
+        $this->iqOwnerOriginal30Bank->forAttempt($attempt)->validateSubmit($attempt, $dto);
     }
 
     /**

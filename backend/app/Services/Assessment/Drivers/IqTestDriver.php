@@ -6,6 +6,7 @@ use App\Services\Assessment\IqBetaStandardScore;
 use App\Services\Assessment\ScoreResult;
 use App\Services\Iq\IqBetaReferenceScore;
 use App\Services\Iq\IqNormAuthorityContract;
+use App\Services\Iq\IqOwnerOriginal30BankService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
@@ -260,7 +261,9 @@ class IqTestDriver implements DriverInterface
                 || $solutionRule === ''
                 || $distractorLogic === ''
                 || ! is_array($assets) || $assets === []
-                || ! is_array($assetHashes) || $assetHashes === []
+                || ! is_array($assetHashes)
+                || ($assetHashes === [] && ($bankId !== IqOwnerOriginal30BankService::MERGED_FORM_CODE
+                    || ($assets['stem'] ?? '') !== '' || ($assets['options'] ?? []) !== []))
                 || ! is_array($generatorMetadata) || $generatorMetadata === []
             ) {
                 $contract['reason_code'] = 'ANSWER_KEY_INCOMPLETE';

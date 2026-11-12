@@ -79,6 +79,49 @@ final class IqOwnerOriginal30SessionDeliveryTest extends TestCase
     }
 
     #[Test]
+    public function merged_form_delivers_and_scores_forty_questions(): void
+    {
+        (new ScaleRegistrySeeder)->run();
+
+        $anonId = 'anon_iq_merged_runtime';
+        $token = $this->issueAnonToken($anonId);
+        $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ]);
+        $start = $this->postJson('/api/v0.3/attempts/start', [
+            'scale_code' => 'IQ_INTELLIGENCE_QUOTIENT',
+            'anon_id' => $anonId,
+            'form_code' => 'IQ_MERGED_40',
+        ])->assertOk()->assertJsonPath('form_code', 'IQ_MERGED_40')->assertJsonPath('question_count', 40);
+        $attemptId = $start->json('attempt_id');
+
+        $answers = $this->perfectAnswers('IQ_MERGED_40', 40);
+        foreach ($answers as $index => $answer) {
+            $question = $this->getJson("/api/v0.3/attempts/{$attemptId}/questions?index={$index}")
+                ->assertOk()
+                ->assertJsonPath('bank_id', 'IQ_MERGED_40')
+                ->assertJsonPath('question_count', 40)
+                ->assertJsonPath('questions.items.0.question_id', $answer['question_id']);
+            $item = $question->json('questions.items.0');
+            $this->assertContains($answer['code'], array_column($item['options'], 'code'));
+            if ($index === 1) {
+                $this->get($item['stem']['src'])->assertOk()->assertHeader('Content-Type', 'image/png');
+            }
+            $this->assertPayloadHasNoPrivateIqFields($question->json());
+        }
+
+        $this->postJson('/api/v0.3/attempts/submit?mode=sync_legacy', [
+            'attempt_id' => $attemptId,
+            'answers' => $answers,
+            'duration_ms' => 120000,
+        ])->assertOk()
+            ->assertJsonPath('result.raw_score', 40)
+            ->assertJsonPath('result.normed_json.bank_id', 'IQ_MERGED_40')
+            ->assertJsonPath('result.normed_json.norms.iq_estimate', null);
+    }
+
+    #[Test]
     public function current_question_delivery_returns_one_public_safe_question(): void
     {
         $anonId = 'anon_iq_owner_delivery';
@@ -497,9 +540,12 @@ final class IqOwnerOriginal30SessionDeliveryTest extends TestCase
     /**
      * @return array<int,array{question_id:string,code:string}>
      */
-    private function perfectAnswers(): array
+    private function perfectAnswers(string $bankId = 'IQ_OWNER_ORIGINAL_30', int $count = 30): array
     {
         $path = base_path('../content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/answer_key.json');
+        if ($bankId === 'IQ_MERGED_40') {
+            $path = resource_path('iq_merged40/banks/IQ_MERGED_40/answer_key.json');
+        }
         $doc = json_decode((string) file_get_contents($path), true);
         $this->assertIsArray($doc);
 
@@ -512,7 +558,7 @@ final class IqOwnerOriginal30SessionDeliveryTest extends TestCase
             ];
         }
 
-        $this->assertCount(30, $answers);
+        $this->assertCount($count, $answers);
 
         return $answers;
     }

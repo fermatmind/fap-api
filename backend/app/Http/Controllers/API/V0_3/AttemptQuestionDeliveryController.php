@@ -40,12 +40,13 @@ final class AttemptQuestionDeliveryController extends Controller
             throw new ApiProblemException(404, 'RESOURCE_NOT_FOUND', 'attempt not found.');
         }
 
-        if (! $this->ownerBank->isOwnerOriginalAttempt($attempt)) {
+        $bank = $this->ownerBank->forAttempt($attempt);
+        if (! $bank->isOwnerOriginalAttempt($attempt)) {
             throw new ApiProblemException(404, 'RESOURCE_NOT_FOUND', 'attempt question delivery is not available.');
         }
 
         return response()->json(
-            $this->ownerBank->publicQuestionPayload($attempt, (int) $index, $request)
+            $bank->publicQuestionPayload($attempt, (int) $index, $request)
         );
     }
 

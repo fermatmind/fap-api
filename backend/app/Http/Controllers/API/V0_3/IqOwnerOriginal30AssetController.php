@@ -37,11 +37,16 @@ final class IqOwnerOriginal30AssetController extends Controller
             )
             ->first();
 
-        if (! $attempt instanceof Attempt || ! $this->ownerBank->isOwnerOriginalAttempt($attempt)) {
+        if (! $attempt instanceof Attempt) {
             throw new ApiProblemException(404, 'IQ_OWNER_ASSET_NOT_FOUND', 'owner IQ asset not found.');
         }
 
-        $asset = $this->ownerBank->publicAsset($path);
+        $bank = $this->ownerBank->forAttempt($attempt);
+        if (! $bank->isOwnerOriginalAttempt($attempt)) {
+            throw new ApiProblemException(404, 'IQ_OWNER_ASSET_NOT_FOUND', 'owner IQ asset not found.');
+        }
+
+        $asset = $bank->publicAsset($path);
 
         return new BinaryFileResponse($asset['absolute_path'], 200, [
             'Content-Type' => $asset['content_type'],

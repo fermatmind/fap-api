@@ -22,6 +22,35 @@ final class IqOwnerOriginal30BankService
 
     public const DIR_VERSION = 'IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO';
 
+    public const MERGED_FORM_CODE = 'IQ_MERGED_40';
+
+    public function __construct(private readonly string $formCode = self::FORM_CODE) {}
+
+    public function forRequest(?string $formCode, ?string $bankId = null): self
+    {
+        foreach ([$formCode, $bankId] as $candidate) {
+            $normalized = strtoupper(trim((string) $candidate));
+            if (in_array($normalized, [self::FORM_CODE, self::MERGED_FORM_CODE], true)) {
+                return new self($normalized);
+            }
+        }
+
+        return $this;
+    }
+
+    public function forAttempt(Attempt $attempt): self
+    {
+        $formCode = data_get($attempt->answers_summary_json, 'meta.form_code');
+        $bankId = data_get($attempt->answers_summary_json, 'meta.bank_id');
+
+        return $this->forRequest(is_string($formCode) ? $formCode : null, is_string($bankId) ? $bankId : null);
+    }
+
+    public function formCode(): string
+    {
+        return $this->formCode;
+    }
+
     public const DELIVERY_MODE = 'current_question';
 
     private const PUBLIC_ASSET_SOURCE_PREFIX = 'assets/iq_owner_original_30/';
@@ -44,8 +73,8 @@ final class IqOwnerOriginal30BankService
     public function startMetadata(string $packId, string $dirVersion): array
     {
         return [
-            'form_code' => self::FORM_CODE,
-            'bank_id' => self::BANK_ID,
+            'form_code' => $this->formCode,
+            'bank_id' => $this->formCode,
             'question_count' => $this->questionCount(),
             'question_delivery_mode' => self::DELIVERY_MODE,
             'question_delivery_contract' => 'attempt_current_question_v1',
@@ -65,7 +94,7 @@ final class IqOwnerOriginal30BankService
 
         foreach ($candidates as $candidate) {
             $normalized = strtoupper(trim((string) $candidate));
-            if ($normalized === self::FORM_CODE || $normalized === self::BANK_ID) {
+            if ($normalized === $this->formCode) {
                 return true;
             }
         }
@@ -113,8 +142,8 @@ final class IqOwnerOriginal30BankService
             'attempt_id' => (string) $attempt->id,
             'scale_code' => self::SCALE_CODE,
             'scale_code_legacy' => self::LEGACY_SCALE_CODE,
-            'bank_id' => self::BANK_ID,
-            'form_code' => self::FORM_CODE,
+            'bank_id' => $this->formCode,
+            'form_code' => $this->formCode,
             'pack_id' => (string) ($attempt->pack_id ?? ''),
             'dir_version' => (string) ($attempt->dir_version ?? self::DIR_VERSION),
             'content_package_version' => (string) ($attempt->content_package_version ?? ''),
@@ -149,6 +178,7 @@ final class IqOwnerOriginal30BankService
     {
         $scoringSpec = $this->readJson('scoring_spec.json');
         $answerKeyDoc = $this->readJson('answer_key.json');
+        $version = $this->formCode === self::MERGED_FORM_CODE ? 'iq_merged_40_runtime_scoring_v1' : 'iq_owner_original_30_runtime_scoring_v1';
         $answers = $answerKeyDoc['answers'] ?? null;
         if (! is_array($answers)) {
             throw new ApiProblemException(500, 'IQ_OWNER_ANSWER_KEY_INVALID', 'owner IQ answer key is invalid.');
@@ -165,17 +195,17 @@ final class IqOwnerOriginal30BankService
 
         return [
             'schema_version' => 'fm.iq.runtime_scoring_spec.v1',
-            'version' => 'iq_owner_original_30_runtime_scoring_v1',
-            'scoring_spec_version' => 'iq_owner_original_30_runtime_scoring_v1',
+            'version' => $version,
+            'scoring_spec_version' => $version,
             'scale_code' => self::SCALE_CODE,
             'driver_type' => 'iq_test',
-            'engine_version' => 'owner_original_30_runtime_scoring_v1',
+            'engine_version' => $this->formCode === self::MERGED_FORM_CODE ? $version : 'owner_original_30_runtime_scoring_v1',
             'scoring_engine_version' => 'iq_scoring_v2',
             'scoring_mode' => 'scored',
             'answer_key_version' => (string) ($answerKeyDoc['answer_key_version'] ?? 'owner_original_30_answer_key_2026_06_23'),
             'norm_table_version' => 'unavailable',
             'item_bank' => [
-                'bank_id' => self::BANK_ID,
+                'bank_id' => $this->formCode,
                 'schema_version' => 'fm.iq.owner_image_bank.items.v1',
                 'status' => 'owner_original_runtime_scoring_bound',
                 'production_ready' => false,
@@ -334,7 +364,7 @@ final class IqOwnerOriginal30BankService
             'dimension' => $dimension,
             'correct_answer' => $correctAnswer,
             'raw_points' => 1.0,
-            'item_family' => 'owner_original_30_visual_reasoning',
+            'item_family' => $this->formCode === self::MERGED_FORM_CODE ? 'iq_merged_40' : 'owner_original_30_visual_reasoning',
             'difficulty_level' => 'level_'.max(1, (int) ($answer['difficulty_level'] ?? 1)),
             'solution_rule' => 'backend_private_owner_answer_key',
             'distractor_logic' => 'owner_original_six_option_bank',
@@ -342,7 +372,7 @@ final class IqOwnerOriginal30BankService
             'asset_hashes' => is_array($item['asset_hashes'] ?? null) ? $item['asset_hashes'] : [],
             'generator_metadata' => [
                 'source' => 'owner_original_backend_private_runtime_contract',
-                'bank_id' => self::BANK_ID,
+                'bank_id' => $this->formCode,
                 'runtime_binding' => true,
             ],
         ];
@@ -398,13 +428,13 @@ final class IqOwnerOriginal30BankService
         return [
             'schema_version' => (string) ($item['schema_version'] ?? 'fm.iq.owner_image_bank.item.v1'),
             'scale_code' => self::SCALE_CODE,
-            'bank_id' => self::BANK_ID,
+            'bank_id' => $this->formCode,
             'question_id' => (string) ($item['question_id'] ?? ''),
             'item_id' => (string) ($item['item_id'] ?? ''),
             'sequence' => (int) ($item['sequence'] ?? 0),
             'order' => (int) ($item['sequence'] ?? 0),
             'safe_dimension_aliases' => $this->safeDimensionAliases($item),
-            'title' => $locale === 'en'
+            'title' => $this->formCode !== self::MERGED_FORM_CODE && $locale === 'en'
                 ? 'Choose the appropriate shape to replace the missing shape.'
                 : (string) ($item['title'] ?? ''),
             'stem' => $this->onlyPublicMediaFields(
@@ -504,7 +534,7 @@ final class IqOwnerOriginal30BankService
     private function publicRoutePathForAsset(string $assetPath): ?string
     {
         $normalized = $this->normalizeAssetPath($assetPath);
-        if ($normalized === null || ! str_starts_with($normalized, self::PUBLIC_ASSET_SOURCE_PREFIX)) {
+        if ($normalized === null || ! str_starts_with($normalized, $this->formCode === self::MERGED_FORM_CODE ? 'assets/iq_merged_40/' : self::PUBLIC_ASSET_SOURCE_PREFIX)) {
             return null;
         }
 
@@ -514,7 +544,7 @@ final class IqOwnerOriginal30BankService
     private function publicAssetAbsolutePath(string $routePath): string
     {
         $normalized = $this->normalizeAssetPath($routePath);
-        if ($normalized === null || ! str_starts_with($normalized, self::PUBLIC_ASSET_ROUTE_PREFIX)) {
+        if ($normalized === null || ! str_starts_with($normalized, $this->formCode === self::MERGED_FORM_CODE ? 'iq_merged_40/' : self::PUBLIC_ASSET_ROUTE_PREFIX)) {
             throw new ApiProblemException(404, 'IQ_OWNER_ASSET_NOT_FOUND', 'owner IQ asset not found.');
         }
 
@@ -579,7 +609,7 @@ final class IqOwnerOriginal30BankService
 
     private function bankDir(): string
     {
-        return $this->packageDir().'/banks/'.self::BANK_ID;
+        return $this->packageDir().'/banks/'.$this->formCode;
     }
 
     private function assetDir(): string
@@ -589,6 +619,10 @@ final class IqOwnerOriginal30BankService
 
     private function packageDir(): string
     {
+        if ($this->formCode === self::MERGED_FORM_CODE) {
+            return resource_path('iq_merged40');
+        }
+
         $snapshot = resource_path('iq_owner_original30');
         if (File::isDirectory($snapshot) || app()->environment(['production', 'staging'])) {
             return $snapshot;
