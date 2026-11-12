@@ -9043,8 +9043,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "motorboat-operators.profile.definition-block.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -12032,7 +12040,8 @@
           "data": {
             "entries": [
               "操纵与航向保持：操纵发动机油门与转向机构把船引导到预定航线，借助罗盘或电子助航设备保持航向。",
-              "安全指挥与航务：组织并指挥船员工作、按安全程序保障乘客与货物安全，在紧急情况下指挥安全处置并报告航行隐患；维护灭火器、护舷、缆绳与泵等设备，安排维修、燃油与补给，并负责载运乘客、车辆或货物的航行。"
+              "安全指挥与航务：组织并指挥船员，保障乘客与货物安全，处理紧急情况并报告航行隐患。安排维修、燃油与补给，执行载运乘客、车辆或货物的航行任务。",
+              "船载设备维护：维护灭火器、护舷、缆绳与泵等船载设备。"
             ]
           },
           "id": "motorboat-operators.profile.definition-block.1",
@@ -15689,7 +15698,7 @@
       "text": "机动船操作员"
     }
   },
-  "source_content_sha256": "bae6c7305aeea39bc295316d05aa3e60ff16c46dc4c9bfd8cc9f254b344c6b8e",
+  "source_content_sha256": "951863e51ab5b8d04b8fcaaf1d3f2a43c3ae0a51c47b96efbbaea842d5267723",
   "subject": {
     "canonical_slug": "motorboat-operators",
     "name": "机动船操作员",

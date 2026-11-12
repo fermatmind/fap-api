@@ -9058,8 +9058,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "motion-picture-projectionists.profile.definition-block.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -11346,7 +11354,8 @@
           "data": {
             "entries": [
               "Pre-screening checks and calibration: Check projection equipment and curtain and screen controls; adjust picture size, illumination, and focus, and sound volume and tone.",
-              "Screening operation and maintenance: Start screenings and monitor picture and sound quality, projecting for multiple auditoriums; replace lamps, clean lenses, lubricate mechanisms, handle minor repairs or report major repairs, and complete projection inspection reports and duty logs."
+              "Screening operation: Start screenings and monitor picture and sound quality across auditoriums. Complete inspection reports and duty logs.",
+              "Routine maintenance: Replace projection lamps, clean lenses, and lubricate mechanisms. Carry out minor repairs within the role and report major repairs."
             ]
           },
           "id": "motion-picture-projectionists.profile.definition-block.1",
@@ -14987,7 +14996,7 @@
       "text": "Motion Picture Projectionists"
     }
   },
-  "source_content_sha256": "b1f30345c7b0df820671b9bde379fae26febecdc02894bf811012e2fb0ab84dd",
+  "source_content_sha256": "b0b56d48cd0af4eefcf846d953d3c697a1a5a5462db992f4d9c6c8e6caaea297",
   "subject": {
     "canonical_slug": "motion-picture-projectionists",
     "name": "Motion Picture Projectionists",

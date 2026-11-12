@@ -9058,8 +9058,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "motion-picture-projectionists.profile.definition-block.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -11346,7 +11354,8 @@
           "data": {
             "entries": [
               "放映前检查与调校：检查投映设备、幕帘与银幕控制，调整画面尺寸、照度与焦点以及音量与音调。",
-              "放映运行与维护：启动放映并监控画面与声音质量，为多个影厅放映；执行灯泡更换、镜头清洁与机械润滑，处理小修或上报大修，并填写放映检查报告与值班日志。"
+              "放映运行：启动放映并监控各影厅的画面与声音质量，填写检查报告和当班日志。",
+              "例行维护：更换放映灯泡、清洁镜头并润滑机构。在职责范围内处理小修，将重大故障上报。"
             ]
           },
           "id": "motion-picture-projectionists.profile.definition-block.1",
@@ -14987,7 +14996,7 @@
       "text": "电影放映员"
     }
   },
-  "source_content_sha256": "4462bac519883ebf72e8a4eb7739d86d9d6ef991fe0d0b1e883fc6e49cac8596",
+  "source_content_sha256": "b25e30eddf536cff03ec2f46c716b5e16a5f5c95176ba5009758875a95d5caec",
   "subject": {
     "canonical_slug": "motion-picture-projectionists",
     "name": "电影放映员",
