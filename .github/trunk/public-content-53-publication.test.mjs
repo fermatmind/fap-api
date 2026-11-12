@@ -1860,6 +1860,25 @@ test('Traditional lineage batch retains English roots, Chinese copy and independ
  }
 });
 
+test('Taiwan career blog delta selects exactly two bound Traditional articles',()=>{
+ const selection='traditional-article-taiwan-delta';
+ const path='backend/content_assets/public_content_53/'+selection;
+ assert.equal(classifyPaths([path+'.json',path+'-review.json']).operations.public_content_53_package,selection);
+ const digest=packageDigest('backend',selection);
+ const slugs=['after-holland-test-compare-job-postings','how-to-choose-an-online-course-for-a-career-change'];
+ for(const environment of ['staging','production']){
+  const {candidates}=readCandidateRows('backend',digest,environment);
+  assert.deepEqual(candidates.map(row=>row.identity.slug),slugs);
+  for(const row of candidates){
+   assert.equal(row.identity.locale,'zh-TW');
+   assert.equal(row.new_traditional_article,true);
+   assert.equal(row.source_expectations.source.locale,'zh-CN');
+   assert.equal(row.source_expectations.existing_english.source_article_id,row.source_expectations.source.id);
+   assert.equal(row.source_identity.source_article_id,row.source_expectations.source.id);
+  }
+ }
+});
+
 test('Traditional article media batch uses verified variants and keeps inline and standalone images separate',()=>{
  const selection='traditional-article-localized-media';
  assert.equal(classifyPaths(['backend/content_assets/public_content_53/'+selection+'.json']).operations.public_content_53_package,selection);
