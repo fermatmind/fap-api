@@ -1494,22 +1494,7 @@
         "status": "mapped"
       },
       "item:actors.display.responsibilities_block.01": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.02": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.03": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.04": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.05": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.06": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:actors.display.riasec_fit_block.code": {
         "status": "mapped"
@@ -19193,8 +19178,16 @@
         "status": "mapped"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -19205,8 +19198,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -19217,8 +19218,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -19229,8 +19238,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -23426,85 +23443,18 @@
           "availability": "available",
           "copy_key": "career.item.responsibilities-block",
           "data": {
-            "paragraphs": [
-              "Execute layout according to design specifications and page requirements, verify fonts, type sizes, column widths, spacing and alignment item by item, and do not change a confirmed design without authorization."
+            "entries": [
+              "Operate desktop publishing software and equipment to design, lay out, and produce camera-ready copy.",
+              "Position text and art elements from a variety of databases in a visually appealing way to design print or web pages, using knowledge of type styles and size and layout patterns.",
+              "Check preliminary and final proofs for errors and make necessary corrections.",
+              "View monitors for visual representation of work in progress and for instructions and feedback throughout process, making modifications as necessary."
             ]
           },
           "id": "actors.display.responsibilities_block.01",
           "source_refs": [
-            "r5-onet-current"
+            "batch52-onet-core"
           ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "Import and process text and art elements, verify text completeness as well as image resolution and color mode, and confirm whether the source of materials and the usage authorization are clear."
-            ]
-          },
-          "id": "actors.display.responsibilities_block.02",
-          "source_refs": [
-            "r5-onet-current"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "Check preliminary and final proofs page by page, and promptly correct and document typos, misplacement, mismatched graphics and text, and page order problems."
-            ]
-          },
-          "id": "actors.display.responsibilities_block.03",
-          "source_refs": [
-            "r5-onet-current"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "Set the number of colors and separations, bleed and margins according to the output purpose, convert various files into formats for print or the internet, and perform a pre-delivery check."
-            ]
-          },
-          "id": "actors.display.responsibilities_block.04",
-          "source_refs": [
-            "r5-onet-current"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "Collaborate with graphic artists, editors and writers to produce master copies according to design specifications, deliver masters to the printer, and file copies of publications and version records."
-            ]
-          },
-          "id": "actors.display.responsibilities_block.05",
-          "source_refs": [
-            "r5-onet-current"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "Confirm design intent and the scope of authorization before changes, raise and report content changes that exceed one's duties or authorization first, and do not make content decisions on behalf of clients or editors."
-            ]
-          },
-          "id": "actors.display.responsibilities_block.06",
-          "source_refs": [
-            "r5-onet-current"
-          ],
-          "type": "prose"
+          "type": "list"
         },
         {
           "availability": "available",
@@ -32131,6 +32081,32 @@
                 "publisher": "Shanghai Municipal Government",
                 "scope": "recruitment_proxy",
                 "url": "https://www.shanghai.gov.cn/nw17239/20251121/13d34e4c22e541f2b196606cfd180ae0.html"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/43-9031.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -36960,44 +36936,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$item": "actors.display.responsibilities_block.01",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.02",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.03",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.04",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.05",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.06",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "actors.display.responsibilities_block.01",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": {
           "$item": "actors.display.riasec_fit_block.fit-interest",
@@ -37732,7 +37676,7 @@
       "text": "Desktop Publishers"
     }
   },
-  "source_content_sha256": "4be4516972d4f2e266e03ef1409acd38b762fc5c46158c5a288c146e46057993",
+  "source_content_sha256": "c6a80a0394a544f766e809b7f8bb5495a5481a5e5711f965345f96a436b83fe5",
   "subject": {
     "canonical_slug": "desktop-publishers",
     "name": "Desktop Publishers",

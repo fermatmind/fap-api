@@ -162,13 +162,7 @@
         "status": "pending_mapping"
       },
       "item:maids-and-housekeeping-cleaners.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:maids-and-housekeeping-cleaners.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:maids-and-housekeeping-cleaners.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:maids-and-housekeeping-cleaners.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6116,8 +6110,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "maids-and-housekeeping-cleaners.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6128,8 +6130,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "maids-and-housekeeping-cleaners.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6140,8 +6150,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "maids-and-housekeeping-cleaners.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6152,8 +6170,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "maids-and-housekeeping-cleaners.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7286,40 +7312,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Inputs: guest rooms and public areas requiring cleaning, linens and bedding, guest supplies such as towels and toiletries, cleaners and disinfectants, cleaning tools and equipment such as vacuums, floor scrubbers and polishers, mops and cloths, cleaning carts and storage rooms, cleaning standards, and inspection forms."
+              "Keep storage areas and carts well-stocked, clean, and tidy.",
+              "Carry linens, towels, toilet items, and cleaning supplies, using wheeled carts.",
+              "Clean rooms, hallways, lobbies, lounges, restrooms, corridors, elevators, stairways, locker rooms, and other work areas so that health standards are met.",
+              "Empty wastebaskets, empty and clean ashtrays, and transport other trash and waste to disposal areas."
             ]
           },
           "id": "maids-and-housekeeping-cleaners.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Inspectable outputs: rooms and areas cleaned to standard, made beds and fully replenished linens and guest supplies, cleaning and disinfection records, removed waste, damage and lost property reports and handling records, and maintained carts and storage rooms."
-            ]
-          },
-          "id": "maids-and-housekeeping-cleaners.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Complete workflow: receive assignments and confirm standards → prepare carts and supplies → clean rooms and beds in sequence → clean bathrooms and replenish guest supplies → clean public areas and floors → remove waste and disinfect → inspect, document, and report abnormalities."
-            ]
-          },
-          "id": "maids-and-housekeeping-cleaners.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-tasks"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8707,6 +8708,32 @@
                 "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/37-2012.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11031,41 +11058,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "maids-and-housekeeping-cleaners.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "maids-and-housekeeping-cleaners.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "maids-and-housekeeping-cleaners.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "maids-and-housekeeping-cleaners.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "Activity preferences can only help design trials and cannot determine qualifications or performance.",
         "interest": "First observe interests, stress, and experiences during real cleaning, linen organization, and inspection.",
@@ -11299,7 +11297,7 @@
       "text": "Housekeeping Cleaner: Rooms, Linen and Handoffs"
     }
   },
-  "source_content_sha256": "a49f0896d0599ed9387e1f76260cbc021dc16d5f026c4fb2639bd90892011b43",
+  "source_content_sha256": "2b2f54e5d3ef1f1bf12977766398b680d048e53c0d215c394c00309699903660",
   "subject": {
     "canonical_slug": "maids-and-housekeeping-cleaners",
     "name": "Housekeeping Cleaner",

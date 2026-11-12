@@ -168,13 +168,7 @@
         "status": "pending_mapping"
       },
       "item:intelligence-analysts.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:intelligence-analysts.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:intelligence-analysts.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:intelligence-analysts.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6146,8 +6140,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "intelligence-analysts.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6158,8 +6160,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "intelligence-analysts.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6170,8 +6180,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "intelligence-analysts.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6182,8 +6200,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "intelligence-analysts.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7323,40 +7349,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Objects of work | Analyze intelligence within authorization and confidentiality boundaries, working with intelligence questions and needs, information and data from multiple sources, case and threat leads, and search and analysis tools."
+              "Validate known intelligence with data from other sources.",
+              "Gather, analyze, correlate, or evaluate information from a variety of resources, such as law enforcement databases.",
+              "Evaluate records of communications, such as telephone calls, to plot activity and determine the size and location of criminal groups and members.",
+              "Gather intelligence information by field observation, confidential information sources, or public records."
             ]
           },
           "id": "intelligence-analysts.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-summary"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Checkable outputs | Reviewable analytical records and evidence chains, source and timeliness labels, lists of gaps and alternative hypotheses, assessment reports and charts, and sharing or disclosure records. Results must be traceable to sources and search parameters."
-            ]
-          },
-          "id": "intelligence-analysts.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-summary"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Complete workflow | Define intelligence questions and needs → collect and connect information from multiple sources → cross-check and label timeliness → identify gaps and alternative hypotheses → form reviewable judgments and reports → share or recommend within authorization."
-            ]
-          },
-          "id": "intelligence-analysts.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-summary"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8984,6 +8985,32 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/33-3021.00"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/33-3021.06#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11283,41 +11310,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "intelligence-analysts.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "intelligence-analysts.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "intelligence-analysts.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "intelligence-analysts.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "Activity preferences can only help design trials; they cannot determine qualifications or performance.",
         "interest": "First observe your interest, stress, and collaboration experience in real tasks.",
@@ -11571,7 +11569,7 @@
       "text": "Intelligence Analysts: Duties, Entry Paths and Pay Data"
     }
   },
-  "source_content_sha256": "e768789735fb12269aa26ae872bef578ea275bf75f7288bb57dc1d4859522c8f",
+  "source_content_sha256": "72d07a98665274bb295d23eea2f6d68bb09c9432ddae69fe93b1dc4a1b3e58e7",
   "subject": {
     "canonical_slug": "intelligence-analysts",
     "name": "Intelligence Analysts",

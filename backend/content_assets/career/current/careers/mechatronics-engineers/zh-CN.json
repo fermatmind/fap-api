@@ -159,13 +159,7 @@
         "status": "pending_mapping"
       },
       "item:mechatronics-engineers.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:mechatronics-engineers.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:mechatronics-engineers.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:mechatronics-engineers.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6113,8 +6107,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mechatronics-engineers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6125,8 +6127,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mechatronics-engineers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6137,8 +6147,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mechatronics-engineers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6149,8 +6167,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mechatronics-engineers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7287,42 +7313,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "投入对象：客户与生产需求、控制与安全规格、机械与电气界面条件、传感器与执行机构选型、既有程序与现场反馈，以及适用标准与法规。"
+              "为零部件、组件或成品制作机械设计文件。",
+              "设计先进的精度设备，用于准确或控制的应用。",
+              "设计工业任务自动化的工程系统。",
+              "实施或测试设计解决方案。"
             ]
           },
           "id": "mechatronics-engineers.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-tasks",
-            "onet-details"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "可检查产出：控制方案与程序、传感与执行机构选型说明、联调与验证记录、安全功能与风险评估结论、现场移交与验收文档，以及评审与签核记录。"
-            ]
-          },
-          "id": "mechatronics-engineers.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-tasks",
-            "onet-details"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "完整工作流程：解读需求与控制规格 → 研究与可行性分析 → 机械/电气/控制设计 → 编程与联调测试 → 性能与安全验证 → 评审、签核与移交的闭环。"
-            ]
-          },
-          "id": "mechatronics-engineers.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-tasks"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8907,6 +8906,32 @@
                 "publisher": "FermatMind",
                 "scope": "exact",
                 "url": "#career-visual-group-quick-decision"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/17-2199.05#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11479,41 +11504,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "mechatronics-engineers.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "mechatronics-engineers.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "mechatronics-engineers.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "mechatronics-engineers.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "活动偏好只能帮助设计试验，不能判断资格或表现。",
         "interest": "先观察真实任务中的兴趣、压力与协作体验。",
@@ -11733,7 +11729,7 @@
       "text": "机电一体化工程师：工作内容、美国工资与入行 | 费马测试"
     }
   },
-  "source_content_sha256": "04ea89f8f782b0c0c3f9e2f86f74282db7548ccc2f792c1d3b85478ab0b4460b",
+  "source_content_sha256": "6f24e67b6b927d8ca7c150430c06d860540eb6f8747d395048b0fb255d0580ab",
   "subject": {
     "canonical_slug": "mechatronics-engineers",
     "name": "机电一体化工程师",

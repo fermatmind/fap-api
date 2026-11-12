@@ -1500,22 +1500,7 @@
         "status": "mapped"
       },
       "item:actors.display.responsibilities_block.01": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.02": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.03": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.04": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.05": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.06": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:actors.display.riasec_fit_block.code": {
         "status": "mapped"
@@ -19165,8 +19150,16 @@
         "status": "mapped"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -19177,8 +19170,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -19189,8 +19190,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -19201,8 +19210,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -23383,85 +23400,18 @@
           "availability": "available",
           "copy_key": "career.item.responsibilities-block",
           "data": {
-            "paragraphs": [
-              "常见输入：当餐菜单与订单、标准摆台图与餐具清单、布草与调味品与饮料库存、清洁与消毒用品、以及值班主管的班次指令与顾客需求。"
+            "entries": [
+              "运行现金登记。",
+              "提供冰水、咖啡、卷子或黄油给顾客。",
+              "冲洗和堆放脏盘子，并携带盘子和其他餐具到厨房清洗。",
+              "用湿布擦拭桌面或座位，或更换脏桌布。"
             ]
           },
           "id": "actors.display.responsibilities_block.01",
           "source_refs": [
-            "onet"
+            "batch52-onet-core"
           ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "核心产出：按标准完成摆台与补货的服务区、按订单完成的上菜上饮与撤餐、清洁的桌面与地面、以及库存与缺货与破损与交接记录。"
-            ]
-          },
-          "id": "actors.display.responsibilities_block.02",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "典型流程：开餐前准备与摆台—迎宾并安排就座—按订单上菜上饮与协助服务员—及时撤餐与清洁—补充库存与清理场地—登记缺货并交接未完成事项。"
-            ]
-          },
-          "id": "actors.display.responsibilities_block.03",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "常协作对象：服务员与传菜、收银、后厨与出餐口、库房与采购、清洁与设备维护、值班主管与顾客。"
-            ]
-          },
-          "id": "actors.display.responsibilities_block.04",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "常见工具与对象：托盘与餐具与玻璃器皿、布草与清洁用品与消毒剂、饮料与冰的分配器、自助餐台与保温设备、POS 收银机与点单系统。"
-            ]
-          },
-          "id": "actors.display.responsibilities_block.05",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "责任边界：本职业承担前厅执行与协助责任；不自行更改菜品或酒水配方、不代替点单人员承诺服务结果、不在无授权时操作收银与退款，异常与越权事项立即上报。"
-            ]
-          },
-          "id": "actors.display.responsibilities_block.06",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
+          "type": "list"
         },
         {
           "availability": "available",
@@ -31866,6 +31816,32 @@
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/35-9011.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -36703,44 +36679,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$item": "actors.display.responsibilities_block.01",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.02",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.03",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.04",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.05",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.06",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "actors.display.responsibilities_block.01",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": {
           "$item": "actors.display.riasec_fit_block.fit-interest",
@@ -37509,7 +37453,7 @@
       "text": "餐厅、食堂与酒吧服务助手：工作、工资与入行"
     }
   },
-  "source_content_sha256": "c1b6b096722365158b43ab21b4fdb2358009cfcf94a3d8aa0721158a96fc9a54",
+  "source_content_sha256": "40ef65fb23ce7c6bb470626c4d350b95cd047bd449925920bf88e5e28cafb450",
   "subject": {
     "canonical_slug": "dining-room-and-cafeteria-attendants-and-bartender-helpers",
     "name": "餐厅、食堂与酒吧服务助手",

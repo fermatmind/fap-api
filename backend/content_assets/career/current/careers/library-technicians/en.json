@@ -171,13 +171,7 @@
         "status": "pending_mapping"
       },
       "item:library-technicians.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:library-technicians.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:library-technicians.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:library-technicians.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6125,8 +6119,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "library-technicians.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6137,8 +6139,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "library-technicians.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6149,8 +6159,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "library-technicians.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6161,8 +6179,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "library-technicians.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7295,40 +7321,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Work objects: reader search/borrowing needs, catalogs/databases, books/audiovisual materials, reader cards/borrowing records, classification/shelving rules and computer/audiovisual equipment."
+              "Reserve, circulate, renew, and discharge books and other materials.",
+              "Answer routine telephone or in-person reference inquiries, referring patrons to librarians for further assistance, when necessary.",
+              "Help patrons find and use library resources, such as reference materials, audio-visual equipment, computers, and other electronic resources and provide technical assistance when needed.",
+              "Deliver and retrieve items throughout the library by hand or using pushcart."
             ]
           },
           "id": "library-technicians.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-summary"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Inspectable outputs: loan/return and reader records, shelving/shelf-order results, material processing/repair records, equipment maintenance/fault records, search responses and collection statistics."
-            ]
-          },
-          "id": "library-technicians.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-summary"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Complete workflow: receive/register materials → classify/sort/shelve → handle loans, returns and renewals → help readers retrieve/use resources → process/repair materials → maintain equipment/systems → compile statistics, inventory and escalate exceptions."
-            ]
-          },
-          "id": "library-technicians.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-summary"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8659,6 +8660,32 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "25-4031",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/25-4031.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -10864,41 +10891,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "library-technicians.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "library-technicians.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "library-technicians.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "library-technicians.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "Activity preferences can only help design trials, not judge qualifications or performance.",
         "interest": "First observe interest, stress and collaboration experiences in real tasks.",
@@ -11164,7 +11162,7 @@
       "text": "Library Technician Careers: Catalog Records and Digital Tools"
     }
   },
-  "source_content_sha256": "745afb1fbe51fbcbbfeebd87007f41fafa023ce0896da5b66fac3fd4ac32cc24",
+  "source_content_sha256": "370f44c1eb593a7ad3136cfb8e88bf16d4784a8f735945013c8e9b0af5023aa5",
   "subject": {
     "canonical_slug": "library-technicians",
     "name": "Library Technician",

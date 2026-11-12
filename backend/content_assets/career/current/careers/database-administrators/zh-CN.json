@@ -1506,22 +1506,7 @@
         "status": "mapped"
       },
       "item:actors.display.responsibilities_block.01": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.02": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.03": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.04": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.05": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.06": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:actors.display.riasec_fit_block.code": {
         "status": "mapped"
@@ -19185,8 +19170,16 @@
         "status": "mapped"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -19197,8 +19190,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -19209,8 +19210,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -19221,8 +19230,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -23402,85 +23419,18 @@
           "availability": "available",
           "copy_key": "career.item.responsibilities-block",
           "data": {
-            "paragraphs": [
-              "库结构与变更｜维护数据库与数据字典｜修改现有数据库与数据库管理系统，或指导程序员与分析人员完成变更；编写逻辑与物理数据库描述并指定标识符，按流程开发数据模型，并修订公司数据字典中的数据定义。"
+            "entries": [
+              "修改现有的数据库和数据库管理系统，或指导程序员和分析员进行修改。",
+              "规划、协调和实施安全措施，以保护计算机文件中的信息免受意外或未经授权的损害、修改或披露。",
+              "计划和安装数据库管理系统软件的升级，以提高数据库性能。",
+              "指定每个数据库部分的用户和用户访问级别。"
             ]
           },
           "id": "actors.display.responsibilities_block.01",
           "source_refs": [
-            "r5-onet-current"
+            "batch52-onet-core"
           ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "性能与容量｜监测并解决性能问题｜选择并输入代码监测数据库性能并创建生产数据库；识别、调查并解决数据库性能、容量与可扩展性问题；识别、评估并推荐能达到所需性能的硬件或软件技术。"
-            ]
-          },
-          "id": "actors.display.responsibilities_block.02",
-          "source_refs": [
-            "r5-onet-current"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "安全与权限｜实施安全措施并控制访问｜规划、协调并实施安全措施，防止计算机文件中的信息被意外或未经授权地损坏、修改或泄露；为数据库的每个片段指定用户与访问级别；制定软件使用与采购以及保护脆弱信息的标准与指南。"
-            ]
-          },
-          "id": "actors.display.responsibilities_block.03",
-          "source_refs": [
-            "r5-onet-current"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "测试与升级｜测试变更并安装升级｜测试数据库应用或系统的变更；测试程序或数据库、修正错误并做必要修改；规划并安装数据库管理系统软件升级以提升性能；审批、排期、规划并监督新产品的安装与测试。"
-            ]
-          },
-          "id": "actors.display.responsibilities_block.04",
-          "source_refs": [
-            "r5-onet-current"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "支持与培训｜解答问题并支持用户｜培训用户并解答问题，向初级员工或客户提供技术支持，并查阅程序员分析师绘制的工作流图以了解计算机将执行的任务。"
-            ]
-          },
-          "id": "actors.display.responsibilities_block.05",
-          "source_refs": [
-            "r5-onet-current"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "趋势与技术判断｜评估方向并提供建议｜查阅数据库管理系统手册中的流程以修改数据库，识别并评估数据库系统的行业趋势，为高层管理提供信息与建议，并在变更与优化中记录依据与结果。"
-            ]
-          },
-          "id": "actors.display.responsibilities_block.06",
-          "source_refs": [
-            "r5-onet-current"
-          ],
-          "type": "prose"
+          "type": "list"
         },
         {
           "availability": "available",
@@ -31888,6 +31838,32 @@
                 "publisher": "O*NET OnLine",
                 "scope": "related",
                 "url": "https://www.onetonline.org/link/details/15-1243.00"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/15-1242.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -36813,44 +36789,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$item": "actors.display.responsibilities_block.01",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.02",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.03",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.04",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.05",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.06",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "actors.display.responsibilities_block.01",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": {
           "$item": "actors.display.riasec_fit_block.fit-interest",
@@ -37627,7 +37571,7 @@
       "text": "数据库管理员"
     }
   },
-  "source_content_sha256": "6006b5b64eb3a0ff113c34e875a28bf266ea9e16effcc075908a773079d95940",
+  "source_content_sha256": "cb82d13fb164d00ab19a5f94492793694a6afe513f0218787aca0eb063d3d2d5",
   "subject": {
     "canonical_slug": "database-administrators",
     "name": "数据库管理员",

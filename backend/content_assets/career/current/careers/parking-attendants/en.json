@@ -186,7 +186,7 @@
         "status": "mapped"
       },
       "item:parking-attendants.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:parking-attendants.profile.work-context-block.3": {
         "status": "mapped"
@@ -9292,16 +9292,8 @@
         "status": "unfilled"
       },
       "responsibilities_block.05.category": {
-        "ref": {
-          "id": "parking-attendants.profile.responsibilities-block.2",
-          "path": [
-            "data",
-            "entries",
-            4
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "responsibilities_block.05.description": {
         "ref": null,
@@ -9312,16 +9304,8 @@
         "status": "unfilled"
       },
       "responsibilities_block.06.category": {
-        "ref": {
-          "id": "parking-attendants.profile.responsibilities-block.2",
-          "path": [
-            "data",
-            "entries",
-            5
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "responsibilities_block.06.description": {
         "ref": null,
@@ -11475,18 +11459,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Greets customers and explains the parking rules.",
-              "Verifies the license plate, vehicle condition, ticket, and key number.",
-              "Parks or retrieves vehicles per authorization and follows on-site traffic rules.",
-              "Calculates fees, collects payment, makes change, and reconciles accounts.",
-              "Directs spaces and maintains lot order.",
-              "Handles complaints, payment anomalies, and damage disputes.",
-              "On exit, verifies the customer's credential, vehicle status, and key handoff."
+              "Take numbered tags from customers, locate vehicles, and deliver vehicles, or provide customers with instructions for locating vehicles.",
+              "Inspect vehicles to detect any damage.",
+              "Greet customers and open their car doors.",
+              "Issue ticket stubs or place numbered tags on windshields, log tags or attach tag to customers' keys, and give customers matching tags for locating parked vehicles."
             ]
           },
           "id": "parking-attendants.profile.responsibilities-block.2",
           "source_refs": [
-            "source-pack-onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -12951,6 +12932,32 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/53-6021.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -15169,7 +15176,7 @@
       "text": "Parking attendant: work content, wages, and vehicle handoff boundaries."
     }
   },
-  "source_content_sha256": "14e788b1785d0f43adf112c12157d75b2573d650c01cfb432ac78355ce6b8f02",
+  "source_content_sha256": "2cc6e8e2dd4c21b9b4143956772f3910381786b88006eacc10bac9eb73457c8c",
   "subject": {
     "canonical_slug": "parking-attendants",
     "name": "Parking attendant.",

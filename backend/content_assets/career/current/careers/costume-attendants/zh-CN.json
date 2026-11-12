@@ -1494,22 +1494,7 @@
         "status": "mapped"
       },
       "item:actors.display.responsibilities_block.01": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.02": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.03": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.04": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.05": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.06": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:actors.display.riasec_fit_block.code": {
         "status": "mapped"
@@ -19127,8 +19112,16 @@
         "status": "mapped"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -19139,8 +19132,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -19151,8 +19152,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -19163,8 +19172,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -23322,85 +23339,18 @@
           "availability": "available",
           "copy_key": "career.item.responsibilities-block",
           "data": {
-            "paragraphs": [
-              "需求对接与资料｜对接设计并研读资料｜与服装设计与制作人员对接设计细节，研读剧本与制作资料确定故事地点与年代、人物数量与所需服装，并查阅历史服饰资料核对形制。"
+            "entries": [
+              "创建用于服装清单、演出提示或服装检查的工作表。",
+              "为被选成员提供敷料协助，或为被选成员指派梳妆员，协助特定被选成员改变服装。",
+              "安排服装，以方便表演的快速改变程序。",
+              "设计或制造服装，或送他们到裁缝处进行建筑、大修或改建。"
             ]
           },
           "id": "actors.display.responsibilities_block.01",
           "source_refs": [
-            "onet"
+            "batch52-onet-core"
           ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "库存与保管｜清点并保管用品｜清点服装、假发与化妆用品的类型与状态，按编号保管并维护库存台账，安排库房、更衣室、假发室与洗衣区的整理与安全。"
-            ]
-          },
-          "id": "actors.display.responsibilities_block.02",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "采购与养护｜采购租领、清洗整烫和小修Core；设计制作或送裁缝大修修改也Core，非服装物件养护Supplemental。"
-            ]
-          },
-          "id": "actors.display.responsibilities_block.03",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "合身与效果｜检查演员合身记修改、舞台灯光下核效果为Core；制作纸样和安排试装为New，类别不代表每日频率。"
-            ]
-          },
-          "id": "actors.display.responsibilities_block.04",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "换装与班组｜按使用顺序排序、帮助演员穿衣或分配换装员及编检查工作单为Core；服装班督导Supplemental。"
-            ]
-          },
-          "id": "actors.display.responsibilities_block.05",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "供应商与预算｜推荐供应商并配合预算｜向管理人员提供与服装、保管或化妆相关的预算建议，推荐供应商并跟进其工作，承担相应预算项目的执行。"
-            ]
-          },
-          "id": "actors.display.responsibilities_block.06",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
+          "type": "list"
         },
         {
           "availability": "available",
@@ -31628,6 +31578,32 @@
                 "publisher": "上海市人社局",
                 "scope": "recruitment_proxy",
                 "url": "https://rsj.sh.gov.cn/tzpgg_17408/20220613/t0035_1407437.html"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/39-3092.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -36365,44 +36341,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$item": "actors.display.responsibilities_block.01",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.02",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.03",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.04",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.05",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.06",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "actors.display.responsibilities_block.01",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": {
           "$item": "actors.display.riasec_fit_block.fit-interest",
@@ -37139,7 +37083,7 @@
       "text": "服装服务员"
     }
   },
-  "source_content_sha256": "fe6f958bae3facc56d9b82ccb4f53e4f1016715da93459be76576e74e52b8eb5",
+  "source_content_sha256": "427b8439055cf3487fbe8c50ecbe46924927791f24eb16d51e98b3b03ce8d9ce",
   "subject": {
     "canonical_slug": "costume-attendants",
     "name": "服装服务员",

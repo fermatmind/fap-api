@@ -1500,22 +1500,7 @@
         "status": "mapped"
       },
       "item:actors.display.responsibilities_block.01": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.02": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.03": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.04": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.05": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.06": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:actors.display.riasec_fit_block.code": {
         "status": "mapped"
@@ -19187,8 +19172,16 @@
         "status": "mapped"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -19199,8 +19192,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -19211,8 +19212,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -19223,8 +19232,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -23390,85 +23407,18 @@
           "availability": "available",
           "copy_key": "career.item.responsibilities-block",
           "data": {
-            "paragraphs": [
-              "信用数据与财报分析｜读取资料并判断风险程度｜分析个人或企业的信用数据与财务报表，判断放贷或授信所涉风险程度，并核对数据时点、口径与完整性。"
+            "entries": [
+              "分析信贷数据和财务报表，以确定提供信贷或贷款所涉及的风险程度。",
+              "完成贷款申请，包括信贷分析和贷款申请摘要，并提交贷款委员会审批。",
+              "利用计算机程序生成财务比率，以评估客户的财务状况。",
+              "准备报告，其中包括扩大信用或贷款资金所涉及的风险程度。"
             ]
           },
           "id": "actors.display.responsibilities_block.01",
           "source_refs": [
-            "onet"
+            "batch52-onet-core"
           ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "财务比率与盈利能力测算｜生成比率并测算盈利｜用计算机程序生成财务比率评估客户财务状况，分析收入增长、管理层质量与市场份额等财务数据判断贷款的预期盈利能力。"
-            ]
-          },
-          "id": "actors.display.responsibilities_block.02",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "同类机构比较｜比较流动性与信用历史｜把受评机构的流动性、盈利能力与信用历史，与同行业、同地区的类似机构比较，支撑风险判断。"
-            ]
-          },
-          "id": "actors.display.responsibilities_block.03",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "报告与申请编制｜编制报告与贷款申请｜编制包含风险程度的报告，完成贷款申请（含信用分析与贷款申请摘要），核对口径后提交贷款委员会等有权机构审批。"
-            ]
-          },
-          "id": "actors.display.responsibilities_block.04",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "客户投诉与交易核实为美国Core；按收入储蓄、还款及交易记录评估客户并建议还款方案为Supplemental，是否承担与频率由实际分工核。"
-            ]
-          },
-          "id": "actors.display.responsibilities_block.05",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "逾期催收、筛选逾期档案、信用信息交换为美国Supplemental任务；中国具体访问、使用、对外提供与催收权限另核，不把任务清单当授权。"
-            ]
-          },
-          "id": "actors.display.responsibilities_block.06",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
+          "type": "list"
         },
         {
           "availability": "available",
@@ -31839,6 +31789,32 @@
                 "publisher": "上海市国资委",
                 "scope": "recruitment_proxy",
                 "url": "https://www.gzw.sh.gov.cn/shgzw_xxgk_cqzp/20250304/ecbe908818cd40079a4576414855cf2f.html"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/13-2041.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -36736,44 +36712,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$item": "actors.display.responsibilities_block.01",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.02",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.03",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.04",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.05",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.06",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "actors.display.responsibilities_block.01",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": {
           "$item": "actors.display.riasec_fit_block.fit-interest",
@@ -37531,7 +37475,7 @@
       "text": "信用分析师"
     }
   },
-  "source_content_sha256": "2f57084e914cf137c01dac16c47c6b73af94645191abb44daeb20da3ba0c2bda",
+  "source_content_sha256": "86b88dc103cfcffb31a9b308ca54b48bdbe5c20969e2eb048ac1c58293f2d829",
   "subject": {
     "canonical_slug": "credit-analysts",
     "name": "信用分析师",

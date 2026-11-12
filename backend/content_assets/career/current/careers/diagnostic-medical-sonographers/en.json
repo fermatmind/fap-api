@@ -168,13 +168,7 @@
         "status": "pending_mapping"
       },
       "item:diagnostic-medical-sonographers.profile.responsibilities-block.1": {
-        "status": "pending_mapping"
-      },
-      "item:diagnostic-medical-sonographers.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:diagnostic-medical-sonographers.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:diagnostic-medical-sonographers.profile.work-context-block.1": {
         "status": "pending_mapping"
@@ -6140,8 +6134,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "diagnostic-medical-sonographers.profile.responsibilities-block.1",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6152,8 +6154,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "diagnostic-medical-sonographers.profile.responsibilities-block.1",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6164,8 +6174,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "diagnostic-medical-sonographers.profile.responsibilities-block.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6176,8 +6194,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "diagnostic-medical-sonographers.profile.responsibilities-block.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7318,40 +7344,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Common inputs include the examination request, patient identity, relevant medical history, examination site, institutional protocol, equipment and probe status, and previous examinations or bedside limitations."
+              "Observe screen during scan to ensure that image produced is satisfactory for diagnostic purposes, making adjustments to equipment as required.",
+              "Decide which images to include, looking for differences between healthy and pathological areas.",
+              "Operate ultrasound equipment to produce and record images of the motion, shape, and composition of blood, organs, tissues, or bodily masses, such as fluid accumulations.",
+              "Observe and care for patients throughout examinations to ensure their safety and comfort."
             ]
           },
           "id": "diagnostic-medical-sonographers.profile.responsibilities-block.1",
           "source_refs": [
-            "bls-sonographer-current"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "The core outputs are images, measurements, technical records, quality notes and exception handovers that meet institutional requirements, for subsequent use by physicians and the medical team."
-            ]
-          },
-          "id": "diagnostic-medical-sonographers.profile.responsibilities-block.2",
-          "source_refs": [
-            "bls-sonographer-current"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "The typical process is verifying the request and identity — explaining the procedure and positioning — selecting the probe and settings — scanning according to protocol — reviewing images and measurements — archiving and handing over."
-            ]
-          },
-          "id": "diagnostic-medical-sonographers.profile.responsibilities-block.3",
-          "source_refs": [
-            "bls-sonographer-current"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -9230,6 +9231,32 @@
                 "publisher": "Inteleos",
                 "scope": "contextual",
                 "url": "https://www.inteleos.org/certification/registered-diagnostic-medical-sonographer/"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/29-2032.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11570,41 +11597,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "diagnostic-medical-sonographers.profile.responsibilities-block.1",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "diagnostic-medical-sonographers.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "diagnostic-medical-sonographers.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "diagnostic-medical-sonographers.profile.responsibilities-block.1",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "Interests only suggest exploration directions; actual fit is verified through supervised hands-on practice and training feedback.",
         "interest": "Official interest code RCI (Realistic, Conventional, Investigative): mainly equipment operation, checklist-based verification and application of medical knowledge.",
@@ -11856,7 +11854,7 @@
       "text": "Diagnostic Medical Sonographer: Duties, Pay and Training"
     }
   },
-  "source_content_sha256": "c16dc9b3177ebad70524c5d94ec0c7db66fc77df6b262b23a1eb6836ca07c88c",
+  "source_content_sha256": "a0117250cf5fe68d6d0b762a383afb54f5a404f0d086fff8c97bee18079583d4",
   "subject": {
     "canonical_slug": "diagnostic-medical-sonographers",
     "name": "Diagnostic Medical Sonographers",

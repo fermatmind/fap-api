@@ -171,13 +171,7 @@
         "status": "pending_mapping"
       },
       "item:library-technicians.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:library-technicians.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:library-technicians.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:library-technicians.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6125,8 +6119,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "library-technicians.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6137,8 +6139,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "library-technicians.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6149,8 +6159,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "library-technicians.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6161,8 +6179,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "library-technicians.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7297,40 +7323,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "投入对象：读者的检索与借还需求、馆藏目录与数据库、图书与视听资料、读者证与借阅记录、分类与排架规则，以及计算机与视听设备。"
+              "保留、循环、更新、排放书籍和其他材料。",
+              "回复常规电话或个人参考查询，请求图书馆工作人员，如有必要，提供进一步的帮助。",
+              "帮助管理人员找到和使用图书馆资源，如参考材料、音频和视觉设备、计算机和其他电子资源，并在需要时提供技术援助。",
+              "通过手动或使用 pushcart 向整个图书馆交付和获取物品。"
             ]
           },
           "id": "library-technicians.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-summary"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "可检查产出：借还登记与读者记录、上架与整架结果、资料加工与修复记录、设备维护与故障记录、检索答复、馆藏统计报表。"
-            ]
-          },
-          "id": "library-technicians.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-summary"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "完整流程：接收与登记资料 → 分类排序与上架 → 办理借还与续借 → 帮助读者检索与使用资源 → 加工与修复资料 → 维护设备与系统 → 统计、盘点和异常升级。"
-            ]
-          },
-          "id": "library-technicians.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-summary"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8688,6 +8689,32 @@
                 "publisher": "北京大学图书馆",
                 "scope": "具名岗位、工作样例或职称制度",
                 "url": "https://www.lib.pku.edu.cn/2xxzzfw/26xwgg/262gglb/4010dde9164f448e92229b180e6d82fc.htm"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/25-4031.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -10893,41 +10920,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "library-technicians.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "library-technicians.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "library-technicians.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "library-technicians.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "活动偏好只能帮助设计试验，不能判断资格或表现。",
         "interest": "先观察真实任务中的兴趣、压力与协作体验。",
@@ -11193,7 +11191,7 @@
       "text": "图书馆技术员做什么：书目数据、数字化和检索支持"
     }
   },
-  "source_content_sha256": "59dcecccf2155c2cc4ece8078076fac849f46cc9e841d13f61c5519532bd514b",
+  "source_content_sha256": "14fab3fe1531ca690378a28b2349714a52fd8c9f959d6609aa2e3e8619da2091",
   "subject": {
     "canonical_slug": "library-technicians",
     "name": "图书馆技术员",

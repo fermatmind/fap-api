@@ -1506,22 +1506,7 @@
         "status": "mapped"
       },
       "item:actors.display.responsibilities_block.01": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.02": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.03": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.04": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.05": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.06": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:actors.display.riasec_fit_block.code": {
         "status": "mapped"
@@ -19205,8 +19190,16 @@
         "status": "mapped"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -19217,8 +19210,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -19229,8 +19230,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -19241,8 +19250,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -23438,88 +23455,18 @@
           "availability": "available",
           "copy_key": "career.item.responsibilities-block",
           "data": {
-            "paragraphs": [
-              "在牙医指导下按治疗计划与规程准备器械与材料，并核对灭菌状态、有效期与用途匹配。"
+            "entries": [
+              "准备病人、消毒或消毒工具、设置仪器托盘、准备材料或在牙科手术期间协助牙医。",
+              "记录患者记录中的治疗信息。",
+              "协助牙医处理医疗或牙科紧急情况。",
+              "管理并监控牙科用品和设备库存。"
             ]
           },
           "id": "actors.display.responsibilities_block.01",
           "source_refs": [
-            "r5-onet-current"
+            "batch52-onet-core"
           ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "WS/T842—2024已于2025-01-01施行，适用各级各类口腔医疗机构，引用WS506非替代。按实际操作选PPE/每患者手套及手卫生、准备核包装/污染/名称/有效性、水路与印模修复物交接、放射设备表面感控分项核；推荐标准非执业证。本轮WS506全文412未读，不假称灭菌放行全部细则已核。 灭菌监测与放行按实际适用规范/机构程序和受训授权核，不由完成探索练习获得权限。"
-            ]
-          },
-          "id": "actors.display.responsibilities_block.02",
-          "source_refs": [
-            "r5-cn-ws842"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "接待并准备患者，核对身份与病史过敏信息，测量与记录生命体征，做好术前安抚与沟通。"
-            ]
-          },
-          "id": "actors.display.responsibilities_block.03",
-          "source_refs": [
-            "r5-onet-current"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "治疗中按合法岗位权限配合、观察报告异常；患者病情危急应及时通知医师；中国护士在紧急抢救垂危患者时应先实施必要紧急救护，不能写任何异常只能报告禁止救护；其他岗位按训练、合法权限及机构应急流程，不自行诊断或定治疗。"
-            ]
-          },
-          "id": "actors.display.responsibilities_block.04",
-          "source_refs": [
-            "r5-onet-current",
-            "r5-cn-nurse"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "放射职业活动适用人员须年满18、健康/培训合格、工作证及剂量健康管理，由单位向许可机关申请；岗前不少4天、后续间隔不超2年每次不少2天。工作证不代机构放射诊疗许可、专业影像人员或具体操作权限，普通行政岗位不一律要证。 医疗照射须有明确目的并核正当化/防护最优化，影像质量异常先报告评估必要性，不能写立即自动重拍；资料登记/保存不应导致不必要重复照射。 美国按州别要求，以加州作当前例子：普通助理在牙医监督做基础支持，放射设备须认可安全课程；RDA/RDAEF须委员会许可，具体任务区分一般/直接监督。未持许可不能窝沟封闭/超声洁治。州别权限不能由O*NET清洁牙齿等任务自动推出，也不能直接套中国。"
-            ]
-          },
-          "id": "actors.display.responsibilities_block.05",
-          "source_refs": [
-            "r5-cn-radworker",
-            "r5-cn-radclinical",
-            "r5-ca-duties"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "按牙医指定内容进行术后注意事项与口腔卫生指导，处理预约、收费与保险信息，完成诊室复位与废物处置。"
-            ]
-          },
-          "id": "actors.display.responsibilities_block.06",
-          "source_refs": [
-            "r5-onet-current"
-          ],
-          "type": "prose"
+          "type": "list"
         },
         {
           "availability": "available",
@@ -32250,6 +32197,32 @@
                 "publisher": "O*NET",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/29-1292.00"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/31-9091.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -37317,44 +37290,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$item": "actors.display.responsibilities_block.01",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.02",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.03",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.04",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.05",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.06",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "actors.display.responsibilities_block.01",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": {
           "$item": "actors.display.riasec_fit_block.fit-interest",
@@ -38141,7 +38082,7 @@
       "text": "牙科助理"
     }
   },
-  "source_content_sha256": "b45bda4541c7b57dc00ebb112128ce90e2543037d68db137a9e1cc2d9d5ebb4e",
+  "source_content_sha256": "2cf39e4f50aa4b6d286a5e81c0e91520883ae63572a8567fa8512e67290d5cc0",
   "subject": {
     "canonical_slug": "dental-assistants",
     "name": "牙科助理",

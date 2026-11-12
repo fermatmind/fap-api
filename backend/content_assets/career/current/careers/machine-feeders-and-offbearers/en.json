@@ -165,13 +165,7 @@
         "status": "pending_mapping"
       },
       "item:machine-feeders-and-offbearers.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:machine-feeders-and-offbearers.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:machine-feeders-and-offbearers.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:machine-feeders-and-offbearers.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6131,8 +6125,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "machine-feeders-and-offbearers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6143,8 +6145,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "machine-feeders-and-offbearers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6155,8 +6165,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "machine-feeders-and-offbearers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6167,8 +6185,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "machine-feeders-and-offbearers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7308,40 +7334,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Work inputs: materials and products to process, machines and equipment operated by others or automated, work instructions and specifications, measuring and inspection tools, hand tools and handling devices such as handcarts and industrial vehicles, conveyors and gates, packaging and stacking materials, and production record forms."
+              "Inspect materials and products for defects, and to ensure conformance to specifications.",
+              "Record production and operational data, such as amount of materials processed.",
+              "Push dual control buttons and move controls to start, stop, or adjust machinery and equipment.",
+              "Weigh or measure materials or products to ensure conformance to specifications."
             ]
           },
           "id": "machine-feeders-and-offbearers.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Checkable outputs: inspected materials and products, accurate production and operating records, measurements and labels meeting specifications, feeding, removal, and transfer records, equipment cleaning and maintenance records, packaging and stacking results, and anomaly reports."
-            ]
-          },
-          "id": "machine-feeders-and-offbearers.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Full workflow: verify work instructions and safety conditions → inspect materials and prepare the workstation → feed materials and start or stop equipment under procedures → monitor operation and sample for inspection → remove, weigh, and label materials → transfer, package, and stack → clean and maintain equipment and record production and anomalies."
-            ]
-          },
-          "id": "machine-feeders-and-offbearers.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-tasks"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8758,6 +8759,32 @@
                 "publisher": "FermatMind",
                 "scope": "Paper exercise",
                 "url": "#career-content-path"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/53-7063.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11076,41 +11103,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "machine-feeders-and-offbearers.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "machine-feeders-and-offbearers.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "machine-feeders-and-offbearers.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "machine-feeders-and-offbearers.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "Activity preferences can only help design trials; they cannot determine qualifications or performance.",
         "interest": "First observe interest, stress, and experience during real feeding and removal, inspection records, and safe operations.",
@@ -11356,7 +11354,7 @@
       "text": "Machine Feeders and Offbearers: Tasks, Pay and Training"
     }
   },
-  "source_content_sha256": "7e6c229bf698fd80db9cd7bc988b247eb971278763aac76107e188ad501c5033",
+  "source_content_sha256": "ab29013018447b76211c6b24574ec4848dfeb16b8f17c23a22168d5c65f6ed0d",
   "subject": {
     "canonical_slug": "machine-feeders-and-offbearers",
     "name": "Machine Feeders and Offbearers",

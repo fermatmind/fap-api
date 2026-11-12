@@ -159,13 +159,7 @@
         "status": "pending_mapping"
       },
       "item:coroners.profile.work-context-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:coroners.profile.work-context-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:coroners.profile.work-context-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:coroners.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6137,8 +6131,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "coroners.profile.work-context-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6149,8 +6151,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "coroners.profile.work-context-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6161,8 +6171,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "coroners.profile.work-context-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6173,8 +6191,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "coroners.profile.work-context-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7313,43 +7339,18 @@
           "availability": "available",
           "copy_key": "career.item.responsibilities-block",
           "data": {
-            "paragraphs": [
-              "真实输入包括报案和现场观察、遗体与身份信息、病史、证人陈述、照片、物证链、毒理或病理结果及执法记录。"
+            "entries": [
+              "完整死亡证明，包括死亡原因和死亡方式的确定。",
+              "进行医学检查和尸检，对尸体进行初步检查，以查明受害者，找到创伤迹象，并查明表明死亡时间的因素。",
+              "采访在死亡现场的人，以获得有助于确定死亡方式的信息。",
+              "观察并记录身体和相关证据的位置和状况。"
             ]
           },
           "id": "coroners.profile.work-context-block.2",
           "source_refs": [
-            "onet-coroners"
+            "batch52-onet-core"
           ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "编辑流程概括：核管辖与身份、记录现场及遗体、访谈取病史、保存移交物证、检查或安排尸检及病理毒理检验、形成有权签署的报告和文件。O*NET把法医学检查／尸检和指示尸检也列为任务，不能概括为所有验尸官只整理文书；执行主体与授权须另查。"
-            ]
-          },
-          "id": "coroners.profile.work-context-block.3",
-          "source_refs": [
-            "onet-coroners"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "关键判断是区分观察、证言和专业推断，并决定哪些事项需法医、病理、毒理、执法或法院介入。"
-            ]
-          },
-          "id": "coroners.profile.work-context-block.4",
-          "source_refs": [
-            "onet-coroners"
-          ],
-          "type": "prose"
+          "type": "list"
         },
         {
           "availability": "available",
@@ -9093,6 +9094,32 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/13-1041.06#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11012,26 +11039,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$item": "coroners.profile.work-context-block.2",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "coroners.profile.work-context-block.3",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "coroners.profile.work-context-block.4",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "coroners.profile.work-context-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "I/C/E职业兴趣参考，结合具体任务探索",
         "interest": "O*NET当前职业兴趣I66、C64、E52、R51、S35、A8是职业兴趣分数，不是人群比例、个体合格线或医学心理测评。",
@@ -11344,7 +11357,7 @@
       "text": "验尸官"
     }
   },
-  "source_content_sha256": "7d8b5a6e0216d8e381d75b64dede46099c1e6a9bb7fd08a51f31ad36efbe8b5d",
+  "source_content_sha256": "0ee41c9f900e88dfed5256d6b5b55850915ac9d2ca07f07fe5469d0897094fba",
   "subject": {
     "canonical_slug": "coroners",
     "name": "验尸官",

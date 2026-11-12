@@ -159,13 +159,7 @@
         "status": "pending_mapping"
       },
       "item:mechatronics-engineers.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:mechatronics-engineers.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:mechatronics-engineers.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:mechatronics-engineers.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6113,8 +6107,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mechatronics-engineers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6125,8 +6127,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mechatronics-engineers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6137,8 +6147,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mechatronics-engineers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6149,8 +6167,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mechatronics-engineers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7287,42 +7313,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Inputs: client and production requirements, control and safety specifications, mechanical and electrical interface conditions, sensor and actuator selections, existing programs and field feedback, and applicable standards and regulations."
+              "Create mechanical design documents for parts, assemblies, or finished products.",
+              "Design advanced precision equipment for accurate or controlled applications.",
+              "Design engineering systems for the automation of industrial tasks.",
+              "Implement or test design solutions."
             ]
           },
           "id": "mechatronics-engineers.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-tasks",
-            "onet-details"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Verifiable outputs: control proposals and programs, sensor and actuator selection rationales, commissioning and validation records, safety-function and risk-assessment conclusions, site handover and acceptance documents, and review and sign-off records."
-            ]
-          },
-          "id": "mechatronics-engineers.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-tasks",
-            "onet-details"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Complete workflow: interpret requirements and control specifications → research and feasibility analysis → mechanical/electrical/control design → programming and commissioning tests → performance and safety validation → review, sign-off, and handover, completing the loop."
-            ]
-          },
-          "id": "mechatronics-engineers.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-tasks"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8907,6 +8906,32 @@
                 "publisher": "FermatMind",
                 "scope": "exact",
                 "url": "#career-visual-group-quick-decision"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/17-2199.05#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11479,41 +11504,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "mechatronics-engineers.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "mechatronics-engineers.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "mechatronics-engineers.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "mechatronics-engineers.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "Activity preferences only help design trials; they cannot establish qualifications or performance.",
         "interest": "First observe interest, stress, and collaboration experiences in real tasks.",
@@ -11733,7 +11729,7 @@
       "text": "Mechatronics Engineers: Work, US Wages, and Entry Paths"
     }
   },
-  "source_content_sha256": "0a8c53bd26be229bc5da27c1e50b9ad44ffded1fdbb02652aff331dc561756c3",
+  "source_content_sha256": "bcb5e4deb527a10670c38080cf22c10ee254145634d1ee0a592429acd7771261",
   "subject": {
     "canonical_slug": "mechatronics-engineers",
     "name": "Mechatronics Engineers",

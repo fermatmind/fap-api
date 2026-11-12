@@ -156,13 +156,7 @@
         "status": "pending_mapping"
       },
       "item:meat-poultry-and-fish-cutters-and-trimmers.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:meat-poultry-and-fish-cutters-and-trimmers.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:meat-poultry-and-fish-cutters-and-trimmers.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:meat-poultry-and-fish-cutters-and-trimmers.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6122,8 +6116,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6134,8 +6136,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6146,8 +6156,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6158,8 +6176,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7299,40 +7325,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Work inputs: Meat, poultry, and fish raw materials for cutting, product specifications and yield requirements, knives, saws, and other hand tools, weighing and labeling equipment, cleaning and disinfecting supplies, and hygiene and equipment safety procedures."
+              "Use knives, cleavers, meat saws, bandsaws, or other equipment to perform meat cutting and trimming.",
+              "Weigh meats and tag containers for weight and contents.",
+              "Inspect meat products for defects, bruises or blemishes and remove them along with any excess fat.",
+              "Cut and trim meat to prepare for packing."
             ]
           },
           "id": "meat-poultry-and-fish-cutters-and-trimmers.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Verifiable outputs: Cuts and trimmings meeting specifications, portions labeled by weight and contents, deboned, skinned, and trimmed intermediate products, ground meat and trimmings, cleaned tools and equipment, and traceable weight and batch records."
-            ]
-          },
-          "id": "meat-poultry-and-fish-cutters-and-trimmers.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Complete human–machine workflow: Check specifications and yield → inspect raw materials and remove defects → cut by anatomical section and debone → trim and grade → weigh, label, portion, and seal → clean tools and equipment and record batches."
-            ]
-          },
-          "id": "meat-poultry-and-fish-cutters-and-trimmers.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-tasks"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8796,6 +8797,32 @@
                 "period": "2026-11",
                 "publisher": "eCFR",
                 "url": "https://www.ecfr.gov/current/title-21/chapter-I/subchapter-B/part-123/subpart-A/section-123.7"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/51-3022.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11112,41 +11139,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "meat-poultry-and-fish-cutters-and-trimmers.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "meat-poultry-and-fish-cutters-and-trimmers.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "meat-poultry-and-fish-cutters-and-trimmers.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "meat-poultry-and-fish-cutters-and-trimmers.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "Activity preferences can only help design exercises; they cannot determine qualifications or performance.",
         "interest": "First observe interest, stress, and experience in actual cutting and trimming, hygiene work, and prolonged standing.",
@@ -11359,7 +11357,7 @@
       "text": "Meat, Poultry, and Fish Cutters and Trimmers: Tasks, Pay and Training"
     }
   },
-  "source_content_sha256": "aed644865f1d089de26df16822201b38e3e7198736eab9f0a8cbea9383a2fe63",
+  "source_content_sha256": "0d5675efa63f1d040b0daf7f2d8b9a18ae4286add3d627c2a17b87712c4e7d2c",
   "subject": {
     "canonical_slug": "meat-poultry-and-fish-cutters-and-trimmers",
     "name": "Meat, Poultry, and Fish Cutters and Trimmers",

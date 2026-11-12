@@ -177,13 +177,7 @@
         "status": "pending_mapping"
       },
       "item:electromechanical-equipment-assemblers.profile.responsibilities-block.1": {
-        "status": "pending_mapping"
-      },
-      "item:electromechanical-equipment-assemblers.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:electromechanical-equipment-assemblers.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:electromechanical-equipment-assemblers.profile.work-context-block.1": {
         "status": "pending_mapping"
@@ -6146,8 +6140,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "electromechanical-equipment-assemblers.profile.responsibilities-block.1",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6158,8 +6160,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "electromechanical-equipment-assemblers.profile.responsibilities-block.1",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6170,8 +6180,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "electromechanical-equipment-assemblers.profile.responsibilities-block.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6182,8 +6200,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "electromechanical-equipment-assemblers.profile.responsibilities-block.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7323,40 +7349,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "输入：批准图纸、物料表、工序、零件标识、公差、工具和测试要求。"
+              "检查、测试和调整完成单位，以确保单位符合规格、宽容和客户订单要求。",
+              "将零件放置、对齐并调整，以确保正确匹配和组装。",
+              "使用手动工具和电动工具，将部件或单元组合起来，并将单元固定在组件、子组装或框架上。",
+              "根据规格连接电缆、管和线路。"
             ]
           },
           "id": "electromechanical-equipment-assemblers.profile.responsibilities-block.1",
           "source_refs": [
-            "onet"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "任务：定位对准、紧固、接线、测量、检验测试并调整成品。"
-            ]
-          },
-          "id": "electromechanical-equipment-assemblers.profile.responsibilities-block.2",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "产出：符合图纸的组件、公差记录、测试记录、缺陷和交接状态。"
-            ]
-          },
-          "id": "electromechanical-equipment-assemblers.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -9080,6 +9081,32 @@
                 "publisher": "淮南市人力资源和社会保障局",
                 "scope": "recruitment_proxy",
                 "url": "https://rsj.huainan.gov.cn/gzqk/tzgg/551864645.html"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/51-2023.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11413,41 +11440,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "electromechanical-equipment-assemblers.profile.responsibilities-block.1",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "electromechanical-equipment-assemblers.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "electromechanical-equipment-assemblers.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "electromechanical-equipment-assemblers.profile.responsibilities-block.1",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "工作样本优先",
         "interest": "按实际任务、工具和责任边界核对兴趣适配",
@@ -11730,7 +11728,7 @@
       "text": "机电设备装配工"
     }
   },
-  "source_content_sha256": "1f7e04861d50ad72e15ea35b531a49e22eede19307578f8858d76b4c36fb94fc",
+  "source_content_sha256": "c712ea23016e9bb15a891b568a75b953b065d28c46341e7b73e3d86ec5408f86",
   "subject": {
     "canonical_slug": "electromechanical-equipment-assemblers",
     "name": "机电设备装配工",

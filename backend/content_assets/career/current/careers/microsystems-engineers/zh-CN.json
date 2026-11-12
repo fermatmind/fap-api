@@ -9072,8 +9072,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "microsystems-engineers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -12058,14 +12066,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "需求与规格：拆解产品需求，确定功能、工艺与封装约束。",
-              "设计与仿真：完成原理图、物理版图与设计评审。",
-              "制程、封装与验证：开发微纳制程，评估封装方案并完成测试与文档。"
+              "建立与过程，功能，或包件约束相一致的集成微电机系统(MEMS)组件或包件组件的示意图和物理布局。",
+              "利用模拟或建模软件，调查潜在的微电机系统(MEMS)设备设计的成本，性能或处理能力等特征。",
+              "创建或维护正式工程文件，如图表、材料、组件或材料规格或包装要求。",
+              "进行分析，以解决失败、可靠性或收益改善等问题。"
             ]
           },
           "id": "microsystems-engineers.profile.responsibilities-block.2",
           "source_refs": [
-            "source-pack-onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -13558,6 +13567,32 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/17-2199.06#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -15726,7 +15761,7 @@
       "text": "微系统工程师：工作内容、美国工资与就业 | 费马测试"
     }
   },
-  "source_content_sha256": "4346fa7b926b9fd959c85b29d371ab91b3b7f2ebc02551fdf9d11bbf33b61614",
+  "source_content_sha256": "4b03f239fc3cd0ea4d9414fc49bb32437c3c5eed95ce2a7f0d8d565a29e013a4",
   "subject": {
     "canonical_slug": "microsystems-engineers",
     "name": "微系统工程师",

@@ -183,7 +183,7 @@
         "status": "mapped"
       },
       "item:metal-refining-furnace-operators-and-tenders.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:metal-refining-furnace-operators-and-tenders.profile.work-context-block.3": {
         "status": "mapped"
@@ -9489,16 +9489,8 @@
         "status": "unfilled"
       },
       "responsibilities_block.05.category": {
-        "ref": {
-          "id": "metal-refining-furnace-operators-and-tenders.profile.responsibilities-block.2",
-          "path": [
-            "data",
-            "entries",
-            4
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "responsibilities_block.05.description": {
         "ref": null,
@@ -9509,16 +9501,8 @@
         "status": "unfilled"
       },
       "responsibilities_block.06.category": {
-        "ref": {
-          "id": "metal-refining-furnace-operators-and-tenders.profile.responsibilities-block.2",
-          "path": [
-            "data",
-            "entries",
-            5
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "responsibilities_block.06.description": {
         "ref": null,
@@ -12468,18 +12452,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Charge preparation and charging: Check and add charge materials according to furnace conditions and steel grade requirements.",
-              "Melting and refining: Monitor melting and adjust composition and temperature.",
-              "Sampling and adjustment: Sample to confirm composition and make adjustments according to procedures.",
-              "Tapping and coordination: Coordinate tapping and pouring and record shift handovers.",
-              "Energy and equipment: Use energy and equipment according to procedures and report abnormalities.",
-              "Records and traceability: Accurately record heats, parameters, and abnormalities.",
-              "Safety and emergencies: Follow procedures for high temperatures, lifting operations, and emergencies."
+              "Regulate supplies of fuel and air, or control flow of electric current and water coolant to heat furnaces and adjust temperatures.",
+              "Draw smelted metal samples from furnaces or kettles for analysis, and calculate types and amounts of materials needed to ensure that materials meet specifications.",
+              "Weigh materials to be charged into furnaces, using scales.",
+              "Record production data, and maintain production logs."
             ]
           },
           "id": "metal-refining-furnace-operators-and-tenders.profile.responsibilities-block.2",
           "source_refs": [
-            "source-pack-onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -14105,6 +14086,32 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/51-4051.00#Education"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/51-4051.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -16318,7 +16325,7 @@
       "text": "Metal-Refining Furnace Operators and Tenders: Duties, U.S. Wages, and Entry"
     }
   },
-  "source_content_sha256": "15c6100886881328383ade9ba20b94831902ad93450a4e9844d860b1c9a6d698",
+  "source_content_sha256": "3d1bf021bf42c5118a35bcf6b97c95afa5c17fe1178cd86d7503ca94e3a79227",
   "subject": {
     "canonical_slug": "metal-refining-furnace-operators-and-tenders",
     "name": "Metal-Refining Furnace Operators and Tenders",

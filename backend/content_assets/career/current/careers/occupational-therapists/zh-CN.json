@@ -9051,8 +9051,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "occupational-therapists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -12026,14 +12034,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "通过病史、访谈和实际任务观察，识别是身体功能、认知、环境还是任务步骤限制了作业表现。",
-              "与当事人确定可测目标，把穿衣、书写、备餐或返岗任务转成有目的的活动训练。",
-              "选择并指导使用辅助器具，调整家庭、学校或工作场所的摆放、标识与流程，减少活动障碍。"
+              "测试并评估患者的身体和精神能力，并分析医疗数据，以确定患者的现实康复目标。",
+              "完成并保持必要的记录。",
+              "计划、组织和在医院、机构或社区设施开展职业治疗计划，以帮助因疾病、伤害或心理或发展问题而残疾人康复。",
+              "计划并实施各种方案和社会活动，帮助病人学习工作或学习技能，适应残疾。"
             ]
           },
           "id": "occupational-therapists.profile.responsibilities-block.2",
           "source_refs": [
-            "source-pack-onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -13656,6 +13665,32 @@
                 "publisher": "费马测试编辑部",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/29-1122.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -15803,7 +15838,7 @@
       "text": "作业治疗师：职责、执照、工资与入门路径"
     }
   },
-  "source_content_sha256": "fff8c21e80e956b325da8df7113b7f9704b67fada285e7502409a33981b862c6",
+  "source_content_sha256": "8c4d1ad52c025d35e48cd80971ea2e7b07168a9ac2305b0b797124e9c0246dbd",
   "subject": {
     "canonical_slug": "occupational-therapists",
     "name": "作业治疗师",

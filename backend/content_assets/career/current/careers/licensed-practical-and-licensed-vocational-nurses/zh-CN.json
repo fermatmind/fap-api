@@ -174,13 +174,7 @@
         "status": "pending_mapping"
       },
       "item:licensed-practical-and-licensed-vocational-nurses.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:licensed-practical-and-licensed-vocational-nurses.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:licensed-practical-and-licensed-vocational-nurses.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:licensed-practical-and-licensed-vocational-nurses.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6128,8 +6122,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "licensed-practical-and-licensed-vocational-nurses.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6140,8 +6142,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "licensed-practical-and-licensed-vocational-nurses.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6152,8 +6162,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "licensed-practical-and-licensed-vocational-nurses.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6164,8 +6182,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "licensed-practical-and-licensed-vocational-nurses.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7298,45 +7324,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "投入对象：患者的生命体征与症状、医嘱与用药单、护理与给药记录、伤口与导管等护理部位、样本与护理用品，以及患者安全与隐私要求。"
+              "观察患者，记录并报告病情变化（如用药或治疗后的不良反应），并采取必要措施。",
+              "测量和记录病人的生命迹象，例如身高、体重、温度、血压、脉搏或呼吸。",
+              "管理处方药或开始静脉注射液，在病人图表上注明时间和数量。",
+              "提供基本的病人护理或治疗，如温度或血压，服装伤口，治疗床位，给麻烦或淋浴，用酒精擦拭，按摩，或进行催化。"
             ]
           },
           "id": "licensed-practical-and-licensed-vocational-nurses.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-details-lpn",
-            "onet-summary-lpn"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "可检查产出：生命体征与观察记录、给药与核对记录、伤口与导管护理记录、样本采集与送检记录、患者/家属沟通与异常上报记录。"
-            ]
-          },
-          "id": "licensed-practical-and-licensed-vocational-nurses.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-details-lpn",
-            "onet-summary-lpn"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "任务示意，并非固定临床步骤：核对获准照护信息、观察与记录、执行获准护理，与团队沟通或交接。危急响应及报告不得以先完成日常照护或记录为前提。"
-            ]
-          },
-          "id": "licensed-practical-and-licensed-vocational-nurses.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-details-lpn",
-            "onet-summary-lpn",
-            "bls-ooh-lpn",
-            "review-cn-nurses"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8867,6 +8863,32 @@
                 "publisher": "National Council of State Boards of Nursing / NCLEX",
                 "scope": "考试注册与监管机构的资格/执照申请不同；不在本页代报名或保证资格。",
                 "url": "https://www.nclex.com/registration.page"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/29-2061.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11357,41 +11379,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "licensed-practical-and-licensed-vocational-nurses.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "licensed-practical-and-licensed-vocational-nurses.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "licensed-practical-and-licensed-vocational-nurses.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "licensed-practical-and-licensed-vocational-nurses.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "兴趣与工作风格只能帮助设计试验，不能判断资格、执照或表现。",
         "interest": "用真实任务观察对帮助患者与按规程执行的偏好。",
@@ -11670,7 +11663,7 @@
       "text": "美国LPN/LVN职业：职责、入行与大陆护理资格"
     }
   },
-  "source_content_sha256": "8abb62429508e3884bcc85c68e7a88b26af72fcdb49c4859244e0cc53f7eba5e",
+  "source_content_sha256": "2fe061ad990216d8b8272c1783022a63b7833e14baaf1b29a3bc4690010ab9cc",
   "subject": {
     "canonical_slug": "licensed-practical-and-licensed-vocational-nurses",
     "name": "执业护士与职业护士",

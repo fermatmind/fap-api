@@ -162,13 +162,7 @@
         "status": "pending_mapping"
       },
       "item:maids-and-housekeeping-cleaners.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:maids-and-housekeeping-cleaners.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:maids-and-housekeeping-cleaners.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:maids-and-housekeeping-cleaners.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6116,8 +6110,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "maids-and-housekeeping-cleaners.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6128,8 +6130,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "maids-and-housekeeping-cleaners.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6140,8 +6150,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "maids-and-housekeeping-cleaners.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6152,8 +6170,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "maids-and-housekeeping-cleaners.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7287,40 +7313,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "投入对象：待清洁的客房与公共区域、布草与床品、毛巾与洗漱用品等客用品、清洁剂与消毒剂、清洁工具与设备（吸尘器、洗地打蜡机、拖把、抹布）、清洁车与储物间、清洁标准与检查表单。"
+              "保持储存区和车的储存充足、清洁和清洁。",
+              "使用带有轮子的货车，搬运床单、毛巾、卫生用品和清洁用品。",
+              "清洁房，走廊，大厅，休息室，洗手间，走廊，电梯，楼梯，更衣室等工作区，达到卫生标准。",
+              "空垃圾篮、空的干净烟灰缸，并将其他垃圾和废物运到处置区。"
             ]
           },
           "id": "maids-and-housekeeping-cleaners.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "可检查产出：按标准清洁的客房与区域、整理好的床铺与补充到位的布草客用品、清洁与消毒记录、清运的垃圾、报告并处理的损坏与失物记录、维护好的清洁车与储物间。"
-            ]
-          },
-          "id": "maids-and-housekeeping-cleaners.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "完整工作流程：领取任务与核定标准 → 准备清洁车与用品 → 按顺序清洁客房与床铺 → 清洁卫生间与补充客用品 → 清洁公共区域与地板 → 清运垃圾并消毒 → 检查、记录并报告异常。"
-            ]
-          },
-          "id": "maids-and-housekeeping-cleaners.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-tasks"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8724,6 +8725,32 @@
                 "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/37-2012.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11048,41 +11075,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "maids-and-housekeeping-cleaners.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "maids-and-housekeeping-cleaners.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "maids-and-housekeeping-cleaners.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "maids-and-housekeeping-cleaners.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "活动偏好只能帮助设计试验，不能判断资格或表现。",
         "interest": "先观察真实清洁操作、布草整理与检查中的兴趣、压力与体验。",
@@ -11316,7 +11314,7 @@
       "text": "客房与家政清洁员做什么：房间整理、用品和交接"
     }
   },
-  "source_content_sha256": "bcb9ed1d2965437e5cfce1fe2adf1909af00ff8aaeec9c6ded5bea3cd3131886",
+  "source_content_sha256": "ff71c5de82f02d9939c424212cb687a1edb7adbd9f49295e24e12d5ebc8d8764",
   "subject": {
     "canonical_slug": "maids-and-housekeeping-cleaners",
     "name": "客房与家政清洁员",

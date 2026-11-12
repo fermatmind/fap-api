@@ -156,13 +156,7 @@
         "status": "pending_mapping"
       },
       "item:landscape-architects.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:landscape-architects.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:landscape-architects.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:landscape-architects.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6110,8 +6104,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "landscape-architects.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6122,8 +6124,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "landscape-architects.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6134,8 +6144,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "landscape-architects.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6146,8 +6164,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "landscape-architects.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7291,40 +7317,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "投入对象｜以场地与现状条件、客户与项目需求、规范与公共健康安全要求、种植与材料、工程与建筑等其他专业接口为对象，在许可与伦理边界内开展设计与设计管理。"
+              "与客户、工程人员或建筑师在景观项目上交谈。",
+              "分析环境报告或景观计划的位置、排水或结构位置等条件的数据。",
+              "检查景观工作，以确保符合规格，评估材料或工作质量，或咨询客户或建筑人员。",
+              "准备土地开发的项目规划、规格或成本估算。"
             ]
           },
           "id": "landscape-architects.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-details"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "可检查产出｜可复核的现状分析与场地评估、总平面与方案比较图、种植与材料表、规格与成本估算、施工核对与变更记录；结果须可追溯到场地数据、规范依据与客户确认。"
-            ]
-          },
-          "id": "landscape-architects.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-details"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "完整工作流程｜沟通需求→踏勘并分析地形与排水等场地数据→形成总平面与种植材料方案→编制规格与成本估算→施工阶段核对并处理变更。"
-            ]
-          },
-          "id": "landscape-architects.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8991,6 +8992,32 @@
                 "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/17-1012.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11452,41 +11479,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "landscape-architects.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "landscape-architects.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "landscape-architects.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "landscape-architects.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "活动偏好只能帮助设计试验，不能判断资格或表现。",
         "interest": "先观察真实任务中的兴趣、压力与协作体验。",
@@ -11696,7 +11694,7 @@
       "text": "景观建筑师做什么：场地、动线与室外空间"
     }
   },
-  "source_content_sha256": "05cc808e2d764481eb9d3262c27e4305ee14ad96468db3642eadab5537039de7",
+  "source_content_sha256": "f5b2907639f3b78d7cafcaaa53c4ebd2597320d93f1981d0cff0681e74088c71",
   "subject": {
     "canonical_slug": "landscape-architects",
     "name": "景观建筑师",

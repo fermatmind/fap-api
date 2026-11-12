@@ -174,13 +174,7 @@
         "status": "pending_mapping"
       },
       "item:layout-workers-metal-and-plastic.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:layout-workers-metal-and-plastic.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:layout-workers-metal-and-plastic.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:layout-workers-metal-and-plastic.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6128,8 +6122,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "layout-workers-metal-and-plastic.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6140,8 +6142,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "layout-workers-metal-and-plastic.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6152,8 +6162,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "layout-workers-metal-and-plastic.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6164,8 +6182,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "layout-workers-metal-and-plastic.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7298,40 +7324,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "投入对象：金属与塑料工件、工程图纸与样板、量具与划线工具、尺寸与公差信息、基准和加工顺序。"
+              "用划针、石笔、冲子和手钻在工件上标出曲线、线条、孔位、尺寸和焊接符号。",
+              "计划切割，钻探，弯曲，滚动，拳击，和焊接作业的地点和顺序，使用指南针，推进器，分割器，以及规则。",
+              "将待焊接或组装的加工件装配到位并对齐。",
+              "查找中心线和验证模板位置，使用测量工具，如盖格块，高度盖格和直径指标。"
             ]
           },
           "id": "layout-workers-metal-and-plastic.profile.responsibilities-block.2",
           "source_refs": [
-            "source-pack-onet-custom"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "可检查产出：按图纸计算尺寸并建立基准点，形成可复核的划线标记、检查记录和异常升级记录。"
-            ]
-          },
-          "id": "layout-workers-metal-and-plastic.profile.responsibilities-block.3",
-          "source_refs": [
-            "source-pack-onet-custom"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "完整工作流程：读图并核对版本与单位，选择基准并计算尺寸，定位与划线，复核标记，规划切割、钻孔、弯曲或焊接顺序，交付并留痕。"
-            ]
-          },
-          "id": "layout-workers-metal-and-plastic.profile.responsibilities-block.4",
-          "source_refs": [
-            "source-pack-onet-custom"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8767,6 +8768,32 @@
                 "publisher": "FermatMind",
                 "scope": "纸面练习",
                 "url": "#career-content-path"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/51-4192.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11058,41 +11085,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "layout-workers-metal-and-plastic.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "layout-workers-metal-and-plastic.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "layout-workers-metal-and-plastic.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "layout-workers-metal-and-plastic.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "活动偏好只能帮助设计试验，不能判断资格或表现。",
         "interest": "先观察真实任务中的兴趣、压力与协作体验。",
@@ -11370,7 +11368,7 @@
       "text": "金属与塑料工件划线工做什么：任务、工资与入行"
     }
   },
-  "source_content_sha256": "bc94e0803b4b67539a6437cfe73439541cb991950e29a3cff5f9312d46647e18",
+  "source_content_sha256": "8cc764bd4e3ef4930847dae83570496a15d4098733051401e45a06b8cf83ba7f",
   "subject": {
     "canonical_slug": "layout-workers-metal-and-plastic",
     "name": "金属与塑料工件划线工",

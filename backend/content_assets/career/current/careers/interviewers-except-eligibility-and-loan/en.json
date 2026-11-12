@@ -150,13 +150,7 @@
         "status": "pending_mapping"
       },
       "item:interviewers-except-eligibility-and-loan.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:interviewers-except-eligibility-and-loan.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:interviewers-except-eligibility-and-loan.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:interviewers-except-eligibility-and-loan.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6116,8 +6110,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "interviewers-except-eligibility-and-loan.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6128,8 +6130,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "interviewers-except-eligibility-and-loan.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6140,8 +6150,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "interviewers-except-eligibility-and-loan.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6152,8 +6170,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "interviewers-except-eligibility-and-loan.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7293,40 +7319,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Objects of work | Questionnaires and forms, respondents and answer information, interview scripts and procedures, and record and filing systems; conducting interviews and keeping records within authorization and information protection boundaries."
+              "Ask questions in accordance with instructions to obtain various specified information, such as person's name, address, age, religious preference, or state of residency.",
+              "Identify and report problems in obtaining valid data.",
+              "Ensure payment for services by verifying benefits with the person's insurance provider or working out financing options.",
+              "Perform office duties, such as telemarketing or customer service inquiries, maintaining staff records, billing patients, or receiving payments."
             ]
           },
           "id": "interviewers-except-eligibility-and-loan.profile.responsibilities-block.2",
           "source_refs": [
-            "profile"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Checkable outputs | Reviewable interview records and coded data, completeness and accuracy check results, inconsistency handling records, and filing and handover records; results must be traceable to the script version and respondent authorization."
-            ]
-          },
-          "id": "interviewers-except-eligibility-and-loan.profile.responsibilities-block.3",
-          "source_refs": [
-            "profile"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Complete workflow | Confirm interview purpose and script → verify identity and authorization → ask questions and record answers → check completeness and accuracy → identify and resolve inconsistencies → file and hand over."
-            ]
-          },
-          "id": "interviewers-except-eligibility-and-loan.profile.responsibilities-block.4",
-          "source_refs": [
-            "profile"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8782,6 +8783,32 @@
                 "publisher": "FermatMind",
                 "scope": "Paper exercise",
                 "url": "#career-content-path"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/43-4111.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11144,41 +11171,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "interviewers-except-eligibility-and-loan.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "interviewers-except-eligibility-and-loan.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "interviewers-except-eligibility-and-loan.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "interviewers-except-eligibility-and-loan.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "Activity preferences can only help design trials; they cannot determine qualifications or performance.",
         "interest": "First observe interest, stress and collaboration experiences in real tasks.",
@@ -11360,7 +11358,7 @@
       "text": "Interviewers, Except Eligibility and Loan: Tasks, Pay and Training"
     }
   },
-  "source_content_sha256": "4edadffbf21a800ea24d9741f56aa5a70fa8636bcc71018ad88a9181018f654a",
+  "source_content_sha256": "ddeda5d41e87f6afdc81af8d2131ced1ddebfc3238fc440d535fd6b0f13c3f48",
   "subject": {
     "canonical_slug": "interviewers-except-eligibility-and-loan",
     "name": "Interviewers, Except Eligibility and Loan",

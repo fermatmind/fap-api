@@ -186,7 +186,7 @@
         "status": "mapped"
       },
       "item:parking-attendants.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:parking-attendants.profile.work-context-block.3": {
         "status": "mapped"
@@ -9292,16 +9292,8 @@
         "status": "unfilled"
       },
       "responsibilities_block.05.category": {
-        "ref": {
-          "id": "parking-attendants.profile.responsibilities-block.2",
-          "path": [
-            "data",
-            "entries",
-            4
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "responsibilities_block.05.description": {
         "ref": null,
@@ -9312,16 +9304,8 @@
         "status": "unfilled"
       },
       "responsibilities_block.06.category": {
-        "ref": {
-          "id": "parking-attendants.profile.responsibilities-block.2",
-          "path": [
-            "data",
-            "entries",
-            5
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "responsibilities_block.06.description": {
         "ref": null,
@@ -11475,18 +11459,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "接待客户并解释停车规则。",
-              "核车牌、车况、票据与钥匙编号。",
-              "按授权停车或取车并遵守场内交通。",
-              "计算费用、收款、找零与对账。",
-              "指引车位并维护车场秩序。",
-              "处理投诉、支付异常与损伤争议。",
-              "离场复核客户凭据、车辆状态与钥匙交接。"
+              "从客户那里采取数字标签，找到车辆，并交货车辆，或者给客户提供车辆的位置指示。",
+              "检查车辆，以检测任何损坏。",
+              "问候顾客，打开他们的车门。",
+              "在挡风玻璃上发放票根或贴上编号标记，在顾客的钥匙上贴上日志标记或附加标记，并给顾客提供匹配标记，以定位停靠的车辆。"
             ]
           },
           "id": "parking-attendants.profile.responsibilities-block.2",
           "source_refs": [
-            "source-pack-onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -12951,6 +12932,32 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/53-6021.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -15169,7 +15176,7 @@
       "text": "停车服务员：工作内容、工资与车辆交接边界"
     }
   },
-  "source_content_sha256": "7068e41342ca1fe79f8c59e18c1aabe147ebf9f0da56d376d35357c3cc4c531f",
+  "source_content_sha256": "f09a0ac7651e9490513a6362b145bd2293e0a1cdc9e65b7157af19ecc24a0b18",
   "subject": {
     "canonical_slug": "parking-attendants",
     "name": "停车服务员",

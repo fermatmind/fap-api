@@ -159,13 +159,7 @@
         "status": "pending_mapping"
       },
       "item:information-security-engineers.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:information-security-engineers.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:information-security-engineers.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:information-security-engineers.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6113,8 +6107,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "information-security-engineers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6125,8 +6127,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "information-security-engineers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6137,8 +6147,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "information-security-engineers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6149,8 +6167,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "information-security-engineers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7285,40 +7311,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "投入对象｜以资产、网络、系统、安全技术与安全策略为对象，在授权与变更边界内执行设计、部署、监测与调查。"
+              "利用渗透测试，识别安全系统中的弱点。",
+              "对网络或系统进行协调监控，以检测安全漏洞或入侵。",
+              "评估安全控制的有效性，利用性能指标。",
+              "对工作人员进行信息安全标准、政策和最佳做法的培训，并监督其使用情况。"
             ]
           },
           "id": "information-security-engineers.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-exact"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "可检查产出｜可复核的控制设计、配置与规则、测试与部署验证记录、事件时间线与响应记录、修复与复盘结论；结果须可追溯到原始日志、版本与授权。"
-            ]
-          },
-          "id": "information-security-engineers.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-exact"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "完整工作流程｜确认资产与威胁→设计控制→部署前验证→部署与监测→响应与恢复→事后改进与记录。"
-            ]
-          },
-          "id": "information-security-engineers.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-exact"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8996,6 +8997,32 @@
                 "publisher": "中国网信网",
                 "scope": "contextual",
                 "url": "https://www.cac.gov.cn/2025-10/29/c_1763461514706581.htm"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/15-1299.05#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11178,41 +11205,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "information-security-engineers.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "information-security-engineers.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "information-security-engineers.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "information-security-engineers.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "活动偏好只能帮助设计试验，不能判断资格或表现。",
         "interest": "先观察真实任务中的兴趣、压力与协作体验。",
@@ -11421,7 +11419,7 @@
       "text": "信息安全工程师职业判断：工作、入行与风险边界"
     }
   },
-  "source_content_sha256": "7c12fe5a53a6ec9004787383b2c38de9dccd2d30582626c510c6db343172f42f",
+  "source_content_sha256": "9faabdc70fa909a95d1aa0614a5e726a6fefe829218285a18b547fc52464eb2f",
   "subject": {
     "canonical_slug": "information-security-engineers",
     "name": "信息安全工程师",

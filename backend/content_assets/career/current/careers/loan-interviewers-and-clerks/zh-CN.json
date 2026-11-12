@@ -171,13 +171,7 @@
         "status": "pending_mapping"
       },
       "item:loan-interviewers-and-clerks.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:loan-interviewers-and-clerks.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:loan-interviewers-and-clerks.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:loan-interviewers-and-clerks.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6125,8 +6119,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "loan-interviewers-and-clerks.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6137,8 +6139,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "loan-interviewers-and-clerks.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6149,8 +6159,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "loan-interviewers-and-clerks.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6161,8 +6179,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "loan-interviewers-and-clerks.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7295,40 +7321,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "投入对象：贷款与信贷申请、申请人个人与财务资料、信用机构与雇主等核实来源、申请与结清文件、利息与结清费用计算、放款与资金支付记录、贷款档案与逾期账款。"
+              "面试贷款申请人，以获取个人和财务数据并协助完成申请。",
+              "解答问题，并就贷款和交易向客户提供咨询。",
+              "提交贷款申请，并附上推荐进行风险评估的建议。",
+              "审核并核实贷款申请和结算文件的信息及准确性。"
             ]
           },
           "id": "loan-interviewers-and-clerks.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "可检查产出：完整且经核对的申请材料、符合要求的申请与结清文件、经复核的利息与费用计算、放款与资金支付登记、及时更新的贷款记录与逾期跟进记录。"
-            ]
-          },
-          "id": "loan-interviewers-and-clerks.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "完整工作流程：受理申请并面谈收集资料 → 协助填写申请 → 核实信用与推荐信息 → 复核文件完整性与准确性 → 计算与复核利息、本金、还款额及结清费用 → 提交审批或准备结清文件 → 登记放款与资金支付 → 维护贷款记录并跟进逾期账款。"
-            ]
-          },
-          "id": "loan-interviewers-and-clerks.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-tasks"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8704,6 +8705,32 @@
                 "publisher": "FermatMind",
                 "scope": "纸面练习",
                 "url": "#career-content-path"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/43-4131.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11004,41 +11031,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "loan-interviewers-and-clerks.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "loan-interviewers-and-clerks.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "loan-interviewers-and-clerks.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "loan-interviewers-and-clerks.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "活动偏好只能帮助设计试验，不能判断资格或表现。",
         "interest": "先观察真实文书处理、客户沟通与复核中的兴趣、压力与体验。",
@@ -11304,7 +11302,7 @@
       "text": "贷款受理与文书人员做什么：任务、工资与入行"
     }
   },
-  "source_content_sha256": "5275ef0614b7110bbaa667234e2947596843b9f073b0444bbb42aff1cc4928d9",
+  "source_content_sha256": "98e447d0041b1b35b25c95a9803a892eae5fa99771bcf3e33f68f29c85d3b3ae",
   "subject": {
     "canonical_slug": "loan-interviewers-and-clerks",
     "name": "贷款受理与文书人员",

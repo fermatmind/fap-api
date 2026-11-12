@@ -159,13 +159,7 @@
         "status": "pending_mapping"
       },
       "item:manicurists-and-pedicurists.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:manicurists-and-pedicurists.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:manicurists-and-pedicurists.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:manicurists-and-pedicurists.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6113,8 +6107,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "manicurists-and-pedicurists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6125,8 +6127,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "manicurists-and-pedicurists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6137,8 +6147,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "manicurists-and-pedicurists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6149,8 +6167,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "manicurists-and-pedicurists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7283,40 +7309,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "投入对象：顾客的手指甲与脚趾甲及其状况、预约与需求说明、美甲工具与一次性耗材、消毒用品与化学品（甲油、溶剂、粉末、卸甲液）、产品与色卡、服务与库存记录、收款与预约系统。"
+              "清洁并消毒工具和工作环境。",
+              "用刷子在指甲上涂底油，并涂透明或彩色指甲油。",
+              "维持供应库存和客户服务记录。",
+              "指甲的形状和顺利端，使用裂缝，文件，或 emery 板。"
             ]
           },
           "id": "manicurists-and-pedicurists.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "可检查产出：清洁修整并完成上色或装饰的指甲、完成消毒的工具与工位、甲面与手部状况的评估与护理建议、服务与库存记录、预约与收款记录、需要转介或升级时的说明。"
-            ]
-          },
-          "id": "manicurists-and-pedicurists.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "完整工作流程：核对预约与需求 → 检查手部与甲面状况并确认禁忌 → 清洁消毒工具与工位 → 处理甲缘角质并修剪打磨甲形 → 涂底油与上色或装饰（必要时延长或加固）→ 检查成品与顾客确认 → 记录服务与库存并收款。"
-            ]
-          },
-          "id": "manicurists-and-pedicurists.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-tasks"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8754,6 +8755,32 @@
                 "publisher": "FermatMind",
                 "scope": "纸面练习",
                 "url": "#career-content-path"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/39-5092.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11108,41 +11135,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "manicurists-and-pedicurists.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "manicurists-and-pedicurists.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "manicurists-and-pedicurists.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "manicurists-and-pedicurists.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "活动偏好只能帮助设计试验，不能判断资格或表现。",
         "interest": "先观察真实美甲与修脚操作、顾客沟通与卫生落实中的兴趣、压力与体验。",
@@ -11364,7 +11362,7 @@
       "text": "手足美甲师做什么：任务、工资与入行"
     }
   },
-  "source_content_sha256": "93b3730e2309ac48d92d3200a05b8c982ad60a34832619a10278c09641f6beeb",
+  "source_content_sha256": "9c8ea52e230e390b0aaac50559e38962d17c053cbd5d9324991e8a0410e8cba4",
   "subject": {
     "canonical_slug": "manicurists-and-pedicurists",
     "name": "手足美甲师",

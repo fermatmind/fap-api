@@ -153,13 +153,7 @@
         "status": "pending_mapping"
       },
       "item:judges-magistrate-judges-and-magistrates.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:judges-magistrate-judges-and-magistrates.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:judges-magistrate-judges-and-magistrates.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:judges-magistrate-judges-and-magistrates.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6107,8 +6101,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "judges-magistrate-judges-and-magistrates.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6119,8 +6121,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "judges-magistrate-judges-and-magistrates.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6131,8 +6141,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "judges-magistrate-judges-and-magistrates.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6143,8 +6161,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "judges-magistrate-judges-and-magistrates.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7282,43 +7308,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "投入对象｜以诉状与动议、证据与事实材料、法律与先例、程序规则与审限、当事人与代理人陈述为对象，在管辖与司法伦理边界内执行裁判。"
+              "在陪审团认定被告有罪后，依据适用法律对刑事案件中的被告量刑。",
+              "监测程序，以确保所有适用的规则和程序得到遵守。",
+              "指示陪审团了解适用的法律，指示陪审团从提出的证据中推断事实，并听取他们的判决。",
+              "撰写案件裁决书。"
             ]
           },
           "id": "judges-magistrate-judges-and-magistrates.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-details",
-            "moj-judge-law"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "可检查产出｜可复核的裁判与意见文书、事实认定与证据采纳说明、程序与审限记录、回避与利益冲突处理记录、救济告知与移送记录；结果须可追溯到案卷与法律依据。"
-            ]
-          },
-          "id": "judges-magistrate-judges-and-magistrates.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-details",
-            "moj-judge-law"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "完整工作流程｜确认管辖与程序→审查诉状与动议→主持庭审与听证并裁定证据可采性→研究法律与类案→形成事实认定与法律适用、撰写裁判理由与救济告知→送达、记录与后续程序。"
-            ]
-          },
-          "id": "judges-magistrate-judges-and-magistrates.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-details",
-            "moj-judge-law"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -9038,6 +9036,32 @@
                 "publisher": "FermatMind",
                 "scope": "纸面练习",
                 "url": "#career-content-path"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/23-1023.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11297,41 +11321,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "judges-magistrate-judges-and-magistrates.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "judges-magistrate-judges-and-magistrates.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "judges-magistrate-judges-and-magistrates.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "judges-magistrate-judges-and-magistrates.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "活动偏好只能帮助设计试验，不能判断资格或表现。",
         "interest": "先观察真实任务中的兴趣、压力与协作体验。",
@@ -11529,7 +11524,7 @@
       "text": "法官与司法裁判人员做什么：任务、工资与入行"
     }
   },
-  "source_content_sha256": "8d95d5f441b578bfdde70dd575fff51a14346dfbbb8931fceb3e23825f513424",
+  "source_content_sha256": "f5c1a0607661cab452bdaef3cc821ffb28dd7c17be2f624d5fdddd807d3ff775",
   "subject": {
     "canonical_slug": "judges-magistrate-judges-and-magistrates",
     "name": "法官与司法裁判人员",

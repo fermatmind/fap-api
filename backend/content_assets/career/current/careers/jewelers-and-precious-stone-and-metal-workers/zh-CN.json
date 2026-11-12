@@ -153,13 +153,7 @@
         "status": "pending_mapping"
       },
       "item:jewelers-and-precious-stone-and-metal-workers.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:jewelers-and-precious-stone-and-metal-workers.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:jewelers-and-precious-stone-and-metal-workers.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:jewelers-and-precious-stone-and-metal-workers.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6119,8 +6113,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "jewelers-and-precious-stone-and-metal-workers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6131,8 +6133,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "jewelers-and-precious-stone-and-metal-workers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6143,8 +6153,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "jewelers-and-precious-stone-and-metal-workers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6155,8 +6173,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "jewelers-and-precious-stone-and-metal-workers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7298,40 +7324,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "投入对象｜以贵金属与宝石材料、设计与规格、珠宝匠工具与热处理和电镀设备、客户要求与交付期限为对象，在精度与安全边界内执行业务。"
+              "清洁和抛光的金属物品和珠宝件，使用珠宝商的工具，抛光轮子，以及化学浴缸。",
+              "使用手文件、纸张和用打磨轮子或打磨线打磨的平滑区域，以平滑的焊接和粗点。",
+              "创建珠宝的材料，如黄金，银，柏拉丁，和珍贵或半珍贵的石头。",
+              "切割和锉修戒指、胸针、手镯和吊坠盒等珠宝饰件。"
             ]
           },
           "id": "jewelers-and-precious-stone-and-metal-workers.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-details"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "可检查产出｜符合规格的作品与修复结果、材料与克重记录、工序与工时记录、检验与分级依据、交付与交接记录；结果须可追溯到设计与材料来源。"
-            ]
-          },
-          "id": "jewelers-and-precious-stone-and-metal-workers.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-details"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "编辑整理的工作流程｜确认设计与规格→选择与核对材料→切割与成型→镶嵌与装配→抛光与检验→记录与交接；具体工序按岗位核查。"
-            ]
-          },
-          "id": "jewelers-and-precious-stone-and-metal-workers.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -9083,6 +9084,32 @@
                 "name": "中国地质大学（武汉）珠宝学院：GIC 首饰制作初级课程",
                 "publisher": "中国地质大学（武汉）",
                 "url": "https://cugaa.cug.edu.cn/info/1183/15847.htm"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/51-9071.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11357,41 +11384,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "jewelers-and-precious-stone-and-metal-workers.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "jewelers-and-precious-stone-and-metal-workers.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "jewelers-and-precious-stone-and-metal-workers.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "jewelers-and-precious-stone-and-metal-workers.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "活动偏好只能帮助设计试验，不能判断资格或表现。",
         "interest": "先观察真实任务中的兴趣、压力与协作体验。",
@@ -11590,7 +11588,7 @@
       "text": "珠宝首饰及贵金属加工人员做什么：任务、工资与入行"
     }
   },
-  "source_content_sha256": "6c473cd962344f8ccb3e2627d0c0b6d935ae45f966e3e51a7f883a7cd0dc6b16",
+  "source_content_sha256": "2f18c385e516c50b6a71cfb6379051c7d403a384001c1f79490904027769dc21",
   "subject": {
     "canonical_slug": "jewelers-and-precious-stone-and-metal-workers",
     "name": "珠宝首饰及贵金属加工人员",

@@ -168,13 +168,7 @@
         "status": "pending_mapping"
       },
       "item:light-truck-drivers.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:light-truck-drivers.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:light-truck-drivers.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:light-truck-drivers.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6122,8 +6116,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "light-truck-drivers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6134,8 +6136,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "light-truck-drivers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6146,8 +6156,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "light-truck-drivers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6158,8 +6176,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "light-truck-drivers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7293,40 +7319,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Work objects: orders/freight documents, packages/cargo, light trucks/vans, routes/customer windows, handling equipment/securing materials and vehicle/delivery records."
+              "Obey traffic laws and follow established traffic and transportation procedures.",
+              "Report any mechanical problems encountered with vehicles.",
+              "Verify the contents of inventory loads against shipping papers.",
+              "Inspect and maintain vehicle supplies and equipment, such as gas, oil, water, tires, lights, or brakes, to ensure that vehicles are in proper working condition."
             ]
           },
           "id": "light-truck-drivers.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-details"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Inspectable outputs: pre-trip inspections, loading/securing by unloading order, receipts/return evidence, payments/document handover, mileage/defects and delay/exception reports."
-            ]
-          },
-          "id": "light-truck-drivers.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-details"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Complete workflow: receive routes/orders → inspect vehicle/equipment → load/secure by unloading order → drive/park under law/routes → customer handoff, receipt/payment → record mileage/defects/exceptions → return documents/report."
-            ]
-          },
-          "id": "light-truck-drivers.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8800,6 +8801,32 @@
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "adjacent_occupation",
                 "url": "https://www.onetonline.org/link/summary/43-5052.00"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/53-3033.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11279,41 +11306,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "light-truck-drivers.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "light-truck-drivers.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "light-truck-drivers.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "light-truck-drivers.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "Activity preferences can only help design trials; they cannot determine licensing eligibility or performance.",
         "interest": "First observe your interests, stress, and collaboration experience during actual departures, loading, and deliveries.",
@@ -11563,7 +11561,7 @@
       "text": "Light Truck Drivers: Duties, Pay, Requirements and Career Fit"
     }
   },
-  "source_content_sha256": "f432573a3e65447f8aad6935995ed32b21001236a0a87119e3e14df65da751bb",
+  "source_content_sha256": "bd46c9816b29ec18a85bd173de5bdf57904d6247111c530995fadf4aa8a8a21c",
   "subject": {
     "canonical_slug": "light-truck-drivers",
     "name": "Light Truck Drivers",

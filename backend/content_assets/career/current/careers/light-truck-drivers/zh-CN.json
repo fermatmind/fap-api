@@ -168,13 +168,7 @@
         "status": "pending_mapping"
       },
       "item:light-truck-drivers.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:light-truck-drivers.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:light-truck-drivers.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:light-truck-drivers.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6122,8 +6116,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "light-truck-drivers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6134,8 +6136,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "light-truck-drivers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6146,8 +6156,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "light-truck-drivers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6158,8 +6176,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "light-truck-drivers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7293,40 +7319,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "投入对象：订单与货运单据、待配送的包裹与货物、轻型卡车或厢式货车、配送路线与客户时间窗、装卸器具与固定材料，以及车辆与交付记录。"
+              "遵守交通法规，并遵循既定的交通运输规程。",
+              "请报告任何车辆出现的机械问题。",
+              "按运输单据核对所装货物。",
+              "检查和维护车辆用品和设备，如天然气、石油、水、轮胎、灯光或刹车，以确保车辆处于正常工作状态。"
             ]
           },
           "id": "light-truck-drivers.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-details"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "可检查产出：出车车辆检查记录、按卸货顺序完成的装载与固定、签收与退货凭证、货款与单据交接、里程与缺陷记录、延误与异常上报记录。"
-            ]
-          },
-          "id": "light-truck-drivers.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-details"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "完整流程：接收路线与订单 → 出车检查车辆与设备 → 按卸货顺序装载并固定货物 → 按法规与路线驾驶和停车 → 与客户交接、签收或收款 → 记录里程、缺陷与异常 → 回场交单与上报。"
-            ]
-          },
-          "id": "light-truck-drivers.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8800,6 +8801,32 @@
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "adjacent_occupation",
                 "url": "https://www.onetonline.org/link/summary/43-5052.00"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/53-3033.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11279,41 +11306,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "light-truck-drivers.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "light-truck-drivers.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "light-truck-drivers.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "light-truck-drivers.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "活动偏好只能帮助设计试验，不能判断驾照资格或表现。",
         "interest": "先观察真实出车、装载与交付中的兴趣、压力与协作体验。",
@@ -11563,7 +11561,7 @@
       "text": "轻型卡车司机职业判断：工作、入行与风险边界"
     }
   },
-  "source_content_sha256": "080cda66d43f5cb2f071ace555fd023e9b13a759cea6a51e9220b9590c95fca9",
+  "source_content_sha256": "24c9f0d405f36c49582253212635afc5109c5c7a219f1aa34c563abcc2bdba27",
   "subject": {
     "canonical_slug": "light-truck-drivers",
     "name": "轻型卡车司机",

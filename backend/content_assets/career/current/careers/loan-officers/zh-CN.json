@@ -171,13 +171,7 @@
         "status": "pending_mapping"
       },
       "item:loan-officers.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:loan-officers.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:loan-officers.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:loan-officers.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6125,8 +6119,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "loan-officers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6137,8 +6139,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "loan-officers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6149,8 +6159,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "loan-officers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6161,8 +6179,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "loan-officers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7295,40 +7321,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "投入对象：贷款申请与申请人财务资料、信用记录与抵押物评估、授权额度与信贷政策、贷款协议与档案、还款计划、逾期账户与客户关系。"
+              "与申请人会面，以获取贷款申请信息，并回答有关过程的问题。",
+              "分析申请人的财务状况、信贷和财产评估，以确定发放贷款的可行性。",
+              "在规定限度内批准贷款，并将这些限度以外的贷款申请提交管理层批准。",
+              "向客户解释现有的不同类型的贷款和信贷选择，以及这些服务的条件。"
             ]
           },
           "id": "loan-officers.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "可检查产出：经分析的贷款申请与可行性结论、在授权范围内的批准或提交审批记录、经核对的贷款协议与更新档案、还款计划、逾期跟进与合规记录。"
-            ]
-          },
-          "id": "loan-officers.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "完整工作流程：会面收集申请信息 → 整理信用与财务材料 → 分析财务状况、信用与抵押物 → 判断可行性并按授权额度批准或提交审批 → 向客户解释条款 → 准备并核对贷款协议 → 放款与更新档案 → 跟进还款与逾期账户。"
-            ]
-          },
-          "id": "loan-officers.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-tasks"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8751,6 +8752,32 @@
                 "publisher": "FermatMind",
                 "scope": "纸面练习",
                 "url": "#career-content-path"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/13-2072.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11051,41 +11078,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "loan-officers.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "loan-officers.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "loan-officers.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "loan-officers.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "活动偏好只能帮助设计试验，不能判断资格或表现。",
         "interest": "先观察真实客户沟通、财务分析与审批中的兴趣、压力与体验。",
@@ -11351,7 +11349,7 @@
       "text": "信贷专员做什么：任务、工资与入行"
     }
   },
-  "source_content_sha256": "aad58bf3665923f4770b6df1190c903288d6558794e6229af38f40f6d104d8db",
+  "source_content_sha256": "099807053acbce94f9afda9e0d630aa776858fff2de2507ffcbeda6b097c3fb6",
   "subject": {
     "canonical_slug": "loan-officers",
     "name": "信贷专员",

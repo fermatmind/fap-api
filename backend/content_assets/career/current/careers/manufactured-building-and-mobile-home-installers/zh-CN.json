@@ -159,13 +159,7 @@
         "status": "pending_mapping"
       },
       "item:manufactured-building-and-mobile-home-installers.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:manufactured-building-and-mobile-home-installers.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:manufactured-building-and-mobile-home-installers.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:manufactured-building-and-mobile-home-installers.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6113,8 +6107,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "manufactured-building-and-mobile-home-installers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6125,8 +6127,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "manufactured-building-and-mobile-home-installers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6137,8 +6147,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "manufactured-building-and-mobile-home-installers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6149,8 +6167,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "manufactured-building-and-mobile-home-installers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7283,40 +7309,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "投入对象：安装工单与场地平面、移动房屋或预制建筑单元与模块、基础与固定件、封闭材料与五金、水电气等管线与接口、部件与工具清单、技术手册与图纸、客户与工单要求。"
+              "移动和在业主的地盘上或在流动家庭公园内设置移动房屋或预制建筑。",
+              "用聚乙烯板材、钉子和锤子封闭模块单元敞开的一侧，以备装运。",
+              "利用烧焦化合物和塑料或铜管修复管道或燃气管的漏水。",
+              "将水管与管道系统连接起来，测试管道装置的操作。"
             ]
           },
           "id": "manufactured-building-and-mobile-home-installers.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "可检查产出：就位并固定的单元与基础、完成封闭的模块开口、连接并测试过的水电气等系统、安装到位的门窗五金与器具、检查与测试记录、渗漏与框架修复结果、收尾与交接说明。"
-            ]
-          },
-          "id": "manufactured-building-and-mobile-home-installers.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "工作流程按工单区分运输准备与现场安装：先核房屋类型、制造商说明、场地与许可 → 编部件/工序计划 → 按适用方案就位、支承与锚固 → 在授权范围内连接系统、检查并记录 → 处理缺陷和交接。ONet的模块开口封闭任务用于运输前保护，不把它写成现场安装的固定下一工序；电气与燃气等作业另核执行者资格。"
-            ]
-          },
-          "id": "manufactured-building-and-mobile-home-installers.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-tasks"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8755,6 +8756,32 @@
                 "publisher": "FermatMind",
                 "scope": "纸面练习",
                 "url": "#career-content-path"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/49-9095.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11121,41 +11148,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "manufactured-building-and-mobile-home-installers.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "manufactured-building-and-mobile-home-installers.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "manufactured-building-and-mobile-home-installers.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "manufactured-building-and-mobile-home-installers.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "活动偏好只能帮助设计试验，不能判断资格或表现。",
         "interest": "先观察真实现场安装、安全作业与工单核对中的兴趣、压力与体验。",
@@ -11378,7 +11376,7 @@
       "text": "预制建筑与移动房屋安装工做什么：任务、工资与入行"
     }
   },
-  "source_content_sha256": "08e465394d6f57cad30ed27f26909a59f30386b01416ccc5dfcd6487ddf33a94",
+  "source_content_sha256": "cb19cdae57e90ec39c2fcb5ab926674e4465a260b6514f3719fb6e10ec0b417f",
   "subject": {
     "canonical_slug": "manufactured-building-and-mobile-home-installers",
     "name": "预制建筑与移动房屋安装工",

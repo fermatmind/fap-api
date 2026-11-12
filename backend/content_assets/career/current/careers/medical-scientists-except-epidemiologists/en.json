@@ -9435,8 +9435,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.profile.definition-block.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -9447,8 +9455,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.profile.definition-block.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -12407,13 +12423,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Research design: Disease and health research.",
-              "Data analysis: Interpret results and write reports."
+              "Follow strict safety procedures when handling toxic materials to avoid contamination.",
+              "Evaluate effects of drugs, gases, pesticides, parasites, and microorganisms at various levels.",
+              "Plan and direct studies to investigate human or animal disease, preventive methods, and treatments for disease.",
+              "Prepare and analyze organ, tissue, and cell samples to identify toxicity, bacteria, or microorganisms or to study cell structure."
             ]
           },
           "id": "medical-scientists-except-epidemiologists.profile.definition-block.1",
           "source_refs": [
-            "onet-summary"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -14267,6 +14285,32 @@
                 "publisher": "Shanghai University",
                 "scope": "Shanghai University School of Medicine research vacancy",
                 "url": "https://jobs.shu.edu.cn/Ads/Ads?a=921ef790-92ec-4eac-b670-b2d098959bd3"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/19-1042.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -16665,7 +16709,7 @@
       "text": "Medical Scientists, Except Epidemiologists: Duties, U.S. Pay, and Entry"
     }
   },
-  "source_content_sha256": "39819e0e90bdbc014907d88f171bb70a0953e87a0cb2b3361269afa015fddecb",
+  "source_content_sha256": "4532f3feef6c91dca199001f5b01ed0f548e1bd3084f05addfc1b740757ca3ef",
   "subject": {
     "canonical_slug": "medical-scientists-except-epidemiologists",
     "name": "Medical Scientists, Except Epidemiologists",

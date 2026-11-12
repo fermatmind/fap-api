@@ -162,13 +162,7 @@
         "status": "pending_mapping"
       },
       "item:mathematicians.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:mathematicians.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:mathematicians.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:mathematicians.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6116,8 +6110,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mathematicians.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6128,8 +6130,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mathematicians.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6140,8 +6150,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mathematicians.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6152,8 +6170,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mathematicians.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7286,40 +7312,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Work inputs: Mathematical problems and conjectures, observational or simulated data, assumptions and axiomatic conditions, computational and numerical methods, modeling needs and application contexts, literature and existing findings, and funding and collaboration information."
+              "Mentor others on mathematical techniques.",
+              "Maintain knowledge in the field by reading professional journals, talking with other mathematicians, and attending professional conferences.",
+              "Develop new principles and new relationships between existing mathematical principles to advance mathematical science.",
+              "Disseminate research by writing reports, publishing papers, or presenting at professional conferences."
             ]
           },
           "id": "mathematicians.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Verifiable outputs: Proofs and theorems, models and mathematical formulations, numerical calculations and simulation results, algorithms and computational methods, research reports and papers, academic presentations and handouts, and conclusions and recommendations for applied problems."
-            ]
-          },
-          "id": "mathematicians.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Complete workflow: Define the problem and assumptions → review literature and select methods → derive or model and compute → verify results and boundaries → document and present findings → undergo review and revise to complete the cycle."
-            ]
-          },
-          "id": "mathematicians.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-tasks"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8669,6 +8670,32 @@
                 "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/15-2021.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -10987,41 +11014,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "mathematicians.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "mathematicians.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "mathematicians.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "mathematicians.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "Activity preferences can only help design exercises; they cannot determine qualifications or performance.",
         "interest": "First observe interest, stress, and experience in actual derivation and proof, modeling and computation, and writing and presentations.",
@@ -11255,7 +11253,7 @@
       "text": "Mathematician: Proofs, Models and Assumptions"
     }
   },
-  "source_content_sha256": "da5bb0d2232093c7dfc83baea82d687ed309c6c450cd9f49b21bcaced7f80d6c",
+  "source_content_sha256": "d3ba4c944ba92048ebe666307faddff896824414d47cb3d0a3191765f3f7d57c",
   "subject": {
     "canonical_slug": "mathematicians",
     "name": "Mathematician",

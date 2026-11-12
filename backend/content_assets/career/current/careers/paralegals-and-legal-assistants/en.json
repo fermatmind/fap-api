@@ -174,7 +174,7 @@
         "status": "mapped"
       },
       "item:paralegals-and-legal-assistants.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:paralegals-and-legal-assistants.profile.work-context-block.3": {
         "status": "mapped"
@@ -9350,16 +9350,8 @@
         "status": "unfilled"
       },
       "responsibilities_block.05.category": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.profile.responsibilities-block.2",
-          "path": [
-            "data",
-            "entries",
-            4
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "responsibilities_block.05.description": {
         "ref": null,
@@ -9370,16 +9362,8 @@
         "status": "unfilled"
       },
       "responsibilities_block.06.category": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.profile.responsibilities-block.2",
-          "path": [
-            "data",
-            "entries",
-            5
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "responsibilities_block.06.description": {
         "ref": null,
@@ -12343,18 +12327,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Verify the task scope, lawyer instructions, and case deadlines.",
-              "Organize the case file, fact timeline, and evidence sources.",
-              "Search statutes, precedents, and public records and note the version.",
-              "Draft letters, pleadings, or contracts for lawyer review.",
-              "Coordinate authorized information with lawyers, courts, or clients.",
-              "Check citations, facts, attachments, and filing format.",
-              "Keep revision records and deliver as confirmed by the lawyer."
+              "Prepare affidavits or other documents, such as legal correspondence, and organize and maintain documents in paper or electronic filing system.",
+              "Prepare, edit, or review legal documents, including legislation, briefs, pleadings, appeals, wills, contracts, and real estate closing statements.",
+              "Investigate facts and law of cases and search pertinent sources, such as public records and internet sources, to determine causes of action and to prepare cases.",
+              "Prepare for trial by performing tasks such as organizing exhibits."
             ]
           },
           "id": "paralegals-and-legal-assistants.profile.responsibilities-block.2",
           "source_refs": [
-            "source-pack-onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -14227,6 +14208,32 @@
                 "publisher": "U.S. Department of Labor",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/23-2093.00"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/23-2011.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -16535,7 +16542,7 @@
       "text": "Paralegals and legal assistants: Duties, entry and pay"
     }
   },
-  "source_content_sha256": "1c0ec62a1fceb57848f48e95f190fe3ade32c2383039093a3c79b1f086899e1f",
+  "source_content_sha256": "68d4c820a2961fc0769495538d2eeb1e189a408f485131b27bc6c63d45e3b232",
   "subject": {
     "canonical_slug": "paralegals-and-legal-assistants",
     "name": "Paralegals and legal assistants",

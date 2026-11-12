@@ -168,13 +168,7 @@
         "status": "pending_mapping"
       },
       "item:intelligence-analysts.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:intelligence-analysts.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:intelligence-analysts.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:intelligence-analysts.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6140,8 +6134,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "intelligence-analysts.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6152,8 +6154,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "intelligence-analysts.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6164,8 +6174,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "intelligence-analysts.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6176,8 +6194,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "intelligence-analysts.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7317,40 +7343,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "投入对象｜以情报问题与需求、多来源信息与数据、涉案与威胁线索、检索与分析工具为对象，在授权与保密边界内执行情报分析。"
+              "通过来自其他来源的数据来验证已知情报。",
+              "收集、分析、相关或评估来自各种资源的信息，如执法数据库。",
+              "评估通讯记录，如电话通话，计划活动，并确定犯罪团体和成员的规模和位置。",
+              "通过实地观察、机密信息来源或公共记录收集情报信息。"
             ]
           },
           "id": "intelligence-analysts.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-summary"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "可检查产出｜可复核的分析记录与依据链、来源与时效标注、缺口与替代假设清单、评估报告与图表、共享或披露记录；结果须可追溯到来源与检索口径。"
-            ]
-          },
-          "id": "intelligence-analysts.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-summary"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "完整工作流程｜界定情报问题与需求→收集与关联多来源信息→交叉验证与标注时效→识别缺口与替代假设→形成可复核判断与报告→按授权共享或建议。"
-            ]
-          },
-          "id": "intelligence-analysts.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-summary"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8978,6 +8979,32 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/33-3021.00"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/33-3021.06#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11277,41 +11304,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "intelligence-analysts.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "intelligence-analysts.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "intelligence-analysts.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "intelligence-analysts.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "活动偏好只能帮助设计试验，不能判断资格或表现。",
         "interest": "先观察真实任务中的兴趣、压力与协作体验。",
@@ -11564,7 +11562,7 @@
       "text": "情报分析师：做什么、入行与工资口径"
     }
   },
-  "source_content_sha256": "30f3f37726f55115115433e7b52725ed14527b71495bf9c9a2592310e415f049",
+  "source_content_sha256": "5c53a4342ef205f46c5cf68b8d49c7600b4d8db758c704a550bee052658c839f",
   "subject": {
     "canonical_slug": "intelligence-analysts",
     "name": "情报分析师",

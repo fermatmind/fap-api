@@ -9043,8 +9043,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "midwives.profile.definition-block.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -9055,8 +9063,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "midwives.profile.definition-block.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -11220,13 +11236,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "本页严格指 O*NET 29-9099.01 Midwives，中文页面语言不把它自动映射为中国职业分类。",
-              "职责为提供产前照护与分娩协助，具体范围以所在地法规与机构授权为准。"
+              "通过检查生命迹象、监测子宫收缩或进行身体检查来监测分娩期间的产妇状况。",
+              "识别输卵管妊娠及异位妊娠，并为患者提供治疗。",
+              "为出生时的婴儿提供必要的医疗护理，包括复苏等紧急护理。",
+              "不断开展产前健康评估，跟踪身体和情感健康变化。"
             ]
           },
           "id": "midwives.profile.definition-block.1",
           "source_refs": [
-            "source-pack-onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -12628,6 +12646,32 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/29-9099.01#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -14760,7 +14804,7 @@
       "text": "助产士：工作内容、美国工资与就业 | 费马测试"
     }
   },
-  "source_content_sha256": "632a37f91bc6c52a6de0427ab22be9674a4860afdd53c374870ff0a97e57c1fc",
+  "source_content_sha256": "a46242104a5c26ea11c402130c40ed0c9277846d21c2444130fe754b2ba63349",
   "subject": {
     "canonical_slug": "midwives",
     "name": "助产士",

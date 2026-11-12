@@ -1503,22 +1503,7 @@
         "status": "mapped"
       },
       "item:actors.display.responsibilities_block.01": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.02": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.03": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.04": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.05": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.06": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:actors.display.riasec_fit_block.code": {
         "status": "mapped"
@@ -19202,8 +19187,16 @@
         "status": "mapped"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -19214,8 +19207,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -19226,8 +19227,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -19238,8 +19247,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -23412,88 +23429,18 @@
           "availability": "available",
           "copy_key": "career.item.responsibilities-block",
           "data": {
-            "paragraphs": [
-              "常见输入：图纸与设计说明与吊顶或隔墙构造与房间净高与洞口标高、龙骨与吊杆与吊挂件与连接件规格与防腐与防火处理、板材与吸声板与防潮与保温材料规格与合格证书与性能检验报告、基层与砌体与埋件的垂直与水平与牢固程度、高处作业与临时用电与电动工具安全条件，以及隐蔽工程与检查与验收记录要求。"
+            "entries": [
+              "查看图纸或其他规格文件，确定安装方法、作业流程以及材料和工具要求。",
+              "按照图纸，使用卷尺、直尺或角尺和标记工具，在作业表面测量并放样。",
+              "切割和切割金属通道，以制作地板或天花板框架，根据房间或露台的位置的计划。",
+              "将石膏板安装在办公室、学校或其他大型建筑的墙面及吊顶金属框架上；必要时用升降设备或吊具调整板材高度。"
             ]
           },
           "id": "actors.display.responsibilities_block.01",
           "source_refs": [
-            "onet"
+            "batch52-onet-core"
           ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "核心产出：按规格与设计完成的龙骨与板材与吸声板安装记录、洞口与收边与伸缩缝与找平记录、锚固与固定与找平检查记录、基层与吊挂件检查与隐蔽工程记录，以及异常上报与交接记录。"
-            ]
-          },
-          "id": "actors.display.responsibilities_block.02",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "典型流程：读图与放线与骨架与基层—安装与加工—协作与检查与收尾与异常上报。"
-            ]
-          },
-          "id": "actors.display.responsibilities_block.03",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "常协作对象：班组长与技术负责人、嵌缝工与木工与水电与暖通、吊顶内设备安装与检验、材料与安全与质量管理人员。"
-            ]
-          },
-          "id": "actors.display.responsibilities_block.04",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "常见工具与对象：金属或木龙骨与吊杆与吊挂件与连接件、纸面石膏板与吸声板与减振材料与保温与防潮材料、卷尺与直尺与角尺与划线工具与水准仪或水平尺、锁孔锯与刀与切割工具与螺丝与钉与胶与订书钉与钢丝、举升设备或吊装设备与脚手架与梯具与安全带、防护用品与防尘与降噪用品与记录工具。"
-            ]
-          },
-          "id": "actors.display.responsibilities_block.05",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "安装人员按批准设计/现行规范执行并及时报告，不自行改变荷载构造、出具未取得权限的验收或合规结论。GB55034-2022自2023-06-01实施、全部强制，冲突以其为准；公告废止JGJ80-2016第4.1.1/4.2.1/5.2.3/6.4.1/8.1.2，非全部JGJ80废止。本轮核公告，GB55034及JGJ80其余具体技术条款未核；不由标准名推任何高度一律同安全带/平台方案。建设工程安全生产管理条例2条含装修；27施工技术交底双方签字、31施工单位用火用电消防制度、32提供防护用品并告知危险操作、33正确使用，36每年至少一次培训考核、37换岗/新现场/新工艺等教育考核。32危及人身紧急时有权立即停止或必要应急措施后撤离，不等一般质量异常统一停工、等待领导许可或自签恢复；现场具体防护和复工方案未取得。 GB55032-2022自2023-03-01实施、全文强制，不一致以此为准；公告废止GB50210-2018第3.1.4/6.1.11/6.1.12/7.1.12/11.1.12，不等废止全标准。GB50210-2018吊顶7.1.2验设计和材料/隐蔽/施工记录，7.1.3人造木板甲醛复验；7.1.4隐蔽项含管设备/水管试压风管严密、木龙骨防火防腐、埋件/吊杆/龙骨/填充/反支撑转换层；7.1.7装龙骨前净高洞口及吊顶管设备支架标高交接；7.1.8木龙骨木面板防火；7.1.11端部距<=300mm、吊杆>1500mm反支撑、遇设备调整吊杆或型钢支架；7.1.13连接安全可靠，7.1.14上部网架钢屋架或吊杆>2500mm设钢结构转换层；7.1.15大面积或狭长伸缩/分格缝符合设计。原7.1.12重型及振动设备禁装龙骨条款已废止，不能单作现行强制依据，须按现行规范和设计核荷载固定。GB55032本轮实际另读2.0.1—2.0.11：责任/质量体系、不得擅改设计、资料真实完整可追溯、培训考核及记录；未读其余全部条文，不宣称全文施工结论。"
-            ]
-          },
-          "id": "actors.display.responsibilities_block.06",
-          "source_refs": [
-            "r5-construction-safety",
-            "r5-safety-current",
-            "r5-gb50210",
-            "r5-quality-current"
-          ],
-          "type": "prose"
+          "type": "list"
         },
         {
           "availability": "available",
@@ -31956,6 +31903,32 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/47-2081.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -36768,44 +36741,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$item": "actors.display.responsibilities_block.01",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.02",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.03",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.04",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.05",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.06",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "actors.display.responsibilities_block.01",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": {
           "$item": "actors.display.riasec_fit_block.fit-interest",
@@ -37587,7 +37528,7 @@
       "text": "石膏板与天花板瓷砖安装工"
     }
   },
-  "source_content_sha256": "b6bfc45829719ad1c852071f4fbbc38896b7e21b4b38c99166d7dd9a3205adf0",
+  "source_content_sha256": "2cd1d5e050700136e9412d2f1c544cecc6238f0c17bb224ffec8e3456357bfd8",
   "subject": {
     "canonical_slug": "drywall-and-ceiling-tile-installers",
     "name": "石膏板与天花板瓷砖安装工",

@@ -9051,8 +9051,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "occupational-therapists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -12026,14 +12034,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Through history, interview, and actual task observation, identify whether physical function, cognition, the environment, or task steps limit occupational performance.",
-              "Set measurable goals with the client and turn dressing, handwriting, meal preparation, or return-to-work tasks into purposeful activity training.",
-              "Select and teach the use of assistive devices, and adjust placement, signage, and processes at home, school, or the workplace to reduce activity barriers."
+              "Test and evaluate patients' physical and mental abilities and analyze medical data to determine realistic rehabilitation goals for patients.",
+              "Complete and maintain necessary records.",
+              "Plan, organize, and conduct occupational therapy programs in hospital, institutional, or community settings to help rehabilitate persons with disabilities because of illness, injury or psychological or developmental problems.",
+              "Plan and implement programs and social activities to help patients learn work or school skills and adjust to handicaps."
             ]
           },
           "id": "occupational-therapists.profile.responsibilities-block.2",
           "source_refs": [
-            "source-pack-onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -13656,6 +13665,32 @@
                 "publisher": "FermatMind Editorial",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/29-1122.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -15803,7 +15838,7 @@
       "text": "Occupational therapists: duties, licensure, wages, and entry paths"
     }
   },
-  "source_content_sha256": "ff5229e3db9a2c3693b284cd81295e5fb4ba0ab44ae7866c40b0b8cc864a3c72",
+  "source_content_sha256": "2e611ac655c7bc94dba1fcfdad24eaa5346012bfe7b5ca6acbb57e8468299791",
   "subject": {
     "canonical_slug": "occupational-therapists",
     "name": "Occupational therapists",

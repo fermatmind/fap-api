@@ -174,13 +174,7 @@
         "status": "pending_mapping"
       },
       "item:licensed-practical-and-licensed-vocational-nurses.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:licensed-practical-and-licensed-vocational-nurses.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:licensed-practical-and-licensed-vocational-nurses.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:licensed-practical-and-licensed-vocational-nurses.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6128,8 +6122,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "licensed-practical-and-licensed-vocational-nurses.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6140,8 +6142,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "licensed-practical-and-licensed-vocational-nurses.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6152,8 +6162,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "licensed-practical-and-licensed-vocational-nurses.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6164,8 +6182,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "licensed-practical-and-licensed-vocational-nurses.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7298,45 +7324,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Work objects: patient vital signs/symptoms, orders/medication lists, nursing/medication records, wounds/catheters and other care sites, samples/supplies and patient-safety/privacy requirements."
+              "Observe patients, charting and reporting changes in patients' conditions, such as adverse reactions to medication or treatment, and taking any necessary action.",
+              "Measure and record patients' vital signs, such as height, weight, temperature, blood pressure, pulse, or respiration.",
+              "Administer prescribed medications or start intravenous fluids, noting times and amounts on patients' charts.",
+              "Provide basic patient care or treatments, such as taking temperatures or blood pressures, dressing wounds, treating bedsores, giving enemas or douches, rubbing with alcohol, massaging, or performing catheterizations."
             ]
           },
           "id": "licensed-practical-and-licensed-vocational-nurses.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-details-lpn",
-            "onet-summary-lpn"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Inspectable outputs: vital-sign/observation records, medication/check records, wound/catheter-care records, sample collection/submission records, patient/family communication and abnormality reports."
-            ]
-          },
-          "id": "licensed-practical-and-licensed-vocational-nurses.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-details-lpn",
-            "onet-summary-lpn"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Task illustration, not a fixed clinical sequence: review authorized care information, observe and record, carry out permitted care, and communicate or hand over to the team. Urgent response and reporting must not wait for routine care or documentation to finish."
-            ]
-          },
-          "id": "licensed-practical-and-licensed-vocational-nurses.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-details-lpn",
-            "onet-summary-lpn",
-            "bls-ooh-lpn",
-            "review-cn-nurses"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8867,6 +8863,32 @@
                 "publisher": "National Council of State Boards of Nursing / NCLEX",
                 "scope": "Exam registration differs from the regulator’s eligibility and licensing process; this page neither registers candidates nor guarantees eligibility.",
                 "url": "https://www.nclex.com/registration.page"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/29-2061.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11357,41 +11379,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "licensed-practical-and-licensed-vocational-nurses.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "licensed-practical-and-licensed-vocational-nurses.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "licensed-practical-and-licensed-vocational-nurses.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "licensed-practical-and-licensed-vocational-nurses.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "Interests/work styles only help design trials, not judge qualifications, licensure or performance.",
         "interest": "Observe helping-patient and procedural-work preferences through actual tasks.",
@@ -11670,7 +11663,7 @@
       "text": "U.S. LPN/LVN careers: duties, licensing, pay and entry routes"
     }
   },
-  "source_content_sha256": "879d03c5d577ea9cc8b1b333831ddfdc5ad58f14fb56a4eaaa1221dd3b849d2e",
+  "source_content_sha256": "123590ca311834cb7a86433cd7d3d38bc1583b99fbe48c1725cde5536a297376",
   "subject": {
     "canonical_slug": "licensed-practical-and-licensed-vocational-nurses",
     "name": "Licensed Practical and Licensed Vocational Nurses",

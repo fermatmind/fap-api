@@ -9432,8 +9432,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.profile.definition-block.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -9444,8 +9452,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.profile.definition-block.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -12383,13 +12399,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Assessment and planning: complete counseling needs assessment and risk screening, and develop a reviewable counseling and prevention plan.",
-              "Counseling and support: conduct individual or group counseling and prevention education, and keep records, referrals, and follow-up."
+              "Maintain confidentiality of records relating to clients' treatment.",
+              "Encourage clients to express their feelings and discuss what is happening in their lives, helping them to develop insight into themselves or their relationships.",
+              "Counsel clients or patients, individually or in group sessions, to assist in overcoming dependencies, adjusting to life, or making changes.",
+              "Perform crisis interventions to help ensure the safety of the patients and others."
             ]
           },
           "id": "mental-health-counselors.profile.definition-block.1",
           "source_refs": [
-            "source-pack-onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -14071,6 +14089,32 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/ooh/community-and-social-service/substance-abuse-behavioral-disorder-and-mental-health-counselors.htm#tab-4"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/21-1014.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -16304,7 +16348,7 @@
       "text": "Mental health counselor: work content, U.S. wages, and entry"
     }
   },
-  "source_content_sha256": "96f8a04b1386c854bb456b40cfcbd3b793acfee54fe654fdd5a7e91d62bd2e2a",
+  "source_content_sha256": "aa01a7c838a1e69968f4649452364c002fce3c7b57e855190a98294cfca36b18",
   "subject": {
     "canonical_slug": "mental-health-counselors",
     "name": "Mental health counselor",

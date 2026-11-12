@@ -156,13 +156,7 @@
         "status": "pending_mapping"
       },
       "item:judicial-law-clerks.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:judicial-law-clerks.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:judicial-law-clerks.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:judicial-law-clerks.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6110,8 +6104,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "judicial-law-clerks.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6122,8 +6124,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "judicial-law-clerks.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6134,8 +6144,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "judicial-law-clerks.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6146,8 +6164,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "judicial-law-clerks.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7284,40 +7310,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Work objects | Pleadings and motions, case files and evidence materials, laws and precedents, procedural rules and deadlines, and judges' questions and instructions form the basis of research and document work within confidentiality and authorization boundaries."
+              "Prepare briefs, legal memoranda, or statements of issues involved in cases, including appropriate suggestions or recommendations.",
+              "Research laws, court decisions, documents, opinions, briefs, or other information related to cases before the court.",
+              "Draft or proofread judicial opinions, decisions, or citations.",
+              "Confer with judges concerning legal questions, construction of documents, or granting of orders."
             ]
           },
           "id": "judicial-law-clerks.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-details"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Checkable outputs | Reviewable legal memoranda and issue briefs, research trails and citation checklists with original-text locations, statements on the status of precedents and statutes, draft opinions or decisions, and proofreading records; results must be traceable to case materials and authoritative legal texts."
-            ]
-          },
-          "id": "judicial-law-clerks.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-details"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Complete workflow | Review pleadings and motions → research laws and precedents → prepare memoranda or issue briefs → draft or check judicial documents and citations → report legal issues to judges and review."
-            ]
-          },
-          "id": "judicial-law-clerks.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8963,6 +8964,32 @@
                 "publisher": "FermatMind",
                 "scope": "Paper exercise",
                 "url": "#career-content-path"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/23-1012.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11306,41 +11333,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "judicial-law-clerks.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "judicial-law-clerks.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "judicial-law-clerks.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "judicial-law-clerks.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "Activity preferences can only help design trials, not determine qualifications or performance.",
         "interest": "First observe interest, stress, and collaboration in real tasks.",
@@ -11550,7 +11548,7 @@
       "text": "Judicial Law Clerks: Tasks, Pay and Training"
     }
   },
-  "source_content_sha256": "62c6b291779dba0601f99479e5b04d6295690aeb0a733e3b7e92d4315e6aa84b",
+  "source_content_sha256": "4d02d40d24342df92e86e450e285d651664baa5e54537dcdeb93efc4c6299a69",
   "subject": {
     "canonical_slug": "judicial-law-clerks",
     "name": "Judicial Law Clerks",

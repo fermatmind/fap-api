@@ -9432,8 +9432,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.profile.definition-block.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -9444,8 +9452,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.profile.definition-block.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -12383,13 +12399,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "评估与计划：完成咨询需求评估与风险筛查，制定可复核的咨询与预防计划。",
-              "咨询与支持：开展个体或团体咨询与预防教育，并做记录、转介与随访。"
+              "对与来访者治疗有关的记录保密。",
+              "鼓励客户表达自己的感受，讨论他们生活中发生的事情，帮助他们发展对自己或他们的关系的洞察力。",
+              "个别或集体向客户或病人提供咨询，以协助克服依赖性，适应生活，或作出改变。",
+              "进行危机干预，以确保患者及其他人的安全。"
             ]
           },
           "id": "mental-health-counselors.profile.definition-block.1",
           "source_refs": [
-            "source-pack-onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -14072,6 +14090,32 @@
                 "publisher": "美国劳工统计局",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/ooh/community-and-social-service/substance-abuse-behavioral-disorder-and-mental-health-counselors.htm#tab-4"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/21-1014.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -16305,7 +16349,7 @@
       "text": "心理健康咨询师：工作内容、美国工资与入行 | 费马测试"
     }
   },
-  "source_content_sha256": "9edb9654e65a91a7a5a3d11d30ef245a327bf916e01fbc635d124bb22b42fa1c",
+  "source_content_sha256": "94515b274a5b834e7d02f72dc0b2161dc5f03cdbc5c50edd60edba3dc0ddfdea",
   "subject": {
     "canonical_slug": "mental-health-counselors",
     "name": "心理健康咨询师",

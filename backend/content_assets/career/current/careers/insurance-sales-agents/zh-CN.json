@@ -153,13 +153,7 @@
         "status": "pending_mapping"
       },
       "item:insurance-sales-agents.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:insurance-sales-agents.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:insurance-sales-agents.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:insurance-sales-agents.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6107,8 +6101,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "insurance-sales-agents.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6119,8 +6121,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "insurance-sales-agents.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6131,8 +6141,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "insurance-sales-agents.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6143,8 +6161,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "insurance-sales-agents.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7280,40 +7306,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "投入对象｜以客户风险与保障需求、保险产品与条款、投保与保单资料、佣金与续期规则为对象，在委托授权与合规边界内开展销售与服务。"
+              "定制保险方案以适合个别客户，往往涵盖各种风险。",
+              "出售各种保险政策的企业和个人代表保险公司，包括汽车，火灾，生命，财产，医疗和牙科保险，或专门的政策，如海洋，农场 / 种植，和医疗虐待。",
+              "解释各种政策的特点、优点和缺点，以促进保险计划的销售。",
+              "执行行政任务，如保存记录和处理政策更新。"
             ]
           },
           "id": "insurance-sales-agents.profile.responsibilities-block.2",
           "source_refs": [
-            "nfra-sales-conduct"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "可检查产出｜可复核的需求与支付能力分析记录、产品比较与条款与费用说明、投保资料与保单记录、送达与回访及变更记录、理赔入口说明；结果须可追溯到授权范围与产品条款版本。"
-            ]
-          },
-          "id": "insurance-sales-agents.profile.responsibilities-block.3",
-          "source_refs": [
-            "nfra-sales-conduct"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "完整工作流程｜寻找并联系客户→了解风险与需求→收集投保信息→比较并解释产品条款和费用→完成投保与记录→送达、回访与变更、续保及理赔入口说明。"
-            ]
-          },
-          "id": "insurance-sales-agents.profile.responsibilities-block.4",
-          "source_refs": [
-            "nfra-sales-conduct"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8769,6 +8770,32 @@
                 "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/41-3021.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11131,41 +11158,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "insurance-sales-agents.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "insurance-sales-agents.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "insurance-sales-agents.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "insurance-sales-agents.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "活动偏好只能帮助设计试验，不能判断资格或表现。",
         "interest": "先观察真实任务中的兴趣、压力与协作体验。",
@@ -11359,7 +11357,7 @@
       "text": "保险销售人员做什么：需求沟通、产品说明与服务"
     }
   },
-  "source_content_sha256": "032920865e423c23e9745ad20e49512f3ae3d561ddf4e15dd36651423273582b",
+  "source_content_sha256": "f5f6010a4bb7facf32e265271a90536bf358d53b1a2a05dbabb6eb7f2bcdf22d",
   "subject": {
     "canonical_slug": "insurance-sales-agents",
     "name": "保险销售人员",

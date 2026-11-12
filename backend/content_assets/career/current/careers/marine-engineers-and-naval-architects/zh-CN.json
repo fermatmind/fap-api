@@ -159,13 +159,7 @@
         "status": "pending_mapping"
       },
       "item:marine-engineers-and-naval-architects.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:marine-engineers-and-naval-architects.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:marine-engineers-and-naval-architects.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:marine-engineers-and-naval-architects.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6113,8 +6107,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "marine-engineers-and-naval-architects.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6125,8 +6127,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "marine-engineers-and-naval-architects.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6137,8 +6147,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "marine-engineers-and-naval-architects.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6149,8 +6167,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "marine-engineers-and-naval-architects.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7283,40 +7309,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "投入对象：船舶用途与规格、设计与试验数据、规范与船级社要求、稳性与结构计算、机舱与推进及辅助系统、舱室与布置约束、成本与进度要求、合同与监管文件。"
+              "进行监测活动，以确保船舶符合国际规则和生命救援设备和污染预防措施的标准。",
+              "设计按照规格和试验数据，按照安全，高效，经济的标准，完成船体和上层结构。",
+              "进行船舶分析，如稳定、结构、重量和振动分析。",
+              "研究设计建议和规格，以确定工艺的基本特征，如尺寸，重量，速度，动力，移动，和草案。"
             ]
           },
           "id": "marine-engineers-and-naval-architects.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "可检查产出：船体与上层建筑设计、稳性与结构分析结论、功能设备与管系布置、舱内布局方案、技术与合同文件、试验与验收结果、合规与防污染说明、设计与变更记录。"
-            ]
-          },
-          "id": "marine-engineers-and-naval-architects.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "完整工作流程：界定用途与规范 → 收集设计与试验数据 → 开展稳性结构与性能分析 → 形成并比较设计方案 → 编制技术文件与图纸 → 建造与试验验证 → 评估符合性并跟踪变更的闭环。"
-            ]
-          },
-          "id": "marine-engineers-and-naval-architects.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-tasks"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8751,6 +8752,32 @@
                 "period": "2026-04-15",
                 "publisher": "宁波大学",
                 "url": "https://hyxy.nbu.edu.cn/info/2762/58516.htm"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/17-2121.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11043,41 +11070,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "marine-engineers-and-naval-architects.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "marine-engineers-and-naval-architects.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "marine-engineers-and-naval-architects.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "marine-engineers-and-naval-architects.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "活动偏好只能帮助设计试验，不能判断资格或表现。",
         "interest": "先观察真实的船舶设计分析、试验验证与多方沟通中的兴趣、压力与体验。",
@@ -11301,7 +11299,7 @@
       "text": "船舶工程师与船舶总体设计师做什么：任务、工资与入行"
     }
   },
-  "source_content_sha256": "9a1b5cc80da6ccc8368528cad178eb227e52afd49a535de721ef06910359f4c2",
+  "source_content_sha256": "01ba2350c0767c6d5664eb9ae0fad1e1dc70e1260cf21f32d64c4909990c2952",
   "subject": {
     "canonical_slug": "marine-engineers-and-naval-architects",
     "name": "船舶工程师与船舶总体设计师",

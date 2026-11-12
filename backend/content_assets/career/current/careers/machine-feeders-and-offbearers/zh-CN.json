@@ -165,13 +165,7 @@
         "status": "pending_mapping"
       },
       "item:machine-feeders-and-offbearers.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:machine-feeders-and-offbearers.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:machine-feeders-and-offbearers.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:machine-feeders-and-offbearers.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6131,8 +6125,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "machine-feeders-and-offbearers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6143,8 +6145,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "machine-feeders-and-offbearers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6155,8 +6165,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "machine-feeders-and-offbearers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6167,8 +6185,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "machine-feeders-and-offbearers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7308,40 +7334,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "投入对象：待加工的物料与产品、由他人操作或自动化的机器与设备、作业指导与规格、计量与检查工具、手工工具与搬运装置（手推车、工业车辆）、输送带与闸门、包装与堆码材料、生产记录表单。"
+              "检查材料和产品缺陷，并确保符合规格。",
+              "记录生产和运营数据，例如所处理的材料数量。",
+              "按双控制按钮并移动控制器，以启动、停止或调整机械和设备。",
+              "重量或测量材料或产品，以确保符合规格。"
             ]
           },
           "id": "machine-feeders-and-offbearers.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "可检查产出：经检查的物料与产品、准确的产量与运行记录、按规格的计量与标识、上料取料与转运记录、设备清洁维护记录、包装堆码结果与异常上报记录。"
-            ]
-          },
-          "id": "machine-feeders-and-offbearers.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "完整工作流程：核对作业指导与安全条件 → 检查物料并准备工位 → 按规程上料与启停设备 → 监控运行并取样检查 → 取料、称重与标识 → 转运、包装与堆码 → 清洁维护并记录产量与异常。"
-            ]
-          },
-          "id": "machine-feeders-and-offbearers.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-tasks"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8758,6 +8759,32 @@
                 "publisher": "FermatMind",
                 "scope": "纸面练习",
                 "url": "#career-content-path"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/53-7063.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11076,41 +11103,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "machine-feeders-and-offbearers.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "machine-feeders-and-offbearers.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "machine-feeders-and-offbearers.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "machine-feeders-and-offbearers.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "活动偏好只能帮助设计试验，不能判断资格或表现。",
         "interest": "先观察真实上料取料、检查记录与安全作业中的兴趣、压力与体验。",
@@ -11356,7 +11354,7 @@
       "text": "设备上下料工做什么：任务、工资与入行"
     }
   },
-  "source_content_sha256": "2771bf49445b48e0cc9c1677318acdeaf5872d02c71cb39a6e1c68a538fda68f",
+  "source_content_sha256": "c13d46756ede2f22f5e381358a5c000e10f26699330575616a7bd84e60db58fc",
   "subject": {
     "canonical_slug": "machine-feeders-and-offbearers",
     "name": "设备上下料工",

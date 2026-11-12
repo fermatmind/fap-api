@@ -9455,8 +9455,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.profile.definition-block.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -9467,8 +9475,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.profile.definition-block.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -12406,13 +12422,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "配料与称量：按工单与配方称重或测量物料与配料，核对规格与批次。",
-              "设备操作与监控：启动并看护混合机、泵与传送带，观察运行并按时间与品质要求停止与转移。"
+              "重量或测量材料、成分或产品，以确保符合要求。",
+              "阅读工作指令，以确定生产规格或信息。",
+              "观察生产或监控设备，以确保安全高效的运行。",
+              "将食材混合，通过启动机器并设定特定时间进行搅拌。"
             ]
           },
           "id": "mixing-and-blending-machine-setters-operators-and-tenders.profile.definition-block.1",
           "source_refs": [
-            "onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -14111,6 +14129,32 @@
                 "publisher": "烟台芝罘区：2026 年 6 月招聘公告",
                 "scope": "烟台芝罘区：2026 年 6 月招聘公告",
                 "url": "https://www.zhifu.gov.cn/col/col101867/art/2026/art_0cf757963eb64f6a921d399444707a26.html"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/51-9023.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -16209,7 +16253,7 @@
       "text": "混合与搅拌机操作及看护员：工作内容、美国工资与安全 | 费马测试"
     }
   },
-  "source_content_sha256": "c421d8e38c1b6dc774edd77389eac77d0ee13b80025f5f1f19b2bdc44bcee18c",
+  "source_content_sha256": "ec4286d1a10b95a536619d3628fb91fd2f07944ecfeda560349f5418cb6b07cd",
   "subject": {
     "canonical_slug": "mixing-and-blending-machine-setters-operators-and-tenders",
     "name": "混合与搅拌机操作及看护员",

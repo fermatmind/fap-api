@@ -159,13 +159,7 @@
         "status": "pending_mapping"
       },
       "item:marine-engineers-and-naval-architects.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:marine-engineers-and-naval-architects.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:marine-engineers-and-naval-architects.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:marine-engineers-and-naval-architects.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6113,8 +6107,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "marine-engineers-and-naval-architects.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6125,8 +6127,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "marine-engineers-and-naval-architects.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6137,8 +6147,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "marine-engineers-and-naval-architects.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6149,8 +6167,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "marine-engineers-and-naval-architects.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7283,40 +7309,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Inputs: vessel purposes and specifications, design and test data, standards and classification society requirements, stability and structural calculations, engine rooms and propulsion and auxiliary systems, compartment and layout constraints, cost and schedule requirements, and contract and regulatory documents."
+              "Perform monitoring activities to ensure that ships comply with international regulations and standards for life-saving equipment and pollution preventatives.",
+              "Design complete hull and superstructure according to specifications and test data, in conformity with standards of safety, efficiency, and economy.",
+              "Conduct analyses of ships, such as stability, structural, weight, and vibration analyses.",
+              "Study design proposals and specifications to establish basic characteristics of craft, such as size, weight, speed, propulsion, displacement, and draft."
             ]
           },
           "id": "marine-engineers-and-naval-architects.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Checkable outputs: hull and superstructure designs, stability and structural analysis conclusions, functional equipment and piping layouts, interior layout options, technical and contract documents, test and acceptance results, compliance and pollution-prevention explanations, and design and change records."
-            ]
-          },
-          "id": "marine-engineers-and-naval-architects.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Complete workflow: define intended use and standards → collect design and test data → analyze stability, structures, and performance → develop and compare design options → prepare technical documents and drawings → validate through construction and testing → assess compliance and track changes."
-            ]
-          },
-          "id": "marine-engineers-and-naval-architects.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-tasks"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8739,6 +8740,32 @@
                 "publisher": "FermatMind",
                 "scope": "Paper exercise",
                 "url": "#career-content-path"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/17-2121.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11031,41 +11058,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "marine-engineers-and-naval-architects.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "marine-engineers-and-naval-architects.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "marine-engineers-and-naval-architects.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "marine-engineers-and-naval-architects.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "Activity preferences can only help design trials; they cannot determine qualifications or performance.",
         "interest": "First observe your interest, stress, and experience during actual vessel design analysis, test validation, and multi-party communication.",
@@ -11289,7 +11287,7 @@
       "text": "Marine Engineers and Naval Architects: Tasks, Pay and Training"
     }
   },
-  "source_content_sha256": "bb60d6fc2d4f736f2e272fe12a2f03fb8bf0607eb75bcb8a74240d7968d0f0db",
+  "source_content_sha256": "c9431e1b98d1677e4515b67c6b01a14932d35cb591397ec35d916045b5e0880f",
   "subject": {
     "canonical_slug": "marine-engineers-and-naval-architects",
     "name": "Marine Engineers and Naval Architects",

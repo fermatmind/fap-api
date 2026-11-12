@@ -9058,8 +9058,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "orthodontists.profile.definition-block.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -9070,8 +9078,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "orthodontists.profile.definition-block.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -11347,14 +11363,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Orthodontists correspond to the U.S. O*NET 29-1023.00 Orthodontists. This occupation examines, diagnoses, and treats dentofacial deformities and related oral abnormalities, designing and using appliances to adjust the relationship between teeth and jaws. The Chinese scope of practice must be separately verified against local physician registration rules and organizational conditions.",
-              "The main deliverables are traceable assessment, plan communication, treatment operations, and follow-up records; clinical judgment remains with physicians holding the corresponding practice authority."
+              "Diagnose teeth and jaw or other dental-facial abnormalities.",
+              "Examine patients to assess abnormalities of jaw development, tooth position, and other dental-facial structures.",
+              "Study diagnostic records, such as medical or dental histories, plaster models of the teeth, photos of a patient's face and teeth, and X-rays, to develop patient treatment plans.",
+              "Fit dental appliances in patients' mouths to alter the position and relationship of teeth and jaws or to realign teeth."
             ]
           },
           "id": "orthodontists.profile.definition-block.1",
           "source_refs": [
-            "source-pack-onet-details",
-            "nhc-physician-registration-2017"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -12880,6 +12897,32 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/29-1023.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -15090,7 +15133,7 @@
       "text": "Orthodontist"
     }
   },
-  "source_content_sha256": "137ca01a36f18aff057dbc6e63685c8c8e2dddb9f17bb87750ef1f499a67a470",
+  "source_content_sha256": "2ca9410bac58e681d6627c7a7cba55dcc94e5b20f23d54ddec990364645b2bff",
   "subject": {
     "canonical_slug": "orthodontists",
     "name": "Orthodontist",

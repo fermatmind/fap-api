@@ -171,13 +171,7 @@
         "status": "pending_mapping"
       },
       "item:locksmiths-and-safe-repairers.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:locksmiths-and-safe-repairers.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:locksmiths-and-safe-repairers.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:locksmiths-and-safe-repairers.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6125,8 +6119,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "locksmiths-and-safe-repairers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6137,8 +6139,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "locksmiths-and-safe-repairers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6149,8 +6159,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "locksmiths-and-safe-repairers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6161,8 +6179,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "locksmiths-and-safe-repairers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7295,40 +7321,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Objects of work: mechanical and electronic locks, lock cylinders and key blanks, safes and vault doors, master key systems and key records, door locks and door closers and other door hardware, alarm and electronic access control equipment, and customer authorization and work orders."
+              "Cut new or duplicate keys, using impressions or code key machines.",
+              "Insert new or repaired tumblers into locks to change combinations.",
+              "Move picklocks in cylinders to open door locks without keys.",
+              "Cut new or duplicate keys, using key cutting machines."
             ]
           },
           "id": "locksmiths-and-safe-repairers.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Checkable outputs: verified opening or replacement records, keys made to bitting or coding, an updated master key system and key ledger, locks and safes installed or repaired to standard, and anomaly and escalation records."
-            ]
-          },
-          "id": "locksmiths-and-safe-repairers.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Complete workflow: accept the work order and verify customer identity and authorization → judge the lock/safe structure and the opening plan → open the lock or change the cylinder and make keys → install or repair locks, safes, and door hardware → establish or update the master key system and ledger → test and hand over → record and invoice."
-            ]
-          },
-          "id": "locksmiths-and-safe-repairers.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-tasks"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8716,6 +8717,32 @@
                 "publisher": "FermatMind",
                 "scope": "Paper exercise",
                 "url": "#career-content-path"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/49-9094.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11016,41 +11043,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "locksmiths-and-safe-repairers.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "locksmiths-and-safe-repairers.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "locksmiths-and-safe-repairers.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "locksmiths-and-safe-repairers.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "Activity preferences can only help design exercises and cannot judge qualifications or performance.",
         "interest": "First observe the interest, pressure, and experience in real lock disassembly and assembly, safe work, and customer authorization communication.",
@@ -11316,7 +11314,7 @@
       "text": "Locksmiths and Safe Repairers: Tasks, Pay and Training"
     }
   },
-  "source_content_sha256": "40396edbb899502636705a5ef26a0ee61761c7cc9cce6dc330a0884d0a600a9e",
+  "source_content_sha256": "0d4e16ef144d37a87903c225a087af09de90fe297b9ae33e627a1a9c52b1e67c",
   "subject": {
     "canonical_slug": "locksmiths-and-safe-repairers",
     "name": "Locksmiths and Safe Repairers",

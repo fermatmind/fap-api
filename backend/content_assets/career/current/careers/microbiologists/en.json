@@ -183,7 +183,7 @@
         "status": "mapped"
       },
       "item:microbiologists.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:microbiologists.profile.work-context-block.3": {
         "status": "mapped"
@@ -9489,16 +9489,8 @@
         "status": "unfilled"
       },
       "responsibilities_block.05.category": {
-        "ref": {
-          "id": "microbiologists.profile.responsibilities-block.2",
-          "path": [
-            "data",
-            "entries",
-            4
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "responsibilities_block.05.description": {
         "ref": null,
@@ -9509,16 +9501,8 @@
         "status": "unfilled"
       },
       "responsibilities_block.06.category": {
-        "ref": {
-          "id": "microbiologists.profile.responsibilities-block.2",
-          "path": [
-            "data",
-            "entries",
-            5
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "responsibilities_block.06.description": {
         "ref": null,
@@ -12479,18 +12463,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Questions and protocols: Pose testable research questions and design experimental protocols.",
-              "Culture and handling: Culture and handle microorganisms according to aseptic and biosafety procedures.",
-              "Data collection: Collect and check experimental data according to the protocol.",
-              "Analysis and interpretation: Perform statistical analysis and distinguish correlation from causation.",
-              "Papers and sharing: Write papers and reports and share data according to policy.",
-              "Records and compliance: Record honestly and follow biosafety and ethics requirements.",
-              "Collaboration and communication: Communicate results and limitations to teams and clinical or industry partners."
+              "Isolate and maintain cultures of bacteria or other microorganisms in prescribed or developed media, controlling moisture, aeration, temperature, and nutrition.",
+              "Provide laboratory services for health departments, community environmental health programs, and physicians needing information for diagnosis and treatment.",
+              "Monitor and perform tests on water, food, and the environment to detect harmful microorganisms or to obtain information about sources of pollution, contamination, or infection.",
+              "Examine physiological, morphological, and cultural characteristics, using microscope, to identify and classify microorganisms in human, water, and food specimens."
             ]
           },
           "id": "microbiologists.profile.responsibilities-block.2",
           "source_refs": [
-            "source-pack-onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -14168,6 +14149,32 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/ooh/healthcare/clinical-laboratory-technologists-and-technicians.htm"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/19-1022.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -16348,7 +16355,7 @@
       "text": "Microbiologists: Duties, U.S. Wages, and Entry"
     }
   },
-  "source_content_sha256": "b2b6cd281c5d7ebe64911c5c36898b9b964e8c99773fb189a326994c199e94d9",
+  "source_content_sha256": "e841f8e3a089116324b14d4f001634a2df2c79a520f8405390c530d989e78171",
   "subject": {
     "canonical_slug": "microbiologists",
     "name": "Microbiologists",

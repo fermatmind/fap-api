@@ -150,13 +150,7 @@
         "status": "pending_mapping"
       },
       "item:medical-and-clinical-laboratory-technologists.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:medical-and-clinical-laboratory-technologists.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:medical-and-clinical-laboratory-technologists.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:medical-and-clinical-laboratory-technologists.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6104,8 +6098,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-and-clinical-laboratory-technologists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6116,8 +6118,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-and-clinical-laboratory-technologists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6128,8 +6138,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-and-clinical-laboratory-technologists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6140,8 +6158,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-and-clinical-laboratory-technologists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7278,40 +7304,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Inputs: patient specimens (blood, body fluids, tissues, and cultures), test requests and method requirements, equipment such as spectrophotometers and analyzers, reagents and quality-control materials, and infection-control and protective procedures."
+              "Analyze samples of biological material for chemical content or reaction.",
+              "Analyze laboratory findings to check the accuracy of the results.",
+              "Conduct chemical analysis of body fluids, including blood, urine, or spinal fluid, to determine presence of normal or abnormal components.",
+              "Enter data from analysis of medical tests or clinical results into computer for storage."
             ]
           },
           "id": "medical-and-clinical-laboratory-technologists.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-details"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Verifiable outputs: specimen checking and processing records, complex test and quality-control results, method and performance assessment records, quality assurance and equipment maintenance records, traceable reports, and mentoring and supervision records."
-            ]
-          },
-          "id": "medical-and-clinical-laboratory-technologists.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-details"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Complete workflow: check specimens and requests → process and test according to methodology → analyze results and verify accuracy → quality assurance and equipment maintenance → review and produce reports → technical communication and anomaly escalation, completing the loop."
-            ]
-          },
-          "id": "medical-and-clinical-laboratory-technologists.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8813,6 +8814,32 @@
                 "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/29-2011.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11140,41 +11167,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "medical-and-clinical-laboratory-technologists.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "medical-and-clinical-laboratory-technologists.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "medical-and-clinical-laboratory-technologists.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "medical-and-clinical-laboratory-technologists.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "Activity preferences only help design trials; they cannot establish qualifications or performance.",
         "interest": "First observe interest, stress, and collaboration experiences in real tasks.",
@@ -11360,7 +11358,7 @@
       "text": "Clinical Laboratory Technologist: Testing, Quality Control and Review"
     }
   },
-  "source_content_sha256": "adff6a15a85149fc1d9c19d71a627fd14a13d65e0bb8341a836fa5679dee0eb9",
+  "source_content_sha256": "3b0cdfb0ba0abafbab44f45970b61aa5106e4d7e32529f808c2cb9339a2f31ec",
   "subject": {
     "canonical_slug": "medical-and-clinical-laboratory-technologists",
     "name": "Clinical Laboratory Technologist",

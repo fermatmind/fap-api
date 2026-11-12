@@ -9052,8 +9052,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "merchandise-displayers-and-window-trimmers.profile.definition-block.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -9064,8 +9072,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "merchandise-displayers-and-window-trimmers.profile.definition-block.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -11338,13 +11354,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "设计与准备：按主题与预算制定陈列草图与方案，准备材料、道具与灯光。",
-              "搭建与验收：现场搭建与安全核对，完成验收、调整、撤展与记录复盘。"
+              "计划商业展示 吸引和吸引客户。",
+              "按草图布置道具、家具、商品、背景布或其他配件。",
+              "更改或旋转窗口显示、内部显示区域或标志，以反映库存或促销的变化。",
+              "在背景、固定装置、商品或地板上贴上价格或描述性标志。"
             ]
           },
           "id": "merchandise-displayers-and-window-trimmers.profile.definition-block.1",
           "source_refs": [
-            "source-pack-onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -12716,6 +12734,32 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/27-1026.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -14884,7 +14928,7 @@
       "text": "商品陈列员橱窗布置员：工作内容、美国工资与入行 | 费马测试"
     }
   },
-  "source_content_sha256": "d6025b772aeabf4e680c6c9d62abccf0318059902478c47ac1e0064bb4d0b989",
+  "source_content_sha256": "1b092fa21ad469fe974f06091e8cba29426e62d4de8f65094f049212044fb6ce",
   "subject": {
     "canonical_slug": "merchandise-displayers-and-window-trimmers",
     "name": "商品陈列员橱窗布置员",

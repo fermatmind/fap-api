@@ -150,13 +150,7 @@
         "status": "pending_mapping"
       },
       "item:medical-and-clinical-laboratory-technologists.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:medical-and-clinical-laboratory-technologists.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:medical-and-clinical-laboratory-technologists.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:medical-and-clinical-laboratory-technologists.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6104,8 +6098,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-and-clinical-laboratory-technologists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6116,8 +6118,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-and-clinical-laboratory-technologists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6128,8 +6138,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-and-clinical-laboratory-technologists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6140,8 +6158,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-and-clinical-laboratory-technologists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7280,40 +7306,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "投入对象：患者标本（血液、体液、组织与培养物）、检验申请与方法要求、分光光度计与分析仪等设备、试剂与质控材料，以及感染控制与防护规程。"
+              "对生物材料进行化学成分或反应的分析。",
+              "分析实验室结果，以验证其准确性。",
+              "对体液，包括血液、尿液或脊椎液进行化学分析，以确定是否存在正常或不正常的成分。",
+              "将医疗测试或临床结果分析数据输入计算机储存。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technologists.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-details"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "可检查产出：标本核对与处理记录、复杂检验与质控结果、方法与性能评估记录、质量保证与设备维护记录、可追溯报告，以及带教与监督记录。"
-            ]
-          },
-          "id": "medical-and-clinical-laboratory-technologists.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-details"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "完整工作流程：核对标本与申请 → 按方法学处理与检测 → 分析结果并验证准确性 → 质量保证与设备维护 → 复核并形成报告 → 技术沟通与异常升级的闭环。"
-            ]
-          },
-          "id": "medical-and-clinical-laboratory-technologists.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8846,6 +8847,32 @@
                 "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/29-2011.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11173,41 +11200,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "medical-and-clinical-laboratory-technologists.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "medical-and-clinical-laboratory-technologists.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "medical-and-clinical-laboratory-technologists.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "medical-and-clinical-laboratory-technologists.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "活动偏好只能帮助设计试验，不能判断资格或表现。",
         "interest": "先观察真实任务中的兴趣、压力与协作体验。",
@@ -11393,7 +11391,7 @@
       "text": "临床检验技师做什么：检测、质控与结果复核"
     }
   },
-  "source_content_sha256": "e050155419762f5dddaff030f975b44c047ab5eeb60cabc66dd84b6b7e5f129e",
+  "source_content_sha256": "2155de6d2b4ea27e3d71ce8a31a498d921591801b59f7bfaf28c48f5f0b618de",
   "subject": {
     "canonical_slug": "medical-and-clinical-laboratory-technologists",
     "name": "临床检验技师",

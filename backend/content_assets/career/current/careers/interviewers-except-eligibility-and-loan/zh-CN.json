@@ -150,13 +150,7 @@
         "status": "pending_mapping"
       },
       "item:interviewers-except-eligibility-and-loan.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:interviewers-except-eligibility-and-loan.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:interviewers-except-eligibility-and-loan.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:interviewers-except-eligibility-and-loan.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6116,8 +6110,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "interviewers-except-eligibility-and-loan.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6128,8 +6130,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "interviewers-except-eligibility-and-loan.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6140,8 +6150,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "interviewers-except-eligibility-and-loan.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6152,8 +6170,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "interviewers-except-eligibility-and-loan.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7293,40 +7319,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "投入对象｜以问卷与表单、被访者与回答信息、访谈脚本与流程、记录与归档系统为对象，在授权与信息保护边界内执行访谈与记录。"
+              "按照指示提问，以获得各种特定信息，如姓名、地址、年龄、宗教信仰或居住状况。",
+              "识别并报告获取有效数据时遇到的问题。",
+              "通过与该人的保险提供人核实福利或制定融资方案，确保支付服务费用。",
+              "履行办公职责，如电话营销或客户服务查询、保存工作人员记录、向病人收费或收取付款。"
             ]
           },
           "id": "interviewers-except-eligibility-and-loan.profile.responsibilities-block.2",
           "source_refs": [
-            "profile"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "可检查产出｜可复核的访谈记录与编码数据、完整性与准确性核对结果、不一致处理记录、归档与交接记录；结果须可追溯到脚本版本与被访者授权。"
-            ]
-          },
-          "id": "interviewers-except-eligibility-and-loan.profile.responsibilities-block.3",
-          "source_refs": [
-            "profile"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "完整工作流程｜确认访谈目的与脚本→核实身份与授权→提问并记录→核对完整性与准确性→识别并解决不一致→归档与交接。"
-            ]
-          },
-          "id": "interviewers-except-eligibility-and-loan.profile.responsibilities-block.4",
-          "source_refs": [
-            "profile"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8782,6 +8783,32 @@
                 "publisher": "FermatMind",
                 "scope": "纸面练习",
                 "url": "#career-content-path"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/43-4111.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11144,41 +11171,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "interviewers-except-eligibility-and-loan.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "interviewers-except-eligibility-and-loan.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "interviewers-except-eligibility-and-loan.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "interviewers-except-eligibility-and-loan.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "活动偏好只能帮助设计试验，不能判断资格或表现。",
         "interest": "先观察真实任务中的兴趣、压力与协作体验。",
@@ -11360,7 +11358,7 @@
       "text": "访谈与信息采集员做什么：任务、工资与入行"
     }
   },
-  "source_content_sha256": "62c4189bb619f211b6f55c32a11f5e29eac2a3d1ab1a12d894e5ce8b83fb08dc",
+  "source_content_sha256": "8e7daacc2731a4cb7c1d3145bdb39895933d1c101af663b9ac9bc9e2205f4416",
   "subject": {
     "canonical_slug": "interviewers-except-eligibility-and-loan",
     "name": "访谈与信息采集员",

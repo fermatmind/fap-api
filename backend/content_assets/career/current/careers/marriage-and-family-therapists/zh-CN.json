@@ -159,13 +159,7 @@
         "status": "pending_mapping"
       },
       "item:marriage-and-family-therapists.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:marriage-and-family-therapists.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:marriage-and-family-therapists.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:marriage-and-family-therapists.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6113,8 +6107,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "marriage-and-family-therapists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6125,8 +6127,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "marriage-and-family-therapists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6137,8 +6147,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "marriage-and-family-therapists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6149,8 +6167,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "marriage-and-family-therapists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7284,40 +7310,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "投入对象：来访者与家庭的关系与症状信息、访谈与观察记录、心理测量与评估工具、治疗理论与家庭系统框架、转介与跨专业信息、个案档案与知情同意、督导与伦理要求。"
+              "问问题，这将帮助客户识别他们的情绪和行为。",
+              "鼓励个人和家庭成员发展和利用技能和战略，以建设性的方式解决他们的问题。",
+              "制定和实施针对家庭关系问题、破坏性行为模式和其他个人问题的个性化治疗计划。",
+              "保持案例文件，其中包括活动、进展笔记、评估和建议。"
             ]
           },
           "id": "marriage-and-family-therapists.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "可检查产出：评估与诊断结论、个体化治疗计划、治疗过程与进展记录、个案档案与建议、转介与会诊记录、面向法院的评估说明、督导与咨询记录。"
-            ]
-          },
-          "id": "marriage-and-family-therapists.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "完整工作流程：建立安全与知情边界 → 收集信息与评估 → 形成诊断与治疗计划 → 实施治疗并记录进展 → 判断转介或升级 → 会诊与督导 → 评估效果并调整的闭环。"
-            ]
-          },
-          "id": "marriage-and-family-therapists.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-tasks"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8774,6 +8775,32 @@
                 "period": "2025 年",
                 "publisher": "国务院",
                 "url": "https://www.mee.gov.cn/zcwj/gwywj/202504/t20250410_1113983.shtml"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/21-1013.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11190,41 +11217,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "marriage-and-family-therapists.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "marriage-and-family-therapists.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "marriage-and-family-therapists.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "marriage-and-family-therapists.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "活动偏好只能帮助设计试验，不能判断资格或表现。",
         "interest": "先观察真实的评估、治疗与督导中的兴趣、压力与体验。",
@@ -11448,7 +11446,7 @@
       "text": "婚姻与家庭治疗师做什么：任务、工资与入行"
     }
   },
-  "source_content_sha256": "7051830be235199a1188bdb88e9afd03f662a9844a528b58c01b3f0f7954c037",
+  "source_content_sha256": "98fef8d23ba3b507d462c89f83e54a952e064dadcffbc3f9c2c17853ab401de6",
   "subject": {
     "canonical_slug": "marriage-and-family-therapists",
     "name": "婚姻与家庭治疗师",

@@ -171,7 +171,7 @@
         "status": "mapped"
       },
       "item:operating-engineers-and-other-construction-equipment-operators.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:operating-engineers-and-other-construction-equipment-operators.profile.work-context-block.3": {
         "status": "mapped"
@@ -9321,16 +9321,8 @@
         "status": "unfilled"
       },
       "responsibilities_block.05.category": {
-        "ref": {
-          "id": "operating-engineers-and-other-construction-equipment-operators.profile.responsibilities-block.2",
-          "path": [
-            "data",
-            "entries",
-            4
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "responsibilities_block.05.description": {
         "ref": null,
@@ -9341,16 +9333,8 @@
         "status": "unfilled"
       },
       "responsibilities_block.06.category": {
-        "ref": {
-          "id": "operating-engineers-and-other-construction-equipment-operators.profile.responsibilities-block.2",
-          "path": [
-            "data",
-            "entries",
-            5
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "responsibilities_block.06.description": {
         "ref": null,
@@ -12311,18 +12295,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "核设备、液压、制动、警示和作业区。",
-              "看图纸、地形、地下管线与人员通道。",
-              "按信号启动、移动和控制挖掘或整平。",
-              "在许可范围挖土、装载和移动材料。",
-              "与指挥员和其他机械保持安全距离。",
-              "记录故障并进行授权范围内保养。",
-              "异常停机、隔离并交接状态与剩余风险。"
+              "学习并遵守安全规定。",
+              "采取行动，以避免潜在的危险或障碍，如用途线、其他设备、其他工人或落下的物品。",
+              "启动发动机，移动节流阀，开关，或杠杆，或减压踏板来操作机器，如推土机，壕沟挖土机，路面平板机，或后蹄。",
+              "与其他活动协调机器动作，定位或移动负载，以响应船员的手或音频信号。"
             ]
           },
           "id": "operating-engineers-and-other-construction-equipment-operators.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -13968,6 +13949,32 @@
                 "publisher": "人力资源和社会保障部、住房和城乡建设部",
                 "scope": "用于挖掘铲运和桩工机械司机技能评价；现场操作权限另核。",
                 "url": "https://www.mohrss.gov.cn/xxgk2020/fdzdgknr/rcrs_4225/jnrc/zyyjnpj/202304/W020230414729511815491.pdf"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/47-2073.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -16145,7 +16152,7 @@
       "text": "施工设备操作员：点检、交班与放行"
     }
   },
-  "source_content_sha256": "3f9a6514608f0be003e4ee0ae422970269ccdb5aa04f7e77d144b05605141f3d",
+  "source_content_sha256": "3172f719eb3e910d00da44f261a7b5f3782f460973e3d2918714e5c135feb82f",
   "subject": {
     "canonical_slug": "operating-engineers-and-other-construction-equipment-operators",
     "name": "工程机械操作员",

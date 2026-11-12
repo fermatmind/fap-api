@@ -9513,16 +9513,8 @@
         "status": "unfilled"
       },
       "responsibilities_block.05.category": {
-        "ref": {
-          "id": "music-directors-and-composers.profile.responsibilities-block.2",
-          "path": [
-            "data",
-            "entries",
-            4
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "responsibilities_block.05.description": {
         "ref": null,
@@ -9533,16 +9525,8 @@
         "status": "unfilled"
       },
       "responsibilities_block.06.category": {
-        "ref": {
-          "id": "music-directors-and-composers.profile.responsibilities-block.2",
-          "path": [
-            "data",
-            "entries",
-            5
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "responsibilities_block.06.description": {
         "ref": null,
@@ -12511,17 +12495,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "音乐指挥：研究总谱、作品背景与乐团条件，形成速度、分句、力度、发音和整体风格解释。",
-              "音乐指挥：选择或确认曲目、安排排练次序，通过手势、语言和示范纠正节奏、音准、平衡与合奏问题。",
-              "音乐指挥：与独奏者、声部长、舞台/录音团队协调，决定何时继续、拆分、重练或保留一次演出。",
-              "作曲家：把委约目标、剧本、画面或自主创意转成主题、和声、节奏、结构与配器方案。",
-              "作曲家：用谱面、MIDI、录音软件或乐器制作草稿，听取演奏/制作反馈后修订可演奏性与情绪效果。",
-              "作曲家：交付总谱、分谱、音频样稿或工程文件，并保持版本、素材来源和修改范围可追溯。"
+              "使用手势来塑造播放的音乐，传达想要的节奏，语调，颜色，音调，音量，和其他性能方面 。",
+              "在排练、现场表演或记录表演时，直接分组，以实现预期效果，如音调和平衡动态、节奏和节奏。",
+              "通过学习成绩，深入了解音乐，并培养独特的解读能力。",
+              "应用音乐理论的元素来创造音乐和托纳结构，包括谐音和旋律。"
             ]
           },
           "id": "music-directors-and-composers.profile.responsibilities-block.2",
           "source_refs": [
-            "source-pack-onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -14134,6 +14116,32 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/27-2041.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -16261,7 +16269,7 @@
       "text": "音乐总监与作曲家"
     }
   },
-  "source_content_sha256": "e732575538b590237134d7c1db47142bd7a777dc58133670379de71ceac069c9",
+  "source_content_sha256": "69ab347324bee8edaf572463b6d0a1c314850db9f60321aad0f2be862a2aef47",
   "subject": {
     "canonical_slug": "music-directors-and-composers",
     "name": "音乐总监与作曲家",

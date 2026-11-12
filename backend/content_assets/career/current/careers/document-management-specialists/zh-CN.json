@@ -1509,22 +1509,7 @@
         "status": "mapped"
       },
       "item:actors.display.responsibilities_block.01": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.02": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.03": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.04": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.05": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.06": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:actors.display.riasec_fit_block.code": {
         "status": "mapped"
@@ -19196,8 +19181,16 @@
         "status": "mapped"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -19208,8 +19201,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -19220,8 +19221,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -19232,8 +19241,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -23413,89 +23430,18 @@
           "availability": "available",
           "copy_key": "career.item.responsibilities-block",
           "data": {
-            "paragraphs": [
-              "常见输入：文档管理政策与分类体系与元数据规范、密级与商业秘密与个人信息与保存期限要求、业务与办公系统产生的电子文件与其格式与接口、用户的访问与检索与复制需求与授权范围、系统版本与权限与审计日志与备份安排，以及到期鉴定与销毁清单与审批记录。"
+            "entries": [
+              "协助确定文件管理政策，以便利有效、合法和安全地获取电子内容。",
+              "协助编制文件或内容分类分类分类，以便利信息采集、搜索和检索。",
+              "与其他信息技术专家合作，实施电子文件处理、检索和分发系统。",
+              "根据安全级别、功能和元数据等特征，对文件或其他电子内容进行识别和分类。"
             ]
           },
           "id": "actors.display.responsibilities_block.01",
           "source_refs": [
-            "onet"
+            "batch52-onet-core"
           ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "核心产出：可执行的文档管理政策与分类与元数据规范、按规则配置的系统功能与权限与版本控制记录、数字化与数据捕获与安全监督记录、检索与分发记录与支持文档与培训材料、保存期限与鉴定与销毁记录、系统测试计划与技术功能与规格；部分岗位另有系统绩效分析，以及待办与异常交接记录。"
-            ]
-          },
-          "id": "actors.display.responsibilities_block.02",
-          "source_refs": [
-            "sag-moa"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "典型流程：参与确定政策与建立分类—协同实施与配置系统与权限与版本—抓捕获与数字化—检索与分发并提供支持—监控法规与保存期限并组织鉴定与销毁—编写规格并交接；系统绩效分析为部分岗位补充任务。"
-            ]
-          },
-          "id": "actors.display.responsibilities_block.03",
-          "source_refs": [
-            "sag-moa"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "常协作对象：业务部门与最终用户、信息技术与信息安全、法务与合规、档案与记录管理、审计与外部监管、系统与影像与扫描供应商。"
-            ]
-          },
-          "id": "actors.display.responsibilities_block.04",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "常见工具与对象：文档与内容管理系统、扫描与影像与光学字符识别工具、元数据与分类与工作流配置、权限与版本与审计日志、办公与数据库与协作工具、技术规格与绩效报表。"
-            ]
-          },
-          "id": "actors.display.responsibilities_block.05",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "O*NET15-1299.03实施管理企业文档系统和规程，捕获存储检索共享销毁电子记录。23任务中22Core/1Supplemental，系统绩效数据分析解释传播是补充，不当全部岗位必做。政策/分类、新系统评估采购部署为协助参与，配置访问和版本控制、捕获、检索、需求、测试、法规跟踪和用户支持为核心。监控法规不自动给法务裁决权；任务与邻职可交叉，不能一律排除档案工作、系统开发配置或技术职责，只按主要产出/授权区分。 2024国家档案局22号电子档案管理办法（11-01施行）：3/5/14/16—19条来源程序要素、元数据全过程、归档范围/期限、检测及责任人确认；26—28条备份/迁移制度与转换后检测；29/30条到期鉴定、继续保存重划期限、履行审批后才销毁并记录，不能到期自动删。35条提出AI等用于编研/展览/专题数据库开发，不证明本职业部署率/效益或AI自动授权。"
-            ]
-          },
-          "id": "actors.display.responsibilities_block.06",
-          "source_refs": [
-            "onet",
-            "sag-moa",
-            "r5-archive-current",
-            "r5-electronic-current",
-            "r5-account-current"
-          ],
-          "type": "prose"
+          "type": "list"
         },
         {
           "availability": "available",
@@ -31961,6 +31907,32 @@
                 "publisher": "大余县政府",
                 "scope": "recruitment_proxy",
                 "url": "https://www.jxdy.gov.cn/dyxxxgk/c145429gg/202606/c957d55652424130875c7919a6526fb2.shtml"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/15-1299.03#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -36778,44 +36750,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$item": "actors.display.responsibilities_block.01",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.02",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.03",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.04",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.05",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.06",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "actors.display.responsibilities_block.01",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": {
           "$item": "actors.display.riasec_fit_block.fit-interest",
@@ -37615,7 +37555,7 @@
       "text": "文档管理专员"
     }
   },
-  "source_content_sha256": "5c44ba8699bf0ba5cfb5162d93fc3ec1d10337f30432756a6f9997a503afa8cc",
+  "source_content_sha256": "feabe5420189026a70823d2ff1da72be56ae876e4d48c1d65b84d1de5169fb16",
   "subject": {
     "canonical_slug": "document-management-specialists",
     "name": "文档管理专员",

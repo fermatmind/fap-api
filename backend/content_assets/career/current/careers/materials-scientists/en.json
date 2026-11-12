@@ -162,13 +162,7 @@
         "status": "pending_mapping"
       },
       "item:materials-scientists.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:materials-scientists.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:materials-scientists.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:materials-scientists.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6116,8 +6110,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "materials-scientists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6128,8 +6130,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "materials-scientists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6140,8 +6150,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "materials-scientists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6152,8 +6170,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "materials-scientists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7286,40 +7312,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Work inputs: Application and performance requirements, material systems and samples, testing and inspection equipment, modeling and computing tools, literature and standards, process and manufacturing cost constraints, safety and compliance requirements, and client and funder needs."
+              "Conduct research on the structures and properties of materials, such as metals, alloys, polymers, and ceramics, to obtain information that could be used to develop new products or enhance existing ones.",
+              "Test metals to determine conformance to specifications of mechanical strength, strength-weight ratio, ductility, magnetic and electrical properties, and resistance to abrasion, corrosion, heat, and cold.",
+              "Test material samples for tolerance under tension, compression, and shear to determine the cause of metal failures.",
+              "Determine ways to strengthen or combine materials or develop new materials with new or specific properties for use in a variety of products and applications."
             ]
           },
           "id": "materials-scientists.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Verifiable outputs: Research hypotheses and testing plans, structure and performance data, failure and mechanism analyses, strengthening or composite approaches, proposals for new materials or applications, papers and reports, test methods, and material selection recommendations for different environments."
-            ]
-          },
-          "id": "materials-scientists.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Complete workflow: Define application and performance requirements → review literature and develop hypotheses → plan and conduct tests and modeling → analyze structure and performance data → propose material or process solutions → verify and document findings to complete the cycle."
-            ]
-          },
-          "id": "materials-scientists.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-tasks"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8724,6 +8725,32 @@
                 "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/19-2032.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11084,41 +11111,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "materials-scientists.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "materials-scientists.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "materials-scientists.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "materials-scientists.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "Activity preferences can only help design exercises; they cannot determine qualifications or performance.",
         "interest": "First observe your interest, stress, and experience in actual materials testing, data analysis, and paper writing.",
@@ -11352,7 +11350,7 @@
       "text": "Materials Scientist: Structure, Characterization and Experiments"
     }
   },
-  "source_content_sha256": "a46cdd3f369e61412a6da6112c0b81684ecef1f3236345c81ed0d25a6e46e356",
+  "source_content_sha256": "fe93d87d4cedf31db444c91a0495c7e5dace26ed7fc1d48a9fbf8f4ee5c09027",
   "subject": {
     "canonical_slug": "materials-scientists",
     "name": "Materials Scientist",

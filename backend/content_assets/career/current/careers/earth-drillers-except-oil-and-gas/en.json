@@ -1491,22 +1491,7 @@
         "status": "mapped"
       },
       "item:actors.display.responsibilities_block.01": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.02": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.03": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.04": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.05": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.06": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:actors.display.riasec_fit_block.code": {
         "status": "mapped"
@@ -19166,8 +19151,16 @@
         "status": "mapped"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -19178,8 +19171,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -19190,8 +19191,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -19202,8 +19211,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -23435,87 +23452,18 @@
           "availability": "available",
           "copy_key": "career.item.responsibilities-block",
           "data": {
-            "paragraphs": [
-              "Common inputs: the task sheet and geological data and hole position and depth and diameter and coring or well completion requirements, site and access and water and power and working face and slope and underground pipeline and buried object conditions, the specifications and inspection and maintenance status of drilling rigs and tools and bits and rods and well completion equipment, geotechnical and groundwater and strata information, mud or flushing and dust removal and waste residue and waste oil and wastewater disposal and environmental requirements, and sampling logging and progress and safety and environmental record requirements."
+            "entries": [
+              "Operate controls to stabilize machines and to position and align drills.",
+              "Start, stop, and control drilling speed of machines and insertion of casings into holes.",
+              "Regulate air pressure, rotary speed, and downward pressure, according to the type of rock or concrete being drilled.",
+              "Select and attach drill bits and drill rods, adding more rods as hole depths increase, and changing drill bits as needed."
             ]
           },
           "id": "actors.display.responsibilities_block.01",
           "source_refs": [
-            "onet"
+            "batch52-onet-core"
           ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "Core outputs: drilling and sampling logging records completed by task and geotechnical conditions, hole depth and position and verticality and strata records, well completion and well washing and pumping test and disinfection records, equipment maintenance and in-hole anomaly handling records, and safety and environmental and handover records."
-            ]
-          },
-          "id": "actors.display.responsibilities_block.02",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "Typical flow: task and site and positioning and preparation — drilling and sampling and well completion — records and safety and environmental protection and handover and anomaly reporting."
-            ]
-          },
-          "id": "actors.display.responsibilities_block.03",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "Common collaborators: the team leader and technical lead, geology and surveying and inspection personnel, equipment repair and safety and environmental personnel, and back-office dispatch and the owner and competent authorities."
-            ]
-          },
-          "id": "actors.display.responsibilities_block.04",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "Common tools and objects: rotary, cable-tool, and pneumatic drilling rigs and air compressors and mud pumps, bits and drill rods and casing and core barrels and fishing tools, well completion equipment (well casing and screen and filter material and water pumps), measuring and hole deviation and hole depth detection instruments, hoisting and carrying tools and protection and dust and noise control supplies, and sample containers and logging and recording tools."
-            ]
-          },
-          "id": "actors.display.responsibilities_block.05",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "Work to the applicable design and procedures and report; the Chinese unit and its principal person in charge bear statutory safety responsibility, and this page's division of labor does not replace actual acceptance/restart authority. Articles 44/45 of the Chinese Work Safety Law require the unit to inform workers of hazards and provide compliant PPE, and Article 54 allows refusal of illegal commands or forced risk-taking; Article 55 allows stopping or taking necessary emergency measures and then evacuating when personal danger is immediate, without requiring registration, reporting, or approval beforehand; Articles 57/58 require following procedures, correct PPE, and training, and Article 59 requires hazards to be reported immediately to on-site safety management or the unit head. Suspension/restart of ordinary quality problems and the professional signing position must be verified against the real project systems; these were not obtained this round, and no uniform final authority can be granted to the team leader, geologist, repair, or inspection."
-            ]
-          },
-          "id": "actors.display.responsibilities_block.06",
-          "source_refs": [
-            "r5-safety-law",
-            "r5-geology-rule",
-            "r5-qualification-cancel"
-          ],
-          "type": "prose"
+          "type": "list"
         },
         {
           "availability": "available",
@@ -32100,6 +32048,32 @@
                 "publisher": "Lufeng human resources department / 禄丰市人社局",
                 "scope": "contextual",
                 "url": "https://ynlf.gov.cn/info/1011/202054.htm"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/47-5023.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -36935,44 +36909,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$item": "actors.display.responsibilities_block.01",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.02",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.03",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.04",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.05",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.06",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "actors.display.responsibilities_block.01",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": {
           "$item": "actors.display.riasec_fit_block.fit-interest",
@@ -37711,7 +37653,7 @@
       "text": "Earth drillers, except oil and gas"
     }
   },
-  "source_content_sha256": "25facc25ce1d8e84d8e46223d0b7f181b38c28119a5a77b9c4e8c214b0465963",
+  "source_content_sha256": "963debaa6251fb64b2b855879720b0260b86918371aa0bcbb99f1551fe0c4499",
   "subject": {
     "canonical_slug": "earth-drillers-except-oil-and-gas",
     "name": "Earth drillers, except oil and gas",

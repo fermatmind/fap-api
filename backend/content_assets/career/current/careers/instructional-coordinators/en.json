@@ -156,13 +156,7 @@
         "status": "pending_mapping"
       },
       "item:instructional-coordinators.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:instructional-coordinators.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:instructional-coordinators.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:instructional-coordinators.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6110,8 +6104,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "instructional-coordinators.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6122,8 +6124,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "instructional-coordinators.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6134,8 +6144,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "instructional-coordinators.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6146,8 +6164,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "instructional-coordinators.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7281,40 +7307,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Input objects | The objects are curriculum standards and syllabi, instructional materials and activities, teacher development and training, and assessment and student data; execute design and coordination within authorization and education policy boundaries."
+              "Observe work of teaching staff to evaluate performance and to recommend changes that could strengthen teaching skills.",
+              "Plan and conduct teacher training programs and conferences dealing with new classroom procedures, instructional materials and equipment, and teaching aids.",
+              "Interpret and enforce provisions of state education codes and rules and regulations of state education boards.",
+              "Conduct or participate in workshops, committees, and conferences designed to promote the intellectual, social, and physical welfare of students."
             ]
           },
           "id": "instructional-coordinators.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-details"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Checkable outputs | Reviewable curriculum and unit plans, instructional material and activity designs, teacher training plans and records, observation and feedback records, and evaluation and iteration conclusions; results must be traceable to curriculum standards, the basis, and procedures."
-            ]
-          },
-          "id": "instructional-coordinators.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-details"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Complete workflow | Analyze curriculum standards and needs → design instructional materials and training → observe and give feedback → evaluate and iterate → retrospective and recording."
-            ]
-          },
-          "id": "instructional-coordinators.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8758,6 +8759,32 @@
                 "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/25-9031.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11120,41 +11147,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "instructional-coordinators.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "instructional-coordinators.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "instructional-coordinators.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "instructional-coordinators.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "Activity preferences can only help design experiments and cannot judge qualification or performance.",
         "interest": "First observe interests, pressure, and collaboration experience in real tasks.",
@@ -11360,7 +11358,7 @@
       "text": "Instructional Coordinator: Curriculum, Evaluation and Teacher Support"
     }
   },
-  "source_content_sha256": "6b02e2136a5805c8b0849c474a7a37868609425808c4fce5723f07baf5733d90",
+  "source_content_sha256": "e68b337de3b8b9bbaeee0687289081225b8787e99a44a32222ae8ad41cce5f25",
   "subject": {
     "canonical_slug": "instructional-coordinators",
     "name": "Instructional Coordinator",

@@ -162,13 +162,7 @@
         "status": "pending_mapping"
       },
       "item:investment-fund-managers.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:investment-fund-managers.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:investment-fund-managers.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:investment-fund-managers.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6128,8 +6122,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "investment-fund-managers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6140,8 +6142,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "investment-fund-managers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6152,8 +6162,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "investment-fund-managers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6164,8 +6182,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "investment-fund-managers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7305,40 +7331,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "投入对象｜以基金资产与投资目标、投资授权与限额、研究与估值资料、交易与执行渠道、披露与合规要求为对象，在受托与合规边界内执行投资管理。"
+              "管理投资资金，使客户投资收益最大化。",
+              "选择特定的投资或投资组合，供投资基金购买。",
+              "监测个别投资的财务或业务业绩，以确保投资组合达到风险目标。",
+              "选择或指示交易的执行。"
             ]
           },
           "id": "investment-fund-managers.profile.responsibilities-block.2",
           "source_refs": [
-            "source-pack-onet-details"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "可检查产出｜可复核的投资决策与依据、组合与风险限额记录、交易与执行记录、估值与定价记录、业绩与合规披露材料；结果须可追溯到授权、数据来源与制度版本。"
-            ]
-          },
-          "id": "investment-fund-managers.profile.responsibilities-block.3",
-          "source_refs": [
-            "source-pack-onet-details"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "完整工作流程｜确认授权与投资目标→研究与估值→制定与执行策略→交易与执行监控→业绩与风险复核→合规披露与监管应对。"
-            ]
-          },
-          "id": "investment-fund-managers.profile.responsibilities-block.4",
-          "source_refs": [
-            "source-pack-onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8855,6 +8856,32 @@
                 "period": "2026-01-16",
                 "publisher": "中国证券投资基金业协会",
                 "url": "https://www.amac.org.cn/xwfb/tzgg/202601/t20260116_27204.html"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/11-3031.03#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -10981,41 +11008,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "investment-fund-managers.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "investment-fund-managers.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "investment-fund-managers.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "investment-fund-managers.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "活动偏好只能帮助设计试验，不能判断资格或表现。",
         "interest": "先观察真实任务中的兴趣、压力与协作体验。",
@@ -11251,7 +11249,7 @@
       "text": "投资基金经理做什么：任务、工资与入行"
     }
   },
-  "source_content_sha256": "6ff68bbdf4762078e353162d558c4c2ee3e28409d087d0c3bea5a73eb260b3fc",
+  "source_content_sha256": "ef6f1ac926869604973cc8a8da7f6cb594bf77c11940db006c0362db75dbc92f",
   "subject": {
     "canonical_slug": "investment-fund-managers",
     "name": "投资基金经理",

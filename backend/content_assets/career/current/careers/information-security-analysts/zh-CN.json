@@ -360,13 +360,7 @@
         "status": "pending_mapping"
       },
       "item:information-security-analysts.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:information-security-analysts.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:information-security-analysts.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:information-security-analysts.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -8243,8 +8237,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "information-security-analysts.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -8255,8 +8257,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "information-security-analysts.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -8267,8 +8277,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "information-security-analysts.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -8279,8 +8297,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "information-security-analysts.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -9416,41 +9442,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "投入对象：虚构或经授权的安全日志、资产清单、权限记录、系统配置、漏洞报告和变更记录。"
+              "制定计划，保护计算机档案不受意外或未经授权的修改、销毁或披露，并满足紧急数据处理的需要。",
+              "监测计算机病毒的当前报告，以确定什么时候更新病毒保护系统。",
+              "加密数据传输，并建立防火墙，以隐藏在传输时的机密信息，并保持隐藏的数字传输。",
+              "对数据处理系统进行风险评估和测试，以确保数据处理活动和安全措施的运作。"
             ]
           },
           "id": "information-security-analysts.profile.responsibilities-block.2",
           "source_refs": [
-            "bls-ooh-2025-information-security-analysts"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "可检查产出：告警分级、漏洞复核表、控制改进建议、事件时间线、指标报告和升级记录。"
-            ]
-          },
-          "id": "information-security-analysts.profile.responsibilities-block.3",
-          "source_refs": [
-            "bls-ooh-2025-information-security-analysts"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "完整工作流程：确认范围与授权，核对输入和版本，分析异常或漏洞，提出缓解方案，记录证据，复核后交接；不执行未授权的真实网络操作。"
-            ]
-          },
-          "id": "information-security-analysts.profile.responsibilities-block.4",
-          "source_refs": [
-            "bls-ooh-2025-information-security-analysts",
-            "source-pack-onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -12204,6 +12204,32 @@
                 "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/15-1212.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -14671,41 +14697,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "information-security-analysts.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "information-security-analysts.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "information-security-analysts.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "information-security-analysts.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "活动偏好只能帮助设计试验，不能判断资格或表现。",
         "interest": "O*NET 兴趣代码为 CI（常规型—研究型）：倾向按程序与规程组织信息与数据，并进行研究与分析；偏好不等于能力或录用结论。",
@@ -15041,7 +15038,7 @@
       "text": "信息安全分析师做什么：告警研判、风险与事件交接"
     }
   },
-  "source_content_sha256": "a443c762aeb1d8bf3ac29f0e19c795e7ee6cd780714055c74185b7ee3c02dacd",
+  "source_content_sha256": "1858348d6116bdcd0f5bdc0d2cc936a01d7541891beae729661ec1e4f76f087a",
   "subject": {
     "canonical_slug": "information-security-analysts",
     "name": "信息安全分析师",

@@ -171,13 +171,7 @@
         "status": "pending_mapping"
       },
       "item:loss-prevention-managers.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:loss-prevention-managers.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:loss-prevention-managers.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:loss-prevention-managers.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6125,8 +6119,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "loss-prevention-managers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6137,8 +6139,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "loss-prevention-managers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6149,8 +6159,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "loss-prevention-managers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6161,8 +6179,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "loss-prevention-managers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7295,40 +7321,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Work inputs: exception reports and cash-discrepancy data, inventory and accounting records, surveillance and access-control loss prevention systems, loss prevention programs and training materials, investigative evidence and interview records, law enforcement and industry cooperation channels, relevant regulations, and company policies."
+              "Coordinate or conduct internal investigations of problems such as employee theft and violations of corporate loss prevention policies.",
+              "Administer systems and programs to reduce loss, maintain inventory control, or increase safety.",
+              "Review loss prevention exception reports and cash discrepancies to ensure adherence to guidelines.",
+              "Train loss prevention staff, retail managers, or store employees on loss control and prevention measures."
             ]
           },
           "id": "loss-prevention-managers.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Checkable outputs: reviewed exception reports and cash-audit conclusions, internal investigation and interview records, inventory-control and security program plans, employee training and compliance-advice records, case materials for law enforcement cooperation, and loss prevention databases and trend analyses."
-            ]
-          },
-          "id": "loss-prevention-managers.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Full workflow: collect exception reports and discrepancy data → preliminarily assess risks and confirm investigative authorization → conduct on-site checks and secure evidence → interview and investigate collaboratively → form conclusions and handling recommendations → implement controls and training → update databases and track effects."
-            ]
-          },
-          "id": "loss-prevention-managers.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-tasks"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8713,6 +8714,32 @@
                 "publisher": "FermatMind",
                 "scope": "Paper exercise",
                 "url": "#career-content-path"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/11-9199.08#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11013,41 +11040,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "loss-prevention-managers.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "loss-prevention-managers.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "loss-prevention-managers.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "loss-prevention-managers.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "Activity preferences can only help design trials; they cannot determine qualifications or performance.",
         "interest": "First observe interest, stress, and experience during real site patrols, investigative interviews, and compliance judgments.",
@@ -11317,7 +11315,7 @@
       "text": "Loss Prevention Managers: Tasks, Pay and Training"
     }
   },
-  "source_content_sha256": "d2d176ded255268da448f16e28a6663b479ad56f8b4d0d4ec0d2b137aba44d93",
+  "source_content_sha256": "55fad37be8a0a5484703eff5a697657cd8afe4e9a11dd41cf275611ecdefc018",
   "subject": {
     "canonical_slug": "loss-prevention-managers",
     "name": "Loss Prevention Managers",

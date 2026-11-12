@@ -183,13 +183,7 @@
         "status": "pending_mapping"
       },
       "item:dietitians-and-nutritionists.profile.responsibilities-block.1": {
-        "status": "pending_mapping"
-      },
-      "item:dietitians-and-nutritionists.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:dietitians-and-nutritionists.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:dietitians-and-nutritionists.profile.work-context-block.1": {
         "status": "pending_mapping"
@@ -6155,8 +6149,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "dietitians-and-nutritionists.profile.responsibilities-block.1",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6167,8 +6169,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "dietitians-and-nutritionists.profile.responsibilities-block.1",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6179,8 +6189,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "dietitians-and-nutritionists.profile.responsibilities-block.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6191,8 +6209,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "dietitians-and-nutritionists.profile.responsibilities-block.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7346,41 +7372,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Common inputs include dietary and health history, food labels and recipes, laboratory tests, cultural, religious and budget preferences, institutional nutrition guidelines, and clinical material used within the scope of authorization."
+              "Assess nutritional needs, diet restrictions, and current health plans to develop and implement dietary-care plans and provide nutritional counseling.",
+              "Evaluate laboratory tests in preparing nutrition recommendations.",
+              "Counsel individuals and groups on basic rules of good nutrition, healthy eating habits, and nutrition monitoring to improve their quality of life.",
+              "Advise patients and their families on nutritional principles, dietary plans, diet modifications, and food selection and preparation."
             ]
           },
           "id": "dietitians-and-nutritionists.profile.responsibilities-block.1",
           "source_refs": [
-            "editorial-safe-exercise-v2"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "The core outputs are nutrition assessment records, individualised nutrition care plans, education material, menus and programme plans, monitoring records, and a list of issues that need to be passed to the medical team."
-            ]
-          },
-          "id": "dietitians-and-nutritionists.profile.responsibilities-block.2",
-          "source_refs": [
-            "editorial-safe-exercise-v2"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "O*NET lists 28 tasks, 13 core and 15 supplemental: the core includes assessing needs and restrictions, testing and monitoring, individual and group consultation, cultural adaptation, collaboration with physicians, collecting food history and allergy and medication information, menus, consultation coordination, education courses, research and professional training; managing food staff, purchasing costs, special diets and nutrigenomic research are supplemental, and not everyone takes on all of them. BLS distinguishes clinical medical nutrition therapy, community education and food service management."
-            ]
-          },
-          "id": "dietitians-and-nutritionists.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-details",
-            "bls-current-2025-2035"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -9324,6 +9324,32 @@
                 "publisher": "Official text",
                 "scope": "regulatory_context",
                 "url": "https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-G/part-482/subpart-C/section-482.28"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/29-1031.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11766,41 +11792,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "dietitians-and-nutritionists.profile.responsibilities-block.1",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "dietitians-and-nutritionists.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "dietitians-and-nutritionists.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "dietitians-and-nutritionists.profile.responsibilities-block.1",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "Interests only suggest exploration directions; actual fit is verified through supervised practice and training feedback.",
         "interest": "Six interest scores S75/I63/E40/C39/R34/A23, SI code; style Impact attention to detail 90, dependability 80, cooperation 77, empathy 76, integrity 72, social orientation 69, self control 57 and stress tolerance 54. These are occupational characteristic scores, not population percentages, Big Five scores, EQ or IQ, or personal thresholds.",
@@ -12117,7 +12114,7 @@
       "text": "Dietitians and nutritionists"
     }
   },
-  "source_content_sha256": "d49694698ea2b4b37874f60e76b07ed24a9b86fda648b2a868417c42381e4de4",
+  "source_content_sha256": "d07b206875dae9e6f76ab240ae1536796df09f9d821d9c09d72dbed16f913627",
   "subject": {
     "canonical_slug": "dietitians-and-nutritionists",
     "name": "Dietitians and nutritionists",

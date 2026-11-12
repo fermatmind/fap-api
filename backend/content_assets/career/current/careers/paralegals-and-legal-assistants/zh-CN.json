@@ -174,7 +174,7 @@
         "status": "mapped"
       },
       "item:paralegals-and-legal-assistants.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:paralegals-and-legal-assistants.profile.work-context-block.3": {
         "status": "mapped"
@@ -9350,16 +9350,8 @@
         "status": "unfilled"
       },
       "responsibilities_block.05.category": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.profile.responsibilities-block.2",
-          "path": [
-            "data",
-            "entries",
-            4
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "responsibilities_block.05.description": {
         "ref": null,
@@ -9370,16 +9362,8 @@
         "status": "unfilled"
       },
       "responsibilities_block.06.category": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.profile.responsibilities-block.2",
-          "path": [
-            "data",
-            "entries",
-            5
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "responsibilities_block.06.description": {
         "ref": null,
@@ -12343,18 +12327,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "核任务范围、律师指示和案件期限。",
-              "整理案卷、事实时间线及证据来源。",
-              "检索法规、判例和公开记录并注明版本。",
-              "起草函件、诉状或合同等供律师复核。",
-              "与律师、法院或客户协调已授权的信息。",
-              "检查引注、事实、附件与提交格式。",
-              "保留修改记录并按律师确认交付。"
+              "准备信件或其他文件，如法律邮件，并组织和维护文件在纸质或电子提交系统。",
+              "编写、编辑或审查法律文件，包括立法、书状、书状、上诉、遗嘱、合同和房地产结算声明。",
+              "调查案件的事实和法律，并搜索相关来源，如公共记录和互联网来源，以确定诉讼原因和准备案件。",
+              "通过组织展览等任务为审判做准备。"
             ]
           },
           "id": "paralegals-and-legal-assistants.profile.responsibilities-block.2",
           "source_refs": [
-            "source-pack-onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -14227,6 +14208,32 @@
                 "publisher": "U.S. Department of Labor",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/23-2093.00"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/23-2011.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -16535,7 +16542,7 @@
       "text": "律师助理与法律助理：职责、入行和执业边界"
     }
   },
-  "source_content_sha256": "74f1a506a688b28158a315c50e3e745fc1c7cc4745def5c5960b90f6f04d4089",
+  "source_content_sha256": "71dec4ad3c0cfa0d2e11a2fcbc38e892744c1d83c721adf3ae868fb939706fd2",
   "subject": {
     "canonical_slug": "paralegals-and-legal-assistants",
     "name": "律师助理与法律助理",

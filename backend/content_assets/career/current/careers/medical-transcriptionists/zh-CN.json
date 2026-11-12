@@ -165,7 +165,7 @@
         "status": "mapped"
       },
       "item:medical-transcriptionists.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:medical-transcriptionists.profile.work-context-block.3": {
         "status": "mapped"
@@ -9271,16 +9271,8 @@
         "status": "unfilled"
       },
       "responsibilities_block.05.category": {
-        "ref": {
-          "id": "medical-transcriptionists.profile.responsibilities-block.2",
-          "path": [
-            "data",
-            "entries",
-            4
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "responsibilities_block.05.description": {
         "ref": null,
@@ -9291,16 +9283,8 @@
         "status": "unfilled"
       },
       "responsibilities_block.06.category": {
-        "ref": {
-          "id": "medical-transcriptionists.profile.responsibilities-block.2",
-          "path": [
-            "data",
-            "entries",
-            5
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "responsibilities_block.06.description": {
         "ref": null,
@@ -12247,18 +12231,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "报告转录：听音写稿。",
-              "缩写还原：核语境。",
-              "术语数值：逐项核。",
-              "编辑格式：按模板。",
-              "疑点处理：不猜补。",
-              "保密访问：按权限。",
-              "交回报告：待审核。"
+              "以印刷或电子形式提供报告，供医生审查、签名和纠正，并列入病人的医疗记录。",
+              "编写医疗报告、信函、记录、病人护理信息、统计、医学研究和行政材料。",
+              "识别报告中的错误，并与医生确认，以获取准确的信息。",
+              "审查和编辑转录的报告，或为拼写、语法、明确性、一致性和适当的医学术语规定材料。"
             ]
           },
           "id": "medical-transcriptionists.profile.responsibilities-block.2",
           "source_refs": [
-            "source-pack-onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -13917,6 +13898,32 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/31-9094.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -16020,7 +16027,7 @@
       "text": "医疗文书转录员：工作内容、美国工资与入行 | 费马测试"
     }
   },
-  "source_content_sha256": "74c6e5ad46a73ece0d4848797c6360b12097a418f8d2a1d974928f35e0c3c19a",
+  "source_content_sha256": "87e392fd6cf650645f7a069c85d3e54ca4a42374c8120ed93d1a19f8f631a7b5",
   "subject": {
     "canonical_slug": "medical-transcriptionists",
     "name": "医疗文书转录员",

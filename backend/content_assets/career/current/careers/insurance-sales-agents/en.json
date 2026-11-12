@@ -153,13 +153,7 @@
         "status": "pending_mapping"
       },
       "item:insurance-sales-agents.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:insurance-sales-agents.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:insurance-sales-agents.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:insurance-sales-agents.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6107,8 +6101,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "insurance-sales-agents.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6119,8 +6121,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "insurance-sales-agents.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6131,8 +6141,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "insurance-sales-agents.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6143,8 +6161,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "insurance-sales-agents.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7278,40 +7304,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Objects of work | Conduct sales and service within delegated authority and compliance boundaries, working with client risks and protection needs, insurance products and terms, application and policy materials, and commission and renewal rules."
+              "Customize insurance programs to suit individual customers, often covering a variety of risks.",
+              "Sell various types of insurance policies to businesses and individuals on behalf of insurance companies, including automobile, fire, life, property, medical and dental insurance, or specialized policies, such as marine, farm/crop, and medical malpractice.",
+              "Explain features, advantages, and disadvantages of various policies to promote sale of insurance plans.",
+              "Perform administrative tasks, such as maintaining records and handling policy renewals."
             ]
           },
           "id": "insurance-sales-agents.profile.responsibilities-block.2",
           "source_refs": [
-            "nfra-sales-conduct"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Checkable outputs | Reviewable needs and ability-to-pay analysis records, product comparisons and explanations of terms and charges, application materials and policy records, delivery, follow-up and modification records, and explanations of claims entry points. Results must be traceable to the authorized scope and product term version."
-            ]
-          },
-          "id": "insurance-sales-agents.profile.responsibilities-block.3",
-          "source_refs": [
-            "nfra-sales-conduct"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Complete workflow | Find and contact clients → understand risks and needs → collect application information → compare and explain product terms and charges → complete applications and records → deliver policies, follow up, handle modifications and renewals, and explain claims entry points."
-            ]
-          },
-          "id": "insurance-sales-agents.profile.responsibilities-block.4",
-          "source_refs": [
-            "nfra-sales-conduct"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8736,6 +8737,32 @@
                 "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/41-3021.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11098,41 +11125,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "insurance-sales-agents.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "insurance-sales-agents.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "insurance-sales-agents.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "insurance-sales-agents.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "Activity preferences can only help design trials; they cannot determine qualifications or performance.",
         "interest": "First observe your interest, stress, and collaboration experience in real tasks.",
@@ -11326,7 +11324,7 @@
       "text": "Insurance Sales Agent: Client Needs, Policies and Service"
     }
   },
-  "source_content_sha256": "6d16f62119a8ebea5c4a721d73b6e9a8240898aee8506b13acfbec432c53c839",
+  "source_content_sha256": "9cf4ae6dd7bc6ea47af407a40ef57fc73844e991fb13c65962791fe450a0be43",
   "subject": {
     "canonical_slug": "insurance-sales-agents",
     "name": "Insurance Sales Agent",

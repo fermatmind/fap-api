@@ -9435,8 +9435,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.profile.definition-block.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -9447,8 +9455,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.profile.definition-block.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -12407,13 +12423,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "研究设计：疾病与健康研究。",
-              "数据分析：解释结果，撰写报告。"
+              "严格遵守操作有毒物质时的安全程序，以避免污染。",
+              "评估药物、气体、杀虫剂、寄生虫和微生物在各级的影响。",
+              "计划和直接研究研究人类或动物疾病，预防方法和疾病的治疗方法。",
+              "准备和分析器官、组织和细胞样本，以查明毒性、细菌或微生物，或研究细胞结构。"
             ]
           },
           "id": "medical-scientists-except-epidemiologists.profile.definition-block.1",
           "source_refs": [
-            "onet-summary"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -14267,6 +14285,32 @@
                 "publisher": "Shanghai University",
                 "scope": "上海大学医学院科学研究岗位",
                 "url": "https://jobs.shu.edu.cn/Ads/Ads?a=921ef790-92ec-4eac-b670-b2d098959bd3"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/19-1042.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -16665,7 +16709,7 @@
       "text": "医学科学家（不含流行病学家）：工作内容、美国工资与入行 | 费马测试"
     }
   },
-  "source_content_sha256": "564de05a43ce99b18ad3d019617a5ba54566df2233f2037e2279951127035add",
+  "source_content_sha256": "b8acb251949b2b10aa62745f51fe7a8a6b9c696b7eb89e5987550787a10aab1e",
   "subject": {
     "canonical_slug": "medical-scientists-except-epidemiologists",
     "name": "医学科学家（不含流行病学家）",

@@ -183,7 +183,7 @@
         "status": "mapped"
       },
       "item:microbiologists.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:microbiologists.profile.work-context-block.3": {
         "status": "mapped"
@@ -9489,16 +9489,8 @@
         "status": "unfilled"
       },
       "responsibilities_block.05.category": {
-        "ref": {
-          "id": "microbiologists.profile.responsibilities-block.2",
-          "path": [
-            "data",
-            "entries",
-            4
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "responsibilities_block.05.description": {
         "ref": null,
@@ -9509,16 +9501,8 @@
         "status": "unfilled"
       },
       "responsibilities_block.06.category": {
-        "ref": {
-          "id": "microbiologists.profile.responsibilities-block.2",
-          "path": [
-            "data",
-            "entries",
-            5
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "responsibilities_block.06.description": {
         "ref": null,
@@ -12479,18 +12463,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "问题与方案：提出可检验的研究问题并设计实验方案。",
-              "培养与操作：按无菌与生物安全规程培养与处理微生物。",
-              "数据采集：按方案采集并核对实验数据。",
-              "分析解释：统计分析并区分相关与因果。",
-              "论文与共享：撰写论文与报告并按政策共享数据。",
-              "记录与合规：如实记录并遵守生物安全与伦理要求。",
-              "协作与交流：与团队、临床或产业伙伴沟通结果与局限。"
+              "将细菌或其他微生物的培养物分离并保存在规定或开发的介质中，控制水分、空气循环、温度和营养。",
+              "为卫生部门、社区环境卫生方案以及需要诊断和治疗信息的医生提供实验室服务。",
+              "监测和对水、食物和环境进行测试，以检测有害微生物或获取有关污染、污染或感染的来源的信息。",
+              "使用微镜检查生理学、形态学和文化特征，以识别和分类微生物在人类、水和食物样本。"
             ]
           },
           "id": "microbiologists.profile.responsibilities-block.2",
           "source_refs": [
-            "source-pack-onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -14168,6 +14149,32 @@
                 "publisher": "美国劳工统计局",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/ooh/healthcare/clinical-laboratory-technologists-and-technicians.htm"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/19-1022.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -16348,7 +16355,7 @@
       "text": "微生物学家：工作内容、美国工资与入行 | 费马测试"
     }
   },
-  "source_content_sha256": "d1ae94b205ea9b45198137a0cf037759aa1b6cbef1428fd861c8203ac126e8bc",
+  "source_content_sha256": "c958d1656f2cdea45daa1a15d3a23855e3658b253076b05e994cc95be67a0dd4",
   "subject": {
     "canonical_slug": "microbiologists",
     "name": "微生物学家",

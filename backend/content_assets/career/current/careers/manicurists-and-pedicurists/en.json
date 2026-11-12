@@ -159,13 +159,7 @@
         "status": "pending_mapping"
       },
       "item:manicurists-and-pedicurists.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:manicurists-and-pedicurists.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:manicurists-and-pedicurists.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:manicurists-and-pedicurists.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6113,8 +6107,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "manicurists-and-pedicurists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6125,8 +6127,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "manicurists-and-pedicurists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6137,8 +6147,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "manicurists-and-pedicurists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6149,8 +6167,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "manicurists-and-pedicurists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7283,40 +7309,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Inputs: clients' fingernails and toenails and their condition, appointment and requirements information, nail tools and disposable supplies, disinfectants and chemicals such as nail polish, solvents, powders, and polish remover, products and color charts, service and inventory records, and payment and appointment systems."
+              "Clean and sanitize tools and work environment.",
+              "Apply undercoat and clear or colored polish onto nails with brush.",
+              "Maintain supply inventories and records of client services.",
+              "Shape and smooth ends of nails, using scissors, files, or emery boards."
             ]
           },
           "id": "manicurists-and-pedicurists.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Checkable outputs: cleaned and shaped nails with completed color or decoration, disinfected tools and workstations, assessments and care advice for nail and hand conditions, service and inventory records, appointment and payment records, and explanations when referral or escalation is needed."
-            ]
-          },
-          "id": "manicurists-and-pedicurists.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Complete workflow: check the appointment and requirements → inspect hands and nail surfaces and confirm contraindications → clean and disinfect tools and the workstation → treat cuticles and trim and file nails → apply base coat and color or decorations, with extensions or reinforcement when needed → inspect the result and confirm it with the client → record the service and inventory and collect payment."
-            ]
-          },
-          "id": "manicurists-and-pedicurists.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-tasks"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8754,6 +8755,32 @@
                 "publisher": "FermatMind",
                 "scope": "Paper exercise",
                 "url": "#career-content-path"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/39-5092.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11108,41 +11135,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "manicurists-and-pedicurists.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "manicurists-and-pedicurists.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "manicurists-and-pedicurists.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "manicurists-and-pedicurists.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "Activity preferences can only help design trials; they cannot determine qualifications or performance.",
         "interest": "First observe your interest, stress, and experience during actual manicure and pedicure work, client communication, and hygiene implementation.",
@@ -11364,7 +11362,7 @@
       "text": "Manicurists and Pedicurists: Tasks, Pay and Training"
     }
   },
-  "source_content_sha256": "cd9dc343b8b2a058ac47b752d1c077d2b7874bdcd120424e5ea2dd7265234790",
+  "source_content_sha256": "55df23a0aa2c137296d5924c730f0b0309a60ff8b794917e1af4a9d5fd04aecb",
   "subject": {
     "canonical_slug": "manicurists-and-pedicurists",
     "name": "Manicurists and Pedicurists",

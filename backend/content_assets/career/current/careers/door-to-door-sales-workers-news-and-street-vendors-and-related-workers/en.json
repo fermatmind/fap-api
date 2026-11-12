@@ -1503,22 +1503,7 @@
         "status": "mapped"
       },
       "item:actors.display.responsibilities_block.01": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.02": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.03": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.04": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.05": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.06": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:actors.display.riasec_fit_block.code": {
         "status": "mapped"
@@ -19178,8 +19163,16 @@
         "status": "mapped"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -19190,8 +19183,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -19202,8 +19203,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -19214,8 +19223,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -23423,90 +23440,18 @@
           "availability": "available",
           "copy_key": "career.item.responsibilities-block",
           "data": {
-            "paragraphs": [
-              "Common inputs: the true information about the goods or services and the clearly marked price and pricing unit, the deliverability and delivery time and freight and warranty and return and exchange conditions, the cancellation right and cooling-off period and return instructions where applicable, the payment and change and voucher and invoice arrangements, the business location and time period and local registration and urban management requirements, and the safety arrangements for cash and goods and personal information carried."
+            "entries": [
+              "Explain products or services and prices and demonstrate use of products.",
+              "Develop prospect lists.",
+              "Deliver merchandise and collect payment.",
+              "Write and record orders for merchandise or enter orders into computers."
             ]
           },
           "id": "actors.display.responsibilities_block.01",
           "source_refs": [
-            "onet"
+            "batch52-onet-core"
           ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "Core outputs: a statement writing out the product and price and terms, recorded or entered orders, checkable payment and change and vouchers and invoices, return and exchange and cancellation right statements and handling records, display and restocking and visit records, and satisfaction follow-up and newcomer training records."
-            ]
-          },
-          "id": "actors.display.responsibilities_block.02",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "Typical process: prepare and find people—explain and demonstrate and quote—persuade the purchase and record the order—deliver or same-spot deliver and collect payment and issue vouchers—keep records and follow up on satisfaction."
-            ]
-          },
-          "id": "actors.display.responsibilities_block.03",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "Common collaborators: supply and warehouse and distribution, cashier and finance, fellow salespeople and mentors, local business and market supervision and urban management departments, and customers and potential customers."
-            ]
-          },
-          "id": "actors.display.responsibilities_block.04",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "Common tools and objects: goods and samples and explanatory materials, order and payment and voucher and invoice tools, mobile payment and collection devices, display and shelving and freight tools, and customer and visit and follow-up records."
-            ]
-          },
-          "id": "actors.display.responsibilities_block.05",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "China's consumer protection law Articles 20, 21 and 22 require truthful and comprehensive and clear answers and clearly marked prices and a true name and vouchers issued per regulation or custom and mandatorily on request; Article 24 concerns return, exchange and repair for nonconforming quality, and Article 25 concerns the seven-day no-reason return for online and television and telephone and mail order and its exceptions, without applying the seven-day no-reason rule to all face-to-face sales. The 2024 implementing regulations Articles 9—13 and 17—19 supplement truthful advertising and quoting, honoring commitments and standard terms and returns, and operator rules cannot exclude statutory consumer rights. China's Regulations on the Administration of Direct Selling as revised in 2017: Articles 3 and 9 make off-premises product promotion by enterprises approved for direct selling subject to that system, and do not equate all vendors or door-to-door services with direct sellers. Articles 15, 16 and 18 cover excluded recruitment targets, the sales contract and permitted areas, and free enterprise training and assessment leading to a direct seller certificate; without the certificate one may not engage in the corresponding direct selling. Articles 22 and 23 require the certificate and contract, leaving when the consumer refuses, and return disclosure and vouchers and the marked price; Article 24 requires remuneration based on the person's own direct sales income with a total of no more than 30% and at least monthly payment, and this applies only to that system and not to all sales industries; Article 25 allows return or exchange with the receipt within 30 days of purchase if unopened, handled within 7 days of the request, with other situations governed by law or contract. Chinese customer lists and contact details are handled as identifiable personal information and are not all called sensitive personal information; financial accounts and movement trajectories and the like require separate checking of the sensitive scope and the lawful basis and the adequacy and necessity for a specific purpose and the applicability of separate consent and impact assessment. Article 29 of the consumer protection law and Articles 23 and 24 of the 2024 implementing regulations restrict excessive collection and blanket default authorization and commercial information calls, and processing stops when the consumer refuses or opts out; an approved system account does not automatically permit uploading to external AI, and de-identification is not anonymization. The specific custody and export and institutional procedures were not collected."
-            ]
-          },
-          "id": "actors.display.responsibilities_block.06",
-          "source_refs": [
-            "r5-consumer-current",
-            "r5-consumer-reg",
-            "r5-direct-current",
-            "r5-cn-pipl",
-            "r5-consumer-current",
-            "r5-consumer-reg"
-          ],
-          "type": "prose"
+          "type": "list"
         },
         {
           "availability": "available",
@@ -31903,6 +31848,32 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/41-9091.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -36723,44 +36694,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$item": "actors.display.responsibilities_block.01",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.02",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.03",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.04",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.05",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.06",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "actors.display.responsibilities_block.01",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": {
           "$item": "actors.display.riasec_fit_block.fit-interest",
@@ -37536,7 +37475,7 @@
       "text": "Door-to-door sales workers, news and street vendors, and related workers"
     }
   },
-  "source_content_sha256": "2fcbb62317591926fa96a757aedb321d09aa9758df8322164a91576c1e58634d",
+  "source_content_sha256": "785e639b15fae99e3dabfefc1dfa3fcd55b47de0c79093e7d645623806ac2ebc",
   "subject": {
     "canonical_slug": "door-to-door-sales-workers-news-and-street-vendors-and-related-workers",
     "name": "Door-to-door sales workers, news and street vendors, and related workers",

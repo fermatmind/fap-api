@@ -9049,8 +9049,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "meeting-convention-and-event-planners.profile.definition-block.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -9061,8 +9069,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "meeting-convention-and-event-planners.profile.definition-block.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -11335,13 +11351,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Plans and budgets: Develop an event plan from requirements and budget, select and coordinate venues and vendors, and check quotations and terms.",
-              "Contracts and execution: Manage contracts and settlement, arrange schedules and execution checklists, coordinate on site, handle unexpected situations, and document reviews."
+              "Consult with customers to determine objectives and requirements for events, such as meetings, conferences, and conventions.",
+              "Review event bills for accuracy and approve payment.",
+              "Coordinate services for events, such as accommodation and transportation for participants, facilities, catering, signage, displays, special needs requirements, printing and event security.",
+              "Arrange the availability of audio-visual equipment, transportation, displays, and other event needs."
             ]
           },
           "id": "meeting-convention-and-event-planners.profile.definition-block.1",
           "source_refs": [
-            "source-pack-onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -12895,6 +12913,32 @@
                 "publisher": "BLS",
                 "scope": "proxy",
                 "url": "https://www.bls.gov/ooh/media-and-communication/public-relations-specialists.htm"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/13-1121.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -15111,7 +15155,7 @@
       "text": "Meeting, Convention, and Event Planners: Duties, U.S. Pay, and Entry"
     }
   },
-  "source_content_sha256": "9117ad808364e5d7927f4741a1fde3ae5b06af52214c16ef51fcc081793b2346",
+  "source_content_sha256": "679efcdd98175f128b15f3111d61132ae5aa4a978733dd5f35383e53026d9c5d",
   "subject": {
     "canonical_slug": "meeting-convention-and-event-planners",
     "name": "Meeting, Convention, and Event Planners",

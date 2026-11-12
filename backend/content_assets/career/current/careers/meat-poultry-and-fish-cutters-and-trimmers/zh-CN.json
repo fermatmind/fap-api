@@ -156,13 +156,7 @@
         "status": "pending_mapping"
       },
       "item:meat-poultry-and-fish-cutters-and-trimmers.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:meat-poultry-and-fish-cutters-and-trimmers.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:meat-poultry-and-fish-cutters-and-trimmers.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:meat-poultry-and-fish-cutters-and-trimmers.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6122,8 +6116,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6134,8 +6136,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6146,8 +6156,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6158,8 +6176,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7299,40 +7325,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "投入对象：待分割的肉类、家禽与鱼类原料、产品规格与出成率要求、刀具与锯等手工工具、称重与标签设备、清洗与消毒用品、卫生与设备安全规程。"
+              "使用刀、刀、锯、木锯或其他设备进行肉类切割和剪切。",
+              "准确称量肉类，并对容器进行标记，以记录重量和内容。",
+              "检查肉制品的缺陷，瘀伤或斑点，并连同任何过量脂肪一起去除。",
+              "切割和切割肉，准备包装。"
             ]
           },
           "id": "meat-poultry-and-fish-cutters-and-trimmers.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "可检查产出：符合规格的分割与修整切块、按重量与内容物贴标的分装、去骨去皮修整后的半成品、绞肉与修整料、清洗后的刀具与设备，以及可追溯的称重与批次记录。"
-            ]
-          },
-          "id": "meat-poultry-and-fish-cutters-and-trimmers.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "完整工作流程：核对规格与出成率 → 检查原料与修除瑕疵 → 按部位分割与去骨 → 修整与分级 → 称重、贴标与分装封口 → 清洗刀具设备并记录批次的人机闭环。"
-            ]
-          },
-          "id": "meat-poultry-and-fish-cutters-and-trimmers.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-tasks"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8809,6 +8810,32 @@
                 "period": "2026-11",
                 "publisher": "eCFR",
                 "url": "https://www.ecfr.gov/current/title-21/chapter-I/subchapter-B/part-123/subpart-A/section-123.7"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/51-3022.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11125,41 +11152,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "meat-poultry-and-fish-cutters-and-trimmers.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "meat-poultry-and-fish-cutters-and-trimmers.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "meat-poultry-and-fish-cutters-and-trimmers.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "meat-poultry-and-fish-cutters-and-trimmers.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "活动偏好只能帮助设计试验，不能判断资格或表现。",
         "interest": "先观察真实的分割修整、卫生操作与长时间站立中的兴趣、压力与体验。",
@@ -11372,7 +11370,7 @@
       "text": "肉类、家禽与鱼类切割与修整工做什么：任务、工资与入行"
     }
   },
-  "source_content_sha256": "e283f37e3bb61df60c60136b3d698ea3e191414ff9a6511e317db4411938e07f",
+  "source_content_sha256": "3c8585ae159197fbf55b1fa637d81fd325d7b187700e869e29365e65abb6e181",
   "subject": {
     "canonical_slug": "meat-poultry-and-fish-cutters-and-trimmers",
     "name": "肉类、家禽与鱼类切割与修整工",

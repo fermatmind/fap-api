@@ -1503,22 +1503,7 @@
         "status": "mapped"
       },
       "item:actors.display.responsibilities_block.01": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.02": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.03": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.04": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.05": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.06": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:actors.display.riasec_fit_block.code": {
         "status": "mapped"
@@ -19202,8 +19187,16 @@
         "status": "mapped"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -19214,8 +19207,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -19226,8 +19227,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -19238,8 +19247,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -23412,88 +23429,18 @@
           "availability": "available",
           "copy_key": "career.item.responsibilities-block",
           "data": {
-            "paragraphs": [
-              "Common inputs: drawings and design specifications and ceiling or partition construction and the room's clear height and opening elevations, the specifications and anti-corrosion and fire protection treatment of studs and hangers and suspension fittings and connectors, the specifications and conformity certificates and performance test reports of panels and acoustic tiles and moisture-proof and insulation materials, the verticality and levelness and firmness of the substrate and masonry and embedded parts, working-at-height and temporary power and power tool safety conditions, and concealed works and inspection and acceptance record requirements."
+            "entries": [
+              "Read blueprints or other specifications to determine methods of installation, work procedures, or material or tool requirements.",
+              "Measure and mark surfaces to lay out work, according to blueprints or drawings, using tape measures, straightedges or squares, and marking devices.",
+              "Cut and screw together metal channels to make floor or ceiling frames, according to plans for the location of rooms or hallways.",
+              "Hang drywall panels on metal frameworks of walls and ceilings in offices, schools, or other large buildings, using lifts or hoists to adjust panel heights, when necessary."
             ]
           },
           "id": "actors.display.responsibilities_block.01",
           "source_refs": [
-            "onet"
+            "batch52-onet-core"
           ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "Core outputs: records of stud and panel and acoustic tile installation completed by specification and design, opening and edging and expansion joint and leveling records, anchoring and securing and leveling inspection records, substrate and suspension fitting inspection and concealed works records, and anomaly reporting and handover records."
-            ]
-          },
-          "id": "actors.display.responsibilities_block.02",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "Typical flow: drawing reading and layout and framing and substrate — installation and fabrication — coordination and inspection and close-out and anomaly reporting."
-            ]
-          },
-          "id": "actors.display.responsibilities_block.03",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "Common collaborators: the team leader and technical lead, the tapers and carpenters and water and electricity and HVAC trades, in-ceiling equipment installation and inspection, and materials and safety and quality management personnel."
-            ]
-          },
-          "id": "actors.display.responsibilities_block.04",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "Common tools and objects: metal or wood studs and hangers and suspension fittings and connectors, paper-faced drywall and acoustic tiles and vibration-damping materials and insulation and moisture-proof materials, tape measures and straightedges and squares and marking tools and levels or spirit levels, keyhole saws and knives and cutting tools and screws and nails and adhesive and staples and steel wire, lifting or hoisting equipment and scaffolding and ladders and safety harnesses, and protective supplies and dust and noise control supplies and recording tools."
-            ]
-          },
-          "id": "actors.display.responsibilities_block.05",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "Installers work to the approved design and current codes and report promptly, do not change load-bearing construction on their own, and do not issue acceptance or compliance conclusions beyond the authority obtained. GB55034-2022 has been in force since 2023-06-01 and is fully mandatory, and it prevails in case of conflict; the announcement repeals JGJ80-2016 clauses 4.1.1/4.2.1/5.2.3/6.4.1/8.1.2, not the whole of JGJ80. This round verified the announcement, and the other specific technical clauses of GB55034 and JGJ80 were not verified; the standard name is not used to claim that any height uniformly requires the same harness/platform solution. Article 2 of the Regulations on the Administration of Construction Project Work Safety covers decoration; Article 27 requires construction technical disclosure signed by both parties, Article 31 requires the construction unit to have fire and electricity use systems, Article 32 requires providing protective equipment and informing workers of hazardous operations, Article 33 requires correct use, Article 36 requires training and assessment at least once a year, and Article 37 requires education and assessment for job changes/new sites/new processes. Article 32 provides the right to stop work immediately or take necessary emergency measures and then evacuate when personal safety is endangered. This does not impose a uniform stop-work rule for ordinary quality anomalies, require waiting for a leader's permission to exercise emergency rights, or authorize self-approved resumption of work; the specific on-site protection and restart plans were not obtained. GB55032-2022 has been in force since 2023-03-01 and is fully mandatory, and it prevails where inconsistent; the announcement repeals GB50210-2018 clauses 3.1.4/6.1.11/6.1.12/7.1.12/11.1.12, which does not mean repealing the whole standard. GB50210-2018 ceiling clause 7.1.2 requires verifying the design and materials/concealed works/construction records, and 7.1.3 requires re-testing formaldehyde in artificial wood panels; 7.1.4 concealed items include pipes and equipment/water pipe pressure tests and duct tightness, wood stud fire and anti-corrosion treatment, and embedded parts/hangers/studs/fill/reverse bracing transfer layers; 7.1.7 requires handover inspection of the clear height and openings and ceiling pipes and equipment support elevations before installing studs; 7.1.8 covers fire protection of wood studs and wood panels; 7.1.11 covers end distance <=300 mm, reverse bracing for hangers >1500 mm, and adjusting hangers or steel supports when equipment is encountered; 7.1.13 covers safe and reliable connections, and 7.1.14 covers providing a steel transfer layer for upper grid steel roof frames or hangers >2500 mm; 7.1.15 covers expansion/separation joints for large-area or narrow-long ceilings meeting the design. Original clause 7.1.12 prohibiting heavy and vibrating equipment on studs has been repealed and cannot stand alone as a current mandatory basis, and loads and fastening must be verified against current codes and the design. GB55032 was also actually read in this round for 2.0.1—2.0.11: responsibility/quality system, no unauthorized changes to the design, true, complete, and traceable records, and training and assessment and records; the remaining clauses were not read, so no full-text construction conclusion is claimed."
-            ]
-          },
-          "id": "actors.display.responsibilities_block.06",
-          "source_refs": [
-            "r5-construction-safety",
-            "r5-safety-current",
-            "r5-gb50210",
-            "r5-quality-current"
-          ],
-          "type": "prose"
+          "type": "list"
         },
         {
           "availability": "available",
@@ -31956,6 +31903,32 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/47-2081.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -36768,44 +36741,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$item": "actors.display.responsibilities_block.01",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.02",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.03",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.04",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.05",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.06",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "actors.display.responsibilities_block.01",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": {
           "$item": "actors.display.riasec_fit_block.fit-interest",
@@ -37587,7 +37528,7 @@
       "text": "Drywall and ceiling tile installers"
     }
   },
-  "source_content_sha256": "ede6efa8d1bbe8c69451a52305f9802e6bead628b6743fcf354581efdf737788",
+  "source_content_sha256": "03e5705cc90992737b90606cfda70d300c456ae38a231a3b6ea5e1e0b74a12d0",
   "subject": {
     "canonical_slug": "drywall-and-ceiling-tile-installers",
     "name": "Drywall and ceiling tile installers",

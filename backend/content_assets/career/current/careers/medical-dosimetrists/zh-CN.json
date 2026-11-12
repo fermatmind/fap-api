@@ -162,13 +162,7 @@
         "status": "pending_mapping"
       },
       "item:medical-dosimetrists.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:medical-dosimetrists.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:medical-dosimetrists.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:medical-dosimetrists.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6128,8 +6122,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-dosimetrists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6140,8 +6142,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-dosimetrists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6152,8 +6162,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-dosimetrists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6164,8 +6182,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-dosimetrists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7308,40 +7334,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "投入对象：处方与靶区约束、影像与解剖结构、治疗计划系统、射束修饰与固定装置，以及剂量与质量保证记录。"
+              "借助计算机、手册及指南布置照射野，减少患者器官等重要组织受到的辐射。",
+              "计划使用波束修改装置，如补偿器、防护罩和网状过滤器，以确保安全有效地提供辐射处理。",
+              "识别和描述身体结构，使用图像程序，如X射线，磁响图像，计算 tomography，或 positron 排放 tomography。",
+              "计算放射治疗的交付，例如每小时放射的数量或范围，基于放射治疗的规定的过程。"
             ]
           },
           "id": "medical-dosimetrists.profile.responsibilities-block.2",
           "source_refs": [
-            "source-pack-onet-details"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "可检查产出：治疗计划与剂量计算、射野与剂量分布文件、剂量核验与质量保证记录、固定与射束修饰装置要求，以及剂量与实施记录。"
-            ]
-          },
-          "id": "medical-dosimetrists.profile.responsibilities-block.3",
-          "source_refs": [
-            "source-pack-onet-details"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "完整工作流程：核对处方与影像 → 勾画并确认结构 → 设计射野与剂量方案 → 计算并按适用方法核验 → 质保记录与团队复核批准 → 沟通并监督实施。具体复核分工依机构规程。"
-            ]
-          },
-          "id": "medical-dosimetrists.profile.responsibilities-block.4",
-          "source_refs": [
-            "source-pack-onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -9012,6 +9013,32 @@
                 "publisher": "Medical Dosimetrist Certification Board",
                 "scope": "contextual",
                 "url": "https://www.mdcb.org/january-certification-exam-handbook-posted-0"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/29-2036.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11415,41 +11442,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "medical-dosimetrists.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "medical-dosimetrists.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "medical-dosimetrists.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "medical-dosimetrists.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "活动偏好只能帮助设计试验，不能判断资格或表现。",
         "interest": "先观察真实任务中的兴趣、压力与协作体验。",
@@ -11673,7 +11671,7 @@
       "text": "医学剂量师做什么？放疗分工、入行与美国薪资"
     }
   },
-  "source_content_sha256": "c2b58ef74e3d9e2afc593c87dfa8f9dfb5be0bbce249621fec44eacb61fae38e",
+  "source_content_sha256": "17a571d01006d4f1548439eaaa405afe6cc98d5941be1af37df0660890811274",
   "subject": {
     "canonical_slug": "medical-dosimetrists",
     "name": "医学剂量师",

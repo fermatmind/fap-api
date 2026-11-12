@@ -186,13 +186,7 @@
         "status": "pending_mapping"
       },
       "item:data-warehousing-specialists.profile.responsibilities-block.1": {
-        "status": "pending_mapping"
-      },
-      "item:data-warehousing-specialists.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:data-warehousing-specialists.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:data-warehousing-specialists.profile.work-context-block.1": {
         "status": "pending_mapping"
@@ -6188,8 +6182,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "data-warehousing-specialists.profile.responsibilities-block.1",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6200,8 +6202,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "data-warehousing-specialists.profile.responsibilities-block.1",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6212,8 +6222,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "data-warehousing-specialists.profile.responsibilities-block.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6224,8 +6242,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "data-warehousing-specialists.profile.responsibilities-block.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7367,40 +7393,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Inputs: Business definitions and target scope, source-table schemas and field samples, primary keys and update frequency, data permissions and service levels, downstream query requirements, and lists of historical failures and data quality issues."
+              "Develop data warehouse process models, including sourcing, loading, transformation, and extraction.",
+              "Verify the structure, accuracy, or quality of warehouse data.",
+              "Map data between source systems, data warehouses, and data marts.",
+              "Develop and implement data extraction procedures from other systems, such as administration, billing, or claims."
             ]
           },
           "id": "data-warehousing-specialists.profile.responsibilities-block.1",
           "source_refs": [
-            "r5-onet-current"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Outputs: Dimension and fact table designs, rerunnable extract-transform-load implementations, quality assertions and quarantine mechanisms, reconciliation conclusions, metadata and lineage records, and user support notes."
-            ]
-          },
-          "id": "data-warehousing-specialists.profile.responsibilities-block.2",
-          "source_refs": [
-            "r5-onet-current"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Process: Clarify requirements → confirm data and permissions → define grain and models → write mappings and transformations → load and apply quality assertions → validate and reconcile → publish metadata → support users and review results. When definitions conflict, rows are anomalous or permissions are insufficient, pause, quarantine and escalate according to procedure."
-            ]
-          },
-          "id": "data-warehousing-specialists.profile.responsibilities-block.3",
-          "source_refs": [
-            "r5-onet-current"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -9237,6 +9238,32 @@
                 "publisher": "People’s Bank of China website",
                 "scope": "recruitment_proxy",
                 "url": "https://www.pbc.gov.cn/renshisi/144501/144513/5836227/5836240/2025121214564112292/2025121214560356519.pdf"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/15-1243.01#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11723,41 +11750,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "data-warehousing-specialists.profile.responsibilities-block.1",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "data-warehousing-specialists.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "data-warehousing-specialists.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "data-warehousing-specialists.profile.responsibilities-block.1",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "The interest code published on this occupation's O*NET summary page is CI: Conventional refers to organizing data and checking quality according to procedures and standards; Investigative refers to analyzing data relationships and improving methods. Check actual tasks: Are you willing to invest consistently in definitions, quality and reproducibility? The interest code describes only activity types, does not predict job performance or constitute hiring criteria.",
         "interest": "Conventional refers to organizing information and data according to established procedures and rules, and handling structured tasks in business settings. Investigative refers to researching and analyzing data and exploring patterns through statistical and mathematical methods. The code comes from the official interest profile, not a personality label.",
@@ -12102,7 +12100,7 @@
       "text": "Data Warehousing Specialists"
     }
   },
-  "source_content_sha256": "b4b4a6af3a160cdda81b2793d3d20fe8cbcfa07c57c1480e25d8da81d1945638",
+  "source_content_sha256": "d945f48ee9a8a23f03387770ca43d8a005fc8f3dbfbd116248f479e72f4d27fe",
   "subject": {
     "canonical_slug": "data-warehousing-specialists",
     "name": "Data Warehousing Specialists",

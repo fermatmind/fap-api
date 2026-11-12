@@ -171,13 +171,7 @@
         "status": "pending_mapping"
       },
       "item:loan-interviewers-and-clerks.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:loan-interviewers-and-clerks.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:loan-interviewers-and-clerks.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:loan-interviewers-and-clerks.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6125,8 +6119,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "loan-interviewers-and-clerks.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6137,8 +6139,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "loan-interviewers-and-clerks.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6149,8 +6159,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "loan-interviewers-and-clerks.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6161,8 +6179,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "loan-interviewers-and-clerks.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7295,40 +7321,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Work inputs: loan and credit applications, applicant personal and financial information, verification sources such as credit agencies and employers, application and closing documents, interest and closing-cost calculations, disbursement and fund-payment records, loan files, and overdue accounts."
+              "Interview loan applicants to obtain personal and financial data and to assist in completing applications.",
+              "Answer questions and advise customers regarding loans and transactions.",
+              "Submit loan applications with recommendation for underwriting approval.",
+              "Verify and examine information and accuracy of loan application and closing documents."
             ]
           },
           "id": "loan-interviewers-and-clerks.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Verifiable outputs: complete, checked application materials, compliant application and closing documents, reviewed interest and fee calculations, loan disbursement and fund-payment entries, promptly updated loan records, and overdue-account follow-up records."
-            ]
-          },
-          "id": "loan-interviewers-and-clerks.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Complete workflow: receive applications and interview applicants to collect information → help complete applications → verify credit and references → review document completeness and accuracy → calculate and review interest, principal, payments, and closing costs → submit for approval or prepare closing documents → record loan disbursements and fund payments → maintain loan records and follow up overdue accounts."
-            ]
-          },
-          "id": "loan-interviewers-and-clerks.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-tasks"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8704,6 +8705,32 @@
                 "publisher": "FermatMind",
                 "scope": "Paper exercise",
                 "url": "#career-content-path"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/43-4131.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11004,41 +11031,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "loan-interviewers-and-clerks.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "loan-interviewers-and-clerks.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "loan-interviewers-and-clerks.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "loan-interviewers-and-clerks.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "Activity preferences can only help design trials; they cannot determine qualifications or performance.",
         "interest": "First observe your interests, stress, and experience during actual paperwork, customer communication, and reviews.",
@@ -11304,7 +11302,7 @@
       "text": "Loan Interviewers and Clerks: Tasks, Pay and Training"
     }
   },
-  "source_content_sha256": "46da777e1c266b5f9a419fe323b7f6d278eaebcd5909fd9efc509f545e476006",
+  "source_content_sha256": "129a2e76ae54c5de6c69a6e6f5725056f82621a6dcd106e7411841873ed1031d",
   "subject": {
     "canonical_slug": "loan-interviewers-and-clerks",
     "name": "Loan Interviewers and Clerks",

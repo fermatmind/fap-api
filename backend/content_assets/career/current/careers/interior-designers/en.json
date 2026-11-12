@@ -159,13 +159,7 @@
         "status": "pending_mapping"
       },
       "item:interior-designers.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:interior-designers.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:interior-designers.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:interior-designers.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6113,8 +6107,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "interior-designers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6125,8 +6127,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "interior-designers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6137,8 +6147,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "interior-designers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6149,8 +6167,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "interior-designers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7283,40 +7309,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Objects of work | Design within authorization and compliance boundaries, working with interior spaces and usage needs, fire and accessibility codes and other requirements, materials, furniture and equipment, and client budgets and schedules."
+              "Design plans to be safe and to be compliant with the American Disabilities Act (ADA).",
+              "Use computer-aided drafting (CAD) and related software to produce construction documents.",
+              "Research health and safety code requirements to inform design.",
+              "Confer with client to determine factors affecting planning of interior environments, such as budget, architectural preferences, purpose, and function."
             ]
           },
           "id": "interior-designers.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-profile"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Checkable outputs | Reviewable space plans, floor plans and elevations, construction drawings and details, material and furniture specifications and versions, cost and schedule estimates, and briefing and acceptance records. Results must be traceable to needs, code references, and material versions."
-            ]
-          },
-          "id": "interior-designers.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-profile"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Complete workflow | Confirm needs and budget → check codes and safety requirements → plan spaces and furniture → select materials and colors → prepare construction drawings and details → briefing and acceptance."
-            ]
-          },
-          "id": "interior-designers.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-profile"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8724,6 +8725,32 @@
                 "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/27-1025.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11052,41 +11079,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "interior-designers.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "interior-designers.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "interior-designers.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "interior-designers.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "Activity preferences can only help design trials; they cannot determine qualifications or performance.",
         "interest": "First observe your interest, stress, and collaboration experience in real tasks.",
@@ -11304,7 +11302,7 @@
       "text": "Interior Designer: Space Planning, Materials and Project Handoffs"
     }
   },
-  "source_content_sha256": "e182ae28253aede388fa8546b055d369fd538ab21c1dc0c9b8a0efba5009f737",
+  "source_content_sha256": "7c02c3fe24bc27eb57125d95764f8eea7f1ce9589856e8c00f9684fba2195182",
   "subject": {
     "canonical_slug": "interior-designers",
     "name": "Interior Designer",

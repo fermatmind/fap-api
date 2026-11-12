@@ -201,7 +201,7 @@
         "status": "mapped"
       },
       "item:nanotechnology-engineering-technologists-and-technicians.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:nanotechnology-engineering-technologists-and-technicians.profile.work-context-block.5": {
         "status": "mapped"
@@ -9087,8 +9087,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "nanotechnology-engineering-technologists-and-technicians.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -11375,19 +11383,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Carry out production and preparation steps for nanomaterials or devices per work instructions.",
-              "Operate and maintain nanofabrication, coating, etching, or inspection equipment and record parameters.",
-              "Use equipment such as electron microscopes and atomic force microscopes to observe and manipulate nanoscale objects.",
-              "Measure samples by standard methods and organize the measurement data.",
-              "Perform testing and inspection on products, processes, or systems, and record deviations.",
-              "Calibrate equipment, replace consumables, and complete cleaning and maintenance.",
-              "Record data as required, write reports, and hand over to engineers or supervisors.",
-              "Follow safety, chemical, and cleanroom procedures, and shut down and report when something is abnormal."
+              "Produce images or measurements, using tools or techniques such as atomic force microscopy, scanning electron microscopy, optical microscopy, particle size analysis, or zeta potential analysis.",
+              "Maintain accurate record or batch-record documentation of nanoproduction.",
+              "Calibrate nanotechnology equipment, such as weighing, testing, or production equipment.",
+              "Maintain work area according to cleanroom or other processing standards."
             ]
           },
           "id": "nanotechnology-engineering-technologists-and-technicians.profile.responsibilities-block.2",
           "source_refs": [
-            "source-pack-onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -12901,6 +12905,32 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/17-3026.01#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -15165,7 +15195,7 @@
       "text": "Nanotechnology engineering technologists and technicians"
     }
   },
-  "source_content_sha256": "535e1e131c7eca1a23c36a9772ed42e68aae02c8892b2043193f5d87e5f89fdf",
+  "source_content_sha256": "6b26e44b7f8f9e9db2c03276ecad81c8249a768a1714985aa634377463fca54c",
   "subject": {
     "canonical_slug": "nanotechnology-engineering-technologists-and-technicians",
     "name": "Nanotechnology engineering technologists and technicians",

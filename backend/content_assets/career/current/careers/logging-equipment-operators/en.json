@@ -174,13 +174,7 @@
         "status": "pending_mapping"
       },
       "item:logging-equipment-operators.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:logging-equipment-operators.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:logging-equipment-operators.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:logging-equipment-operators.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6128,8 +6122,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "logging-equipment-operators.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6140,8 +6142,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "logging-equipment-operators.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6152,8 +6162,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "logging-equipment-operators.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6164,8 +6182,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "logging-equipment-operators.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7298,40 +7324,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Work inputs: logging tractors and skidding machinery, accessories such as bulldozer blades and frontal shears, logs and stumps, skidding roads and work areas, grading standards and timber conversion tables, and equipment maintenance and shift records."
+              "Inspect equipment for safety prior to use, and perform necessary basic maintenance tasks.",
+              "Control hydraulic tractors equipped with tree clamps and booms to lift, swing, and bunch sheared trees.",
+              "Grade logs according to characteristics such as knot size and straightness, and according to established industry or company standards.",
+              "Drive straight or articulated tractors equipped with accessories such as bulldozer blades, grapples, logging arches, cable winches, and crane booms to skid, load, unload, or stack logs, pull stumps, or clear brush."
             ]
           },
           "id": "logging-equipment-operators.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Checkable outputs: planned harvesting and skidding quantities, accepted log loads and stacks, log grading completed under standards, properly maintained skidding roads, and equipment inspection and shift records."
-            ]
-          },
-          "id": "logging-equipment-operators.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Full workflow: pre-shift briefing and equipment inspection → confirm the work area and safety conditions → fell trees and skid logs → load, unload, and stack → grade by characteristics and standards and buck to length → maintain skidding roads and equipment → record and hand over the shift."
-            ]
-          },
-          "id": "logging-equipment-operators.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-tasks"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8674,6 +8675,32 @@
                 "publisher": "Jilin Forestry and Grassland Administration",
                 "scope": "Named site example",
                 "url": "https://jllc.jl.gov.cn/xxfb/xydt/dfdt/202512/t20251210_3517450.html"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/45-4022.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -10974,41 +11001,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "logging-equipment-operators.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "logging-equipment-operators.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "logging-equipment-operators.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "logging-equipment-operators.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "Activity preferences can only help design trials; they cannot determine safety qualifications or performance.",
         "interest": "First observe interest, stress, and experience during real equipment operation, safety exercises, and outdoor work.",
@@ -11286,7 +11284,7 @@
       "text": "Logging Equipment Operator: Tasks, Pay and Training"
     }
   },
-  "source_content_sha256": "d653e112d19e1aa0e52ec01f45c6478233b13e41036b22df673ff7682240a003",
+  "source_content_sha256": "5da8352c37cf61316e73ed04cee001c022fdd33d3364a613e86e20e8810cb926",
   "subject": {
     "canonical_slug": "logging-equipment-operators",
     "name": "Logging Equipment Operator",

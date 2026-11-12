@@ -156,13 +156,7 @@
         "status": "pending_mapping"
       },
       "item:librarians-and-media-collections-specialists.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:librarians-and-media-collections-specialists.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:librarians-and-media-collections-specialists.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:librarians-and-media-collections-specialists.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6110,8 +6104,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "librarians-and-media-collections-specialists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6122,8 +6124,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "librarians-and-media-collections-specialists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6134,8 +6144,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "librarians-and-media-collections-specialists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6146,8 +6164,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "librarians-and-media-collections-specialists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7283,40 +7309,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "投入对象：读者与机构的检索与借阅需求、书目与馆藏目录、分类与编目规则、采购预算与供应商报价，以及数据库、视听设备与版权条款。"
+              "搜索标准参考材料，包括在线来源和互联网，以回答老板的参考问题。",
+              "分析用户的要求，以确定所需信息，并协助提供或查找这些信息。",
+              "监督图书馆的日常业务、预算编制、规划和人事活动，如聘用、培训、时间安排和业绩评价。",
+              "设计并讲授信息素养、图书馆使用和技术应用等课程。"
             ]
           },
           "id": "librarians-and-media-collections-specialists.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-details"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "可检查产出：可检索的编目记录、采购与淘汰清单、流通与馆藏清单、参考咨询答复、信息素养课程或指南、数据库与媒体设备配置记录。"
-            ]
-          },
-          "id": "librarians-and-media-collections-specialists.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-details"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "完整流程：分析读者与机构需求 → 评估并选购资料 → 分类编目与加工 → 上架与流通管理 → 提供参考咨询与信息素养教学 → 维护记录、设备与版权合规 → 定期清查与淘汰。"
-            ]
-          },
-          "id": "librarians-and-media-collections-specialists.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8703,6 +8704,32 @@
                 "publisher": "中国政府网",
                 "scope": "具名岗位、工作样例或职称制度",
                 "url": "https://app.www.gov.cn/govdata/gov/202107/16/473542/article.html"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/25-4022.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -10935,41 +10962,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "librarians-and-media-collections-specialists.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "librarians-and-media-collections-specialists.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "librarians-and-media-collections-specialists.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "librarians-and-media-collections-specialists.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "活动偏好只能帮助设计试验，不能判断资格或表现。",
         "interest": "先观察真实任务中的兴趣、压力与协作体验。",
@@ -11175,7 +11173,7 @@
       "text": "图书馆员与媒体馆藏专员：编目、数字资源和工作分工"
     }
   },
-  "source_content_sha256": "b9d55ce53bf6f7dd64d7dcc67690a36066c3b51beb91ee2736ea49d337ee0c5b",
+  "source_content_sha256": "f367a9d4b102318d3a1ee3fd0dd2836213f8e8a07e7a35a210196c1c01198cfe",
   "subject": {
     "canonical_slug": "librarians-and-media-collections-specialists",
     "name": "图书馆员与媒体馆藏专员",

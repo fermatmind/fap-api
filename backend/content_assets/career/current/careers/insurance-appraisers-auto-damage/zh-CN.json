@@ -156,13 +156,7 @@
         "status": "pending_mapping"
       },
       "item:insurance-appraisers-auto-damage.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:insurance-appraisers-auto-damage.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:insurance-appraisers-auto-damage.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:insurance-appraisers-auto-damage.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6110,8 +6104,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "insurance-appraisers-auto-damage.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6122,8 +6124,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "insurance-appraisers-auto-damage.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6134,8 +6144,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "insurance-appraisers-auto-damage.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6146,8 +6164,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "insurance-appraisers-auto-damage.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7282,40 +7308,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "投入对象｜以受损车辆、保单与理赔任务、汽车工时与零件资料、照片与检视记录为对象，在合规与安全边界内执行损伤评估与估价。"
+              "评估修理的实用性，而不是在事故发生前支付车辆的市场价值。",
+              "查看与汽车修理商店的修理成本估计，以确保修理成本的协议。",
+              "检查受损车辆，确定结构、车身、机械、电气或内饰的损坏程度。",
+              "准备保险单，以注明维修成本估算和建议。"
             ]
           },
           "id": "insurance-appraisers-auto-damage.profile.responsibilities-block.2",
           "source_refs": [
-            "ia-details"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "可检查产出｜可复核的损伤清单与照片记录、工时与零件估算、维修或更换理由、待拆检项目、价格来源与假设、升级问题与估价报告。"
-            ]
-          },
-          "id": "insurance-appraisers-auto-damage.profile.responsibilities-block.3",
-          "source_refs": [
-            "ia-details"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "完整工作流程｜核对事故与保单任务→检查并记录车辆损伤→按工时与零件资料估算→与维修方或理赔人员澄清差异→提交可复核报告。"
-            ]
-          },
-          "id": "insurance-appraisers-auto-damage.profile.responsibilities-block.4",
-          "source_refs": [
-            "ia-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8751,6 +8752,32 @@
                 "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/13-1032.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11096,41 +11123,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "insurance-appraisers-auto-damage.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "insurance-appraisers-auto-damage.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "insurance-appraisers-auto-damage.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "insurance-appraisers-auto-damage.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "活动偏好只能帮助设计试验，不能判断资格或表现。",
         "interest": "先观察真实任务中的兴趣、压力与协作体验。",
@@ -11336,7 +11334,7 @@
       "text": "车险查勘定损做什么：损伤记录、修理估价与交接"
     }
   },
-  "source_content_sha256": "f9c983b8cb27ab883ccf86fcc6a26f11f07ab977b9b1ef83d41c642d955a9fb3",
+  "source_content_sha256": "26254381291c013f821f09777d469fac41fdf9f18376d957ba996834e814dd74",
   "subject": {
     "canonical_slug": "insurance-appraisers-auto-damage",
     "name": "车险查勘定损人员",

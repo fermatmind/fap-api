@@ -177,13 +177,7 @@
         "status": "pending_mapping"
       },
       "item:electromechanical-equipment-assemblers.profile.responsibilities-block.1": {
-        "status": "pending_mapping"
-      },
-      "item:electromechanical-equipment-assemblers.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:electromechanical-equipment-assemblers.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:electromechanical-equipment-assemblers.profile.work-context-block.1": {
         "status": "pending_mapping"
@@ -6146,8 +6140,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "electromechanical-equipment-assemblers.profile.responsibilities-block.1",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6158,8 +6160,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "electromechanical-equipment-assemblers.profile.responsibilities-block.1",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6170,8 +6180,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "electromechanical-equipment-assemblers.profile.responsibilities-block.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6182,8 +6200,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "electromechanical-equipment-assemblers.profile.responsibilities-block.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7323,40 +7349,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Inputs: approved drawings, bills of materials, processes, part identifiers, tolerances, tools, and test requirements."
+              "Inspect, test, and adjust completed units to ensure that units meet specifications, tolerances, and customer order requirements.",
+              "Position, align, and adjust parts for proper fit and assembly.",
+              "Assemble parts or units, and position, align, and fasten units to assemblies, subassemblies, or frames, using hand tools and power tools.",
+              "Connect cables, tubes, and wiring, according to specifications."
             ]
           },
           "id": "electromechanical-equipment-assemblers.profile.responsibilities-block.1",
           "source_refs": [
-            "onet"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Tasks: position and align, fasten, wire, measure, inspect and test, and adjust finished products."
-            ]
-          },
-          "id": "electromechanical-equipment-assemblers.profile.responsibilities-block.2",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Outputs: components conforming to drawings, tolerance records, test records, defects, and handover status."
-            ]
-          },
-          "id": "electromechanical-equipment-assemblers.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -9080,6 +9081,32 @@
                 "publisher": "Huainan Human Resources and Social Security Bureau",
                 "scope": "recruitment_proxy",
                 "url": "https://rsj.huainan.gov.cn/gzqk/tzgg/551864645.html"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/51-2023.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11413,41 +11440,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "electromechanical-equipment-assemblers.profile.responsibilities-block.1",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "electromechanical-equipment-assemblers.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "electromechanical-equipment-assemblers.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "electromechanical-equipment-assemblers.profile.responsibilities-block.1",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "Work samples first",
         "interest": "Check interest fit against actual tasks, tools, and responsibility boundaries",
@@ -11730,7 +11728,7 @@
       "text": "Electromechanical equipment assemblers"
     }
   },
-  "source_content_sha256": "879f7ec02a88c7cd236a1e707927d78daa7959cc6924860e3aa030eba8862d34",
+  "source_content_sha256": "c7bf663bbe9494a69e70be5def61534eb4361eedd66500a2d88206a160593cc0",
   "subject": {
     "canonical_slug": "electromechanical-equipment-assemblers",
     "name": "Electromechanical equipment assemblers",

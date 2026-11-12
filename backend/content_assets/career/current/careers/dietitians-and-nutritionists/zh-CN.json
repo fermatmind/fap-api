@@ -183,13 +183,7 @@
         "status": "pending_mapping"
       },
       "item:dietitians-and-nutritionists.profile.responsibilities-block.1": {
-        "status": "pending_mapping"
-      },
-      "item:dietitians-and-nutritionists.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:dietitians-and-nutritionists.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:dietitians-and-nutritionists.profile.work-context-block.1": {
         "status": "pending_mapping"
@@ -6155,8 +6149,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "dietitians-and-nutritionists.profile.responsibilities-block.1",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6167,8 +6169,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "dietitians-and-nutritionists.profile.responsibilities-block.1",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6179,8 +6189,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "dietitians-and-nutritionists.profile.responsibilities-block.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6191,8 +6209,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "dietitians-and-nutritionists.profile.responsibilities-block.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7346,41 +7372,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "常见输入包括饮食与健康史、食物标签与配方、实验室检查、文化宗教与预算偏好、机构营养指南，以及在授权范围内使用的临床资料。"
+              "评估营养需求，饮食限制，以及目前的健康计划，开发和实施营养护理计划，并提供营养咨询。",
+              "评估实验室检测结果，以制定营养建议。",
+              "就良好营养、健康饮食习惯和营养监测的基本规则向个人和团体提供咨询，以提高他们的生活质量。",
+              "就营养原则、饮食计划、饮食调整、食物选择和准备向病人及其家属提供咨询。"
             ]
           },
           "id": "dietitians-and-nutritionists.profile.responsibilities-block.1",
           "source_refs": [
-            "editorial-safe-exercise-v2"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "核心产出是营养评估记录、个体化饮食照护计划、教育材料、菜单与项目方案、监测记录，以及需要转交医疗团队的问题清单。"
-            ]
-          },
-          "id": "dietitians-and-nutritionists.profile.responsibilities-block.2",
-          "source_refs": [
-            "editorial-safe-exercise-v2"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "O*NET列28任务，13核心、15补充：核心含需求与限制评估、检验监测、个体群体咨询、文化适应、医师协作、食物史及过敏/用药收集、菜单、咨询协调、教育课程、研究及专业培训；管理食品人员、采购成本、特殊膳食、营养基因研究等属补充，不是人人承担全部。BLS区分临床医疗营养治疗、社区教育及食品服务管理。"
-            ]
-          },
-          "id": "dietitians-and-nutritionists.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-details",
-            "bls-current-2025-2035"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -9324,6 +9324,32 @@
                 "publisher": "政府原文",
                 "scope": "regulatory_context",
                 "url": "https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-G/part-482/subpart-C/section-482.28"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/29-1031.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11766,41 +11792,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "dietitians-and-nutritionists.profile.responsibilities-block.1",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "dietitians-and-nutritionists.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "dietitians-and-nutritionists.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "dietitians-and-nutritionists.profile.responsibilities-block.1",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "兴趣只提示探索方向；实际适配以受监督实践与训练反馈核验。",
         "interest": "六兴趣评分S75/I63/E40/C39/R34/A23，SI代码；风格Impact细节90、可靠80、合作77、同理76、诚信72、社交69、自控57、抗压54。是职业特征评分，非人口百分比、大五分数、EQ/IQ或个人门槛。",
@@ -12117,7 +12114,7 @@
       "text": "膳食与营养师"
     }
   },
-  "source_content_sha256": "ad9b03598bfc56169e83940527743ada6884d48b60ab466064e8ff66fc4a1070",
+  "source_content_sha256": "b7f0ae1bc825f95ba25de6e7d03c513892fca9fc40be7437c395dd4b5defc822",
   "subject": {
     "canonical_slug": "dietitians-and-nutritionists",
     "name": "膳食与营养师",

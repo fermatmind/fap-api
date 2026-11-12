@@ -9043,8 +9043,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "midwives.profile.definition-block.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -9055,8 +9063,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "midwives.profile.definition-block.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -11220,13 +11236,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "This page strictly refers to O*NET 29-9099.01 Midwives. Chinese page language does not automatically map it to a Chinese occupational classification.",
-              "Duties involve prenatal care and childbirth assistance; specific scope follows local regulations and institutional authorization."
+              "Monitor maternal condition during labor by checking vital signs, monitoring uterine contractions, or performing physical examinations.",
+              "Identify tubal and ectopic pregnancies and refer patients for treatments.",
+              "Provide necessary medical care for infants at birth, including emergency care such as resuscitation.",
+              "Conduct ongoing prenatal health assessments, tracking changes in physical and emotional health."
             ]
           },
           "id": "midwives.profile.definition-block.1",
           "source_refs": [
-            "source-pack-onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -12628,6 +12646,32 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/29-9099.01#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -14760,7 +14804,7 @@
       "text": "Midwives: Duties, U.S. Wages, and Employment"
     }
   },
-  "source_content_sha256": "56978277fd59d98722cd611fb9f93ca243b8a6b6a58d752c2e1ca4f475464897",
+  "source_content_sha256": "97204d7310e7f0147be6bb9a2994f2edb61a51ae5e26bb8fcbf98abac8ff15cb",
   "subject": {
     "canonical_slug": "midwives",
     "name": "Midwives",

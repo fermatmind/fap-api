@@ -9105,8 +9105,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "orthotists-and-prosthetists.profile.definition-block.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -9117,8 +9125,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "orthotists-and-prosthetists.profile.definition-block.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -11282,13 +11298,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Patient assessment",
-              "Appliance fitting"
+              "Fit, test, and evaluate devices on patients, and make adjustments for proper fit, function, and comfort.",
+              "Instruct patients in the use and care of orthoses and prostheses.",
+              "Maintain patients' records.",
+              "Examine, interview, and measure patients to determine their appliance needs and to identify factors that could affect appliance fit."
             ]
           },
           "id": "orthotists-and-prosthetists.profile.definition-block.1",
           "source_refs": [
-            "source-pack-onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -12779,6 +12797,32 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/29-2091.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -15016,7 +15060,7 @@
       "text": "Orthotist and prosthetist｜duties, training, and salary"
     }
   },
-  "source_content_sha256": "84e32b5b3156cccb17e2a30fcfe34fbe487465643129014905328a077053b4a5",
+  "source_content_sha256": "f93140f3eaec4712482ce30e3dd179a14bba87e8d556f53c50098a291461a50b",
   "subject": {
     "canonical_slug": "orthotists-and-prosthetists",
     "name": "Orthotist and prosthetist",

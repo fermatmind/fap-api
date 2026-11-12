@@ -1503,22 +1503,7 @@
         "status": "mapped"
       },
       "item:actors.display.responsibilities_block.01": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.02": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.03": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.04": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.05": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.06": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:actors.display.riasec_fit_block.code": {
         "status": "mapped"
@@ -19178,8 +19163,16 @@
         "status": "mapped"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -19190,8 +19183,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -19202,8 +19203,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -19214,8 +19223,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -23423,90 +23440,18 @@
           "availability": "available",
           "copy_key": "career.item.responsibilities-block",
           "data": {
-            "paragraphs": [
-              "常见输入：商品或服务的真实信息与明码标价与计价单位、可交付与交付时间与运费与保修与退换条件、适用情形下的取消权与冷静期与退货说明、收款与找零与凭证与发票安排、经营地点与时段与本地登记与城市管理要求，以及随身现金与货物与个人信息的安全安排。"
+            "entries": [
+              "详细介绍产品或服务以及价格，并演示产品的使用方法。",
+              "编制潜在客户名单。",
+              "交付商品并收取货款。",
+              "写下和记录商品订单或将订单输入计算机。"
             ]
           },
           "id": "actors.display.responsibilities_block.01",
           "source_refs": [
-            "onet"
+            "batch52-onet-core"
           ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "核心产出：写清商品与价格与条件的说明、已记录或已录入的订单、可核对的收款与找零与凭证与发票、退换与取消权说明与处理记录、陈列与补货与拜访记录，以及满意度跟进与新人培训记录。"
-            ]
-          },
-          "id": "actors.display.responsibilities_block.02",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "典型流程：准备与找人—说明与演示并报价—说服购买并记录订单—交付或当场交货收款并出具凭证—保存记录并跟进满意度。"
-            ]
-          },
-          "id": "actors.display.responsibilities_block.03",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "常协作对象：货源与仓库与配送、收银与财务、同伴销售员与带教、本地经营与市场监督与城市管理部门、以及客户与潜在客户。"
-            ]
-          },
-          "id": "actors.display.responsibilities_block.04",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "常见工具与对象：商品与样品与说明材料、订单与收款与凭证与发票工具、移动支付与收款设备、陈列与货架与货运工具、客户与拜访与跟进记录。"
-            ]
-          },
-          "id": "actors.display.responsibilities_block.05",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "中国消保法20/21/22条真实全面明确答复/明码标价/真实名称/按规定或惯例出具凭证且索要必须出具；24条质量不符退换修、25条网络电视电话邮购等七日无理由及例外，不把面对面销售一律套七日无理由。2024实施条例9—13/17—19补真实宣传报价、兑现承诺/格式条款和退货，经营者制度不能排除法定消费者权利。 中国《直销管理条例》2017修订：3/9条经批准直销企业招募的场所外产品推销才属该制度，不把所有摊贩/上门服务等同直销员。15/16/18条招募排除对象、推销合同及允许地域、企业免费培训考试合格发直销员证；无证不得从事对应直销。22/23要求证合同/消费者拒绝即离开/退货告知和凭证/按标价；24按本人直接销售收入核报酬、总额≤30%且至少月付，仅此制度非所有销售行业；25购买30日内未开封凭票据退换、提出后7日办理，其他情形依法或合同。 中国客户名单/联系方式等按可识别个人信息处理，不全称敏感个人信息；金融账户/行踪等另核敏感范围、合法依据/特定目的充分必要、适用单独同意和影响评估。消保法29条及2024实施条例23/24条限制过度收集/概括默认授权与商业信息电话，拒绝或取消即停止；批准系统账号不自动准许外部AI上传，去标识非匿名化。具体保管/导出/机构规程未采。"
-            ]
-          },
-          "id": "actors.display.responsibilities_block.06",
-          "source_refs": [
-            "r5-consumer-current",
-            "r5-consumer-reg",
-            "r5-direct-current",
-            "r5-cn-pipl",
-            "r5-consumer-current",
-            "r5-consumer-reg"
-          ],
-          "type": "prose"
+          "type": "list"
         },
         {
           "availability": "available",
@@ -31903,6 +31848,32 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/41-9091.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -36723,44 +36694,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$item": "actors.display.responsibilities_block.01",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.02",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.03",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.04",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.05",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.06",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "actors.display.responsibilities_block.01",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": {
           "$item": "actors.display.riasec_fit_block.fit-interest",
@@ -37536,7 +37475,7 @@
       "text": "上门销售员与街头摊贩及相关人员"
     }
   },
-  "source_content_sha256": "a77b8b6b5716829a0f9919b27e5ff84437949e2c6420a27cfae9c16b3f4bfd8e",
+  "source_content_sha256": "6ccb98cc9e2a3f3ee725b9beb383948e031d478b43c07350b3e4ecb7ef86fde0",
   "subject": {
     "canonical_slug": "door-to-door-sales-workers-news-and-street-vendors-and-related-workers",
     "name": "上门销售员与街头摊贩及相关人员",

@@ -1506,22 +1506,7 @@
         "status": "mapped"
       },
       "item:actors.display.responsibilities_block.01": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.02": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.03": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.04": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.05": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.06": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:actors.display.riasec_fit_block.code": {
         "status": "mapped"
@@ -19205,8 +19190,16 @@
         "status": "mapped"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -19217,8 +19210,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -19229,8 +19230,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -19241,8 +19250,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -23438,88 +23455,18 @@
           "availability": "available",
           "copy_key": "career.item.responsibilities-block",
           "data": {
-            "paragraphs": [
-              "Prepare instruments and materials per the treatment plan and procedures under the dentist's direction, and verify the sterilization status, expiry date, and match to use."
+            "entries": [
+              "Prepare patient, sterilize or disinfect instruments, set up instrument trays, prepare materials, or assist dentist during dental procedures.",
+              "Record treatment information in patient records.",
+              "Assist dentist in management of medical or dental emergencies.",
+              "Order and monitor dental supplies and equipment inventory."
             ]
           },
           "id": "actors.display.responsibilities_block.01",
           "source_refs": [
-            "r5-onet-current"
+            "batch52-onet-core"
           ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "WS/T842—2024 took effect on 2025-01-01 and applies to oral medical institutions at all levels and types, and citing WS506 does not replace it. Select PPE according to the actual operation, with gloves per patient and hand hygiene; verify packaging, contamination, name, and validity when preparing; and verify water lines and impression and restoration handover and radiological equipment surface infection control item by item; a recommended standard is not a practice certificate. The full text of WS506 412 was not read this round, and it is not falsely claimed that all sterilization release details have been verified. Sterilization monitoring and release are verified against the actually applicable standards, institutional procedures, and trained authorization, and permission is not obtained by completing exploratory exercises."
-            ]
-          },
-          "id": "actors.display.responsibilities_block.02",
-          "source_refs": [
-            "r5-cn-ws842"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "Receive and prepare the patient, verify identity and medical history and allergy information, measure and record vital signs, and provide pre-treatment reassurance and communication."
-            ]
-          },
-          "id": "actors.display.responsibilities_block.03",
-          "source_refs": [
-            "r5-onet-current"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "During treatment, assist within the lawful position authority and observe and report anomalies; when a patient's condition is critical, notify the physician promptly; in China, nurses should first provide necessary emergency rescue when urgently rescuing a dying patient, and it cannot be written that any anomaly may only be reported and rescue is prohibited; other positions follow their training, lawful authority, and institutional emergency procedures, and do not diagnose or set treatment themselves."
-            ]
-          },
-          "id": "actors.display.responsibilities_block.04",
-          "source_refs": [
-            "r5-onet-current",
-            "r5-cn-nurse"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "Personnel engaged in radiological occupational activities must be at least 18 years old, pass health and training requirements, and be subject to work permit and dose health management, with the unit applying to the licensing authority; pre-employment training is no less than 4 days, and subsequent training at intervals of no more than 2 years lasts no less than 2 days each time. A work permit does not replace the institution's radiological diagnosis and treatment license, professional imaging personnel, or specific operating authority, and ordinary administrative positions do not uniformly require the certificate. Medical exposure must have a clear purpose with justification and optimization of protection verified, and when image quality is abnormal, the necessity is reported and assessed first, and it cannot be written that an automatic immediate retake is required; registration and retention of data should not cause unnecessary repeat exposure. In the U.S. requirements vary by state, taking California as the current example: a general assistant provides basic support under dentist supervision, and radiographic equipment requires an approved safety course; RDA and RDAEF require board licensure, with specific tasks distinguished between general and direct supervision. Without a license, one cannot place sealants or perform ultrasonic scaling. State-level authority cannot be inferred automatically from O*NET tasks such as cleaning teeth, nor directly applied to China."
-            ]
-          },
-          "id": "actors.display.responsibilities_block.05",
-          "source_refs": [
-            "r5-cn-radworker",
-            "r5-cn-radclinical",
-            "r5-ca-duties"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "Give post-treatment precautions and oral hygiene instruction per the dentist's specified content, handle scheduling, billing, and insurance information, and complete operatory reset and waste disposal."
-            ]
-          },
-          "id": "actors.display.responsibilities_block.06",
-          "source_refs": [
-            "r5-onet-current"
-          ],
-          "type": "prose"
+          "type": "list"
         },
         {
           "availability": "available",
@@ -32250,6 +32197,32 @@
                 "publisher": "O*NET",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/29-1292.00"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/31-9091.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -37317,44 +37290,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$item": "actors.display.responsibilities_block.01",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.02",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.03",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.04",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.05",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.06",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "actors.display.responsibilities_block.01",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": {
           "$item": "actors.display.riasec_fit_block.fit-interest",
@@ -38141,7 +38082,7 @@
       "text": "Dental assistants"
     }
   },
-  "source_content_sha256": "7c459bb9691904734521b5249b4a762ac77c768e2e84c58a62e8bd9e4b4e9c0f",
+  "source_content_sha256": "7850232da7caa55bd6403e7b11ca53817a35a864e605772045692175363753d4",
   "subject": {
     "canonical_slug": "dental-assistants",
     "name": "Dental assistants",

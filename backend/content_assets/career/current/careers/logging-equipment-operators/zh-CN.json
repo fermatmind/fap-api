@@ -174,13 +174,7 @@
         "status": "pending_mapping"
       },
       "item:logging-equipment-operators.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:logging-equipment-operators.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:logging-equipment-operators.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:logging-equipment-operators.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6128,8 +6122,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "logging-equipment-operators.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6140,8 +6142,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "logging-equipment-operators.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6152,8 +6162,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "logging-equipment-operators.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6164,8 +6182,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "logging-equipment-operators.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7298,40 +7324,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "投入对象：伐木拖拉机与集材机械、推土铲与前切刀等配件、原木与树桩、集材道路与作业面、分级标准与木材换算表、设备维护与班次记录。"
+              "使用前检查安全设备，执行必要的基本维修任务。",
+              "控制液压拖拉机，配有树夹和抬起、摇摆和剪切的树群的繁荣。",
+              "等级记录根据特征，如节点大小和直度，并根据设立的行业或公司标准。",
+              "驾驶刚性或铰接式拖拉机，借助推土铲、抓具、集材拱架、绞盘或吊臂等附件，拖运、装卸或堆放原木，拔除树桩或清除灌木。"
             ]
           },
           "id": "logging-equipment-operators.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "可检查产出：按计划完成的采伐与集材量、经验收的原木装载与堆垛、按标准完成的原木分级、维护到位的集材道路、设备检查与班次记录。"
-            ]
-          },
-          "id": "logging-equipment-operators.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "完整工作流程：班前交底与设备检查 → 确认作业面与安全条件 → 伐倒树木并集材 → 装载、卸载与堆垛 → 按特征与标准分级并造材 → 维护集材道路与设备 → 记录并交接班。"
-            ]
-          },
-          "id": "logging-equipment-operators.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-tasks"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8674,6 +8675,32 @@
                 "publisher": "吉林省林业和草原局",
                 "scope": "具名机构工作样本",
                 "url": "https://jllc.jl.gov.cn/xxfb/xydt/dfdt/202512/t20251210_3517450.html"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/45-4022.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -10974,41 +11001,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "logging-equipment-operators.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "logging-equipment-operators.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "logging-equipment-operators.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "logging-equipment-operators.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "活动偏好只能帮助设计试验，不能判断安全资质或表现。",
         "interest": "先观察真实设备操作、安全演练与户外作业中的兴趣、压力与体验。",
@@ -11286,7 +11284,7 @@
       "text": "伐木设备操作员做什么：任务、工资与入行"
     }
   },
-  "source_content_sha256": "8483ca57cbf1bbf627bd3eb978d35ede6f21b40091ad13e9d5e6fe15101ac601",
+  "source_content_sha256": "934e36258125396c539be4a4503e20f2b24a5941daeb5385e71ceaeee651ace9",
   "subject": {
     "canonical_slug": "logging-equipment-operators",
     "name": "伐木设备操作员",

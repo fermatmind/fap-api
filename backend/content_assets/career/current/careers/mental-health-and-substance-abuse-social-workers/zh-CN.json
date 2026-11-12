@@ -9476,8 +9476,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.profile.definition-block.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -9488,8 +9496,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.profile.definition-block.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -11762,13 +11778,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "评估与计划：完成心理社会评估与风险筛查，制定可复核的服务计划。",
-              "干预与支持：开展个体或团体干预、个案管理、危机介入与当事人倡导，并做记录、转介与随访。"
+              "在个人或团体会议上向客户提供咨询，协助他们处理药物滥用、精神或身体疾病、贫穷、失业或身体虐待。",
+              "与顾问、医生或护士合作，根据社会工作经验和病人的需要规划或协调治疗。",
+              "监测并评估客户在治疗目标方面的进展，并进行记录。",
+              "与客户面谈，审查记录，进行评估，或与其他专业人员协商，以评估客户或病人的精神或身体状况。"
             ]
           },
           "id": "mental-health-and-substance-abuse-social-workers.profile.definition-block.1",
           "source_refs": [
-            "source-pack-onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -13403,6 +13421,32 @@
                 "publisher": "北京市卫生健康委员会转载",
                 "scope": "contextual",
                 "url": "https://wjw.beijing.gov.cn/zwgk_20040/zcwj2022/flfg/202304/t20230407_2992810.html"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/21-1023.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -15606,7 +15650,7 @@
       "text": "心理健康与物质滥用社会工作者：工作内容、美国工资与入行 | 费马测试"
     }
   },
-  "source_content_sha256": "34225560d73b522330e29881a8a077bc2b51241883c9669b3db9dd5a08a1cc9f",
+  "source_content_sha256": "cbffad2e82ffec4225deafe075c4ea5c91a7b1f2981e417b64a4183bbce398cd",
   "subject": {
     "canonical_slug": "mental-health-and-substance-abuse-social-workers",
     "name": "心理健康与物质滥用社会工作者",

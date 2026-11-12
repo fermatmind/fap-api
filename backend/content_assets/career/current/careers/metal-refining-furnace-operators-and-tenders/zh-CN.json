@@ -183,7 +183,7 @@
         "status": "mapped"
       },
       "item:metal-refining-furnace-operators-and-tenders.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:metal-refining-furnace-operators-and-tenders.profile.work-context-block.3": {
         "status": "mapped"
@@ -9489,16 +9489,8 @@
         "status": "unfilled"
       },
       "responsibilities_block.05.category": {
-        "ref": {
-          "id": "metal-refining-furnace-operators-and-tenders.profile.responsibilities-block.2",
-          "path": [
-            "data",
-            "entries",
-            4
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "responsibilities_block.05.description": {
         "ref": null,
@@ -9509,16 +9501,8 @@
         "status": "unfilled"
       },
       "responsibilities_block.06.category": {
-        "ref": {
-          "id": "metal-refining-furnace-operators-and-tenders.profile.responsibilities-block.2",
-          "path": [
-            "data",
-            "entries",
-            5
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "responsibilities_block.06.description": {
         "ref": null,
@@ -12468,18 +12452,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "配料与加料：按炉况与钢种要求核对配料并加料。",
-              "熔化与精炼：监控熔化过程并调整成分与温度。",
-              "取样与调整：取样确认成分并按规程调整。",
-              "出钢与协同：协同出钢与浇注并记录交班。",
-              "能源与设备：按规程使用能源与设备并报告异常。",
-              "记录与追溯：如实记录炉次、参数与异常。",
-              "安全与应急：按高温、起重与应急规程作业。"
+              "规范燃料和空气供应，或控制电流和水冷却剂流向加热炉，调节温度。",
+              "从熔炉或水壶中抽出熔炼的金属样品以供分析，并计算为确保材料符合规格所需的材料类型和数量。",
+              "用秤称量准备装入熔炉的材料。",
+              "记录生产数据，并保持生产记录。"
             ]
           },
           "id": "metal-refining-furnace-operators-and-tenders.profile.responsibilities-block.2",
           "source_refs": [
-            "source-pack-onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -14105,6 +14086,32 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/51-4051.00#Education"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/51-4051.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -16318,7 +16325,7 @@
       "text": "金属精炼炉操作员与看护员：工作内容、美国工资与入行 | 费马测试"
     }
   },
-  "source_content_sha256": "2802a8b0ae89df37938a7fe1903a2e3ea889aa6cf7a2618992bf98ad353f55d5",
+  "source_content_sha256": "d105a197e40ae14eca77c8ddaa346698162db8bb040b538e0cff9d7882531ab7",
   "subject": {
     "canonical_slug": "metal-refining-furnace-operators-and-tenders",
     "name": "金属精炼炉操作员与看护员",

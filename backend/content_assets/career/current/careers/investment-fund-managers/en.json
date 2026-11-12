@@ -162,13 +162,7 @@
         "status": "pending_mapping"
       },
       "item:investment-fund-managers.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:investment-fund-managers.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:investment-fund-managers.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:investment-fund-managers.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6128,8 +6122,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "investment-fund-managers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6140,8 +6142,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "investment-fund-managers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6152,8 +6162,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "investment-fund-managers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6164,8 +6182,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "investment-fund-managers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7305,40 +7331,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Objects of work | Fund assets and investment objectives, investment authorization and limits, research and valuation materials, trade and execution channels, and disclosure and compliance requirements; investment management within fiduciary and compliance boundaries."
+              "Manage investment funds to maximize return on client investments.",
+              "Select specific investments or investment mixes for purchase by an investment fund.",
+              "Monitor financial or operational performance of individual investments to ensure portfolios meet risk goals.",
+              "Select or direct the execution of trades."
             ]
           },
           "id": "investment-fund-managers.profile.responsibilities-block.2",
           "source_refs": [
-            "source-pack-onet-details"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Checkable outputs | Reviewable investment decisions and their basis, portfolio and risk limit records, trade and execution records, valuation and pricing records, and performance and compliance disclosure materials; results must be traceable to authorization, data sources and policy versions."
-            ]
-          },
-          "id": "investment-fund-managers.profile.responsibilities-block.3",
-          "source_refs": [
-            "source-pack-onet-details"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Complete workflow | Confirm authorization and investment objectives → research and valuation → develop and execute strategies → monitor trades and execution → review performance and risks → compliance disclosure and regulatory responses."
-            ]
-          },
-          "id": "investment-fund-managers.profile.responsibilities-block.4",
-          "source_refs": [
-            "source-pack-onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8842,6 +8843,32 @@
                 "period": "2025–35",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "url": "https://www.bls.gov/ooh/management/financial-managers.htm#tab-4"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/11-3031.03#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -10950,41 +10977,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "investment-fund-managers.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "investment-fund-managers.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "investment-fund-managers.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "investment-fund-managers.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "Activity preferences can only help design trials; they cannot determine qualifications or performance.",
         "interest": "First observe interest, stress and collaboration experiences in real tasks.",
@@ -11220,7 +11218,7 @@
       "text": "Investment Fund Managers: Tasks, Pay and Training"
     }
   },
-  "source_content_sha256": "25bf4034bf329a1f3478d4e029c5692215fb386ba15815e82e96a52b6278229b",
+  "source_content_sha256": "d9ee26e9d2d83d6dff809960d79d778257a519fd523a107f21082acc16ec61be",
   "subject": {
     "canonical_slug": "investment-fund-managers",
     "name": "Investment Fund Managers",

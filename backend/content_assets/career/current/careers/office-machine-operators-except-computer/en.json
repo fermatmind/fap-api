@@ -9054,8 +9054,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "office-machine-operators-except-computer.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -12040,14 +12048,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Read the work order, prepare originals and consumables, and verify copies, paper, and deadline.",
-              "Set up and monitor copying, scanning, folding, or binding equipment; check jams, misalignment, and clarity.",
-              "Organize finished output, spot-check page order and quantity, record output and consumables; hand major faults to maintenance."
+              "Read job orders to determine the type of work to be done, the quantities to be produced, and the materials needed.",
+              "Deliver completed work.",
+              "Place original copies in feed trays, feed originals into feed rolls, or position originals on tables beneath camera lenses.",
+              "Sort, assemble, and proof completed work."
             ]
           },
           "id": "office-machine-operators-except-computer.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -13556,6 +13565,32 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/43-9071.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -15679,7 +15714,7 @@
       "text": "Non-computer office machine operators: duties, wages, and outlook"
     }
   },
-  "source_content_sha256": "3110b0d0b8d541bfc5bf004e5c27f142c731b2da67ca9d1dadba42fadd8713a7",
+  "source_content_sha256": "0039ed30432f30e4125a64b14ffb36292d0dffc779c69a8ce974c17c00b18765",
   "subject": {
     "canonical_slug": "office-machine-operators-except-computer",
     "name": "Office machine operators (except computer)",

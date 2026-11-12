@@ -201,7 +201,7 @@
         "status": "mapped"
       },
       "item:nanotechnology-engineering-technologists-and-technicians.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:nanotechnology-engineering-technologists-and-technicians.profile.work-context-block.5": {
         "status": "mapped"
@@ -9087,8 +9087,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "nanotechnology-engineering-technologists-and-technicians.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -11375,19 +11383,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "按作业指导书执行纳米材料或器件的生产与制备步骤。",
-              "操作与维护纳米加工、镀膜、刻蚀或检测设备并记录参数。",
-              "使用电子显微镜、原子力显微镜等设备观察与操作纳米级对象。",
-              "按标准方法测量样品并整理测量数据。",
-              "对产品、工艺或系统执行测试与检验，记录偏差。",
-              "校准设备、更换耗材并完成清洁与维护。",
-              "按要求记录数据、编写报告并向工程师或主管交接。",
-              "遵守安全、化学品与洁净室规程，异常时停机并上报。"
+              "使用原子力显微镜、扫描电子显微镜、光学显微镜、粒度分析或 ζ 电位分析等工具与技术获取图像或测量结果。",
+              "保持纳米生产的准确记录或批量记录文件。",
+              "校准纳米技术设备，例如称量、测试或生产设备。",
+              "按照洁净室或其它处理的标准，保持工作区域的清洁。"
             ]
           },
           "id": "nanotechnology-engineering-technologists-and-technicians.profile.responsibilities-block.2",
           "source_refs": [
-            "source-pack-onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -12901,6 +12905,32 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/17-3026.01#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -15165,7 +15195,7 @@
       "text": "纳米技术工程技师与技术人员"
     }
   },
-  "source_content_sha256": "a1632ab9f86eb145f9ae329a3cec5f485df56286fa02c72505b19c6e858dd00b",
+  "source_content_sha256": "e784dcb225b1733b5402eeb5830e737844bc03de727abf4b393c32b1a4c186cb",
   "subject": {
     "canonical_slug": "nanotechnology-engineering-technologists-and-technicians",
     "name": "纳米技术工程技师与技术人员",

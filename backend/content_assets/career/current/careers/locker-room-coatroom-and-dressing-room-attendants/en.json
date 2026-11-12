@@ -171,13 +171,7 @@
         "status": "pending_mapping"
       },
       "item:locker-room-coatroom-and-dressing-room-attendants.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:locker-room-coatroom-and-dressing-room-attendants.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:locker-room-coatroom-and-dressing-room-attendants.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:locker-room-coatroom-and-dressing-room-attendants.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6125,8 +6119,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "locker-room-coatroom-and-dressing-room-attendants.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6137,8 +6139,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "locker-room-coatroom-and-dressing-room-attendants.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6149,8 +6159,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "locker-room-coatroom-and-dressing-room-attendants.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6161,8 +6179,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "locker-room-coatroom-and-dressing-room-attendants.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7295,40 +7321,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Work inputs: guests' personal items and supplies such as towels, clothing, footwear, and sports equipment; lockers and clothing containers; claim checks and lost-and-found; laundry and cleaning supplies; premises and equipment; venue rules and safety requirements."
+              "Clean facilities such as floors or locker rooms.",
+              "Provide towels and sheets to clients in public baths, steam rooms, and restrooms.",
+              "Collect soiled linen or clothing for laundering.",
+              "Refer guest problems or complaints to supervisors."
             ]
           },
           "id": "locker-room-coatroom-and-dressing-room-attendants.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Verifiable outputs: accurate item issue and return records, locker and storage assignments matching claim checks, maintained lost-and-found and item inventories, cleaned premises and equipment, and complaint and hazard reports."
-            ]
-          },
-          "id": "locker-room-coatroom-and-dressing-room-attendants.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Complete workflow: check items and premises at shift start → issue supplies and assign lockers or storage spaces → verify and collect claim checks → collect laundry and replenish supplies → clean and organize premises and maintain lost-and-found → handle questions and complaints and report safety hazards → hand over and record."
-            ]
-          },
-          "id": "locker-room-coatroom-and-dressing-room-attendants.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-tasks"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8664,6 +8665,32 @@
                 "publisher": "FermatMind",
                 "scope": "Paper exercise",
                 "url": "#career-content-path"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/39-3093.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -10964,41 +10991,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "locker-room-coatroom-and-dressing-room-attendants.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "locker-room-coatroom-and-dressing-room-attendants.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "locker-room-coatroom-and-dressing-room-attendants.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "locker-room-coatroom-and-dressing-room-attendants.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "Activity preferences can only help design trials; they cannot determine qualifications or performance.",
         "interest": "First observe your interests, stress, and experience during actual shifts, item checks, and customer communication.",
@@ -11264,7 +11262,7 @@
       "text": "Locker Room, Coatroom and Dressing Room Attendants: Tasks, Pay and Training"
     }
   },
-  "source_content_sha256": "8f81e45dce48b86f3dbf8090a6937830c13c2794f0afc765bc2f1141faf2ae38",
+  "source_content_sha256": "20532cb1e011e8241979d06452858674f856522bfa6461ce75e27980c7af685d",
   "subject": {
     "canonical_slug": "locker-room-coatroom-and-dressing-room-attendants",
     "name": "Locker Room, Coatroom and Dressing Room Attendants",

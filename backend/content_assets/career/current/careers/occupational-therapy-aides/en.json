@@ -165,7 +165,7 @@
         "status": "mapped"
       },
       "item:occupational-therapy-aides.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:occupational-therapy-aides.profile.work-context-block.3": {
         "status": "mapped"
@@ -9271,16 +9271,8 @@
         "status": "unfilled"
       },
       "responsibilities_block.05.category": {
-        "ref": {
-          "id": "occupational-therapy-aides.profile.responsibilities-block.2",
-          "path": [
-            "data",
-            "entries",
-            4
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "responsibilities_block.05.description": {
         "ref": null,
@@ -9291,16 +9283,8 @@
         "status": "unfilled"
       },
       "responsibilities_block.06.category": {
-        "ref": {
-          "id": "occupational-therapy-aides.profile.responsibilities-block.2",
-          "path": [
-            "data",
-            "entries",
-            5
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "responsibilities_block.06.description": {
         "ref": null,
@@ -11454,18 +11438,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Confirm team instructions, the supervisor, and appointment and equipment lists.",
-              "Prepare the treatment area and materials per the checklist and keep pathways safe.",
-              "Verify identity per institutional procedure when escorting patients, and report transfer risks promptly.",
-              "After treatment, clean equipment, return items, and update inventory records.",
-              "Assist with non-clinical forms and appointments and protect personal information.",
-              "Stop when missing items, discomfort, fall risk, or conflicting information occur.",
-              "Hand over completion status and abnormalities to the therapist or assistant."
+              "Encourage patients and attend to their physical needs to facilitate the attainment of therapeutic goals.",
+              "Report to supervisors or therapists, verbally or in writing, on patients' progress, attitudes, attendance, and accomplishments.",
+              "Observe patients' attendance, progress, attitudes, and accomplishments and record and maintain information in client records.",
+              "Prepare and maintain work area, materials, and equipment and maintain inventory of treatment and educational supplies."
             ]
           },
           "id": "occupational-therapy-aides.profile.responsibilities-block.2",
           "source_refs": [
-            "source-pack-onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -12884,6 +12865,32 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/31-2012.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -15009,7 +15016,7 @@
       "text": "Occupational therapy aides: duties, wages, and entry boundaries"
     }
   },
-  "source_content_sha256": "a6e1573a20328302b6b35e444c337e492dcbd6c6a0d57c2f10d8b07ec2e0fe83",
+  "source_content_sha256": "243531d67f6c3fbdbc7039e09ddbfd9ec989f018b6cfea2e7f6006928925c79f",
   "subject": {
     "canonical_slug": "occupational-therapy-aides",
     "name": "Occupational therapy aides",

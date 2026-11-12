@@ -162,13 +162,7 @@
         "status": "pending_mapping"
       },
       "item:medical-dosimetrists.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:medical-dosimetrists.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:medical-dosimetrists.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:medical-dosimetrists.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6128,8 +6122,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-dosimetrists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6140,8 +6142,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-dosimetrists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6152,8 +6162,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-dosimetrists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6164,8 +6182,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-dosimetrists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7308,40 +7334,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Inputs: prescriptions and target constraints, images and anatomical structures, treatment planning systems, beam-modification and immobilization devices, and dose and quality-assurance records."
+              "Design the arrangement of radiation fields to reduce exposure to critical patient structures, such as organs, using computers, manuals, and guides.",
+              "Plan the use of beam modifying devices, such as compensators, shields, and wedge filters, to ensure safe and effective delivery of radiation treatment.",
+              "Identify and outline bodily structures, using imaging procedures, such as x-ray, magnetic resonance imaging, computed tomography, or positron emission tomography.",
+              "Calculate the delivery of radiation treatment, such as the amount or extent of radiation per session, based on the prescribed course of radiation therapy."
             ]
           },
           "id": "medical-dosimetrists.profile.responsibilities-block.2",
           "source_refs": [
-            "source-pack-onet-details"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Verifiable outputs: treatment plans and dose calculations, field and dose-distribution documents, dose verification and quality-assurance records, immobilization and beam-modification device requirements, and dose and implementation records."
-            ]
-          },
-          "id": "medical-dosimetrists.profile.responsibilities-block.3",
-          "source_refs": [
-            "source-pack-onet-details"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Complete workflow: check prescriptions and images → contour and confirm structures → design fields and dose proposals → calculate and verify using applicable methods → quality-assurance records and team review/approval → communicate and oversee implementation. Specific review responsibilities follow organizational procedures."
-            ]
-          },
-          "id": "medical-dosimetrists.profile.responsibilities-block.4",
-          "source_refs": [
-            "source-pack-onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -9012,6 +9013,32 @@
                 "publisher": "Medical Dosimetrist Certification Board",
                 "scope": "contextual",
                 "url": "https://www.mdcb.org/january-certification-exam-handbook-posted-0"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/29-2036.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11415,41 +11442,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "medical-dosimetrists.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "medical-dosimetrists.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "medical-dosimetrists.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "medical-dosimetrists.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "Activity preferences only help design trials; they cannot establish qualifications or performance.",
         "interest": "First observe interest, stress, and collaboration experiences in real tasks.",
@@ -11673,7 +11671,7 @@
       "text": "Medical Dosimetrist Career Guide: Duties, Training, and U.S. Pay"
     }
   },
-  "source_content_sha256": "8ed1d0e0019295072388430c2f7a2231e88e40cb2e1430a1b459e0deba027225",
+  "source_content_sha256": "8755106c2a75afc41fbee225dfeaaae8bebca0d8f8c77b851df0fe84fb396884",
   "subject": {
     "canonical_slug": "medical-dosimetrists",
     "name": "Medical Dosimetrists",

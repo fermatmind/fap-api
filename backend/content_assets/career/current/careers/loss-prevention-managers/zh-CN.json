@@ -171,13 +171,7 @@
         "status": "pending_mapping"
       },
       "item:loss-prevention-managers.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:loss-prevention-managers.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:loss-prevention-managers.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:loss-prevention-managers.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6125,8 +6119,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "loss-prevention-managers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6137,8 +6139,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "loss-prevention-managers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6149,8 +6159,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "loss-prevention-managers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6161,8 +6179,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "loss-prevention-managers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7295,40 +7321,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "投入对象：例外报告与现金差异数据、库存与账务记录、监控与门禁等防损系统、防损项目与培训材料、调查证据与访谈记录、执法与行业合作渠道、相关法规与公司政策。"
+              "协调或开展对诸如雇员盗窃和违反公司损失预防政策等问题的内部调查。",
+              "管理减少损失、维持库存控制或提高安全性的系统和程序。",
+              "审查防止损失的例外报告和现金差异，以确保遵守准则。",
+              "培训损失预防人员、零售经理或存储员工对损失控制和预防措施。"
             ]
           },
           "id": "loss-prevention-managers.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "可检查产出：经审查的例外报告与现金审计结论、内部调查与访谈记录、库存控制与安全项目方案、员工培训与合规建议记录、与执法协作的案件材料、防损数据库与趋势分析。"
-            ]
-          },
-          "id": "loss-prevention-managers.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "完整工作流程：收集例外报告与差异数据 → 初判风险并确认调查授权 → 现场核查与证据固定 → 访谈与协作调查 → 形成结论与处理建议 → 落实控制措施与培训 → 更新数据库并跟踪效果。"
-            ]
-          },
-          "id": "loss-prevention-managers.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-tasks"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8725,6 +8726,32 @@
                 "name": "开平人社局 2026 年第九十二期企业岗位信息",
                 "publisher": "开平市人力资源和社会保障局",
                 "url": "https://www.kaiping.gov.cn/kpsrlzyhshbzj/jycyxx/zpxx/content/post_3463860.html"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/11-9199.08#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11061,41 +11088,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "loss-prevention-managers.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "loss-prevention-managers.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "loss-prevention-managers.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "loss-prevention-managers.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "活动偏好只能帮助设计试验，不能判断资格或表现。",
         "interest": "先观察真实现场巡视、调查访谈与合规判断中的兴趣、压力与体验。",
@@ -11365,7 +11363,7 @@
       "text": "防损经理做什么：任务、工资与入行"
     }
   },
-  "source_content_sha256": "f0bfa3173c19c9b8db56ae710848e3551a49fd10e8ba8207f92c149f39c6b3be",
+  "source_content_sha256": "cd75a69fbc9b1055e84c5d6798f673a2fc6ba7b947dc7b37f382a17c265952de",
   "subject": {
     "canonical_slug": "loss-prevention-managers",
     "name": "防损经理",

@@ -9072,8 +9072,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "microsystems-engineers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -12058,14 +12066,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Requirements and specifications: Break down product requirements and establish functional, process, and packaging constraints.",
-              "Design and simulation: Complete schematics, physical layouts, and design reviews.",
-              "Fabrication, packaging, and validation: Develop micro- and nanoscale processes, evaluate packaging options, and complete testing and documentation."
+              "Create schematics and physical layouts of integrated microelectromechanical systems (MEMS) components or packaged assemblies consistent with process, functional, or package constraints.",
+              "Investigate characteristics such as cost, performance, or process capability of potential microelectromechanical systems (MEMS) device designs, using simulation or modeling software.",
+              "Create or maintain formal engineering documents, such as schematics, bills of materials, components or materials specifications, or packaging requirements.",
+              "Conduct analyses addressing issues such as failure, reliability, or yield improvement."
             ]
           },
           "id": "microsystems-engineers.profile.responsibilities-block.2",
           "source_refs": [
-            "source-pack-onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -13558,6 +13567,32 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/17-2199.06#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -15726,7 +15761,7 @@
       "text": "Microsystems Engineers: Duties, U.S. Wages, and Employment"
     }
   },
-  "source_content_sha256": "d09aca94cd1a6247da43e0c92a6e598aec1fb02dca74d140e20d1270f81f7543",
+  "source_content_sha256": "e3362ca39ba2e9ce7c927fd4275ffaaf3b2d64a06e49bf959b690375885e9c4b",
   "subject": {
     "canonical_slug": "microsystems-engineers",
     "name": "Microsystems Engineers",

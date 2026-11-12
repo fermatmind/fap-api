@@ -168,13 +168,7 @@
         "status": "pending_mapping"
       },
       "item:diagnostic-medical-sonographers.profile.responsibilities-block.1": {
-        "status": "pending_mapping"
-      },
-      "item:diagnostic-medical-sonographers.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:diagnostic-medical-sonographers.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:diagnostic-medical-sonographers.profile.work-context-block.1": {
         "status": "pending_mapping"
@@ -6140,8 +6134,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "diagnostic-medical-sonographers.profile.responsibilities-block.1",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6152,8 +6154,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "diagnostic-medical-sonographers.profile.responsibilities-block.1",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6164,8 +6174,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "diagnostic-medical-sonographers.profile.responsibilities-block.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6176,8 +6194,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "diagnostic-medical-sonographers.profile.responsibilities-block.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7318,40 +7344,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "常见输入包括检查申请、患者身份、相关病史、检查部位、机构方案、设备和探头状态，以及既往检查或床旁限制。"
+              "在扫描过程中观察屏幕，以确保所产生的图像适合诊断目的，并根据需要对设备进行调整。",
+              "决定要包含哪些图像，寻找健康领域和病理领域之间的差异 。",
+              "使用超声波设备制作和记录血液、器官、组织或身体质量的运动、形状和组成图像，如液体积累。",
+              "在整个检查过程中观察和照顾病人，以确保他们的安全和舒适。"
             ]
           },
           "id": "diagnostic-medical-sonographers.profile.responsibilities-block.1",
           "source_refs": [
-            "bls-sonographer-current"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "核心产出是符合机构要求的图像、测量、技术记录、质量说明和异常交接，供医师与医疗团队后续使用。"
-            ]
-          },
-          "id": "diagnostic-medical-sonographers.profile.responsibilities-block.2",
-          "source_refs": [
-            "bls-sonographer-current"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "典型流程是核对申请与身份—解释程序和摆位—选择探头与设置—按方案扫查—复核图像与测量—归档并交接。"
-            ]
-          },
-          "id": "diagnostic-medical-sonographers.profile.responsibilities-block.3",
-          "source_refs": [
-            "bls-sonographer-current"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -9230,6 +9231,32 @@
                 "publisher": "Inteleos",
                 "scope": "contextual",
                 "url": "https://www.inteleos.org/certification/registered-diagnostic-medical-sonographer/"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/29-2032.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11570,41 +11597,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "diagnostic-medical-sonographers.profile.responsibilities-block.1",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "diagnostic-medical-sonographers.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "diagnostic-medical-sonographers.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "diagnostic-medical-sonographers.profile.responsibilities-block.1",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "兴趣只提示探索方向，实际适配以受监督实操与训练反馈核验。",
         "interest": "官方兴趣代码 RCI（现实型、常规型、研究型）：以设备操作、按程序核对与医学知识应用为主。",
@@ -11856,7 +11854,7 @@
       "text": "医学超声技师做什么？技术职责、工资与入行"
     }
   },
-  "source_content_sha256": "fd03f00e0511956e11c667552b86186984715453ec64dc6ce32f4583cdd5408f",
+  "source_content_sha256": "c822a1ec924c6a5686e447f43dde8d2cd76e108e6a2e83cf188fc024884d9538",
   "subject": {
     "canonical_slug": "diagnostic-medical-sonographers",
     "name": "医学超声技师",

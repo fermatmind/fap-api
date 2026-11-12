@@ -1497,22 +1497,7 @@
         "status": "mapped"
       },
       "item:actors.display.responsibilities_block.01": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.02": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.03": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.04": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.05": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.06": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:actors.display.riasec_fit_block.code": {
         "status": "mapped"
@@ -19184,8 +19169,16 @@
         "status": "mapped"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -19196,8 +19189,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -19208,8 +19209,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -19220,8 +19229,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -23388,88 +23405,18 @@
           "availability": "available",
           "copy_key": "career.item.responsibilities-block",
           "data": {
-            "paragraphs": [
-              "Collecting dispatch｜receiving items and delivery information｜Receive the items to be delivered and the recipient's name, address, telephone and delivery instructions, sort by route and confirm the delivery sequence and timeliness requirements."
+            "entries": [
+              "Deliver and pick up medical records, lab specimens, and medications to and from hospitals and other medical facilities.",
+              "Walk, ride bicycles, drive vehicles, or use public conveyances to reach destinations to deliver messages or materials.",
+              "Load vehicles with listed goods, ensuring goods are loaded correctly and taking precautions with hazardous goods.",
+              "Receive messages or materials to be delivered, and information on recipients, such as names, addresses, telephone numbers, and delivery instructions, communicated via telephone, two-way radio, or in person."
             ]
           },
           "id": "actors.display.responsibilities_block.01",
           "source_refs": [
-            "onet"
+            "batch52-onet-core"
           ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "Route planning｜arranging a time-saving sequence｜Plan and follow the most time-saving delivery route, taking recipient time windows and road conditions into account and reducing empty running and repeated trips."
-            ]
-          },
-          "id": "actors.display.responsibilities_block.02",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "Loading by list is U.S. Core, and hazardous goods handling in China must distinguish acceptance of prohibited and restricted mail from items already accepted; Articles 5/31/34 of China's Interim Regulations on Express Delivery prohibit opening parcels without authorization and illegally sending prohibited or restricted items: items prohibited from mailing found before acceptance should be refused, and suspected prohibited items found after acceptance require immediately stopping sorting, transport and delivery and handling them according to law, with reporting and cooperation if a crime is suspected; other prohibited and restricted items are handled according to the rules. U.S. hazardous goods prevention tasks are not a Chinese carrier licence. The specific unit handling, suspension lifting and recovery procedures were not obtained, and no authorization is filled in on your own."
-            ]
-          },
-          "id": "actors.display.responsibilities_block.03",
-          "source_refs": [
-            "onet",
-            "cn-rule"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "In addition to documents and parcels, U.S. Core also includes picking up and delivering medical records, specimens and medicines; the specific transport conditions and training for these categories must be checked against the actual rules, and the task profile does not grant medical practice authority."
-            ]
-          },
-          "id": "actors.display.responsibilities_block.04",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "Recording items and responses is Core, while obtaining signatures and arranging payment and contacting the unit after delivery are Supplemental; in China, confirming receipt follows the regulations and the user's agreement. Articles 27–28 of China's Measures for the Administration of the Express Delivery Market: inform the recipient of the right of inspection, and for obviously damaged or fragile items inform them they may inspect the contents or refuse acceptance; a signature or other legible and preservable express confirmation can prove receipt, and where face-to-face handover is not possible the method must be agreed with the user, and without consent one may not confirm on the user's behalf or place the item in a smart locker or service station. Collection of payments on behalf of others applies only where the actual business requires it and is not required every time."
-            ]
-          },
-          "id": "actors.display.responsibilities_block.05",
-          "source_refs": [
-            "onet",
-            "g04-cn-market"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "Unloading and sorting along the route and routine maintenance of oil, fluids and fuel are Core; transferring from larger to smaller vehicles, opening and distributing items, general clerical work and verbal messaging by telephone are Supplemental, and China prohibits opening parcels without authorization."
-            ]
-          },
-          "id": "actors.display.responsibilities_block.06",
-          "source_refs": [
-            "onet",
-            "cn-rule"
-          ],
-          "type": "prose"
+          "type": "list"
         },
         {
           "availability": "available",
@@ -31745,6 +31692,32 @@
                 "publisher": "Beijing Fangshan District",
                 "scope": "recruitment_proxy",
                 "url": "https://www.bjfsh.gov.cn/zwgk/qrlsbj/zdly_999/fshcyjy/rlzyscgqxx/202407/t20240726_40079183.shtml"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/43-5021.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -36497,44 +36470,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$item": "actors.display.responsibilities_block.01",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.02",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.03",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.04",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.05",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.06",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "actors.display.responsibilities_block.01",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": {
           "$item": "actors.display.riasec_fit_block.fit-interest",
@@ -37283,7 +37224,7 @@
       "text": "Couriers and messengers"
     }
   },
-  "source_content_sha256": "503218c2b463a69b4c031bc9f12fe86ba1690508f9097520f762051c05a07ec4",
+  "source_content_sha256": "296965566ea35f03b98adbfe88abdc1a9787cd8ab4ffb92cb1a4ee8313c00837",
   "subject": {
     "canonical_slug": "couriers-and-messengers",
     "name": "Couriers and messengers",

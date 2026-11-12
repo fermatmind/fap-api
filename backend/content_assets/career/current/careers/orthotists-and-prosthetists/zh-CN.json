@@ -9105,8 +9105,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "orthotists-and-prosthetists.profile.definition-block.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -9117,8 +9125,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "orthotists-and-prosthetists.profile.definition-block.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -11282,13 +11298,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "患者评估",
-              "器具试配"
+              "适合，测试和评估患者的设备，并进行适当的适合，功能和舒适的调整。",
+              "指导病人使用和护理矫形器和假肢。",
+              "保持患者的记录。",
+              "检查、面试和测量患者，以确定他们的设备需求，并确定可能影响设备适合的因素。"
             ]
           },
           "id": "orthotists-and-prosthetists.profile.definition-block.1",
           "source_refs": [
-            "source-pack-onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -12779,6 +12797,32 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/29-2091.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -15016,7 +15060,7 @@
       "text": "矫形器与假肢师｜职责、培训与薪资"
     }
   },
-  "source_content_sha256": "a477c572cfbadc0e856035a177f9a919510d0776c7ced19cecc4a719bfa965d3",
+  "source_content_sha256": "a34c8ff08b5d041280963f989f0144414001f51503cc56cf7ab6f2de1ff0f2af",
   "subject": {
     "canonical_slug": "orthotists-and-prosthetists",
     "name": "矫形器与假肢师",

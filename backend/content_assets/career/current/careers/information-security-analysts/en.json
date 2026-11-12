@@ -360,13 +360,7 @@
         "status": "pending_mapping"
       },
       "item:information-security-analysts.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:information-security-analysts.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:information-security-analysts.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:information-security-analysts.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -8243,8 +8237,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "information-security-analysts.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -8255,8 +8257,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "information-security-analysts.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -8267,8 +8277,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "information-security-analysts.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -8279,8 +8297,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "information-security-analysts.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -9414,41 +9440,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Input objects: fictional or authorized security logs, asset inventories, permission records, system configurations, vulnerability reports and change records."
+              "Develop plans to safeguard computer files against accidental or unauthorized modification, destruction, or disclosure and to meet emergency data processing needs.",
+              "Monitor current reports of computer viruses to determine when to update virus protection systems.",
+              "Encrypt data transmissions and erect firewalls to conceal confidential information as it is being transmitted and to keep out tainted digital transfers.",
+              "Perform risk assessments and execute tests of data processing system to ensure functioning of data processing activities and security measures."
             ]
           },
           "id": "information-security-analysts.profile.responsibilities-block.2",
           "source_refs": [
-            "bls-ooh-2025-information-security-analysts"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Checkable outputs: alert triage, vulnerability review tables, control improvement recommendations, incident timelines, metric reports and escalation records."
-            ]
-          },
-          "id": "information-security-analysts.profile.responsibilities-block.3",
-          "source_refs": [
-            "bls-ooh-2025-information-security-analysts"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Complete work process: confirm the scope and authorization, check inputs and versions, analyze anomalies or vulnerabilities, propose mitigation options, record evidence, and hand over after review; do not perform unauthorized real network operations."
-            ]
-          },
-          "id": "information-security-analysts.profile.responsibilities-block.4",
-          "source_refs": [
-            "bls-ooh-2025-information-security-analysts",
-            "source-pack-onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -12171,6 +12171,32 @@
                 "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/15-1212.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -14638,41 +14664,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "information-security-analysts.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "information-security-analysts.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "information-security-analysts.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "information-security-analysts.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "Activity preferences can only help design exercises and cannot judge qualifications or performance.",
         "interest": "The O*NET interest code is CI (Conventional—Investigative): leaning toward organizing information and data per procedures and rules and conducting research and analysis; preference does not equal ability or a hiring conclusion.",
@@ -15008,7 +15005,7 @@
       "text": "Information Security Analyst: Alert Triage, Risk and Incident Handoffs"
     }
   },
-  "source_content_sha256": "056aea238780e0d4698ef3d6d6795c2e7cfdfedbb0e472bf9b8f0a5384568e33",
+  "source_content_sha256": "a4c527eb96fcaf50e33c572475a7e833354631f3ecc526df6ef2489fbc82efce",
   "subject": {
     "canonical_slug": "information-security-analysts",
     "name": "Information Security Analyst",

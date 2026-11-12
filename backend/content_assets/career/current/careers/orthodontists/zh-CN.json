@@ -9058,8 +9058,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "orthodontists.profile.definition-block.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -9070,8 +9078,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "orthodontists.profile.definition-block.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -11347,14 +11363,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "正畸医师对应美国 O*NET 29-1023.00 Orthodontists。该职业检查、诊断和治疗牙颌畸形及相关口腔异常，设计和使用矫治装置以调整牙齿与颌骨关系。中国执业范围须另按本地医师注册规则和机构条件核定。",
-              "主要交付是可追溯的评估、方案沟通、矫治操作与随访记录；临床判断仍由有相应执业权限的医师承担。"
+              "诊断牙齿和下颌的异常，或任何牙齿与面部相关的畸形。",
+              "检查患者，评估颌骨发育、牙齿位置及其他牙颌面结构是否异常。",
+              "研究诊断记录，如医学或牙科史，牙齿的石膏模型，患者面部和牙齿的照片，以及X光等，以制定患者治疗计划。",
+              "在病人的嘴里装上牙科用具 来改变牙齿和下巴的位置和关系 或调整牙齿。"
             ]
           },
           "id": "orthodontists.profile.definition-block.1",
           "source_refs": [
-            "source-pack-onet-details",
-            "nhc-physician-registration-2017"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -12880,6 +12897,32 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/29-1023.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -15090,7 +15133,7 @@
       "text": "正畸医师"
     }
   },
-  "source_content_sha256": "e178520960bd32bf9b928a26563f36722ca203835bd551dbdf5c793ffdd013df",
+  "source_content_sha256": "4fb23a220eb5e2ea0607c51c81f5c39b2008156d82cc65dded52a29f85c0137e",
   "subject": {
     "canonical_slug": "orthodontists",
     "name": "正畸医师",

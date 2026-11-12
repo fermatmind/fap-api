@@ -186,13 +186,7 @@
         "status": "pending_mapping"
       },
       "item:data-warehousing-specialists.profile.responsibilities-block.1": {
-        "status": "pending_mapping"
-      },
-      "item:data-warehousing-specialists.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:data-warehousing-specialists.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:data-warehousing-specialists.profile.work-context-block.1": {
         "status": "pending_mapping"
@@ -6188,8 +6182,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "data-warehousing-specialists.profile.responsibilities-block.1",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6200,8 +6202,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "data-warehousing-specialists.profile.responsibilities-block.1",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6212,8 +6222,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "data-warehousing-specialists.profile.responsibilities-block.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6224,8 +6242,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "data-warehousing-specialists.profile.responsibilities-block.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7367,40 +7393,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "输入：业务定义与目标口径、源表模式与字段样本、主键与更新频率、数据权限与服务等级、下游查询需求、历史故障与数据质量问题清单。"
+              "开发数据存储过程模型，包括提取、加载、转换和提取。",
+              "验证仓库数据的结构、准确性或质量。",
+              "地图数据介于源系统，数据仓库，和数据壁图之间。",
+              "制定并实施从其他系统提取数据的程序，如行政管理、计费或索偿。"
             ]
           },
           "id": "data-warehousing-specialists.profile.responsibilities-block.1",
           "source_refs": [
-            "r5-onet-current"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "产出：维度与事实表设计、可重跑的抽取转换装载实现、质量断言与隔离机制、对账结论、元数据与血缘记录、用户支持说明。"
-            ]
-          },
-          "id": "data-warehousing-specialists.profile.responsibilities-block.2",
-          "source_refs": [
-            "r5-onet-current"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "流程：澄清需求 → 确认数据与权限 → 定粒度与模型 → 写映射与转换 → 加载与质量断言 → 验证与对账 → 发布元数据 → 支持用户与复盘；遇到口径冲突、异常行或权限不足时按流程暂停、隔离并升级。"
-            ]
-          },
-          "id": "data-warehousing-specialists.profile.responsibilities-block.3",
-          "source_refs": [
-            "r5-onet-current"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -9237,6 +9238,32 @@
                 "publisher": "中国人民银行官网",
                 "scope": "recruitment_proxy",
                 "url": "https://www.pbc.gov.cn/renshisi/144501/144513/5836227/5836240/2025121214564112292/2025121214560356519.pdf"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/15-1243.01#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11723,41 +11750,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "data-warehousing-specialists.profile.responsibilities-block.1",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "data-warehousing-specialists.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "data-warehousing-specialists.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "data-warehousing-specialists.profile.responsibilities-block.1",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "本职业在 O*NET 摘要页公示的兴趣代码为 CI：常规型对应按程序与规范组织数据并核对质量，研究型对应分析数据关系与改进方法。请用实际任务核对——是否愿意长期在口径、质量与复现上投入；兴趣代码只说明活动类型，不预测工作表现，也不构成录用标准。",
         "interest": "常规型对应按既定程序与规则组织信息与数据、在业务环境中处理结构化任务；研究型对应研究与分析数据、用统计与数学方法探索规律。代码来自官方兴趣档案，不是人格标签。",
@@ -12102,7 +12100,7 @@
       "text": "数据仓库专家"
     }
   },
-  "source_content_sha256": "099ebff9c695bdd383c158ca8b3697e83bee84cde3045fdb6b7f02da1ed6ff69",
+  "source_content_sha256": "beeb5a38797802b007de4c6ce2ec15c005e6b93372cd1fb6042809115bca2134",
   "subject": {
     "canonical_slug": "data-warehousing-specialists",
     "name": "数据仓库专家",

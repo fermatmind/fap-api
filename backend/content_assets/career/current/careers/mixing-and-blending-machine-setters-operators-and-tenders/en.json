@@ -9455,8 +9455,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.profile.definition-block.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -9467,8 +9475,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.profile.definition-block.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -12406,13 +12422,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Ingredient preparation and weighing: weigh or measure materials and ingredients according to work orders and formulas, and verify specifications and batches.",
-              "Equipment operation and monitoring: start and tend mixers, pumps, and conveyors, observe operation, and stop and transfer materials according to timing and quality requirements."
+              "Weigh or measure materials, ingredients, or products to ensure conformance to requirements.",
+              "Read work orders to determine production specifications or information.",
+              "Observe production or monitor equipment to ensure safe and efficient operation.",
+              "Mix or blend ingredients by starting machines and mixing for specified times."
             ]
           },
           "id": "mixing-and-blending-machine-setters-operators-and-tenders.profile.definition-block.1",
           "source_refs": [
-            "onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -14111,6 +14129,32 @@
                 "publisher": "Zhifu district: June 2026 employer notice",
                 "scope": "Zhifu district: June 2026 employer notice",
                 "url": "https://www.zhifu.gov.cn/col/col101867/art/2026/art_0cf757963eb64f6a921d399444707a26.html"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/51-9023.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -16209,7 +16253,7 @@
       "text": "Mixing and Blending Machine Setters, Operators, and Tenders: Work, U.S. Wages, and Safety"
     }
   },
-  "source_content_sha256": "f9080441610f3b80527b732b47ab27d10177748cd2fd678bda2b92df9cba1de9",
+  "source_content_sha256": "f306d70fca1fa91d690edc66328b41acaa134f0ceeb5ce766ee78ca7be62a72a",
   "subject": {
     "canonical_slug": "mixing-and-blending-machine-setters-operators-and-tenders",
     "name": "Mixing and blending machine setters, operators, and tenders",

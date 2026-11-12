@@ -1509,22 +1509,7 @@
         "status": "mapped"
       },
       "item:actors.display.responsibilities_block.01": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.02": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.03": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.04": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.05": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.06": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:actors.display.riasec_fit_block.code": {
         "status": "mapped"
@@ -19196,8 +19181,16 @@
         "status": "mapped"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -19208,8 +19201,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -19220,8 +19221,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -19232,8 +19241,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -23413,89 +23430,18 @@
           "availability": "available",
           "copy_key": "career.item.responsibilities-block",
           "data": {
-            "paragraphs": [
-              "Common inputs: document management policy and the classification scheme and metadata specifications, requirements for classification level and trade secrets and personal information and retention periods, electronic files produced by business and office systems and their formats and interfaces, user access and retrieval and copying needs and the scope of authorization, system versions and permissions and audit logs and backup arrangements, and expiry appraisal and destruction lists and approval records."
+            "entries": [
+              "Assist in determining document management policies to facilitate efficient, legal, and secure access to electronic content.",
+              "Assist in the development of document or content classification taxonomies to facilitate information capture, search, and retrieval.",
+              "Implement electronic document processing, retrieval, and distribution systems in collaboration with other information technology specialists.",
+              "Identify and classify documents or other electronic content according to characteristics such as security level, function, and metadata."
             ]
           },
           "id": "actors.display.responsibilities_block.01",
           "source_refs": [
-            "onet"
+            "batch52-onet-core"
           ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "Core outputs: executable document management policy and classification and metadata specifications, records of system functions and permissions and version control configured according to the rules, digitization and data capture and security oversight records, retrieval and distribution records and support documents and training materials, retention period and appraisal and destruction records, and system test plans and technical functions and specifications; some positions also have system performance analysis, plus handoff records of pending items and anomalies."
-            ]
-          },
-          "id": "actors.display.responsibilities_block.02",
-          "source_refs": [
-            "sag-moa"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "Typical process: take part in determining policy and establishing classification—jointly implement and configure systems and permissions and versions—capture and digitize—retrieve and distribute and provide support—monitor regulations and retention periods and organize appraisal and destruction—write specifications and hand off; system performance analysis is a supplemental task in some positions."
-            ]
-          },
-          "id": "actors.display.responsibilities_block.03",
-          "source_refs": [
-            "sag-moa"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "Common collaborators: business departments and end users, information technology and information security, legal and compliance, archives and records management, audit and external regulators, and system and imaging and scanning vendors."
-            ]
-          },
-          "id": "actors.display.responsibilities_block.04",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "Common tools and objects: document and content management systems, scanning and imaging and optical character recognition tools, metadata and classification and workflow configuration, permissions and versions and audit logs, office and database and collaboration tools, and technical specifications and performance reports."
-            ]
-          },
-          "id": "actors.display.responsibilities_block.05",
-          "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "The O*NET15-1299.03 definition covers implementing and administering enterprise document systems and procedures and capturing, storing, retrieving, sharing and destroying electronic records. Of 23 tasks, 22 are Core and 1 Supplemental; analyzing and interpreting and disseminating system performance data is supplemental and is not treated as required in all positions. Policy and classification and evaluating and procuring and deploying new systems are assistance and participation, while configuring access and version control, capture, retrieval, requirements, testing, regulatory tracking and user support are core. Monitoring regulations does not automatically confer legal adjudication authority; tasks may overlap with adjacent occupations, and archive work or system development and configuration or technical duties cannot be uniformly excluded, being distinguished only by main outputs and authorization. National Archives Administration Order No. 22 of 2024, the Measures for the Administration of Electronic Archives (effective 11-01): Articles 3, 5, 14 and 16—19 cover provenance and procedures and elements, metadata throughout the process, archiving scope and retention periods, testing, and confirmation by responsible persons; Articles 26—28 cover backup and migration systems and testing after conversion; Articles 29 and 30 cover expiry appraisal, re-setting retention periods for continued preservation, and destruction only after performing approval and keeping records, so expiry cannot trigger automatic deletion. Article 35 proposes using AI and the like for arrangement and research and exhibitions and thematic database development, which does not prove deployment rates or benefits for this occupation or automatic AI authorization."
-            ]
-          },
-          "id": "actors.display.responsibilities_block.06",
-          "source_refs": [
-            "onet",
-            "sag-moa",
-            "r5-archive-current",
-            "r5-electronic-current",
-            "r5-account-current"
-          ],
-          "type": "prose"
+          "type": "list"
         },
         {
           "availability": "available",
@@ -31961,6 +31907,32 @@
                 "publisher": "Dayu County Government",
                 "scope": "recruitment_proxy",
                 "url": "https://www.jxdy.gov.cn/dyxxxgk/c145429gg/202606/c957d55652424130875c7919a6526fb2.shtml"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/15-1299.03#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -36778,44 +36750,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$item": "actors.display.responsibilities_block.01",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.02",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.03",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.04",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.05",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.06",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "actors.display.responsibilities_block.01",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": {
           "$item": "actors.display.riasec_fit_block.fit-interest",
@@ -37615,7 +37555,7 @@
       "text": "Document management specialists"
     }
   },
-  "source_content_sha256": "cc6cc4c4dd752988dd4293e12a61acb28b15f979dbf4fc199594f0b27c574870",
+  "source_content_sha256": "a1daf67c9f5b36dca7c97e4830fb75da9461be7dfc9680c43210ddf14c84b321",
   "subject": {
     "canonical_slug": "document-management-specialists",
     "name": "Document management specialists",

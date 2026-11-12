@@ -9054,8 +9054,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "office-machine-operators-except-computer.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -12040,14 +12048,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "读工单、准备原件与耗材，核份数、纸张和截止时间。",
-              "设定并监控复印、扫描、折页或装订设备；检查卡纸、偏移与清晰度。",
-              "整理成品、抽检页序和数量，记产量与耗材；重大故障交维修。"
+              "阅读工作订单，以确定要完成的工作类型、要生产的数量以及需要的材料。",
+              "提交完成的工作。",
+              "将原始副本放在进料盘中，将原始文本输入到进料卷中，或将原始文本放在相机镜头下的桌子上。",
+              "排序、收集和证明完成的工作。"
             ]
           },
           "id": "office-machine-operators-except-computer.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -13556,6 +13565,32 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/43-9071.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -15679,7 +15714,7 @@
       "text": "非计算机办公设备操作员：职责、工资与前景"
     }
   },
-  "source_content_sha256": "3d8e8dfa8d99e46f4ca79586747dba67ff263ee50a8f9dda9e7cd25f726c601a",
+  "source_content_sha256": "596ea58e1555d0adc497d050f997b02c4a002031a72bfbd9aacf2dfcf40a09a5",
   "subject": {
     "canonical_slug": "office-machine-operators-except-computer",
     "name": "办公设备操作员（计算机除外）",

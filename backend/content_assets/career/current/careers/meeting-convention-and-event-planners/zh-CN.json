@@ -9049,8 +9049,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "meeting-convention-and-event-planners.profile.definition-block.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -9061,8 +9069,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "meeting-convention-and-event-planners.profile.definition-block.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -11335,13 +11351,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "方案与预算：按需求与预算制定活动方案，选择并协调场地与供应商，并核对报价与条款。",
-              "合同与执行：管理合同与结算，排布日程与执行清单，负责现场统筹、突发处置与复盘记录。"
+              "与客户咨询，以确定活动的目标和要求，如会议、会议和会议。",
+              "查看事件账单，以确保准确性和批准付款。",
+              "协调活动服务，如参加者住宿和运输，设施，餐饮，签名，显示，特殊需求要求，印刷和活动安全。",
+              "安排提供视听设备、运输、展示和其他活动需要。"
             ]
           },
           "id": "meeting-convention-and-event-planners.profile.definition-block.1",
           "source_refs": [
-            "source-pack-onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -12895,6 +12913,32 @@
                 "publisher": "BLS",
                 "scope": "proxy",
                 "url": "https://www.bls.gov/ooh/media-and-communication/public-relations-specialists.htm"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 31.0 核心任务",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/13-1121.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "费马测试节译自 O*NET® 31.0 数据库的核心任务原文，按 CC BY 4.0 使用，仅对应美国职业范围。译文未经美国劳工部就业与培训管理局审定或认可。",
+                "market": "United States",
+                "name": "O*NET® 数据库许可 · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "美国劳工部就业与培训管理局",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -15111,7 +15155,7 @@
       "text": "会议、会展与活动策划师：工作内容、美国工资与入行 | 费马测试"
     }
   },
-  "source_content_sha256": "00a4c5b1e13d4d7967e94c9c7173c11ebc838c24df9074822cc5b537561895d4",
+  "source_content_sha256": "f1b7b5a32680b55ff5d34904ce5a2af9d23019528938674d74161d479f445be5",
   "subject": {
     "canonical_slug": "meeting-convention-and-event-planners",
     "name": "会议、会展与活动策划师",

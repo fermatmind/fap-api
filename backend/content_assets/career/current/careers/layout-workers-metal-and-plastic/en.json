@@ -174,13 +174,7 @@
         "status": "pending_mapping"
       },
       "item:layout-workers-metal-and-plastic.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:layout-workers-metal-and-plastic.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:layout-workers-metal-and-plastic.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:layout-workers-metal-and-plastic.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6128,8 +6122,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "layout-workers-metal-and-plastic.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6140,8 +6142,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "layout-workers-metal-and-plastic.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6152,8 +6162,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "layout-workers-metal-and-plastic.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6164,8 +6182,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "layout-workers-metal-and-plastic.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7298,40 +7324,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Work objects: metal and plastic workpieces, engineering drawings and templates, measuring and marking tools, dimensions and tolerances, datums and processing sequences."
+              "Mark curves, lines, holes, dimensions, and welding symbols onto workpieces, using scribes, soapstones, punches, and hand drills.",
+              "Plan locations and sequences of cutting, drilling, bending, rolling, punching, and welding operations, using compasses, protractors, dividers, and rules.",
+              "Fit and align fabricated parts to be welded or assembled.",
+              "Locate center lines and verify template positions, using measuring instruments such as gauge blocks, height gauges, and dial indicators."
             ]
           },
           "id": "layout-workers-metal-and-plastic.profile.responsibilities-block.2",
           "source_refs": [
-            "source-pack-onet-custom"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Inspectable outputs: dimensions calculated from drawings and established datums, with reviewable layout markings, inspection records and exception-escalation records."
-            ]
-          },
-          "id": "layout-workers-metal-and-plastic.profile.responsibilities-block.3",
-          "source_refs": [
-            "source-pack-onet-custom"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Complete workflow: read drawings and verify versions and units, select datums and calculate dimensions, position and mark, review markings, plan cutting, drilling, bending or welding sequence, then hand off with records."
-            ]
-          },
-          "id": "layout-workers-metal-and-plastic.profile.responsibilities-block.4",
-          "source_refs": [
-            "source-pack-onet-custom"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8767,6 +8768,32 @@
                 "publisher": "FermatMind",
                 "scope": "Paper exercise",
                 "url": "#career-content-path"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/51-4192.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11058,41 +11085,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "layout-workers-metal-and-plastic.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "layout-workers-metal-and-plastic.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "layout-workers-metal-and-plastic.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "layout-workers-metal-and-plastic.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "Activity preferences can only help design trials, not judge qualifications or performance.",
         "interest": "First observe interest, stress and collaboration experiences in real tasks.",
@@ -11370,7 +11368,7 @@
       "text": "Layout Workers, Metal and Plastic: Tasks, Pay and Training"
     }
   },
-  "source_content_sha256": "500b47d13cae87114021c3b75966c76a066535e59274be343cce99a4b4a9394b",
+  "source_content_sha256": "e714c594bb8c2bdffa90a2ee9be770d6702f2432c9574dfccf187d62364925a1",
   "subject": {
     "canonical_slug": "layout-workers-metal-and-plastic",
     "name": "Layout Workers, Metal and Plastic",

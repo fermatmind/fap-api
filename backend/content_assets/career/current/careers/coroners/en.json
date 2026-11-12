@@ -159,13 +159,7 @@
         "status": "pending_mapping"
       },
       "item:coroners.profile.work-context-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:coroners.profile.work-context-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:coroners.profile.work-context-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:coroners.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6137,8 +6131,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "coroners.profile.work-context-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6149,8 +6151,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "coroners.profile.work-context-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6161,8 +6171,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "coroners.profile.work-context-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6173,8 +6191,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "coroners.profile.work-context-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7313,43 +7339,18 @@
           "availability": "available",
           "copy_key": "career.item.responsibilities-block",
           "data": {
-            "paragraphs": [
-              "Real inputs include reports and scene observations, body and identity information, medical history, witness statements, photographs, the chain of physical evidence, toxicology or pathology results and law enforcement records."
+            "entries": [
+              "Complete death certificates, including the assignment of cause and manner of death.",
+              "Perform medicolegal examinations and autopsies, conducting preliminary examinations of the body to identify victims, locate signs of trauma, and identify factors that would indicate time of death.",
+              "Interview persons present at death scenes to obtain information useful in determining the manner of death.",
+              "Observe and record the positions and conditions of bodies and related evidence."
             ]
           },
           "id": "coroners.profile.work-context-block.2",
           "source_refs": [
-            "onet-coroners"
+            "batch52-onet-core"
           ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "Editorial process summary: verify jurisdiction and identity, record the scene and body, conduct interviews and take medical history, preserve and transfer physical evidence, examine or arrange autopsy and pathology and toxicology testing, and produce the reports and documents one is authorized to sign. O*NET also lists forensic examination/autopsy and directing autopsies as tasks, so it cannot be summarized as all coroners only organizing paperwork; the executing parties and authorization must be checked separately."
-            ]
-          },
-          "id": "coroners.profile.work-context-block.3",
-          "source_refs": [
-            "onet-coroners"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "The key judgment is to distinguish observation, testimony and professional inference, and to decide which matters require the involvement of forensic physicians, pathology, toxicology, law enforcement or the courts."
-            ]
-          },
-          "id": "coroners.profile.work-context-block.4",
-          "source_refs": [
-            "onet-coroners"
-          ],
-          "type": "prose"
+          "type": "list"
         },
         {
           "availability": "available",
@@ -9093,6 +9094,32 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/13-1041.06#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11012,26 +11039,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$item": "coroners.profile.work-context-block.2",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "coroners.profile.work-context-block.3",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "coroners.profile.work-context-block.4",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "coroners.profile.work-context-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "I/C/E occupational interest reference, to be explored alongside specific tasks",
         "interest": "The current O*NET occupational interest scores I66, C64, E52, R51, S35 and A8 are occupational interest scores, not population proportions, individual pass marks or medical psychological assessments.",
@@ -11344,7 +11357,7 @@
       "text": "Coroners"
     }
   },
-  "source_content_sha256": "32dc848e6c5817b327c8c7c12c04e6794dc3f15a4588bd6285b2155acbf5c335",
+  "source_content_sha256": "46017794f034a0e21a2f6b5c2562c4c3f2a3f7bd0794d4ebb9663f7e9b4799f5",
   "subject": {
     "canonical_slug": "coroners",
     "name": "Coroners",

@@ -171,7 +171,7 @@
         "status": "mapped"
       },
       "item:operating-engineers-and-other-construction-equipment-operators.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:operating-engineers-and-other-construction-equipment-operators.profile.work-context-block.3": {
         "status": "mapped"
@@ -9321,16 +9321,8 @@
         "status": "unfilled"
       },
       "responsibilities_block.05.category": {
-        "ref": {
-          "id": "operating-engineers-and-other-construction-equipment-operators.profile.responsibilities-block.2",
-          "path": [
-            "data",
-            "entries",
-            4
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "responsibilities_block.05.description": {
         "ref": null,
@@ -9341,16 +9333,8 @@
         "status": "unfilled"
       },
       "responsibilities_block.06.category": {
-        "ref": {
-          "id": "operating-engineers-and-other-construction-equipment-operators.profile.responsibilities-block.2",
-          "path": [
-            "data",
-            "entries",
-            5
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "responsibilities_block.06.description": {
         "ref": null,
@@ -12311,18 +12295,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Check equipment, hydraulics, brakes, warnings, and the work zone.",
-              "Read drawings, terrain, underground utilities, and personnel access routes.",
-              "Start, move, and control excavation or grading by signals.",
-              "Excavate, load, and move materials within the permitted scope.",
-              "Maintain safe distances from signalers and other machinery.",
-              "Record faults and perform maintenance within authorized scope.",
-              "Stop work on anomalies, isolate, and hand over status and residual risks."
+              "Learn and follow safety regulations.",
+              "Take actions to avoid potential hazards or obstructions, such as utility lines, other equipment, other workers, or falling objects.",
+              "Start engines, move throttles, switches, or levers, or depress pedals to operate machines, such as bulldozers, trench excavators, road graders, or backhoes.",
+              "Coordinate machine actions with other activities, positioning or moving loads in response to hand or audio signals from crew members."
             ]
           },
           "id": "operating-engineers-and-other-construction-equipment-operators.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -13968,6 +13949,32 @@
                 "publisher": "Ministry of Human Resources and Social Security; Ministry of Housing and Urban-Rural Development",
                 "scope": "Skill assessment for excavation, earthmoving and piling machinery operators. Site operating authority is determined separately.",
                 "url": "https://www.mohrss.gov.cn/xxgk2020/fdzdgknr/rcrs_4225/jnrc/zyyjnpj/202304/W020230414729511815491.pdf"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/47-2073.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -16145,7 +16152,7 @@
       "text": "Construction equipment operator: inspection and shift handoff"
     }
   },
-  "source_content_sha256": "89052fb9ee299b33dcb642900527a3638bdecac5edc97f55be983268ed7d3d1c",
+  "source_content_sha256": "1f1ac66a9aa9f1f0a4bb89e28739505b4f951fa315343bdd68eb33705e1e4bf9",
   "subject": {
     "canonical_slug": "operating-engineers-and-other-construction-equipment-operators",
     "name": "Construction equipment operator",

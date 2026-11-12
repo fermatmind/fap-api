@@ -9052,8 +9052,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "merchandise-displayers-and-window-trimmers.profile.definition-block.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -9064,8 +9072,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "merchandise-displayers-and-window-trimmers.profile.definition-block.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -11338,13 +11354,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Design and preparation: develop the display sketch and plan according to the theme and budget, and prepare materials, props, and lighting.",
-              "Build and acceptance: on-site build and safety check, completion of acceptance, adjustment, dismantling, and record review."
+              "Plan commercial displays to entice and appeal to customers.",
+              "Arrange properties, furniture, merchandise, backdrops, or other accessories, as shown in prepared sketches.",
+              "Change or rotate window displays, interior display areas, or signage to reflect changes in inventory or promotion.",
+              "Place prices or descriptive signs on backdrops, fixtures, merchandise, or floor."
             ]
           },
           "id": "merchandise-displayers-and-window-trimmers.profile.definition-block.1",
           "source_refs": [
-            "source-pack-onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -12716,6 +12734,32 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/27-1026.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -14884,7 +14928,7 @@
       "text": "Merchandise displayers and window trimmers: work content, U.S. wages, and entry"
     }
   },
-  "source_content_sha256": "613c9412e3d0275a91415309f2526066a225cc2b38a2d36fd71e026a9db5b709",
+  "source_content_sha256": "57f4a8b9192264a3694560a1beb0dddbbd7830bc62a72778798cf5a4397d7e05",
   "subject": {
     "canonical_slug": "merchandise-displayers-and-window-trimmers",
     "name": "Merchandise displayers and window trimmers",

@@ -159,13 +159,7 @@
         "status": "pending_mapping"
       },
       "item:manufactured-building-and-mobile-home-installers.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:manufactured-building-and-mobile-home-installers.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:manufactured-building-and-mobile-home-installers.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:manufactured-building-and-mobile-home-installers.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6113,8 +6107,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "manufactured-building-and-mobile-home-installers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6125,8 +6127,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "manufactured-building-and-mobile-home-installers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6137,8 +6147,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "manufactured-building-and-mobile-home-installers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6149,8 +6167,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "manufactured-building-and-mobile-home-installers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7283,40 +7309,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Inputs: installation work orders and site plans, mobile home or manufactured building units and modules, foundations and fasteners, sealing materials and hardware, water, electrical, gas, and other lines and interfaces, component and tool lists, technical manuals and drawings, and client and work-order requirements."
+              "Move and set up mobile homes or prefabricated buildings on owners' lots or at mobile home parks.",
+              "Seal open sides of modular units to prepare them for shipment, using polyethylene sheets, nails, and hammers.",
+              "Repair leaks in plumbing or gas lines, using caulking compounds and plastic or copper pipe.",
+              "Connect water hoses to inlet pipes of plumbing systems, and test operation of plumbing fixtures."
             ]
           },
           "id": "manufactured-building-and-mobile-home-installers.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Checkable outputs: positioned and secured units and foundations, sealed module openings, connected and tested water, electrical, gas, and other systems, properly installed doors, windows, hardware, and appliances, inspection and test records, leak and frame repairs, and cleanup and handover notes."
-            ]
-          },
-          "id": "manufactured-building-and-mobile-home-installers.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Distinguish transport preparation from on-site installation by work order: first check home type, manufacturer instructions, site, and permits → prepare component / procedure plans → position, support, and anchor under the applicable plan → connect systems, inspect, and record within authorized scope → address defects and hand over. ONet's module-opening sealing task protects the unit before transport; do not present it as a fixed next step in on-site installation. Separately verify worker qualifications for electrical, gas, and other work."
-            ]
-          },
-          "id": "manufactured-building-and-mobile-home-installers.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-tasks"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8755,6 +8756,32 @@
                 "publisher": "FermatMind",
                 "scope": "Paper exercise",
                 "url": "#career-content-path"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/49-9095.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11121,41 +11148,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "manufactured-building-and-mobile-home-installers.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "manufactured-building-and-mobile-home-installers.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "manufactured-building-and-mobile-home-installers.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "manufactured-building-and-mobile-home-installers.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "Activity preferences can only help design trials; they cannot determine qualifications or performance.",
         "interest": "First observe your interest, stress, and experience during actual on-site installation, safe work, and work-order checks.",
@@ -11378,7 +11376,7 @@
       "text": "Manufactured Building and Mobile Home Installers: Tasks, Pay and Training"
     }
   },
-  "source_content_sha256": "154d796eb234f5870de946e324cfbd6d01016fb2a39aa819b1e9df2c5786f6e0",
+  "source_content_sha256": "e33978624172453ba7fee164125dcc8f500eead65202738d5de9fe49341ad30c",
   "subject": {
     "canonical_slug": "manufactured-building-and-mobile-home-installers",
     "name": "Manufactured Building and Mobile Home Installers",

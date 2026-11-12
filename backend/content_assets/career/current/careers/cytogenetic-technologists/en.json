@@ -1506,22 +1506,7 @@
         "status": "mapped"
       },
       "item:actors.display.responsibilities_block.01": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.02": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.03": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.04": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.05": {
-        "status": "pending_mapping"
-      },
-      "item:actors.display.responsibilities_block.06": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:actors.display.riasec_fit_block.code": {
         "status": "mapped"
@@ -19205,8 +19190,16 @@
         "status": "mapped"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -19217,8 +19210,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -19229,8 +19230,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -19241,8 +19250,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "actors.display.responsibilities_block.01",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -23409,86 +23426,18 @@
           "availability": "available",
           "copy_key": "career.item.responsibilities-block",
           "data": {
-            "paragraphs": [
-              "Specimen receipt and assessment | Verify and judge suitability | Receive specimens such as amniotic fluid, bone marrow, solid tumours, blood and chorionic villi, verify identity, batch number and requested test, assess whether the specimen is suitable for testing, and identify the appropriateness of collection, storage or transport."
+            "entries": [
+              "Arrange and attach chromosomes in numbered pairs on karyotype charts, using standard genetics laboratory practices and nomenclature, to identify normal or abnormal chromosomes.",
+              "Analyze chromosomes found in biological specimens to aid diagnoses and treatments for genetic diseases such as congenital disabilities, fertility problems, and hematological disorders.",
+              "Prepare biological specimens such as amniotic fluids, bone marrow, tumors, chorionic villi, and blood, for chromosome examinations.",
+              "Harvest cell cultures using substances such as mitotic arrestants, cell releasing agents, and cell fixatives."
             ]
           },
           "id": "actors.display.responsibilities_block.01",
           "source_refs": [
-            "r5-onet-current"
+            "batch52-onet-core"
           ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "Culture and harvest | Culture aseptically and harvest cells | Select the culture system or process according to specimen type and referral reason, prepare the specimen and medium using aseptic technique and maintain their pH and sterility, and harvest cells in the optimal time sequence and manner (manual or automated) using blocking agents, releasing agents and fixatives."
-            ]
-          },
-          "id": "actors.display.responsibilities_block.02",
-          "source_refs": [
-            "r5-onet-current"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "Slide preparation and banding | Prepare slides and make chromosomes visible | Prepare cell culture slides according to the standard process, select a banding method to identify chromosome pairs, stain so that chromosomes are visible under the microscope, apply the specimen and control to suitable slide frames, run the instrument and produce analysable results, and generate chromosome images with a computer imaging system."
-            ]
-          },
-          "id": "actors.display.responsibilities_block.03",
-          "source_refs": [
-            "r5-onet-current"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "Interpretation and analysis | Count chromosomes and identify abnormalities | Observe the slides under a microscope, light microscope or photomicrography system, count chromosome numbers, identify structural abnormalities and arrange chromosomes in pairs on a karyogram; the task profile also lists DNA extraction, measurement and dilution and analyses such as FISH and aCGH. The specific method is chosen according to the test request, the validated applicability of the method, institutional procedures and staff permissions; this does not mean that every case uses them in parallel or cross-validates them."
-            ]
-          },
-          "id": "actors.display.responsibilities_block.04",
-          "source_refs": [
-            "r5-onet-current",
-            "r5-cn-lab"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "Result expression and reporting | Name according to the standards and summarise and report | Describe chromosome, FISH and aCGH analysis results according to the International System for Human Cytogenomic Nomenclature (ISCN), summarise test results and report them to physicians, patients, family members or researchers, and record specimen handling, analysis and technical problems in logs or the laboratory information system."
-            ]
-          },
-          "id": "actors.display.responsibilities_block.05",
-          "source_refs": [
-            "r5-onet-current"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "paragraphs": [
-              "Quality and maintenance | Quality control, equipment maintenance and archiving | Formulate, implement and monitor quality control and quality assurance programmes, maintain photomicrography systems, inverted microscopes and darkrooms and other equipment, archive case materials and research materials according to regulations and policy, and take on the task of guiding junior staff and training and teaching."
-            ]
-          },
-          "id": "actors.display.responsibilities_block.06",
-          "source_refs": [
-            "r5-onet-current"
-          ],
-          "type": "prose"
+          "type": "list"
         },
         {
           "availability": "available",
@@ -31924,6 +31873,32 @@
                 "publisher": "Shandong University careers portal (Dalian recruitment attachment)",
                 "scope": "recruitment_proxy",
                 "url": "https://jobcareer.sdu.edu.cn/eweb/servlet/resdownload?id=CS8fVEQvmGwdYbPZXhYwqb&type=getfile"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/29-2011.01#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -36945,44 +36920,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$item": "actors.display.responsibilities_block.01",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.02",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.03",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.04",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.05",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        },
-        {
-          "$item": "actors.display.responsibilities_block.06",
-          "block": "profile",
-          "copy_key": "career.item.responsibilities-block",
-          "type": "prose"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "actors.display.responsibilities_block.01",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": {
           "$item": "actors.display.riasec_fit_block.fit-interest",
@@ -37764,7 +37707,7 @@
       "text": "Cytogenetic Technologists"
     }
   },
-  "source_content_sha256": "faa5f20ca2e1c2f6a3fe1bb1cec8a769b60ba5892b9760806b23ef7e734c03d3",
+  "source_content_sha256": "7432b1c758bdb419986129ae3047438c99cb815b36c3d3b27072233657995560",
   "subject": {
     "canonical_slug": "cytogenetic-technologists",
     "name": "Cytogenetic Technologists",

@@ -165,13 +165,7 @@
         "status": "pending_mapping"
       },
       "item:insurance-underwriters.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:insurance-underwriters.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:insurance-underwriters.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:insurance-underwriters.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6119,8 +6113,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "insurance-underwriters.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6131,8 +6133,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "insurance-underwriters.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6143,8 +6153,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "insurance-underwriters.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6155,8 +6173,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "insurance-underwriters.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7290,40 +7316,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Objects of work | Underwrite within authorization and compliance boundaries, working with insurance applications and supporting documents, health and financial risk information, rate and endorsement rules, and records of coverage amounts and accumulated risks."
+              "Examine documents to determine degree of risk from factors such as applicant health, financial standing and value, and condition of property.",
+              "Decline excessive risks.",
+              "Write to field representatives, medical personnel, or others to obtain further information, quote rates, or explain company underwriting policies.",
+              "Evaluate possibility of losses due to catastrophe or excessive insurance."
             ]
           },
           "id": "insurance-underwriters.profile.responsibilities-block.2",
           "source_refs": [
-            "source-pack-onet-details"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Checkable outputs | Reviewable risk assessment records; coverage, rejection, or coverage reduction decisions and their grounds; rate and endorsement references; reinsurance or referral records; and replies to agents. Results must be traceable to application materials and rule versions."
-            ]
-          },
-          "id": "insurance-underwriters.profile.responsibilities-block.3",
-          "source_refs": [
-            "source-pack-onet-details"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Complete workflow | Review applications and supporting documents → assess health and financial risks → check coverage amounts and accumulated risks → decide according to rules and specify endorsements and rates → document and reply to agents."
-            ]
-          },
-          "id": "insurance-underwriters.profile.responsibilities-block.4",
-          "source_refs": [
-            "source-pack-onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8615,6 +8616,32 @@
                 "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/13-2053.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -10841,41 +10868,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "insurance-underwriters.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "insurance-underwriters.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "insurance-underwriters.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "insurance-underwriters.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "Activity preferences can only help design trials; they cannot determine qualifications or performance.",
         "interest": "First observe your interest, stress, and collaboration experience in real tasks.",
@@ -11117,7 +11115,7 @@
       "text": "Insurance Underwriter: Risk Review and Coverage Decisions"
     }
   },
-  "source_content_sha256": "21c26736c0a24a9399724085f9aa729f2a48c35d048128964a2a7d2a16cbbde4",
+  "source_content_sha256": "3bd44facf84ce6ea9feaac8ae5723a3205d490850f4e76fe9e8e560b88ad4df9",
   "subject": {
     "canonical_slug": "insurance-underwriters",
     "name": "Insurance Underwriter",

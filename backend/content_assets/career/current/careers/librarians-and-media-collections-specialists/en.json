@@ -156,13 +156,7 @@
         "status": "pending_mapping"
       },
       "item:librarians-and-media-collections-specialists.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:librarians-and-media-collections-specialists.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:librarians-and-media-collections-specialists.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:librarians-and-media-collections-specialists.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6110,8 +6104,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "librarians-and-media-collections-specialists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6122,8 +6124,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "librarians-and-media-collections-specialists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6134,8 +6144,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "librarians-and-media-collections-specialists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6146,8 +6164,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "librarians-and-media-collections-specialists.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7280,40 +7306,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Work objects: reader and institutional search/borrowing needs, bibliographies and collection catalogs, classification/cataloging rules, procurement budgets and supplier quotes, databases, audiovisual equipment and copyright terms."
+              "Search standard reference materials, including online sources and the Internet, to answer patrons' reference questions.",
+              "Analyze patrons' requests to determine needed information and assist in furnishing or locating that information.",
+              "Supervise daily library operations, budgeting, planning, and personnel activities, such as hiring, training, scheduling, and performance evaluations.",
+              "Plan and teach classes on topics such as information literacy, library instruction, and technology use."
             ]
           },
           "id": "librarians-and-media-collections-specialists.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-details"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Inspectable outputs: searchable catalog records, acquisition/withdrawal lists, circulation and collection inventories, reference responses, information-literacy courses or guides, and database/media-equipment configuration records."
-            ]
-          },
-          "id": "librarians-and-media-collections-specialists.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-details"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Complete workflow: analyze reader and institutional needs → evaluate and acquire materials → classify, catalog and process → shelve and manage circulation → provide reference services and information-literacy teaching → maintain records, equipment and copyright compliance → regularly inventory and withdraw materials."
-            ]
-          },
-          "id": "librarians-and-media-collections-specialists.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8659,6 +8660,32 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "25-4022",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/25-4022.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -10891,41 +10918,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "librarians-and-media-collections-specialists.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "librarians-and-media-collections-specialists.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "librarians-and-media-collections-specialists.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "librarians-and-media-collections-specialists.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "Activity preferences can only help design trials, not judge qualifications or performance.",
         "interest": "First observe interest, stress and collaboration experiences in real tasks.",
@@ -11131,7 +11129,7 @@
       "text": "Librarians and Media Collections Specialists: Catalogs and Digital Access"
     }
   },
-  "source_content_sha256": "e94d5cefb8f8606946d1c19629953c01b3209a0cbd882d28766e2c0083b4024b",
+  "source_content_sha256": "0c59c6392efa083123d6c0129deb50f30ad7abac871417d0aabdb159ab174d08",
   "subject": {
     "canonical_slug": "librarians-and-media-collections-specialists",
     "name": "Librarians and Media Collections Specialists",

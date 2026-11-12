@@ -159,13 +159,7 @@
         "status": "pending_mapping"
       },
       "item:information-security-engineers.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:information-security-engineers.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:information-security-engineers.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:information-security-engineers.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6113,8 +6107,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "information-security-engineers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6125,8 +6127,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "information-security-engineers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6137,8 +6147,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "information-security-engineers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6149,8 +6167,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "information-security-engineers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7285,40 +7311,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Input objects | Taking assets, networks, systems, security technologies and security policies as the object, carrying out design, deployment, monitoring and investigation within authorization and change boundaries."
+              "Identify security system weaknesses, using penetration tests.",
+              "Coordinate monitoring of networks or systems for security breaches or intrusions.",
+              "Assess the quality of security controls, using performance indicators.",
+              "Train staff on, and oversee the use of, information security standards, policies, and best practices."
             ]
           },
           "id": "information-security-engineers.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-exact"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Checkable outputs | Reviewable control designs, configurations and rules, test and deployment verification records, incident timelines and response records, and remediation and debriefing conclusions; results must be traceable to the original logs, versions and authorization."
-            ]
-          },
-          "id": "information-security-engineers.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-exact"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Complete work process | Confirm assets and threats → design controls → verify before deployment → deploy and monitor → respond and recover → improve and record afterwards."
-            ]
-          },
-          "id": "information-security-engineers.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-exact"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -8996,6 +8997,32 @@
                 "publisher": "中国网信网",
                 "scope": "contextual",
                 "url": "https://www.cac.gov.cn/2025-10/29/c_1763461514706581.htm"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/15-1299.05#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11178,41 +11205,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "information-security-engineers.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "information-security-engineers.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "information-security-engineers.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "information-security-engineers.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "Activity preferences can only help design exercises and cannot judge qualifications or performance.",
         "interest": "First observe the interest, pressure and collaboration experience in real tasks.",
@@ -11421,7 +11419,7 @@
       "text": "Information security engineer careers: duties, training and pay"
     }
   },
-  "source_content_sha256": "6f30c3323cd1cfcf3d598a95819781e586599d744ded5d1d63983500ad9cc091",
+  "source_content_sha256": "cfa4e6a9b9223dcc5cfe4d2446392f87712cb8494a19e1d46d1945e3faf70461",
   "subject": {
     "canonical_slug": "information-security-engineers",
     "name": "Information security engineers",

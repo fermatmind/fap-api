@@ -153,13 +153,7 @@
         "status": "pending_mapping"
       },
       "item:jewelers-and-precious-stone-and-metal-workers.profile.responsibilities-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:jewelers-and-precious-stone-and-metal-workers.profile.responsibilities-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:jewelers-and-precious-stone-and-metal-workers.profile.responsibilities-block.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:jewelers-and-precious-stone-and-metal-workers.profile.work-context-block.5": {
         "status": "pending_mapping"
@@ -6119,8 +6113,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.01.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "jewelers-and-precious-stone-and-metal-workers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.01.description": {
         "ref": null,
@@ -6131,8 +6133,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.02.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "jewelers-and-precious-stone-and-metal-workers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.02.description": {
         "ref": null,
@@ -6143,8 +6153,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.03.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "jewelers-and-precious-stone-and-metal-workers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.03.description": {
         "ref": null,
@@ -6155,8 +6173,16 @@
         "status": "unfilled"
       },
       "responsibilities_block.04.category": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "jewelers-and-precious-stone-and-metal-workers.profile.responsibilities-block.2",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "responsibilities_block.04.description": {
         "ref": null,
@@ -7298,40 +7324,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Objects of work | Work within precision and safety boundaries with precious metals and gemstones, designs and specifications, jewelers' tools and heat-treatment and electroplating equipment, and client requirements and deadlines."
+              "Clean and polish metal items and jewelry pieces, using jewelers' tools, polishing wheels, and chemical baths.",
+              "Smooth soldered joints and rough spots, using hand files and emery paper, and polish smoothed areas with polishing wheels or buffing wire.",
+              "Create jewelry from materials such as gold, silver, platinum, and precious or semiprecious stones.",
+              "Cut and file pieces of jewelry such as rings, brooches, bracelets, and lockets."
             ]
           },
           "id": "jewelers-and-precious-stone-and-metal-workers.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-details"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Checkable outputs | Pieces and repairs meeting specifications, material and weight records, process and work-time records, inspection and grading grounds, and delivery and handover records. Results must be traceable to designs and material sources."
-            ]
-          },
-          "id": "jewelers-and-precious-stone-and-metal-workers.profile.responsibilities-block.3",
-          "source_refs": [
-            "onet-details"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "Editorial workflow | Confirm designs and specifications → select and check materials → cut and shape → set and assemble → polish and inspect → document and hand over. Check specific processes for each role."
-            ]
-          },
-          "id": "jewelers-and-precious-stone-and-metal-workers.profile.responsibilities-block.4",
-          "source_refs": [
-            "onet-details"
+            "batch52-onet-core"
           ],
           "type": "list"
         },
@@ -9060,6 +9061,32 @@
                 "publisher": "FermatMind",
                 "scope": "Paper exercise",
                 "url": "#career-content-path"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® 31.0 Core Task Statements",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/51-9071.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-12",
+                "details": [],
+                "evidence_type": "primary_document",
+                "id": "batch52-onet-core-license",
+                "limitation": "Verbatim Core Task Statements excerpted from the O*NET® 31.0 Database, used under CC BY 4.0. U.S. occupational scope.",
+                "market": "United States",
+                "name": "O*NET® database license · CC BY 4.0",
+                "period": "O*NET 31.0",
+                "publisher": "U.S. Department of Labor, Employment and Training Administration",
+                "scope": "exact",
+                "url": "https://creativecommons.org/licenses/by/4.0/"
               }
             ]
           },
@@ -11280,41 +11307,12 @@
         "target_action": "start_riasec_test",
         "test_slug": "holland-career-interest-test-riasec"
       },
-      "responsibilities_block": [
-        {
-          "$join": [
-            {
-              "$item": "jewelers-and-precious-stone-and-metal-workers.profile.responsibilities-block.2",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "jewelers-and-precious-stone-and-metal-workers.profile.responsibilities-block.3",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        },
-        {
-          "$join": [
-            {
-              "$item": "jewelers-and-precious-stone-and-metal-workers.profile.responsibilities-block.4",
-              "block": "profile",
-              "copy_key": "career.item.responsibilities-block",
-              "type": "list"
-            }
-          ],
-          "separator": "；"
-        }
-      ],
+      "responsibilities_block": {
+        "$item": "jewelers-and-precious-stone-and-metal-workers.profile.responsibilities-block.2",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
       "riasec_fit_block": {
         "fit_interest": "Activity preferences can only help design trials; they cannot determine qualifications or performance.",
         "interest": "First observe your interest, stress, and collaboration experience in real tasks.",
@@ -11513,7 +11511,7 @@
       "text": "Jewelers and Precious Stone and Metal Workers: Tasks, Pay and Training"
     }
   },
-  "source_content_sha256": "dca2ed141ca5886289fb2d2a8a28a5751b844de689659a5adf8b492516080775",
+  "source_content_sha256": "d7b044e17527d73b0ae86f0505939388c5ec2bbb8a4bc606e2f310199ae656d6",
   "subject": {
     "canonical_slug": "jewelers-and-precious-stone-and-metal-workers",
     "name": "Jewelers and Precious Stone and Metal Workers",
