@@ -196,8 +196,9 @@ final class CareerPageCacheCompactorTest extends TestCase
         $this->isolatedRedis(function ($store, $redis): void {
             $parity = app(CareerCurrentAuthorityParity::class);
             $loader = app(\App\Domain\Career\Display\CareerCurrentAuthorityPackageLoader::class);
-            $validated = ['authority' => $loader->indexForPublish(base_path()),
-                'full' => ['counts' => ['verified_files' => 2092], 'cache_write_count' => 0],
+            $authority = $loader->indexForPublish(base_path());
+            $validated = ['authority' => $authority,
+                'full' => ['counts' => ['verified_files' => $authority['summary']['file_count']], 'cache_write_count' => 0],
                 'releaseSha' => str_repeat('a', 40), 'activeSha' => str_repeat('b', 40)];
             $receipt = $parity->completeProduction($validated);
             self::assertSame('pass', $receipt['status']);
