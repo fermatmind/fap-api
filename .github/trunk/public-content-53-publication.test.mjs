@@ -1864,10 +1864,10 @@ test('Taiwan career blog delta selects exactly two bound Traditional articles',(
  const selection='traditional-article-taiwan-delta';
  const path='backend/content_assets/public_content_53/'+selection;
  assert.equal(classifyPaths([path+'.json',path+'-review.json']).operations.public_content_53_package,selection);
- const digest=packageDigest('backend',selection);
+ const digest=packageDigest(root,selection);
  const slugs=['after-holland-test-compare-job-postings','how-to-choose-an-online-course-for-a-career-change'];
  for(const environment of ['staging','production']){
-  const {candidates}=readCandidateRows('backend',digest,environment);
+  const {candidates}=readCandidateRows(root,digest,environment);
   assert.deepEqual(candidates.map(row=>row.identity.slug),slugs);
   for(const row of candidates){
    assert.equal(row.identity.locale,'zh-TW');
