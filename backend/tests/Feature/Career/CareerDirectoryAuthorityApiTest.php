@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Career;
 
+use App\Domain\Career\Display\CareerContentV3CanonicalReader;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
@@ -141,10 +142,16 @@ final class CareerDirectoryAuthorityApiTest extends TestCase
 
     public function test_current_source_scope_survives_legacy_transport_cleanup(): void
     {
-        $slug = 'library-assistants-clerical';
-        $expected = app(\App\Domain\Career\Display\CareerContentV3CanonicalReader::class)->page($slug, 'zh-CN');
-        self::assertStringContainsString('industry_proxy', json_encode($expected));
-        $this->createDirectoryOccupation($slug, 'Library Assistants, Clerical', '图书馆事务助理', 'office-and-administration', 'Office and Administration');
+        $slug = 'administrative-services-managers';
+        $sourceScopes = static function (array $content): array {
+            $blocks = array_column($content['blocks'], null, 'id');
+            $sources = $blocks['source-register']['items'][0]['data']['entries'];
+
+            return array_column($sources, 'scope', 'id');
+        };
+        $expected = $sourceScopes(app(CareerContentV3CanonicalReader::class)->page($slug, 'zh-CN'));
+        self::assertSame('industry_proxy', $expected['nbs'] ?? null);
+        $this->createDirectoryOccupation($slug, 'Administrative Services Managers', '行政服务经理', 'business-finance', 'Business and Finance');
         $this->publishRuntimeProjection([$slug]);
 
         $public = $this->getJson('/api/v0.5/career/jobs/'.$slug.'?locale=zh-CN')
@@ -153,7 +160,7 @@ final class CareerDirectoryAuthorityApiTest extends TestCase
             ->assertJsonMissingPath('display_surface_v1')
             ->json('career_page.content');
 
-        self::assertStringContainsString('industry_proxy', json_encode($public));
+        self::assertSame($expected, $sourceScopes($public));
         self::assertArrayNotHasKey('audit_fields', $public);
     }
 
