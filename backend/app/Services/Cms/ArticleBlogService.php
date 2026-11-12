@@ -22,12 +22,34 @@ final class ArticleBlogService
 
     public function read(int $orgId, string $locale, callable $project): array
     {
-        $surface = LandingSurface::withoutGlobalScopes()->where('org_id', $orgId)
-            ->where('surface_key', 'articles_index')->where('locale', $locale)->publishedPublic()
+        $query = LandingSurface::withoutGlobalScopes()->where('org_id', $orgId)
+            ->where('surface_key', 'articles_index')->publishedPublic()
             ->where(fn ($q) => $q->whereNull('published_at')->orWhere('published_at', '<=', now()))
-            ->where(fn ($q) => $q->whereNull('scheduled_at')->orWhere('scheduled_at', '<=', now()))->first();
+            ->where(fn ($q) => $q->whereNull('scheduled_at')->orWhere('scheduled_at', '<=', now()));
+        $surface = (clone $query)->where('locale', $locale)->first();
+        $featuredIds = null;
+        if ($surface && $orgId === 0 && in_array($locale, ArticlePublicListQuery::BLOG_LOCALES, true)) {
+            $surfaces = $query->whereIn('locale', ArticlePublicListQuery::BLOG_LOCALES)->get()->keyBy('locale');
+            $sourceIds = $surfaces->get('zh-CN')?->payload_json['blog_v1']['featured_article_ids'] ?? null;
+            if ($surfaces->count() === count(ArticlePublicListQuery::BLOG_LOCALES) && is_array($sourceIds) && array_is_list($sourceIds)) {
+                $featuredIds = $this->sharedFeaturedIds($orgId, $locale, array_map('intval', array_filter($sourceIds, 'is_numeric')));
+            }
+        }
 
-        return $this->projectSurface($surface, $orgId, $locale, $project);
+        return $this->projectSurface($surface, $orgId, $locale, $project, $featuredIds);
+    }
+
+    /** @return list<int> */
+    private function sharedFeaturedIds(int $orgId, string $locale, array $sourceIds): array
+    {
+        $ids = [];
+        foreach ($this->query->completeBlogGroups($orgId) as $group) {
+            if (in_array($group['zh-CN'][0], $sourceIds, true)) {
+                $ids[] = $group[$locale][0];
+            }
+        }
+
+        return $ids;
     }
 
     /** Read-only draft projection, exclusively consumed behind the Ops read gate. */
@@ -36,7 +58,7 @@ final class ArticleBlogService
         return $this->projectSurface($surface, (int) $surface->org_id, (string) $surface->locale, $project);
     }
 
-    private function projectSurface(?LandingSurface $surface, int $orgId, string $locale, callable $project): array
+    private function projectSurface(?LandingSurface $surface, int $orgId, string $locale, callable $project, ?array $featuredIds = null): array
     {
         $empty = ['schema_version' => 1, 'configuration_state' => 'unconfigured',
             'title' => null, 'description' => null, 'is_indexable' => false, 'categories' => [], 'featured_items' => []];
@@ -69,7 +91,7 @@ final class ArticleBlogService
                     'name' => $category['name'], 'description' => $category['description'], 'article_count' => $count];
             }
         }
-        $ids = array_map('intval', $config['featured_article_ids']);
+        $ids = $featuredIds ?? array_map('intval', $config['featured_article_ids']);
         $featured = $ids === [] ? [] : $this->query->selected($orgId, $locale, $ids)->map($project)->all();
 
         return ['schema_version' => 1, 'configuration_state' => 'published',

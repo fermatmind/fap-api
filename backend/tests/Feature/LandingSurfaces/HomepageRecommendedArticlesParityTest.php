@@ -11,6 +11,7 @@ use App\Models\ArticleTag;
 use App\Models\ArticleTranslationRevision;
 use App\Models\ContentMaterialDecision;
 use App\Models\LandingSurface;
+use App\Services\Cms\ArticleReviewedCounterpartService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -62,6 +63,60 @@ final class HomepageRecommendedArticlesParityTest extends TestCase
 
         $this->assertRecommendedArticlesAreRenderEligible('en', $this->enSlugs);
         $this->assertRecommendedArticlesAreRenderEligible('zh-CN', $this->zhSlugs);
+    }
+
+    public function test_three_homepages_and_paginated_archives_share_group_order_and_keep_local_dates(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+        Carbon::setTestNow('2026-05-27T00:00:00Z');
+        $locales = ['zh-CN', 'en', 'zh-TW'];
+        $groupDates = ['group-a' => 20, 'group-b' => 20, 'group-c' => 19, 'group-d' => 18,
+            'group-e' => 17, 'group-f' => 16, 'group-g' => 15, 'group-without-date' => null];
+        $expected = array_keys($groupDates);
+        foreach (array_reverse($locales) as $locale) {
+            $this->createHomeSurface($locale);
+            foreach (array_reverse($groupDates, true) as $group => $day) {
+                $article = $this->createArticle($group.'-'.strtolower($locale), $locale, true);
+                $localDay = $locale === 'zh-CN' ? $day : ($locale === 'en' ? 24 : 25);
+                $storageGroup = $group === 'group-c' && $locale === 'en' ? 'older-english-group' : $group;
+                $article->forceFill([
+                    'translation_group_id' => $storageGroup,
+                    'published_at' => $day === null ? null : Carbon::create(2026, 5, $localDay, 0, 0, 0, 'UTC'),
+                    'is_indexable' => $locale !== 'zh-TW',
+                ])->saveQuietly();
+                $article->publishedRevision->forceFill(['translation_group_id' => $storageGroup])->saveQuietly();
+            }
+        }
+        LandingSurface::query()->where('locale', 'zh-TW')->firstOrFail()->blocks()->delete();
+        $reviewed = Article::query()->whereIn('slug', ['group-c-zh-cn', 'group-c-en'])->with(['publishedRevision', 'seoMeta'])->get();
+        $counterparts = app(ArticleReviewedCounterpartService::class);
+        $binding = $counterparts->createBinding($reviewed->all());
+        foreach ($reviewed as $article) {
+            $article->seoMeta->forceFill(['schema_json' => ['editorial_package_v1' => ['hreflang_gate_v1' => [
+                'enabled' => true, 'policy' => 'reciprocal_counterparts_verified', 'counterpart_binding_v1' => $binding,
+            ]]]])->saveQuietly();
+        }
+
+        foreach ($locales as $locale) {
+            $items = array_column($this->recommendedItems($locale), 'article');
+            self::assertSame(
+                array_map(static fn (string $group): string => $group.'-'.strtolower($locale), array_slice($expected, 0, 6)),
+                array_column($items, 'slug')
+            );
+            self::assertSame($locale !== 'zh-TW', $items[0]['is_indexable']);
+            self::assertSame(match ($locale) {
+                'en' => '2026-05-24T00:00:00.000000Z',
+                'zh-TW' => '2026-05-25T00:00:00.000000Z',
+                default => '2026-05-20T00:00:00.000000Z',
+            }, $items[0]['published_at']);
+            $actual = [];
+            foreach (range(1, 4) as $page) {
+                $response = $this->getJson('/api/v0.5/articles?include_blog=1&org_id=0&per_page=2&locale='.$locale.'&page='.$page)
+                    ->assertOk()->assertJsonPath('pagination.total', count($expected));
+                array_push($actual, ...array_column($response->json('items'), 'slug'));
+            }
+            self::assertSame(array_map(static fn (string $group): string => $group.'-'.strtolower($locale), $expected), $actual);
+        }
     }
 
     public static function locales(): array

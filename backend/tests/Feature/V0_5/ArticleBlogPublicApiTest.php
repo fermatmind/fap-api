@@ -72,6 +72,28 @@ final class ArticleBlogPublicApiTest extends TestCase
             ->assertJsonCount(2, 'blog_v1.featured_items')->assertJsonPath('blog_v1.categories.0.article_count', 2);
     }
 
+    public function test_three_published_archives_share_featured_groups_and_keep_local_configuration(): void
+    {
+        $ids = [];
+        foreach (['zh-CN', 'en', 'zh-TW'] as $locale) {
+            foreach (['older', 'newer'] as $group) {
+                $article = $this->createArticle([
+                    'slug' => $group.'-'.strtolower($locale), 'locale' => $locale, 'translation_group_id' => $group,
+                    'published_at' => now()->subDays($locale === 'zh-CN' ? ($group === 'older' ? 4 : 3) : 1),
+                    'is_indexable' => $locale !== 'zh-TW',
+                ]);
+                $ids[$locale][] = $article->id;
+            }
+            $this->surface($locale, $locale === 'zh-CN' ? $ids[$locale] : [], 'Blog '.$locale);
+        }
+
+        foreach ($ids as $locale => [$older, $newer]) {
+            $response = $this->getJson('/api/v0.5/articles?include_blog=1&locale='.$locale)->assertOk()
+                ->assertJsonPath('blog_v1.title', 'Blog '.$locale);
+            self::assertSame([$newer, $older], array_column($response->json('blog_v1.featured_items'), 'id'));
+        }
+    }
+
     public function test_revision_binding_and_soft_deleted_lifecycle_exclude_all_blog_projections(): void
     {
         $category = $this->category();

@@ -320,6 +320,7 @@ final class ArticlePublicListReadCache
             'category_cache_token' => $filters['category_cache_token'] ?? null,
             'page' => $filters['page'],
             'per_page' => $filters['per_page'],
+            ...(ArticlePublicListQuery::usesBlogOrder($filters) ? ['blog_group_order' => true] : []),
         ], JSON_THROW_ON_ERROR));
     }
 

@@ -15,6 +15,58 @@ use Illuminate\Database\Query\JoinClause;
 
 final class ArticlePublicListQuery
 {
+    public const BLOG_LOCALES = ['zh-CN', 'en', 'zh-TW'];
+
+    public static function usesBlogOrder(array $filters): bool
+    {
+        return ($filters['include_blog'] ?? false)
+            && in_array($filters['locale'], self::BLOG_LOCALES, true)
+            && $filters['related_test_slug'] === null && $filters['voice'] === null;
+    }
+
+    /** @return list<array<string,list<int>>> Published groups in archive order, keyed within each group by locale. */
+    public function orderedBlogGroups(int $orgId): array
+    {
+        $articles = $this->publicQuery(['org_id' => $orgId])
+            ->whereIn('articles.locale', self::BLOG_LOCALES)
+            ->select(['articles.id', 'articles.locale', 'articles.translation_group_id', 'articles.published_at'])
+            ->get();
+
+        $reviewedKeys = [];
+        if ($orgId === 0) {
+            $counterparts = app(ArticleReviewedCounterpartService::class);
+            $english = Article::withoutGlobalScopes()->where('org_id', 0)->where('locale', 'en')
+                ->whereIn('id', $articles->where('locale', 'en')->modelKeys())
+                ->whereHas('seoMeta', static fn ($query) => $query->whereNotNull('schema_json->editorial_package_v1->hreflang_gate_v1->counterpart_binding_v1'))
+                ->with('seoMeta')->get();
+            foreach ($english as $article) {
+                $chinese = collect($counterparts->resolve($article))->firstWhere('locale', 'zh-CN');
+                if ($chinese && $chinese->translation_group_id && $articles->contains('id', $chinese->id)) {
+                    $reviewedKeys[$article->id] = (string) $chinese->translation_group_id;
+                }
+            }
+        }
+
+        $groups = [];
+        foreach ($articles as $article) {
+            $key = $reviewedKeys[$article->id] ?? (trim((string) $article->translation_group_id) ?: 'article:'.$article->id);
+            $date = $article->published_at?->toISOString();
+            $groups[$key]['members'][$article->locale][] = (int) $article->id;
+            $previous = $groups[$key]['date'] ?? null;
+            $groups[$key]['date'] = $date !== null && ($previous === null || $date < $previous) ? $date : $previous;
+        }
+        uksort($groups, static fn ($left, $right): int => ($groups[$right]['date'] <=> $groups[$left]['date'])
+            ?: strcmp((string) $left, (string) $right));
+
+        return array_values(array_column($groups, 'members'));
+    }
+
+    /** @return list<array<string,list<int>>> Groups with exactly one published article per blog language. */
+    public function completeBlogGroups(int $orgId): array
+    {
+        return array_values(array_filter($this->orderedBlogGroups($orgId), static fn (array $members): bool => count($members) === count(self::BLOG_LOCALES) && count(array_merge(...array_values($members))) === count(self::BLOG_LOCALES)));
+    }
+
     /** Material recency belongs to the current published revision, never a draft or row touch. */
     public function materialChangedAtSubquery(): Builder
     {
@@ -184,6 +236,21 @@ final class ArticlePublicListQuery
      */
     private function applyOrdering(Builder $query, array $filters): void
     {
+        if (self::usesBlogOrder($filters)) {
+            $cases = [];
+            foreach ($this->orderedBlogGroups($filters['org_id']) as $rank => $group) {
+                foreach ($group[$filters['locale']] ?? [] as $id) {
+                    $cases[] = "WHEN {$id} THEN {$rank}";
+                }
+            }
+            if ($cases !== []) {
+                $query->orderByRaw('CASE articles.id '.implode(' ', $cases).' ELSE '.count($cases).' END');
+            }
+            $query->orderBy('articles.id');
+
+            return;
+        }
+
         if ($filters['related_test_slug'] !== null) {
             $query
                 ->orderByRaw(

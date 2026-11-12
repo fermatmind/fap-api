@@ -61,7 +61,7 @@ final class LandingSurfaceController extends Controller
 
         return response()->json([
             'ok' => true,
-            'surface' => $this->surfacePayload($surface),
+            'surface' => $this->surfacePayload($surface, publicRead: true),
         ]);
     }
 
@@ -207,8 +207,20 @@ final class LandingSurfaceController extends Controller
     /**
      * @return array<string,mixed>
      */
-    private function surfacePayload(LandingSurface $surface): array
+    private function surfacePayload(LandingSurface $surface, bool $publicRead = false): array
     {
+        $sharedHome = $publicRead && $surface->surface_key === 'home' && (int) $surface->org_id === 0
+            && in_array($surface->locale, ArticlePublicListQuery::BLOG_LOCALES, true)
+            && LandingSurface::withoutGlobalScopes()->where('org_id', 0)->where('surface_key', 'home')
+                ->whereIn('locale', ArticlePublicListQuery::BLOG_LOCALES)->publishedPublic()->distinct()->count('locale')
+                    === count(ArticlePublicListQuery::BLOG_LOCALES);
+        $blocks = $surface->blocks;
+        if ($sharedHome && ! $blocks->contains('block_key', 'recommended_articles')) {
+            $blocks = $blocks->concat([new PageBlock([
+                'block_key' => 'recommended_articles', 'block_type' => 'articles', 'sort_order' => 10, 'is_enabled' => true,
+            ])]);
+        }
+
         return [
             'surface_key' => (string) $surface->surface_key,
             'locale' => (string) $surface->locale,
@@ -221,11 +233,12 @@ final class LandingSurfaceController extends Controller
             'is_indexable' => (bool) $surface->is_indexable,
             'published_at' => $surface->published_at?->toIso8601String(),
             'scheduled_at' => $surface->scheduled_at?->toIso8601String(),
-            'page_blocks' => $surface->blocks
+            'page_blocks' => $blocks
                 ->map(fn (PageBlock $block): array => $this->blockPayload(
                     $block,
                     $surface->locale,
-                    (int) $surface->org_id
+                    (int) $surface->org_id,
+                    $sharedHome,
                 ))
                 ->values()
                 ->all(),
@@ -333,6 +346,44 @@ final class LandingSurfaceController extends Controller
                 (string) $article->slug => $this->recommendedArticleProjection($article),
             ])
             ->all();
+    }
+
+    private function sharedHomepageArticlePayloadMap(string $locale): array
+    {
+        $groups = $this->articlePublicListQuery->completeBlogGroups(0);
+        if ($groups === []) {
+            return [];
+        }
+
+        $ids = array_merge(...array_map(static fn (array $members): array => array_merge(...array_values($members)), $groups));
+        $eligible = Article::withoutGlobalScopes()->where('org_id', 0)->whereIn('articles.id', $ids)->publiclyReadable()
+            ->select(['id', 'category_id', 'published_revision_id', 'cover_image_url', 'cover_image_alt'])
+            ->where(static fn ($query) => $query->where('is_indexable', true)->orWhere('locale', 'zh-TW'))
+            ->with([
+                'category' => fn ($query) => $query->withoutGlobalScopes(),
+                'tags' => fn ($query) => $query->withoutGlobalScopes(),
+                'publishedRevision:id,title,excerpt',
+            ])->get()->filter(fn (Article $article): bool => $this->isRecommendedArticleRenderEligible($article))->keyBy('id');
+        $selected = [];
+        foreach ($groups as $members) {
+            if (collect($members)->every(static fn (array $ids): bool => $eligible->has($ids[0]))) {
+                $selected[] = $members[$locale][0];
+                if (count($selected) === 6) {
+                    break;
+                }
+            }
+        }
+
+        $payloads = Article::withoutGlobalScopes()->where('org_id', 0)->whereIn('articles.id', $selected)
+            ->with($this->recommendedArticleRelations())->select('articles.*')
+            ->selectSub($this->articlePublicListQuery->materialChangedAtSubquery(), 'recommendation_material_changed_at')
+            ->get()->keyBy('id');
+
+        return collect($selected)->mapWithKeys(function (int $id) use ($payloads): array {
+            $article = $payloads->get($id);
+
+            return $article ? [(string) $article->slug => $this->recommendedArticleProjection($article)] : [];
+        })->all();
     }
 
     private function isRecommendedArticleRenderEligible(Article $article): bool
@@ -629,11 +680,16 @@ final class LandingSurfaceController extends Controller
     /**
      * @return array<string,mixed>
      */
-    private function blockPayload(PageBlock $block, ?string $surfaceLocale = null, ?int $surfaceOrgId = null): array
+    private function blockPayload(PageBlock $block, ?string $surfaceLocale = null, ?int $surfaceOrgId = null, bool $sharedHome = false): array
     {
         $payload = is_array($block->payload_json) ? $block->payload_json : [];
 
-        if ($surfaceLocale !== null && $surfaceOrgId !== null) {
+        if ($sharedHome && $block->block_key === 'recommended_articles') {
+            $payload['selection_mode'] = self::RECOMMENDED_ARTICLE_SELECTION_MODE_LATEST;
+            $payload['limit'] = 6;
+            $payload['pinned_slugs'] = [];
+            $payload = $this->enrichRecommendedArticlesPayload($payload, $this->sharedHomepageArticlePayloadMap($surfaceLocale));
+        } elseif ($surfaceLocale !== null && $surfaceOrgId !== null) {
             $payload = $this->enrichRecommendedArticlesPayload(
                 $payload,
                 $this->recommendedArticlePayloadMap($block, $surfaceLocale, $surfaceOrgId)
