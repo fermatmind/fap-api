@@ -18,11 +18,11 @@ final class CareerDatasetMethodController extends Controller
 
     public function show(Request $request): JsonResponse
     {
-        $locale = $request->query('locale', 'en');
+        $locale = $request->query('locale', '');
 
         return response()->json(CareerDatasetMethodResource::localizePayload(
             $this->responseCache->datasetMethodPayload(),
-            is_string($locale) ? $locale : 'en',
+            is_string($locale) ? $locale : '',
         ));
     }
 }

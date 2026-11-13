@@ -16,6 +16,7 @@ final class CareerDatasetMethodLocaleTest extends TestCase
         foreach (['zh', 'zh-CN'] as $locale) {
             $response = $this->getJson('/api/v0.5/career/datasets/occupations/method?locale='.$locale)
                 ->assertOk()
+                ->assertJsonPath('reader_guide.sections.0.title', '职业任务来自哪里？')
                 ->assertJsonPath('title', '职业数据库方法说明')
                 ->assertJsonPath('structured_data.article.headline', '职业数据库方法说明');
             foreach (['dataset_key', 'dataset_scope', 'scope_summary', 'publication', 'method_url', 'hub_url'] as $field) {
@@ -25,14 +26,22 @@ final class CareerDatasetMethodLocaleTest extends TestCase
             $this->assertStringNotContainsString('release-ledger', json_encode($response->json('review_discipline_summary')));
             $this->assertSame($payload, PublicProjectionCache::get(PublicCareerAuthorityResponseCache::DATASET_METHOD_CACHE_KEY));
         }
-        $this->getJson('/api/v0.5/career/datasets/occupations/method?locale=en')
-            ->assertOk()->assertExactJson($payload);
+        $english = $this->getJson('/api/v0.5/career/datasets/occupations/method?locale=en')
+            ->assertOk()
+            ->assertJsonPath('reader_guide.sections.0.title', 'Where do the job tasks come from?')
+            ->json();
+        $this->assertSame(
+            ['career-task-evidence', 'riasec-free-results', 'interest-and-work-style', 'try-a-task'],
+            array_column($english['reader_guide']['sections'], 'id')
+        );
+        unset($english['reader_guide']);
+        $this->assertEquals($payload, $english);
     }
 
     public function test_default_unknown_and_non_scalar_locales_preserve_the_existing_contract(): void
     {
         $payload = $this->cachedMethod();
-        foreach (['', '?locale=en', '?locale=fr', '?locale[]=zh'] as $query) {
+        foreach (['', '?locale=fr', '?locale[]=zh'] as $query) {
             $this->getJson('/api/v0.5/career/datasets/occupations/method'.$query)
                 ->assertOk()->assertExactJson($payload);
         }
