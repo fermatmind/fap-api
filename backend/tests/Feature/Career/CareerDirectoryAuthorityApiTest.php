@@ -204,6 +204,10 @@ final class CareerDirectoryAuthorityApiTest extends TestCase
         self::assertSame(['accountants-and-auditors', 'actors', 'actuaries'], array_column(
             app(\App\Services\Career\CareerDirectoryAuthorityService::class)->indexableItems('en'), 'slug',
         ));
+        $traditional = app(\App\Services\Career\CareerDirectoryAuthorityService::class)->indexableItems('zh-TW');
+        self::assertSame(['accountants-and-auditors', 'actors', 'actuaries'], array_column($traditional, 'slug'));
+        self::assertSame('/zh-TW/career/jobs/accountants-and-auditors', $traditional[0]['canonical_path']);
+        self::assertSame('zh-TW', $traditional[0]['locale']);
 
         $this->assertSame(
             ['arts-media', 'business-finance'],

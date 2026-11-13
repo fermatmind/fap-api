@@ -17,7 +17,7 @@ Do not use it to publish, deploy, write CMS/database/cache state, render fronten
 
 ## Authority and boundaries
 
-- `backend/content_assets/career/current/manifest.json` and its bound 2092 per-page files are the repository Current content authority.
+- `backend/content_assets/career/current/manifest.json` and its bound 3138 per-page files are the repository Current content authority.
 - No committed flat or sharded projection exists. Legacy presentation rows are compatibility materializations and must match the per-page manifest hashes before use.
 - The compiler and package contracts under `backend/app/Domain/Career/{Compilation,Display}` define accepted input, output, locale, component, and hash behavior.
 - Source assets, lookup files, evidence files, Desktop directories, dry-run output, and a PASS receipt are candidates or evidence only.
@@ -66,7 +66,7 @@ The assembler is historical migration evidence only. Active compilation and runt
 
 ## Acceptance
 
-- The compiler reports 1046 careers, 2092 locale pages, and the current exact v4.3/28-component contract; v4.2/26 remains read-only compatible.
+- The compiler reports 1046 careers, 3138 locale pages, and the component contract declared by the current manifest/runtime contract; older component sets remain read-only compatible only where the runtime contract explicitly allows them.
 - Only `Occupation`, `BreadcrumbList`, and visible-content `FAQPage` structured-data families are allowed.
 - Slug set, locale pairing, component order, source/evidence hashes, and package hashes validate.
 - The dry run reports zero CMS, database, cache, discoverability, and search writes.

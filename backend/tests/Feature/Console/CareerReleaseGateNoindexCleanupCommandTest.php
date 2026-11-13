@@ -26,9 +26,9 @@ final class CareerReleaseGateNoindexCleanupCommandTest extends TestCase
     #[Test]
     public function it_dry_runs_release_gate_noindex_cleanup_without_writes(): void
     {
-        $en = $this->createCareerJob('approved-career', 'en');
-        $zh = $this->createCareerJob('approved-career', 'zh-CN');
-        $scope = $this->writeScope(['approved-career']);
+        $en = $this->createCareerJob('actors', 'en');
+        $zh = $this->createCareerJob('actors', 'zh-CN');
+        $scope = $this->writeScope(['actors']);
 
         $exitCode = Artisan::call('career:release-gate-noindex-cleanup', [
             '--scope' => $scope,
@@ -53,9 +53,9 @@ final class CareerReleaseGateNoindexCleanupCommandTest extends TestCase
     #[Test]
     public function it_forces_approved_career_jobs_to_indexable_through_existing_seo_owner(): void
     {
-        $en = $this->createCareerJob('approved-career', 'en');
-        $zh = $this->createCareerJob('approved-career', 'zh-CN');
-        $scope = $this->writeScope(['approved-career']);
+        $en = $this->createCareerJob('actors', 'en');
+        $zh = $this->createCareerJob('actors', 'zh-CN');
+        $scope = $this->writeScope(['actors']);
 
         $exitCode = Artisan::call('career:release-gate-noindex-cleanup', [
             '--scope' => $scope,
@@ -74,9 +74,9 @@ final class CareerReleaseGateNoindexCleanupCommandTest extends TestCase
         $this->assertTrue((bool) $en->is_indexable);
         $this->assertTrue((bool) $zh->is_indexable);
         $this->assertSame('index,follow', $en->seoMeta()->firstOrFail()->robots);
-        $this->assertSame('https://example.test/en/career/jobs/approved-career', $en->seoMeta()->firstOrFail()->canonical_url);
+        $this->assertSame('https://example.test/en/career/jobs/actors', $en->seoMeta()->firstOrFail()->canonical_url);
         $this->assertSame('index,follow', $zh->seoMeta()->firstOrFail()->robots);
-        $this->assertSame('https://example.test/zh/career/jobs/approved-career', $zh->seoMeta()->firstOrFail()->canonical_url);
+        $this->assertSame('https://example.test/zh/career/jobs/actors', $zh->seoMeta()->firstOrFail()->canonical_url);
 
         Artisan::call('career:release-gate-noindex-cleanup', [
             '--scope' => $scope,

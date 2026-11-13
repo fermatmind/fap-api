@@ -6,7 +6,7 @@ Use source at the exact candidate SHA; these paths are the maintained contract:
 - `backend/app/Domain/Career/Compilation/CareerTenBlockCompiler.php`: single-source normalization, lookup/evidence binding, omissions, and public-key guards.
 - `backend/app/Domain/Career/Compilation/CareerTenBlockCurrentPackageCompiler.php`: full-cohort baseline retention, deterministic candidate assembly, receipts, and package diff.
 - `backend/app/Domain/Career/Display/CareerDisplayAssetComponentContract.php`: exact current v4.3/28-component order, v4.2/26 read compatibility, and page-shape validation.
-- `backend/app/Domain/Career/Display/CareerContentV3AuthorityPackage.php`: 1046-directory/2092-file package, canonical encoding, hashes, and fail-closed inventory validation.
+- `backend/app/Domain/Career/Display/CareerContentV3AuthorityPackage.php`: 1046-directory/3138-file package, canonical encoding, hashes, and fail-closed inventory validation.
 - `backend/app/Domain/Career/Display/CareerContentV3CanonicalReader.php`: shared API, publisher, cache, and snapshot hydration boundary.
 - `backend/tests/Unit/Domain/Career/Compilation/CareerTenBlockCurrentPackageCompilerTest.php` and `backend/tests/Unit/Domain/Career/Display/CareerDisplayAssetComponentContractTest.php`: focused executable coverage.
 - `.agents/skills/fap-api-career-canonical-builder/scripts/split_legacy_current.php`: deterministic read-only legacy-to-module sharder.
@@ -25,8 +25,8 @@ A dry compile produces candidate `assets.jsonl`, `manifest.json`, a full compile
 
 The candidate must preserve:
 
-- the exact Current canonical slug set and en/zh-CN locale pairing;
-- the current v4.3/28-component order and complete page fields, while retaining v4.2/26 read compatibility;
+- the exact Current canonical slug set and en/zh-CN/zh-TW locale triplet;
+- the component order and complete page fields declared by the current runtime contract, while retaining only the read compatibility explicitly declared there;
 - allowed structured data only: `Occupation`, `BreadcrumbList`, and FAQ derived from visible content;
 - canonical link identities and zero unresolved/variant output links;
 - Current baseline copy for claims without exact active evidence binding;
@@ -42,6 +42,6 @@ The installed Current shape is frozen by:
 - `backend/docs/career/contracts/career-content-v3-current-manifest.v1.schema.json`
 - `backend/docs/career/contracts/career-content-v3-current-field-ownership.v1.json`
 
-The per-page package is the only installed Current authority: `current/manifest.json` binds exactly 1046 canonical slug directories and 2092 locale files, their bytes and hashes, coverage, source registry, semantic set, compatibility projections, and aggregate hash. There is no committed flat or sharded projection. Historical split/assembly scripts are transition evidence and are not active Current inputs.
+The per-page package is the only installed Current authority: `current/manifest.json` binds exactly 1046 canonical slug directories and 3138 locale files, their bytes and hashes, coverage, source registry, semantic set, compatibility projections, and aggregate hash. There is no committed flat or sharded projection. Historical split/assembly scripts are transition evidence and are not active Current inputs.
 
 Active reading consumes only a fully validated per-page package. It fails closed on root manifest drift, missing or undeclared files, incomplete locale pairing, duplicate identities, traversal, symlinks, JSON/locale/hash drift, duplicate block/item IDs, unknown primitives, or invalid sources and links. A database presentation_v1/v2 materialization is usable only when the same canonical reader verifies its manifest-bound compatibility hash.

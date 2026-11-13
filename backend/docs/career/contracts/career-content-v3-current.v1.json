@@ -2,14 +2,14 @@
   "authority_path": "backend/content_assets/career/current",
   "compatibility": {
     "database_schema_changed": false,
-    "legacy_projection_hashes_required": true,
+    "legacy_projection_hashes_required": false,
     "presentation_v1_v2_materialization": "database_derived_and_manifest_hash_bound"
   },
   "contract_version": "career.content_v3_current.v1",
   "current_inventory": {
     "career_directories": 1046,
-    "files": 2092,
-    "locales": ["en", "zh-CN"],
+    "files": 3138,
+    "locales": ["en", "zh-CN", "zh-TW"],
     "manifest": "manifest.json",
     "path_template": "careers/{canonical_slug}/{locale}.json"
   },
@@ -17,7 +17,7 @@
     "authority": "manifest.json#identity_aliases",
     "storage_identity": "Each fixed canonical slug and its validated JSON files define one independent career; locales are language versions",
     "public_identity": "All 1046 fixed slugs remain independent; O*NET/SOC are shareable fact-source and crosswalk references only",
-    "compatibility": "Aliases may only be historical URLs outside the fixed slug inventory targeting one Current slug; counts remain 1046 careers and 2092 language pages"
+    "compatibility": "Aliases may only be historical URLs outside the fixed slug inventory targeting one Current slug; counts remain 1046 careers and 3138 language pages"
   },
   "fail_closed": [
     "invalid_root_manifest", "missing_or_undeclared_file", "duplicate_slug_locale",
@@ -28,8 +28,8 @@
   "rollback": "previous_git_release_and_runtime_lkg_only",
   "schema_version": "career.detail.content.v3",
   "validation_responsibilities": {
-    "ci": "2092-page package, manifest, codec, deterministic and disposable Redis capacity scan",
-    "production_preactivation": "candidate-code 1046-row and 2092-page database, canonical reader, publisher snapshot, API, active and LKG parity; read-only and before symlink",
+    "ci": "3138-page package, manifest, codec, deterministic and disposable Redis capacity scan",
+    "production_preactivation": "candidate-code 1046-row compatibility projection and 3138-page file authority, canonical reader, publisher snapshot, API, active and LKG parity; read-only and before symlink",
     "publisher_binding": "CI package receipt digest plus production preactivation parity receipt digest",
     "staging": "existing 30-slug x 2-locale public cohort smoke and readback only"
   }

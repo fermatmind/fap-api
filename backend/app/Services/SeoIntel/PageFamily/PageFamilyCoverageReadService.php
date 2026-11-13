@@ -133,7 +133,7 @@ final class PageFamilyCoverageReadService
         $career = [
             'authority_revision' => CareerDirectoryAuthorityService::AUTHORITY_VERSION,
             'localized_public_authority_count' => 0,
-            'locale_distribution' => ['zh-CN' => 0, 'en' => 0],
+            'locale_distribution' => ['zh-CN' => 0, 'zh-TW' => 0, 'en' => 0],
             'sitemap_role' => 'consumer_consistency_only',
         ];
 
@@ -154,7 +154,7 @@ final class PageFamilyCoverageReadService
 
         try {
             $directory = $this->careerAuthority ?? app(CareerDirectoryAuthorityService::class);
-            foreach (['zh-CN', 'en'] as $locale) {
+            foreach (['zh-CN', 'zh-TW', 'en'] as $locale) {
                 $items = $directory->indexableItems($locale, false);
                 foreach ($items as $item) {
                     $path = trim((string) ($item['canonical_path'] ?? ''));

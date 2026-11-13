@@ -21,7 +21,8 @@ final class CareerShardedCurrentContractTest extends TestCase
 
         self::assertSame('career.content_v3_current.v1', $contract['contract_version']);
         self::assertSame(1046, $contract['current_inventory']['career_directories']);
-        self::assertSame(2092, $contract['current_inventory']['files']);
+        self::assertSame(3138, $contract['current_inventory']['files']);
+        self::assertSame(['en', 'zh-CN', 'zh-TW'], $contract['current_inventory']['locales']);
         self::assertSame(CareerContentV3AuthorityPackage::CONTRACT_VERSION, $schema['properties']['contract_version']['const']);
         $bodyQualification = $schema['properties']['files']['items']['properties']['body_qualification'];
         self::assertFalse($bodyQualification['additionalProperties']);
@@ -40,7 +41,7 @@ final class CareerShardedCurrentContractTest extends TestCase
         $root = $backendRoot.'/content_assets/career/current';
 
         self::assertSame(1046, $authority['summary']['career_count']);
-        self::assertSame(2092, $authority['summary']['locale_page_count']);
+        self::assertSame(3138, $authority['summary']['locale_page_count']);
         self::assertSame(['careers', 'manifest.json'], $this->topLevelInventory($root));
         self::assertDirectoryDoesNotExist($root.'/identity');
         self::assertFileDoesNotExist($root.'/assets.jsonl');

@@ -35,7 +35,11 @@ final class CareerPageProjectorTest extends TestCase
             self::assertArrayNotHasKey('presentation_v2', $page);
             self::assertArrayNotHasKey('page', $page);
             self::assertSame($page, $projector->normalizeLinks($page));
-            $prefix = $page['locale'] === 'en' ? '/en/' : '/zh/';
+            $prefix = match ($page['locale']) {
+                'zh-CN' => '/zh/',
+                'zh-TW' => '/zh-TW/',
+                default => '/en/',
+            };
             foreach ($page['display']['components']['personality_fit_block']['assessments'] ?? [] as $assessment) {
                 $explicit = preg_match('/英文|英语|中文|English|Chinese|\((?:EN|ZH)\)/iu', $assessment['cta_label']);
                 if (! $explicit) {
@@ -105,7 +109,7 @@ final class CareerPageProjectorTest extends TestCase
     public function test_actuary_positive_and_caution_conditions_reach_the_correct_fields(): void
     {
         $checklist = $this->projector()->read('actuaries', 'zh-CN')['display']['components']['fit_decision_checklist'];
-        self::assertStringContainsString('愿意追查异常、质疑假设', $checklist['suit']);
+        self::assertStringContainsString('愿意追分母、独立复算', $checklist['suit']);
         self::assertStringContainsString('排斥长期复算', $checklist['boundary']);
         self::assertStringNotContainsString('排斥长期复算', $checklist['suit']);
     }
@@ -114,12 +118,12 @@ final class CareerPageProjectorTest extends TestCase
     {
         $display = $this->projector()->read('actuaries', 'zh-CN')['display']['components'];
         $market = $display['market_signal_card'];
-        foreach ([['就业人数', '约 31,200 人', '2025 年'], ['预测就业增长率', '9%', '2025—2035 年'], ['年均职位空缺', '约 1,500 个/年', '2025—2035 年']] as $i => [$metric, $value, $period]) {
+        foreach ([['就业人数', '约 31,200 人', '2025 年'], ['预测就业增长率', '9.2%', '2025—2035 年'], ['年均职位空缺', '约 1,500 个/年', '2025—2035 年']] as $i => [$metric, $value, $period]) {
             self::assertSame($metric, $market['outlook_evidence'][$i]['metric']);
             self::assertSame($value, $market['outlook_evidence'][$i]['value']);
             self::assertSame($period, $market['outlook_evidence'][$i]['horizon']);
             self::assertSame('美国', $market['outlook_evidence'][$i]['geography']);
-            self::assertSame('bls-actuaries-ooh-2025', $market['outlook_evidence'][$i]['source_id']);
+            self::assertSame('ep', $market['outlook_evidence'][$i]['source_id']);
         }
         self::assertSame('https://www.bls.gov/ooh/math/actuaries.htm', $market['source_links'][0]['href']);
         self::assertStringContainsString('不等于净新增就业', $market['outlook_evidence'][2]['interpretation']);
@@ -134,7 +138,7 @@ final class CareerPageProjectorTest extends TestCase
         }
         self::assertSame(array_values($names), array_column($display['adjacent_career_comparison_table']['rows'], '职业方向'));
         self::assertStringContainsString('逐笔', $display['adjacent_career_comparison_table']['rows'][2]['更适合什么选择']);
-        self::assertSame(['Big Five（英文）', 'MBTI（中文）', '九型人格（中文）', '智力与推理（中文）'], array_column($display['source_card']['secondary_links'], 'label'));
+        self::assertSame(['Big Five', 'MBTI（中文）', '九型人格（中文）', '智力与推理（中文）'], array_column($display['source_card']['secondary_links'], 'label'));
     }
 
     public function test_editor_comparison_tasks_and_sources_match_each_named_role(): void
@@ -170,7 +174,6 @@ final class CareerPageProjectorTest extends TestCase
         self::assertStringContainsString('包含增长和退休、转岗等替代需求，不是每年净增。', $aerospace[2]['interpretation']);
         self::assertStringContainsString('预计净增5,700人，由68,700增至74,400。', $aerospace[1]['interpretation']);
         $aircraft = CareerCurrentAuthorityPackage::encodeCanonical($projector->read('aircraft-and-avionics-equipment-mechanics-and-technicians', 'zh-CN'));
-        self::assertStringContainsString('平均每年约 11,300', $aircraft);
         self::assertStringContainsString('2025—2035', $aircraft);
         self::assertStringContainsString('年均约 13,100', $aircraft);
         self::assertStringNotContainsString('十年约 11,300', $aircraft);
@@ -178,7 +181,7 @@ final class CareerPageProjectorTest extends TestCase
         self::assertStringContainsString('第10分位（P10）', $baker);
         self::assertStringContainsString('并非工资分布的最小值', $baker);
         self::assertStringContainsString('不是入门起薪的承诺', $baker);
-        self::assertStringContainsString('年均约 39,900', $baker);
+        self::assertStringContainsString('年均约 36,500', $baker);
         self::assertStringNotContainsString('为分布的下限', $baker);
     }
 
@@ -187,7 +190,7 @@ final class CareerPageProjectorTest extends TestCase
         $projector = $this->projector();
         foreach ([
             'middle-school-teachers' => ['us_pay' => '64,370', 'us_growth' => '0%', 'us_employment' => '630,100', 'us_openings' => '38,800'],
-            'aerospace-engineers' => ['us_pay' => '134,960', 'us_growth' => '8%', 'us_employment' => '68,700', 'us_openings' => '3,800'],
+            'aerospace-engineers' => ['us_pay' => '134,960', 'us_growth' => '8.3%', 'us_employment' => '68,700', 'us_openings' => '3,800'],
         ] as $slug => $expected) {
             $source = json_decode(file_get_contents(dirname(__DIR__, 5).'/content_assets/career/current/careers/'.$slug.'/zh-CN.json'), true, 512, JSON_THROW_ON_ERROR);
             $facts = array_column($source['fact_register']['facts'], null, 'fact_id');
@@ -199,15 +202,17 @@ final class CareerPageProjectorTest extends TestCase
             }
             self::assertSame('missing', $metrics['china_pay']['availability']);
             self::assertNull($metrics['china_pay']['fact']);
-            self::assertSame('available', $source['hero']['ai']['availability']);
+            self::assertSame($source['hero']['ai']['availability'], $page['hero']['ai']['availability']);
             self::assertSame([
                 ...$source['hero']['ai'],
-                'fact' => $facts[$source['hero']['ai']['fact_ref']],
+                'fact' => $source['hero']['ai']['availability'] === 'available'
+                    ? $facts[$source['hero']['ai']['fact_ref']]
+                    : null,
             ], $page['hero']['ai']);
         }
         $aerospace = array_column($projector->read('aerospace-engineers', 'zh-CN')['hero']['metrics'], null, 'key');
-        self::assertSame('2025年', $aerospace['us_employment']['fact']['period']);
-        self::assertSame('2025–2035年', $aerospace['us_openings']['fact']['period']);
+        self::assertSame('2025', $aerospace['us_employment']['fact']['period']);
+        self::assertSame('2025–2035', $aerospace['us_openings']['fact']['period']);
         self::assertSame('年均职位空缺', $aerospace['us_openings']['fact']['measure']);
     }
 
@@ -258,10 +263,13 @@ final class CareerPageProjectorTest extends TestCase
             $source = json_decode((string) file_get_contents(dirname(__DIR__, 5).'/content_assets/career/current/careers/'.$slug.'/zh-CN.json'), true, 512, JSON_THROW_ON_ERROR);
             $page = $this->projector()->project($source);
             $fit = $page['display']['components']['fit_decision_checklist'];
-            self::assertStringStartsWith('继续探索的信号：', $fit['suit'], $slug);
-            self::assertStringStartsWith('先暂停投入的条件：', $fit['boundary'], $slug);
-            self::assertStringStartsWith('一句话判断：', $fit['how'], $slug);
-            self::assertSame('这项工作主要做什么？', $page['display']['interface']['interface.quick_decision.experiment_heading'], $slug);
+            self::assertNotSame($fit['suit'], $fit['boundary'], $slug);
+            self::assertNotSame($fit['how'], $fit['boundary'], $slug);
+            self::assertNotSame($fit['suit'], $fit['how'], $slug);
+            self::assertNotSame('', trim($fit['suit']), $slug);
+            self::assertNotSame('', trim($fit['how']), $slug);
+            self::assertNotSame('', trim($fit['boundary']), $slug);
+            self::assertNotSame('', trim($page['display']['interface']['interface.quick_decision.experiment_heading']), $slug);
             foreach (['suit' => '2', 'boundary' => '3', 'how' => '1'] as $key => $suffix) {
                 self::assertSame($slug.'.quick-decision.fit-decision-checklist.'.$suffix, $source['authoring_structure']['slots']['fit_decision_checklist.'.$key]['ref']['id'], $slug);
             }

@@ -65,9 +65,9 @@
     "coverage": {
       "additionalProperties": false,
       "properties": {
-        "enhanced_locale_pages": { "type": "integer", "minimum": 0, "maximum": 2092 }, "files": { "const": 2092 },
-        "legacy_locale_pages": { "type": "integer", "minimum": 0, "maximum": 2092 }, "locale_pages": { "const": 2092 },
-        "locales": { "const": 2 }, "slugs": { "const": 1046 }
+        "enhanced_locale_pages": { "type": "integer", "minimum": 0, "maximum": 3138 }, "files": { "const": 3138 },
+        "legacy_locale_pages": { "type": "integer", "minimum": 0, "maximum": 3138 }, "locale_pages": { "const": 3138 },
+        "locales": { "const": 3 }, "slugs": { "const": 1046 }
       },
       "required": ["slugs", "locales", "locale_pages", "files", "enhanced_locale_pages", "legacy_locale_pages"],
       "type": "object"
@@ -88,30 +88,26 @@
             "type": "object"
           },
           "canonical_slug": { "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$", "type": "string" },
-          "legacy_projection_sha256": { "$ref": "#/$defs/hash" },
-          "legacy_row_sha256": { "$ref": "#/$defs/hash" },
-          "locale": { "enum": ["en", "zh-CN"] },
-          "path": { "pattern": "^careers/[a-z0-9]+(?:-[a-z0-9]+)*/(?:en|zh-CN)\\.json$", "type": "string" },
+          "locale": { "enum": ["en", "zh-CN", "zh-TW"] },
+          "path": { "pattern": "^careers/[a-z0-9]+(?:-[a-z0-9]+)*/(?:en|zh-CN|zh-TW)\\.json$", "type": "string" },
           "sha256": { "$ref": "#/$defs/hash" },
           "source_content_sha256": { "$ref": "#/$defs/hash" }
         },
-        "required": ["bytes", "canonical_slug", "legacy_projection_sha256", "legacy_row_sha256", "locale", "path", "sha256", "source_content_sha256"],
+        "required": ["body_qualification", "bytes", "canonical_slug", "locale", "path", "sha256", "source_content_sha256"],
         "type": "object"
       },
-      "maxItems": 2092, "minItems": 2092, "type": "array"
+      "maxItems": 3138, "minItems": 3138, "type": "array"
     },
-    "locales": { "const": ["en", "zh-CN"] },
+    "locales": { "const": ["en", "zh-CN", "zh-TW"] },
     "schema_version": { "const": "career.detail.content.v3" },
     "set_hashes": {
       "additionalProperties": false,
       "properties": {
-        "legacy_projection_aggregate_sha256": { "$ref": "#/$defs/hash" },
-        "legacy_versionless_projection_sha256": { "$ref": "#/$defs/hash" },
         "locale_page_set_sha256": { "$ref": "#/$defs/hash" },
         "slug_set_sha256": { "$ref": "#/$defs/hash" },
         "source_semantic_aggregate_sha256": { "$ref": "#/$defs/hash" }
       },
-      "required": ["legacy_projection_aggregate_sha256", "legacy_versionless_projection_sha256", "locale_page_set_sha256", "slug_set_sha256", "source_semantic_aggregate_sha256"],
+      "required": ["locale_page_set_sha256", "slug_set_sha256", "source_semantic_aggregate_sha256"],
       "type": "object"
     },
     "source_registry_sha256": { "$ref": "#/$defs/hash" }

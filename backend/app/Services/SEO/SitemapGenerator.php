@@ -942,6 +942,7 @@ class SitemapGenerator
         foreach ([
             'en' => 'en',
             'zh-CN' => 'zh',
+            'zh-TW' => 'zh-TW',
         ] as $locale => $segment) {
             foreach ($this->careerDirectoryAuthorityService->indexableItems($locale) as $item) {
                 $slug = strtolower(trim((string) ($item['slug'] ?? '')));

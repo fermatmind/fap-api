@@ -103,10 +103,31 @@ final class CareerDirectoryAuthorityService
      */
     public function indexableItems(string $locale, bool $recordCacheState = true): array
     {
+        if (strtolower(trim($locale)) === 'zh-tw') {
+            return $this->traditionalIndexableItems($recordCacheState);
+        }
+
         $publicLocale = $this->normalizePublicLocale($locale);
         $items = array_values(array_filter($this->browseItems($publicLocale, $recordCacheState), static fn (array $item): bool => $item['indexable']));
 
         return array_map(fn (array $item): array => $this->publicItem($item), $items);
+    }
+
+    /** @return list<array<string, mixed>> */
+    private function traditionalIndexableItems(bool $recordCacheState): array
+    {
+        $items = array_values(array_filter(
+            $this->indexableItems('zh-CN', $recordCacheState),
+            fn (array $item): bool => $this->content->hasPublicBody((string) $item['slug'], 'zh-TW'),
+        ));
+
+        return array_map(function (array $item): array {
+            $slug = (string) $item['slug'];
+            $item['locale'] = 'zh-TW';
+            $item['canonical_path'] = '/zh-TW/career/jobs/'.$slug;
+
+            return $item;
+        }, $items);
     }
 
     /** @return list<array<string, mixed>> */

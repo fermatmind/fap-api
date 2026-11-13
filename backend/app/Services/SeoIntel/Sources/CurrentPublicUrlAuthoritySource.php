@@ -107,7 +107,7 @@ final class CurrentPublicUrlAuthoritySource implements UrlTruthInventorySource
     private function careerRecords(array $index): array
     {
         $records = [];
-        foreach (['zh-CN', 'en'] as $locale) {
+        foreach (['zh-CN', 'zh-TW', 'en'] as $locale) {
             $hasBrowseAuthority = false;
             try {
                 $items = $this->careerAuthority->indexableItems($locale, false);

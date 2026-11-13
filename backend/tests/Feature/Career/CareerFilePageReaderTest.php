@@ -139,6 +139,7 @@ final class CareerFilePageReaderTest extends TestCase
         self::assertSame([
             'en' => '/en/career/jobs/accountants-and-auditors',
             'zh-CN' => '/zh/career/jobs/accountants-and-auditors',
+            'zh-TW' => '/zh-TW/career/jobs/accountants-and-auditors',
         ], $reader->seo($accountant)['meta']['hreflang']);
     }
 
@@ -175,7 +176,8 @@ final class CareerFilePageReaderTest extends TestCase
                 ->assertJsonPath('titles.canonical_zh_tw', '演員')
                 ->assertJsonPath('career_page.locale', 'zh-TW')
                 ->assertJsonPath('career_page.display.path', '/zh-TW/career/jobs/actors')
-                ->assertJsonPath('seo_contract.robots_policy', 'noindex,follow');
+                ->assertJsonPath('seo_contract.robots_policy', 'index,follow')
+                ->assertJsonPath('seo_contract.reason_codes.1', 'release_gate_pass');
             $simplified = $this->getJson('/api/v0.5/career/jobs/actors?locale=zh-CN')->assertOk()
                 ->assertJsonPath('career_page.locale', 'zh-CN')
                 ->assertJsonPath('seo_contract.robots_policy', 'index,follow');
@@ -186,8 +188,10 @@ final class CareerFilePageReaderTest extends TestCase
             );
             $this->getJson('/api/v0.5/career-jobs/actors/seo?org_id=0&locale=zh-TW')->assertOk()
                 ->assertJsonPath('meta.canonical', '/zh-TW/career/jobs/actors')
-                ->assertJsonPath('meta.robots', 'noindex,follow')
-                ->assertJsonPath('meta.hreflang', []);
+                ->assertJsonPath('meta.robots', 'index,follow')
+                ->assertJsonPath('meta.hreflang.en', '/en/career/jobs/actors')
+                ->assertJsonPath('meta.hreflang.zh-CN', '/zh/career/jobs/actors')
+                ->assertJsonPath('meta.hreflang.zh-TW', '/zh-TW/career/jobs/actors');
             $this->getJson($traditionalUri.'&projection_contract=career.detail.presence.v1')->assertOk()
                 ->assertExactJson([
                     'bundle_kind' => 'career_job_presence',

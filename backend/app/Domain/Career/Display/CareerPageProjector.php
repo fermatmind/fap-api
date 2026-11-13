@@ -80,13 +80,14 @@ final class CareerPageProjector
     /** Normalize navigation only; locale files and their provenance remain unchanged. */
     public function normalizeLinks(array $page): array
     {
-        if (($page['locale'] ?? null) === 'zh-TW') {
-            return $page;
-        }
-        $segment = ($page['locale'] ?? null) === 'zh-CN' ? 'zh' : 'en';
+        $segment = match ($page['locale'] ?? null) {
+            'zh-CN' => 'zh',
+            'zh-TW' => 'zh-TW',
+            default => 'en',
+        };
         $changes = [];
         $localize = static function (string $href) use ($segment): string {
-            return preg_replace('#^/(?:en|zh)/(tests|career/jobs)/#', '/'.$segment.'/$1/', $href);
+            return preg_replace('#^/(?:en|zh|zh-TW)/(tests|career/jobs)/#', '/'.$segment.'/$1/', $href);
         };
         foreach ($page['display']['components']['personality_fit_block']['assessments'] ?? [] as $i => $assessment) {
             $href = $assessment['cta_href'];

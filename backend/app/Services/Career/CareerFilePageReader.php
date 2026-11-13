@@ -105,7 +105,7 @@ final class CareerFilePageReader
             default => ['en', 'canonical_en'],
         };
         $path = '/'.$segment.'/career/jobs/'.$slug;
-        $indexable = ! $traditional && $this->content->hasPublicBody($slug, $locale);
+        $indexable = $this->content->hasPublicBody($slug, $locale);
         $business = $traditional ? [] : $this->publication->filePageBusiness($slug, $locale);
 
         return array_merge($business, [
@@ -125,7 +125,7 @@ final class CareerFilePageReader
             'seo_contract' => ['canonical_path' => $path, 'canonical_target' => $path,
                 'index_state' => $indexable ? 'indexable' : 'noindex', 'index_eligible' => $indexable,
                 'robots_policy' => $indexable ? 'index,follow' : 'noindex,follow',
-                'reason_codes' => ['runtime_publish_projection', $traditional ? 'locale_index_hold' : 'release_gate_pass'],
+                'reason_codes' => ['runtime_publish_projection', 'release_gate_pass'],
                 'metadata_fingerprint' => $page['source_content_sha256']],
             'career_page' => $page,
         ]);
@@ -178,9 +178,11 @@ final class CareerFilePageReader
         $robots = $indexable ? 'index,follow' : 'noindex,follow';
         $alternates = [];
         if ($indexable) {
-            foreach (['en' => 'en', 'zh-CN' => 'zh'] as $locale => $segment) {
+            foreach (['en' => 'en', 'zh-CN' => 'zh', 'zh-TW' => 'zh-TW'] as $locale => $segment) {
                 $slug = $page['subject']['canonical_slug'];
-                if ($this->publication->jobDetailProjectionItemIsPublished($this->publication->filePagePublication($slug, $locale))
+                $publicationLocale = $locale === 'zh-TW' ? 'zh-CN' : $locale;
+                if (isset($this->content->authority()['entries'][$slug][$locale])
+                    && $this->publication->jobDetailProjectionItemIsPublished($this->publication->filePagePublication($slug, $publicationLocale))
                     && $this->content->hasPublicBody($slug, $locale)) {
                     $alternates[$locale] = '/'.$segment.'/career/jobs/'.$slug;
                 }

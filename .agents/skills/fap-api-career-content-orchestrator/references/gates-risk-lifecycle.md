@@ -22,7 +22,7 @@ Consume only the canonical research package and complete byte lock recorded by G
 
 ## Gate 4 — canonical builder
 
-Invoke the real existing single-slug dry compile without `--write-current`. It must consume the exact Gate 3 source-root path/tree digest, lookup path/raw digest, and evidence-package digest. PASS requires `PASS_TEN_BLOCK_DRY_COMPILE`, 10 source files, 2 locale projections, 26 components per page, blockers 0, candidate row and digest present, deterministic recompilation PASS, and zero Current/runtime/API/database/cache/CMS/sitemap/discoverability/search writes. Expired or superseded evidence cannot enter this gate. Input drift yields `BLOCKED_COMPILE` / `compiler_input_binding_mismatch` without running the compiler; other failures are `BLOCKED_COMPILE`.
+Invoke the real existing single-slug dry compile without `--write-current`. It must consume the exact Gate 3 source-root path/tree digest, lookup path/raw digest, and evidence-package digest. PASS requires `PASS_TEN_BLOCK_DRY_COMPILE`, the source-file and locale-projection counts declared by the current compiler contract, the component set declared by the current runtime contract, blockers 0, candidate row and digest present, deterministic recompilation PASS, and zero Current/runtime/API/database/cache/CMS/sitemap/discoverability/search writes. Expired or superseded evidence cannot enter this gate. Input drift yields `BLOCKED_COMPILE` / `compiler_input_binding_mismatch` without running the compiler; other failures are `BLOCKED_COMPILE`.
 
 ## Gate 5 — orchestrator receipt
 

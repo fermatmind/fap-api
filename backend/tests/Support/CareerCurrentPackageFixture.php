@@ -9,7 +9,7 @@ use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
 use App\Domain\Career\Display\CareerCurrentAuthorityReleaseIntent;
 use Illuminate\Filesystem\Filesystem;
 
-/** Compact mutation fixture; the real 2092-page corpus is scanned separately. */
+/** Compact mutation fixture; the real 3138-page corpus is scanned separately. */
 final class CareerCurrentPackageFixture
 {
     public static function create(string $source): string
