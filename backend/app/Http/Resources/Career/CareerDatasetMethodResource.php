@@ -75,11 +75,12 @@ final class CareerDatasetMethodResource extends JsonResource
                 'id' => 'career-task-evidence',
                 'title' => $chinese ? '职业任务来自哪里？' : 'Where do the job tasks come from?',
                 'body' => $chinese
-                    ? '以美国井口泵工为例，O*NET 31.0 的任务说明列出一项职责：检查泵和输送管线有无气体或液体泄漏。费马依据美国劳工部就业与培训管理局（USDOL/ETA）的 O*NET 数据译写此例，适用 CC BY 4.0。美国职业资料可用于理解工作任务。中国本地的任职资格、薪资与岗位要求请查当地官方资料和招聘信息。'
-                    : 'For U.S. wellhead pumpers, the O*NET 31.0 Task Statements list checking pumps and flow lines for gas or fluid leaks. FermatMind adapted this example from O*NET data from the U.S. Department of Labor, Employment and Training Administration (USDOL/ETA), under CC BY 4.0. Use the U.S. data to understand work tasks. Check local official guidance and job postings for qualifications, pay, and hiring requirements in China or other markets.',
+                    ? '以美国井口泵工为例，O*NET 31.0 的任务说明列出一项职责：检查泵和输送管线有无气体或液体泄漏。费马依据美国劳工部就业与培训管理局（USDOL/ETA）的 O*NET 数据译写此例，适用 CC BY 4.0。译写未经 USDOL/ETA 审批、背书或测试。美国职业资料可用于理解工作任务。中国本地的任职资格、薪资与岗位要求请查当地官方资料和招聘信息。'
+                    : 'For U.S. wellhead pumpers, the O*NET 31.0 Task Statements list checking pumps and flow lines for gas or fluid leaks. FermatMind adapted this example from O*NET data from the U.S. Department of Labor, Employment and Training Administration (USDOL/ETA), under CC BY 4.0. USDOL/ETA has not approved, endorsed, or tested this adaptation. Use the U.S. data to understand work tasks. Check local official guidance and job postings for qualifications, pay, and hiring requirements in China or other markets.',
                 'sources' => [
                     ['label' => $chinese ? 'O*NET 井口泵工任务（53-7073.00）' : 'O*NET Wellhead Pumpers tasks (53-7073.00)', 'href' => 'https://www.onetonline.org/link/summary/53-7073.00#Tasks'],
-                    ['label' => $chinese ? 'O*NET 31.0 数据与许可' : 'O*NET 31.0 data license', 'href' => 'https://www.onetcenter.org/license_db.html'],
+                    ['label' => $chinese ? 'O*NET 31.0 数据库' : 'O*NET 31.0 Database', 'href' => 'https://www.onetcenter.org/database.html'],
+                    ['label' => $chinese ? 'CC BY 4.0 许可' : 'CC BY 4.0 license', 'href' => 'https://creativecommons.org/licenses/by/4.0/'],
                 ],
             ],
             [
