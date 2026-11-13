@@ -72,7 +72,7 @@ final class CareerCurrentIdentityTest extends TestCase
         $identity = app(CareerCurrentIdentity::class);
         $inventory = $identity->inventory();
         self::assertSame(1046, $inventory['storage_count']);
-        self::assertSame(2092, $inventory['file_count']);
+        self::assertSame(3138, $inventory['file_count']);
         self::assertCount(1046, array_unique($inventory['slugs']));
         self::assertSame(hash_file('sha256', base_path(CareerCurrentAuthorityPackage::RELATIVE_PATH.'/manifest.json')), $inventory['manifest_sha256']);
         self::assertSame($identity->aliases(), (array) $inventory['aliases']);

@@ -57,7 +57,8 @@ test("production publisher is bound to the preactivation receipt digest", () => 
   assert.match(deploy, /production_parity_receipt="career-current-authority-production-preactivation-parity\.json"/);
   assert.match(deploy, /PRODUCTION_PARITY_RECEIPT_DIGEST="\$\(jq -r \.receipt_digest "\$production_parity_receipt"\)"/);
   assert.ok(deploy.includes("(.validation_scope.canonical_slugs | unique | length) == 1046"));
-  assert.ok(deploy.includes(".validation_scope.locale_page_count == (1046 * (.validation_scope.locales | length))"));
+  assert.ok(deploy.includes('.validation_scope.locales == ["en", "zh-CN", "zh-TW"]'));
+  assert.ok(deploy.includes(".validation_scope.locale_page_count == 3138"));
   assert.match(deploy, /\.parity\.production_preactivation_receipt_digest == env\.PRODUCTION_PARITY_RECEIPT_DIGEST/);
   assert.match(publisher, /CAREER_CURRENT_PUBLISH_PRODUCTION_PARITY_RECEIPT_DIGEST/);
   assert.match(publisher, /validation_scope\.canonical_slugs/);
@@ -100,23 +101,21 @@ test("the actual production receipt predicate rejects sampled and incomplete inv
     contract_version: "career.current_authority_parity.v2", status: "pass", mode: "production-preactivation",
     release_sha: values.sha, active_sha: values.active,
     package: { digest: values.package, projection_digest: values.projection, compiler_digest: values.compiler, codec_digest: values.codec },
-    validation_scope: { canonical_slugs: Array.from({ length: 1046 }, (_, i) => `role-${i}`), slug_count: 1046, locales: ["en", "zh-CN"], locale_page_count: 2092 },
-    full_scan: { delivery_mode: "file_authoritative", counts: {locale_pages: 2092, verified_files: 2092} },
+    validation_scope: { canonical_slugs: Array.from({ length: 1046 }, (_, i) => `role-${i}`), slug_count: 1046, locales: ["en", "zh-CN", "zh-TW"], locale_page_count: 3138 },
+    full_scan: { delivery_mode: "file_authoritative", counts: {locale_pages: 3138, verified_files: 3138} },
     redis: { mode: "readonly" }, write_counts: { database_write_count: 0, cache_write_count: 0 }, receipt_digest: "a".repeat(64),
   };
   const accepted = value => spawnSync("jq", [...args, predicate], { input: JSON.stringify(value), encoding: "utf8" }).status === 0;
   assert.equal(accepted(receipt), true);
-  const traditional = structuredClone(receipt);
-  traditional.validation_scope.locales.push("zh-TW");
-  traditional.validation_scope.locale_page_count = 3138;
-  traditional.full_scan.counts = { locale_pages: 3138, verified_files: 3138 };
-  assert.equal(accepted(traditional), true);
-  traditional.full_scan.counts.verified_files = 3137;
-  assert.equal(accepted(traditional), false);
+  const bilingual = structuredClone(receipt);
+  bilingual.validation_scope.locales = ["en", "zh-CN"];
+  bilingual.validation_scope.locale_page_count = 2092;
+  bilingual.full_scan.counts = { locale_pages: 2092, verified_files: 2092 };
+  assert.equal(accepted(bilingual), false);
   for (const mutate of [
     r => { r.validation_scope.canonical_slugs = ["accountants-and-auditors"]; r.validation_scope.locale_page_count = 2; },
     r => { r.validation_scope.canonical_slugs[1045] = r.validation_scope.canonical_slugs[0]; },
-    r => { r.full_scan.counts.verified_files = 2091; },
+    r => { r.full_scan.counts.verified_files = 3137; },
     r => { r.full_scan.delivery_mode = "cache_only"; },
     r => { r.write_counts.cache_write_count = 1; },
   ]) { const invalid = structuredClone(receipt); mutate(invalid); assert.equal(accepted(invalid), false); }
@@ -197,19 +196,19 @@ function simulation() {
   const parity={contract_version:'career.current_authority_parity.v2',status:'pass',mode:'production-preactivation',
     release_sha:candidateSha,active_sha:lkgSha,package:{digest:hashes.assets,projection_digest:hashes.projection,
       compiler_digest:hashes.compiler,codec_digest:hashes.codec},
-    validation_scope:{canonical_slugs:Array.from({length:1046},(_,i)=>`role-${i}`),slug_count:1046,locales:['en','zh-CN'],locale_page_count:2092},
-    full_scan:{counts:{locale_pages:2092,verified_files:2092},delivery_mode:'file_authoritative'},redis:{mode:'readonly'},
+    validation_scope:{canonical_slugs:Array.from({length:1046},(_,i)=>`role-${i}`),slug_count:1046,locales:['en','zh-CN','zh-TW'],locale_page_count:3138},
+    full_scan:{counts:{locale_pages:3138,verified_files:3138},delivery_mode:'file_authoritative'},redis:{mode:'readonly'},
     write_counts:{database_write_count:0,cache_write_count:0},receipt_digest:hashes.parity};
   const publisher={contract_version:'career.current_authority_publish.v1',status:'PASS_CURRENT_AUTHORITY_PUBLISH',
     release_sha:candidateSha,source_merge_sha:lkgSha,manifest_sha256:hashes.manifest,assets_sha256:hashes.assets,
     versionless_projection_sha256:hashes.projection,operation_key:hashes.operation,
-    package:{versionless_projection_sha256:hashes.projection,career_count:1046,locale_page_count:2092,file_count:2092},
+    package:{versionless_projection_sha256:hashes.projection,career_count:1046,locale_page_count:3138,file_count:3138},
     authority:{changed_locale_page_count:0,target_count:1046,unique_slug_count:1046,verified_identity_count:1046},
     changed_page_set_sha256:null,parity:{ci_package_scan_receipt_digest:hashes.ci,production_preactivation_receipt_digest:hashes.parity,
       compiler_digest:hashes.compiler,codec_digest:hashes.codec,content_package_sha256:null,content_package_receipt_digest:null},
     full_scan:true,resource_guard:{schema_version:'career.current_authority_publish.resource_guard.v1',timeout_seconds:900,
       nice_adjustment:15,ionice_class:2,ionice_priority:7,memory_limit_mb:1024},manual_hold_verified:true,
-    file_readback:{delivery_mode:'file_authoritative',file_hash_match_count:2092,verified_slug_count:1046,verified_locale_page_count:2092},
+    file_readback:{delivery_mode:'file_authoritative',file_hash_match_count:3138,verified_slug_count:1046,verified_locale_page_count:3138},
     write_counts:{cache_candidate_write_count:0,occupation_write_count:0,generation_write_count:0,discoverability_write_count:0,search_submission_count:0},
     negative_guarantees:{task_3a_through_7b_executed:false,search_channel_executed:false},automatic_retry_allowed:false};
   writeFileSync(join(root,'parity.json'),JSON.stringify(parity));
@@ -252,7 +251,7 @@ test('actual forward readers share their deadline and reject malformed/incomplet
     const sim=simulation();
     try {
       if(failure==='sha')sim.parity.release_sha=lkgSha;
-      if(failure==='inventory')sim.publisher.file_readback.file_hash_match_count=2091;
+      if(failure==='inventory')sim.publisher.file_readback.file_hash_match_count=3137;
       writeFileSync(join(sim.root,'parity.json'),JSON.stringify(sim.parity));
       writeFileSync(join(sim.root,'publisher.json'),JSON.stringify(sim.publisher));
       if(failure==='missing-file')rmSync(join(sim.root,'parity.json'));

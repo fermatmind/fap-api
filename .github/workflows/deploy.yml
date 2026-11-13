@@ -2322,8 +2322,8 @@ jobs:
               and (.validation_scope.canonical_slugs | length) == 1046
               and (.validation_scope.canonical_slugs | unique | length) == 1046
               and .validation_scope.slug_count == 1046
-              and (.validation_scope.locales == ["en", "zh-CN"] or .validation_scope.locales == ["en", "zh-CN", "zh-TW"])
-              and .validation_scope.locale_page_count == (1046 * (.validation_scope.locales | length))
+              and .validation_scope.locales == ["en", "zh-CN", "zh-TW"]
+              and .validation_scope.locale_page_count == 3138
               and .full_scan.counts.locale_pages == .validation_scope.locale_page_count
               and .full_scan.counts.verified_files == .validation_scope.locale_page_count
               and .full_scan.delivery_mode == "file_authoritative"
@@ -2373,8 +2373,8 @@ jobs:
               and (.validation_scope.canonical_slugs | length) == 1046
               and (.validation_scope.canonical_slugs | unique | length) == 1046
               and .validation_scope.slug_count == 1046
-              and (.validation_scope.locales == ["en", "zh-CN"] or .validation_scope.locales == ["en", "zh-CN", "zh-TW"])
-              and .validation_scope.locale_page_count == (1046 * (.validation_scope.locales | length))
+              and .validation_scope.locales == ["en", "zh-CN", "zh-TW"]
+              and .validation_scope.locale_page_count == 3138
               and ([.write_counts[]] | all(. == 0))
               and (.receipt_digest | test("^[0-9a-f]{64}$"))
             ' "$production_parity_receipt" >/dev/null
@@ -2490,7 +2490,7 @@ jobs:
                 "memory_limit_mb": 1024
               }
               and .package.career_count == 1046
-              and (.package.locale_page_count == 2092 or .package.locale_page_count == 3138)
+              and .package.locale_page_count == 3138
               and .package.file_count == .package.locale_page_count
               and .authority.target_count == 1046
               and .authority.unique_slug_count == 1046

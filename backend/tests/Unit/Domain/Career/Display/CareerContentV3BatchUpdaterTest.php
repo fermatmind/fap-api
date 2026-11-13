@@ -71,7 +71,7 @@ final class CareerContentV3BatchUpdaterTest extends TestCase
                 $release = app(CareerCurrentAuthorityReleaseIntent::class)->verify($root);
                 self::assertSame($result['aggregate_sha256'], $release['intent']['aggregate_sha256']);
                 self::assertSame(1046, $release['package']['slug_count']);
-                self::assertSame(2092, $release['package']['locale_page_count']);
+                self::assertSame(3138, $release['package']['locale_page_count']);
             }
         } finally {
             $this->removeDirectory($root);

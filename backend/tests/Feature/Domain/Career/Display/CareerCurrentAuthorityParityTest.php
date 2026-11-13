@@ -12,7 +12,7 @@ use Tests\TestCase;
 
 final class CareerCurrentAuthorityParityTest extends TestCase
 {
-    public function test_it_runs_the_fixed_slice_then_all_2092_pages_without_authority_writes(): void
+    public function test_it_runs_the_fixed_slice_then_all_3138_pages_without_authority_writes(): void
     {
         $receipt = app(CareerCurrentAuthorityParity::class)->run(
             base_path(),
@@ -24,14 +24,14 @@ final class CareerCurrentAuthorityParityTest extends TestCase
         self::assertSame(CareerCurrentAuthorityParity::PACKAGE_SCAN_CONTRACT_VERSION, $receipt['contract_version']);
         self::assertSame(CareerCurrentAuthorityParity::MODE_PACKAGE, $receipt['mode']);
         self::assertSame('pass', $receipt['status']);
-        self::assertSame(4, $receipt['architecture_slice']['counts']['locale_pages']);
-        self::assertSame(4, $receipt['architecture_slice']['content_states']['enhanced']);
+        self::assertSame(6, $receipt['architecture_slice']['counts']['locale_pages']);
+        self::assertSame(6, $receipt['architecture_slice']['content_states']['enhanced']);
         self::assertSame(0, $receipt['architecture_slice']['content_states']['legacy']);
         self::assertSame(1046, $receipt['full_scan']['counts']['slugs']);
-        self::assertSame(2092, $receipt['full_scan']['counts']['locale_pages']);
-        self::assertSame(2092, $receipt['full_scan']['counts']['encoded']);
-        self::assertSame(2092, $receipt['full_scan']['counts']['decoded']);
-        self::assertCount(2092, $receipt['full_scan']['projection_index']);
+        self::assertSame(3138, $receipt['full_scan']['counts']['locale_pages']);
+        self::assertSame(3138, $receipt['full_scan']['counts']['encoded']);
+        self::assertSame(3138, $receipt['full_scan']['counts']['decoded']);
+        self::assertCount(3138, $receipt['full_scan']['projection_index']);
         self::assertMatchesRegularExpression('/\A[0-9a-f]{64}\z/', $receipt['full_scan']['projection_index_sha256']);
         self::assertSame(
             ['slug', 'locale', 'path', 'source_sha256', 'projection_sha256', 'codec_sha256'],
@@ -66,7 +66,7 @@ final class CareerCurrentAuthorityParityTest extends TestCase
         $parity = new CareerCurrentAuthorityParity($loader, app(\App\Domain\Career\Display\CareerJobDetailCanonicalCacheReader::class), $pages);
         $scan = $parity->scanFiles($authority);
         self::assertSame('file_authoritative', $scan['delivery_mode']);
-        self::assertSame(4, $scan['counts']['verified_files']);
+        self::assertSame(6, $scan['counts']['verified_files']);
         self::assertSame(0, $scan['cache_write_count']);
         $authority['entries']['actors']['zh-CN']['sha256'] = str_repeat('0', 64);
         $this->expectException(\App\Domain\Career\Display\CareerCurrentAuthorityPackageFailure::class);
@@ -83,11 +83,11 @@ final class CareerCurrentAuthorityParityTest extends TestCase
         $parity = new CareerCurrentAuthorityParity($loader, $codec, $pages);
         $scan = (new \ReflectionMethod($parity, 'scanPages'))->invoke($parity, $authority, ['actors'], true, 'none');
         $bytes = 0;
-        foreach (['en', 'zh-CN'] as $locale) {
+        foreach (['en', 'zh-CN', 'zh-TW'] as $locale) {
             $page = $pages->project($loader->pageFromPublishIndex($authority, 'actors', $locale));
             $bytes += strlen(serialize($codec->encode($page)));
         }
-        self::assertSame(2, $scan['counts']['locale_pages']);
+        self::assertSame(3, $scan['counts']['locale_pages']);
         self::assertSame($bytes, $scan['bytes']['serialized_total']);
         self::assertSame(3 * $bytes, $scan['bytes']['worst_state_amplification']);
     }
@@ -108,7 +108,7 @@ final class CareerCurrentAuthorityParityTest extends TestCase
         }
     }
 
-    public function test_deploy_requires_all_2092_production_pages_before_mutations_and_symlink(): void
+    public function test_deploy_requires_all_3138_production_pages_before_mutations_and_symlink(): void
     {
         $root = dirname(__DIR__, 6);
         $deploy = (string) file_get_contents($root.'/deploy.php');
@@ -126,7 +126,8 @@ final class CareerCurrentAuthorityParityTest extends TestCase
         self::assertStringNotContainsString('Run staging zero-write 2092-page Career parity', $workflow);
         self::assertStringContainsString('career.current_authority_parity.v2', $workflow);
         self::assertStringContainsString('(.validation_scope.canonical_slugs | unique | length) == 1046', $workflow);
-        self::assertStringContainsString('.validation_scope.locale_page_count == 2092', $workflow);
+        self::assertStringContainsString('.validation_scope.locales == ["en", "zh-CN", "zh-TW"]', $workflow);
+        self::assertStringContainsString('.validation_scope.locale_page_count == 3138', $workflow);
         self::assertStringContainsString('CAREER_CURRENT_PUBLISH_PRODUCTION_PARITY_RECEIPT_DIGEST', $workflow);
         self::assertStringNotContainsString('CAREER_CURRENT_PUBLISH_STAGING_PARITY_RECEIPT_DIGEST', $workflow);
     }

@@ -1,6 +1,6 @@
 # Career Backend Technical Handbook
 
-Last reviewed: 2026-07-19
+Last reviewed: 2026-11-13
 
 This is the backend entry point for FermatMind Career architecture, authority,
 runtime publication, discoverability, and operations. It consolidates the
@@ -15,7 +15,7 @@ that duplicated this handbook have been removed.
 Current public Career detail authority is backend-owned:
 
 - Public Career detail cohort: `1046` canonical slugs.
-- Localized public detail URLs: `2092` (`1046` EN + `1046` ZH).
+- Localized public detail URLs: `3138` (`1046` EN + `1046` zh-CN + `1046` zh-TW).
 - Career job detail pages are public only when backend runtime projection,
   release gate, SEO/indexability policy, and display/content authority agree.
 - Sitemap and LLM discoverability are consumers of backend public authority,
@@ -199,10 +199,10 @@ Older scans used several overlapping numbers. They mean different things:
 | `2289` | Earlier excluded candidate/raw authority count reported by dataset authority before the 1046 rollout. |
 | `1016` | Clean delta promoted into runtime publication during the 1046 rollout after excluding unsafe replacement/hold slugs. |
 | `1046` | Current public detail-indexable Career slug total. |
-| `2092` | Current bilingual public Career detail URL total. |
+| `3138` | Current trilingual public Career detail URL total. |
 | `10000` | Future scale target; it must use directory pagination and artifact-first discoverability, not full-list SSR. |
 
-The current public truth is `1046` slugs and `2092` localized detail URLs.
+The current public truth is `1046` slugs and `3138` localized detail URLs.
 Legacy counts remain useful for provenance, not for public runtime enumeration.
 
 Earlier audit families such as `80`, `51 delta`, `2786`, progressive rollout,
@@ -408,7 +408,7 @@ The 10k ops readiness gate is:
 ```bash
 php artisan career:validate-directory-10k-scale-readiness \
   --expected-public-count=1046 \
-  --expected-sitemap-career-urls=2092 \
+  --expected-sitemap-career-urls=3138 \
   --synthetic-count=10000 \
   --json
 ```
@@ -450,9 +450,9 @@ Required rules:
 
 Current expected Career discoverability counts:
 
-- sitemap Career detail URLs: `2092`;
-- `llms.txt` Career detail URLs: `2092`;
-- `llms-full.txt` Career detail URLs: `2092` when complete artifact is warm.
+- sitemap Career detail URLs: `3138`;
+- `llms.txt` Career detail URLs: `3138`;
+- `llms-full.txt` Career detail URLs: `3138` when complete artifact is warm.
 
 `llms-full.txt` must be artifact/cache-first. Request-time full fanout across
 thousands of Career details is not acceptable at 10k scale.
@@ -497,9 +497,9 @@ Scale budgets:
 | Directory API first page | 50 items | 50 to 100 bounded items |
 | Directory API payload | card/list fields only | no detail bundle, FAQ, snapshots, or markdown |
 | Frontend SSR | first page + facets | first page + facets only |
-| Sitemap | 2092 Career detail URLs | full public detail URL coverage from authority artifact |
-| `llms.txt` | 2092 Career detail URLs | URL/title/type records from sitemap/directory authority |
-| `llms-full.txt` | 2092 when complete artifact warm | precomputed artifact or last-known-good, degraded 200 if needed |
+| Sitemap | 3138 Career detail URLs | full public detail URL coverage from authority artifact |
+| `llms.txt` | 3138 Career detail URLs | URL/title/type records from sitemap/directory authority |
+| `llms-full.txt` | 3138 when complete artifact warm | precomputed artifact or last-known-good, degraded 200 if needed |
 | Search Channel | HOLD | staged only after explicit approval and readiness gate |
 
 Rollback posture:
@@ -679,7 +679,7 @@ Override SOP:
 Ops dashboards and SEO Intel read models must distinguish:
 
 - runtime public Career detail truth (`1046`);
-- localized public URL truth (`2092`);
+- localized public URL truth (`3138`);
 - legacy CMS/Ops `career_jobs` table scope;
 - historical baseline/import package scope;
 - draft/import-only or human-review assets.
@@ -797,13 +797,14 @@ curl -sS https://fermatmind.com/llms-full.txt
 Verify:
 
 - EN job count is `1046`;
-- ZH job count is `1046`;
+- zh-CN job count is `1046`;
+- zh-TW job count is `1046`;
 - dataset/public detail count is `1046`;
-- sitemap Career detail URL count is `2092`;
-- `llms.txt` Career detail URL count is `2092`;
-- `llms-full.txt` returns 200 and, when complete, includes `2092` Career detail
+- sitemap Career detail URL count is `3138`;
+- `llms.txt` Career detail URL count is `3138`;
+- `llms-full.txt` returns 200 and, when complete, includes `3138` Career detail
   URLs;
-- sampled EN/ZH details return 200, exact canonical, index/follow, title, H1;
+- sampled EN/zh-CN/zh-TW details return 200, exact canonical, index/follow, title, H1;
 - excluded slugs are 404/noindex or absent;
 - no staging, private, take, result, share, order, pay, or payment URLs appear;
 - Search Channel remains closed unless separately approved.
