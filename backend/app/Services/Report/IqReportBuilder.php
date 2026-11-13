@@ -267,9 +267,7 @@ final class IqReportBuilder
 
         return [
             'raw_score' => $scored ? $this->floatOrNull($score['raw_score'] ?? null) : null,
-            'beta_reference' => array_key_exists('beta_reference', $score)
-                ? $score['beta_reference']
-                : app(IqBetaReferenceScore::class)->fromScore($score),
+            'beta_reference' => app(IqBetaReferenceScore::class)->withCurrentInterpretation($score)['beta_reference'] ?? null,
             'iq_estimate' => $scored && $hasNormAuthority ? $this->floatOrNull($norms['iq_estimate'] ?? null) : null,
             'percentile' => $scored && $hasNormAuthority ? $this->floatOrNull($norms['percentile'] ?? null) : null,
             'confidence_interval' => $scored && $hasNormAuthority && is_array($norms['confidence_interval'] ?? null)

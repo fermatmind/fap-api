@@ -65,6 +65,30 @@ final class IqBetaReferenceScoreTest extends TestCase
         $this->assertArrayNotHasKey('beta_reference', IqResultPayloadRedactor::redactAnswerKeys($report));
     }
 
+    public function test_merged_form_uses_proportional_anchors_for_new_and_stored_results(): void
+    {
+        $service = new IqBetaReferenceScore;
+        $previous = 0;
+        for ($raw = 0; $raw <= 40; $raw++) {
+            $score = array_replace($this->score($raw), [
+                'bank_id' => 'IQ_MERGED_40',
+                'expected_item_count' => 40,
+                'answer_count' => 40,
+                'beta_reference' => null,
+            ]);
+            $reference = $service->withCurrentInterpretation($score)['beta_reference'];
+            $this->assertSame(IqBetaReferenceScore::MERGED_MODEL_VERSION, $reference['model_version']);
+            $this->assertGreaterThan($previous, $reference['standard_score']);
+            $this->assertFalse($reference['population_percentile_eligible']);
+            $previous = $reference['standard_score'];
+            $expected = [0 => 73, 7 => 101, 40 => 145];
+            if (isset($expected[$raw])) {
+                $this->assertSame($expected[$raw], $reference['display_score']);
+            }
+        }
+        $this->assertNull($service->fromScore(array_replace($score, ['answer_count' => 30])));
+    }
+
     private function score(int $raw): array
     {
         return ['status' => 'scored', 'bank_id' => IqBetaReferenceScore::BANK_ID, 'raw_score' => $raw, 'expected_item_count' => 30, 'answer_count' => 30];

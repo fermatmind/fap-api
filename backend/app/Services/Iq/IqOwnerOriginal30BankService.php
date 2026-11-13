@@ -434,9 +434,11 @@ final class IqOwnerOriginal30BankService
             'sequence' => (int) ($item['sequence'] ?? 0),
             'order' => (int) ($item['sequence'] ?? 0),
             'safe_dimension_aliases' => $this->safeDimensionAliases($item),
-            'title' => $this->formCode !== self::MERGED_FORM_CODE && $locale === 'en'
-                ? 'Choose the appropriate shape to replace the missing shape.'
-                : (string) ($item['title'] ?? ''),
+            'title' => $locale === 'en'
+                ? ($this->formCode === self::MERGED_FORM_CODE
+                    ? (string) $item['title']
+                    : 'Choose the appropriate shape to replace the missing shape.')
+                : (string) ($item['title_zh'] ?? $item['title'] ?? ''),
             'stem' => $this->onlyPublicMediaFields(
                 is_array($item['stem'] ?? null) ? $item['stem'] : [],
                 $publicAssetOrigin,

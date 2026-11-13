@@ -98,12 +98,22 @@ final class IqOwnerOriginal30SessionDeliveryTest extends TestCase
 
         $answers = $this->perfectAnswers('IQ_MERGED_40', 40);
         foreach ($answers as $index => $answer) {
-            $question = $this->getJson("/api/v0.3/attempts/{$attemptId}/questions?index={$index}")
+            $question = $this->getJson("/api/v0.3/attempts/{$attemptId}/questions?index={$index}&locale=zh")
                 ->assertOk()
                 ->assertJsonPath('bank_id', 'IQ_MERGED_40')
                 ->assertJsonPath('question_count', 40)
                 ->assertJsonPath('questions.items.0.question_id', $answer['question_id']);
             $item = $question->json('questions.items.0');
+            $this->assertMatchesRegularExpression('/\p{Han}/u', $item['title']);
+            if ($index === 0) {
+                $this->assertSame('一个正方体有几个顶点？', $item['title']);
+                $english = $this->getJson("/api/v0.3/attempts/{$attemptId}/questions?index=0&locale=en")
+                    ->assertOk()
+                    ->assertJsonPath('questions.items.0.title', 'How many corners does a cube have?')
+                    ->json('questions.items.0.options');
+                $this->assertSame(array_column($item['options'], 'code'), array_column($english, 'code'));
+                $this->assertSame(array_column($item['options'], 'label'), array_column($english, 'label'));
+            }
             $this->assertContains($answer['code'], array_column($item['options'], 'code'));
             if ($index === 1) {
                 $this->get($item['stem']['src'])->assertOk()->assertHeader('Content-Type', 'image/png');
@@ -118,7 +128,9 @@ final class IqOwnerOriginal30SessionDeliveryTest extends TestCase
         ])->assertOk()
             ->assertJsonPath('result.raw_score', 40)
             ->assertJsonPath('result.normed_json.bank_id', 'IQ_MERGED_40')
-            ->assertJsonPath('result.normed_json.norms.iq_estimate', null);
+            ->assertJsonPath('result.normed_json.norms.iq_estimate', null)
+            ->assertJsonPath('result.normed_json.beta_reference.display_score', 145)
+            ->assertJsonPath('result.normed_json.beta_reference.production_normed', false);
     }
 
     #[Test]
