@@ -89,6 +89,21 @@ final class IqBetaReferenceScoreTest extends TestCase
         $this->assertNull($service->fromScore(array_replace($score, ['answer_count' => 30])));
     }
 
+    public function test_merged_full_snapshot_recovers_explicit_null_score_at_read_time(): void
+    {
+        $report = [
+            'schema_version' => 'iq.report.v1',
+            'summary' => ['raw_score' => 7, 'beta_reference' => null],
+            'scoring' => ['status' => 'scored', 'bank_id' => 'IQ_MERGED_40', 'beta_reference' => null],
+            'access' => ['report_access_level' => 'full'],
+        ];
+        $read = IqResultPayloadRedactor::redactAnswerKeys($report);
+        $this->assertSame(101, $read['summary']['beta_reference']['display_score']);
+        $this->assertSame($read['summary']['beta_reference'], $read['scoring']['beta_reference']);
+        $report['access']['report_access_level'] = 'free';
+        $this->assertSame($report, IqResultPayloadRedactor::redactAnswerKeys($report));
+    }
+
     private function score(int $raw): array
     {
         return ['status' => 'scored', 'bank_id' => IqBetaReferenceScore::BANK_ID, 'raw_score' => $raw, 'expected_item_count' => 30, 'answer_count' => 30];

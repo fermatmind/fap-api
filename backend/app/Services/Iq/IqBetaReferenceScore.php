@@ -65,13 +65,16 @@ final class IqBetaReferenceScore
     /** Read-time interpretation is additive; stored legacy fields remain unchanged. */
     public function withCurrentInterpretation(array $payload): array
     {
+        $isReport = ($payload['schema_version'] ?? null) === 'iq.report.v1';
+        $bank = $isReport ? ($payload['scoring']['bank_id'] ?? null) : ($payload['bank_id'] ?? null);
+        $isMerged = $bank === IqOwnerOriginal30BankService::MERGED_FORM_CODE;
         if (array_key_exists('beta_reference', $payload)
-            && ($payload['beta_reference'] !== null || ($payload['bank_id'] ?? null) !== IqOwnerOriginal30BankService::MERGED_FORM_CODE)) {
+            && ($payload['beta_reference'] !== null || ! $isMerged)) {
             return $payload;
         }
 
         $score = $payload;
-        if (($payload['schema_version'] ?? null) === 'iq.report.v1') {
+        if ($isReport) {
             if (($payload['access']['report_access_level'] ?? null) !== 'full') {
                 return $payload;
             }
@@ -84,6 +87,10 @@ final class IqBetaReferenceScore
         $reference = $this->fromScore($score);
         if ($reference !== null) {
             $payload['beta_reference'] = $reference;
+            if ($isReport && $isMerged) {
+                $payload['summary']['beta_reference'] ??= $reference;
+                $payload['scoring']['beta_reference'] ??= $reference;
+            }
         }
 
         return $payload;
