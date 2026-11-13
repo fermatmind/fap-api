@@ -49,6 +49,7 @@ final class PersonalityDesktopCloneBaselineImportTest extends TestCase
             $code = $record->variant->runtime_type_code;
             $response = $this->getJson('/api/v0.5/personality/'.strtolower($code).'/desktop-clone?locale=zh-CN')->assertOk();
             $this->assertJsonValueSame($assets[$code]['faq'], $response->json('content.faq'));
+            $this->assertNotEmpty($response->json('content.hero.profile_identity.introduction'));
             foreach (MbtiResultChapterCopy::CHAPTERS as $chapter) {
                 $response->assertJsonPath('content.chapters.'.$chapter.'.intro', $assets[$code]['chapters'][$chapter]);
             }
@@ -145,6 +146,7 @@ final class PersonalityDesktopCloneBaselineImportTest extends TestCase
         foreach (PersonalityProfileVariantCloneContent::query()->with('variant')->get() as $record) {
             $row = $rows[$record->variant->runtime_type_code];
             $content = $row['content_json'];
+            unset($content['hero']['profile_identity']['introduction']);
             foreach (MbtiResultChapterCopy::CHAPTERS as $chapter) {
                 $content['chapters'][$chapter]['intro'] = ['Previous first paragraph', 'Previous second paragraph'];
             }

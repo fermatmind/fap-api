@@ -70,6 +70,10 @@ final class MbtiResultChapterCopy
     /** @param array<string,mixed> $content @return array<string,mixed> */
     public static function withoutEditorialSlots(array $content): array
     {
+        if (is_string(data_get($content, 'hero.profile_identity.introduction'))) {
+            unset($content['hero']['profile_identity']['introduction']);
+        }
+
         foreach (array_keys((array) ($content['faq'] ?? [])) as $index) {
             self::maskText($content, 'faq.'.$index.'.question');
             self::maskText($content, 'faq.'.$index.'.answer');
