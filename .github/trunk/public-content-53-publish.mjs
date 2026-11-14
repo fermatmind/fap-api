@@ -55,7 +55,7 @@ const parseResponse = bytes => {
     throw error;
   }
 };
-const traditionalIndexQaCodes = new Set(['IDENTITY','HTML','SITEMAP','STAGING_SITEMAP','TIMEOUT','BODY_OR_HOLD','PEER','PROTECTED_STATE','SEO'].map(code => 'PUBLIC_CONTENT_53_TRADITIONAL_INDEX_' + code));
+const traditionalIndexQaCodes = new Set(['IDENTITY','HTML','BROWSER','SITEMAP','STAGING_SITEMAP','TIMEOUT','BODY_OR_HOLD','PEER','PROTECTED_STATE','SEO'].map(code => 'PUBLIC_CONTENT_53_TRADITIONAL_INDEX_' + code));
 const mbtiQaCodes = new Set(['IDENTITY_INVALID','TRANSPORT_FAILED','API_FAILED','BANK_INVALID','GUEST_INVALID','ATTEMPT_INVALID','RESULT_INVALID','SECTION_INVALID','PRESTATE_DRIFT','BROWSER_FAILED','DOM_INVALID','NATIVE_READBACK_FAILED','DERIVED_BODY_MISMATCH'].map(code => 'MBTI_RESULT_COPY_QA_' + code));
 const nativeTraditionalCode = value => /^public_content_53_traditional_page_source_(?:identity|readiness|review|hold|html|version|path|support_contact|schema_enabled|copy_(?:title|kicker|summary|seo_title|meta_description|seo_description|content_md|headings|faq_items))_(?:about|brand|charter|careers|privacy|terms|method-boundaries|science|help-contact|foundation|policies|help-faq|help-about|help-team|help-used-and-mentioned|help-for-business-and-research|common-misconceptions|data-privacy|help-data-deletion|help-payment-refund|help-privacy-data|help-result-recovery|help-unlock-failure|item-design-notes|reliability-validity|methodology|source-review-policy)$/.test(value ?? '');
 const safeNativeCode = value => /^public_content_53_[a-z0-9_]+$/.test(value ?? '') || nativeTraditionalCode(value);

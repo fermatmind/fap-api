@@ -5,6 +5,9 @@ import { canonical } from './iq-public-scale-package.mjs';
 import { readCandidateRows } from './public-content-53-package.mjs';
 import { renderPage } from './iq-public-article-online-qa.mjs';
 
+const transientIndexTransport = error =>
+  /^PUBLIC_CONTENT_53_API_(?:TRANSPORT_[A-Z_]+|BODY_TRANSPORT_FAILED)$/.test(error?.message ?? '');
+
 const equal = (a,b) => JSON.stringify(canonical(a)) === JSON.stringify(canonical(b));
 const compact = x => String(x ?? '').normalize('NFKC').replace(/[\s\p{P}\p{S}]/gu,'');
 // Mirror fap-web's resolveCareerGuideMetadataTitle: a CMS-owned brand suffix
@@ -219,7 +222,12 @@ async function verifyIndexSitemaps(rows, environment, fetcher, active) {
   if (payload.ok !== true || payload.source !== 'backend_sitemap_generator' || !Array.isArray(source)
     || !equal(inBatch(source),expect(web))) throw new Error('PUBLIC_CONTENT_53_TRADITIONAL_INDEX_SITEMAP');
   if (stage) {
-    const response = await fetcher(web+'/sitemap.xml',{redirect:'error',signal:AbortSignal.timeout(15000)});
+    let response;
+    try {
+      response = await fetcher(web+'/sitemap.xml',{redirect:'error',signal:AbortSignal.timeout(15000)});
+    } catch {
+      throw new Error('PUBLIC_CONTENT_53_API_TRANSPORT_FAILED');
+    }
     if (response.status !== 410) throw new Error('PUBLIC_CONTENT_53_TRADITIONAL_INDEX_STAGING_SITEMAP');
     return;
   }
@@ -300,7 +308,7 @@ async function traditionalIndexOnline(rows, environment, fetcher, renderer, befo
       for (const [i,value] of settled.entries()) {
         if (value.status === 'fulfilled') result[pending[i].page_id]=value.value;
         else if (before && (value.reason?.message === 'PUBLIC_CONTENT_53_TRADITIONAL_INDEX_HTML'
-          || value.reason?.message === 'PUBLIC_CONTENT_53_API_BODY_TRANSPORT_FAILED') && Date.now()<deadline) retry.push(pending[i]);
+          || transientIndexTransport(value.reason)) && Date.now()<deadline) retry.push(pending[i]);
         else throw value.reason;
       }
       pending=retry;
@@ -313,7 +321,8 @@ async function traditionalIndexOnline(rows, environment, fetcher, renderer, befo
       await verifyIndexSitemaps(rows,environment,fetcher,!!before);
       break;
     } catch (error) {
-      if (!before || error?.message !== 'PUBLIC_CONTENT_53_TRADITIONAL_INDEX_SITEMAP' || Date.now()>=deadline) throw error;
+      if (!before || Date.now()>=deadline
+        || (error?.message !== 'PUBLIC_CONTENT_53_TRADITIONAL_INDEX_SITEMAP' && !transientIndexTransport(error))) throw error;
       await new Promise(resolve=>setTimeout(resolve,5000));
     }
   }
@@ -327,7 +336,17 @@ async function traditionalIndexOnline(rows, environment, fetcher, renderer, befo
     checkTime();
     const expected = Object.fromEntries([spec.target,...spec.peers].map(identity=>[identity.locale,identity.canonical]));
     const verifyDOM = html=>assertIndexHtml(spec.target,html,expected,stage);
-    verifyDOM(await renderer(indexAt(web,spec.target.canonical),{surface:'public_page',verifyDOM}));
+    while (true) {
+      try {
+        verifyDOM(await renderer(indexAt(web,spec.target.canonical),{surface:'public_page',verifyDOM}));
+        break;
+      } catch (error) {
+        if (Date.now()>=deadline) {
+          throw new Error('PUBLIC_CONTENT_53_TRADITIONAL_INDEX_BROWSER', {cause:error});
+        }
+        await new Promise(resolve=>setTimeout(resolve,5000));
+      }
+    }
   }
   return {environment,api_readback_count:rows.length,dom_readback_count:rows.length,raw_html_readback_count:rows.length,
     reciprocal_peer_readback_count:rows.reduce((sum,row)=>sum+row.traditional_article_index.peers.length,0),

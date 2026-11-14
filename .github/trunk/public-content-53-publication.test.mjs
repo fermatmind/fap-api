@@ -1987,8 +1987,13 @@ test('Traditional article index release checks the complete cohort and preserves
    const before=await readOnlinePrestate(environment,fixture,fetcher(false),undefined,sha);
    assert.equal(Object.keys(before).length,115);
    if (stage) await assert.rejects(readOnlinePrestate(environment,fixture,fetcher(false,{leak:true}),undefined,sha),/TRADITIONAL_INDEX_SITEMAP/);
-   const renderer=async url=>html(bySlug.get(new URL(url).pathname.split('/').at(-1)),'zh-TW');
+   let browserCalls=0;
+   const renderer=async url=>{
+    if (++browserCalls === 1) throw new Error('IQ_ARTICLE_ONLINE_RENDER_FAILED');
+    return html(bySlug.get(new URL(url).pathname.split('/').at(-1)),'zh-TW');
+   };
    const accepted=await verifyOnlineCandidates(environment,fixture,fetcher(true),renderer,before,sha);
+   assert.equal(browserCalls,2);
    assert.deepEqual([accepted.api_readback_count,accepted.dom_readback_count,accepted.discovery_readback_count,
     accepted.reciprocal_peer_readback_count,accepted.browser_readback_count],[115,115,115,115,1]);
    await assert.rejects(verifyOnlineCandidates(environment,fixture,fetcher(true,{wrongAlternate:true}),renderer,before,sha),/TRADITIONAL_INDEX_SEO/);
