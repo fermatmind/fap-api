@@ -1939,7 +1939,7 @@ test('Traditional article index release checks the complete cohort and preserves
    const local=identity=>host+new URL(identity.canonical).pathname;
    const html=(row,locale)=> {
     const subject=[row.target,...row.peers].find(member=>member.locale===locale);
-    const links=stage?'':[row.target,...row.peers].map(member=>'<link rel="alternate" hreflang="'+member.locale+'" href="'+member.canonical+'">').join('');
+    const links=(stage ? [locale === 'zh-TW' ? null : subject].filter(Boolean) : [row.target,...row.peers]).map(member=>'<link rel="alternate" hreflang="'+member.locale+'" href="'+member.canonical+'">').join('');
     return '<html lang="'+locale+'"><head><meta charset="utf-8"><meta name="robots" content="'+(stage?'noindex':'index,follow')+'"><link rel="canonical" href="'+subject.canonical+'">'+links+'</head><body><main><article data-testid="article-detail-content"><h1>'+title+'</h1>繁體文章</article></main></body></html>';
    };
    const fetcher=(active,{leak=false,wrongAlternate=false}={})=>async url=>{

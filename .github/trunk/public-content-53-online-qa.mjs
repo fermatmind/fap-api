@@ -195,10 +195,13 @@ function assertIndexHtml(identity, html, expected, stage, header = '') {
   const dom = domOf(html,{articleSsr:true});
   const language = identity.locale === 'zh-CN' ? 'zh' : identity.locale;
   const alternates = dom.alternate_entries.filter(entry=>entry.hreflang && entry.hreflang !== 'x-default');
+  const observed = Object.fromEntries(alternates.map(entry=>[entry.hreflang,entry.href]));
+  const alternatesMatch = stage
+    ? Object.entries(observed).every(([locale,url])=>locale !== 'zh-TW' && expected[locale] === url)
+    : equal(observed,expected);
   if (dom.language !== language || !equal(dom.canonical,[identity.canonical])
     || !dom.article_body.some(body=>body.trim()) || (dom.robots.some(hasNoindex) || hasNoindex(header)) !== stage
-    || alternates.length !== Object.keys(expected).length
-    || !equal(Object.fromEntries(alternates.map(entry=>[entry.hreflang,entry.href])),expected)) {
+    || alternates.length !== Object.keys(observed).length || !alternatesMatch) {
     throw new Error('PUBLIC_CONTENT_53_TRADITIONAL_INDEX_HTML');
   }
 }
@@ -283,7 +286,7 @@ async function traditionalIndexOnline(rows, environment, fetcher, renderer, befo
         throw new Error('PUBLIC_CONTENT_53_TRADITIONAL_INDEX_SEO');
       }
       checkTime();
-      assertIndexHtml(identity,html,stage?{}:expected,stage,header);
+      assertIndexHtml(identity,html,expected,stage,header);
     }
     return snapshot;
   };
@@ -296,7 +299,8 @@ async function traditionalIndexOnline(rows, environment, fetcher, renderer, befo
       const retry = [];
       for (const [i,value] of settled.entries()) {
         if (value.status === 'fulfilled') result[pending[i].page_id]=value.value;
-        else if (before && value.reason?.message === 'PUBLIC_CONTENT_53_TRADITIONAL_INDEX_HTML' && Date.now()<deadline) retry.push(pending[i]);
+        else if (before && (value.reason?.message === 'PUBLIC_CONTENT_53_TRADITIONAL_INDEX_HTML'
+          || value.reason?.message === 'PUBLIC_CONTENT_53_API_BODY_TRANSPORT_FAILED') && Date.now()<deadline) retry.push(pending[i]);
         else throw value.reason;
       }
       pending=retry;
@@ -322,7 +326,7 @@ async function traditionalIndexOnline(rows, environment, fetcher, renderer, befo
   for (const spec of byPeerCount.values()) {
     checkTime();
     const expected = Object.fromEntries([spec.target,...spec.peers].map(identity=>[identity.locale,identity.canonical]));
-    const verifyDOM = html=>assertIndexHtml(spec.target,html,stage?{}:expected,stage);
+    const verifyDOM = html=>assertIndexHtml(spec.target,html,expected,stage);
     verifyDOM(await renderer(indexAt(web,spec.target.canonical),{surface:'public_page',verifyDOM}));
   }
   return {environment,api_readback_count:rows.length,dom_readback_count:rows.length,raw_html_readback_count:rows.length,
