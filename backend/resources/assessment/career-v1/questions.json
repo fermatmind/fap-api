@@ -1,0 +1,1069 @@
+{
+  "form_version": "career_v1",
+  "status": "pilot",
+  "anchors": {
+    "interest": {
+      "zh-CN": [
+        "很不喜欢",
+        "不太喜欢",
+        "无明显偏好",
+        "比较喜欢",
+        "很喜欢"
+      ],
+      "en": [
+        "Strongly dislike",
+        "Somewhat dislike",
+        "No clear preference",
+        "Somewhat like",
+        "Strongly like"
+      ]
+    },
+    "style": {
+      "zh-CN": [
+        "明显偏前一种",
+        "略偏前一种",
+        "两种都可以",
+        "略偏后一种",
+        "明显偏后一种"
+      ],
+      "en": [
+        "Strongly prefer the first",
+        "Somewhat prefer the first",
+        "Either works for me",
+        "Somewhat prefer the second",
+        "Strongly prefer the second"
+      ]
+    },
+    "value": {
+      "zh-CN": [
+        "完全不重要",
+        "不太重要",
+        "有一定重要性",
+        "比较重要",
+        "非常重要"
+      ],
+      "en": [
+        "Not at all important",
+        "Slightly important",
+        "Moderately important",
+        "Very important",
+        "Extremely important"
+      ]
+    }
+  },
+  "unknown_option": {
+    "zh-CN": "不确定或跳过",
+    "en": "Not sure or skip"
+  },
+  "instructions": {
+    "interest": {
+      "zh-CN": "假设有机会学习并尝试，请按你对活动本身的喜欢程度回答。",
+      "en": "Imagine you could learn and try the activity. Rate how much you would enjoy doing it."
+    },
+    "style": {
+      "zh-CN": "假设两种做法都能完成工作，请选你更愿意长期采用的方式。",
+      "en": "Assume both approaches work. Choose the one you would prefer to use regularly."
+    },
+    "value": {
+      "zh-CN": "选工作时，下面这项对你有多重要？",
+      "en": "How much would each of these matter to you when choosing work?"
+    },
+    "context": {
+      "zh-CN": "按你当前的情况回答。这里的选择不会改变前面的分数。",
+      "en": "Answer for your current situation. These answers do not change your earlier scores."
+    }
+  },
+  "items": [
+    {
+      "id": "career_v1_001",
+      "section": "interest",
+      "axis": "R",
+      "text": {
+        "zh-CN": "用手动工具修好一扇关不严的门",
+        "en": "Repair a door that will not close using hand tools"
+      }
+    },
+    {
+      "id": "career_v1_002",
+      "section": "interest",
+      "axis": "I",
+      "text": {
+        "zh-CN": "用一组实验比较两种材料的隔热效果",
+        "en": "Run experiments to compare how well two materials insulate"
+      }
+    },
+    {
+      "id": "career_v1_003",
+      "section": "interest",
+      "axis": "A",
+      "text": {
+        "zh-CN": "给一段无声短片创作配乐",
+        "en": "Compose music for a silent short film"
+      }
+    },
+    {
+      "id": "career_v1_004",
+      "section": "interest",
+      "axis": "S",
+      "text": {
+        "zh-CN": "手把手教初学者完成一项新操作",
+        "en": "Guide a beginner through a new task step by step"
+      }
+    },
+    {
+      "id": "career_v1_005",
+      "section": "interest",
+      "axis": "E",
+      "text": {
+        "zh-CN": "向潜在客户说明产品价值并争取签约",
+        "en": "Explain a product’s value to a prospective customer and ask for the sale"
+      }
+    },
+    {
+      "id": "career_v1_006",
+      "section": "interest",
+      "axis": "C",
+      "text": {
+        "zh-CN": "核对一批报销单与相应收据是否一致",
+        "en": "Check a batch of expense claims against their receipts"
+      }
+    },
+    {
+      "id": "career_v1_007",
+      "section": "interest",
+      "axis": "R",
+      "text": {
+        "zh-CN": "按图纸组装一个可实际使用的展示架",
+        "en": "Assemble a usable display stand from a drawing"
+      }
+    },
+    {
+      "id": "career_v1_008",
+      "section": "interest",
+      "axis": "I",
+      "text": {
+        "zh-CN": "分析多个月的用量数据，找出季节变化规律",
+        "en": "Analyze months of usage data to find seasonal patterns"
+      }
+    },
+    {
+      "id": "career_v1_009",
+      "section": "interest",
+      "axis": "A",
+      "text": {
+        "zh-CN": "用图片和排版设计一本小册子的视觉风格",
+        "en": "Use imagery and typography to design a booklet’s visual style"
+      }
+    },
+    {
+      "id": "career_v1_010",
+      "section": "interest",
+      "axis": "S",
+      "text": {
+        "zh-CN": "为行动不便的人介绍如何使用社区服务",
+        "en": "Show someone with limited mobility how to access community services"
+      }
+    },
+    {
+      "id": "career_v1_011",
+      "section": "interest",
+      "axis": "E",
+      "text": {
+        "zh-CN": "与供应商谈判一份更合适的合作条款",
+        "en": "Negotiate better terms with a supplier"
+      }
+    },
+    {
+      "id": "career_v1_012",
+      "section": "interest",
+      "axis": "C",
+      "text": {
+        "zh-CN": "按馆藏分类规则为新书编目",
+        "en": "Catalog new books using a library classification scheme"
+      }
+    },
+    {
+      "id": "career_v1_013",
+      "section": "interest",
+      "axis": "R",
+      "text": {
+        "zh-CN": "调试一台封装设备，让封口对齐",
+        "en": "Adjust a packaging machine so it seals in the right place"
+      }
+    },
+    {
+      "id": "career_v1_014",
+      "section": "interest",
+      "axis": "I",
+      "text": {
+        "zh-CN": "查证不同报道的原始资料，判断哪种解释更有依据",
+        "en": "Check the original sources behind competing reports to see which explanation has better evidence"
+      }
+    },
+    {
+      "id": "career_v1_015",
+      "section": "interest",
+      "axis": "A",
+      "text": {
+        "zh-CN": "为故事里的人物写一段原创对话",
+        "en": "Write original dialogue for a character in a story"
+      }
+    },
+    {
+      "id": "career_v1_016",
+      "section": "interest",
+      "axis": "S",
+      "text": {
+        "zh-CN": "帮助一位求职者练习怎样回答面试问题",
+        "en": "Help a job seeker practice answering interview questions"
+      }
+    },
+    {
+      "id": "career_v1_017",
+      "section": "interest",
+      "axis": "E",
+      "text": {
+        "zh-CN": "向赞助方陈述项目价值并争取支持",
+        "en": "Pitch a project to sponsors and ask for their support"
+      }
+    },
+    {
+      "id": "career_v1_018",
+      "section": "interest",
+      "axis": "C",
+      "text": {
+        "zh-CN": "清查库存并更正出入库记录",
+        "en": "Reconcile inventory and correct incoming and outgoing stock records"
+      }
+    },
+    {
+      "id": "career_v1_019",
+      "section": "interest",
+      "axis": "R",
+      "text": {
+        "zh-CN": "在户外铺设灌溉管并检查是否漏水",
+        "en": "Lay irrigation pipes outdoors and check them for leaks"
+      }
+    },
+    {
+      "id": "career_v1_020",
+      "section": "interest",
+      "axis": "I",
+      "text": {
+        "zh-CN": "用一个小模型检验排队时间受哪些因素影响",
+        "en": "Build a small model to test what affects waiting times"
+      }
+    },
+    {
+      "id": "career_v1_021",
+      "section": "interest",
+      "axis": "A",
+      "text": {
+        "zh-CN": "设计一组让观众感到沉浸的展览空间",
+        "en": "Design an exhibition space that draws visitors into the experience"
+      }
+    },
+    {
+      "id": "career_v1_022",
+      "section": "interest",
+      "axis": "S",
+      "text": {
+        "zh-CN": "为一组新成员带领一次入门活动",
+        "en": "Lead an introductory session for a group of new members"
+      }
+    },
+    {
+      "id": "career_v1_023",
+      "section": "interest",
+      "axis": "E",
+      "text": {
+        "zh-CN": "为一项推广计划确定目标并带领团队执行",
+        "en": "Set a goal for a promotional campaign and lead a team to deliver it"
+      }
+    },
+    {
+      "id": "career_v1_024",
+      "section": "interest",
+      "axis": "C",
+      "text": {
+        "zh-CN": "逐项检查一批表格是否缺少必填信息",
+        "en": "Check a batch of forms for missing required information"
+      }
+    },
+    {
+      "id": "career_v1_025",
+      "section": "interest",
+      "axis": "R",
+      "text": {
+        "zh-CN": "把原材料加工成符合尺寸要求的零件",
+        "en": "Shape raw material into a part of the required size"
+      }
+    },
+    {
+      "id": "career_v1_026",
+      "section": "interest",
+      "axis": "I",
+      "text": {
+        "zh-CN": "设计观察方法，检验某种动物活动范围的假设",
+        "en": "Design an observation method to test an idea about an animal’s range"
+      }
+    },
+    {
+      "id": "career_v1_027",
+      "section": "interest",
+      "axis": "A",
+      "text": {
+        "zh-CN": "构思一组用光线讲故事的照片",
+        "en": "Create a series of photographs that tells a story through lighting"
+      }
+    },
+    {
+      "id": "career_v1_028",
+      "section": "interest",
+      "axis": "S",
+      "text": {
+        "zh-CN": "听一位遇到困难的人讲经历，陪他梳理所需的帮助",
+        "en": "Listen to someone describe a difficulty and help them identify what support they need"
+      }
+    },
+    {
+      "id": "career_v1_029",
+      "section": "interest",
+      "axis": "E",
+      "text": {
+        "zh-CN": "说服有不同优先事项的团队为一个提案投入资源",
+        "en": "Persuade teams with different priorities to commit resources to a proposal"
+      }
+    },
+    {
+      "id": "career_v1_030",
+      "section": "interest",
+      "axis": "C",
+      "text": {
+        "zh-CN": "按固定规则为电子档案命名并归档",
+        "en": "Name and file digital records using a set of rules"
+      }
+    },
+    {
+      "id": "career_v1_031",
+      "section": "interest",
+      "axis": "R",
+      "text": {
+        "zh-CN": "用攀爬设备检查高处构件的固定情况",
+        "en": "Use climbing equipment to check the fastenings of a structure overhead"
+      }
+    },
+    {
+      "id": "career_v1_032",
+      "section": "interest",
+      "axis": "I",
+      "text": {
+        "zh-CN": "追查两个统计结果为何互相矛盾",
+        "en": "Investigate why two statistical results contradict each other"
+      }
+    },
+    {
+      "id": "career_v1_033",
+      "section": "interest",
+      "axis": "A",
+      "text": {
+        "zh-CN": "为一场演出设计带有鲜明风格的服装",
+        "en": "Design costumes with a distinctive style for a performance"
+      }
+    },
+    {
+      "id": "career_v1_034",
+      "section": "interest",
+      "axis": "S",
+      "text": {
+        "zh-CN": "协助有分歧的双方听清彼此的诉求",
+        "en": "Help two people in a disagreement understand each other’s concerns"
+      }
+    },
+    {
+      "id": "career_v1_035",
+      "section": "interest",
+      "axis": "E",
+      "text": {
+        "zh-CN": "为一个新的商业服务寻找合作伙伴并促成试行",
+        "en": "Find partners for a new commercial service and secure a pilot"
+      }
+    },
+    {
+      "id": "career_v1_036",
+      "section": "interest",
+      "axis": "C",
+      "text": {
+        "zh-CN": "更新日程表，避免多个预订使用同一时段",
+        "en": "Update a schedule to prevent bookings from overlapping"
+      }
+    },
+    {
+      "id": "career_v1_037",
+      "section": "interest",
+      "axis": "R",
+      "text": {
+        "zh-CN": "操作搬运设备，把货物摆放到指定位置",
+        "en": "Operate handling equipment to move goods into position"
+      }
+    },
+    {
+      "id": "career_v1_038",
+      "section": "interest",
+      "axis": "I",
+      "text": {
+        "zh-CN": "研究一种工艺在哪些条件下容易出现缺陷",
+        "en": "Investigate the conditions under which a production process develops defects"
+      }
+    },
+    {
+      "id": "career_v1_039",
+      "section": "interest",
+      "axis": "A",
+      "text": {
+        "zh-CN": "制作一段用手绘表达抽象概念的动画",
+        "en": "Create a short hand-drawn animation to express an abstract idea"
+      }
+    },
+    {
+      "id": "career_v1_040",
+      "section": "interest",
+      "axis": "S",
+      "text": {
+        "zh-CN": "根据学员反馈调整教学方法，帮助他们学会一个难点",
+        "en": "Adapt an exercise based on learner feedback to help them understand a difficult point"
+      }
+    },
+    {
+      "id": "career_v1_041",
+      "section": "interest",
+      "axis": "E",
+      "text": {
+        "zh-CN": "为一个公益议题组织倡议并争取决策者采纳",
+        "en": "Organize a campaign for a public cause and persuade decision makers to adopt it"
+      }
+    },
+    {
+      "id": "career_v1_042",
+      "section": "interest",
+      "axis": "C",
+      "text": {
+        "zh-CN": "按规定的编码整理一批退货登记",
+        "en": "Sort a batch of return records using the required codes"
+      }
+    },
+    {
+      "id": "career_v1_043",
+      "section": "style",
+      "axis": "coordination",
+      "text": {
+        "zh-CN": "做同一个项目时，你偏好各自完成分工后再汇合，还是边做边一起协调？",
+        "en": "On the same project, would you prefer to work separately and combine contributions later, or coordinate throughout?"
+      }
+    },
+    {
+      "id": "career_v1_044",
+      "section": "style",
+      "axis": "method_discretion",
+      "text": {
+        "zh-CN": "在目标明确时，你偏好按团队指定的方法做，还是自己选择方法？",
+        "en": "With the goal clear, would you prefer to follow the team’s specified method, or choose the method yourself?"
+      }
+    },
+    {
+      "id": "career_v1_045",
+      "section": "style",
+      "axis": "task_switching",
+      "text": {
+        "zh-CN": "一段工作时间里，你偏好专注一项任务，还是在不同任务之间切换？",
+        "en": "In a block of work time, would you prefer focusing on one task, or switching among several?"
+      }
+    },
+    {
+      "id": "career_v1_046",
+      "section": "style",
+      "axis": "external_contact",
+      "text": {
+        "zh-CN": "交付工作时，你偏好由团队同事负责对外交流，还是自己直接和客户或公众沟通？",
+        "en": "When delivering work, would you prefer colleagues to handle external contact, or speak directly with customers or the public yourself?"
+      }
+    },
+    {
+      "id": "career_v1_047",
+      "section": "style",
+      "axis": "physical_activity",
+      "text": {
+        "zh-CN": "任务相同而做法可选时，你偏好在固定位置处理，还是在不同位置走动处理？",
+        "en": "When the task is the same but the setup can vary, would you prefer working from one station, or moving among different locations?"
+      }
+    },
+    {
+      "id": "career_v1_048",
+      "section": "style",
+      "axis": "coordination",
+      "text": {
+        "zh-CN": "动手解决问题时，你偏好先独自处理，还是和搭档随时交流？",
+        "en": "When working through a problem, would you prefer to tackle it on your own first, or talk it through with a partner?"
+      }
+    },
+    {
+      "id": "career_v1_049",
+      "section": "style",
+      "axis": "method_discretion",
+      "text": {
+        "zh-CN": "接手例行任务时，你偏好沿用规定的步骤，还是可以调整步骤？",
+        "en": "When taking over a routine task, would you prefer to follow the prescribed steps, or be free to change them?"
+      }
+    },
+    {
+      "id": "career_v1_050",
+      "section": "style",
+      "axis": "task_switching",
+      "text": {
+        "zh-CN": "一上午的工作，你偏好把同类事项集中处理，还是穿插不同类别的事项？",
+        "en": "Over a morning, would you prefer grouping similar tasks together, or alternating between different kinds?"
+      }
+    },
+    {
+      "id": "career_v1_051",
+      "section": "style",
+      "axis": "external_contact",
+      "text": {
+        "zh-CN": "了解使用者需求时，你偏好先看同事整理的资料，还是自己和使用者交谈？",
+        "en": "To learn what users need, would you prefer reviewing material prepared by colleagues, or talking with users yourself?"
+      }
+    },
+    {
+      "id": "career_v1_052",
+      "section": "style",
+      "axis": "physical_activity",
+      "text": {
+        "zh-CN": "一天中有多个检查点时，你偏好坐着集中完成，还是走到各处完成？",
+        "en": "With multiple checks in a day, would you prefer doing them centrally while seated, or walking to different points?"
+      }
+    },
+    {
+      "id": "career_v1_053",
+      "section": "style",
+      "axis": "coordination",
+      "text": {
+        "zh-CN": "改一个共同交付物时，你偏好一起实时编辑，还是分别改完自己的部分？",
+        "en": "When revising a shared deliverable, would you prefer editing together in real time, or revising your own section separately?"
+      },
+      "reverse": true
+    },
+    {
+      "id": "career_v1_054",
+      "section": "style",
+      "axis": "method_discretion",
+      "text": {
+        "zh-CN": "交付标准一样时，你偏好自己决定用什么工具，还是大家用同一套工具？",
+        "en": "With identical delivery standards, would you prefer to pick your own tools, or use the same tools as everyone else?"
+      },
+      "reverse": true
+    },
+    {
+      "id": "career_v1_055",
+      "section": "style",
+      "axis": "task_switching",
+      "text": {
+        "zh-CN": "手上有多个事项时，你偏好做完一项再开下一项，还是在几项之间轮流推进？",
+        "en": "With several items to do, would you prefer finishing one before starting another, or alternating between them?"
+      }
+    },
+    {
+      "id": "career_v1_056",
+      "section": "style",
+      "axis": "external_contact",
+      "text": {
+        "zh-CN": "工作需要回应外部反馈时，你偏好直接回复对方，还是在团队内部处理后由别人回复？",
+        "en": "When your work draws external feedback, would you prefer responding directly, or preparing the response for someone else to send?"
+      },
+      "reverse": true
+    },
+    {
+      "id": "career_v1_057",
+      "section": "style",
+      "axis": "physical_activity",
+      "text": {
+        "zh-CN": "核对现场信息时，你偏好亲自走一遍，还是坐在工位远程查看？",
+        "en": "When checking information from a site, would you prefer walking through it yourself, or reviewing it remotely from a workstation?"
+      },
+      "reverse": true
+    },
+    {
+      "id": "career_v1_058",
+      "section": "style",
+      "axis": "coordination",
+      "text": {
+        "zh-CN": "任务需要几个环节配合时，你偏好频繁对齐，还是只在交接时沟通？",
+        "en": "When several steps depend on each other, would you prefer frequent check-ins, or communication at handoffs only?"
+      },
+      "reverse": true
+    },
+    {
+      "id": "career_v1_059",
+      "section": "style",
+      "axis": "method_discretion",
+      "text": {
+        "zh-CN": "遇到新问题，你偏好自行决定排查顺序，还是按事先定好的顺序排查？",
+        "en": "On a new problem, would you prefer to decide what to check first yourself, or use a predetermined sequence?"
+      },
+      "reverse": true
+    },
+    {
+      "id": "career_v1_060",
+      "section": "style",
+      "axis": "task_switching",
+      "text": {
+        "zh-CN": "当天的工作量一样时，你偏好交替处理长短任务，还是分别留出整段时间来做？",
+        "en": "With the same daily workload, would you prefer alternating short and long tasks, or assigning each a dedicated block?"
+      },
+      "reverse": true
+    },
+    {
+      "id": "career_v1_061",
+      "section": "style",
+      "axis": "external_contact",
+      "text": {
+        "zh-CN": "交付成果时，你偏好亲自向外部对象说明，还是把说明交给对外负责人？",
+        "en": "When a piece of work is delivered, would you prefer explaining it to external recipients yourself, or handing that over to the person who manages the relationship?"
+      },
+      "reverse": true
+    },
+    {
+      "id": "career_v1_062",
+      "section": "style",
+      "axis": "physical_activity",
+      "text": {
+        "zh-CN": "常态工作的一部分，你偏好有机会起身活动，还是能在原位置完成任务？",
+        "en": "As a regular part of work, would you prefer opportunities to get up and move, or being able to complete tasks from one place?"
+      },
+      "reverse": true
+    },
+    {
+      "id": "career_v1_063",
+      "section": "value",
+      "axis": "predictable_hours",
+      "text": {
+        "zh-CN": "提前一周知道具体上班时间",
+        "en": "Knowing your exact working hours a week ahead"
+      }
+    },
+    {
+      "id": "career_v1_064",
+      "section": "value",
+      "axis": "learning_support",
+      "text": {
+        "zh-CN": "工作期间有时间学习新的方法",
+        "en": "Having time during working hours to learn new methods"
+      }
+    },
+    {
+      "id": "career_v1_065",
+      "section": "value",
+      "axis": "stable_income",
+      "text": {
+        "zh-CN": "每个月的收入相对可预期",
+        "en": "Having reasonably predictable income each month"
+      }
+    },
+    {
+      "id": "career_v1_066",
+      "section": "value",
+      "axis": "visible_benefit",
+      "text": {
+        "zh-CN": "能知道自己的工作具体帮到了谁",
+        "en": "Knowing exactly who your work helps"
+      }
+    },
+    {
+      "id": "career_v1_067",
+      "section": "value",
+      "axis": "advancement_path",
+      "text": {
+        "zh-CN": "知道做到什么程度可以承担更高一级的职责",
+        "en": "Knowing what is required to take on the next level of responsibility"
+      }
+    },
+    {
+      "id": "career_v1_068",
+      "section": "value",
+      "axis": "flexible_location",
+      "text": {
+        "zh-CN": "在符合工作要求时，可以选择工作的地点",
+        "en": "Being able to choose where you work when the job allows it"
+      }
+    },
+    {
+      "id": "career_v1_069",
+      "section": "value",
+      "axis": "predictable_hours",
+      "text": {
+        "zh-CN": "工作结束时间通常能事先确定",
+        "en": "Usually being able to predict when your workday will end"
+      }
+    },
+    {
+      "id": "career_v1_070",
+      "section": "value",
+      "axis": "learning_support",
+      "text": {
+        "zh-CN": "接手新职责时能得到有经验的人指导",
+        "en": "Having an experienced person guide you when you take on new responsibilities"
+      }
+    },
+    {
+      "id": "career_v1_071",
+      "section": "value",
+      "axis": "stable_income",
+      "text": {
+        "zh-CN": "收入主要来自固定薪酬，而不是月底才知道的提成",
+        "en": "Earning mainly fixed pay rather than commissions you cannot estimate until month-end"
+      }
+    },
+    {
+      "id": "career_v1_072",
+      "section": "value",
+      "axis": "visible_benefit",
+      "text": {
+        "zh-CN": "能看到成果给使用者带来的变化",
+        "en": "Being able to see the difference your work makes for the people who use it"
+      }
+    },
+    {
+      "id": "career_v1_073",
+      "section": "value",
+      "axis": "advancement_path",
+      "text": {
+        "zh-CN": "有机会从初级岗位逐步晋升到更高级岗位",
+        "en": "Having a route from a junior role to more senior roles"
+      }
+    },
+    {
+      "id": "career_v1_074",
+      "section": "value",
+      "axis": "flexible_location",
+      "text": {
+        "zh-CN": "需要时能换一个地点完成可远程完成的任务",
+        "en": "Being able to complete remote-friendly tasks from a different location when needed"
+      }
+    },
+    {
+      "id": "career_v1_075",
+      "section": "value",
+      "axis": "predictable_hours",
+      "text": {
+        "zh-CN": "在安排自己的生活前，就能确认周末是否要上班",
+        "en": "Knowing whether you will work the weekend before making personal plans"
+      }
+    },
+    {
+      "id": "career_v1_076",
+      "section": "value",
+      "axis": "learning_support",
+      "text": {
+        "zh-CN": "雇主提供进修或培训资源",
+        "en": "Having an employer that provides courses or training resources"
+      }
+    },
+    {
+      "id": "career_v1_077",
+      "section": "value",
+      "axis": "stable_income",
+      "text": {
+        "zh-CN": "淡旺季的收入差别不大",
+        "en": "Having little variation in earnings between busy and slow seasons"
+      }
+    },
+    {
+      "id": "career_v1_078",
+      "section": "value",
+      "axis": "visible_benefit",
+      "text": {
+        "zh-CN": "能看到使用者采用了自己交付的成果",
+        "en": "Seeing the intended users adopt something you delivered"
+      }
+    },
+    {
+      "id": "career_v1_079",
+      "section": "value",
+      "axis": "advancement_path",
+      "text": {
+        "zh-CN": "能看到组织里有人沿着明确的路径晋升",
+        "en": "Seeing people advance along a clear path in the organization"
+      }
+    },
+    {
+      "id": "career_v1_080",
+      "section": "value",
+      "axis": "flexible_location",
+      "text": {
+        "zh-CN": "只有确实需要到场的任务才要求在指定地点完成",
+        "en": "Having to be at a designated place only for tasks that need an in-person presence"
+      }
+    },
+    {
+      "id": "career_v1_081",
+      "section": "value",
+      "axis": "predictable_hours",
+      "text": {
+        "zh-CN": "临时改动工作时间的情况很少",
+        "en": "Having few last-minute changes to your working hours"
+      }
+    },
+    {
+      "id": "career_v1_082",
+      "section": "value",
+      "axis": "learning_support",
+      "text": {
+        "zh-CN": "能在有人给反馈的情况下练习不熟悉的工作",
+        "en": "Being able to practice unfamiliar work and get feedback on it"
+      }
+    },
+    {
+      "id": "career_v1_083",
+      "section": "value",
+      "axis": "stable_income",
+      "text": {
+        "zh-CN": "在接受一份工作前，能够明确知道其中的固定薪酬",
+        "en": "Knowing how much of your pay is fixed before accepting a job"
+      }
+    },
+    {
+      "id": "career_v1_084",
+      "section": "value",
+      "axis": "visible_benefit",
+      "text": {
+        "zh-CN": "能说清楚一项工作解决了别人什么实际问题",
+        "en": "Being able to explain the practical problem your work solved for someone"
+      }
+    },
+    {
+      "id": "career_v1_085",
+      "section": "value",
+      "axis": "advancement_path",
+      "text": {
+        "zh-CN": "有一条能继续晋升的专业路线，即使不带团队",
+        "en": "Having a professional advancement path even without managing a team"
+      }
+    },
+    {
+      "id": "career_v1_086",
+      "section": "value",
+      "axis": "flexible_location",
+      "text": {
+        "zh-CN": "能事先和团队约定哪些任务可以在其他地点完成",
+        "en": "Being able to agree in advance which tasks can be done from another location"
+      }
+    },
+    {
+      "id": "career_v1_087",
+      "section": "context",
+      "axis": "career_stage",
+      "text": {
+        "zh-CN": "你现在最接近哪个阶段？",
+        "en": "Which best describes your current stage?"
+      },
+      "options": {
+        "student": {
+          "zh-CN": "在读或准备选专业",
+          "en": "Studying or choosing what to study"
+        },
+        "entry": {
+          "zh-CN": "准备进入职场",
+          "en": "Preparing to enter the workforce"
+        },
+        "employed": {
+          "zh-CN": "已工作，考虑在原领域发展",
+          "en": "Employed and exploring further in my field"
+        },
+        "transition": {
+          "zh-CN": "在找工作或考虑转行",
+          "en": "Looking for work or considering a career change"
+        }
+      }
+    },
+    {
+      "id": "career_v1_088",
+      "section": "context",
+      "axis": "experience",
+      "text": {
+        "zh-CN": "你有多少全职工作经验（或相当的累计经验）？",
+        "en": "How much full-time work experience do you have, or the equivalent?"
+      },
+      "options": {
+        "none": {
+          "zh-CN": "没有",
+          "en": "None"
+        },
+        "under_2": {
+          "zh-CN": "不到两年",
+          "en": "Less than two years"
+        },
+        "two_to_five": {
+          "zh-CN": "两到五年",
+          "en": "Two to five years"
+        },
+        "over_5": {
+          "zh-CN": "五年以上",
+          "en": "More than five years"
+        }
+      }
+    },
+    {
+      "id": "career_v1_089",
+      "section": "context",
+      "axis": "education",
+      "text": {
+        "zh-CN": "你已完成的最高教育或培训阶段是？",
+        "en": "What is your highest completed level of education or training?"
+      },
+      "options": {
+        "secondary_or_less": {
+          "zh-CN": "中学或更早阶段",
+          "en": "Secondary school or earlier"
+        },
+        "vocational": {
+          "zh-CN": "职业教育、学徒制或其他专科训练",
+          "en": "Vocational training, apprenticeship, or other postsecondary training"
+        },
+        "degree": {
+          "zh-CN": "本科或同等学位",
+          "en": "Bachelor’s degree or equivalent"
+        },
+        "postgraduate": {
+          "zh-CN": "研究生或同等学位",
+          "en": "Graduate degree or equivalent"
+        }
+      }
+    },
+    {
+      "id": "career_v1_090",
+      "section": "context",
+      "axis": "exploration_goal",
+      "text": {
+        "zh-CN": "这次你最想比较什么？",
+        "en": "What would you most like to compare this time?"
+      },
+      "options": {
+        "first_direction": {
+          "zh-CN": "第一个专业或工作方向",
+          "en": "A first field of study or work"
+        },
+        "adjacent_move": {
+          "zh-CN": "能用上已有经验的方向",
+          "en": "Directions that use my existing experience"
+        },
+        "new_field": {
+          "zh-CN": "不同领域的新方向",
+          "en": "Options in a different field"
+        },
+        "open": {
+          "zh-CN": "先看看有哪些方向",
+          "en": "I’m open to exploring"
+        }
+      }
+    },
+    {
+      "id": "career_v1_091",
+      "section": "context",
+      "axis": "training_budget",
+      "text": {
+        "zh-CN": "你现在最多愿意投入多长时间补学入行所需的知识或技能？",
+        "en": "How much time are you willing to spend preparing to enter a different field?"
+      },
+      "options": {
+        "none": {
+          "zh-CN": "暂时不安排额外学习",
+          "en": "No additional training for now"
+        },
+        "up_to_3m": {
+          "zh-CN": "最多三个月",
+          "en": "Up to three months"
+        },
+        "up_to_12m": {
+          "zh-CN": "最多一年",
+          "en": "Up to one year"
+        },
+        "over_12m": {
+          "zh-CN": "可以超过一年",
+          "en": "More than one year"
+        }
+      }
+    },
+    {
+      "id": "career_v1_092",
+      "section": "context",
+      "axis": "experience_areas",
+      "text": {
+        "zh-CN": "你最想继续用上哪一类经验？",
+        "en": "What kind of experience would you most like to keep using?"
+      },
+      "options": {
+        "analysis": {
+          "zh-CN": "研究或分析",
+          "en": "Research or analysis"
+        },
+        "making": {
+          "zh-CN": "制作、设计或现场操作",
+          "en": "Making, design, or hands-on operations"
+        },
+        "support": {
+          "zh-CN": "教学、服务或支持他人",
+          "en": "Teaching, service, or supporting others"
+        },
+        "business": {
+          "zh-CN": "商务、推广或组织协调",
+          "en": "Business, outreach, or coordination"
+        },
+        "operations": {
+          "zh-CN": "记录、流程或运营",
+          "en": "Records, procedures, or operations"
+        },
+        "none": {
+          "zh-CN": "没有特别想保留的一类",
+          "en": "None in particular"
+        }
+      }
+    },
+    {
+      "id": "career_v1_093",
+      "section": "context",
+      "axis": "night_shifts",
+      "text": {
+        "zh-CN": "对于必须定期上夜班的岗位，你目前能接受吗？",
+        "en": "Could you currently take a job with required regular night shifts?"
+      },
+      "options": {
+        "accept": {
+          "zh-CN": "可以考虑",
+          "en": "I could consider it"
+        },
+        "cannot": {
+          "zh-CN": "目前不能",
+          "en": "I cannot at present"
+        }
+      }
+    },
+    {
+      "id": "career_v1_094",
+      "section": "context",
+      "axis": "travel",
+      "text": {
+        "zh-CN": "对于必须频繁出差过夜的岗位，你目前能接受吗？",
+        "en": "Could you currently take a job with required frequent overnight travel?"
+      },
+      "options": {
+        "accept": {
+          "zh-CN": "可以考虑",
+          "en": "I could consider it"
+        },
+        "cannot": {
+          "zh-CN": "目前不能",
+          "en": "I cannot at present"
+        }
+      }
+    }
+  ]
+}
