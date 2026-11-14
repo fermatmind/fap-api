@@ -779,14 +779,14 @@ test('sample discovery requires real archive anchors and cannot pass from serial
 });
 
 
-test('deferred Traditional index manifest stays out of automatic publication selection',()=>{
+test('Traditional index manifest selects its exact automatic publication',()=>{
  const index='backend/content_assets/public_content_53/traditional-article-index.json';
  const independent='backend/content_assets/public_content_53/support-contact.json';
- assert.equal(selectPublicContentPackage([index]),null);
- assert.equal(selectPublicContentPackage([index,independent]),'support-contact');
+ assert.equal(selectPublicContentPackage([index]),'traditional-article-index');
+ assert.throws(()=>selectPublicContentPackage([index,independent]),/MULTIPLE_PACKAGES_REQUIRE_SERIAL_RELEASE/);
  const classification=classifyPaths([index,'backend/app/Services/Career/CareerFilePageReader.php']);
- assert.equal(classification.operations.public_content_53_publish,false);
- assert.equal(classification.operations.public_content_53_package,null);
+ assert.equal(classification.operations.public_content_53_publish,true);
+ assert.equal(classification.operations.public_content_53_package,'traditional-article-index');
  assert.equal(classification.operations.public_content_53_checks,true);
 });
 
@@ -856,7 +856,7 @@ test('exact changed paths select a single package through transport, QA and work
  }
  const indexExecution=buildExecution({...env,PUBLIC_CONTENT_53_PACKAGE_NAME:'traditional-article-index'},root);
  assert.equal(indexExecution.publishTimeoutMs,TRADITIONAL_INDEX_PUBLISH_TIMEOUT_MS);
- assert.equal(indexExecution.binding.expected_row_count,115);
+ assert.equal(indexExecution.binding.expected_row_count,readCandidateRows(root,indexExecution.binding.package_sha256,'staging').candidates.length);
  assert.equal(selectPublicContentPackage(['backend/app/Services/ContentPromotion/PublicContent53Package.php']),null);
  assert.throws(()=>selectPublicContentPackage(['backend/content_assets/public_content_53/riasec-code-samples.json','backend/content_assets/public_content_53/career-planning.json']),/MULTIPLE_PACKAGES/);
  assert.throws(()=>selectPublicContentPackage(['backend/content_assets/public_content_53/unknown.json']),/SELECTION_UNKNOWN/);
@@ -1913,7 +1913,7 @@ test('Traditional article index release checks the complete cohort and preserves
  const selection='traditional-article-index';
  const assets='content_assets/public_content_53';
  const filename=selection+'.json';
- assert.equal(classifyPaths(['backend/'+assets+'/'+filename]).operations.public_content_53_package,null);
+ assert.equal(classifyPaths(['backend/'+assets+'/'+filename]).operations.public_content_53_package,selection);
  const fixture=mkdtempSync(resolve(tmpdir(),'traditional-index-online-'));
  const digest=value=>createHash('sha256').update(value).digest('hex');
  const body='## 繁體標題\n\n繁體文章';

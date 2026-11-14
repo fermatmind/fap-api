@@ -124,7 +124,7 @@ const readCommand = (program, args) => execFileSync(program, args, {
 }).trim();
 
 function validateStagingIndexRecoveryReceipt(receipt, execution) {
-  if (execution.binding.environment !== 'staging' || execution.binding.expected_row_count !== 115
+  if (execution.binding.environment !== 'staging'
     || receipt.schema !== 'public.content53.publish.v1' || receipt.ok !== false || receipt.sanitized !== true
     || receipt.source_commit !== execution.request.source_commit
     || receipt.workflow_run_id !== execution.request.workflow_run_id || receipt.workflow_run_attempt !== 1
@@ -161,7 +161,7 @@ export async function recoverPreviousStagingIndex(env, {
     if (payload.ok !== true || payload.source !== 'backend_sitemap_generator' || !Array.isArray(payload.items))
       throw new Error('PUBLIC_CONTENT_53_PREVIOUS_STAGING_SITEMAP_INVALID');
     return payload.items.map(item => new URL(item.loc).pathname)
-      .filter(path => /^\/zh-TW\/articles\/[a-z0-9]+(?:-[a-z0-9]+)*$/.test(path)).sort();
+      .filter(path => expected.includes(path)).sort();
   };
   const previous = await current();
   const active = await members();

@@ -210,16 +210,18 @@ async function verifyIndexSitemaps(rows, environment, fetcher, active) {
   const source = payload.items?.map(item=>item.loc);
   const detail = /^\/zh-TW\/articles\/[a-z0-9]+(?:-[a-z0-9]+)*$/;
   const collect = urls => urls.filter(url=>detail.test(new URL(url).pathname)).sort();
-  const expect = host => active ? rows.map(row=>indexAt(host,row.traditional_article_index.target.canonical)).sort() : [];
+  const targets = rows.map(row=>new URL(row.traditional_article_index.target.canonical).pathname);
+  const expect = host => active ? targets.map(path=>host+path).sort() : [];
+  const inBatch = urls => collect(urls).filter(url=>targets.includes(new URL(url).pathname));
   if (payload.ok !== true || payload.source !== 'backend_sitemap_generator' || !Array.isArray(source)
-    || !equal(collect(source),expect(web))) throw new Error('PUBLIC_CONTENT_53_TRADITIONAL_INDEX_SITEMAP');
+    || !equal(inBatch(source),expect(web))) throw new Error('PUBLIC_CONTENT_53_TRADITIONAL_INDEX_SITEMAP');
   if (stage) {
     const response = await fetcher(web+'/sitemap.xml',{redirect:'error',signal:AbortSignal.timeout(15000)});
     if (response.status !== 410) throw new Error('PUBLIC_CONTENT_53_TRADITIONAL_INDEX_STAGING_SITEMAP');
     return;
   }
   const xml = await read(web+'/sitemap.xml',fetcher);
-  if (!/<urlset\b/.test(xml) || !equal(collect([...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match=>match[1])),expect(web)))
+  if (!/<urlset\b/.test(xml) || !equal(inBatch([...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match=>match[1])),expect(web)))
     throw new Error('PUBLIC_CONTENT_53_TRADITIONAL_INDEX_SITEMAP');
 }
 

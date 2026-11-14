@@ -12,7 +12,7 @@ final class TraditionalArticleIndexPackage
 
     public const SCHEMA = 'fermatmind.traditional_article_index.v1';
 
-    public const TARGET_COUNT = 115;
+    public const MAX_BATCH_SIZE = 115;
 
     public static function read(string $bytes, string $environment): array
     {
@@ -25,7 +25,7 @@ final class TraditionalArticleIndexPackage
 
         $cohorts = [];
         foreach ($manifest['environments'] as $name => $rows) {
-            if (! is_array($rows) || ! array_is_list($rows) || count($rows) !== self::TARGET_COUNT) {
+            if (! is_array($rows) || ! array_is_list($rows) || count($rows) < 1 || count($rows) > self::MAX_BATCH_SIZE) {
                 throw new DomainException('public_content_53_traditional_index_count_invalid');
             }
             $members = [];
@@ -100,7 +100,6 @@ final class TraditionalArticleIndexPackage
     public static function mutationCounts(PromotionContext $context): ?array
     {
         if ($context->lane !== 'W3' || $context->subscope !== Adapters\PublicContent53PromotionAdapter::SUBSCOPE
-            || $context->expectedRowCount !== self::TARGET_COUNT
             || realpath($context->packageDirectory) !== realpath(base_path(PublicContent53Package::PACKAGE))) {
             return null;
         }
@@ -114,6 +113,10 @@ final class TraditionalArticleIndexPackage
             return null;
         }
         $rows = self::read($bytes, PublicContent53Package::environment())['candidates'];
+
+        if (count($rows) !== $context->expectedRowCount) {
+            return null;
+        }
 
         return [
             'indexability_mutation_count' => count($rows),
