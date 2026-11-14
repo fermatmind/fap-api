@@ -145,9 +145,6 @@ export async function recoverPreviousStagingIndex(env, {
     throw new Error('PUBLIC_CONTENT_53_PREVIOUS_STAGING_SCOPE_INVALID');
   }
   const backendRoot = fileURLToPath(new URL('../../backend', import.meta.url));
-  const digest = packageDigest(backendRoot, selection);
-  const expected = readCandidateRows(backendRoot, digest, 'staging').candidates
-    .map(row => new URL(row.traditional_article_index.target.canonical).pathname).sort();
   const read = async path => {
     const response = await fetcher('https://staging-api.fermatmind.com' + path, {
       redirect: 'error', signal: AbortSignal.timeout(20000), headers: {'Cache-Control':'no-cache'},
@@ -161,25 +158,22 @@ export async function recoverPreviousStagingIndex(env, {
     if (payload.ok !== true || payload.source !== 'backend_sitemap_generator' || !Array.isArray(payload.items))
       throw new Error('PUBLIC_CONTENT_53_PREVIOUS_STAGING_SITEMAP_INVALID');
     return payload.items.map(item => new URL(item.loc).pathname)
-      .filter(path => expected.includes(path)).sort();
+      .sort();
   };
   const previous = await current();
-  const active = await members();
-  if (!active.length) return;
-  if (!/^[a-f0-9]{40}$/.test(previous ?? '') || previous === env.DEPLOY_SHA
-    || JSON.stringify(active) !== JSON.stringify(expected) || await current() !== previous) {
+  const currentDigest = packageDigest(backendRoot, selection);
+  const candidatePaths = new Set(readCandidateRows(backendRoot, currentDigest, 'staging').candidates
+    .map(row => new URL(row.traditional_article_index.target.canonical).pathname));
+  if (!/^[a-f0-9]{40}$/.test(previous ?? '') || previous === env.DEPLOY_SHA) {
     throw new Error('PUBLIC_CONTENT_53_PREVIOUS_STAGING_STATE_INVALID');
   }
+  const active = await members();
   command('git', ['merge-base', '--is-ancestor', previous, env.DEPLOY_SHA]);
-  command('git', ['diff', '--quiet', previous, env.DEPLOY_SHA, '--',
-    ...executorPaths.map(path => 'backend/' + path),
-    'backend/config/content_promotion_release_policy.v2.json',
-    'backend/content_assets/public_content_53/traditional-article-index.json',
-  ]);
   const runs = JSON.parse(command('gh', ['run', 'list', '--workflow', 'deploy.yml', '--commit', previous,
     '--branch', 'main', '--event', 'workflow_run', '--status', 'failure', '--limit', '2',
     '--json', 'databaseId,headSha,attempt,status,conclusion',
   ]));
+  if (runs.length === 0 && !active.some(path => candidatePaths.has(path))) return;
   if (runs.length !== 1 || runs[0].headSha !== previous || runs[0].attempt !== 1
     || runs[0].status !== 'completed' || runs[0].conclusion !== 'failure'
     || !Number.isSafeInteger(runs[0].databaseId) || runs[0].databaseId < 1) {
@@ -191,14 +185,28 @@ export async function recoverPreviousStagingIndex(env, {
     const artifact = 'public-content-53-staging-' + previous + '-' + run + '-1';
     command('gh', ['run', 'download', run, '--name', artifact, '--dir', directory]);
     const receipt = JSON.parse(readFileSync(resolve(directory, 'staging.json'), 'utf8'));
-    const execution = buildExecution({...env, DEPLOY_SHA:previous, GITHUB_RUN_ID:run}, backendRoot);
-    validateStagingIndexRecoveryReceipt(receipt, execution);
-    if (await current() !== previous) throw new Error('PUBLIC_CONTENT_53_PREVIOUS_STAGING_STATE_INVALID');
-    const response = await execute(execution, {...execution.request, mode:'recover'});
-    const result = parseResponse(response.stdout);
-    if (!recovered(execution, response, result) || result.restored !== true
-      || await current() !== previous || (await members()).length !== 0) {
-      throw new Error('PUBLIC_CONTENT_53_PREVIOUS_STAGING_RECOVERY_FAILED');
+    const historical = resolve(directory, 'checkout');
+    command('git', ['worktree', 'add', '--detach', historical, previous]);
+    try {
+      const historicalBackend = resolve(historical, 'backend');
+      const digest = packageDigest(historicalBackend, selection);
+      const priorPaths = new Set(readCandidateRows(historicalBackend, digest, 'staging').candidates
+        .map(row => new URL(row.traditional_article_index.target.canonical).pathname));
+      const expectedActive = active.filter(path => priorPaths.has(path));
+      if (!expectedActive.length && !active.some(path => candidatePaths.has(path))) return;
+      if (expectedActive.length !== priorPaths.size || await current() !== previous) {
+        throw new Error('PUBLIC_CONTENT_53_PREVIOUS_STAGING_STATE_INVALID');
+      }
+      const execution = buildExecution({...env, DEPLOY_SHA:previous, GITHUB_RUN_ID:run}, historicalBackend);
+      validateStagingIndexRecoveryReceipt(receipt, execution);
+      const response = await execute(execution, {...execution.request, mode:'recover'});
+      const result = parseResponse(response.stdout);
+      if (!recovered(execution, response, result) || result.restored !== true
+        || await current() !== previous || (await members()).some(path => priorPaths.has(path) || candidatePaths.has(path))) {
+        throw new Error('PUBLIC_CONTENT_53_PREVIOUS_STAGING_RECOVERY_FAILED');
+      }
+    } finally {
+      command('git', ['worktree', 'remove', historical]);
     }
   } finally {
     rmSync(directory, {recursive:true, force:true});

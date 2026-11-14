@@ -802,13 +802,29 @@ test('interrupted Traditional index staging restores only the exact prior transa
  const receipt={schema:'public.content53.publish.v1',ok:false,sanitized:true,source_commit:previous,
   workflow_run_id:run,workflow_run_attempt:1,package_sha256:digest,transport_started:true,recovery_completed:false,
   recovery_error_code:'public_content_53_execution_lock_failed',error_code:'PUBLIC_CONTENT_53_SSH_EXIT_255'};
- let active=cohort;
+ const manifestPath="content_assets/public_content_53/traditional-article-index.json";
+ const unrelated={loc:"https://fermatmind.com/zh-TW/articles/unrelated-accepted"};
+ let active=[...cohort,unrelated];
  let receiptBody=receipt;
  const calls=[];
  const deps={
   command(program,args) {
    calls.push([program,...args.slice(0,2)]);
-   if (program==='git') return args[0]==='rev-parse'?candidate:'';
+   if (program==='git') {
+    if (args[0]==='worktree' && args[1]==='add') {
+      const backend=resolve(args[3],'backend');
+      mkdirSync(resolve(backend,'content_assets/public_content_53'),{recursive:true});
+      copyFileSync(resolve(root,manifestPath),resolve(backend,manifestPath));
+      for(const path of executorPaths) {
+        const file=resolve(backend,path);
+        mkdirSync(resolve(file,'..'),{recursive:true});
+        copyFileSync(resolve(root,path),file);
+      }
+      mkdirSync(resolve(backend,'config'),{recursive:true});
+      copyFileSync(resolve(root,'config/content_promotion_release_policy.v2.json'),resolve(backend,'config/content_promotion_release_policy.v2.json'));
+    }
+    return args[0]==='rev-parse'?candidate:'';
+   }
    if (args[1]==='list') return JSON.stringify([{headSha:previous,attempt:1,status:'completed',conclusion:'failure',databaseId:Number(run)}]);
    assert.equal(args[4],`public-content-53-staging-${previous}-${run}-1`);
    writeFileSync(resolve(args.at(-1),'staging.json'),JSON.stringify(receiptBody));
@@ -820,13 +836,13 @@ test('interrupted Traditional index staging restores only the exact prior transa
    calls.push(['recover',request.source_commit,request.workflow_run_id]);
    assert.equal(request.mode,'recover');
    assert.equal(request.package_sha256,digest);
-   active=[];
+   active=[unrelated];
    return {status:0,stdout:JSON.stringify({...request,ok:true,restored:true,recovery_status:'restored',sanitized:true})};
   },
  };
  try {
   await recoverPreviousStagingIndex(env,deps);
-  assert.deepEqual(calls.at(-1),['recover',previous,run]);
+  assert.ok(calls.some(call=>JSON.stringify(call)===JSON.stringify(['recover',previous,run])));
   const recoveryCalls=()=>calls.filter(call=>call[0]==='recover').length;
   await recoverPreviousStagingIndex(env,deps);
   assert.equal(recoveryCalls(),1);
