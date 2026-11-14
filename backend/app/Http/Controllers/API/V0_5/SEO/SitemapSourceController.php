@@ -86,6 +86,9 @@ class SitemapSourceController extends Controller
      */
     public function buildPayloadFromAuthorityUrls(array $authorityUrls, CareerRuntimePublishProjectionLookup $projection): array
     {
+        $careerIdentity = app(CareerCurrentIdentity::class);
+        $careerContent = app(CareerContentV3CanonicalReader::class);
+        $careerCache = app(PublicCareerAuthorityResponseCache::class);
         $items = collect($authorityUrls)
             ->map(static function (array $item): array {
                 return [
@@ -99,7 +102,7 @@ class SitemapSourceController extends Controller
                 'loc' => $this->normalizeOwnedCanonicalUrl($item['loc']),
             ])
             ->filter(fn (array $item): bool => ! $this->isCareerJobDetailUrl($item['loc'])
-                || $this->isRuntimePublishedCareerJobDetailUrl($item['loc'], $projection))
+                || $this->isRuntimePublishedCareerJobDetailUrl($item['loc'], $projection, $careerIdentity, $careerContent, $careerCache))
             ->values()
             ->all();
 
@@ -218,20 +221,24 @@ class SitemapSourceController extends Controller
         return $this->careerJobDetailRouteParts($loc) !== null;
     }
 
-    private function isRuntimePublishedCareerJobDetailUrl(string $loc, CareerRuntimePublishProjectionLookup $projection): bool
-    {
+    private function isRuntimePublishedCareerJobDetailUrl(
+        string $loc,
+        CareerRuntimePublishProjectionLookup $projection,
+        CareerCurrentIdentity $careerIdentity,
+        CareerContentV3CanonicalReader $content,
+        PublicCareerAuthorityResponseCache $careerCache,
+    ): bool {
         $route = $this->careerJobDetailRouteParts($loc);
-        if ($route === null || app(CareerCurrentIdentity::class)->isAlias($route['slug'])) {
+        if ($route === null || $careerIdentity->isAlias($route['slug'])) {
             return false;
         }
 
-        $content = app(CareerContentV3CanonicalReader::class);
         $locale = $route['locale'] === 'zh' ? 'zh-CN' : 'en';
         $current = isset($content->authority()['entries'][$route['slug']][$locale]);
         // Current file pages and their inventories must use the same validated
         // active publication snapshot, including promotions newer than generation.
         $item = $current
-            ? app(PublicCareerAuthorityResponseCache::class)->filePagePublication($route['slug'], $locale)
+            ? $careerCache->filePagePublication($route['slug'], $locale)
             : $projection->itemForSlug($route['slug'], $route['locale']);
         if (! is_array($item)) {
             return false;

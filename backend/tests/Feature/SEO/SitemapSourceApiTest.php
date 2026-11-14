@@ -94,7 +94,7 @@ class SitemapSourceApiTest extends TestCase
             ->assertJsonPath('ok', true)
             ->assertJsonPath('source', 'backend_sitemap_generator')
             ->assertJsonPath('career_current_identity.storage_count', 1046)
-            ->assertJsonPath('career_current_identity.file_count', 2092)
+            ->assertJsonPath('career_current_identity.file_count', 3138)
             ->assertJsonMissingPath('career_current_identity.aliases.preschool-teachers')
             ->assertJsonMissingPath('career_current_identity.aliases.preschool-teachers-except-special-education');
 
