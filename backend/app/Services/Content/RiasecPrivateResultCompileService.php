@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Content;
 
+use App\Services\Riasec\RiasecDeepCopySlotRegistry;
 use App\Services\Riasec\RiasecEnglishReportSourceContract;
 use JsonException;
 use RuntimeException;
@@ -119,6 +120,8 @@ final class RiasecPrivateResultCompileService
         }
 
         $this->assertEnglishActivities($assets[self::ENGLISH_ACTIVITY_ASSET], $assets['activity_task_examples_v1.zh-CN.jsonl']);
+        $this->assertChineseWorkDivision($assets['pair_blend_15_pairs_v1.zh-CN.jsonl']);
+        $this->assertChineseDesktopReading($assets);
         $this->assertSelectedEnglishSources($assets);
         $sourceHash = hash('sha256', $sourceHashInput);
         $coverage = $this->coverage($assets);
@@ -210,6 +213,95 @@ final class RiasecPrivateResultCompileService
         ];
     }
 
+    /** @param array<string,mixed> $assets */
+    private function assertChineseDesktopReading(array $assets): void
+    {
+        $dimensionAsset = $assets['dimension_deep_copy_v1.zh-CN.r3.json'];
+        $top3Rows = $assets['top3_code_chain_strategy_v1.zh-CN.jsonl'];
+        foreach ($dimensionAsset['dimensions'] ?? [] as $row) {
+            $insight = $row['desktop_insight_by_decile'] ?? null;
+            if (! is_array($insight) || ! array_is_list($insight) || count($insight) !== 10) {
+                throw new RuntimeException('RIASEC Chinese desktop dimension insight must have ten score intervals.');
+            }
+            if (count(array_filter($insight, static fn (mixed $copy): bool => is_string($copy) && trim($copy) !== '')) !== 10
+                || count(array_unique($insight)) !== 10) {
+                throw new RuntimeException('RIASEC Chinese desktop dimension insight copy is empty or duplicated.');
+            }
+
+            $desktopAtlas = $row['desktop_atlas_by_decile'] ?? null;
+            if (! is_array($desktopAtlas) || ! array_is_list($desktopAtlas) || count($desktopAtlas) !== 10) {
+                throw new RuntimeException('RIASEC Chinese desktop atlas must have ten score intervals per dimension.');
+            }
+            foreach ($desktopAtlas as $entry) {
+                $examples = $entry['examples'] ?? null;
+                if (! is_string($entry['reading'] ?? null) || trim($entry['reading']) === ''
+                    || ! is_string($entry['next_step'] ?? null) || trim($entry['next_step']) === ''
+                    || ! is_array($examples) || ! array_is_list($examples) || count($examples) !== 3
+                    || count(array_filter($examples, static fn (mixed $text): bool => is_string($text) && trim($text) !== '')) !== 3
+                    || count(array_unique($examples)) !== 3) {
+                    throw new RuntimeException('RIASEC Chinese desktop atlas reading, activities, or next step are incomplete.');
+                }
+            }
+            if (count(array_unique(array_column($desktopAtlas, 'reading'))) !== 10
+                || count(array_unique(array_column($desktopAtlas, 'next_step'))) !== 10) {
+                throw new RuntimeException('RIASEC Chinese desktop atlas copy is duplicated across score intervals.');
+            }
+
+            $atlas = $row['atlas_score_reading'] ?? null;
+            if (! is_array($atlas) || count($atlas) !== 3) {
+                throw new RuntimeException('RIASEC canonical dimension atlas coverage is incomplete.');
+            }
+            foreach (['low', 'medium', 'high'] as $band) {
+                $panels = $row['atlas_score_panels'][$band] ?? [];
+                $examples = $panels['examples'] ?? null;
+                if (! is_array($examples) || ! array_is_list($examples) || count($examples) !== 3
+                    || count(array_filter($examples, static fn ($text): bool => is_string($text) && trim($text) !== '')) !== 3
+                    || count(array_unique($examples)) !== 3
+                    || ! is_string($panels['next_step'] ?? null) || trim($panels['next_step']) === ''
+                    || ! is_string($panels['profile_focus'] ?? null) || trim($panels['profile_focus']) === '') {
+                    throw new RuntimeException('RIASEC canonical dimension atlas panels are incomplete.');
+                }
+                if (! is_string($atlas[$band] ?? null) || trim($atlas[$band]) === '') {
+                    throw new RuntimeException('RIASEC canonical dimension atlas band is empty.');
+                }
+            }
+        }
+        $fields = ['headline', 'scene', 'screen', 'question', 'trial', 'decision', 'career_lens'];
+        $orderedFields = [...$fields, 'hero_job_tip'];
+        $seen = [];
+        foreach ($top3Rows as $row) {
+            $desktop = $row['desktop_reading_v1'] ?? [];
+            $ordered = $desktop['ordered'] ?? [];
+            if (! is_array($ordered) || count($ordered) !== 6) {
+                throw new RuntimeException('RIASEC Chinese ordered desktop group must cover six codes.');
+            }
+            foreach ($fields as $field) {
+                if (! is_string($desktop[$field] ?? null) || trim($desktop[$field]) === '') {
+                    throw new RuntimeException('RIASEC Chinese desktop comparison copy is incomplete.');
+                }
+            }
+            foreach ($ordered as $code => $variant) {
+                $letters = str_split((string) $code);
+                $group = $row['dimensions'];
+                sort($letters);
+                sort($group);
+                if ($letters !== $group || ! is_array($variant) || count($variant) !== count($orderedFields)) {
+                    throw new RuntimeException('RIASEC Chinese ordered desktop code has invalid group or fields.');
+                }
+                foreach ($orderedFields as $field) {
+                    $copy = $variant[$field] ?? null;
+                    if (! is_string($copy) || trim($copy) === '' || isset($seen[$field][$copy])) {
+                        throw new RuntimeException("RIASEC Chinese ordered desktop copy is missing or duplicated: {$code}.{$field}");
+                    }
+                    $seen[$field][$copy] = true;
+                }
+            }
+        }
+        if (count($seen['headline'] ?? []) !== 120) {
+            throw new RuntimeException('RIASEC Chinese ordered desktop code coverage is incomplete.');
+        }
+    }
+
     /** @param array<string,mixed> $assets @return array<string,mixed> */
     private function coverage(array $assets): array
     {
@@ -226,7 +318,7 @@ final class RiasecPrivateResultCompileService
         sort($pairs, SORT_STRING);
         $top3Rows = (array) $assets['top3_code_chain_strategy_v1.zh-CN.jsonl'];
 
-        if ($dimensions !== ['A', 'C', 'E', 'I', 'R', 'S'] || count($pairs) !== 15 || $top3Rows === []) {
+        if ($dimensions !== ['A', 'C', 'E', 'I', 'R', 'S'] || count($pairs) !== 15 || array_column($top3Rows, 'unordered_top3_key') !== RiasecDeepCopySlotRegistry::TOP3_COMBOS) {
             throw new RuntimeException('RIASEC canonical dimension, pair, or top-three coverage is incomplete.');
         }
 
@@ -451,9 +543,31 @@ final class RiasecPrivateResultCompileService
         }
     }
 
+    /** @param list<array<string,mixed>> $rows */
+    private function assertChineseWorkDivision(array $rows): void
+    {
+        foreach ($rows as $row) {
+            $copy = $row['work_division_v1'] ?? [];
+            if (! is_array($copy) || count($copy) !== 3) {
+                throw new RuntimeException('RIASEC Chinese work-division copy is incomplete.');
+            }
+            foreach (['scene', 'tradeoff', 'question'] as $key) {
+                if (! is_string($copy[$key] ?? null) || trim($copy[$key]) === '') {
+                    throw new RuntimeException('RIASEC Chinese work-division copy is incomplete.');
+                }
+            }
+        }
+    }
+
     /** @param list<array<string,mixed>> $rows @param list<array<string,mixed>> $chineseRows */
     public function assertEnglishPairSources(array $rows, array $chineseRows): void
     {
+        // The English package is bound to the legacy pair copy, before the Chinese-only work-division panel.
+        $chineseRows = array_map(static function (array $row): array {
+            unset($row['work_division_v1']);
+
+            return $row;
+        }, $chineseRows);
         $sourceHash = 'd406bf9b4913c8b6db6a08ab4a7358d8b4b7cdb335730a20642392e753e4cd4a';
         if (count($rows) !== 15 || count($chineseRows) !== 15
             || hash('sha256', $this->canonicalJson($chineseRows)) !== $sourceHash) {
@@ -510,6 +624,12 @@ final class RiasecPrivateResultCompileService
     /** @param list<array<string,mixed>> $rows @param list<array<string,mixed>> $chineseRows */
     public function assertEnglishTop3Sources(array $rows, array $chineseRows): void
     {
+        // English provenance covers the shared Top3 fields, independently of Chinese desktop copy.
+        $chineseRows = array_map(static function (array $row): array {
+            unset($row['desktop_reading_v1']);
+
+            return $row;
+        }, $chineseRows);
         if (count($rows) !== 20 || count($chineseRows) !== 20
             || array_column($rows, 'unordered_top3_key') !== self::ENGLISH_TOP3_KEYS
             || hash('sha256', $this->canonicalJson($chineseRows)) !== '1fbda7c7396793b6df28f9335bf2123a52eda798247a88e879f84d136ec9cf90') {
