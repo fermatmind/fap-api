@@ -375,9 +375,21 @@ final class RiasecPublicProjectionService
 
         $top3Key = $this->selectedTop3Key($topCode);
         if ($top3Key !== null) {
+            $triadSlot = $this->deepCopySlots->resolveTop3ChainSlot($topCode);
+            $desktop = $triadSlot['desktop_reading_v1'] ?? [];
+            $tie = (array) data_get($projection, 'interpretation_state.tie_display_v1', []);
+            $orderedCopy = $desktop['ordered'][$topCode] ?? null;
+            unset($desktop['ordered']);
+            if ($formCode === 'riasec_60'
+                && ($tie['kind'] ?? null) === 'none'
+                && ($tie['unavailable_reason'] ?? '') === ''
+                && is_array($orderedCopy)) {
+                $desktop = $orderedCopy;
+            }
+            $triadSlot['desktop_reading_v1'] = $desktop;
             $this->appendRenderableSlot(
                 $slots,
-                $this->deepCopySlots->resolveTop3ChainSlot($topCode),
+                $triadSlot,
                 'hero_activity_chain',
                 $modulePolicy,
                 $locale
@@ -594,6 +606,11 @@ final class RiasecPublicProjectionService
             $slot = $this->deepCopySlots->resolveDimensionSlot($dimensionCode);
             if (($slot[$selectedDetailKey] ?? null) === null || trim((string) $slot[$selectedDetailKey]) === '') {
                 continue;
+            }
+            if (data_get($projection, 'form.form_code') === 'riasec_60') {
+                $decile = min(9, (int) floor($score / 10));
+                $slot['desktop_insight_reading'] = $slot['desktop_insight_by_decile'][$decile] ?? null;
+                $slot['desktop_atlas'] = $slot['desktop_atlas_by_decile'][$decile] ?? null;
             }
             $slot['selection_v1'] = [
                 'schema_version' => 'riasec.dimension_interpretation_selection.v1',
@@ -985,6 +1002,12 @@ final class RiasecPublicProjectionService
             'body',
         ];
         $content = [];
+        if ($locale === 'zh-CN' && $moduleKey === 'pair_blend' && ! empty($slot['work_division_v1'])) {
+            $content['work_division_v1'] = $slot['work_division_v1'];
+        }
+        if ($locale === 'zh-CN' && $moduleKey === 'hero_activity_chain' && ! empty($slot['desktop_reading_v1'])) {
+            $content['desktop_reading_v1'] = $slot['desktop_reading_v1'];
+        }
         $selection = is_array($slot['selection_v1'] ?? null) ? $slot['selection_v1'] : null;
         $layerContentKey = match ((string) ($slot['layer'] ?? '')) {
             'task' => 'task_activity_card',
@@ -1009,6 +1032,26 @@ final class RiasecPublicProjectionService
             }
             if (array_key_exists($key, $slot) && $slot[$key] !== null && $slot[$key] !== '' && $slot[$key] !== []) {
                 $content[$key] = $slot[$key];
+            }
+        }
+
+        if ($selection !== null && ($slot['slot_key'] ?? null) === 'dimension_deep_copy'
+            && $locale === 'zh-CN') {
+            $insight = $slot['desktop_insight_reading'] ?? null;
+            if (is_string($insight) && trim($insight) !== '') {
+                $content['desktop_insight_reading'] = $insight;
+            }
+            $band = $selection['score_band'] ?? '';
+            $desktopAtlas = $slot['desktop_atlas'] ?? null;
+            $atlas = $desktopAtlas['reading'] ?? $slot['atlas_score_reading'][$band] ?? null;
+            $panels = $slot['atlas_score_panels'][$band] ?? null;
+            if (is_array($panels)) {
+                $content['atlas_examples'] = $desktopAtlas['examples'] ?? $panels['examples'];
+                $content['atlas_next_step'] = $desktopAtlas['next_step'] ?? $panels['next_step'];
+                $content['atlas_profile_focus'] = $panels['profile_focus'];
+            }
+            if (is_string($atlas) && trim($atlas) !== '') {
+                $content['atlas_reading'] = $atlas;
             }
         }
 

@@ -244,6 +244,24 @@ final class RiasecEnglishReportSourceContractTest extends TestCase
     {
         $payload = $compiled['payload'];
         $manifest = $compiled['manifest'];
+        // The historical artifact predates the Chinese work-division panel.
+        foreach ($payload['assets']['pair_blend_15_pairs_v1.zh-CN.jsonl'] as &$pair) {
+            unset($pair['work_division_v1']);
+        }
+        unset($pair);
+        foreach ($payload['assets']['top3_code_chain_strategy_v1.zh-CN.jsonl'] as &$triad) {
+            unset($triad['desktop_reading_v1']);
+        }
+        unset($triad);
+        foreach ($payload['assets']['dimension_deep_copy_v1.zh-CN.r3.json']['dimensions'] as &$dimension) {
+            unset(
+                $dimension['atlas_score_reading'],
+                $dimension['atlas_score_panels'],
+                $dimension['desktop_insight_by_decile'],
+                $dimension['desktop_atlas_by_decile'],
+            );
+        }
+        unset($dimension);
         $rows = json_decode((string) file_get_contents(base_path('tests/Fixtures/riasec_reader_copy_precloseout_1_9.json')), true, 512, JSON_THROW_ON_ERROR);
         foreach ($rows as $row) {
             \PHPUnit\Framework\Assert::assertArrayHasKey($row['asset'], $payload['assets']);

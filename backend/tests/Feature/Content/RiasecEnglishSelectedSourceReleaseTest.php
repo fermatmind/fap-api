@@ -187,7 +187,8 @@ final class RiasecEnglishSelectedSourceReleaseTest extends TestCase
         $compiled = app(Compiler::class)->compile();
         $asset = $compiled['payload']['assets']['dimension_deep_copy_v1.en.json'];
         $this->assertSame('94063d7e8ef0886bb1fe2882ab16b3a4c501d8d6', $asset['source_binding']['repository_commit']);
-        $this->assertSame(hash_file('sha256', base_path('content_assets/riasec/dimension_deep_copy_v1.zh-CN.r3.json')), $asset['source_binding']['raw_sha256']);
+        // This digest is bound to the frozen source at the commit above, not the mutable Chinese asset.
+        $this->assertSame('12f7fe4bff50fe978f3ef03aa720be21b8166e2a1cbcc396184403498f1267fd', $asset['source_binding']['raw_sha256']);
         $this->assertSame('f222c798dd7d12c43bb003d2957e9bfb44a533bf485c2850cb0fc2be138cd3c7', $asset['source_binding']['manifest_source_hash']);
         foreach (['provenance', 'permission_scope', 'third_party_license'] as $field) {
             $this->assertNotEmpty($asset['source_binding'][$field]);
