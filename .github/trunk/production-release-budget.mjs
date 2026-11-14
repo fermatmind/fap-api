@@ -33,7 +33,7 @@ export function publicContentOnlineRows(rows) {
 // Reserve both transports and two bounded QA windows. A final HTTP/DOM
 // group and two representative browser reads may finish after a window.
 export const TRADITIONAL_INDEX_BUDGET_SECONDS =
-  (TRADITIONAL_INDEX_PUBLISH_TIMEOUT_MS + PUBLIC_CONTENT_53_TRANSPORT_TIMEOUT_MS) / 1000
+  (2 * TRADITIONAL_INDEX_PUBLISH_TIMEOUT_MS) / 1000
   + 2 * (TRADITIONAL_INDEX_QA_WINDOW_MS / 1000 + 60) + 160;
 
 export function requiredSeconds(deployMinutes, operations, publicContentRows = 53, newArticleDiscovery = false) {

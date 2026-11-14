@@ -6,7 +6,7 @@ import { inspectPackage, workflowSignature, packageDigest, readCandidateRows, ex
 import { verifyOnlineCandidates, readOnlinePrestate } from './public-content-53-online-qa.mjs';
 
 export const PUBLIC_CONTENT_53_TRANSPORT_TIMEOUT_MS = 800000;
-export const TRADITIONAL_INDEX_PUBLISH_TIMEOUT_MS = 1500000;
+export const TRADITIONAL_INDEX_PUBLISH_TIMEOUT_MS = 2700000;
 
 const quote = value => `'${String(value).replaceAll("'", "'\\''")}'`;
 export function buildExecution(env, backendRoot) {
@@ -35,7 +35,7 @@ export function buildExecution(env, backendRoot) {
   return { binding, request, args, publishTimeoutMs };
 }
 const transport = (execution, request) => new Promise(resolve => {
-  const timeout = request.mode === 'publish' ? execution.publishTimeoutMs : PUBLIC_CONTENT_53_TRANSPORT_TIMEOUT_MS;
+  const timeout = execution.publishTimeoutMs;
   const child = execFile('ssh', execution.args, { encoding: 'utf8', timeout, maxBuffer: 262144 },
     (error, stdout) => resolve({
       status: error ? (Number.isInteger(error.code) ? error.code : 1) : 0,
