@@ -55,7 +55,7 @@ export function requiredSeconds(deployMinutes, operations, publicContentRows = 5
   if (operations.public_content_53_publish) {
     if (!Number.isSafeInteger(publicContentRows) || publicContentRows < 1) throw new Error('PUBLIC_CONTENT_ROW_COUNT_INVALID');
     if (operations.public_content_53_package === 'traditional-article-index') {
-      if (publicContentRows !== 115) throw Error('TRADITIONAL_INDEX_ROW_COUNT_INVALID');
+      if (publicContentRows > 115) throw Error('TRADITIONAL_INDEX_ROW_COUNT_INVALID');
       consumers.public_content_53_publish = TRADITIONAL_INDEX_BUDGET_SECONDS;
     } else {
       consumers.public_content_53_publish = 1600 + publicContentRows * 600 + (newArticleDiscovery ? 360 : 0);

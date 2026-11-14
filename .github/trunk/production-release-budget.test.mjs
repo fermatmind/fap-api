@@ -170,11 +170,12 @@ test('capacity refuses above the hosted limit instead of shrinking any reserve',
 });
 
 
-test('the exact 115-article Traditional index package fits the existing deploy window',()=>{
+test('bounded Traditional index batches fit the existing deploy window',()=>{
   const operations={public_content_53_publish:true,public_content_53_package:'traditional-article-index'};
   const plan=productionPlan(operations,{},115);
   assert.equal(plan.required_seconds,30*60+1800+900+60+TRADITIONAL_INDEX_BUDGET_SECONDS);
   assert.ok(plan.job_timeout_minutes<=360);
-  assert.throws(()=>productionPlan(operations,{},114),/TRADITIONAL_INDEX_ROW_COUNT_INVALID/);
+  assert.deepEqual(productionPlan(operations,{},16),plan);
+  assert.throws(()=>productionPlan(operations,{},116),/TRADITIONAL_INDEX_ROW_COUNT_INVALID/);
   assert.throws(()=>productionPlan({...operations,public_content_53_package:'assets'},{},115),/PRODUCTION_BUDGET_EXCEEDS_PLATFORM_LIMIT/);
 });
