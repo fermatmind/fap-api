@@ -84,6 +84,48 @@ final class PublicContent53PublicationTest extends TestCase
         $release->read($spec, false);
     }
 
+    public function test_traditional_cms_index_checks_the_reviewed_public_topic_sections(): void
+    {
+        $release = app(TraditionalCmsIndexRelease::class);
+        $slug = 'reviewed-topic';
+        $spec = [
+            'kind' => 'profile',
+            'identity' => ['org_id' => 0, 'slug' => $slug, 'locale' => 'zh-TW'],
+            'traditional_cms_index' => [],
+        ];
+        foreach (['en', 'zh-CN', 'zh-TW'] as $locale) {
+            $profile = TopicProfile::query()->create([
+                'org_id' => 0, 'topic_code' => $slug, 'slug' => $slug, 'locale' => $locale,
+                'title' => "Topic $locale", 'status' => 'published', 'is_public' => true,
+                'is_indexable' => $locale !== 'zh-TW', 'published_at' => now()->subDay(),
+            ]);
+            $profile->sections()->create([
+                'section_key' => 'overview', 'title' => 'Overview', 'body_md' => "Reviewed body $locale", 'is_enabled' => true,
+            ]);
+            $profile->sections()->create([
+                'section_key' => 'faq', 'title' => 'Draft FAQ', 'body_md' => 'Unpublished body', 'is_enabled' => false,
+            ]);
+            $profile->seoMeta()->create(['seo_title' => $profile->title, 'robots' => $locale !== 'zh-TW' ? 'index,follow' : 'noindex,follow']);
+            $response = $this->getJson("/api/v0.5/topics/$slug?locale=$locale")->assertOk();
+            $sections = array_map(
+                static fn (array $section): array => [$section['section_key'], $section['title'], $section['body_md']],
+                $response->json('sections'),
+            );
+            self::assertSame([['overview', 'Overview', "Reviewed body $locale"]], $sections);
+            $spec['traditional_cms_index'][$locale] = hash('sha256', json_encode(
+                [$response->json('profile.title'), $sections], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR,
+            ));
+        }
+
+        DB::transaction(function () use ($release, $spec): void {
+            $state = $release->read($spec, true);
+            self::assertFalse($state['indexed']);
+            TopicProfileSection::query()->where('profile_id', $state['id'])->where('section_key', 'faq')->update(['is_enabled' => true]);
+            $this->expectExceptionMessage('public_content_53_traditional_cms_prestate_drift');
+            $release->read($spec, true);
+        });
+    }
+
     public function test_missing_blog_translation_uses_the_reviewed_group_and_retains_independent_same_slug_article(): void
     {
         $base = ['org_id' => 0];
