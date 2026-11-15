@@ -221,6 +221,47 @@ final class PublicContent53PublicationTest extends TestCase
         self::assertSame($expected, $actual);
     }
 
+    public function test_traditional_cms_index_refreshes_only_supported_public_cache_paths(): void
+    {
+        config([
+            'ops.content_release_observability.hmac_revalidation_url' => 'https://staging.fermatmind.com/api/content-release/revalidate',
+            'ops.content_release_observability.hmac_revalidation_secret' => 'test-only-revalidation-secret',
+        ]);
+        $rows = TraditionalCmsIndexRelease::readPackage(
+            file_get_contents(base_path('content_assets/public_content_53/traditional-cms-index.json')), 'staging',
+        );
+        $actual = [];
+        $warmed = false;
+        Artisan::shouldReceive('call')->once()
+            ->with('seo:warm-sitemap-source-cache', ['--refresh-if-changed' => true, '--json' => true])
+            ->andReturnUsing(function () use (&$warmed): int {
+                $warmed = true;
+
+                return 0;
+            });
+        Http::fake(function ($request) use (&$actual, &$warmed) {
+            self::assertTrue($warmed);
+            $payload = json_decode($request->body(), true, flags: JSON_THROW_ON_ERROR);
+            $paths = $payload['cache_signal']['paths'];
+            self::assertLessThanOrEqual(24, count($paths));
+            self::assertSame(['type' => 'public_content_53'], $payload['content']);
+            array_push($actual, ...$paths);
+
+            return Http::response(['ok' => true, 'revalidated_paths' => $paths, 'rejected_paths' => [], 'invalidated_tags' => []]);
+        });
+
+        app(PublicContent53FrontendRevalidator::class)->revalidate($rows);
+        Http::assertSentCount(3);
+        self::assertContains('/sitemap.xml', $actual);
+        self::assertSame(57, count(array_unique($actual)));
+        self::assertContains('/zh-TW/about', $actual);
+        self::assertContains('/en/career/guides/from-mbti-to-job-fit', $actual);
+        self::assertContains('/zh/topics/big-five', $actual);
+        foreach ($actual as $path) {
+            self::assertDoesNotMatchRegularExpression('~^/zh-TW/(?:topics|career/guides)/~', $path);
+        }
+    }
+
     public static function stagingOriginalPackages(): array
     {
         return [
