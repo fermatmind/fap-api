@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Assessment;
 
+use App\Http\Controllers\API\V0_5\Career\CareerAssessmentController;
+use App\Http\Middleware\LimitApiPublicPayloadSize;
+use Illuminate\Http\Request;
 use Tests\TestCase;
 
 final class CareerAssessmentApiTest extends TestCase
@@ -52,6 +55,19 @@ final class CareerAssessmentApiTest extends TestCase
             ->assertJsonMissingPath('answers');
 
         self::assertStringContainsString('no-store', $response->headers->get('Cache-Control', ''));
+    }
+
+    public function test_public_scoring_is_bound_to_the_expected_action_and_request_limits(): void
+    {
+        $route = app('router')->getRoutes()->match(Request::create(self::PATH.'/score', 'POST'));
+
+        $this->assertSame(CareerAssessmentController::class.'@score', $route->getActionName());
+        $this->assertContains(LimitApiPublicPayloadSize::class, $route->gatherMiddleware());
+        $this->assertContains('throttle:api_attempt_submit', $route->gatherMiddleware());
+
+        $this->postJson(self::PATH.'/score', ['extra' => str_repeat('x', 16385)])
+            ->assertStatus(413)
+            ->assertJsonPath('error_code', 'PAYLOAD_TOO_LARGE');
     }
 
     public function test_requires_every_answer_key_and_rejects_invalid_or_legacy_payloads(): void

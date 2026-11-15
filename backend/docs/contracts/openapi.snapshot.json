@@ -3452,6 +3452,43 @@
                 ]
             }
         },
+        "/api/v0.5/career-assessment/questions": {
+            "get": {
+                "operationId": "get_api_v0_5_career_assessment_questions",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerAssessmentController@questions",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public"
+                ]
+            }
+        },
+        "/api/v0.5/career-assessment/score": {
+            "post": {
+                "operationId": "post_api_v0_5_career_assessment_score",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerAssessmentController@score",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\LimitApiPublicPayloadSize",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_attempt_submit"
+                ]
+            }
+        },
         "/api/v0.5/career-guides": {
             "get": {
                 "operationId": "get_api_v0_5_career_guides",

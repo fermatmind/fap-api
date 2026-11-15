@@ -52,6 +52,8 @@ final class SecurityGuardrailsTest extends TestCase
         '/api/v0.3/analytics/mbti-attribution-events',
         '/api/v0.3/shares/{shareId}/click',
         '/api/v0.3/shares/{shareId}/compare-invites',
+        // Scores an anonymous answer sheet in memory with no stored attempt.
+        '/api/v0.5/career-assessment/score',
         '/api/v0.5/career/attribution/events',
         '/api/v0.5/career/recommendations/mbti/{type}/feedback',
         '/api/v0.5/career/shortlist',
