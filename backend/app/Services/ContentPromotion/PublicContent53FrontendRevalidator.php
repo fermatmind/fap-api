@@ -17,9 +17,15 @@ final class PublicContent53FrontendRevalidator
     {
         [$endpoint, $secret] = $this->configuration();
         $rateLimitWaited = false;
-        $requests = isset($rows[0]['traditional_article_index'])
-            ? $this->traditionalIndexRequests($rows)
-            : $rows;
+        if ((isset($rows[0]['traditional_article_index']) || isset($rows[0]['traditional_cms_index']))
+            && Artisan::call('seo:warm-sitemap-source-cache', ['--refresh-if-changed' => true, '--json' => true]) !== 0) {
+            throw new DomainException('public_content_53_traditional_index_sitemap_refresh_failed');
+        }
+        $requests = match (true) {
+            isset($rows[0]['traditional_article_index']) => $this->traditionalIndexRequests($rows),
+            isset($rows[0]['traditional_cms_index']) => $this->traditionalCmsIndexRequests($rows),
+            default => $rows,
+        };
         $originals = [];
         foreach ($rows as $row) {
             if (! ($row['new_traditional_article'] ?? false)) {
@@ -139,10 +145,6 @@ final class PublicContent53FrontendRevalidator
 
     private function traditionalIndexRequests(array $rows): array
     {
-        if (Artisan::call('seo:warm-sitemap-source-cache', ['--refresh-if-changed' => true, '--json' => true]) !== 0) {
-            throw new DomainException('public_content_53_traditional_index_sitemap_refresh_failed');
-        }
-
         // Traditional detail already uses no-store. Refresh the exact affected
         // original detail paths and the shared discovery documents.
         $paths = ['/sitemap.xml', '/llms.txt', '/llms-full.txt'];
@@ -152,6 +154,35 @@ final class PublicContent53FrontendRevalidator
             }
         }
 
+        return $this->cachePathRequests($paths);
+    }
+
+    private function traditionalCmsIndexRequests(array $rows): array
+    {
+        $paths = ['/sitemap.xml'];
+        foreach ($rows as $row) {
+            $slug = $row['identity']['slug'];
+            $path = match ($row['kind']) {
+                'guide' => "/career/guides/$slug",
+                'profile' => "/topics/$slug",
+                'page' => null,
+            };
+            if ($path === null) {
+                $paths[] = "/zh-TW/$slug";
+
+                continue;
+            }
+
+            // Traditional guide and topic details already fetch without a cache.
+            $paths[] = "/en$path";
+            $paths[] = "/zh$path";
+        }
+
+        return $this->cachePathRequests($paths);
+    }
+
+    private function cachePathRequests(array $paths): array
+    {
         return array_map(static fn (array $chunk): array => [
             'kind' => 'traditional_index_cache',
             'identity' => ['locale' => 'en', 'slug' => 'articles'],
