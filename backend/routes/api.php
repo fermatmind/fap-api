@@ -40,6 +40,7 @@ use App\Http\Controllers\API\V0_4\PartnerController;
 use App\Http\Controllers\API\V0_4\RotationAuditController;
 use App\Http\Controllers\API\V0_5\Career\CareerAiImpactAssetPreviewController;
 use App\Http\Controllers\API\V0_5\Career\CareerAliasResolutionController;
+use App\Http\Controllers\API\V0_5\Career\CareerAssessmentController;
 use App\Http\Controllers\API\V0_5\Career\CareerAttributionEventController;
 use App\Http\Controllers\API\V0_5\Career\CareerCnProxyPublicOwnerController;
 use App\Http\Controllers\API\V0_5\Career\CareerDatasetHubController;
@@ -620,6 +621,11 @@ Route::prefix('v0.4')->middleware(NormalizeApiErrorContract::class)->group(funct
 });
 
 Route::prefix('v0.5')->group(function () {
+    Route::get('/career-assessment/questions', [CareerAssessmentController::class, 'questions'])
+        ->middleware('throttle:api_public');
+    Route::post('/career-assessment/score', [CareerAssessmentController::class, 'score'])
+        ->middleware([\App\Http\Middleware\LimitApiPublicPayloadSize::class, 'throttle:api_attempt_submit']);
+
     Route::post('/career/attribution/events', [CareerAttributionEventController::class, 'store'])
         ->middleware('throttle:api_track');
     Route::middleware([PublicApiCacheHeaders::class, RecordPublicContentRuntime::class])->group(function () {
