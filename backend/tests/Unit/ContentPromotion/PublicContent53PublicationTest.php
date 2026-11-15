@@ -31,6 +31,7 @@ use App\Services\ContentPromotion\PublicContent53State;
 use App\Services\ContentPromotion\PublicContent53Writer;
 use App\Services\ContentPromotion\StagingArticleOriginals;
 use App\Services\ContentPromotion\TraditionalArticlePublication;
+use App\Services\ContentPromotion\TraditionalCmsIndexRelease;
 use Database\Seeders\ScaleRegistrySeeder;
 use DomainException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -46,6 +47,42 @@ use Tests\TestCase;
 final class PublicContent53PublicationTest extends TestCase
 {
     use RefreshDatabase;
+
+    public function test_traditional_cms_index_updates_only_the_held_target_and_can_restore_it(): void
+    {
+        $release = app(TraditionalCmsIndexRelease::class);
+        $spec = [
+            'kind' => 'guide',
+            'identity' => ['org_id' => 0, 'slug' => 'reviewed-guide', 'locale' => 'zh-TW'],
+            'traditional_cms_index' => [],
+        ];
+        foreach (['en', 'zh-CN', 'zh-TW'] as $locale) {
+            $title = "Guide $locale";
+            $body = "Reviewed body $locale";
+            $guide = CareerGuide::query()->create([
+                'org_id' => 0, 'guide_code' => 'reviewed-guide', 'slug' => 'reviewed-guide', 'locale' => $locale,
+                'title' => $title, 'excerpt' => $title, 'body_md' => $body, 'category_slug' => 'career-planning',
+                'status' => CareerGuide::STATUS_PUBLISHED, 'is_public' => true, 'is_indexable' => $locale !== 'zh-TW',
+                'published_at' => now()->subDay(),
+            ]);
+            $guide->seoMeta()->create(['seo_title' => $title, 'robots' => $locale !== 'zh-TW' ? 'index,follow' : 'noindex,follow']);
+            $guide->revisions()->create(['revision_no' => 1, 'snapshot_json' => ['body_md' => $body], 'note' => 'reviewed', 'created_at' => now()]);
+            $spec['traditional_cms_index'][$locale] = hash('sha256', json_encode([$title, $body], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR));
+        }
+        $before = $release->read($spec, false);
+        $release->assertHeld($before);
+        DB::transaction(function () use ($release, $spec, $before): void {
+            self::assertSame($before, $release->read($spec, true));
+            $release->write($spec, $before, true);
+            $release->assertActive($release->read($spec, true));
+            $release->write($spec, $before, false);
+            self::assertSame($before, $release->read($spec, true));
+        });
+
+        $spec['traditional_cms_index']['zh-CN'] = str_repeat('0', 64);
+        $this->expectExceptionMessage('public_content_53_traditional_cms_prestate_drift');
+        $release->read($spec, false);
+    }
 
     public function test_missing_blog_translation_uses_the_reviewed_group_and_retains_independent_same_slug_article(): void
     {

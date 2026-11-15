@@ -192,6 +192,7 @@ final class CareerGuideSeoService
                 $query->whereNull('published_at')
                     ->orWhere('published_at', '<=', now());
             })
+            ->where(static fn ($query) => $query->where('locale', '<>', 'zh-TW')->orWhere('is_indexable', true))
             ->get(['slug', 'locale']);
 
         $alternates = [];

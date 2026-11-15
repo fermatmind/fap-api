@@ -97,6 +97,15 @@ final class PublicContent53Writer
 
             return ['written_count' => count($rows), 'state' => $this->states->read($context->packageSha256, true)];
         }
+        if (isset($rows[0]['traditional_cms_index'])) {
+            $release = app(TraditionalCmsIndexRelease::class);
+            foreach ($rows as $row) {
+                $release->write($row, $before[$row['page_id']], true);
+                $release->assertActive($release->read($row, true));
+            }
+
+            return ['written_count' => count($rows), 'state' => $this->states->read($context->packageSha256, true)];
+        }
         usort($rows, static fn (array $a, array $b): int => ($a['identity']['locale'] === 'en') <=> ($b['identity']['locale'] === 'en'));
         $written = [];
         $created = 0;
@@ -253,6 +262,11 @@ final class PublicContent53Writer
         }
         $rows = collect($this->package->read(base_path(), $context->packageSha256, (string) config('content_promotion.public_content_53_environment', 'production'))['candidates'])->keyBy('page_id');
         foreach ($before as $id => $saved) {
+            if (isset($rows[$id]['traditional_cms_index'])) {
+                app(TraditionalCmsIndexRelease::class)->write($rows[$id], $saved, false);
+
+                continue;
+            }
             if ($rows[$id]['new_traditional_topic'] ?? false) {
                 app(TraditionalTopicPublication::class)->restore($rows[$id], $saved, $after[$id], $context);
 

@@ -111,10 +111,12 @@ final class TopicProfileSeoService
         return TopicProfile::query()
             ->withoutGlobalScopes()
             ->where('org_id', (int) $profile->org_id)
-            ->where('slug', (string) $profile->slug)
+            ->where(static function ($query) use ($profile): void {
+                $query->where(static fn ($legacy) => $legacy->where('slug', (string) $profile->slug)->whereIn('locale', ['en', 'zh-CN']))
+                    ->orWhere(static fn ($traditional) => $traditional->where('topic_code', (string) $profile->topic_code)->where('locale', 'zh-TW')->where('is_indexable', true));
+            })
             ->where('status', TopicProfile::STATUS_PUBLISHED)
             ->where('is_public', true)
-            ->whereIn('locale', ['en', 'zh-CN'])
             ->where(fn ($query) => $query->whereNull('published_at')->orWhere('published_at', '<=', now()))
             ->get()
             ->mapWithKeys(fn (TopicProfile $alternate): array => [

@@ -8,6 +8,7 @@ export const packagePath = 'content_assets/public_content_53';
 // Selection comes from the existing exact-range classifier, never file presence.
 const packages = {
   'blog-missing-translations': ['fermatmind.blog_missing_translations.v1', ['blog-missing-translations.json']],
+  'traditional-cms-index': ['fermatmind.traditional_cms_index.v1', ['traditional-cms-index.json']],
   'traditional-article-index': ['fermatmind.traditional_article_index.v1', ['traditional-article-index.json']],
   'staging-article-originals': ['fermatmind.staging_article_originals.v1', ['staging-article-originals.json']],
   'staging-article-originals-taiwan-delta': ['fermatmind.staging_article_originals.v1', ['staging-article-originals-taiwan-delta.json']],
@@ -122,6 +123,7 @@ export const executorPaths = [
   "app/Services/ContentPromotion/PublicContent53Writer.php",
   "app/Services/ContentPromotion/StagingArticleOriginals.php",
   "app/Services/ContentPromotion/TraditionalArticleIndexPackage.php",
+  "app/Services/ContentPromotion/TraditionalCmsIndexRelease.php",
   "app/Services/ContentPromotion/TraditionalArticleIndexRelease.php",
   "app/Services/ContentPromotion/TraditionalArticlePublication.php",
   "app/Services/ContentPromotion/TraditionalArticleSourcePreflight.php",
@@ -146,7 +148,7 @@ export const executorPaths = [
 ].sort();
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 export function readCandidateRows(backendRoot, digest = packageDigest(backendRoot), environment = 'production') {
-  const code = 'require $argv[1]."/app/Services/ContentPromotion/PromotionContextFactory.php"; require $argv[1]."/app/Services/ContentPromotion/RiasecCodeSampleArticles.php"; require $argv[1]."/app/Services/ContentPromotion/PublicContent53MbtiResultCopy.php"; require $argv[1]."/app/Services/ContentPromotion/StagingArticleOriginals.php"; require $argv[1]."/app/Services/ContentPromotion/TraditionalArticleIndexPackage.php"; require $argv[1]."/app/Services/ContentPromotion/TraditionalArticlePublication.php"; require $argv[1]."/app/Services/Cms/StructuredContentPagePolicy.php"; require $argv[1]."/app/Services/ContentPromotion/TraditionalContentPagePublication.php"; require $argv[1]."/app/Services/ContentPromotion/TraditionalLandingSurfacePublication.php"; require $argv[1]."/app/Services/ContentPromotion/PublicContent53Package.php"; echo json_encode((new App\\Services\\ContentPromotion\\PublicContent53Package)->read($argv[1],$argv[2],$argv[3]), JSON_THROW_ON_ERROR);';
+  const code = 'require $argv[1]."/app/Services/ContentPromotion/PromotionContextFactory.php"; require $argv[1]."/app/Services/ContentPromotion/RiasecCodeSampleArticles.php"; require $argv[1]."/app/Services/ContentPromotion/PublicContent53MbtiResultCopy.php"; require $argv[1]."/app/Services/ContentPromotion/StagingArticleOriginals.php"; require $argv[1]."/app/Services/ContentPromotion/TraditionalArticleIndexPackage.php"; require $argv[1]."/app/Services/ContentPromotion/TraditionalCmsIndexRelease.php"; require $argv[1]."/app/Services/ContentPromotion/TraditionalArticlePublication.php"; require $argv[1]."/app/Services/Cms/StructuredContentPagePolicy.php"; require $argv[1]."/app/Services/ContentPromotion/TraditionalContentPagePublication.php"; require $argv[1]."/app/Services/ContentPromotion/TraditionalLandingSurfacePublication.php"; require $argv[1]."/app/Services/ContentPromotion/PublicContent53Package.php"; echo json_encode((new App\\Services\\ContentPromotion\\PublicContent53Package)->read($argv[1],$argv[2],$argv[3]), JSON_THROW_ON_ERROR);';
   return JSON.parse(execFileSync('php', ['-r', code, realpathSync(backendRoot), digest, environment], { encoding: 'utf8', timeout: 30000, maxBuffer: 4000000, stdio: ['pipe', 'pipe', 'pipe'] }));
 }
 export function inspectPackage(backendRoot, selection = process.env.PUBLIC_CONTENT_53_PACKAGE_NAME) {

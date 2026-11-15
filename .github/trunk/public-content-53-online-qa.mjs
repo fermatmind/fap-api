@@ -353,9 +353,92 @@ async function traditionalIndexOnline(rows, environment, fetcher, renderer, befo
     discovery_readback_count:rows.length,browser_readback_count:byPeerCount.size};
 }
 
+async function awaitTraditionalCmsFrontend(web, revision, fetcher) {
+  const deadline = Date.now() + 360_000;
+  for (;;) {
+    const state = parseApi(await read(web + '/revision', fetcher));
+    if (state.revision === revision) return;
+    if (Date.now() >= deadline) throw new Error('PUBLIC_CONTENT_53_TRADITIONAL_CMS_FRONTEND_REVISION');
+    await new Promise(resolve => setTimeout(resolve, 10000));
+  }
+}
+
+async function verifyTraditionalCmsIndex(rows, environment, fetcher, active) {
+  const [api, web] = hosts(environment);
+  const staging = environment === 'staging';
+  const collections = ['/zh-TW/career/guides', '/zh-TW/topics'];
+  const paths = [...rows.map(pathFor), ...collections];
+  const source = parseApi(await read(api + '/api/v0.5/seo/sitemap-source', fetcher));
+  const listed = source.items?.map(item => new URL(item.loc).pathname);
+  const peerPaths = paths.flatMap(path => [path.replace('/zh-TW/', '/zh/'), path.replace('/zh-TW/', '/en/')]);
+  if (source.ok !== true || !Array.isArray(listed) ||
+    paths.some(path => listed.filter(entry => entry === path).length !== Number(active)) ||
+    peerPaths.some(path => !listed.includes(path))) {
+    throw new Error('PUBLIC_CONTENT_53_TRADITIONAL_CMS_SITEMAP');
+  }
+  if (!staging) {
+    const xml = await read(web + '/sitemap.xml', fetcher);
+    const entries = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
+    if (!entries.length || new Set(entries).size !== entries.length ||
+      paths.some(path => entries.includes(web + path) !== active)) {
+      throw new Error('PUBLIC_CONTENT_53_TRADITIONAL_CMS_SITEMAP');
+    }
+  }
+  const apiPaths = { guide: 'career-guides', profile: 'topics', page: 'content-pages' };
+  for (let start = 0; start < rows.length; start += 6) {
+    await Promise.all(rows.slice(start, start + 6).map(async row => {
+      const surface = apiPaths[row.kind];
+      const data = parseApi(await read(`${api}/api/v0.5/${surface}/${row.identity.slug}?locale=zh-TW`, fetcher));
+      const record = data[row.kind];
+      if (!record?.is_public || record.locale !== 'zh-TW' || record.slug !== row.identity.slug || record.is_indexable !== active) {
+        throw new Error('PUBLIC_CONTENT_53_TRADITIONAL_CMS_PUBLIC_READBACK');
+      }
+    }));
+  }
+  if (!active) return { environment, api_readback_count: rows.length };
+  const samples = ['guide', 'profile', 'page'].map(kind => rows.find(row => row.kind === kind)).map(pathFor);
+  for (const path of [...samples, ...collections]) {
+    const peers = { 'zh-TW': web + path, 'zh-CN': web + path.replace('/zh-TW/', '/zh/'), en: web + path.replace('/zh-TW/', '/en/') };
+    await Promise.all(Object.values(peers).map(async url => {
+      const response = await fetcher(url, {
+        redirect: 'error', signal: AbortSignal.timeout(20000),
+        headers: { 'User-Agent': 'facebookexternalhit/1.1', 'Cache-Control': 'no-cache' },
+      });
+      if (!response.ok) throw new Error('PUBLIC_CONTENT_53_TRADITIONAL_CMS_HTML');
+      const dom = domOf(await response.text());
+      const robots = [...dom.robots, response.headers.get('x-robots-tag') ?? ''];
+      const canonical = dom.canonical.map(value => new URL(value, web).href);
+      const counterparts = Object.fromEntries(dom.alternate_entries.filter(entry => Object.hasOwn(peers, entry.hreflang))
+        .map(entry => [entry.hreflang, new URL(entry.href, web).href]));
+      if (staging ? !robots.some(value => /\bnoindex\b/i.test(value))
+        : !equal(canonical, [url]) || !equal(counterparts, peers) || robots.some(value => /\bnoindex\b/i.test(value))) {
+        throw new Error('PUBLIC_CONTENT_53_TRADITIONAL_CMS_HTML');
+      }
+    }));
+  }
+  return { environment, api_readback_count: rows.length, discovery_readback_count: paths.length, raw_html_readback_count: 15 };
+}
+
+async function verifyTraditionalCmsIndexAfterCache(rows, environment, fetcher) {
+  const deadline = Date.now() + 360_000;
+  for (;;) {
+    try {
+      return await verifyTraditionalCmsIndex(rows, environment, fetcher, true);
+    } catch (error) {
+      if (Date.now() >= deadline || (!transientIndexTransport(error) &&
+        !/^PUBLIC_CONTENT_53_TRADITIONAL_CMS_(?:SITEMAP|HTML|PUBLIC_READBACK)$/.test(error.message))) throw error;
+      await new Promise(resolve => setTimeout(resolve, 10000));
+    }
+  }
+}
+
 export async function readOnlinePrestate(environment,backendRoot,fetcher=fetch,renderer=renderPage,packageSha256) {
   const [api,web] = hosts(environment); const result={};
   const rows = readCandidateRows(backendRoot,packageSha256,environment).candidates.map(row=>environment === 'staging' && row.staging_snapshot ? {...row,snapshot:row.staging_snapshot} : row);
+  if (rows[0]?.traditional_cms_index) {
+    await awaitTraditionalCmsFrontend(web, rows[0].frontend_revision, fetcher);
+    return verifyTraditionalCmsIndex(rows,environment,fetcher,false);
+  }
   if (rows[0]?.traditional_article_index) return traditionalIndexOnline(rows,environment,fetcher,renderer,null);
   for (const row of rows) {
     if (row.staging_article_original) {
@@ -773,6 +856,7 @@ export function assertNewArticleDiscovery(rows,documents,environment='production
 export async function verifyOnlineCandidates(environment,backendRoot,fetcher=fetch,renderer=renderPage,prestate,packageSha256) {
   const [api,web]=hosts(environment);if(!prestate) throw new Error('PUBLIC_CONTENT_53_PRESTATE_REQUIRED');
   const rows = readCandidateRows(backendRoot,packageSha256,environment).candidates.map(row=>environment === 'staging' && row.staging_snapshot ? {...row,snapshot:row.staging_snapshot} : row);
+  if (rows[0]?.traditional_cms_index) return verifyTraditionalCmsIndexAfterCache(rows,environment,fetcher);
   if (rows[0]?.traditional_article_index) return traditionalIndexOnline(rows,environment,fetcher,renderer,prestate);
   const originalIds=new Map();
   for (const row of rows) {

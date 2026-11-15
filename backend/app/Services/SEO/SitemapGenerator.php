@@ -1274,7 +1274,7 @@ class SitemapGenerator
             ->withoutGlobalScopes()
             ->where('org_id', 0)
             ->publiclyIndexable()
-            ->whereIn('locale', ['en', 'zh-CN'])
+            ->whereIn('locale', ['en', 'zh-CN', 'zh-TW'])
             ->orderBy('locale')
             ->orderBy('slug')
             ->get();
@@ -1371,14 +1371,14 @@ class SitemapGenerator
 
         $path = '/'.ltrim($path, '/');
 
-        if (preg_match('#^/(en|zh)(?:/|$)#', $path) === 1) {
+        if (preg_match('#^/(en|zh|zh-TW)(?:/|$)#', $path) === 1) {
             return str_starts_with($path, '/'.$localeSegment.'/') || $path === '/'.$localeSegment
                 ? $path
                 : null;
         }
 
         if ($path === '/') {
-            return $localeSegment === 'zh' ? '/' : '/en';
+            return $localeSegment === 'zh' ? '/' : '/'.$localeSegment;
         }
 
         return '/'.$localeSegment.$path;
@@ -1389,6 +1389,7 @@ class SitemapGenerator
         return match ($locale) {
             'zh-CN', 'zh' => 'zh',
             'en' => 'en',
+            'zh-TW' => 'zh-TW',
             default => '',
         };
     }

@@ -47,6 +47,11 @@ final class PublicContent53State
             });
         }
         foreach ($rows as $row) {
+            if (isset($row['traditional_cms_index'])) {
+                $state[$row['page_id']] = app(TraditionalCmsIndexRelease::class)->read($row, $lock);
+
+                continue;
+            }
             if ($row['new_traditional_topic'] ?? false) {
                 $state[$row['page_id']] = app(TraditionalTopicPublication::class)->read($row, $lock);
 
@@ -240,6 +245,14 @@ final class PublicContent53State
 
             return;
         }
+        if (isset($rows[0]['traditional_cms_index'])) {
+            $release = app(TraditionalCmsIndexRelease::class);
+            foreach ($rows as $row) {
+                $release->assertHeld($release->read($row, false));
+            }
+
+            return;
+        }
         if ($this->nativeBatch($rows)) {
             app(PublicContent53MbtiResultCopy::class)->withNativeRead($rows, false, static function (PublicContent53MbtiResultCopy $native) use ($rows): void {
                 foreach ($rows as $row) {
@@ -323,6 +336,11 @@ final class PublicContent53State
     {
         foreach ($rows as $row) {
             $saved = $state[$row['page_id']];
+            if (isset($row['traditional_cms_index'])) {
+                app(TraditionalCmsIndexRelease::class)->assertHeld($saved);
+
+                continue;
+            }
             if (($row['new_traditional_guide'] ?? false) || ($row['new_traditional_topic'] ?? false)) {
                 continue; // read() already verified the native source and target under the transaction lock.
             }
@@ -439,6 +457,15 @@ final class PublicContent53State
 
     public function assertPublished(array $rows, array $state): void
     {
+        if (isset($rows[0]['traditional_cms_index'])) {
+            foreach ($rows as $row) {
+                $release = app(TraditionalCmsIndexRelease::class);
+                $release->assertActive($release->read($row, false));
+            }
+
+            return;
+        }
+
         if (isset($rows[0]['staging_article_original'])) {
             app(StagingArticleOriginals::class)->assertPublished($rows);
 

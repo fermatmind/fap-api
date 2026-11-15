@@ -247,6 +247,9 @@ final class PublicContent53PromotionAdapter implements ExactPackagePromotionAdap
         if (isset($rows[0]['staging_article_original']) && PublicContent53Package::environment() === 'production') {
             return;
         }
+        if (isset($rows[0]['traditional_cms_index'])) {
+            $this->cache->flushSharedDiscoverabilityCaches();
+        }
         foreach ($rows as $row) {
             if ($row['kind'] === 'page') {
                 \Illuminate\Support\Facades\Cache::forget('content_page:v1:0:'.$row['identity']['slug'].':'.$row['identity']['locale']);
@@ -271,6 +274,11 @@ final class PublicContent53PromotionAdapter implements ExactPackagePromotionAdap
         }
         if ($published > 0 && $written > 0) {
             $result = array_replace($result, TraditionalArticleIndexPackage::mutationCounts($context) ?? []);
+            $rows = $this->package->read(base_path(), $context->packageSha256, PublicContent53Package::environment())['candidates'];
+            if (isset($rows[0]['traditional_cms_index'])) {
+                $result['indexability_mutation_count'] = $written;
+                $result['sitemap_mutation_count'] = $written + 2;
+            }
         }
         if ($published > 0 && $written > 0 && \App\Services\ContentPromotion\RiasecCodeSampleArticles::matchesContext($context)) {
             $result['created_count'] = $created;

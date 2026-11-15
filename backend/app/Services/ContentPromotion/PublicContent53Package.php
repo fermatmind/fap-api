@@ -254,6 +254,14 @@ final class PublicContent53Package
                 return $package;
             }
         }
+        $cmsIndexFile = TraditionalCmsIndexRelease::FILE;
+        if (is_file($root.'/'.self::PACKAGE.'/'.$cmsIndexFile)) {
+            $bytes = $this->bytes($root, $cmsIndexFile);
+            $digest = hash('sha256', TraditionalCmsIndexRelease::SCHEMA."\n".$cmsIndexFile."\n".hash('sha256', $bytes)."\n");
+            if (hash_equals($expectedSha256, $digest)) {
+                return ['candidates' => TraditionalCmsIndexRelease::readPackage($bytes, $environment), 'package_sha256' => $digest];
+            }
+        }
         if (is_file($root.'/'.self::PACKAGE.'/traditional-topics.json')) {
             $name = 'traditional-topics.json';
             $schema = 'fermatmind.traditional_topics.v1';
