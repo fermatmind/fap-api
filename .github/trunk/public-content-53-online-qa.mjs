@@ -353,8 +353,11 @@ async function traditionalIndexOnline(rows, environment, fetcher, renderer, befo
     discovery_readback_count:rows.length,browser_readback_count:byPeerCount.size};
 }
 
+export const TRADITIONAL_CMS_INDEX_WAIT_MS = 360_000;
+export const TRADITIONAL_CMS_INDEX_MAX_ROWS = 33;
+
 async function awaitTraditionalCmsFrontend(web, revision, fetcher) {
-  const deadline = Date.now() + 360_000;
+  const deadline = Date.now() + TRADITIONAL_CMS_INDEX_WAIT_MS;
   for (;;) {
     const state = parseApi(await read(web + '/revision', fetcher));
     if (state.revision === revision) return;
@@ -420,7 +423,7 @@ async function verifyTraditionalCmsIndex(rows, environment, fetcher, active) {
 }
 
 async function verifyTraditionalCmsIndexAfterCache(rows, environment, fetcher) {
-  const deadline = Date.now() + 360_000;
+  const deadline = Date.now() + TRADITIONAL_CMS_INDEX_WAIT_MS;
   for (;;) {
     try {
       return await verifyTraditionalCmsIndex(rows, environment, fetcher, true);
@@ -437,7 +440,12 @@ export async function readOnlinePrestate(environment,backendRoot,fetcher=fetch,r
   const rows = readCandidateRows(backendRoot,packageSha256,environment).candidates.map(row=>environment === 'staging' && row.staging_snapshot ? {...row,snapshot:row.staging_snapshot} : row);
   if (rows[0]?.traditional_cms_index) {
     await awaitTraditionalCmsFrontend(web, rows[0].frontend_revision, fetcher);
-    return verifyTraditionalCmsIndex(rows,environment,fetcher,false);
+    try {
+      return await verifyTraditionalCmsIndex(rows,environment,fetcher,false);
+    } catch (error) {
+      if (!transientIndexTransport(error)) throw error;
+      return verifyTraditionalCmsIndex(rows,environment,fetcher,false);
+    }
   }
   if (rows[0]?.traditional_article_index) return traditionalIndexOnline(rows,environment,fetcher,renderer,null);
   for (const row of rows) {

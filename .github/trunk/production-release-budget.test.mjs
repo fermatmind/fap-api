@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {spawnSync} from 'node:child_process';
 import test from 'node:test';
-import {requiredSeconds, publicContentOnlineRows, IQ_PUBLIC_SCALE_BUDGET_SECONDS,TRADITIONAL_INDEX_BUDGET_SECONDS,productionPlan,productionJobBudget} from './production-release-budget.mjs';
+import {requiredSeconds, publicContentOnlineRows, IQ_PUBLIC_SCALE_BUDGET_SECONDS,TRADITIONAL_INDEX_BUDGET_SECONDS, TRADITIONAL_CMS_INDEX_BUDGET_SECONDS,productionPlan,productionJobBudget} from './production-release-budget.mjs';
 import {IQ_PUBLICATION_TRANSPORT_TIMEOUT_MS} from './iq-public-scale-publish.mjs';
 import {IQ_CANDIDATE_READ_TIMEOUT_MS, IQ_HTTP_READ_TIMEOUT_MS} from './iq-public-scale-online-qa.mjs';
 import {classifyPaths} from './classify-paths.mjs';
@@ -178,4 +178,14 @@ test('bounded Traditional index batches fit the existing deploy window',()=>{
   assert.deepEqual(productionPlan(operations,{},16),plan);
   assert.throws(()=>productionPlan(operations,{},116),/TRADITIONAL_INDEX_ROW_COUNT_INVALID/);
   assert.throws(()=>productionPlan({...operations,public_content_53_package:'assets'},{},115),/PRODUCTION_BUDGET_EXCEEDS_PLATFORM_LIMIT/);
+});
+
+
+test('CMS index batch budgets the actual shared online QA and unchanged recovery transports',()=>{
+  const operations={public_content_53_publish:true,public_content_53_package:'traditional-cms-index'};
+  const plan=productionPlan(operations,{},33);
+  assert.equal(plan.required_seconds,4560+TRADITIONAL_CMS_INDEX_BUDGET_SECONDS);
+  assert.ok(plan.job_timeout_minutes<=360);
+  assert.throws(()=>productionPlan(operations,{},34),/TRADITIONAL_CMS_INDEX_ROW_COUNT_INVALID/);
+  assert.throws(()=>productionPlan({...operations,public_content_53_package:'assets'},{},33),/PRODUCTION_BUDGET_EXCEEDS_PLATFORM_LIMIT/);
 });

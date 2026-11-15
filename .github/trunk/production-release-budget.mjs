@@ -8,7 +8,7 @@
 // 360s cache-settlement loop (including its final bounded browser attempt).
 // Both 800s publication/recovery SSH limits remain reserved separately.
 import {readCandidateRows,packageDigest} from './public-content-53-package.mjs';
-import {TRADITIONAL_INDEX_QA_WINDOW_MS} from './public-content-53-online-qa.mjs';
+import {TRADITIONAL_INDEX_QA_WINDOW_MS, TRADITIONAL_CMS_INDEX_WAIT_MS, TRADITIONAL_CMS_INDEX_MAX_ROWS} from './public-content-53-online-qa.mjs';
 import {PUBLIC_CONTENT_53_TRANSPORT_TIMEOUT_MS, TRADITIONAL_INDEX_PUBLISH_TIMEOUT_MS} from './public-content-53-publish.mjs';
 import {IQ_PUBLICATION_TRANSPORT_TIMEOUT_MS} from './iq-public-scale-publish.mjs';
 import {IQ_CANDIDATE_READ_TIMEOUT_MS, IQ_HTTP_READ_TIMEOUT_MS} from './iq-public-scale-online-qa.mjs';
@@ -36,6 +36,14 @@ export const TRADITIONAL_INDEX_BUDGET_SECONDS =
   (2 * TRADITIONAL_INDEX_PUBLISH_TIMEOUT_MS) / 1000
   + 2 * (TRADITIONAL_INDEX_QA_WINDOW_MS / 1000 + 60) + 160;
 
+// The CMS index package reads API rows six at a time and checks three
+// siblings for each of three families and two listings. No browser runs
+// per row. Each window leaves 480s for the last HTTP/DOM batch or prestate
+// transport retry, in addition to both unchanged SSH transports.
+export const TRADITIONAL_CMS_INDEX_BUDGET_SECONDS =
+  (2 * PUBLIC_CONTENT_53_TRANSPORT_TIMEOUT_MS) / 1000
+  + 2 * (TRADITIONAL_CMS_INDEX_WAIT_MS / 1000 + 480) + 160;
+
 export function requiredSeconds(deployMinutes, operations, publicContentRows = 53, newArticleDiscovery = false) {
   if (![30,35,60].includes(deployMinutes)) throw new Error('DEPLOY_BUDGET_INVALID');
   if (!operations || typeof operations !== 'object' || Array.isArray(operations)) throw new Error('OPERATIONS_INVALID');
@@ -57,6 +65,9 @@ export function requiredSeconds(deployMinutes, operations, publicContentRows = 5
     if (operations.public_content_53_package === 'traditional-article-index') {
       if (publicContentRows > 115) throw Error('TRADITIONAL_INDEX_ROW_COUNT_INVALID');
       consumers.public_content_53_publish = TRADITIONAL_INDEX_BUDGET_SECONDS;
+    } else if (operations.public_content_53_package === 'traditional-cms-index') {
+      if (publicContentRows !== TRADITIONAL_CMS_INDEX_MAX_ROWS) throw Error('TRADITIONAL_CMS_INDEX_ROW_COUNT_INVALID');
+      consumers.public_content_53_publish = TRADITIONAL_CMS_INDEX_BUDGET_SECONDS;
     } else {
       consumers.public_content_53_publish = 1600 + publicContentRows * 600 + (newArticleDiscovery ? 360 : 0);
     }
