@@ -16,6 +16,7 @@ use App\Services\ContentPromotion\PublicContent53Package;
 use App\Services\ContentPromotion\PublicContent53State;
 use App\Services\ContentPromotion\PublicContent53Writer;
 use App\Services\ContentPromotion\TraditionalArticleIndexPackage;
+use App\Services\ContentPromotion\TraditionalCmsIndexRelease;
 use App\Services\SEO\SeoDiscoverabilityCacheInvalidator;
 use DomainException;
 use Illuminate\Support\Facades\DB;
@@ -273,12 +274,8 @@ final class PublicContent53PromotionAdapter implements ExactPackagePromotionAdap
             $result['updated_count'] = $written - $created;
         }
         if ($published > 0 && $written > 0) {
-            $result = array_replace($result, TraditionalArticleIndexPackage::mutationCounts($context) ?? []);
-            $rows = $this->package->read(base_path(), $context->packageSha256, PublicContent53Package::environment())['candidates'];
-            if (isset($rows[0]['traditional_cms_index'])) {
-                $result['indexability_mutation_count'] = $written;
-                $result['sitemap_mutation_count'] = $written + 2;
-            }
+            $result = array_replace($result, TraditionalArticleIndexPackage::mutationCounts($context)
+                ?? TraditionalCmsIndexRelease::mutationCounts($context) ?? []);
         }
         if ($published > 0 && $written > 0 && \App\Services\ContentPromotion\RiasecCodeSampleArticles::matchesContext($context)) {
             $result['created_count'] = $created;

@@ -257,7 +257,7 @@ final class PublicContent53Package
         $cmsIndexFile = TraditionalCmsIndexRelease::FILE;
         if (is_file($root.'/'.self::PACKAGE.'/'.$cmsIndexFile)) {
             $bytes = $this->bytes($root, $cmsIndexFile);
-            $digest = hash('sha256', TraditionalCmsIndexRelease::SCHEMA."\n".$cmsIndexFile."\n".hash('sha256', $bytes)."\n");
+            $digest = TraditionalCmsIndexRelease::packageDigest($bytes);
             if (hash_equals($expectedSha256, $digest)) {
                 return ['candidates' => TraditionalCmsIndexRelease::readPackage($bytes, $environment), 'package_sha256' => $digest];
             }

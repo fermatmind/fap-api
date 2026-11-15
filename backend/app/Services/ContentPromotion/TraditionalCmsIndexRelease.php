@@ -25,6 +25,36 @@ final class TraditionalCmsIndexRelease
         'profile' => TopicProfile::class,
     ];
 
+    public static function packageDigest(string $bytes): string
+    {
+        return hash('sha256', self::SCHEMA."\n".self::FILE."\n".hash('sha256', $bytes)."\n");
+    }
+
+    public static function mutationCounts(PromotionContext $context): ?array
+    {
+        if ($context->lane !== 'W3' || $context->subscope !== Adapters\PublicContent53PromotionAdapter::SUBSCOPE
+            || realpath($context->packageDirectory) !== realpath(base_path(PublicContent53Package::PACKAGE))) {
+            return null;
+        }
+        $file = $context->packageDirectory.'/'.self::FILE;
+        if (! is_file($file) || is_link($file)) {
+            return null;
+        }
+        $bytes = file_get_contents($file);
+        if ($bytes === false || ! hash_equals($context->packageSha256, self::packageDigest($bytes))) {
+            return null;
+        }
+        $count = count(self::readPackage($bytes, PublicContent53Package::environment()));
+        if ($count !== $context->expectedRowCount) {
+            return null;
+        }
+
+        return [
+            'indexability_mutation_count' => $count,
+            'sitemap_mutation_count' => $count + 2,
+        ];
+    }
+
     public static function readPackage(string $bytes, string $environment): array
     {
         $package = json_decode($bytes, true, 32, JSON_THROW_ON_ERROR);
