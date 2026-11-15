@@ -248,6 +248,13 @@ final class PublicContent53PromotionAdapter implements ExactPackagePromotionAdap
         if (isset($rows[0]['staging_article_original']) && PublicContent53Package::environment() === 'production') {
             return;
         }
+        if (isset($rows[0]['traditional_stage_parity'])) {
+            if (PublicContent53Package::environment() === 'staging') {
+                $this->cache->flushArticleDiscoverabilityCaches(false);
+            }
+
+            return;
+        }
         if (isset($rows[0]['traditional_cms_index'])) {
             $this->cache->flushSharedDiscoverabilityCaches();
         }

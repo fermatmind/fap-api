@@ -254,6 +254,14 @@ final class PublicContent53Package
                 return $package;
             }
         }
+        $articleStageFile = TraditionalArticleStageParity::FILE;
+        if (is_file($root.'/'.self::PACKAGE.'/'.$articleStageFile)) {
+            $bytes = $this->bytes($root, $articleStageFile);
+            $digest = hash('sha256', TraditionalArticleStageParity::SCHEMA."\n".$articleStageFile."\n".hash('sha256', $bytes)."\n");
+            if (hash_equals($expectedSha256, $digest)) {
+                return ['candidates' => TraditionalArticleStageParity::readPackage($bytes), 'package_sha256' => $digest];
+            }
+        }
         $cmsIndexFile = TraditionalCmsIndexRelease::FILE;
         if (is_file($root.'/'.self::PACKAGE.'/'.$cmsIndexFile)) {
             $bytes = $this->bytes($root, $cmsIndexFile);

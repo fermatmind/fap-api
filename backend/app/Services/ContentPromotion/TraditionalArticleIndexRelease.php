@@ -50,14 +50,17 @@ final class TraditionalArticleIndexRelease
     {
         $state = [];
         foreach ($members as $locale => [$article, $revision, $seo, $canonical]) {
+            $reviewed = ($row['reviewed_native_revision'] ?? false) === true
+                ? PublicContent53Package::environment() === 'production' && $revision->approved_at !== null && (int) $revision->reviewed_by > 0
+                : $revision->authority_source_package === PublicContent53Package::PACKAGE
+                    && data_get($revision->authority_metadata_json, 'approval_kind') === 'verified_automated_exact_package';
             if ($locale === 'zh-TW'
                 && ($article->source_article_id !== $row['source_id']
                     || $article->source_locale !== $row['source_locale']
                     || $revision->source_article_id !== $row['source_id']
                     || $revision->source_locale !== $row['source_locale']
                     || $revision->translation_group_id !== $article->translation_group_id
-                    || $revision->authority_source_package !== PublicContent53Package::PACKAGE
-                    || data_get($revision->authority_metadata_json, 'approval_kind') !== 'verified_automated_exact_package'
+                    || ! $reviewed
                     || ! hash_equals($row['body_sha256'], hash('sha256', $this->bodyGuard->downgradeMarkdownH1ToH2((string) $revision->content_md)))
                     || ! hash_equals($row['title_sha256'], hash('sha256', (string) $revision->title)))) {
                 throw new DomainException('traditional_article_index_reviewed_body_drift');
@@ -87,7 +90,7 @@ final class TraditionalArticleIndexRelease
         if (($source['id'] ?? null) !== $row['source_id']
             || ($target['article'] ?? null) !== array_fill_keys(self::INDEX_FIELDS, false)
             || ($target['seo']['is_indexable'] ?? null) !== false
-            || ($target['seo']['robots'] ?? null) !== 'noindex,follow') {
+            || ($target['seo']['robots'] ?? null) !== ($row['held_robots'] ?? 'noindex,follow')) {
             throw new DomainException('traditional_article_index_hold_drift');
         }
         foreach ($row['peers'] as $peer) {

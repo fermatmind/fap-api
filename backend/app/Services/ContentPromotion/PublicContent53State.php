@@ -47,6 +47,11 @@ final class PublicContent53State
             });
         }
         foreach ($rows as $row) {
+            if (isset($row['traditional_stage_parity'])) {
+                $state[$row['page_id']] = app(TraditionalArticleStageParity::class)->read($row, $lock);
+
+                continue;
+            }
             if (isset($row['traditional_cms_index'])) {
                 $state[$row['page_id']] = app(TraditionalCmsIndexRelease::class)->read($row, $lock);
 
@@ -245,6 +250,14 @@ final class PublicContent53State
 
             return;
         }
+        if (isset($rows[0]['traditional_stage_parity'])) {
+            $sync = app(TraditionalArticleStageParity::class);
+            foreach ($rows as $row) {
+                $sync->assertBaseline($row, $sync->read($row, false));
+            }
+
+            return;
+        }
         if (isset($rows[0]['traditional_cms_index'])) {
             $release = app(TraditionalCmsIndexRelease::class);
             foreach ($rows as $row) {
@@ -336,6 +349,11 @@ final class PublicContent53State
     {
         foreach ($rows as $row) {
             $saved = $state[$row['page_id']];
+            if (isset($row['traditional_stage_parity'])) {
+                app(TraditionalArticleStageParity::class)->assertBaseline($row, $saved);
+
+                continue;
+            }
             if (isset($row['traditional_cms_index'])) {
                 app(TraditionalCmsIndexRelease::class)->assertHeld($saved);
 
@@ -457,6 +475,14 @@ final class PublicContent53State
 
     public function assertPublished(array $rows, array $state): void
     {
+        if (isset($rows[0]['traditional_stage_parity'])) {
+            $sync = app(TraditionalArticleStageParity::class);
+            foreach ($rows as $row) {
+                $sync->assertCopy($row, $sync->read($row, false), PublicContent53Package::environment() === 'production');
+            }
+
+            return;
+        }
         if (isset($rows[0]['traditional_cms_index'])) {
             foreach ($rows as $row) {
                 $release = app(TraditionalCmsIndexRelease::class);

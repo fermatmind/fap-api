@@ -97,6 +97,18 @@ final class PublicContent53Writer
 
             return ['written_count' => count($rows), 'state' => $this->states->read($context->packageSha256, true)];
         }
+        if (isset($rows[0]['traditional_stage_parity'])) {
+            $staging = PublicContent53Package::environment() === 'staging';
+            $sync = app(TraditionalArticleStageParity::class);
+            if ($staging) {
+                foreach ($rows as $row) {
+                    $sync->apply($row, $before[$row['page_id']], $context);
+                    $sync->assertCopy($row, $sync->read($row, true), false);
+                }
+            }
+
+            return ['written_count' => $staging ? count($rows) : 0, 'state' => $this->states->read($context->packageSha256, true)];
+        }
         if (isset($rows[0]['traditional_cms_index'])) {
             $release = app(TraditionalCmsIndexRelease::class);
             foreach ($rows as $row) {
@@ -262,6 +274,11 @@ final class PublicContent53Writer
         }
         $rows = collect($this->package->read(base_path(), $context->packageSha256, (string) config('content_promotion.public_content_53_environment', 'production'))['candidates'])->keyBy('page_id');
         foreach ($before as $id => $saved) {
+            if (isset($rows[$id]['traditional_stage_parity'])) {
+                app(TraditionalArticleStageParity::class)->restore($saved, $after[$id]);
+
+                continue;
+            }
             if (isset($rows[$id]['traditional_cms_index'])) {
                 app(TraditionalCmsIndexRelease::class)->write($rows[$id], $saved, false);
 

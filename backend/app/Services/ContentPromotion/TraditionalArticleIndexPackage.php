@@ -41,6 +41,12 @@ final class TraditionalArticleIndexPackage
                     || ! self::digest($row['body_sha256'] ?? null) || ! self::digest($row['title_sha256'] ?? null)) {
                     throw new DomainException('public_content_53_traditional_index_row_invalid');
                 }
+                if (! in_array($row['held_robots'] ?? 'noindex,follow', ['noindex,follow', 'noindex,nofollow'], true)
+                    || (array_key_exists('reviewed_native_revision', $row)
+                        && ($name !== 'production' || $row['reviewed_native_revision'] !== true
+                            || ! TraditionalArticleStageParity::isReviewedProductionMember($target['slug'] ?? '')))) {
+                    throw new DomainException('public_content_53_traditional_index_review_authority_invalid');
+                }
                 $byLocale = [];
                 foreach ([$target, ...$peers] as $identity) {
                     $canonical = self::canonical($identity);

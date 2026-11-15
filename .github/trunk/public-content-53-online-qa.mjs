@@ -435,9 +435,48 @@ async function verifyTraditionalCmsIndexAfterCache(rows, environment, fetcher) {
   }
 }
 
+async function verifyTraditionalArticleStageParity(rows, environment, fetcher, active) {
+  const [api] = hosts(environment);
+  const [productionApi] = hosts('production');
+  const staging = environment === 'staging';
+  const verify = async (row, host, expectedRevision, expectedBody, expectedId, title) => {
+    const url = `${host}/api/v0.5/articles/${row.identity.slug}?locale=${row.identity.locale}`;
+    const response = await fetcher(url, { redirect: 'error', signal: AbortSignal.timeout(15000) });
+    if (expectedBody === null) {
+      if (response.status !== 404) throw new Error('PUBLIC_CONTENT_53_TRADITIONAL_STAGE_PARITY_PRESTATE');
+      await response.body?.cancel();
+      return;
+    }
+    if (!response.ok) throw new Error('PUBLIC_CONTENT_53_TRADITIONAL_STAGE_PARITY_STATUS');
+    const data = await response.json();
+    const article = data.article;
+    if (data.ok !== true || article?.locale !== row.identity.locale || article.slug !== row.identity.slug ||
+      article.translation_group_id !== row.traditional_stage_parity.group || article.status !== 'published' ||
+      (expectedId !== null && article.id !== expectedId) ||
+      (expectedRevision !== null && article.published_revision_id !== expectedRevision) ||
+      (title !== null && article.title !== title) || createHash('sha256').update(article.content_md).digest('hex') !== expectedBody) {
+      throw new Error('PUBLIC_CONTENT_53_TRADITIONAL_STAGE_PARITY_COPY');
+    }
+    if (active && staging && row.identity.locale === 'zh-TW' &&
+      (article.is_indexable || article.sitemap_eligible || article.llms_eligible)) {
+      throw new Error('PUBLIC_CONTENT_53_TRADITIONAL_STAGE_PARITY_DISCOVERY');
+    }
+  };
+  for (const row of rows) {
+    const { reviewed_production: proof, stage_before: before, article } = row.traditional_stage_parity;
+    await verify(row, productionApi, proof.published_revision, proof.body_sha256, proof.id, article.title);
+    if (staging) {
+      if (active) await verify(row, api, null, proof.body_sha256, before?.id ?? null, article.title);
+      else await verify(row, api, before?.published_revision ?? null, before?.body_sha256 ?? null, before?.id ?? null, null);
+    }
+  }
+  return { environment, api_readback_count: rows.length, staging_copy_verified: staging && active };
+}
+
 export async function readOnlinePrestate(environment,backendRoot,fetcher=fetch,renderer=renderPage,packageSha256) {
   const [api,web] = hosts(environment); const result={};
   const rows = readCandidateRows(backendRoot,packageSha256,environment).candidates.map(row=>environment === 'staging' && row.staging_snapshot ? {...row,snapshot:row.staging_snapshot} : row);
+  if (rows[0]?.traditional_stage_parity) return verifyTraditionalArticleStageParity(rows,environment,fetcher,false);
   if (rows[0]?.traditional_cms_index) {
     await awaitTraditionalCmsFrontend(web, rows[0].frontend_revision, fetcher);
     try {
@@ -864,6 +903,7 @@ export function assertNewArticleDiscovery(rows,documents,environment='production
 export async function verifyOnlineCandidates(environment,backendRoot,fetcher=fetch,renderer=renderPage,prestate,packageSha256) {
   const [api,web]=hosts(environment);if(!prestate) throw new Error('PUBLIC_CONTENT_53_PRESTATE_REQUIRED');
   const rows = readCandidateRows(backendRoot,packageSha256,environment).candidates.map(row=>environment === 'staging' && row.staging_snapshot ? {...row,snapshot:row.staging_snapshot} : row);
+  if (rows[0]?.traditional_stage_parity) return verifyTraditionalArticleStageParity(rows,environment,fetcher,true);
   if (rows[0]?.traditional_cms_index) return verifyTraditionalCmsIndexAfterCache(rows,environment,fetcher);
   if (rows[0]?.traditional_article_index) return traditionalIndexOnline(rows,environment,fetcher,renderer,prestate);
   const originalIds=new Map();

@@ -31,6 +31,7 @@ use App\Services\ContentPromotion\PublicContent53State;
 use App\Services\ContentPromotion\PublicContent53Writer;
 use App\Services\ContentPromotion\StagingArticleOriginals;
 use App\Services\ContentPromotion\TraditionalArticlePublication;
+use App\Services\ContentPromotion\TraditionalArticleStageParity;
 use App\Services\ContentPromotion\TraditionalCmsIndexRelease;
 use Database\Seeders\ScaleRegistrySeeder;
 use DomainException;
@@ -47,6 +48,56 @@ use Tests\TestCase;
 final class PublicContent53PublicationTest extends TestCase
 {
     use RefreshDatabase;
+
+    public function test_traditional_stage_parity_seeds_reviewed_source_and_sibling_as_non_indexable(): void
+    {
+        config(['content_promotion.public_content_53_environment' => 'staging']);
+        $rows = TraditionalArticleStageParity::readPackage((string) file_get_contents(base_path(PublicContent53Package::PACKAGE.'/'.TraditionalArticleStageParity::FILE)));
+        $release = app(TraditionalArticleStageParity::class);
+        $context = $this->context();
+        $rows = array_slice($rows, 0, 3);
+        DB::transaction(function () use ($rows, $release, $context): void {
+            foreach ($rows as $row) {
+                $before = $release->read($row, true);
+                $release->assertBaseline($row, $before);
+                $release->apply($row, $before, $context);
+                $after = $release->read($row, true);
+                $release->assertCopy($row, $after, false);
+                self::assertFalse((bool) $after['article']['is_indexable']);
+                self::assertFalse((bool) $after['article']['sitemap_eligible']);
+            }
+            $source = Article::query()->where($rows[0]['identity'])->sole();
+            $traditional = Article::query()->where($rows[2]['identity'])->sole();
+            self::assertSame($source->id, $traditional->source_article_id);
+            self::assertSame($source->source_version_hash, $traditional->publishedRevision->translated_from_version_hash);
+            $existing = $rows[0];
+            $before = $release->read($existing, true);
+            $existing['traditional_stage_parity']['stage_before'] = [
+                'id' => $source->id, 'published_revision' => $source->published_revision_id,
+                'body_sha256' => hash('sha256', $source->publishedRevision->content_md),
+                'seo_robots' => $source->seoMeta->robots,
+            ];
+            $existing['traditional_stage_parity']['article']['content_md'] = 'A newer reviewed staging fixture.';
+            $existing['traditional_stage_parity']['reviewed_production']['body_sha256'] = hash('sha256', 'A newer reviewed staging fixture.');
+            $release->assertBaseline($existing, $before);
+            $release->apply($existing, $before, $this->context(str_repeat('f', 64)));
+            $after = $release->read($existing, true);
+            $release->assertCopy($existing, $after, false);
+            self::assertNotSame($before['article']['published_revision_id'], $after['article']['published_revision_id']);
+            $release->restore($before, $after);
+            self::assertSame($before, $release->read($existing, true));
+
+            $target = $rows[2];
+            $after = $release->read($target, true);
+            $release->restore(['missing' => true], $after);
+            $retained = $release->read($target, true);
+            self::assertTrue($retained['retained_draft']);
+            self::assertNull($retained['article']['published_revision_id']);
+            $release->assertBaseline($target, $retained);
+            $release->apply($target, $retained, $context);
+            self::assertSame($after['article']['published_revision_id'], $release->read($target, true)['article']['published_revision_id']);
+        });
+    }
 
     public function test_traditional_cms_index_updates_only_the_held_target_and_can_restore_it(): void
     {
@@ -219,9 +270,9 @@ final class PublicContent53PublicationTest extends TestCase
         return hash('sha256', $chain);
     }
 
-    private function context(): PromotionContext
+    private function context(?string $packageSha = null): PromotionContext
     {
-        return new PromotionContext(base_path(PublicContent53Package::PACKAGE), $this->digest(), 'W3', 'PUBLIC-CONTENT-53',
+        return new PromotionContext(base_path(PublicContent53Package::PACKAGE), $packageSha ?? $this->digest(), 'W3', 'PUBLIC-CONTENT-53',
             str_repeat('a', 40), str_repeat('b', 64), str_repeat('c', 64), '12345', 1, str_repeat('d', 64), 50, str_repeat('e', 64));
     }
 
