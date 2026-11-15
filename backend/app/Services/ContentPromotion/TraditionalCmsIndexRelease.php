@@ -129,7 +129,8 @@ final class TraditionalCmsIndexRelease
 
     private function topicSections(TopicProfile $profile, bool $lock): array
     {
-        $sections = $profile->sections()->reorder('section_key');
+        // The reviewed fingerprint covers the sections exposed by the public Topic API.
+        $sections = $profile->sections()->where('is_enabled', true)->reorder('section_key');
         if ($lock) {
             $sections->lockForUpdate();
         }
