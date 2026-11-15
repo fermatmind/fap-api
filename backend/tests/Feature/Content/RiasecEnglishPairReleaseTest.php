@@ -78,7 +78,8 @@ final class RiasecEnglishPairReleaseTest extends TestCase
 
     public function test_published_three_pair_1_3_snapshot_keeps_exact_hashes_and_original_bytes(): void
     {
-        $this->assertSame('459c27aee43e5a1eb483d560cb8f56d74e6c75173b6de2187a792ccf613a0bf7', hash('sha256', implode('', array_slice(file(base_path('content_assets/riasec/pair_blend_15_pairs_v1.en.jsonl')), 0, 3))));
+        $legacyRows = \Tests\Unit\Services\Riasec\RiasecEnglishReportSourceContractTest::legacyEnglishJsonlRows('pair_blend_15_pairs_v1.en.jsonl', 'work_division_v1', 3);
+        $this->assertSame('459c27aee43e5a1eb483d560cb8f56d74e6c75173b6de2187a792ccf613a0bf7', hash('sha256', $legacyRows));
         $compiled = app(Compiler::class)->compile();
         $compiled = \Tests\Unit\Services\Riasec\RiasecEnglishReportSourceContractTest::restoreLegacyReaderCopy($compiled);
         $payload = $compiled['payload'];

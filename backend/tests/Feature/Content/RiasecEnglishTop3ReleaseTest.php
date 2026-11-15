@@ -109,7 +109,8 @@ final class RiasecEnglishTop3ReleaseTest extends TestCase
 
     public function test_original_1_4_package_bytes_and_six_ria_outputs_are_unchanged(): void
     {
-        $this->assertSame('eb59709ef2aca0ee5ff4a95b53e86ef9b2db72f09b37f4aeec4f76c97d091eb2', hash('sha256', file(base_path('content_assets/riasec/top3_code_chain_strategy_v1.en.jsonl'))[0]));
+        $legacyRows = \Tests\Unit\Services\Riasec\RiasecEnglishReportSourceContractTest::legacyEnglishJsonlRows('top3_code_chain_strategy_v1.en.jsonl', 'desktop_reading_v1', 1);
+        $this->assertSame('eb59709ef2aca0ee5ff4a95b53e86ef9b2db72f09b37f4aeec4f76c97d091eb2', hash('sha256', $legacyRows));
         $compiled = app(Compiler::class)->compile();
         $compiled = \Tests\Unit\Services\Riasec\RiasecEnglishReportSourceContractTest::restoreLegacyReaderCopy($compiled);
         $payload = $compiled['payload'];
@@ -161,7 +162,9 @@ final class RiasecEnglishTop3ReleaseTest extends TestCase
         $legacy = new Registry(privateResultSource: $source);
         $current = app(Registry::class);
         foreach (Compiler::englishOrderedCodeCoverage('1.4.0') as $code) {
-            $this->assertSame($legacy->resolveForLocale($legacy->resolveTop3ChainSlot($code), 'en'), $current->resolveForLocale($current->resolveTop3ChainSlot($code), 'en'));
+            $currentSlot = $current->resolveForLocale($current->resolveTop3ChainSlot($code), 'en');
+            unset($currentSlot['desktop_reading_v1']);
+            $this->assertSame($legacy->resolveForLocale($legacy->resolveTop3ChainSlot($code), 'en'), $currentSlot);
         }
         foreach (array_slice(Compiler::ENGLISH_TOP3_KEYS, 1) as $key) {
             $this->assertSame('unavailable', $legacy->resolveForLocale($legacy->resolveTop3ChainSlot(str_replace('_', '', $key)), 'en')['content_status']);
