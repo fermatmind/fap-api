@@ -8,16 +8,18 @@ use App\Models\Result;
 use App\Services\Riasec\RiasecDeepCopySlotRegistry as Registry;
 use App\Services\Riasec\RiasecPrivateResultSourceRepository;
 use App\Services\Riasec\RiasecPublicProjectionService;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
 final class RiasecChineseScoreContentTest extends TestCase
 {
-    public function test_chinese_projection_selects_distinct_work_scenarios_and_all_six_score_cards(): void
+    #[DataProvider('desktopLocales')]
+    public function test_projection_selects_distinct_work_scenarios_and_all_six_score_cards(string $locale, string $dimensionFile): void
     {
         $repository = app(RiasecPrivateResultSourceRepository::class);
-        $triads = $repository->asset('top3_code_chain_strategy_v1.zh-CN.jsonl');
-        $dimensions = array_column($repository->asset('dimension_deep_copy_v1.zh-CN.r3.json')['dimensions'], null, 'dimension_code');
-        $pairs = array_column($repository->asset('pair_blend_15_pairs_v1.zh-CN.jsonl'), 'work_division_v1', 'pair_key');
+        $triads = $repository->asset("top3_code_chain_strategy_v1.{$locale}.jsonl", $locale);
+        $dimensions = array_column($repository->asset($dimensionFile, $locale)['dimensions'], null, 'dimension_code');
+        $pairs = array_column($repository->asset("pair_blend_15_pairs_v1.{$locale}.jsonl", $locale), 'work_division_v1', 'pair_key');
         $seenPairs = [];
         $seenBands = [];
         $seenScenes = [];
@@ -30,7 +32,7 @@ final class RiasecChineseScoreContentTest extends TestCase
             if ($letters[0] !== 'R') {
                 [$scores[$others[0]], $scores[$others[2]]] = [$scores[$others[2]], $scores[$others[0]]];
             }
-            $projection = $this->project(implode('', $letters), $scores);
+            $projection = $this->project(implode('', $letters), $scores, $locale);
             $slots = collect($projection['deep_content_slots_v1']['slots'])->groupBy('slot_key');
             $this->assertCount(1, $slots['triad_blend_copy']);
             $content = $slots['triad_blend_copy'][0]['content']['desktop_reading_v1'];
@@ -50,14 +52,14 @@ final class RiasecChineseScoreContentTest extends TestCase
                     $scores[$code] >= 34 => 'medium',
                     default => 'low',
                 };
-                $source = $dimensions[$code]['atlas_score_panels'][$band];
                 $this->assertSame($band, $slot['selection_v1']['score_band']);
                 $reading = $slot['selection_v1']['selected_detail_key'];
                 $this->assertSame($dimensions[$code][$reading], $slot['content'][$reading]);
                 $atlas = $dimensions[$code]['desktop_atlas_by_decile'][min(9, (int) floor($scores[$code] / 10))];
                 $this->assertSame($atlas['examples'], $slot['content']['atlas_examples']);
                 $this->assertSame($atlas['next_step'], $slot['content']['atlas_next_step']);
-                $this->assertSame($source['profile_focus'], $slot['content']['atlas_profile_focus']);
+                $focus = $locale === 'en' ? $dimensions[$code]['desktop_focus_by_band'][$band] : $dimensions[$code]['atlas_score_panels'][$band]['profile_focus'];
+                $this->assertSame($focus, $slot['content']['atlas_profile_focus']);
                 $seenBands[$code][$band] = true;
             }
         }
@@ -65,31 +67,35 @@ final class RiasecChineseScoreContentTest extends TestCase
         $this->assertCount(15, $seenPairs);
         foreach (Registry::DIMENSIONS as $code) {
             $this->assertCount(3, $seenBands[$code]);
-            $this->assertCount(3, array_unique(array_column($dimensions[$code]['atlas_score_panels'], 'profile_focus')));
+            if ($locale === 'zh-CN') {
+                $this->assertCount(3, array_unique(array_column($dimensions[$code]['atlas_score_panels'], 'profile_focus')));
+            }
         }
     }
 
-    public function test_near_tie_reads_the_group_without_inventing_a_precise_order(): void
+    #[DataProvider('desktopLocaleCodes')]
+    public function test_near_tie_reads_the_group_without_inventing_a_precise_order(string $locale): void
     {
-        $projection = $this->project('IAS', ['R' => 45, 'I' => 80, 'A' => 67.5, 'S' => 65, 'E' => 40, 'C' => 35]);
+        $projection = $this->project('IAS', ['R' => 45, 'I' => 80, 'A' => 67.5, 'S' => 65, 'E' => 40, 'C' => 35], $locale);
         $slots = collect($projection['deep_content_slots_v1']['slots'])->where('slot_key', 'triad_blend_copy');
         $this->assertSame('near_tie', $projection['interpretation_state']['tie_display_v1']['kind']);
         $this->assertCount(1, $slots);
         $slot = $slots->first();
-        $triads = app(RiasecPrivateResultSourceRepository::class)->asset('top3_code_chain_strategy_v1.zh-CN.jsonl');
+        $triads = app(RiasecPrivateResultSourceRepository::class)->asset("top3_code_chain_strategy_v1.{$locale}.jsonl", $locale);
         $expected = array_column($triads, 'desktop_reading_v1', 'unordered_top3_key')['I_A_S'];
         unset($expected['ordered']);
         $this->assertSame($expected, $slot['content']['desktop_reading_v1']);
     }
 
-    public function test_chinese_sidebar_and_atlas_select_each_score_interval_without_changing_the_calculated_band(): void
+    #[DataProvider('desktopLocales')]
+    public function test_sidebar_and_atlas_select_each_score_interval_without_changing_the_calculated_band(string $locale, string $dimensionFile): void
     {
-        $assets = app(RiasecPrivateResultSourceRepository::class)->asset('dimension_deep_copy_v1.zh-CN.r3.json');
+        $assets = app(RiasecPrivateResultSourceRepository::class)->asset($dimensionFile, $locale);
         $dimensions = array_column($assets['dimensions'], null, 'dimension_code');
         $scoresByInterval = [0, 10, 20, 30, 40, 50, 60, 70, 80, 100];
         foreach ($scoresByInterval as $interval => $score) {
             $scores = array_fill_keys(Registry::DIMENSIONS, $score);
-            $projection = $this->project('RIA', $scores);
+            $projection = $this->project('RIA', $scores, $locale);
             $slots = collect($projection['deep_content_slots_v1']['slots'])->where('slot_key', 'dimension_deep_copy');
             $this->assertCount(6, $slots);
             foreach ($slots as $slot) {
@@ -105,7 +111,7 @@ final class RiasecChineseScoreContentTest extends TestCase
         }
 
         $decimalScores = ['I' => 100, 'A' => 90, 'S' => 89.9, 'R' => 40, 'E' => 39.9, 'C' => 9.9];
-        $projection = $this->project('IAS', $decimalScores);
+        $projection = $this->project('IAS', $decimalScores, $locale);
         $slots = collect($projection['deep_content_slots_v1']['slots'])
             ->where('slot_key', 'dimension_deep_copy')->keyBy('selection_v1.dimension_code');
         foreach (['I' => 9, 'A' => 9, 'S' => 8, 'R' => 4, 'E' => 3, 'C' => 0] as $code => $index) {
@@ -114,7 +120,20 @@ final class RiasecChineseScoreContentTest extends TestCase
         }
     }
 
-    private function project(string $code, array $scores): array
+    public static function desktopLocaleCodes(): array
+    {
+        return [['zh-CN'], ['en']];
+    }
+
+    public static function desktopLocales(): array
+    {
+        return [
+            'Simplified Chinese' => ['zh-CN', 'dimension_deep_copy_v1.zh-CN.r3.json'],
+            'English' => ['en', 'dimension_deep_copy_v1.en.json'],
+        ];
+    }
+
+    private function project(string $code, array $scores, string $locale): array
     {
         $result = new Result([
             'scale_code' => 'RIASEC',
@@ -132,6 +151,6 @@ final class RiasecChineseScoreContentTest extends TestCase
             ],
         ]);
 
-        return app(RiasecPublicProjectionService::class)->buildV2FromResult($result, 'zh-CN', true, true);
+        return app(RiasecPublicProjectionService::class)->buildV2FromResult($result, $locale, true, true);
     }
 }

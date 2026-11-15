@@ -120,8 +120,10 @@ final class RiasecPrivateResultCompileService
         }
 
         $this->assertEnglishActivities($assets[self::ENGLISH_ACTIVITY_ASSET], $assets['activity_task_examples_v1.zh-CN.jsonl']);
-        $this->assertChineseWorkDivision($assets['pair_blend_15_pairs_v1.zh-CN.jsonl']);
-        $this->assertChineseDesktopReading($assets);
+        $this->assertWorkDivision($assets['pair_blend_15_pairs_v1.zh-CN.jsonl']);
+        $this->assertWorkDivision($assets['pair_blend_15_pairs_v1.en.jsonl']);
+        $this->assertDesktopReading($assets['dimension_deep_copy_v1.zh-CN.r3.json'], $assets['top3_code_chain_strategy_v1.zh-CN.jsonl'], 'zh-CN');
+        $this->assertDesktopReading($assets['dimension_deep_copy_v1.en.json'], $assets['top3_code_chain_strategy_v1.en.jsonl'], 'en');
         $this->assertSelectedEnglishSources($assets);
         $sourceHash = hash('sha256', $sourceHashInput);
         $coverage = $this->coverage($assets);
@@ -213,24 +215,25 @@ final class RiasecPrivateResultCompileService
         ];
     }
 
-    /** @param array<string,mixed> $assets */
-    private function assertChineseDesktopReading(array $assets): void
+    /**
+     * @param  array<string,mixed>  $dimensionAsset
+     * @param  list<array<string,mixed>>  $top3Rows
+     */
+    private function assertDesktopReading(array $dimensionAsset, array $top3Rows, string $locale): void
     {
-        $dimensionAsset = $assets['dimension_deep_copy_v1.zh-CN.r3.json'];
-        $top3Rows = $assets['top3_code_chain_strategy_v1.zh-CN.jsonl'];
         foreach ($dimensionAsset['dimensions'] ?? [] as $row) {
             $insight = $row['desktop_insight_by_decile'] ?? null;
             if (! is_array($insight) || ! array_is_list($insight) || count($insight) !== 10) {
-                throw new RuntimeException('RIASEC Chinese desktop dimension insight must have ten score intervals.');
+                throw new RuntimeException('RIASEC desktop dimension insight must have ten score intervals.');
             }
             if (count(array_filter($insight, static fn (mixed $copy): bool => is_string($copy) && trim($copy) !== '')) !== 10
                 || count(array_unique($insight)) !== 10) {
-                throw new RuntimeException('RIASEC Chinese desktop dimension insight copy is empty or duplicated.');
+                throw new RuntimeException('RIASEC desktop dimension insight copy is empty or duplicated.');
             }
 
             $desktopAtlas = $row['desktop_atlas_by_decile'] ?? null;
             if (! is_array($desktopAtlas) || ! array_is_list($desktopAtlas) || count($desktopAtlas) !== 10) {
-                throw new RuntimeException('RIASEC Chinese desktop atlas must have ten score intervals per dimension.');
+                throw new RuntimeException('RIASEC desktop atlas must have ten score intervals per dimension.');
             }
             foreach ($desktopAtlas as $entry) {
                 $examples = $entry['examples'] ?? null;
@@ -239,12 +242,23 @@ final class RiasecPrivateResultCompileService
                     || ! is_array($examples) || ! array_is_list($examples) || count($examples) !== 3
                     || count(array_filter($examples, static fn (mixed $text): bool => is_string($text) && trim($text) !== '')) !== 3
                     || count(array_unique($examples)) !== 3) {
-                    throw new RuntimeException('RIASEC Chinese desktop atlas reading, activities, or next step are incomplete.');
+                    throw new RuntimeException('RIASEC desktop atlas reading, activities, or next step are incomplete.');
                 }
             }
             if (count(array_unique(array_column($desktopAtlas, 'reading'))) !== 10
                 || count(array_unique(array_column($desktopAtlas, 'next_step'))) !== 10) {
-                throw new RuntimeException('RIASEC Chinese desktop atlas copy is duplicated across score intervals.');
+                throw new RuntimeException('RIASEC desktop atlas copy is duplicated across score intervals.');
+            }
+
+            if ($locale === 'en') {
+                $focus = $row['desktop_focus_by_band'] ?? [];
+                foreach (['low', 'medium', 'high'] as $band) {
+                    if (! is_string($focus[$band] ?? null) || trim($focus[$band]) === '') {
+                        throw new RuntimeException('RIASEC English desktop primary-interest guidance is incomplete.');
+                    }
+                }
+
+                continue;
             }
 
             $atlas = $row['atlas_score_reading'] ?? null;
@@ -273,11 +287,11 @@ final class RiasecPrivateResultCompileService
             $desktop = $row['desktop_reading_v1'] ?? [];
             $ordered = $desktop['ordered'] ?? [];
             if (! is_array($ordered) || count($ordered) !== 6) {
-                throw new RuntimeException('RIASEC Chinese ordered desktop group must cover six codes.');
+                throw new RuntimeException('RIASEC ordered desktop group must cover six codes.');
             }
             foreach ($fields as $field) {
                 if (! is_string($desktop[$field] ?? null) || trim($desktop[$field]) === '') {
-                    throw new RuntimeException('RIASEC Chinese desktop comparison copy is incomplete.');
+                    throw new RuntimeException('RIASEC desktop comparison copy is incomplete.');
                 }
             }
             foreach ($ordered as $code => $variant) {
@@ -286,19 +300,19 @@ final class RiasecPrivateResultCompileService
                 sort($letters);
                 sort($group);
                 if ($letters !== $group || ! is_array($variant) || count($variant) !== count($orderedFields)) {
-                    throw new RuntimeException('RIASEC Chinese ordered desktop code has invalid group or fields.');
+                    throw new RuntimeException('RIASEC ordered desktop code has invalid group or fields.');
                 }
                 foreach ($orderedFields as $field) {
                     $copy = $variant[$field] ?? null;
                     if (! is_string($copy) || trim($copy) === '' || isset($seen[$field][$copy])) {
-                        throw new RuntimeException("RIASEC Chinese ordered desktop copy is missing or duplicated: {$code}.{$field}");
+                        throw new RuntimeException("RIASEC ordered desktop copy is missing or duplicated: {$code}.{$field}");
                     }
                     $seen[$field][$copy] = true;
                 }
             }
         }
         if (count($seen['headline'] ?? []) !== 120) {
-            throw new RuntimeException('RIASEC Chinese ordered desktop code coverage is incomplete.');
+            throw new RuntimeException('RIASEC ordered desktop code coverage is incomplete.');
         }
     }
 
@@ -544,16 +558,16 @@ final class RiasecPrivateResultCompileService
     }
 
     /** @param list<array<string,mixed>> $rows */
-    private function assertChineseWorkDivision(array $rows): void
+    private function assertWorkDivision(array $rows): void
     {
         foreach ($rows as $row) {
             $copy = $row['work_division_v1'] ?? [];
             if (! is_array($copy) || count($copy) !== 3) {
-                throw new RuntimeException('RIASEC Chinese work-division copy is incomplete.');
+                throw new RuntimeException('RIASEC work-division copy is incomplete.');
             }
             foreach (['scene', 'tradeoff', 'question'] as $key) {
                 if (! is_string($copy[$key] ?? null) || trim($copy[$key]) === '') {
-                    throw new RuntimeException('RIASEC Chinese work-division copy is incomplete.');
+                    throw new RuntimeException('RIASEC work-division copy is incomplete.');
                 }
             }
         }
