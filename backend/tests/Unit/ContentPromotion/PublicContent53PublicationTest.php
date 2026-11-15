@@ -126,6 +126,45 @@ final class PublicContent53PublicationTest extends TestCase
         });
     }
 
+    public function test_traditional_cms_index_receipt_allows_only_the_exact_package_discoverability_counts(): void
+    {
+        $directory = base_path(PublicContent53Package::PACKAGE);
+        $bytes = file_get_contents($directory.'/'.TraditionalCmsIndexRelease::FILE);
+        $digest = TraditionalCmsIndexRelease::packageDigest($bytes);
+        $contextFor = static fn (string $sha): PromotionContext => new PromotionContext(
+            $directory, $sha, 'W3', PublicContent53PromotionAdapter::SUBSCOPE,
+            str_repeat('a', 40), str_repeat('b', 64), str_repeat('c', 64), '12345', 1, str_repeat('d', 64), 33, str_repeat('e', 64),
+        );
+        $context = $contextFor($digest);
+        $adapter = app(PublicContent53PromotionAdapter::class);
+        $result = new \ReflectionMethod(PublicContent53PromotionAdapter::class, 'result');
+        $normalize = new \ReflectionMethod(ExactPackagePromotionService::class, 'normalizeResult');
+        $service = app(ExactPackagePromotionService::class);
+        $receiptFor = static fn (PromotionContext $context, array $reported): array => $normalize->invoke(
+            $service, $context, $adapter, 'publish', 'cms_publication_receipt', $reported, null,
+        );
+        $reported = $result->invoke($adapter, $context, 33, 33, 'test-rollback-reference', []);
+        $receipt = $receiptFor($context, $reported);
+        self::assertSame(33, $receipt['indexability_mutation_count']);
+        self::assertSame(35, $receipt['sitemap_mutation_count']);
+        $noChange = $receiptFor($context, $result->invoke($adapter, $context, 0, 33, null, []));
+        self::assertSame(0, $noChange['sitemap_mutation_count']);
+
+        foreach ([
+            [$context, array_replace($reported, ['sitemap_mutation_count' => 36]), 'prohibited_mutation_reported'],
+            [$context, array_replace($reported, ['search_mutation_count' => 1]), 'prohibited_mutation_reported'],
+            [$contextFor(str_repeat('f', 64)), $reported, 'prohibited_mutation_reported'],
+            [$context, $result->invoke($adapter, $context, 32, 33, 'test-rollback-reference', []), 'traditional_cms_index_partial_publication'],
+        ] as [$candidate, $invalid, $errorCode]) {
+            try {
+                $receiptFor($candidate, $invalid);
+                self::fail('The receipt must reject a mutation outside the exact package.');
+            } catch (DomainException $error) {
+                self::assertSame($errorCode, $error->getMessage());
+            }
+        }
+    }
+
     public function test_missing_blog_translation_uses_the_reviewed_group_and_retains_independent_same_slug_article(): void
     {
         $base = ['org_id' => 0];

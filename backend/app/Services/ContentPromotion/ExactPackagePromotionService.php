@@ -287,6 +287,12 @@ final class ExactPackagePromotionService
         if ($traditionalIndex !== null && ! in_array($written, [0, $expected], true)) {
             throw new DomainException('traditional_article_index_partial_publication');
         }
+        $traditionalCmsIndex = $adapter instanceof PublicContent53PromotionAdapter && $phase === 'publish'
+            ? TraditionalCmsIndexRelease::mutationCounts($context) : null;
+        if ($traditionalCmsIndex !== null && ! in_array($written, [0, $expected], true)) {
+            throw new DomainException('traditional_cms_index_partial_publication');
+        }
+        $traditionalIndex ??= $traditionalCmsIndex;
         $boundaryCounts = [];
         foreach (['indexability_mutation_count', 'sitemap_mutation_count', 'llms_mutation_count', 'search_mutation_count', 'deploy_mutation_count'] as $boundary) {
             $allowed = $iqArticleLaunch && $written > 0 && in_array($boundary, ['indexability_mutation_count', 'sitemap_mutation_count', 'llms_mutation_count'], true) ? 2 : 0;
