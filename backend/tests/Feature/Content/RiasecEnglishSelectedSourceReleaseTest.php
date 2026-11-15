@@ -10,6 +10,7 @@ use App\Services\Content\RiasecPrivateResultPackLoader as Loader;
 use App\Services\Riasec\RiasecDeepCopySlotRegistry;
 use App\Services\Riasec\RiasecLifecycleCopyService;
 use App\Services\Riasec\RiasecPublicProjectionService;
+use Illuminate\Support\Arr;
 use RuntimeException;
 use Tests\TestCase;
 
@@ -39,7 +40,10 @@ final class RiasecEnglishSelectedSourceReleaseTest extends TestCase
                     $this->assertSame($source['review_status'], $slot['source_review_status']);
                     $this->assertSame($source['source_binding']['source_evidence_level'], $slot['source_evidence_level']);
                     $this->assertSame($slot['source_evidence_level'], $slot['evidence_level']);
-                    foreach ($slot['content'] as $field => $value) {
+                    $legacyContent = Arr::except($slot['content'], [
+                        'desktop_insight_reading', 'atlas_reading', 'atlas_examples', 'atlas_next_step', 'atlas_profile_focus',
+                    ]);
+                    foreach ($legacyContent as $field => $value) {
                         $this->assertSame($source[$field], $value, $code.':'.$field);
                     }
                     $this->assertSame($source[$selection['selected_detail_key']], $slot['content'][$selection['selected_detail_key']]);
@@ -52,7 +56,7 @@ final class RiasecEnglishSelectedSourceReleaseTest extends TestCase
                     }
                     $this->assertSame($source['pair_key'] === implode('_', $actualTop2), isset($slot['content']['result_page_teaser']));
                 } elseif ($slot['slot_key'] === 'triad_blend_copy') {
-                    $this->assertCount(17, $slot['content']);
+                    $this->assertCount(17, Arr::except($slot['content'], ['desktop_reading_v1']));
                     $this->assertStringContainsString($code, $slot['content']['ordered_code_handling']);
                     $line = $assets['runtime_surface_copy_v1.en.json']['dimension_reading_lines'][$code[0]];
                     $this->assertStringContainsString($line['action'], $slot['content']['activity_sequence'][0]);

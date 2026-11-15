@@ -158,7 +158,9 @@ final class RiasecEnglishDisagreeReleaseTest extends TestCase
         }
         $current = app(Registry::class);
         foreach (Compiler::englishOrderedCodeCoverage('1.5.0') as $code) {
-            $this->assertSame($registry->resolveForLocale($registry->resolveTop3ChainSlot($code), 'en'), $current->resolveForLocale($current->resolveTop3ChainSlot($code), 'en'));
+            $currentSlot = $current->resolveForLocale($current->resolveTop3ChainSlot($code), 'en');
+            unset($currentSlot['desktop_reading_v1']);
+            $this->assertSame($registry->resolveForLocale($registry->resolveTop3ChainSlot($code), 'en'), $currentSlot);
         }
         $bad = $legacy['payload']['assets'];
         $bad['top3_code_chain_strategy_v1.en.jsonl'][1]['likely_tension'] = '';

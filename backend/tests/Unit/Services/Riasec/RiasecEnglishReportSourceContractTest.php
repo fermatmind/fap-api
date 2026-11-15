@@ -240,6 +240,18 @@ final class RiasecEnglishReportSourceContractTest extends TestCase
     }
 
     /** Reconstruct earlier fixtures from the accepted 1.9 reader, never current copy. */
+    public static function legacyEnglishJsonlRows(string $asset, string $desktopField, int $count): string
+    {
+        $rows = array_slice(file(base_path('content_assets/riasec/'.$asset)), 0, $count);
+
+        return implode('', array_map(static function (string $line) use ($desktopField): string {
+            $row = json_decode($line, true, 512, JSON_THROW_ON_ERROR);
+            unset($row[$desktopField]);
+
+            return json_encode($row, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR)."\n";
+        }, $rows));
+    }
+
     public static function restoreLegacyReaderCopy(array $compiled): array
     {
         $payload = $compiled['payload'];
