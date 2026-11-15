@@ -65,6 +65,9 @@ export function requiredSeconds(deployMinutes, operations, publicContentRows = 5
     if (operations.public_content_53_package === 'traditional-article-index') {
       if (publicContentRows > 115) throw Error('TRADITIONAL_INDEX_ROW_COUNT_INVALID');
       consumers.public_content_53_publish = TRADITIONAL_INDEX_BUDGET_SECONDS;
+    } else if (operations.public_content_53_package === 'science-cms-index') {
+      if (publicContentRows !== 6) throw Error('SCIENCE_CMS_INDEX_ROW_COUNT_INVALID');
+      consumers.public_content_53_publish = TRADITIONAL_CMS_INDEX_BUDGET_SECONDS;
     } else if (operations.public_content_53_package === 'traditional-cms-index') {
       if (publicContentRows !== TRADITIONAL_CMS_INDEX_MAX_ROWS) throw Error('TRADITIONAL_CMS_INDEX_ROW_COUNT_INVALID');
       consumers.public_content_53_publish = TRADITIONAL_CMS_INDEX_BUDGET_SECONDS;

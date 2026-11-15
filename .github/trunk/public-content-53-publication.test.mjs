@@ -2002,3 +2002,36 @@ test('Traditional article index release checks the complete cohort and preserves
   rmSync(fixture,{recursive:true,force:true});
  }
 });
+
+test('Science CMS index releases six Chinese URLs and verifies all three language pairs without exposing data privacy', async () => {
+ const selection = 'science-cms-index';
+ const filename = 'backend/content_assets/public_content_53/' + selection + '.json';
+ const binding = inspectPackage(root, selection);
+ assert.equal(binding.expected_row_count, 6);
+ assert.equal(classifyPaths([filename]).operations.public_content_53_package, selection);
+ const rows = readCandidateRows(root, binding.package_sha256, 'production').candidates;
+ const web = 'https://fermatmind.com';
+ const locales = { en: 'en', 'zh-CN': 'zh', 'zh-TW': 'zh-TW' };
+ const added = rows.map(pathFor);
+ const english = rows.filter(row => row.identity.locale === 'zh-TW').map(row => '/en/' + row.identity.slug);
+ const baseline = [...english, '/en/data-privacy', '/zh/privacy'];
+ const fetcher = active => async input => {
+  const url = new URL(input);
+  const paths = active ? [...baseline, ...added] : baseline;
+  if (url.pathname === '/revision') return Response.json({ revision: rows[0].frontend_revision });
+  if (url.pathname.endsWith('/sitemap-source')) return Response.json({ ok: true, items: paths.map(path => ({ loc: web + path })) });
+  if (url.pathname === '/sitemap.xml') return new Response('<urlset>' + paths.map(path => '<url><loc>' + web + path + '</loc></url>').join('') + '</urlset>');
+  const slug = url.pathname.split('/').at(-1);
+  if (url.pathname.startsWith('/api/')) return Response.json({ ok: true, page: {
+   slug, locale: url.searchParams.get('locale'), is_public: true, is_indexable: active && slug !== 'data-privacy',
+  } });
+  const robots = slug === 'data-privacy' ? 'noindex,follow' : 'index,follow';
+  const alternates = Object.entries(locales).map(([lang, segment]) =>
+   `<link rel="alternate" hreflang="${lang}" href="${web}/${segment}/${slug}">`).join('');
+  return new Response(`<meta name="robots" content="${robots}"><link rel="canonical" href="${url.href}">${alternates}`);
+ };
+ const prestate = await readOnlinePrestate('production', root, fetcher(false), undefined, binding.package_sha256);
+ assert.equal(prestate.sitemap.length, baseline.length);
+ const receipt = await verifyOnlineCandidates('production', root, fetcher(true), undefined, prestate, binding.package_sha256);
+ assert.deepEqual(receipt, { environment: 'production', api_readback_count: 6, discovery_readback_count: 6, raw_html_readback_count: 9 });
+});

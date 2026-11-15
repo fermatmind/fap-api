@@ -9,6 +9,7 @@ export const packagePath = 'content_assets/public_content_53';
 const packages = {
   'blog-missing-translations': ['fermatmind.blog_missing_translations.v1', ['blog-missing-translations.json']],
   'traditional-article-stage-parity': ['fermatmind.traditional_article_stage_parity.v1', ['traditional-article-stage-parity.json']],
+  'science-cms-index': ['fermatmind.traditional_cms_index.v1', ['science-cms-index.json']],
   'traditional-cms-index': ['fermatmind.traditional_cms_index.v1', ['traditional-cms-index.json']],
   'traditional-article-index': ['fermatmind.traditional_article_index.v1', ['traditional-article-index.json']],
   'staging-article-originals': ['fermatmind.staging_article_originals.v1', ['staging-article-originals.json']],

@@ -135,6 +135,72 @@ final class PublicContent53PublicationTest extends TestCase
         $release->read($spec, false);
     }
 
+    public function test_science_cms_index_promotes_and_restores_only_both_chinese_locales(): void
+    {
+        $bytes = file_get_contents(base_path('content_assets/public_content_53/'.TraditionalCmsIndexRelease::SCIENCE_FILE));
+        $manifest = json_decode($bytes, true, flags: JSON_THROW_ON_ERROR);
+        $scope = array_column($manifest['candidates'], 'slug');
+        self::assertSame(['common-misconceptions', 'item-design-notes', 'science'], $scope);
+        $scope[] = 'data-privacy';
+        $pages = [];
+        foreach ($scope as $slug) {
+            foreach (['zh-CN', 'en', 'zh-TW'] as $locale) {
+                $path = $locale === 'zh-TW' ? "/zh-TW/$slug" : "/$slug";
+                $pages[$slug][$locale] = ContentPage::query()->create([
+                    'org_id' => 0, 'slug' => $slug, 'locale' => $locale, 'path' => $path, 'canonical_path' => $path,
+                    'kind' => 'page', 'title' => "Reviewed $slug $locale", 'content_md' => "Body $slug $locale",
+                    'seo_title' => 'Reviewed summary', 'seo_description' => 'Reviewed description', 'status' => 'published',
+                    'is_public' => true, 'is_indexable' => $locale === 'en', 'review_state' => 'approved',
+                    'publish_allowed' => true, 'operator_approval_required' => false, 'claim_gate_status' => 'passed',
+                    'schema_enabled' => false, 'legal_review_required' => false, 'science_review_required' => false,
+                    'published_at' => now()->subDay(), 'translation_group_id' => $slug,
+                    'source_content_id' => $locale === 'zh-CN' ? null : $pages[$slug]['zh-CN']->id,
+                    'translation_status' => $locale === 'zh-CN' ? ContentPage::TRANSLATION_STATUS_SOURCE : ContentPage::TRANSLATION_STATUS_PUBLISHED,
+                ]);
+                if ($locale === 'zh-TW') {
+                    $revision = CmsTranslationRevision::query()->create([
+                        'org_id' => 0, 'content_type' => 'content_page', 'content_id' => $pages[$slug][$locale]->id,
+                        'translation_group_id' => $slug, 'locale' => $locale, 'source_locale' => 'zh-CN',
+                        'revision_number' => 1, 'revision_status' => CmsTranslationRevision::STATUS_PUBLISHED,
+                        'source_version_hash' => $pages[$slug]['zh-CN']->source_version_hash, 'payload_json' => [],
+                    ]);
+                    $pages[$slug][$locale]->forceFill(['published_revision_id' => $revision->id])->save();
+                }
+            }
+        }
+        foreach ($manifest['candidates'] as &$candidate) {
+            foreach ($candidate['before']['production'] as $locale => &$digest) {
+                $page = $pages[$candidate['slug']][$locale];
+                $digest = hash('sha256', json_encode([$page->title, $page->content_md], JSON_THROW_ON_ERROR));
+            }
+            unset($digest);
+        }
+        unset($candidate);
+        $rows = TraditionalCmsIndexRelease::readPackage(json_encode($manifest, JSON_THROW_ON_ERROR), 'production', TraditionalCmsIndexRelease::SCIENCE_FILE);
+        self::assertCount(6, $rows);
+
+        $release = app(TraditionalCmsIndexRelease::class);
+        DB::transaction(function () use ($rows, $release, $pages): void {
+            $before = [];
+            foreach ($rows as $row) {
+                $saved = $release->read($row, true);
+                $release->assertHeld($saved);
+                $before[$row['page_id']] = $saved;
+            }
+            foreach ($rows as $row) {
+                $release->write($row, $before[$row['page_id']], true);
+                $release->assertActive($release->read($row, true));
+            }
+            self::assertFalse($pages['data-privacy']['zh-CN']->fresh()->is_indexable);
+            self::assertFalse($pages['data-privacy']['zh-TW']->fresh()->is_indexable);
+            self::assertSame(4, ContentPage::query()->where('locale', 'en')->where('is_indexable', true)->count());
+            foreach ($rows as $row) {
+                $release->write($row, $before[$row['page_id']], false);
+                self::assertSame($before[$row['page_id']], $release->read($row, true));
+            }
+        });
+    }
+
     public function test_traditional_cms_index_checks_the_reviewed_public_topic_sections(): void
     {
         $release = app(TraditionalCmsIndexRelease::class);

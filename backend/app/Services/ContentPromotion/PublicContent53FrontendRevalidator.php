@@ -169,6 +169,10 @@ final class PublicContent53FrontendRevalidator
             };
             if ($path === null) {
                 $paths[] = "/zh-TW/$slug";
+                if ($row['science_cms_index'] ?? false) {
+                    $paths[] = "/zh/$slug";
+                    $paths[] = "/en/$slug";
+                }
 
                 continue;
             }
