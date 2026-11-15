@@ -30,6 +30,12 @@ final class PublicContent53State
         }
         $state = [];
         $rows = $this->package->read(base_path(), $sha, (string) config('content_promotion.public_content_53_environment', 'production'))['candidates'];
+        if (isset($rows[0]['traditional_article_index'])) {
+            $specs = array_column($rows, 'traditional_article_index', 'page_id');
+
+            return array_map(static fn (array $members): array => ['table' => 'articles', 'index_members' => $members],
+                app(TraditionalArticleIndexRelease::class)->readBatch($specs, $lock));
+        }
         if ($this->nativeBatch($rows)) {
             return app(PublicContent53MbtiResultCopy::class)->withNativeRead($rows, $lock, static function (PublicContent53MbtiResultCopy $native) use ($rows, $lock): array {
                 $state = [];
@@ -53,14 +59,6 @@ final class PublicContent53State
             }
             if (isset($row['staging_article_original'])) {
                 $state[$row['page_id']] = app(StagingArticleOriginals::class)->read($row, $lock);
-
-                continue;
-            }
-            if (isset($row['traditional_article_index'])) {
-                $state[$row['page_id']] = [
-                    'table' => 'articles',
-                    'index_members' => app(TraditionalArticleIndexRelease::class)->read($row['traditional_article_index'], $lock),
-                ];
 
                 continue;
             }
@@ -232,6 +230,16 @@ final class PublicContent53State
 
     public function assertBaseline(array $rows): void
     {
+        if (isset($rows[0]['traditional_article_index'])) {
+            $release = app(TraditionalArticleIndexRelease::class);
+            $specs = array_column($rows, 'traditional_article_index');
+            $states = $release->readBatch($specs);
+            foreach ($specs as $key => $spec) {
+                $release->assertHeld($spec, $states[$key]);
+            }
+
+            return;
+        }
         if ($this->nativeBatch($rows)) {
             app(PublicContent53MbtiResultCopy::class)->withNativeRead($rows, false, static function (PublicContent53MbtiResultCopy $native) use ($rows): void {
                 foreach ($rows as $row) {
@@ -245,12 +253,6 @@ final class PublicContent53State
             if (isset($row['staging_article_original'])) {
                 $originals = app(StagingArticleOriginals::class);
                 $originals->assertBaseline($row, $originals->read($row, false));
-
-                continue;
-            }
-            if (isset($row['traditional_article_index'])) {
-                $release = app(TraditionalArticleIndexRelease::class);
-                $release->assertHeld($row['traditional_article_index'], $release->read($row['traditional_article_index']));
 
                 continue;
             }
@@ -443,6 +445,15 @@ final class PublicContent53State
             return;
         }
 
+        if (isset($rows[0]['traditional_article_index'])) {
+            app(TraditionalArticleIndexRelease::class)->assertActiveBatch(
+                array_column($rows, 'traditional_article_index', 'page_id'),
+                array_map(static fn (array $row): array => $row['index_members'], $state),
+            );
+
+            return;
+        }
+
         if ($this->nativeBatch($rows)) {
             app(PublicContent53MbtiResultCopy::class)->withNativeRead($rows, false, function (PublicContent53MbtiResultCopy $native) use ($rows): void {
                 foreach ($rows as $row) {
@@ -455,11 +466,6 @@ final class PublicContent53State
             return;
         }
         foreach ($rows as $row) {
-            if (isset($row['traditional_article_index'])) {
-                app(TraditionalArticleIndexRelease::class)->assertActive($row['traditional_article_index'], $state[$row['page_id']]['index_members']);
-
-                continue;
-            }
             if ($row['new_traditional_guide'] ?? false) {
                 $current = $this->traditionalGuideState($row, false);
                 if ($current !== $state[$row['page_id']] || $current['target']['visibility'] !== 'published') {

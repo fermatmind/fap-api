@@ -32,13 +32,24 @@ final class TraditionalArticleIndexRelease
     /** The package parser supplies one frozen row per Traditional article and its exact language peers. */
     public function read(array $row, bool $lock = false): array
     {
+        return $this->readBatch([$row], $lock)[0];
+    }
+
+    public function readBatch(array $rows, bool $lock = false): array
+    {
+        $members = $this->members($rows, $lock);
+        $states = [];
+        foreach ($rows as $key => $row) {
+            $states[$key] = $this->memberState($row, $members[$key]);
+        }
+
+        return $states;
+    }
+
+    private function memberState(array $row, array $members): array
+    {
         $state = [];
-        foreach ([$row['target'], ...$row['peers']] as $identity) {
-            [$article, $revision, $seo] = $this->member($identity, $lock);
-            $locale = $identity['locale'];
-            if (isset($state[$locale])) {
-                throw new DomainException('traditional_article_index_locale_collision');
-            }
+        foreach ($members as $locale => [$article, $revision, $seo, $canonical]) {
             if ($locale === 'zh-TW'
                 && ($article->source_article_id !== $row['source_id']
                     || $article->source_locale !== $row['source_locale']
@@ -55,7 +66,7 @@ final class TraditionalArticleIndexRelease
                 'id' => (int) $article->id,
                 'locale' => $locale,
                 'seo_id' => $seo?->id,
-                'canonical' => $identity['canonical'],
+                'canonical' => $canonical,
                 'protected_sha256' => Hash::hash([
                     Arr::except($article->getAttributes(), self::INDEX_FIELDS),
                     $revision->getAttributes(),
@@ -96,11 +107,24 @@ final class TraditionalArticleIndexRelease
 
     public function activate(array $row, array $before): void
     {
+        $this->activateBatch([$row], [$before]);
+    }
+
+    public function activateBatch(array $rows, array $before): void
+    {
         $this->assertTransaction();
-        if (! Hash::sameValue($this->read($row, true), $before)) {
+        $current = $this->readBatch($rows, true);
+        if (! Hash::sameValue($current, $before)) {
             throw new DomainException('traditional_article_index_concurrent_state');
         }
-        $this->assertHeld($row, $before);
+        foreach ($rows as $key => $row) {
+            $this->assertHeld($row, $before[$key]);
+            $this->activateMembers($row, $before[$key]);
+        }
+    }
+
+    private function activateMembers(array $row, array $before): void
+    {
         $target = $before['zh-TW'];
         $target['article'] = ['is_indexable' => true, 'sitemap_eligible' => true, 'llms_eligible' => $row['llms_eligible']];
         $target['seo']['is_indexable'] = true;
@@ -116,7 +140,20 @@ final class TraditionalArticleIndexRelease
 
     public function assertActive(array $row, array $before): void
     {
-        $after = $this->read($row, DB::transactionLevel() > 0);
+        $this->assertActiveBatch([$row], [$before]);
+    }
+
+    public function assertActiveBatch(array $rows, array $before): void
+    {
+        $members = $this->members($rows, DB::transactionLevel() > 0);
+        foreach ($rows as $key => $row) {
+            $this->assertActiveMembers($row, $before[$key], $members[$key]);
+        }
+    }
+
+    private function assertActiveMembers(array $row, array $before, array $members): void
+    {
+        $after = $this->memberState($row, $members);
         $identities = [$row['target'], ...$row['peers']];
         $stageOverrides = array_filter($row['peers'], static fn (array $peer): bool => isset($peer['staging_control']));
         $expected = [];
@@ -127,7 +164,7 @@ final class TraditionalArticleIndexRelease
         }
         foreach ($identities as $identity) {
             $locale = $identity['locale'];
-            [$article, $revision] = $this->member($identity, false);
+            [$article, $revision] = $members[$locale];
             $projection = $this->seo->buildSeoPayload($article, $revision);
             $actual = (array) data_get($projection, 'article_authority_v1.alternate_eligibility.alternates', []);
             $eligible = isset($identity['staging_control'])
@@ -166,35 +203,54 @@ final class TraditionalArticleIndexRelease
         }
     }
 
-    private function member(array $identity, bool $lock): array
+    private function members(array $rows, bool $lock): array
     {
-        $article = Article::withoutGlobalScopes()->where('org_id', 0)->whereKey($identity['id'])
-            ->where('locale', $identity['locale'])->where('slug', $identity['slug'])->whereNull('deleted_at')->publiclyReadable()
-            ->where('published_revision_id', $identity['published_revision_id'])
-            ->when($lock, fn ($query) => $query->lockForUpdate())->first();
-        if (! $article instanceof Article || $article->translation_group_id !== $identity['translation_group_id']
-            || $this->counterparts->canonical($article) !== $identity['canonical']) {
-            throw new DomainException('traditional_article_index_identity_drift');
-        }
-        $revision = ArticleTranslationRevision::withoutGlobalScopes()->where('org_id', 0)
-            ->where('article_id', $article->id)->where('locale', $article->locale)->whereKey($article->published_revision_id)
-            ->when($lock, fn ($query) => $query->lockForUpdate())->first();
-        $seoRows = ArticleSeoMeta::withoutGlobalScopes()->where('org_id', 0)
-            ->where('article_id', $article->id)->where('locale', $article->locale)
-            ->when($lock, fn ($query) => $query->lockForUpdate())->limit(2)->get();
-        $seo = $seoRows->first();
-        $stage = $identity['staging_control'] ?? null;
-        $seoMatches = $stage === null
-            ? in_array($seo?->canonical_url, [$identity['canonical'], parse_url($identity['canonical'], PHP_URL_PATH)], true)
-            : PublicContent53Package::environment() === 'staging' && ($seo instanceof ArticleSeoMeta) === $stage['has_seo']
-                && $seo?->canonical_url === $stage['canonical_url'] && $seo?->robots === $stage['robots'];
-        if (! $revision instanceof ArticleTranslationRevision || $seoRows->count() > 1
-            || ! $revision->isPubliclyReadableForArticle($article) || ! $seoMatches) {
-            throw new DomainException('traditional_article_index_revision_drift');
-        }
-        $article->setRelation('publishedRevision', $revision)->setRelation('seoMeta', $seo);
+        $groups = array_map(static fn (array $row): array => [$row['target'], ...$row['peers']], $rows);
+        $identities = array_merge(...array_values($groups));
+        $articleIds = array_column($identities, 'id');
+        $articles = Article::withoutGlobalScopes()->where('org_id', 0)->whereKey($articleIds)
+            ->whereNull('deleted_at')->publiclyReadable()->orderBy('id')
+            ->when($lock, fn ($query) => $query->lockForUpdate())->get()->keyBy('id');
+        $revisions = ArticleTranslationRevision::withoutGlobalScopes()->where('org_id', 0)
+            ->whereKey(array_column($identities, 'published_revision_id'))->orderBy('id')
+            ->when($lock, fn ($query) => $query->lockForUpdate())->get()->keyBy('id');
+        $seoByArticle = ArticleSeoMeta::withoutGlobalScopes()->where('org_id', 0)
+            ->whereIn('article_id', $articleIds)->orderBy('id')
+            ->when($lock, fn ($query) => $query->lockForUpdate())->get()->groupBy('article_id');
 
-        return [$article, $revision, $seo];
+        $members = [];
+        foreach ($groups as $key => $identities) {
+            foreach ($identities as $identity) {
+                $locale = $identity['locale'];
+                if (isset($members[$key][$locale])) {
+                    throw new DomainException('traditional_article_index_locale_collision');
+                }
+                $article = $articles->get($identity['id']);
+                if (! $article instanceof Article || $article->locale !== $locale || $article->slug !== $identity['slug']
+                    || (int) $article->published_revision_id !== $identity['published_revision_id']
+                    || $article->translation_group_id !== $identity['translation_group_id']
+                    || $this->counterparts->canonical($article) !== $identity['canonical']) {
+                    throw new DomainException('traditional_article_index_identity_drift');
+                }
+                $revision = $revisions->get($identity['published_revision_id']);
+                $seoRows = $seoByArticle->get($article->id, collect())->whereStrict('locale', $locale);
+                $seo = $seoRows->first();
+                $stage = $identity['staging_control'] ?? null;
+                $seoMatches = $stage === null
+                    ? in_array($seo?->canonical_url, [$identity['canonical'], parse_url($identity['canonical'], PHP_URL_PATH)], true)
+                    : PublicContent53Package::environment() === 'staging' && ($seo instanceof ArticleSeoMeta) === $stage['has_seo']
+                        && $seo?->canonical_url === $stage['canonical_url'] && $seo?->robots === $stage['robots'];
+                if (! $revision instanceof ArticleTranslationRevision || (int) $revision->article_id !== (int) $article->id
+                    || $revision->locale !== $locale || $seoRows->count() > 1
+                    || ! $revision->isPubliclyReadableForArticle($article) || ! $seoMatches) {
+                    throw new DomainException('traditional_article_index_revision_drift');
+                }
+                $article->setRelation('publishedRevision', $revision)->setRelation('seoMeta', $seo);
+                $members[$key][$locale] = [$article, $revision, $seo, $identity['canonical']];
+            }
+        }
+
+        return $members;
     }
 
     private function enableHreflang(array $member): array

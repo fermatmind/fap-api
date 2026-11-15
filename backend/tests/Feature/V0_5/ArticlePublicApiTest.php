@@ -762,7 +762,7 @@ final class ArticlePublicApiTest extends TestCase
             $parse($missing, 'production');
             self::fail('A missing staging member must reject the entire package.');
         } catch (\DomainException $exception) {
-            self::assertSame('public_content_53_traditional_index_count_invalid', $exception->getMessage());
+            self::assertSame('public_content_53_traditional_index_environment_scope_mismatch', $exception->getMessage());
         }
         $manifest['environments']['staging'][1]['target']['id'] = $manifest['environments']['staging'][0]['target']['id'];
         $this->expectExceptionMessage('public_content_53_traditional_index_duplicate_identity');
@@ -809,7 +809,14 @@ final class ArticlePublicApiTest extends TestCase
             $origins[] = $source;
         }
 
-        $before = array_map($release->read(...), $rows);
+        DB::enableQueryLog();
+        try {
+            $before = $release->readBatch($rows);
+            self::assertCount(3, DB::getQueryLog());
+        } finally {
+            DB::disableQueryLog();
+            DB::flushQueryLog();
+        }
         try {
             DB::transaction(function () use ($release, $rows, $before): void {
                 $release->activate($rows[0], $before[0]);
@@ -823,12 +830,8 @@ final class ArticlePublicApiTest extends TestCase
         self::assertSame($before, array_map($release->read(...), $rows));
 
         DB::transaction(function () use ($release, $rows, $before): void {
-            foreach ($rows as $index => $row) {
-                $release->activate($row, $before[$index]);
-            }
-            foreach ($rows as $index => $row) {
-                $release->assertActive($row, $before[$index]);
-            }
+            $release->activateBatch($rows, $before);
+            $release->assertActiveBatch($rows, $before);
         });
         $after = array_map($release->read(...), $rows);
         foreach ($origins as $index => $source) {

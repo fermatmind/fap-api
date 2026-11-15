@@ -90,12 +90,10 @@ final class PublicContent53Writer
         }
         if (isset($rows[0]['traditional_article_index'])) {
             $release = app(TraditionalArticleIndexRelease::class);
-            foreach ($rows as $row) {
-                $release->activate($row['traditional_article_index'], $before[$row['page_id']]['index_members']);
-            }
-            foreach ($rows as $row) {
-                $release->assertActive($row['traditional_article_index'], $before[$row['page_id']]['index_members']);
-            }
+            $specs = array_column($rows, 'traditional_article_index', 'page_id');
+            $members = array_map(static fn (array $row): array => $row['index_members'], $before);
+            $release->activateBatch($specs, $members);
+            $release->assertActiveBatch($specs, $members);
 
             return ['written_count' => count($rows), 'state' => $this->states->read($context->packageSha256, true)];
         }
