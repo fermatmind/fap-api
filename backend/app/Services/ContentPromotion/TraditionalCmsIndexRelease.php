@@ -107,6 +107,7 @@ final class TraditionalCmsIndexRelease
         $seo = $seoQuery === null ? null : ($lock ? $seoQuery->lockForUpdate() : $seoQuery)->firstOrFail();
 
         return [
+            'table' => $target->getTable(),
             'id' => (int) $target->id,
             'revision' => $kind === 'guide' ? (int) $target->revisions()->value('id') : (int) $target->published_revision_id,
             'indexed' => (bool) $target->is_indexable,
