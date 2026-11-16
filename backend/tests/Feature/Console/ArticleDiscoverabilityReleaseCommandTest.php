@@ -241,6 +241,31 @@ final class ArticleDiscoverabilityReleaseCommandTest extends TestCase
         $this->assertSame(0, ContentMaterialDecision::query()->count());
     }
 
+    public function test_traditional_sitemap_only_uses_the_traditional_canonical_and_preserves_llms(): void
+    {
+        $article = $this->createPublishedIndexableArticle(['locale' => 'zh-TW']);
+        $slug = $article->slug;
+        $options = [
+            '--article-id' => $article->id,
+            '--expected-slug' => $slug,
+            '--sitemap-only' => true,
+            '--json' => true,
+        ];
+        self::assertSame(1, Artisan::call('articles:discoverability-release', $options + ['--dry-run' => true]), Artisan::output());
+        $seo = $article->seoMeta()->withoutGlobalScopes()->firstOrFail();
+        $seo->update(['canonical_url' => 'https://fermatmind.com/zh-TW/articles/'.$slug]);
+        $exitCode = Artisan::call('articles:discoverability-release', $options + ['--dry-run' => true]);
+        $plan = $this->jsonOutput();
+        self::assertSame(0, $exitCode);
+        self::assertFalse((bool) $article->fresh()->sitemap_eligible);
+        self::assertSame(0, Artisan::call('articles:discoverability-release', $options + [
+            '--execute' => true, '--confirm' => $plan['expected_confirmation'], '--no-content-change' => true,
+            '--no-publish' => true, '--no-search' => true, '--no-schema-hreflang' => true, '--no-revalidation' => true,
+        ]), Artisan::output());
+        self::assertTrue((bool) $article->fresh()->sitemap_eligible);
+        self::assertFalse((bool) $article->fresh()->llms_eligible);
+    }
+
     /**
      * @param  array<string,mixed>  $overrides
      */
@@ -276,7 +301,7 @@ final class ArticleDiscoverabilityReleaseCommandTest extends TestCase
             'article_id' => (int) $article->id,
             'source_article_id' => (int) $article->id,
             'translation_group_id' => (string) $article->translation_group_id,
-            'locale' => 'zh-CN',
+            'locale' => $article->locale,
             'source_locale' => 'zh-CN',
             'revision_number' => 1,
             'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
@@ -295,7 +320,7 @@ final class ArticleDiscoverabilityReleaseCommandTest extends TestCase
         ArticleSeoMeta::query()->withoutGlobalScopes()->create([
             'org_id' => 0,
             'article_id' => (int) $article->id,
-            'locale' => 'zh-CN',
+            'locale' => $article->locale,
             'seo_title' => (string) $article->title,
             'seo_description' => (string) $article->excerpt,
             'canonical_url' => 'https://fermatmind.com/zh/articles/gaokao-score-major-shortlist-riasec-checklist',

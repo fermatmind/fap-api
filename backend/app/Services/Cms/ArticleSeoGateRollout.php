@@ -120,6 +120,12 @@ final class ArticleSeoGateRollout
             }
 
             $fresh = $this->resolveArticles($articleIds);
+            if ((bool) ($options['enable_hreflang'] ?? false) && collect($fresh)->contains('locale', 'zh-TW')) {
+                $this->validateReciprocalHreflang($fresh, $errors);
+                if ($errors !== []) {
+                    throw new \RuntimeException('Article SEO gate rollout failed reciprocal hreflang readback.');
+                }
+            }
             $after = array_map(fn (Article $article): array => $this->snapshot($article), $fresh);
             $this->writeAudit($fresh, $options, $translationGroupId);
         });
@@ -251,7 +257,9 @@ final class ArticleSeoGateRollout
         }
 
         if ((bool) ($options['enable_hreflang'] ?? false)) {
-            $this->validateReciprocalHreflang($articles, $errors);
+            $traditional = collect($articles)->where('locale', 'zh-TW');
+            $plannedId = $traditional->count() === 1 ? (int) $traditional->sole()->id : null;
+            $this->validateReciprocalHreflang($articles, $errors, $plannedId);
         }
     }
 
@@ -293,12 +301,11 @@ final class ArticleSeoGateRollout
      * @param  list<Article>  $articles
      * @param  list<array<string,mixed>>  $errors
      */
-    private function validateReciprocalHreflang(array $articles, array &$errors): void
+    private function validateReciprocalHreflang(array $articles, array &$errors, ?int $plannedTraditionalGateId = null): void
     {
         foreach ($articles as $article) {
-            $payload = $this->seoService->buildSeoPayload($article, $article->publishedRevision);
-            $alternates = is_array($payload['alternates'] ?? null) ? $payload['alternates'] : [];
-            $canonical = (string) ($payload['canonical'] ?? '');
+            $alternates = $this->seoService->buildAlternates($article, $plannedTraditionalGateId);
+            $canonical = (string) $this->seoService->buildCanonicalUrl((string) $article->slug, (string) $article->locale);
 
             if ($canonical === '' || ! isset($alternates['en'], $alternates['zh-CN'])) {
                 $errors[] = $this->issue('article.'.$article->id.'.hreflang', 'hreflang_missing_counterpart', 'Hreflang enable requires both en and zh-CN public indexable alternates.', [
@@ -330,8 +337,7 @@ final class ArticleSeoGateRollout
                     continue;
                 }
 
-                $siblingPayload = $this->seoService->buildSeoPayload($sibling, $sibling->publishedRevision);
-                $siblingAlternates = is_array($siblingPayload['alternates'] ?? null) ? $siblingPayload['alternates'] : [];
+                $siblingAlternates = $this->seoService->buildAlternates($sibling, $plannedTraditionalGateId);
                 if (($siblingAlternates[(string) $article->locale] ?? null) !== $canonical) {
                     $errors[] = $this->issue('article.'.$article->id.'.hreflang', 'hreflang_reciprocal_mismatch', 'Hreflang counterpart does not reciprocate this article canonical.', [
                         'article_id' => (int) $article->id,

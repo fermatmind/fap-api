@@ -721,7 +721,7 @@ final class ArticleSeoService
     /**
      * @return array<string, string>
      */
-    private function buildAlternates(Article $article): array
+    public function buildAlternates(Article $article, ?int $plannedTraditionalGateId = null): array
     {
         $variants = [];
         $translationGroupId = trim((string) ($article->translation_group_id ?? ''));
@@ -743,8 +743,9 @@ final class ArticleSeoService
             $candidate = $traditional->count() === 1 ? $traditional->first() : null;
             $canLinkTraditional = $candidate instanceof Article
                 && $counterparts->eligible($candidate, includeTraditional: true)
-                && data_get($candidate->seoMeta?->schema_json, 'editorial_package_v1.hreflang_gate_v1.enabled') === true
-                && ! data_get($candidate->seoMeta?->schema_json, 'editorial_package_v1.hreflang_hold')
+                && ($plannedTraditionalGateId === (int) $candidate->id
+                    || (data_get($candidate->seoMeta?->schema_json, 'editorial_package_v1.hreflang_gate_v1.enabled') === true
+                        && ! data_get($candidate->seoMeta?->schema_json, 'editorial_package_v1.hreflang_hold')))
                 && $variants->contains(fn (Article $sibling): bool => $sibling->id === $candidate->source_article_id
                     && $sibling->locale === $candidate->source_locale)
                 && ! $variants->contains(fn (Article $sibling): bool => $counterparts->binding($sibling) !== null);

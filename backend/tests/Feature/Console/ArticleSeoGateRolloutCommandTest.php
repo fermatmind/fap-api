@@ -306,6 +306,44 @@ final class ArticleSeoGateRolloutCommandTest extends TestCase
 
     }
 
+    public function test_enable_hreflang_projects_the_traditional_gate_before_writing(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+        $common = ['slug' => 'career-comparison', 'translation_group_id' => 'career-comparison', 'source_locale' => 'zh-CN'];
+        $zh = $this->createArticle($common + ['locale' => 'zh-CN']);
+        $en = $this->createArticle($common + ['locale' => 'en', 'source_article_id' => $zh->id, 'translation_status' => Article::TRANSLATION_STATUS_PUBLISHED]);
+        $tw = $this->createArticle($common + ['locale' => 'zh-TW', 'source_article_id' => $zh->id, 'translation_status' => Article::TRANSLATION_STATUS_PUBLISHED]);
+        $this->createSeoMeta($zh);
+        $this->createSeoMeta($en);
+        $twSeo = $this->createSeoMeta($tw, ['canonical_url' => 'https://fermatmind.com/zh-TW/articles/career-comparison']);
+        $options = [
+            '--article-ids' => implode(',', [$zh->id, $en->id, $tw->id]),
+            '--translation-group-id' => 'career-comparison',
+            '--expected-slugs' => 'career-comparison,career-comparison,career-comparison',
+            '--enable-hreflang' => true,
+            '--json' => true,
+        ];
+        self::assertSame(0, Artisan::call('articles:seo-gate-rollout', $options + ['--dry-run' => true]), Artisan::output());
+        self::assertNull($twSeo->fresh()->schema_json);
+        $twSeo->update(['canonical_url' => $zh->seoMeta->canonical_url]);
+        self::assertSame(1, Artisan::call('articles:seo-gate-rollout', $options + ['--dry-run' => true]), Artisan::output());
+        $twSeo->update(['canonical_url' => 'https://fermatmind.com/zh-TW/articles/career-comparison']);
+
+        self::assertSame(0, Artisan::call('articles:seo-gate-rollout', $options + [
+            '--execute' => true, '--no-publish' => true, '--no-search' => true,
+            '--no-sitemap-llms-change' => true, '--no-content-change' => true, '--no-revalidation' => true,
+        ]), Artisan::output());
+        $seo = app(\App\Services\Cms\ArticleSeoService::class);
+        foreach ([$zh, $en, $tw] as $article) {
+            $links = data_get($seo->buildSeoPayload($article->fresh(['publishedRevision'])), 'article_authority_v1.alternate_eligibility.alternates');
+            self::assertEquals([
+                'en' => 'https://fermatmind.com/en/articles/career-comparison',
+                'zh-CN' => 'https://fermatmind.com/zh/articles/career-comparison',
+                'zh-TW' => 'https://fermatmind.com/zh-TW/articles/career-comparison',
+            ], $links);
+        }
+    }
+
     public function test_enable_hreflang_blocks_simultaneous_translation_group_change(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);

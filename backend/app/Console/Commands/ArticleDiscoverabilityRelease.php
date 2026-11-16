@@ -10,6 +10,7 @@ use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use App\Services\Audit\AuditLogger;
 use App\Services\Cms\ArticleMaterialDecisionService;
+use App\Services\Cms\ArticleSeoService;
 use Illuminate\Console\Command;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -25,6 +26,7 @@ final class ArticleDiscoverabilityRelease extends Command
         {--dry-run : Validate and plan without writing}
         {--execute : Release sitemap/llms eligibility}
         {--json : Emit a JSON summary}
+        {--sitemap-only : Preserve existing llms eligibility}
         {--no-content-change : Required execute-mode hold: do not modify article content}
         {--no-publish : Required execute-mode hold: do not publish or promote}
         {--no-search : Required execute-mode hold: do not submit search channels}
@@ -126,7 +128,7 @@ final class ArticleDiscoverabilityRelease extends Command
                 ->where('id', $articleId)
                 ->update([
                     'sitemap_eligible' => true,
-                    'llms_eligible' => true,
+                    ...((bool) $this->option('sitemap-only') ? [] : ['llms_eligible' => true]),
                     'updated_at' => now(),
                 ]);
 
@@ -168,7 +170,7 @@ final class ArticleDiscoverabilityRelease extends Command
                 'article_id' => $articleId,
                 'slug' => $expectedSlug,
                 'confirmation_sha256' => hash('sha256', $confirmation),
-                'updates_scope' => ['articles.sitemap_eligible', 'articles.llms_eligible'],
+                'updates_scope' => $this->updatesScope(),
                 'no_content_change' => true,
                 'no_publish' => true,
                 'no_search' => true,
@@ -205,7 +207,7 @@ final class ArticleDiscoverabilityRelease extends Command
         $before = $this->snapshot($article);
         $after = $before;
         $after['sitemap_eligible'] = true;
-        $after['llms_eligible'] = true;
+        $after['llms_eligible'] = (bool) $this->option('sitemap-only') ? $before['llms_eligible'] : true;
         $errors = [];
 
         if ((string) $article->slug !== $expectedSlug) {
@@ -268,7 +270,7 @@ final class ArticleDiscoverabilityRelease extends Command
             'slug' => (string) $article->slug,
             'locale' => (string) $article->locale,
             'canonical_path' => $this->canonicalPathForArticle($article),
-            'already_released' => (bool) $article->sitemap_eligible && (bool) $article->llms_eligible,
+            'already_released' => (bool) $article->sitemap_eligible && ((bool) $this->option('sitemap-only') || (bool) $article->llms_eligible),
             'before' => $before,
             'after' => $after,
             'errors' => $errors,
@@ -313,10 +315,17 @@ final class ArticleDiscoverabilityRelease extends Command
 
     private function canonicalPathForArticle(Article $article): string
     {
-        $locale = (string) $article->locale;
-        $prefix = str_starts_with($locale, 'zh') ? '/zh' : '/en';
+        $segment = app(ArticleSeoService::class)->mapBackendLocaleToFrontendSegment((string) $article->locale);
 
-        return $prefix.'/articles/'.(string) $article->slug;
+        return '/'.$segment.'/articles/'.rawurlencode((string) $article->slug);
+    }
+
+    /** @return list<string> */
+    private function updatesScope(): array
+    {
+        return (bool) $this->option('sitemap-only')
+            ? ['articles.sitemap_eligible']
+            : ['articles.sitemap_eligible', 'articles.llms_eligible'];
     }
 
     private function pathFromCanonical(string $canonical): string
@@ -339,7 +348,7 @@ final class ArticleDiscoverabilityRelease extends Command
             'article_id' => $articleId,
             'expected_slug' => $expectedSlug,
             'expected_confirmation' => $expectedConfirmation,
-            'updates_scope' => ['articles.sitemap_eligible', 'articles.llms_eligible'],
+            'updates_scope' => $this->updatesScope(),
             'protected_holds' => [
                 'no_content_change' => true,
                 'no_publish' => true,
