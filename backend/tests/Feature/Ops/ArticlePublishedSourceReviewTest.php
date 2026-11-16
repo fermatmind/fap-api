@@ -385,6 +385,9 @@ final class ArticlePublishedSourceReviewTest extends TestCase
         Livewire::test(EditArticle::class, ['record' => $target->id])
             ->callAction('confirmPublishedSourceReview', [...$service->prepare($target), 'source_reviewed' => true])
             ->assertHasNoActionErrors();
+        $this->assertTrue($service->hasCurrentReview($target->fresh()));
+        $this->assertFalse($service->hasCurrentIndependentReview($target->fresh()));
+        $this->assertDatabaseCount('editorial_reviews', 0);
         $locale = $this->consoleLocale($source, $target);
         $this->assertFalse($locale['is_stale']);
         $this->assertFalse($locale['is_published_stale']);
@@ -436,7 +439,7 @@ final class ArticlePublishedSourceReviewTest extends TestCase
     }
 
     #[DataProvider('nonApprovedSourceStates')]
-    public function test_current_pair_review_does_not_replace_source_editorial_approval(string $state): void
+    public function test_current_pair_review_does_not_replace_source_editorial_approval(string $state, bool $preflightAllowed): void
     {
         [$source, $target] = $this->differentSourcePair();
         $actor = (int) auth('admin')->id();
@@ -447,19 +450,28 @@ final class ArticlePublishedSourceReviewTest extends TestCase
         $service = app(ArticlePublishedSourceReviewService::class);
         $service->confirm($target, [...$service->prepare($target), 'source_reviewed' => true]);
         if ($state === 'missing') {
-            EditorialReview::withoutGlobalScopes()->delete();
+            EditorialReview::withoutGlobalScopes()->where('content_type', 'article')->where('content_id', $source->id)->delete();
         } else {
             EditorialReview::withoutGlobalScopes()->update(['workflow_state' => $state]);
         }
         $locale = $this->consoleLocale($source, $target);
         $this->assertFalse($locale['is_stale']);
-        $this->assertFalse($locale['preflight']['ok']);
-        $this->assertStringContainsString('editorial approval missing', implode(' ', $locale['preflight']['blockers']));
+        $this->assertSame($preflightAllowed, $locale['preflight']['ok']);
+        if ($preflightAllowed) {
+            $this->assertSame([], $locale['preflight']['blockers']);
+        } else {
+            $this->assertStringContainsString('editorial approval missing', implode(' ', $locale['preflight']['blockers']));
+        }
     }
 
     public static function nonApprovedSourceStates(): array
     {
-        return [['missing'], ['ready'], ['rejected'], ['changes_requested']];
+        return [
+            'missing workflow with exact formal approval' => ['missing', true],
+            'ready' => ['ready', false],
+            'rejected' => ['rejected', false],
+            'changes requested' => ['changes_requested', false],
+        ];
     }
 
     private function consoleLocale(Article $source, Article $target): array

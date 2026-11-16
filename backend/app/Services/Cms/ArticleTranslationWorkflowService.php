@@ -854,8 +854,7 @@ final class ArticleTranslationWorkflowService
             ->all();
 
         return in_array($workflowStates, [[], [EditorialReviewAudit::STATE_APPROVED]], true)
-            && $this->reviewAttestations->hasApprovedEvidence('article', $source)
-            && $this->reviewAttestations->hasApprovedEvidence('article_translation_revision', $publishedRevision);
+            && $this->reviewAttestations->hasFormalArticleApproval($source, $publishedRevision);
     }
 
     private function referencesPreserved(Article $source, ArticleTranslationRevision $targetRevision): bool

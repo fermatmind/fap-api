@@ -34,6 +34,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 final readonly class CmsEditorialReviewAttestationService
 {
+    private const ARTICLE_APPROVAL_SCOPES = ['cms_article_review', 'cms_editorial_review'];
+
     /** @var array<string, class-string<Model>> */
     private const SURFACE_MODELS = [
         'article' => Article::class,
@@ -169,6 +171,17 @@ final readonly class CmsEditorialReviewAttestationService
         return $this->hasApprovedTarget($target);
     }
 
+    public function hasFormalArticleApproval(Article $article, ArticleTranslationRevision $revision): bool
+    {
+        $targets = $this->targets([
+            ['surface_id' => 'article', 'record' => $article],
+            ['surface_id' => 'article_translation_revision', 'record' => $revision],
+        ]);
+
+        return $this->hasApprovedTarget($targets[0], self::ARTICLE_APPROVAL_SCOPES)
+            && $this->hasApprovedTarget($targets[1], self::ARTICLE_APPROVAL_SCOPES);
+    }
+
     /**
      * @param  list<array{surface_id:string,record:Model}>  $resources
      */
@@ -264,18 +277,25 @@ final readonly class CmsEditorialReviewAttestationService
         }
     }
 
-    /** @param array{target_identity:string,target_sha256:string} $target */
-    private function hasApprovedTarget(array $target): bool
+    /**
+     * @param  array{target_identity:string,target_sha256:string}  $target
+     * @param  list<string>|null  $scopeTypes
+     */
+    private function hasApprovedTarget(array $target, ?array $scopeTypes = null): bool
     {
         return ReviewAttestationTargetEvidence::query()
             ->where('target_identity', $target['target_identity'])
             ->where('target_sha256', $target['target_sha256'])
             ->where('target_decision', 'approved')
-            ->whereHas('attestation', static function ($query): void {
+            ->whereHas('attestation', static function ($query) use ($scopeTypes): void {
                 $query
                     ->where('review_mode', 'solo_owner')
                     ->where('review_source', (string) config('review_governance.attestation.review_source'))
                     ->where('decision', 'approved_all');
+
+                if ($scopeTypes !== null) {
+                    $query->whereIn('scope_type', $scopeTypes);
+                }
             })
             ->exists();
     }
