@@ -17,13 +17,18 @@ final class ArticleBrandByline
     public static function project(?array $payload, Article $article, string $locale): ?array
     {
         $original = mb_strtolower(trim((string) $article->author_name));
-        $editorial = in_array($original, ['fermatmind editorial', '费马测试编辑部'], true);
-        if ($payload === null || (! $editorial && ! in_array($original, ['', 'fermat institute', 'fermatmind', '费马测试'], true))) {
+        $editorial = in_array($original, ['fermatmind editorial', '费马测试编辑部', '費馬測試編輯部'], true);
+        if ($payload === null || (! $editorial && ! in_array($original, ['', 'fermat institute', 'fermatmind', '费马测试', '費馬測試'], true))) {
             return $payload;
         }
-        $brandName = $locale === 'zh-CN' ? '费马测试' : 'FermatMind';
-        $name = $editorial ? self::editorialName($locale) : $brandName;
-        $url = CanonicalFrontendUrl::fromConfig().'/'.($locale === 'zh-CN' ? 'zh' : 'en').'/brand';
+        [$brandName, $brandLocale] = match ($locale) {
+            'zh-CN' => ['费马测试', 'zh'],
+            'zh-TW' => ['費馬測試', 'zh-TW'],
+            default => ['FermatMind', 'en'],
+        };
+        $editorialName = $locale === 'zh-TW' ? '費馬測試編輯部' : self::editorialName($locale);
+        $name = $editorial ? $editorialName : $brandName;
+        $url = CanonicalFrontendUrl::fromConfig().'/'.$brandLocale.'/brand';
         $author = ['@type' => 'Organization', 'name' => $name, 'url' => $url];
         $publisher = ['@type' => 'Organization', 'name' => $brandName, 'url' => $url];
         $apply = static function (array $fragment) use ($author, $publisher): array {

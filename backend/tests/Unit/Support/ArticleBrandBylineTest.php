@@ -72,6 +72,25 @@ final class ArticleBrandBylineTest extends TestCase
         $this->assertArrayNotHasKey('publisher', $fragment);
     }
 
+    public function test_traditional_article_projects_the_editorial_organization_and_brand(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+        $fragment = ['@type' => 'Article', 'author' => ['@type' => 'Person', 'name' => '費馬測試編輯部']];
+        $expected = ['@type' => 'Organization', 'url' => 'https://fermatmind.com/zh-TW/brand'];
+
+        foreach (['費馬測試編輯部', '费马测试编辑部', 'FermatMind Editorial'] as $byline) {
+            $article = new Article(['author_name' => $byline]);
+            $payload = ArticleBrandByline::project(['@graph' => [$fragment]], $article, 'zh-TW');
+            $this->assertEquals($expected + ['name' => '費馬測試編輯部'], $payload['@graph'][0]['author']);
+            $this->assertEquals($expected + ['name' => '費馬測試'], $payload['@graph'][0]['publisher']);
+            $this->assertSame($byline, $article->author_name);
+        }
+
+        $article = new Article(['author_name' => '費馬測試']);
+        $payload = ArticleBrandByline::project($fragment, $article, 'zh-TW');
+        $this->assertEquals($expected + ['name' => '費馬測試'], $payload['author']);
+    }
+
     public function test_explicit_byline_and_nested_citation_author_are_preserved(): void
     {
         $payload = ['@type' => 'Article', 'author' => ['@type' => 'Person', 'name' => 'Existing reviewed author'],
