@@ -32,7 +32,7 @@ final class CareerDirectory10kOpsWarmValidateCommandTest extends TestCase
         $bodyReader = app(CareerContentV3CanonicalReader::class);
         $fixture = \Mockery::mock(CareerContentV3CanonicalReader::class, [app(CareerContentV3AuthorityPackage::class)])->makePartial();
         $fixture->shouldReceive('hydrate')->andReturnUsing($bodyReader->hydrate(...));
-        $fixture->shouldReceive('hasPublicBody')->andReturnUsing(
+        $fixture->shouldReceive('hasPublicBody')->byDefault()->andReturnUsing(
             static fn (string $slug): bool => in_array($slug, ['accountants-and-auditors', 'actors', 'actuaries'], true),
         );
         $this->app->instance(CareerContentV3CanonicalReader::class, $fixture);
@@ -52,7 +52,7 @@ final class CareerDirectory10kOpsWarmValidateCommandTest extends TestCase
 
         $exitCode = Artisan::call('career:validate-directory-10k-scale-readiness', [
             '--expected-public-count' => 2,
-            '--expected-sitemap-career-urls' => 4,
+            '--expected-sitemap-career-urls' => 6,
             '--synthetic-count' => 10000,
             '--json' => true,
         ]);
@@ -65,7 +65,8 @@ final class CareerDirectory10kOpsWarmValidateCommandTest extends TestCase
         $this->assertSame('passed', $report['status']);
         $this->assertSame(2, $report['public_detail_indexable_count_en']);
         $this->assertSame(2, $report['public_detail_indexable_count_zh_cn']);
-        $this->assertSame(4, $report['sitemap_career_detail_url_count']);
+        $this->assertSame(6, $report['sitemap_career_detail_url_count']);
+        $this->assertSame([], $report['errors']);
         $this->assertSame([], $report['leaked_excluded_slugs']);
         $this->assertSame([], $report['forbidden_item_fields']);
         $this->assertSame('passed', $report['capacity_chaos_gate']['status']);
@@ -101,7 +102,7 @@ final class CareerDirectory10kOpsWarmValidateCommandTest extends TestCase
 
         $exitCode = Artisan::call('career:validate-directory-10k-scale-readiness', [
             '--expected-public-count' => 1046,
-            '--expected-sitemap-career-urls' => 2092,
+            '--expected-sitemap-career-urls' => 3138,
             '--json' => true,
         ]);
 
@@ -111,6 +112,30 @@ final class CareerDirectory10kOpsWarmValidateCommandTest extends TestCase
         $this->assertSame('failed', $report['status']);
         $this->assertContains('expected_public_count_mismatch', $report['errors']);
         $this->assertContains('expected_sitemap_career_url_count_mismatch', $report['errors']);
+        $this->assertFalse($report['production_write_performed']);
+    }
+
+    public function test_command_fails_when_the_traditional_chinese_sitemap_url_is_missing(): void
+    {
+        app(CareerContentV3CanonicalReader::class)->shouldReceive('hasPublicBody')
+            ->with('actuaries', 'zh-TW')->andReturnFalse();
+        $this->createDirectoryOccupation('actuaries', 'Actuaries', '精算师');
+        $this->publishRuntimeProjection(['actuaries']);
+        app(PublicCareerAuthorityResponseCache::class)->warm();
+
+        $exitCode = Artisan::call('career:validate-directory-10k-scale-readiness', [
+            '--expected-public-count' => 1,
+            '--synthetic-count' => 50,
+            '--json' => true,
+        ]);
+
+        $report = json_decode((string) Artisan::output(), true);
+        $this->assertSame(1, $exitCode, Artisan::output());
+        $this->assertSame('failed', $report['status']);
+        $this->assertSame(1, $report['public_detail_indexable_count_en']);
+        $this->assertSame(1, $report['public_detail_indexable_count_zh_cn']);
+        $this->assertSame(2, $report['sitemap_career_detail_url_count']);
+        $this->assertSame(['sitemap_career_url_count_not_localized_public_count'], $report['errors']);
         $this->assertFalse($report['production_write_performed']);
     }
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Domain\Career\Display\CareerContentV3Contract;
 use App\Services\Career\Career10kCapacityChaosGate;
 use App\Services\Career\CareerDirectoryAuthorityService;
 use App\Services\SEO\SitemapGenerator;
@@ -14,7 +15,7 @@ final class CareerValidateDirectory10kScaleReadiness extends Command
 {
     protected $signature = 'career:validate-directory-10k-scale-readiness
         {--expected-public-count= : Optional expected public career detail count}
-        {--expected-sitemap-career-urls= : Optional expected EN/ZH career detail URL count}
+        {--expected-sitemap-career-urls= : Optional expected localized career detail URL count}
         {--synthetic-count=10000 : Actual in-memory occupation count generated for the capacity and chaos gate}
         {--max-first-page-bytes=262144 : Maximum allowed first-page directory payload size}
         {--json : Emit JSON output}';
@@ -84,8 +85,8 @@ final class CareerValidateDirectory10kScaleReadiness extends Command
         if ($leakedExcludedSlugs !== []) {
             $errors[] = 'excluded_slug_leakage';
         }
-        if ($sitemapCareerUrlCount !== ($publicCount * 2)) {
-            $errors[] = 'sitemap_career_url_count_not_bilingual_public_count';
+        if ($sitemapCareerUrlCount !== $publicCount * count(CareerContentV3Contract::LOCALES)) {
+            $errors[] = 'sitemap_career_url_count_not_localized_public_count';
         }
         $capacity = $capacityChaosGate->run($syntheticCount, $maxFirstPageBytes, $directoryQueriesPerRead);
         if (($capacity['status'] ?? null) !== 'passed') {
