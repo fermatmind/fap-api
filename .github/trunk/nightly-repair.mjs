@@ -34,11 +34,17 @@ export async function* nightlyRunHistory(listRuns,currentRunId) {
   if(runs.length<100)return;
  }
 }
+export const weeklyPhpShards = ['career', 'unit', 'feature-a-m', 'feature-rest', 'architecture-sre', 'mysql-redis'];
+const fullPhpJobName = 'Full PHPUnit regression and performance contracts';
+
 export async function phpRepairBaseline(runs,listJobs,head,isAncestor) {
  for await(const run of runs) {
   if(run.status!=='completed'||!['success','failure'].includes(run.conclusion)||run.head_branch!=='main'||run.run_attempt!==1||!isAncestor(run.head_sha,head))continue;
   const jobs=await listJobs(run.id);
-  if(jobs.some(job=>['Full PHPUnit regression and performance contracts','Focused PHPUnit regression and performance contracts'].includes(job.name)&&job.conclusion==='success'))return run.head_sha;
+  const succeeded = new Set(jobs.filter(job => job.conclusion === 'success').map(job => job.name));
+  if (succeeded.has('Focused PHPUnit regression and performance contracts')
+      || succeeded.has(fullPhpJobName)
+      || weeklyPhpShards.every(shard => succeeded.has(fullPhpJobName + ' (' + shard + ')'))) return run.head_sha;
  }
  throw new Error('NIGHTLY_PHP_BASE_HOLD');
 }

@@ -267,12 +267,14 @@ jobs:
       - run: bash backend/scripts/ci_verify_mbti.sh
 
   full-phpunit:
-    name: ${{ github.event_name == 'push' && 'Focused PHPUnit regression and performance contracts' || 'Full PHPUnit regression and performance contracts' }}
+    name: ${{ github.event_name == 'push' && 'Focused PHPUnit regression and performance contracts' || format('Full PHPUnit regression and performance contracts ({0})', matrix.shard) }}
     needs: repair-scope
     if: always() && !cancelled() && ((github.event_name == 'push' && needs.repair-scope.outputs.php_required == 'true') || (github.event_name == 'schedule' && github.event.schedule == '37 18 * * 0'))
     runs-on: ubuntu-latest
-    # The measured full suite exceeded 90 minutes before completing all cases.
-    # Retain the complete suite and its JUnit verdict instead of truncating evidence.
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: ${{ github.event_name == 'push' && fromJSON('["focused"]') || fromJSON('["career","unit","feature-a-m","feature-rest","architecture-sre","mysql-redis"]') }}
     timeout-minutes: 180
     services:
       mysql:
@@ -289,6 +291,10 @@ jobs:
         ports: ["6379:6379"]
         options: --health-cmd="redis-cli ping || exit 1" --health-interval=10s --health-timeout=5s --health-retries=12
     env:
+      PHPUNIT_SHARD: ${{ matrix.shard }}
+      CAREER_TEST_PREFIX: 'Tests\\(?:Unit|Feature)\\Domain\\Career\\'
+      FEATURE_FIRST_HALF: 'Tests\\Feature\\[A-M]'
+      REQUIRED_TOPOLOGY_CLASSES: SeoIntelGscReadSnapshotMysqlTest|SeoIntelGscRunClockMysqlTest|SeoPlatform12SchedulerClockMysqlTest|DeliveryRedisTopologyTest|BlogV1SurfaceProvenanceMysqlTest
       APP_ENV: testing
       DB_CONNECTION: mysql
       DB_HOST: 127.0.0.1
@@ -333,32 +339,63 @@ jobs:
         run: |
           # shellcheck disable=SC2016
           php -r '$pdo=new PDO("mysql:host=127.0.0.1;port=3306;dbname=fap_ci", "root", "root"); $pdo->exec("CREATE DATABASE seo_operations_nightly_test");'
-      - name: Run full PHPUnit and retain machine-readable evidence
+      - name: Run PHPUnit shard and retain machine-readable evidence
         id: full-tests
         continue-on-error: true
+        # Reserve time for weekly shard validation and artifact upload.
+        timeout-minutes: ${{ matrix.shard == 'focused' && 180 || 165 }}
         working-directory: backend
+        env:
+          SELECTED_PHP_FILES: ${{ needs.repair-scope.outputs.php_files }}
         run: |
-          set -o pipefail
-          if [ "$GITHUB_EVENT_NAME" = push ]; then
-            mapfile -t selected < <(jq -r '.[]' <<<'${{ needs.repair-scope.outputs.php_files }}')
-            test "${#selected[@]}" -gt 0
-            php artisan test "${selected[@]}" --no-ansi --log-junit="$RUNNER_TEMP/nightly-full-phpunit.xml" 2>&1 | tee "$RUNNER_TEMP/nightly-full-phpunit.log"
-          else
-            php artisan test --no-ansi --log-junit="$RUNNER_TEMP/nightly-full-phpunit.xml" 2>&1 | tee "$RUNNER_TEMP/nightly-full-phpunit.log"
-          fi
+          set -euo pipefail
+          topology=".*\\\\($REQUIRED_TOPOLOGY_CLASSES)::"
+          exclude="/^(?:$CAREER_TEST_PREFIX|$topology)/"
+          case "$PHPUNIT_SHARD" in
+            focused)
+              mapfile -t selected < <(jq -r '.[]' <<<"$SELECTED_PHP_FILES")
+              test "${#selected[@]}" -gt 0
+              ;;
+            career)
+              selected=(--filter "/^$CAREER_TEST_PREFIX/" --exclude-filter "/^$topology/")
+              ;;
+            unit)
+              selected=(--testsuite Unit --exclude-filter "$exclude")
+              ;;
+            feature-a-m)
+              selected=(--testsuite Feature --filter "/^$FEATURE_FIRST_HALF/" --exclude-filter "$exclude")
+              ;;
+            feature-rest)
+              selected=(--testsuite Feature --exclude-filter "/^(?:$CAREER_TEST_PREFIX|$topology|$FEATURE_FIRST_HALF)/")
+              ;;
+            architecture-sre)
+              selected=(--exclude-testsuite "Unit,Feature" --exclude-filter "$exclude")
+              ;;
+            mysql-redis)
+              selected=(--filter "/^$topology/")
+              ;;
+            *)
+              exit 1
+              ;;
+          esac
+          php artisan test "${selected[@]}" --no-ansi --log-junit="$RUNNER_TEMP/nightly-full-phpunit.xml" 2>&1 | tee "$RUNNER_TEMP/nightly-full-phpunit.log"
       - name: Prove full-suite MySQL and Redis consumers ran without skips
-        if: github.event_name == 'schedule' && !cancelled()
+        if: always() && matrix.shard == 'mysql-redis'
         working-directory: backend
         run: |
           php <<'PHP'
           <?php
-          $xml = simplexml_load_file(getenv('RUNNER_TEMP').'/nightly-full-phpunit.xml');
+          $xml = simplexml_load_file(getenv('RUNNER_TEMP').'/nightly-full-phpunit.xml', options: LIBXML_NONET);
           if (! $xml) exit(1);
-          foreach (['SeoIntelGscReadSnapshotMysqlTest', 'SeoIntelGscRunClockMysqlTest', 'SeoPlatform12SchedulerClockMysqlTest', 'DeliveryRedisTopologyTest', 'BlogV1SurfaceProvenanceMysqlTest'] as $class) {
-              $cases = $xml->xpath('//testcase[contains(@class, "'.$class.'") or contains(@classname, "'.$class.'")]');
-              if (! $cases) exit(1);
-              foreach ($cases as $case) if (isset($case->skipped) || isset($case->failure) || isset($case->error)) exit(1);
+          $required = array_fill_keys(explode('|', getenv('REQUIRED_TOPOLOGY_CLASSES')), false);
+          foreach ($xml->xpath('//testcase') as $case) {
+              $qualified = (string) ($case['class'] ?? $case['classname']);
+              $class = substr(strrchr('\\'.$qualified, '\\'), 1);
+              if (! array_key_exists($class, $required)) continue;
+              if (isset($case->skipped) || isset($case->failure) || isset($case->error)) exit(1);
+              $required[$class] = true;
           }
+          if (in_array(false, $required, true)) exit(1);
           PHP
       - name: Validate full PHPUnit JUnit completeness
         if: always()
@@ -384,7 +421,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
-          name: nightly-full-phpunit-${{ github.sha }}-${{ github.run_id }}
+          name: nightly-full-phpunit-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}-${{ matrix.shard }}
           path: |
             ${{ runner.temp }}/nightly-full-phpunit.xml
             ${{ runner.temp }}/nightly-full-phpunit.xml.invalid

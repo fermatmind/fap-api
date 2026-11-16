@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {nightlyRunHistory,phpRepairBaseline,repairDomains} from './nightly-repair.mjs';
+import {nightlyRunHistory,phpRepairBaseline,repairDomains,weeklyPhpShards} from './nightly-repair.mjs';
 
 import {mkdtempSync,writeFileSync,rmSync,readFileSync,chmodSync,mkdirSync} from 'node:fs';
 import {execFileSync,spawnSync} from 'node:child_process';
@@ -29,6 +29,15 @@ test('PHP baseline lazily searches later API pages and excludes the current run'
  assert.deepEqual(pages,[1,2]);
  assert.equal(jobIds.includes(200),false);
  assert.equal(jobIds.includes(99),false);
+});
+
+test('all scheduled PHP shards must succeed at the same revision before they establish a repair baseline', async () => {
+ const runs = [run(3), run(2), run(1, {head_sha:base})];
+ const names = weeklyPhpShards.map(shard => 'Full PHPUnit regression and performance contracts (' + shard + ')');
+ const jobs = id => (id === 3 ? names.slice(1) : names).map(name => ({
+  name, conclusion: id === 2 && name === names[0] ? 'cancelled' : 'success',
+ }));
+ assert.equal(await phpRepairBaseline(runs, jobs, head, () => true), base);
 });
 
 test('no PHP proof still holds; green daily jobs, reruns and unrelated heads never qualify',async()=>{

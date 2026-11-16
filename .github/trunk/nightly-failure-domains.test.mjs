@@ -4,6 +4,7 @@ import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'no
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
+import { weeklyPhpShards } from './nightly-repair.mjs';
 
 const workflow = readFileSync(new URL('../workflows/nightly.yml', import.meta.url), 'utf8');
 
@@ -22,10 +23,13 @@ test('nightly executes authority and full PHPUnit as independent failure domains
 
   assert.match(authority, /bash backend\/scripts\/ci_verify_mbti\.sh/);
   assert.doesNotMatch(authority, /php artisan test --no-ansi/);
-  assert.match(fullPhpunit, /php artisan test --no-ansi/);
+  assert.match(fullPhpunit, /php artisan test .* --no-ansi/);
   assert.doesNotMatch(fullPhpunit, /needs:\s*authority-contract/);
   assert.equal((workflow.match(/bash backend\/scripts\/ci_verify_mbti\.sh/g) ?? []).length, 1);
-  assert.equal((workflow.match(/php artisan test --no-ansi/g) ?? []).length, 1);
+  assert.equal((workflow.match(/php artisan test .* --no-ansi/g) ?? []).length, 1);
+  assert.deepEqual(JSON.parse(fullPhpunit.match(/\|\| fromJSON\('([^']+)'\)/)[1]), weeklyPhpShards);
+  assert.match(fullPhpunit, /fail-fast: false/);
+  assert.match(fullPhpunit, /name: nightly-full-phpunit-[^\n]+matrix\.shard/);
 });
 
 test('nightly keeps dependency, workflow, security, scheduler, and GSC evidence separate', () => {
@@ -151,7 +155,7 @@ test('full PHPUnit has parent revision history and an empty test environment fil
   const fullPhpunit = jobSection('full-phpunit', 'codeql');
   assert.match(fullPhpunit, /persist-credentials: false\s+fetch-depth: 0/);
   assert.match(fullPhpunit, /working-directory: backend\s+run: touch \.env/);
-  assert.ok(fullPhpunit.indexOf('run: touch .env') < fullPhpunit.indexOf('php artisan test --no-ansi'));
+  assert.ok(fullPhpunit.indexOf('run: touch .env') < fullPhpunit.indexOf('php artisan test'));
 });
 
 test('full PHPUnit exposes its disposable MySQL socket and requires real blog JSON coverage', () => {
@@ -160,13 +164,39 @@ test('full PHPUnit exposes its disposable MySQL socket and requires real blog JS
   assert.ok(section.includes(`${directory}:/var/run/mysqld`));
   assert.ok(section.includes(`BLOG_SURFACE_TEST_MYSQL_SOCKET: ${directory}/mysqld.sock`));
   assert.match(section, /BLOG_SURFACE_TEST_MYSQL_PASSWORD: root/);
-  assert.match(section, /foreach \(\[.*'BlogV1SurfaceProvenanceMysqlTest'.*\] as \$class\)/);
+  assert.match(section, /if: always\(\) && matrix\.shard == 'mysql-redis'/);
+  const classes = section.match(/REQUIRED_TOPOLOGY_CLASSES: ([^\n]+)/)[1].split('|');
+  assert.deepEqual(classes, [
+    'SeoIntelGscReadSnapshotMysqlTest', 'SeoIntelGscRunClockMysqlTest', 'SeoPlatform12SchedulerClockMysqlTest',
+    'DeliveryRedisTopologyTest', 'BlogV1SurfaceProvenanceMysqlTest',
+  ]);
+  const marker = "          php <<'PHP'\n";
+  const start = section.indexOf(marker, section.indexOf('Prove full-suite MySQL and Redis'));
+  assert.notEqual(start, -1);
+  const source = section.slice(start + marker.length).split('          PHP')[0]
+    .split('\n').map(line => line.slice(10)).join('\n');
+  const root = mkdtempSync(join(tmpdir(), 'nightly-topology-'));
+  try {
+    for (const missing of [false, true]) {
+      for (const result of ['', '<skipped/>', '<failure/>', '<error/>']) {
+        const cases = (missing ? classes.slice(1) : classes).map((name, index) =>
+          '<testcase classname="Tests\\' + name + '">' + (index === 0 ? result : '') + '</testcase>');
+        writeFileSync(join(root, 'nightly-full-phpunit.xml'), '<testsuites>' + cases.join('') + '</testsuites>');
+        const run = spawnSync('php', [], { input: source, encoding: 'utf8', env: {
+          ...process.env, RUNNER_TEMP: root, REQUIRED_TOPOLOGY_CLASSES: classes.join('|'),
+        } });
+        assert.equal(run.status, !missing && !result ? 0 : 1, run.stderr);
+      }
+    }
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
 });
 
 
 test('full PHPUnit rejects empty or malformed JUnit and retains original diagnostics', () => {
   const section = jobSection('full-phpunit', 'codeql');
-  assert.match(section, /set -o pipefail/);
+  assert.match(section, /set -euo pipefail/);
   assert.match(section, /2>&1 \| tee "\$RUNNER_TEMP\/nightly-full-phpunit\.log"/);
   const marker = "          php <<'PHP'\n";
   const start = section.indexOf(marker, section.indexOf("- name: Validate full PHPUnit JUnit completeness"));

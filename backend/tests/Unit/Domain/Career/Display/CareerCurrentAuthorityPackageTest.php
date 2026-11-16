@@ -61,32 +61,30 @@ final class CareerCurrentAuthorityPackageTest extends TestCase
             $package['manifest']['set_hashes']['source_semantic_aggregate_sha256'],
             $package['summary']['versionless_projection_sha256'],
         );
+        $enhanced = $legacy = 0;
         foreach ($package['entries'] as $slug => $localized) {
             self::assertSame($package['manifest']['locales'], array_keys($localized));
             foreach (array_keys($localized) as $locale) {
-                self::assertSame('career.detail.content.v3', $loader->pageFromPublishIndex($package, $slug, $locale)['contract_version']);
-            }
-        }
-        self::assertNotEmpty($loader->pageFromPublishIndex($package, 'accountants-and-auditors', 'en')['blocks']);
-        self::assertNotEmpty($loader->pageFromPublishIndex($package, 'accountants-and-auditors', 'zh-CN')['blocks']);
-        foreach ($package['entries'] as $slug => $localized) {
-            if ($slug === 'accountants-and-auditors') {
-                continue;
-            }
-            foreach (array_keys($localized) as $locale) {
                 $page = $loader->pageFromPublishIndex($package, $slug, $locale);
+                self::assertSame('career.detail.content.v3', $page['contract_version']);
+                self::assertSame($locale, $page['locale']);
+                self::assertSame($slug, $page['subject']['canonical_slug']);
+                self::assertMatchesRegularExpression('/^[a-f0-9]{64}$/', $page['source_content_sha256']);
                 if ($page['content_state'] === 'legacy') {
                     self::assertSame([], $page['blocks']);
                     self::assertNull($page['subject']['summary']);
+                    $legacy++;
                 } else {
-                    self::assertSame($locale, $page['locale']);
+                    self::assertSame('enhanced', $page['content_state']);
                     self::assertCount(13, $page['blocks']);
                     self::assertNotEmpty($page['subject']['summary']);
+                    $enhanced++;
                 }
             }
         }
-        self::assertSame($package['summary']['enhanced_locale_page_count'], $package['manifest']['coverage']['enhanced_locale_pages']);
-        self::assertSame($package['summary']['legacy_locale_page_count'], $package['manifest']['coverage']['legacy_locale_pages']);
+        self::assertSame($expectedPages, $enhanced + $legacy);
+        self::assertSame($package['manifest']['coverage']['enhanced_locale_pages'], $enhanced);
+        self::assertSame($package['manifest']['coverage']['legacy_locale_pages'], $legacy);
         self::assertArrayNotHasKey('software-developers', $package['entries']);
     }
 
