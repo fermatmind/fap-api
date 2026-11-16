@@ -310,7 +310,11 @@ final class CiScalesRegistrySeeder extends Seeder
 
         $writer = app(ScaleRegistryWriter::class);
         foreach ($rows as $row) {
-            $writer->upsertScale($row);
+            if ($row['code'] === 'EQ_60') {
+                $this->upsertEqWithExistingContent($writer, $row);
+            } else {
+                $writer->upsertScale($row);
+            }
         }
 
         if (! $includeDemoScales) {
@@ -335,6 +339,49 @@ final class CiScalesRegistrySeeder extends Seeder
             count($rows),
             $includeDemoScales ? 1 : 0
         ));
+    }
+
+    /** @param array<string,mixed> $row */
+    private function upsertEqWithExistingContent(ScaleRegistryWriter $writer, array $row): void
+    {
+        DB::transaction(function () use ($writer, $row): void {
+            $existingRows = [];
+            $snapshot = null;
+            foreach (['scales_registry_v2', 'scales_registry'] as $table) {
+                if (! Schema::hasTable($table)) {
+                    continue;
+                }
+                $query = DB::table($table)->where('org_id', $row['org_id'])->where('code', $row['code']);
+                $existing = $query->lockForUpdate()->first(['content_i18n_json']);
+                if ($existing === null) {
+                    continue;
+                }
+                $content = $this->eqContentSnapshot($existing->content_i18n_json);
+                if ($existingRows !== [] && $content !== $snapshot) {
+                    throw new \DomainException('Existing EQ_60 registry content differs between tables.');
+                }
+                $snapshot = $content;
+                $existingRows[] = $query;
+            }
+
+            // Decode objects as objects so both registry writers receive JSON values, not an encoded string.
+            $row['content_i18n_json'] = $snapshot === null ? null : json_decode($snapshot, flags: JSON_THROW_ON_ERROR);
+            $writer->upsertScale($row);
+
+            foreach ($existingRows as $query) {
+                if ($this->eqContentSnapshot($query->value('content_i18n_json')) !== $snapshot) {
+                    throw new \DomainException('CI seeding changed existing EQ_60 registry content.');
+                }
+            }
+        });
+    }
+
+    private function eqContentSnapshot(?string $content): ?string
+    {
+        return $content === null ? null : json_encode(
+            json_decode($content, flags: JSON_THROW_ON_ERROR),
+            JSON_THROW_ON_ERROR | JSON_PRESERVE_ZERO_FRACTION,
+        );
     }
 
     private function includeDemoScales(): bool

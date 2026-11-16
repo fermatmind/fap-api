@@ -19,7 +19,9 @@ final class CiScalesRegistrySeederToggleTest extends TestCase
         putenv('FAP_CI_INCLUDE_DEMO_SCALES');
 
         try {
+            $eqContent = $this->eqContentSnapshots();
             $this->seed(CiScalesRegistrySeeder::class);
+            $this->assertSame($eqContent, $this->eqContentSnapshots());
 
             $this->assertSame(
                 0,
@@ -55,11 +57,17 @@ final class CiScalesRegistrySeederToggleTest extends TestCase
         $previous = getenv('FAP_CI_INCLUDE_DEMO_SCALES');
 
         try {
+            $eqContent = $this->eqContentSnapshots();
             putenv('FAP_CI_INCLUDE_DEMO_SCALES=true');
             $this->seed(CiScalesRegistrySeeder::class);
+            $this->assertSame($eqContent, $this->eqContentSnapshots());
+            $this->assertSame(2, DB::table('scales_registry')->where('org_id', 0)
+                ->whereIn('code', ['DEMO_ANSWERS', 'SIMPLE_SCORE_DEMO'])
+                ->where('is_active', 1)->where('is_public', 1)->count());
 
             putenv('FAP_CI_INCLUDE_DEMO_SCALES=false');
             $this->seed(CiScalesRegistrySeeder::class);
+            $this->assertSame($eqContent, $this->eqContentSnapshots());
 
             $demoAnswers = DB::table('scales_registry')
                 ->where('org_id', 0)
@@ -85,6 +93,21 @@ final class CiScalesRegistrySeederToggleTest extends TestCase
         } finally {
             $this->restoreEnv('FAP_CI_INCLUDE_DEMO_SCALES', $previous);
         }
+    }
+
+    /** @return array<string, string> */
+    private function eqContentSnapshots(): array
+    {
+        $snapshots = [];
+        foreach (['scales_registry_v2', 'scales_registry'] as $table) {
+            $raw = DB::table($table)->where('org_id', 0)->where('code', 'EQ_60')->value('content_i18n_json');
+            $this->assertIsString($raw);
+            $content = json_decode($raw, flags: JSON_THROW_ON_ERROR);
+            $this->assertIsString($content->en->why_choose->intro ?? null);
+            $snapshots[$table] = json_encode($content, JSON_THROW_ON_ERROR | JSON_PRESERVE_ZERO_FRACTION);
+        }
+
+        return $snapshots;
     }
 
     private function restoreEnv(string $name, string|false $previous): void
