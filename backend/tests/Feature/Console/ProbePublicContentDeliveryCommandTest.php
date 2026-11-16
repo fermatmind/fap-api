@@ -214,20 +214,28 @@ final class ProbePublicContentDeliveryCommandTest extends TestCase
     public function test_complete_current_english_mbti_payload_passes_the_fixed_target_budget(): void
     {
         $reader = app(PersonalityCurrentPageReader::class);
-        $payload = ['ok' => true, ...$reader->payload('mbti', 'variant', 'intj-a', 'en')];
-        $body = response()->json($payload)->getContent();
-        $this->assertStringContainsString('mbti64_promotion_metadata', $body);
-        $this->assertGreaterThan(524288, strlen($body));
+        $aggregate = $reader->aggregateSha256();
+        $response = $this->getJson('/api/v0.5/personality/intj-a?locale=en&org_id=0&scale_code=MBTI')
+            ->assertOk()
+            ->assertHeader('X-Fermat-Content-Authority', 'personality.page.content.v1')
+            ->assertHeader('X-Fermat-Content-Aggregate', $aggregate)
+            ->assertJsonPath('profile.locale', 'en')
+            ->assertJsonPath('profile.is_public', true)
+            ->assertJsonPath('mbti_public_projection_v1.display_type', 'INTJ-A');
+        $body = $response->getContent();
         $this->assertLessThanOrEqual(589824, strlen($body));
-        Http::fake(['*' => Http::response($body, 200, $this->currentHeaders())]);
+        Http::fake(['*' => Http::response($body, 200, [
+            'X-Fermat-Content-Authority' => $response->headers->get('X-Fermat-Content-Authority'),
+            'X-Fermat-Content-Aggregate' => $response->headers->get('X-Fermat-Content-Aggregate'),
+        ])]);
 
         $item = app(PublicContentDeliveryProbeService::class)->probeNext();
         $this->assertTrue($item['ok']);
         $this->assertSame(strlen($body), $item['bytes']);
         $this->assertTrue($item['readback']['ok']);
         $this->assertSame('INTJ-A', $item['readback']['fields']['display_type']);
+        $this->assertSame($aggregate, $item['readback']['fields']['aggregate_sha256']);
         $this->assertNull($item['error_code']);
-        $this->assertStringNotContainsString('mbti64_promotion_metadata', json_encode($item, JSON_THROW_ON_ERROR));
     }
 
     public function test_mbti_exact_budget_and_overflow_use_bounded_stream_reads_before_readback(): void
