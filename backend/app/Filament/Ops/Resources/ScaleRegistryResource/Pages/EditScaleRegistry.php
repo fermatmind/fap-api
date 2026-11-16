@@ -7,6 +7,7 @@ namespace App\Filament\Ops\Resources\ScaleRegistryResource\Pages;
 use App\Filament\Ops\Resources\ScaleRegistryResource;
 use App\Models\AuditLog;
 use App\Models\ScaleRegistryV2;
+use App\Services\Audit\AuditLogger;
 use App\Services\Scale\ScaleRegistryWriter;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Hidden;
@@ -239,7 +240,21 @@ class EditScaleRegistry extends EditRecord
                     throw ValidationException::withMessages(['data.content_i18n_json.zh.faq' => 'An exact dual-table FAQ baseline is unavailable. Keep the FAQ unchanged or reconcile authority first.']);
                 }
                 try {
-                    $saved = $writer->upsertScale($data, [...$this->faqEditBaseline, 'form_before_json' => $this->faqFormBaselineJson]);
+                    $saved = $writer->saveSingleFaq(
+                        $data,
+                        [...$this->faqEditBaseline, 'form_before_json' => $this->faqFormBaselineJson],
+                        static function (string $id, array $meta): void {
+                            app(AuditLogger::class)->log(
+                                request(),
+                                'scale_registry.faq.updated',
+                                'scale_registry',
+                                $id,
+                                $meta,
+                                'single FAQ edit through existing CMS Save',
+                                'content_applied',
+                            );
+                        },
+                    );
                 } catch (\DomainException $exception) {
                     throw ValidationException::withMessages(['data.content_i18n_json.zh.faq' => $exception->getMessage()]);
                 }

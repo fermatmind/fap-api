@@ -187,7 +187,9 @@ final class ScaleRegistryFaqEditingTest extends TestCase
         app(OrgContext::class)->set(1, (int) auth('admin')->id(), 'admin');
         $before = $this->state();
         try {
-            app(ScaleRegistryWriter::class)->upsertScale($payload, $context);
+            app(ScaleRegistryWriter::class)->saveSingleFaq($payload, $context, static function (): void {
+                self::fail('A rejected FAQ edit must not write an audit.');
+            });
             self::fail('Expected scope rejection.');
         } catch (\DomainException $e) {
             self::assertStringContainsString('write scope', $e->getMessage());
@@ -229,7 +231,9 @@ final class ScaleRegistryFaqEditingTest extends TestCase
         $before = $this->state();
         Livewire::test(EditScaleRegistry::class, ['record' => 10])->assertForbidden();
         try {
-            app(ScaleRegistryWriter::class)->upsertScale($payload, $context);
+            app(ScaleRegistryWriter::class)->saveSingleFaq($payload, $context, static function (): void {
+                self::fail('A rejected FAQ edit must not write an audit.');
+            });
             self::fail('Expected permission rejection.');
         } catch (\DomainException $e) {
             self::assertStringContainsString('write scope', $e->getMessage());

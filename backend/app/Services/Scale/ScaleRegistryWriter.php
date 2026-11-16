@@ -7,7 +7,6 @@ use App\Models\AuditLog;
 use App\Models\ScaleRegistry as ScaleRegistryModel;
 use App\Models\ScaleRegistryV2;
 use App\Models\ScaleSlug;
-use App\Services\Audit\AuditLogger;
 use App\Support\CacheKeys;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -24,11 +23,8 @@ class ScaleRegistryWriter
         private PublicScaleCatalogCache $publicScaleCatalogCache,
     ) {}
 
-    public function upsertScale(array $payload, ?array $faqEditContext = null): ScaleRegistryModel
+    public function upsertScale(array $payload): ScaleRegistryModel
     {
-        if ($faqEditContext !== null) {
-            return $this->saveSingleFaq($payload, $faqEditContext);
-        }
         $code = strtoupper(trim((string) ($payload['code'] ?? '')));
         $orgId = (int) ($payload['org_id'] ?? 0);
         if ($code === '') {
@@ -99,8 +95,12 @@ class ScaleRegistryWriter
         return $scale;
     }
 
-    /** Precision branch of the existing authenticated editor; never accepts a JSON path. */
-    private function saveSingleFaq(array $payload, array $context): ScaleRegistryModel
+    /**
+     * Precision write for the authenticated editor. The audit must be written in this transaction.
+     *
+     * @param  callable(string, array): void  $writeAudit
+     */
+    public function saveSingleFaq(array $payload, array $context, callable $writeAudit): ScaleRegistryModel
     {
         $this->assertExactKeys($context, ['target', 'baseline', 'form_before_json']);
         $target = $context['target'];
@@ -143,7 +143,7 @@ class ScaleRegistryWriter
         $submitted = $payload['content_i18n_json']['zh']['faq'] ?? null;
         $submitted = json_decode(json_encode($submitted, JSON_THROW_ON_ERROR | JSON_PRESERVE_ZERO_FRACTION), false, 512, JSON_THROW_ON_ERROR);
         $this->assertFaqList($submitted);
-        $result = DB::transaction(function () use ($target, $context, $submitted): array {
+        $result = DB::transaction(function () use ($target, $context, $submitted, $writeAudit): array {
             $rows = [];
             foreach ([self::V2_TABLE, self::LEGACY_TABLE] as $table) {
                 $found = DB::table($table)->where('org_id', $target['org_id'])->where('code', $target['code'])->lockForUpdate()->get();
@@ -212,12 +212,12 @@ class ScaleRegistryWriter
             $operationId = (string) Str::uuid();
             $candidateHash = hash('sha256', $candidate);
             $actorId = (int) auth((string) config('admin.guard', 'admin'))->id();
-            app(AuditLogger::class)->log(request(), 'scale_registry.faq.updated', 'scale_registry', (string) $target['id'], [
+            $writeAudit((string) $target['id'], [
                 'operation_id' => $operationId, 'target' => $target, 'faq_id' => $submitted[$index]->id,
                 'baseline' => $fingerprints, 'post_baseline' => $this->faqRowHashes($post), 'candidate_sha256' => $candidateHash,
                 'before_faq_json' => $this->faqJson($before[$index]), 'after_faq_json' => $candidate,
                 'protected_fields_preserved' => true, 'cache_closeout' => 'after_content_commit', 'params_sanitized' => [],
-            ], 'single FAQ edit through existing CMS Save', 'content_applied');
+            ]);
             $audit = AuditLog::withoutGlobalScopes()->where('org_id', $target['org_id'])->where('actor_admin_id', $actorId)
                 ->where('action', 'scale_registry.faq.updated')->where('target_type', 'scale_registry')->where('target_id', (string) $target['id'])
                 ->where('meta_json->operation_id', $operationId)->first();

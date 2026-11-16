@@ -14,7 +14,6 @@ use App\Models\ArticleTranslationRevision;
 use App\Services\SEO\SeoDiscoverabilityCacheInvalidator;
 use App\Support\ArticleSourceTargetSnapshot;
 use Closure;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use InvalidArgumentException;
 use RuntimeException;
@@ -135,9 +134,7 @@ final class ArticlePublishService
         ContentReleaseAudit::log('article', $article, $source, dispatchFollowUp: false);
         DB::afterCommit(function () use ($article, $source, $dispatchFollowUp): void {
             if ($dispatchFollowUp) {
-                $request = app()->bound('request') && request() instanceof Request
-                    ? request() : Request::create('/ops/content-release', 'POST');
-                ContentReleaseFollowUp::dispatch('article', $article, $source, $request);
+                ContentReleaseFollowUp::dispatch('article', $article, $source);
             }
             $this->seoDiscoverabilityCacheInvalidator->flushArticleDiscoverabilityCaches();
             $this->dispatchUrlTruthChange($article, 'publish');

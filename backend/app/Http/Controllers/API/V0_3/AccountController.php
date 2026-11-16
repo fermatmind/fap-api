@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\API\V0_3;
 
+use App\Exceptions\GoogleLoginUnavailableException;
 use App\Http\Controllers\Controller;
 use App\Services\Account\AccountAssetLinker;
 use App\Services\Auth\FmTokenService;
@@ -59,7 +60,11 @@ final class AccountController extends Controller
         return Cache::lock($key.':lock', 15)->block(2, function () use ($key, $data, $verifier, $request): JsonResponse {
             $nonce = Cache::get($key);
             abort_unless(is_string($nonce), 422, 'Login challenge expired. Please try again.');
-            $claims = $verifier->verify($data['credential'], $nonce);
+            try {
+                $claims = $verifier->verify($data['credential'], $nonce);
+            } catch (GoogleLoginUnavailableException $exception) {
+                abort(503, $exception->getMessage());
+            }
             $claims['locale'] = $data['locale'] ?? 'zh';
             Cache::forget($key);
 

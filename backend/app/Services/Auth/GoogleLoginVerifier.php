@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Auth;
 
+use App\Exceptions\GoogleLoginUnavailableException;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use Illuminate\Support\Facades\Cache;
@@ -14,16 +15,20 @@ class GoogleLoginVerifier
 {
     public function verify(string $credential, string $nonce): array
     {
-        abort_unless(config('services.google_login.enabled'), 503, 'Google login is not enabled.');
+        if (! config('services.google_login.enabled')) {
+            throw new GoogleLoginUnavailableException('Google login is not enabled.');
+        }
         $clientId = trim((string) config('services.google_login.client_id'));
-        abort_if($clientId === '', 503, 'Google login is not configured.');
+        if ($clientId === '') {
+            throw new GoogleLoginUnavailableException('Google login is not configured.');
+        }
         try {
             $certs = Cache::remember('google-login:certificates', 3600, function (): array {
                 return Http::connectTimeout(3)->timeout(8)
                     ->get('https://www.googleapis.com/oauth2/v1/certs')->throw()->json();
             });
         } catch (\Throwable) {
-            abort(503, 'Google login verification is temporarily unavailable.');
+            throw new GoogleLoginUnavailableException('Google login verification is temporarily unavailable.');
         }
         try {
             $keys = [];

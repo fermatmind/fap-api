@@ -52,8 +52,10 @@ final class ContentReleaseFollowUp
         }
     }
 
-    public static function dispatch(string $type, object $record, string $source, Request $request): void
+    public static function dispatch(string $type, object $record, string $source, ?Request $request = null): void
     {
+        $request ??= app()->bound('request') && request() instanceof Request
+            ? request() : Request::create('/ops/content-release', 'POST');
         $payload = self::payload($type, $record, $source);
         self::dispatchPayload($request, $payload);
         if ($type === 'article' && $record instanceof \App\Models\Article) {
