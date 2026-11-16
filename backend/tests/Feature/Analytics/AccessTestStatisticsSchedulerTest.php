@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Analytics;
 
+use DateTimeImmutable;
+use DateTimeZone;
 use Symfony\Component\Process\Process;
 use Tests\TestCase;
 
@@ -21,6 +23,9 @@ final class AccessTestStatisticsSchedulerTest extends TestCase
         $this->assertNotNull($recent);
         $this->assertSame('*/5 * * * *', $recent['expression']);
         $this->assertNotNull($history);
-        $this->assertSame('15 18 * * *', $history['expression']);
+        $this->assertSame('15 2 * * *', $history['expression']);
+        $this->assertSame('Asia/Shanghai', $history['timezone']);
+        $nextRun = new DateTimeImmutable($history['next_due_date']);
+        $this->assertSame('18:15', $nextRun->setTimezone(new DateTimeZone('UTC'))->format('H:i'));
     }
 }
