@@ -42,6 +42,10 @@ final class PublicScaleFormsProjector
             }
 
             $form = $configuredForms[$formCode];
+            if (($form['accepts_new_attempts'] ?? true) === false) {
+                continue;
+            }
+
             $public = $this->toArray($form['public'] ?? null);
             $label = $this->localizedLabel($public['label'] ?? null, $locale);
             $shortLabel = $this->localizedLabel($public['short_label'] ?? null, $locale);

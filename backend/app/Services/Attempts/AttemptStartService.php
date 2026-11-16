@@ -161,6 +161,9 @@ class AttemptStartService
             $resolvedQuestionCount = (int) ($resolvedForm['question_count'] ?? 0);
         } elseif (strtoupper($scaleCode) === 'RIASEC') {
             $resolvedForm = $this->riasecFormCatalog()->resolve($dto->formCode, $packId);
+            if (config('content_packs.riasec_forms.forms.'.$resolvedForm['form_code'].'.accepts_new_attempts', true) === false) {
+                throw new ApiProblemException(410, 'FORM_RETIRED', 'This assessment form no longer accepts new attempts.');
+            }
             $packId = (string) ($resolvedForm['pack_id'] ?? $packId);
             $dirVersion = (string) ($resolvedForm['dir_version'] ?? $dirVersion);
             $contentPackageVersion = (string) ($resolvedForm['content_package_version'] ?? '');

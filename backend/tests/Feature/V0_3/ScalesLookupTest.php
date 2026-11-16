@@ -157,7 +157,6 @@ class ScalesLookupTest extends TestCase
             ],
             'holland-career-interest-test-riasec' => [
                 ['riasec_60', true, 60, 8],
-                ['riasec_140', false, 140, 18],
             ],
             'iq-test-intelligence-quotient-assessment' => [
                 ['IQ_OWNER_ORIGINAL_30', true, 30, 20],
@@ -288,8 +287,7 @@ class ScalesLookupTest extends TestCase
         $this->assertSame('riasec_60', data_get($riasec, 'forms.0.form_code'));
         $this->assertTrue((bool) data_get($riasec, 'forms.0.is_default'));
         $this->assertSame(60, data_get($riasec, 'forms.0.question_count'));
-        $this->assertSame('riasec_140', data_get($riasec, 'forms.1.form_code'));
-        $this->assertSame(140, data_get($riasec, 'forms.1.question_count'));
+        $this->assertCount(1, $riasec['forms']);
 
         $iq = $items->firstWhere('slug', 'iq-test-intelligence-quotient-assessment');
         $this->assertIsArray($iq);

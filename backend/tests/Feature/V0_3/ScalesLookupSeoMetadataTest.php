@@ -85,9 +85,8 @@ final class ScalesLookupSeoMetadataTest extends TestCase
             ->assertJsonPath('forms.0.form_code', 'riasec_60')
             ->assertJsonPath('forms.0.question_count', 60)
             ->assertJsonPath('forms.0.estimated_minutes', 8)
-            ->assertJsonPath('forms.1.form_code', 'riasec_140')
-            ->assertJsonPath('forms.1.question_count', 140)
-            ->assertJsonPath('forms.1.estimated_minutes', 18);
+            ->assertJsonCount(1, 'forms')
+            ->assertJsonPath('capabilities.forms', ['riasec_60']);
         $package = json_decode(file_get_contents(database_path('data/assessment_riasec_parity_en_20260921.json')), true, 512, JSON_THROW_ON_ERROR);
         $english = $response->json('content_i18n_json.en');
 

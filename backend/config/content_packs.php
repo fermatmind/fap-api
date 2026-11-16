@@ -229,6 +229,7 @@ return [
                 ],
             ],
             'riasec_140' => [
+                'accepts_new_attempts' => false,
                 'dir_version' => 'v1-enhanced-140',
                 'question_count' => 140,
                 'form_kind' => 'enhanced',

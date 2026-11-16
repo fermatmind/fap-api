@@ -40,6 +40,24 @@ final class RiasecAssessmentFlowTest extends TestCase
         $enhanced->assertJsonPath('meta.form_kind', 'enhanced');
     }
 
+    public function test_retired_riasec_form_and_aliases_cannot_start_an_attempt(): void
+    {
+        $this->seedScales();
+        $anonId = 'anon_riasec_retired';
+
+        foreach (['riasec_140', '140', 'enhanced_140', 'expert_140', 'holland_140'] as $form) {
+            $this->withHeaders(['X-Anon-Id' => $anonId])->postJson('/api/v0.3/attempts/start', [
+                'scale_code' => 'RIASEC',
+                'anon_id' => $anonId,
+                'locale' => 'zh-CN',
+                'region' => 'CN_MAINLAND',
+                'form_code' => $form,
+            ])->assertStatus(410)->assertJsonPath('error_code', 'FORM_RETIRED');
+        }
+
+        $this->assertDatabaseMissing('attempts', ['anon_id' => $anonId]);
+    }
+
     public function test_riasec_standard_60_start_submit_and_result_readback_use_backend_result(): void
     {
         $this->seedScales();
@@ -411,6 +429,8 @@ final class RiasecAssessmentFlowTest extends TestCase
         $anonId = 'anon_riasec_enhanced';
         $token = $this->issueAnonToken($anonId);
 
+        $availability = 'content_packs.riasec_forms.forms.riasec_140.accepts_new_attempts';
+        config([$availability => true]);
         $start = $this->withHeaders(['X-Anon-Id' => $anonId])->postJson('/api/v0.3/attempts/start', [
             'scale_code' => 'RIASEC',
             'anon_id' => $anonId,
@@ -419,6 +439,7 @@ final class RiasecAssessmentFlowTest extends TestCase
             'form_code' => '140',
         ]);
         $start->assertStatus(200);
+        config([$availability => false]);
         $start->assertJsonPath('form_code', 'riasec_140');
         $start->assertJsonPath('question_count', 140);
 
@@ -497,6 +518,8 @@ final class RiasecAssessmentFlowTest extends TestCase
 
         $this->travel(1)->seconds();
 
+        $availability = 'content_packs.riasec_forms.forms.riasec_140.accepts_new_attempts';
+        config([$availability => true]);
         $enhancedStart = $this->withHeaders(['X-Anon-Id' => $anonId])->postJson('/api/v0.3/attempts/start', [
             'scale_code' => 'RIASEC',
             'anon_id' => $anonId,
@@ -505,6 +528,7 @@ final class RiasecAssessmentFlowTest extends TestCase
             'form_code' => '140',
         ]);
         $enhancedStart->assertStatus(200);
+        config([$availability => false]);
         $enhancedAttemptId = (string) $enhancedStart->json('attempt_id');
         $this->withHeaders([
             'X-Anon-Id' => $anonId,
