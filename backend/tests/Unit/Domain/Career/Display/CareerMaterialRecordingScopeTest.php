@@ -18,11 +18,11 @@ final class CareerMaterialRecordingScopeTest extends TestCase
         self::assertSame(['43-5061.00', '43-5071.00', '43-5111.00'], array_column($identity->definition($slug)['occupations'], 'code'));
         $reader = app(CareerContentV3CanonicalReader::class);
         $en = $reader->page($slug, 'en');
-        self::assertSame('Material Recording Clerks', $en['subject']['name']);
+        self::assertSame('Shipping, Receiving, and Inventory Clerks', $en['subject']['name']);
         self::assertSame('enhanced', $en['content_state']);
         self::assertCount(13, $en['blocks']);
         $zh = $reader->page($slug, 'zh-CN');
-        self::assertSame('物料记录文员', $zh['subject']['name']);
+        self::assertSame('收发货与库存文员', $zh['subject']['name']);
         self::assertSame('enhanced', $zh['content_state']);
         $facts = json_encode($zh['fact_register'], JSON_THROW_ON_ERROR);
         self::assertStringNotContainsString('53-7065', $facts);
@@ -33,7 +33,7 @@ final class CareerMaterialRecordingScopeTest extends TestCase
             'ontology' => ['crosswalks' => [['source_code' => '53-7065.00']]],
             'truth_summary' => ['median_pay_usd_annual' => 1],
         ], 'zh-CN');
-        self::assertSame('物料记录文员', $public['title']);
+        self::assertSame('收发货与库存文员', $public['title']);
         self::assertNotContains('53-7065.00', array_column($public['ontology']['crosswalks'], 'source_code'));
         self::assertNull($public['truth_summary']['median_pay_usd_annual']);
         self::assertFalse(app(CareerContentV3PageUpdater::class)->update(base_path(), $slug, 'zh-CN', false)['changed']);

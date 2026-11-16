@@ -22,7 +22,8 @@ final class CareerInstalledFileIntegrityTest extends TestCase
         $scan = $parity->scanFiles($authority);
         self::assertSame('ci_validated_installed_bytes', $scan['validation_method']);
         self::assertSame('file_authoritative', $scan['delivery_mode']);
-        self::assertSame(4, $scan['counts']['verified_files']);
+        self::assertSame(3, $scan['counts']['locales']);
+        self::assertSame(6, $scan['counts']['verified_files']);
         self::assertSame(0, $scan['cache_write_count']);
         $authority['entries']['actors']['zh-CN']['sha256'] = str_repeat('0', 64);
         $this->expectException(\App\Domain\Career\Display\CareerCurrentAuthorityPackageFailure::class);
@@ -35,19 +36,37 @@ final class CareerInstalledFileIntegrityTest extends TestCase
         $root = sys_get_temp_dir().'/career-installed-'.bin2hex(random_bytes(8));
         mkdir($root);
         $bytes = '{"validated":"in-ci"}';
-        $entry = ['path' => 'page.json', 'bytes' => strlen($bytes), 'sha256' => hash('sha256', $bytes), 'source_content_sha256' => str_repeat('a', 64)];
-        $authority = ['root' => $root, 'slugs' => ['accountants-and-auditors'], 'entries' => ['accountants-and-auditors' => ['en' => $entry, 'zh-CN' => $entry]]];
+        $slug = 'accountants-and-auditors';
+        $locales = ['en', 'zh-CN', 'zh-TW'];
+        $entries = [];
+        $parity = app(CareerCurrentAuthorityParity::class);
         try {
+            foreach ($locales as $locale) {
+                $path = $locale.'.json';
+                file_put_contents($root.'/'.$path, $bytes);
+                $entries[$locale] = ['path' => $path, 'bytes' => strlen($bytes), 'sha256' => hash('sha256', $bytes), 'source_content_sha256' => str_repeat('a', 64)];
+            }
+            $authority = [
+                'root' => $root,
+                'slugs' => [$slug],
+                'manifest' => ['locales' => $locales],
+                'entries' => [$slug => $entries],
+            ];
+            self::assertSame(3, $parity->scanFiles($authority)['counts']['verified_files']);
+
+            $testedPath = $root.'/zh-TW.json';
             foreach (['missing', 'truncated', 'symlink'] as $failure) {
-                @unlink($root.'/page.json');
-                if ($failure === 'truncated') {
-                    file_put_contents($root.'/page.json', '{}');
-                } elseif ($failure === 'symlink') {
-                    file_put_contents($root.'/source.json', $bytes);
-                    symlink($root.'/source.json', $root.'/page.json');
+                if (is_file($testedPath)) {
+                    unlink($testedPath);
                 }
+                if ($failure === 'truncated') {
+                    file_put_contents($testedPath, '{}');
+                } elseif ($failure === 'symlink') {
+                    symlink($root.'/en.json', $testedPath);
+                }
+                clearstatcache();
                 try {
-                    app(CareerCurrentAuthorityParity::class)->scanFiles($authority);
+                    $parity->scanFiles($authority);
                     self::fail('Installed integrity accepted '.$failure);
                 } catch (\App\Domain\Career\Display\CareerCurrentAuthorityPackageFailure $error) {
                     self::assertSame('CURRENT_CONTENT_V3_FILE_HASH_MISMATCH', $error->getMessage());

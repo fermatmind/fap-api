@@ -87,7 +87,7 @@ final class CareerAccountantsZhCredentialDecisionTest extends TestCase
         foreach (['source-18', 'source-19', 'source-20', 'source-cicpa-cpa-law-effective-2027-revision'] as $sourceId) {
             self::assertSame('中国大陆', $sources[$sourceId]['market']);
             self::assertStringStartsWith('https://', $sources[$sourceId]['url']);
-            self::assertSame($sourceId === 'source-cicpa-cpa-law-effective-2027-revision' ? '2026-10-07' : '2026-08-29', $sources[$sourceId]['accessed_at']);
+            self::assertSame($sourceId === 'source-cicpa-cpa-law-effective-2027-revision' ? '2026-11-09' : '2026-08-29', $sources[$sourceId]['accessed_at']);
             self::assertNotSame('', $sources[$sourceId]['scope']);
             self::assertNotSame('', $sources[$sourceId]['limitation']);
         }

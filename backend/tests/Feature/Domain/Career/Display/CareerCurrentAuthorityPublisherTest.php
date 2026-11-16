@@ -18,7 +18,9 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
         $publisher = app(CareerCurrentAuthorityPublisher::class);
         $first = $publisher->execute(base_path());
         self::assertSame('file_authoritative', $first['file_readback']['delivery_mode']);
-        self::assertSame(2092, $first['file_readback']['file_hash_match_count']);
+        self::assertSame(1046, $first['file_readback']['verified_slug_count']);
+        self::assertSame(3138, $first['file_readback']['verified_locale_page_count']);
+        self::assertSame(3138, $first['file_readback']['file_hash_match_count']);
         self::assertSame(0, $first['write_counts']['cache_candidate_write_count']);
         self::assertSame(0, $first['write_counts']['database_update_count']);
         self::assertSame(0, $first['write_counts']['cache_pointer_activation_count']);

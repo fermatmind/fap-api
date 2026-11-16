@@ -30,11 +30,9 @@ final class CareerPageDisplayResolverTest extends TestCase
         $source = $this->source();
         $page = $this->project($source);
         $facts = array_column($source['fact_register']['facts'], null, 'fact_id');
-        self::assertSame('available', $source['hero']['ai']['availability']);
-        self::assertSame([
-            ...$source['hero']['ai'],
-            'fact' => $facts[$source['hero']['ai']['fact_ref']],
-        ], $page['hero']['ai']);
+        self::assertSame('missing', $source['hero']['ai']['availability']);
+        self::assertNull($source['hero']['ai']['fact_ref']);
+        self::assertSame([...$source['hero']['ai'], 'fact' => null], $page['hero']['ai']);
         self::assertSame($source['hero']['badges'], $page['hero']['badges']);
         foreach ($source['hero']['metrics'] as $index => $metric) {
             self::assertSame($metric['availability'], $page['hero']['metrics'][$index]['availability']);
@@ -75,17 +73,16 @@ final class CareerPageDisplayResolverTest extends TestCase
 
     public function test_missing_ai_metric_does_not_expose_an_unselected_registered_fact(): void
     {
-        foreach (['accountants-and-auditors', 'actors'] as $slug) {
-            $source = $this->source($slug);
-            self::assertContains($source['hero']['ai']['fact_ref'], array_column($source['fact_register']['facts'], 'fact_id'));
-            // Missing data is a controlled input, not the current publication state.
-            $source['hero']['ai']['availability'] = 'missing';
-            $source['hero']['ai']['fact_ref'] = null;
+        $source = $this->source('actors');
+        self::assertSame('available', $source['hero']['ai']['availability']);
+        self::assertIsString($source['hero']['ai']['fact_ref']);
+        self::assertContains($source['hero']['ai']['fact_ref'], array_column($source['fact_register']['facts'], 'fact_id'));
 
-            $page = $this->project($source);
+        $source['hero']['ai']['availability'] = 'missing';
+        $source['hero']['ai']['fact_ref'] = null;
+        $page = $this->project($source);
 
-            self::assertSame([...$source['hero']['ai'], 'fact' => null], $page['hero']['ai']);
-        }
+        self::assertSame([...$source['hero']['ai'], 'fact' => null], $page['hero']['ai']);
     }
 
     public function test_editing_one_formal_file_field_updates_display_without_database_or_frontend_copy(): void

@@ -72,7 +72,7 @@ final class CareerAccountantsZhEntryGuideTest extends TestCase
     {
         $items = collect($this->pathItems())->keyBy('id');
         $portfolio = implode(' ', array_merge(...array_column($items['accountant-entry-portfolio']['data']['entries'], 'values')));
-        foreach (['使用上方虚构报销材料', '完成一页核对说明', '不要求凭这三项摘要编制分录', '课程结业证书不能代替这些工作证据'] as $required) {
+        foreach (['使用上方虚构报销材料', '完成一页核对说明', '不要求凭这三项摘要编制分录', '课程结业证书不替代这些练习材料'] as $required) {
             self::assertStringContainsString($required, $portfolio);
         }
         $trial = implode(' ', array_merge(...array_column($items['accountant-entry-seven-day-trial']['data']['entries'], 'values')));
