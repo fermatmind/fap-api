@@ -18,6 +18,7 @@ final class CareerContentV3BatchUpdaterTest extends TestCase
     {
         yield 'English' => ['en'];
         yield 'Chinese' => ['zh-CN'];
+        yield 'Traditional Chinese' => ['zh-TW'];
     }
 
     #[DataProvider('singleLocales')]

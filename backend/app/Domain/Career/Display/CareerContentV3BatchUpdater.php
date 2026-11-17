@@ -64,7 +64,7 @@ final class CareerContentV3BatchUpdater
                 $path = $row['path'] ?? null;
                 $sha256 = $row['sha256'] ?? null;
                 if (! is_string($slug) || preg_match('/\A[a-z0-9]+(?:-[a-z0-9]+)*\z/', $slug) !== 1
-                    || ! in_array($locale, CareerCurrentAuthorityPackage::LOCALES, true)
+                    || ! in_array($locale, CareerContentV3Contract::LOCALES, true)
                     || $path !== 'careers/'.$slug.'/'.$locale.'.json'
                     || ! is_string($sha256) || preg_match('/\A[a-f0-9]{64}\z/', $sha256) !== 1
                     || (isset($row['number']) && (! is_int($row['number']) || $row['number'] < 1 || $row['number'] > 1046))) {
