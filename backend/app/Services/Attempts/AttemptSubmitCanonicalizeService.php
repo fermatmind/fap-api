@@ -4,6 +4,7 @@ namespace App\Services\Attempts;
 
 use App\Exceptions\Api\ApiProblemException;
 use App\Models\Attempt;
+use App\Services\Assessment\Jung\JungBank;
 use Carbon\CarbonInterface;
 
 class AttemptSubmitCanonicalizeService
@@ -34,6 +35,12 @@ class AttemptSubmitCanonicalizeService
         $region = (string) ($guarded['region'] ?? '');
         $locale = (string) ($guarded['locale'] ?? '');
 
+        if (JungBank::supports($scaleCode)) {
+            $ids = array_map(static fn (array $answer): string => trim($answer['question_id'] ?? ''), $answers);
+            if (count(array_unique($ids)) !== count($ids)) {
+                throw new ApiProblemException(422, 'VALIDATION_FAILED', 'Duplicate Jung response.');
+            }
+        }
         $draftAnswers = $this->core->progressService()->loadDraftAnswers($attempt);
         $mergedAnswers = $this->core->mergeAnswersForSubmit($answers, $draftAnswers);
         if (empty($mergedAnswers)) {

@@ -238,7 +238,7 @@ class AssessmentEngine
     {
         return in_array(
             strtolower(trim($driverType)),
-            ['big5_ocean', 'clinical_combo_68', 'sds_20', 'eq_60', 'eq_test', 'enneagram', 'riasec'],
+            ['big5_ocean', 'clinical_combo_68', 'sds_20', 'eq_60', 'eq_test', 'enneagram', 'riasec', 'jung_likert'],
             true
         );
     }

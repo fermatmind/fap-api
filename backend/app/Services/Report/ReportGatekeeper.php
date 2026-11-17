@@ -8,6 +8,7 @@ use App\Models\Attempt;
 use App\Models\Result;
 use App\Repositories\Report\ReportAccessActor;
 use App\Repositories\Report\ReportSubjectRepository;
+use App\Services\Assessment\Jung\JungBank;
 use App\Services\Commerce\BigFiveReportUnlockRolloutGate;
 use App\Services\Commerce\FreemiumLocalePolicy;
 use App\Services\Content\ContentPack;
@@ -279,16 +280,17 @@ class ReportGatekeeper
         };
         $locked = $unlockStage === ReportAccess::UNLOCK_STAGE_LOCKED;
 
-        $shouldUseSnapshot = $scaleCode === ReportAccess::SCALE_RIASEC
+        $isJung = JungBank::supports($scaleCode);
+        $shouldUseSnapshot = ! $isJung && ($scaleCode === ReportAccess::SCALE_RIASEC
             ? $hasFullAccess
-            : $hasFullAccess && $this->offerResolver->modulesCoverOffered($modulesAllowed, $modulesOffered);
+            : $hasFullAccess && $this->offerResolver->modulesCoverOffered($modulesAllowed, $modulesOffered));
         $requiresSnapshotBoundReport = $scaleCode === ReportAccess::SCALE_RIASEC
             && $unlockStage !== ReportAccess::UNLOCK_STAGE_PARTIAL
             && $shouldUseSnapshot;
         $snapshotStrictMode = ($scaleCode === ReportAccess::SCALE_EQ_60 && app()->environment('production'))
             || $scaleCode === ReportAccess::SCALE_ENNEAGRAM
             || (! in_array($scaleCode, [ReportAccess::SCALE_EQ_60, ReportAccess::SCALE_RIASEC], true) && $this->strictSnapshotModeEnabled());
-        $shouldReadFromSnapshot = $unlockStage !== ReportAccess::UNLOCK_STAGE_PARTIAL
+        $shouldReadFromSnapshot = ! $isJung && $unlockStage !== ReportAccess::UNLOCK_STAGE_PARTIAL
             && ($snapshotStrictMode || $shouldUseSnapshot);
         $allowLiveBuildFallbackForSnapshot = $scaleCode === ReportAccess::SCALE_EQ_60
             && ! app()->environment('production');

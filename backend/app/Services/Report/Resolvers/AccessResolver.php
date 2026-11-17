@@ -123,7 +123,7 @@ class AccessResolver
         $scaleCode = strtoupper(trim($scaleCode));
         // IQ results are free for the authorized reader, independently of the
         // global multi-assessment rollout. Ownership is still checked upstream.
-        if (ReportAccess::isIqScale($scaleCode)) {
+        if (ReportAccess::isIqScale($scaleCode) || \App\Services\Assessment\Jung\JungBank::supports($scaleCode)) {
             return true;
         }
         if ($scaleCode === ReportAccess::SCALE_MBTI) {

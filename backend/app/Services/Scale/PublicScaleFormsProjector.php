@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services\Scale;
 
+use App\Services\Assessment\Jung\JungBank;
+
 final class PublicScaleFormsProjector
 {
     /**
@@ -15,6 +17,25 @@ final class PublicScaleFormsProjector
         $scaleCode = strtoupper(trim((string) ($registryRow['code'] ?? $registryRow['scale_code'] ?? '')));
         if ($scaleCode === '') {
             return [];
+        }
+
+        if (JungBank::supports($scaleCode)) {
+            $bank = new JungBank($scaleCode);
+            $count = count($bank->data['items']);
+            $labels = ['zh' => $count.' 题自评', 'en' => $count.' self-report items'];
+
+            return [[
+                'form_code' => $bank->data['formCode'],
+                'is_default' => true,
+                'question_count' => $count,
+                'estimated_minutes' => $scaleCode === JungBank::ARCHETYPES ? 10 : 13,
+                'form_kind' => 'likert',
+                'label' => $this->localizedLabel($labels, $locale),
+                'short_label' => $this->localizedLabel($labels, $locale),
+                'label_i18n' => $labels,
+                'short_label_i18n' => $labels,
+                'aliases' => [],
+            ]];
         }
 
         $formsConfig = $this->formsConfigForScale($scaleCode);

@@ -29,6 +29,16 @@ class GenericReportBuilder
         $typeCode = $resultJson['type_code'] ?? $result->type_code ?? null;
         $typeCode = is_string($typeCode) && $typeCode !== '' ? $typeCode : null;
 
+        $jung = data_get($resultJson, 'axis_scores_json.jung');
+        if (is_array($jung)) {
+            return [
+                'schema_version' => 'report.v0.3',
+                'scale_code' => (string) $attempt->scale_code,
+                'jung' => $jung,
+                'version_snapshot' => $breakdown['version_snapshot'] ?? null,
+            ];
+        }
+
         return [
             'schema_version' => 'report.v0.3',
             'scale_code' => (string) ($attempt->scale_code ?? ''),

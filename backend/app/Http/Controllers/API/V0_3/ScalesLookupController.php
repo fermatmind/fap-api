@@ -26,6 +26,8 @@ class ScalesLookupController extends Controller
     private const CATALOG_FALLBACK_IMAGE = 'https://api.fermatmind.com/static/share/mbti_square_600x600.png';
 
     private const FREE_ONLY_ASSESSMENT_CODES = [
+        'JUNG_ARCHETYPES',
+        'JUNG_COGNITIVE_FUNCTIONS',
         'MBTI',
         'BIG5_OCEAN',
         'ENNEAGRAM',

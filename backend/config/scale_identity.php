@@ -39,6 +39,8 @@ return [
     'allow_demo_scales' => (bool) env('FAP_ALLOW_DEMO_SCALES', true),
 
     'code_map_v1_to_v2' => [
+        'JUNG_COGNITIVE_FUNCTIONS' => 'JUNG_COGNITIVE_FUNCTIONS',
+        'JUNG_ARCHETYPES' => 'JUNG_ARCHETYPES',
         'MBTI' => 'MBTI_PERSONALITY_TEST_16_TYPES',
         'BIG5_OCEAN' => 'BIG_FIVE_OCEAN_MODEL',
         'CLINICAL_COMBO_68' => 'CLINICAL_DEPRESSION_ANXIETY_PRO',
@@ -50,6 +52,8 @@ return [
     ],
 
     'code_map_v2_to_v1' => [
+        'JUNG_COGNITIVE_FUNCTIONS' => 'JUNG_COGNITIVE_FUNCTIONS',
+        'JUNG_ARCHETYPES' => 'JUNG_ARCHETYPES',
         'MBTI_PERSONALITY_TEST_16_TYPES' => 'MBTI',
         'BIG_FIVE_OCEAN_MODEL' => 'BIG5_OCEAN',
         'CLINICAL_DEPRESSION_ANXIETY_PRO' => 'CLINICAL_COMBO_68',
@@ -69,9 +73,13 @@ return [
         'EQ_60' => '66666666-6666-4666-8666-666666666666',
         'ENNEAGRAM' => '77777777-7777-4777-8777-777777777777',
         'RIASEC' => '88888888-8888-4888-8888-888888888888',
+        'JUNG_ARCHETYPES' => '823663a2-ec68-4dcc-9bf5-3fc5e38a2073',
+        'JUNG_COGNITIVE_FUNCTIONS' => '39851ee5-cc70-45f7-8b3b-5fae798822a0',
     ],
 
     'pack_id_map_v1' => [
+        'JUNG_COGNITIVE_FUNCTIONS' => 'JUNG_COGNITIVE_FUNCTIONS.v1',
+        'JUNG_ARCHETYPES' => 'JUNG_ARCHETYPES.v1',
         'MBTI' => 'MBTI.cn-mainland.zh-CN.v0.3',
         'BIG5_OCEAN' => 'BIG5_OCEAN',
         'CLINICAL_COMBO_68' => 'CLINICAL_COMBO_68',
@@ -85,6 +93,8 @@ return [
     // v2 pack/dir maps are compat aliases for dual-code/read-path migration.
     // They do not redefine the current runtime canonical MBTI content source.
     'pack_id_map_v2' => [
+        'JUNG_COGNITIVE_FUNCTIONS' => 'JUNG_COGNITIVE_FUNCTIONS.v1',
+        'JUNG_ARCHETYPES' => 'JUNG_ARCHETYPES.v1',
         'MBTI' => 'MBTI_PERSONALITY_TEST_16_TYPES.cn-mainland.zh-CN.v0.3',
         'BIG5_OCEAN' => 'BIG_FIVE_OCEAN_MODEL',
         'CLINICAL_COMBO_68' => 'CLINICAL_DEPRESSION_ANXIETY_PRO',
@@ -96,6 +106,8 @@ return [
     ],
 
     'dir_version_map_v1' => [
+        'JUNG_COGNITIVE_FUNCTIONS' => 'v1',
+        'JUNG_ARCHETYPES' => 'v1',
         'MBTI' => 'MBTI-CN-v0.3',
         'BIG5_OCEAN' => 'v1',
         'CLINICAL_COMBO_68' => 'v1',
@@ -108,6 +120,8 @@ return [
     ],
 
     'dir_version_map_v2' => [
+        'JUNG_COGNITIVE_FUNCTIONS' => 'v1',
+        'JUNG_ARCHETYPES' => 'v1',
         'MBTI' => 'MBTI_PERSONALITY_TEST_16_TYPES-CN-v0.3',
         'BIG5_OCEAN' => 'v1',
         'CLINICAL_COMBO_68' => 'v1',

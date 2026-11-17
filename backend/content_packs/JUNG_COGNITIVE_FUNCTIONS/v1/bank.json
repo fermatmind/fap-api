@@ -1,0 +1,596 @@
+{
+  "schema": "fm.jung.likert-bank.v1",
+  "scaleCode": "JUNG_COGNITIVE_FUNCTIONS",
+  "formCode": "jung_cognitive_functions_64",
+  "itemBankVersion": "1.0.0",
+  "scoringVersion": "functions_range_grant_fit_v1",
+  "responseSetId": "frequency_5",
+  "dimensions": [
+    "Ni",
+    "Ne",
+    "Ti",
+    "Te",
+    "Fi",
+    "Fe",
+    "Si",
+    "Se"
+  ],
+  "items": [
+    {
+      "id": "JCF_NI_01",
+      "dimension": "Ni",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "接连见到几个小问题时，我会把它们连起来，判断事情可能往哪走。",
+        "en": "When several small issues turn up in succession, I connect them to judge where things may be heading."
+      }
+    },
+    {
+      "id": "JCF_NE_01",
+      "dimension": "Ne",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "讨论刚出现第一个方案时，我会再想几条不同的路线。",
+        "en": "When the first proposal comes up in a discussion, I think of several other routes."
+      }
+    },
+    {
+      "id": "JCF_TI_01",
+      "dimension": "Ti",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "听到一条规则时，我会用边缘例子检查它是否前后一致。",
+        "en": "When I hear a rule, I try it on borderline cases to see if it is internally consistent."
+      }
+    },
+    {
+      "id": "JCF_TE_01",
+      "dimension": "Te",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "几种做法都能推进项目时，我会先定一个大家能核对的指标来比较。",
+        "en": "When several approaches could move a project forward, I choose a measure everyone can check to compare them."
+      }
+    },
+    {
+      "id": "JCF_FI_01",
+      "dimension": "Fi",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "一项提议对我有利时，我仍会看看它是否碰到自己在意的底线。",
+        "en": "When an offer benefits me, I still check it against a personal line I care about."
+      }
+    },
+    {
+      "id": "JCF_FE_01",
+      "dimension": "Fe",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "小组刚开始讨论时，我会留意哪种开场能让更多人愿意开口。",
+        "en": "As a group discussion begins, I notice which opening would help more people speak."
+      }
+    },
+    {
+      "id": "JCF_SI_01",
+      "dimension": "Si",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "熟悉的设备表现异常时，我会拿它眼下的表现和以前正常时比较。",
+        "en": "When familiar equipment acts up, I compare its current behaviour with how it usually ran."
+      }
+    },
+    {
+      "id": "JCF_SE_01",
+      "dimension": "Se",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "走在拥挤的人行道上时，我会看眼前哪里腾出了空间并随即调整。",
+        "en": "On a crowded pavement, I look for gaps opening up and adjust as they appear."
+      }
+    },
+    {
+      "id": "JCF_NI_02",
+      "dimension": "Ni",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "读完几条看似不相关的笔记后，我会找一条能串起它们的线索。",
+        "en": "After reading several seemingly unrelated notes, I look for a thread that ties them together."
+      }
+    },
+    {
+      "id": "JCF_NE_02",
+      "dimension": "Ne",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "看到手边剩下的材料时，我会想它们还能拿来做哪些事。",
+        "en": "When I see leftover materials, I think of several other things they could be used for."
+      }
+    },
+    {
+      "id": "JCF_TI_02",
+      "dimension": "Ti",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "两个解释都说得通时，我会检查它们各自的结论能否从前面的说法推出。",
+        "en": "When two explanations sound plausible, I check whether each conclusion follows from its own premises."
+      }
+    },
+    {
+      "id": "JCF_TE_02",
+      "dimension": "Te",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "安排一组任务时，我会按期限和所需人手把它们排出先后。",
+        "en": "When organising a set of tasks, I put them in order using deadlines and staffing needs."
+      }
+    },
+    {
+      "id": "JCF_FI_02",
+      "dimension": "Fi",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "与朋友意见不同时，我会先想自己真正不愿让步的是什么。",
+        "en": "When I disagree with a friend, I first ask myself what I am personally unwilling to give up."
+      }
+    },
+    {
+      "id": "JCF_FE_02",
+      "dimension": "Fe",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "给出批评前，我会考虑对方会怎样听进去，再选表达方式。",
+        "en": "Before giving criticism, I consider how it will land and choose my wording accordingly."
+      }
+    },
+    {
+      "id": "JCF_SI_02",
+      "dimension": "Si",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "处理类似的事情时，我会回想上次哪一步具体起了作用。",
+        "en": "When handling something similar, I recall which specific step worked last time."
+      }
+    },
+    {
+      "id": "JCF_SE_02",
+      "dimension": "Se",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "做一道菜时，我会根据锅里的声音和颜色当场调整火力。",
+        "en": "When cooking, I adjust the heat on the spot using the sounds and colours in the pan."
+      }
+    },
+    {
+      "id": "JCF_NI_03",
+      "dimension": "Ni",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "回顾一个项目时，我会从零散转折里归纳出一条主线。",
+        "en": "When reviewing a project, I draw out one main thread from scattered turning points."
+      }
+    },
+    {
+      "id": "JCF_NE_03",
+      "dimension": "Ne",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "朋友的计划临时取消时，我会想到好几个替代活动。",
+        "en": "When a friend's plans fall through, several substitute activities occur to me."
+      }
+    },
+    {
+      "id": "JCF_TI_03",
+      "dimension": "Ti",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "合用一份物品分类表时，我会检查同一件东西是否会按定义落入两类。",
+        "en": "When sharing an inventory list, I check whether its definitions put the same object into two categories."
+      }
+    },
+    {
+      "id": "JCF_TE_03",
+      "dimension": "Te",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "调整锻炼计划时，我会用记录下来的完成次数决定该怎么改。",
+        "en": "When adjusting an exercise plan, I use the recorded completion count to decide what to change."
+      }
+    },
+    {
+      "id": "JCF_FI_03",
+      "dimension": "Fi",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "选择要投入的活动时，我会确认它对我个人有没有意义。",
+        "en": "When choosing an activity to commit to, I check whether it has personal meaning for me."
+      }
+    },
+    {
+      "id": "JCF_FE_03",
+      "dimension": "Fe",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "几个朋友聚在一起时，我会随着大家的反应调整话题。",
+        "en": "When friends get together, I adjust the topic in response to how the group is reacting."
+      }
+    },
+    {
+      "id": "JCF_SI_03",
+      "dimension": "Si",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "进到常去的地方时，我会因为眼前和记忆不一样而发现物品挪过。",
+        "en": "In a place I know well, I notice that things have been moved by comparing what I see with what I remember."
+      }
+    },
+    {
+      "id": "JCF_SE_03",
+      "dimension": "Se",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "试玩一件新工具时，我会边操作边根据即时反馈调整动作。",
+        "en": "When trying a new tool, I adjust what I do as I get immediate feedback."
+      }
+    },
+    {
+      "id": "JCF_NI_04",
+      "dimension": "Ni",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "一个熟悉的地方出现几处变化时，我会想它们是否指向同一种趋势。",
+        "en": "When a familiar place changes in several ways, I consider whether the changes point to a single trend."
+      }
+    },
+    {
+      "id": "JCF_NE_04",
+      "dimension": "Ne",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "读到一个有趣的细节时，我会顺着它想到好几个能继续探究的问题。",
+        "en": "When I read an interesting detail, it sends me toward several other questions to explore."
+      }
+    },
+    {
+      "id": "JCF_TI_04",
+      "dimension": "Ti",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "有人更换了一个关键词时，我会追查这个变化是否连带改变原来的结论。",
+        "en": "When someone changes a key term, I trace whether that change alters the original conclusion."
+      }
+    },
+    {
+      "id": "JCF_TE_04",
+      "dimension": "Te",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "讨论迟迟没有结果时，我会提出一个明确的决定期限。",
+        "en": "When a discussion keeps going without a decision, I suggest a concrete deadline for deciding."
+      }
+    },
+    {
+      "id": "JCF_FI_04",
+      "dimension": "Fi",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "答应一件事之前，我会想如果没有人知道这个决定，自己还会不会选它。",
+        "en": "Before agreeing, I ask whether I would still make that choice if nobody knew about it."
+      }
+    },
+    {
+      "id": "JCF_FE_04",
+      "dimension": "Fe",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "两个人说话越来越紧张时，我会先找他们都愿意认可的一点。",
+        "en": "When a conversation between two people grows tense, I first look for a point both can acknowledge."
+      }
+    },
+    {
+      "id": "JCF_SI_04",
+      "dimension": "Si",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "重做一道菜时，我会把手感和上次成功时的手感作比较。",
+        "en": "When making a dish again, I compare how it feels with how it felt when it worked last time."
+      }
+    },
+    {
+      "id": "JCF_SE_04",
+      "dimension": "Se",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "活动现场临时换布局时，我会先看现在有哪块空间能直接利用。",
+        "en": "When a venue layout changes, I first look for space I can use right now."
+      }
+    },
+    {
+      "id": "JCF_NI_05",
+      "dimension": "Ni",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "听几个人讲同一件事时，我会找出能解释这些不同叙述的共同情节。",
+        "en": "When several people tell me about one event, I look for an underlying story that makes sense of their accounts."
+      }
+    },
+    {
+      "id": "JCF_NE_05",
+      "dimension": "Ne",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "遇到一句意思不明的话时，我会考虑几种它可能表达的意思。",
+        "en": "When I hear an ambiguous remark, I consider several things it could mean."
+      }
+    },
+    {
+      "id": "JCF_TI_05",
+      "dimension": "Ti",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "学一个桌游规则时，我会设想两条规则同时适用会发生什么。",
+        "en": "When learning a game, I imagine what happens if two of its rules apply at once."
+      }
+    },
+    {
+      "id": "JCF_TE_05",
+      "dimension": "Te",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "合买用品时，我会用预算和交付时间筛选备选方案。",
+        "en": "When buying supplies together, I narrow the options using the budget and delivery dates."
+      }
+    },
+    {
+      "id": "JCF_FI_05",
+      "dimension": "Fi",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "写一段公开感想时，我会选自己确实认同的说法。",
+        "en": "When writing a public reflection, I choose language that expresses what I actually stand behind."
+      }
+    },
+    {
+      "id": "JCF_FE_05",
+      "dimension": "Fe",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "与别人约定一项共同做法时，我会考虑参与者会怎样看待这项约定。",
+        "en": "When agreeing on a shared practice, I consider how the people involved will receive it."
+      }
+    },
+    {
+      "id": "JCF_SI_05",
+      "dimension": "Si",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "一项新说明和旧做法接近时，我会先找出具体改了哪几步。",
+        "en": "When new instructions resemble a previous method, I first identify exactly which steps changed."
+      }
+    },
+    {
+      "id": "JCF_SE_05",
+      "dimension": "Se",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "拍照时光线突然变了，我会根据眼下的光线马上换个角度。",
+        "en": "If the light changes while I take a photo, I immediately change my angle to suit it."
+      }
+    },
+    {
+      "id": "JCF_NI_06",
+      "dimension": "Ni",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "为以后做计划时，我会先想眼下几个迹象最终可能汇成什么局面。",
+        "en": "When planning ahead, I first consider what situation the current signs might eventually add up to."
+      }
+    },
+    {
+      "id": "JCF_NE_06",
+      "dimension": "Ne",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "准备一个小作品时，我会先试着列出不同的表现形式。",
+        "en": "When preparing a small creative piece, I first list different forms it could take."
+      }
+    },
+    {
+      "id": "JCF_TI_06",
+      "dimension": "Ti",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "改一段说明时，我会让同一个术语在各处指同一件事。",
+        "en": "When revising instructions, I make each term refer to the same thing throughout."
+      }
+    },
+    {
+      "id": "JCF_TE_06",
+      "dimension": "Te",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "交接任务时，我会把完成条件写成接手者能直接核对的清单。",
+        "en": "When handing off a job, I turn the completion criteria into a checklist the next person can verify."
+      }
+    },
+    {
+      "id": "JCF_FI_06",
+      "dimension": "Fi",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "两份礼物都合惯例时，我会选更符合自己想传达心意的一份。",
+        "en": "When two gifts are equally conventional, I choose the one that better expresses what I personally want to convey."
+      }
+    },
+    {
+      "id": "JCF_FE_06",
+      "dimension": "Fe",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "邀请别人参加活动时，我会根据对方和群体的关系调整邀请方式。",
+        "en": "When inviting someone to an event, I adapt the invitation to their relationship with the group."
+      }
+    },
+    {
+      "id": "JCF_SI_06",
+      "dimension": "Si",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "估计下次准备时间时，我会回想上次各个环节实际用了多久。",
+        "en": "When estimating preparation time, I recall how long each part actually took last time."
+      }
+    },
+    {
+      "id": "JCF_SE_06",
+      "dimension": "Se",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "准备安装一个部件时，我会先试试眼前的零件能否对上。",
+        "en": "When fitting a part, I first try the pieces in front of me to see how they line up."
+      }
+    },
+    {
+      "id": "JCF_NI_07",
+      "dimension": "Ni",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "看完一段故事后，我会用一个中心主题来整理那些印象深的片段。",
+        "en": "After finishing a story, I use one central theme to make sense of the moments that stood out."
+      }
+    },
+    {
+      "id": "JCF_NE_07",
+      "dimension": "Ne",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "熟悉的工具用不顺手时，我会想出几种可以替代它的东西。",
+        "en": "When a familiar tool is awkward to use, I think of several things that might replace it."
+      }
+    },
+    {
+      "id": "JCF_TI_07",
+      "dimension": "Ti",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "一件东西不能正常运作时，我会把它拆成几个步骤，找出哪一步和原理对不上。",
+        "en": "When something stops working, I break down its operation to find which step conflicts with how it is meant to work."
+      }
+    },
+    {
+      "id": "JCF_TE_07",
+      "dimension": "Te",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "整理学习计划时，我会用能实际完成的里程碑来安排进度。",
+        "en": "When planning study, I organise progress around milestones I can actually complete."
+      }
+    },
+    {
+      "id": "JCF_FI_07",
+      "dimension": "Fi",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "接到一个让我为难的请求时，我会用自己看重的原则判断能答应到什么程度。",
+        "en": "When a request puts me in a difficult spot, I use my own principles to decide how far I can agree."
+      }
+    },
+    {
+      "id": "JCF_FE_07",
+      "dimension": "Fe",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "讨论还没结束时，我会察觉有人是否愿意反对但还没有开口。",
+        "en": "Before a discussion ends, I notice whether someone seems ready to disagree but has not spoken."
+      }
+    },
+    {
+      "id": "JCF_SI_07",
+      "dimension": "Si",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "听到一句熟悉的描述时，我会想起在哪次场合听过和当时有什么细节。",
+        "en": "When I hear a familiar description, I recall the occasion and details from when I heard it before."
+      }
+    },
+    {
+      "id": "JCF_SE_07",
+      "dimension": "Se",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "路线被堵住时，我会用当下看得见的路标和人流决定下一步往哪走。",
+        "en": "When a route is blocked, I use the signs and movement I can see to choose my next direction."
+      }
+    },
+    {
+      "id": "JCF_NI_08",
+      "dimension": "Ni",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "一段讨论有很多细节时，我会把它们合在一起，想讨论的核心会落在哪里。",
+        "en": "When a discussion has many details, I put them together to consider where the central issue is likely to land."
+      }
+    },
+    {
+      "id": "JCF_NE_08",
+      "dimension": "Ne",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "一个计划有空白时间时，我会想象几种完全不同的用法。",
+        "en": "When a plan leaves a free slot, I imagine several quite different ways to use it."
+      }
+    },
+    {
+      "id": "JCF_TI_08",
+      "dimension": "Ti",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "核对一份理由清单时，我会找出里面不能同时成立的两条。",
+        "en": "When checking a list of reasons, I look for any two that cannot both hold."
+      }
+    },
+    {
+      "id": "JCF_TE_08",
+      "dimension": "Te",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "尝试新流程后，我会比较改动前后完成同一工作所花的时间。",
+        "en": "After trying a new workflow, I compare how long the same job took before and after."
+      }
+    },
+    {
+      "id": "JCF_FI_08",
+      "dimension": "Fi",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "遇到意见变化时，我会区分哪些是自己想法变了，哪些只是跟随周围反应。",
+        "en": "When my opinion shifts, I distinguish a change of my own mind from following reactions around me."
+      }
+    },
+    {
+      "id": "JCF_FE_08",
+      "dimension": "Fe",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "宣布一个小组决定时，我会说明它如何回应成员各自在意的地方。",
+        "en": "When announcing a group decision, I explain how it addresses what different members care about."
+      }
+    },
+    {
+      "id": "JCF_SI_08",
+      "dimension": "Si",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "日常路线需要调整时，我会先回想自己走过的备用路径。",
+        "en": "When my usual route needs adjusting, I first recall alternatives I have actually taken."
+      }
+    },
+    {
+      "id": "JCF_SE_08",
+      "dimension": "Se",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "玩接球游戏时，我会随着球眼下的速度和方向调整站位。",
+        "en": "In a catching game, I shift my position to match the ball's speed and direction in the moment."
+      }
+    }
+  ]
+}

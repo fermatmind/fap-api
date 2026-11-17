@@ -8,6 +8,7 @@ use App\Models\Attempt;
 use App\Services\Analytics\EventRecorder;
 use App\Services\Analytics\MbtiLandingAttribution;
 use App\Services\Analytics\MeasurementAttributionDimensions;
+use App\Services\Assessment\Jung\JungBank;
 use App\Services\BigFive\BigFiveFormCatalog;
 use App\Services\Content\BigFivePackLoader;
 use App\Services\Content\ClinicalComboPackLoader;
@@ -160,6 +161,18 @@ class AttemptStartService
             $resolvedScoringSpecVersion = trim((string) ($resolvedForm['scoring_spec_version'] ?? ''));
             $resolvedQualityVersion = trim((string) ($resolvedForm['quality_version'] ?? ''));
             $resolvedQuestionCount = (int) ($resolvedForm['question_count'] ?? 0);
+        } elseif (JungBank::supports($scaleCode)) {
+            $bank = new JungBank($scaleCode);
+            $resolvedFormCode = $bank->data['formCode'];
+            if ($dto->formCode !== null && $dto->formCode !== '' && $dto->formCode !== $resolvedFormCode) {
+                throw new ApiProblemException(422, 'INVALID_FORM', 'Invalid Jung form.');
+            }
+            if (! in_array($locale, ['zh-CN', 'en'], true)) {
+                throw new ApiProblemException(422, 'INVALID_LOCALE', 'Unsupported Jung locale.');
+            }
+            $resolvedQuestionCount = count($bank->data['items']);
+            $resolvedScoringSpecVersion = $bank->data['scoringVersion'];
+            $contentPackageVersion = $bank->data['itemBankVersion'];
         } elseif (strtoupper($scaleCode) === 'RIASEC') {
             $resolvedForm = $this->riasecFormCatalog()->resolve($dto->formCode, $packId);
             if (config('content_packs.riasec_forms.forms.'.$resolvedForm['form_code'].'.accepts_new_attempts', true) === false) {
@@ -202,7 +215,7 @@ class AttemptStartService
             throw new ApiProblemException(500, 'CONTENT_PACK_ERROR', 'scale pack not configured.');
         }
 
-        $questionCount = ($resolvedFormCode === IqOwnerOriginal30BankService::MERGED_FORM_CODE ? $resolvedQuestionCount : null) ?? $this->resolveQuestionCount(
+        $questionCount = ($resolvedFormCode === IqOwnerOriginal30BankService::MERGED_FORM_CODE || JungBank::supports($scaleCode) ? $resolvedQuestionCount : null) ?? $this->resolveQuestionCount(
             $scaleCode,
             $packId,
             $dirVersion,
@@ -997,6 +1010,7 @@ class AttemptStartService
             'EQ_60', 'EQ_EMOTIONAL_INTELLIGENCE' => $this->eq60PackLoader->resolveManifestHash($dirVersion),
             'ENNEAGRAM' => $this->enneagramPackLoader()->resolveManifestHash($dirVersion),
             'RIASEC' => $this->riasecPackLoader()->resolveManifestHash($dirVersion),
+            JungBank::ARCHETYPES, JungBank::FUNCTIONS => (new JungBank($scaleCode))->hash,
             default => '',
         };
     }

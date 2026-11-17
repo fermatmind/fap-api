@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\V0_3;
 
 use App\Exceptions\Api\ApiProblemException;
 use App\Http\Controllers\Controller;
+use App\Services\Assessment\Jung\JungBank;
 use App\Services\BigFive\BigFiveFormCatalog;
 use App\Services\Content\BigFivePackLoader;
 use App\Services\Content\ClinicalComboPackLoader;
@@ -246,6 +247,30 @@ class ScalesController extends Controller
             );
             $this->publicInputGuard->assertSafeContentIdentifier($packId, 'pack_id');
             $this->publicInputGuard->assertSafeContentIdentifier($dirVersion, 'dir_version');
+
+            if (JungBank::supports($resolvedScaleCode)) {
+                $bank = new JungBank($resolvedScaleCode);
+                $form = $this->requestedFormCode($request);
+                if ($form !== null && $form !== '' && $form !== $bank->data['formCode']) {
+                    throw new ApiProblemException(422, 'INVALID_FORM', 'Invalid Jung form.');
+                }
+                if (! in_array($locale, ['zh-CN', 'en'], true)) {
+                    throw new ApiProblemException(422, 'INVALID_LOCALE', 'Unsupported Jung locale.');
+                }
+
+                return response()->json([
+                    'ok' => true,
+                    'scale_code' => $resolvedScaleCode,
+                    'region' => $region,
+                    'locale' => $locale,
+                    'pack_id' => $packId,
+                    'dir_version' => $dirVersion,
+                    'content_package_version' => $bank->data['itemBankVersion'],
+                    'form_code' => $bank->data['formCode'],
+                    'questions' => ['schema' => 'fap.questions.v1', 'items' => $bank->questions($locale)],
+                    'meta' => ['question_count' => count($bank->data['items']), 'content_manifest_hash' => $bank->hash],
+                ] + $scaleCodeMeta);
+            }
 
             $assetsBaseUrlOverride = $request->attributes->get('assets_base_url');
             $assetsBaseUrlOverride = is_string($assetsBaseUrlOverride) ? $assetsBaseUrlOverride : null;

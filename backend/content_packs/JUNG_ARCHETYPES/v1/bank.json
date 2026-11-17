@@ -1,0 +1,456 @@
+{
+  "schema": "fm.jung.likert-bank.v1",
+  "scaleCode": "JUNG_ARCHETYPES",
+  "formCode": "jung_archetypes_48",
+  "itemBankVersion": "1.0.0",
+  "scoringVersion": "archetypes_range_v1",
+  "responseSetId": "typicality_5",
+  "dimensions": [
+    "hero",
+    "sage",
+    "explorer",
+    "creator",
+    "ruler",
+    "caregiver",
+    "magician",
+    "lover",
+    "jester",
+    "everyperson",
+    "innocent",
+    "rebel"
+  ],
+  "items": [
+    {
+      "id": "JA_HERO_01",
+      "dimension": "hero",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "小组可以选容易或有挑战的任务时，挑战本身更能吸引我。",
+        "en": "When a group can choose an easy or a difficult task, the challenge itself draws me in."
+      }
+    },
+    {
+      "id": "JA_SAGE_01",
+      "dimension": "sage",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "大家对同一事件有不同说法时，弄清各自的依据会让我想参与。",
+        "en": "When people explain an event differently, finding out what supports each account makes me want to join in."
+      }
+    },
+    {
+      "id": "JA_EXPLORER_01",
+      "dimension": "explorer",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "第一次到一个地方，自由走走比按固定路线更吸引我。",
+        "en": "In a place I am visiting for the first time, wandering freely appeals to me more than following a fixed route."
+      }
+    },
+    {
+      "id": "JA_CREATOR_01",
+      "dimension": "creator",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "筹备聚会时，有机会做出一件体现自己构想的东西更能吸引我。",
+        "en": "When planning a gathering, I am drawn to making something that expresses an idea of my own."
+      }
+    },
+    {
+      "id": "JA_RULER_01",
+      "dimension": "ruler",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "多人合办活动时，把责任和交接安排清楚会让我想参与。",
+        "en": "When several people run an event, getting responsibilities and handoffs in order makes me want to take part."
+      }
+    },
+    {
+      "id": "JA_CAREGIVER_01",
+      "dimension": "caregiver",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "朋友忙得顾不上日常事务时，分担一件他确实需要帮忙的事会吸引我投入。",
+        "en": "When a friend is too busy to keep up, helping with one thing they actually need draws me in."
+      }
+    },
+    {
+      "id": "JA_MAGICIAN_01",
+      "dimension": "magician",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "一项活动反复卡在老问题上时，把两个原本分开的环节接起来试试会吸引我。",
+        "en": "When an activity keeps hitting the same problem, I am drawn to trying a connection between two previously separate parts."
+      }
+    },
+    {
+      "id": "JA_LOVER_01",
+      "dimension": "lover",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "安排一段空闲时光时，能专心陪伴我珍惜的人会让我格外期待。",
+        "en": "When planning some time off, having time to give someone I cherish my full attention especially appeals to me."
+      }
+    },
+    {
+      "id": "JA_JESTER_01",
+      "dimension": "jester",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "活动程序很固定时，找到一点可以玩起来的空间让我更愿意加入。",
+        "en": "When an activity has a fixed routine, finding a little room for play makes me more inclined to join."
+      }
+    },
+    {
+      "id": "JA_EVERYPERSON_01",
+      "dimension": "everyperson",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "选择兴趣小组时，能作为普通一员加入的感觉很吸引我。",
+        "en": "When choosing an interest group, the feeling that I can join as an ordinary member appeals to me."
+      }
+    },
+    {
+      "id": "JA_INNOCENT_01",
+      "dimension": "innocent",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "日程被打乱时，回到一件简单而熟悉的小事会吸引我重新开始。",
+        "en": "When my schedule falls apart, returning to one simple, familiar thing draws me back in."
+      }
+    },
+    {
+      "id": "JA_REBEL_01",
+      "dimension": "rebel",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "大家沿用一条没人能解释的规定时，有机会质疑它会吸引我投入。",
+        "en": "When everyone follows a rule no one can explain, the chance to question it draws me in."
+      }
+    },
+    {
+      "id": "JA_HERO_02",
+      "dimension": "hero",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "一项新技能卡住时，跨过这个难点的机会让我愿意继续练。",
+        "en": "When I get stuck learning a skill, the chance to get past that hurdle makes me want to keep practising."
+      }
+    },
+    {
+      "id": "JA_SAGE_02",
+      "dimension": "sage",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "学会一个方法后，理解它为什么有用比记住步骤更能吸引我。",
+        "en": "After learning a method, understanding why it works interests me more than remembering its steps."
+      }
+    },
+    {
+      "id": "JA_EXPLORER_02",
+      "dimension": "explorer",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "选业余课程时，能亲自尝试陌生做法会让我更想报名。",
+        "en": "When choosing a course for fun, trying an unfamiliar approach firsthand makes me more inclined to sign up."
+      }
+    },
+    {
+      "id": "JA_CREATOR_02",
+      "dimension": "creator",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "学会一种工具后，用它做出自己构思的小作品会让我想继续练习。",
+        "en": "After learning a tool, making a small piece of my own design makes me want to keep practising."
+      }
+    },
+    {
+      "id": "JA_RULER_02",
+      "dimension": "ruler",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "共同预算出现冲突时，建立一套可持续的分配方式会让我愿意投入。",
+        "en": "When a shared budget becomes contentious, I am motivated to set up an allocation that can last."
+      }
+    },
+    {
+      "id": "JA_CAREGIVER_02",
+      "dimension": "caregiver",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "新人说自己卡住了，能提供一项具体帮助会让我愿意腾出时间。",
+        "en": "When a newcomer says they are stuck, being able to offer practical help makes me willing to set aside time."
+      }
+    },
+    {
+      "id": "JA_MAGICIAN_02",
+      "dimension": "magician",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "一次对话陷入僵局时，换个共同目标能否改变互动会让我想试一试。",
+        "en": "When a conversation stalls, I want to see whether reframing the shared goal can change the interaction."
+      }
+    },
+    {
+      "id": "JA_LOVER_02",
+      "dimension": "lover",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "给别人挑纪念物时，表达我们之间独特的联系让我愿意费心。",
+        "en": "When choosing a keepsake, expressing what is distinctive about our bond makes the effort worthwhile."
+      }
+    },
+    {
+      "id": "JA_JESTER_02",
+      "dimension": "jester",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "讨论越来越拘谨时，想一个让人会心一笑的转折会吸引我。",
+        "en": "When a discussion grows stiff, I am drawn to finding a turn that might make people smile."
+      }
+    },
+    {
+      "id": "JA_EVERYPERSON_02",
+      "dimension": "everyperson",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "合做一件小事时，和大家并肩完成寻常工作会让我感到满足。",
+        "en": "When working together on something small, doing ordinary work side by side feels satisfying to me."
+      }
+    },
+    {
+      "id": "JA_INNOCENT_02",
+      "dimension": "innocent",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "挑选周末活动时，一个让人安心、不复杂的安排让我期待。",
+        "en": "When choosing a weekend activity, a reassuring, uncomplicated plan is something I look forward to."
+      }
+    },
+    {
+      "id": "JA_REBEL_02",
+      "dimension": "rebel",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "有个入门条件把人挡在外面时，重新挑战这个条件比绕过去更吸引我。",
+        "en": "When an entry requirement shuts people out, challenging it interests me more than working around it."
+      }
+    },
+    {
+      "id": "JA_HERO_03",
+      "dimension": "hero",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "回顾一段忙碌的日子，我最珍惜的是自己克服了什么。",
+        "en": "When I look back on a busy period, I especially value what I managed to overcome."
+      }
+    },
+    {
+      "id": "JA_SAGE_03",
+      "dimension": "sage",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "买的东西明明能用，我还是愿意弄清指南中的说法是否可信。",
+        "en": "Even when a purchase works fine, I want to know whether the claims in its guide are reliable."
+      }
+    },
+    {
+      "id": "JA_EXPLORER_03",
+      "dimension": "explorer",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "参与长期项目时，能自己决定尝试哪条路线会让我更愿意留下。",
+        "en": "In a long project, being able to choose which route to try makes me want to stay involved."
+      }
+    },
+    {
+      "id": "JA_CREATOR_03",
+      "dimension": "creator",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "修改一份已经能用的材料时，找到更贴近我想表达的形式会让我投入。",
+        "en": "When revising something that already works, finding a form closer to what I want to express draws me in."
+      }
+    },
+    {
+      "id": "JA_RULER_03",
+      "dimension": "ruler",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "即使工作已经开始，能理清谁有权决定哪些事也让我觉得有价值。",
+        "en": "Even after work has started, clarifying who can decide what still feels worthwhile to me."
+      }
+    },
+    {
+      "id": "JA_CAREGIVER_03",
+      "dimension": "caregiver",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "筹备活动时，确保有额外需要的人能参与会让我觉得这项工作值得做。",
+        "en": "When planning an event, making it possible for people with additional needs to join feels worth doing."
+      }
+    },
+    {
+      "id": "JA_MAGICIAN_03",
+      "dimension": "magician",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "工具都没变时，重新组合现有做法来改变整个体验会让我投入。",
+        "en": "When the tools have stayed the same, combining existing practices to change the whole experience draws me in."
+      }
+    },
+    {
+      "id": "JA_LOVER_03",
+      "dimension": "lover",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "即便不解决任何实际问题，和亲近的人谈谈彼此在意的细节也吸引我。",
+        "en": "Even when there is no practical problem to solve, I am drawn to talking with someone close about the details we care about."
+      }
+    },
+    {
+      "id": "JA_JESTER_03",
+      "dimension": "jester",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "做重复的家务时，把其中一段变成小游戏会让我更想开始。",
+        "en": "When doing repetitive chores, turning part of them into a game makes me more willing to start."
+      }
+    },
+    {
+      "id": "JA_EVERYPERSON_03",
+      "dimension": "everyperson",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "一次活动风格很正式时，我更愿意参与能让人自然融入的环节。",
+        "en": "When an event feels formal, I am more drawn to the parts where people can join in naturally."
+      }
+    },
+    {
+      "id": "JA_INNOCENT_03",
+      "dimension": "innocent",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "分歧告一段落后，保留彼此原本珍惜的日常让我觉得值得。",
+        "en": "After a disagreement settles, I find it worthwhile to keep the everyday things we both valued."
+      }
+    },
+    {
+      "id": "JA_REBEL_03",
+      "dimension": "rebel",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "被要求照旧处理一件事时，能提出一个不同做法会让我更愿意参与。",
+        "en": "When asked to do something the usual way, being able to propose a departure makes me want to get involved."
+      }
+    },
+    {
+      "id": "JA_HERO_04",
+      "dimension": "hero",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "团队提早完成任务后，我会被可以再提高一点难度的目标吸引。",
+        "en": "When a team finishes early, I am drawn to a goal that raises the difficulty a little."
+      }
+    },
+    {
+      "id": "JA_SAGE_04",
+      "dimension": "sage",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "整理一次活动的复盘时，找出哪些结论还缺证据让我觉得值得投入。",
+        "en": "When reviewing an event, I find it worthwhile to identify which conclusions still lack evidence."
+      }
+    },
+    {
+      "id": "JA_EXPLORER_04",
+      "dimension": "explorer",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "忙完一周后，去体验一件平时接触不到的事会让我期待周末。",
+        "en": "After a busy week, getting to try something outside my usual routine gives me something to look forward to."
+      }
+    },
+    {
+      "id": "JA_CREATOR_04",
+      "dimension": "creator",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "即使没有观众，我也愿意把脑中的构想做成看得见的作品。",
+        "en": "Even without an audience, I want to turn an idea in my head into something visible."
+      }
+    },
+    {
+      "id": "JA_RULER_04",
+      "dimension": "ruler",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "接手一项反复发生的任务时，把它安排到不靠某个人记得更让我有成就感。",
+        "en": "When taking over a recurring task, I find it satisfying to arrange it so it does not depend on one person remembering."
+      }
+    },
+    {
+      "id": "JA_CAREGIVER_04",
+      "dimension": "caregiver",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "做完自己的部分后，有人缺人手会让我更愿意留下帮一会儿。",
+        "en": "After finishing my part, seeing someone short of help makes me want to stay a little longer."
+      }
+    },
+    {
+      "id": "JA_MAGICIAN_04",
+      "dimension": "magician",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "发现一条原先没注意到的联系时，我最想试它能带来怎样的实际转变。",
+        "en": "When I spot a connection I had missed, what interests me most is what it might actually transform."
+      }
+    },
+    {
+      "id": "JA_LOVER_04",
+      "dimension": "lover",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "一项爱好渐渐变成惯例时，找回我对其中细节的喜爱让我愿意继续。",
+        "en": "When a hobby becomes routine, rediscovering my affection for its details makes me want to continue."
+      }
+    },
+    {
+      "id": "JA_JESTER_04",
+      "dimension": "jester",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "回想一次见面，共享的那些好笑瞬间最让我想再聚一次。",
+        "en": "Looking back on a gathering, the moments we laughed about together most make me want to meet again."
+      }
+    },
+    {
+      "id": "JA_EVERYPERSON_04",
+      "dimension": "everyperson",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "当一个小组拿到成果时，平时没被注意到的成员也分享那份归属感让我觉得重要。",
+        "en": "When a group achieves something, it matters to me that members who usually go unnoticed feel part of it too."
+      }
+    },
+    {
+      "id": "JA_INNOCENT_04",
+      "dimension": "innocent",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "开始一个新习惯时，一件小而可期待的事会让我想坚持。",
+        "en": "When starting a new habit, having one small thing to look forward to makes me want to keep going."
+      }
+    },
+    {
+      "id": "JA_REBEL_04",
+      "dimension": "rebel",
+      "direction": "forward",
+      "prompt": {
+        "zh-CN": "即使一套惯例运行顺利，指出它强加了什么也能让我觉得讨论值得参加。",
+        "en": "Even when a routine runs smoothly, discussing what it imposes makes the conversation worth joining."
+      }
+    }
+  ]
+}

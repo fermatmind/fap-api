@@ -319,6 +319,7 @@ return [
         'eq_test' => App\Services\Assessment\Drivers\Eq60Driver::class,
         'enneagram' => App\Services\Assessment\Drivers\EnneagramDriver::class,
         'riasec' => App\Services\Assessment\Drivers\RiasecDriver::class,
+        'jung_likert' => App\Services\Assessment\Drivers\JungLikertDriver::class,
     ],
 
     // Persist raw answers (audit)
