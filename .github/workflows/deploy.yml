@@ -587,6 +587,7 @@ jobs:
     environment: staging
     env:
       PUBLIC_CONTENT_53_PACKAGE_NAME: ${{ fromJSON(needs.policy.outputs.classification).operations.public_content_53_package }}
+      STAGING_MBTI_PDF_ENABLED: ${{ vars.STAGING_MBTI_PDF_ENABLED }}
       TARGET: staging
       DEPLOY_USER: ${{ secrets.STAGING_DEPLOY_USER }}
       DEPLOY_PORT: ${{ secrets.STAGING_DEPLOY_PORT }}

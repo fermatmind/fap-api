@@ -27,6 +27,24 @@ final class PdfPrintRuntimeTest extends TestCase
         });
     }
 
+    public function test_opt_in_configures_and_disables_only_the_staging_renderer(): void
+    {
+        $this->fixture(function (string $env, string $input): void {
+            $original = "APP_ENV=staging\nGOTENBERG_PDF_ENABLED=false\n";
+            file_put_contents($env, $original);
+            $process = $this->runHelper($env, $input, mode: '--staging-local-pdf');
+            self::assertSame(0, $process->getExitCode(), $process->getErrorOutput());
+            $enabled = file_get_contents($env);
+            self::assertStringContainsString("GOTENBERG_PDF_ENABLED=true\n", $enabled);
+            self::assertStringContainsString("GOTENBERG_BASE_URL=http://127.0.0.1:13000\n", $enabled);
+            self::assertStringContainsString("GOTENBERG_RESULT_PRINT_BASE_URL=http://127.0.0.1:13001\n", $enabled);
+            self::assertSame(0, $this->runHelper($env, $input)->getExitCode());
+            self::assertSame($enabled, file_get_contents($env));
+            self::assertSame(0, $this->runHelper($env, $input, mode: '--staging-local-pdf-off')->getExitCode());
+            self::assertSame(str_replace('GOTENBERG_PDF_ENABLED=true', 'GOTENBERG_PDF_ENABLED=false', $enabled), file_get_contents($env));
+        });
+    }
+
     public function test_a_conflicting_existing_key_is_never_rotated(): void
     {
         $this->fixture(function (string $env, string $input, string $key): void {
@@ -107,9 +125,9 @@ final class PdfPrintRuntimeTest extends TestCase
         });
     }
 
-    private function runHelper(string $env, string $input, array $phpArguments = []): Process
+    private function runHelper(string $env, string $input, array $phpArguments = [], string $mode = ''): Process
     {
-        $process = new Process([PHP_BINARY, ...$phpArguments, dirname(__DIR__, 3).'/scripts/deploy/configure_pdf_print_runtime.php', $env, $input]);
+        $process = new Process([PHP_BINARY, ...$phpArguments, dirname(__DIR__, 3).'/scripts/deploy/configure_pdf_print_runtime.php', $env, $input, $mode]);
         $process->run();
 
         return $process;

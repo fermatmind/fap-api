@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-// Only the dedicated print signing key may be initialized. Existing keys never rotate here.
+// Existing signing keys never rotate here. Staging can opt into its loopback renderer.
 $phase = 'input';
 $activated = false;
 set_error_handler(static function (int $severity, string $_message, string $_file, int $line): never {
@@ -34,27 +34,43 @@ try {
         throw new RuntimeException('PDF_PRINT_RUNTIME_ENV_CHANGED');
     }
     $phase = 'prepare';
-    $key = 'GOTENBERG_RESULT_PRINT_TOKEN_SECRET';
-    $line = $key.'='.$secret;
-    $seen = false;
+    $values = ['GOTENBERG_RESULT_PRINT_TOKEN_SECRET' => $secret];
+    $mode = $argv[3] ?? '';
+    if (! in_array($mode, ['', '--staging-local-pdf', '--staging-local-pdf-off'], true)) {
+        throw new RuntimeException('PDF_PRINT_RUNTIME_INPUT_INVALID');
+    }
+    if ($mode === '--staging-local-pdf') {
+        $values += [
+            'GOTENBERG_PDF_ENABLED' => 'true',
+            'GOTENBERG_BASE_URL' => 'http://127.0.0.1:13000',
+            'GOTENBERG_RESULT_PRINT_BASE_URL' => 'http://127.0.0.1:13001',
+        ];
+    } elseif ($mode === '--staging-local-pdf-off') {
+        $values['GOTENBERG_PDF_ENABLED'] = 'false';
+    }
     $updated = '';
+    $seen = [];
     foreach (preg_split('/(?<=\n)/', $original, -1, PREG_SPLIT_NO_EMPTY) ?: [] as $segment) {
         $body = preg_replace('/\r?\n\z/', '', $segment);
-        if (preg_match('/\A\s*(?:export\s+)?'.preg_quote($key, '/').'\s*=(.*)\z/D', (string) $body, $matches) === 1) {
-            $old = trim($matches[1]);
-            if (! in_array($old, ['', '""', "''", $secret, '"'.$secret.'"', "'".$secret."'"], true)) {
-                throw new RuntimeException('PDF_PRINT_RUNTIME_EXISTING_KEY_CONFLICT');
-            }
-            if (! $seen) {
-                $updated .= $line.substr($segment, strlen((string) $body));
-                $seen = true;
-            }
-        } else {
+        if (! preg_match('/\A\s*(?:export\s+)?([A-Z_]+)\s*=(.*)\z/D', (string) $body, $matches)
+            || ! array_key_exists($matches[1], $values)) {
             $updated .= $segment;
+
+            continue;
+        }
+        $key = $matches[1];
+        $value = $values[$key];
+        if ($key === 'GOTENBERG_RESULT_PRINT_TOKEN_SECRET'
+            && ! in_array(trim($matches[2]), ['', '""', "''", $value, '"'.$value.'"', "'".$value."'"], true)) {
+            throw new RuntimeException('PDF_PRINT_RUNTIME_EXISTING_KEY_CONFLICT');
+        }
+        if (! isset($seen[$key])) {
+            $updated .= $key.'='.$value.substr($segment, strlen((string) $body));
+            $seen[$key] = true;
         }
     }
-    if (! $seen) {
-        $updated .= ($updated !== '' && ! str_ends_with($updated, "\n") ? "\n" : '').$line."\n";
+    foreach (array_diff_key($values, $seen) as $key => $value) {
+        $updated .= ($updated !== '' && ! str_ends_with($updated, "\n") ? "\n" : '').$key.'='.$value."\n";
     }
     if ($updated !== $original) {
         $phase = 'temporary';

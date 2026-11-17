@@ -1694,6 +1694,18 @@ task('runtime:configure-pdf-print', function (): void {
         return;
     }
 
+    $stagingRenderer = currentHost()->getAlias() === 'staging' ? getenv('STAGING_MBTI_PDF_ENABLED') : false;
+    $mode = match ($stagingRenderer) {
+        '1' => ' --staging-local-pdf',
+        '0' => ' --staging-local-pdf-off',
+        false, '' => '',
+        default => throw new \RuntimeException('PDF_PRINT_RUNTIME_INPUT_INVALID'),
+    };
+    if ($stagingRenderer === '1') {
+        run('curl -fsS --max-time 5 http://127.0.0.1:13000/health >/dev/null'
+            .' && test "$(curl -fsS --max-time 5 http://127.0.0.1:13001/__pdf_proxy_health)" = ok');
+    }
+
     $secret = (string) (getenv('GOTENBERG_RESULT_PRINT_TOKEN_SECRET') ?: '');
     if (preg_match('/\A[0-9a-f]{64}\z/D', $secret) !== 1) {
         throw new \RuntimeException('PDF_PRINT_RUNTIME_KEY_UNAVAILABLE');
@@ -1709,10 +1721,11 @@ task('runtime:configure-pdf-print', function (): void {
         }
         upload($local, $remote);
         run(sprintf(
-            'set -euo pipefail; set +x; patch=%s; trap \'rm -f "$patch"\' EXIT; chmod 600 "$patch"; {{bin/php}} -d display_errors=0 %s %s "$patch"',
+            'set -euo pipefail; set +x; patch=%s; trap \'rm -f "$patch"\' EXIT; chmod 600 "$patch"; {{bin/php}} -d display_errors=0 %s %s "$patch"%s',
             deployPlaceholderPathArg($remote),
             deployPlaceholderPathArg('{{release_path}}', 'backend/scripts/deploy/configure_pdf_print_runtime.php'),
             deployPlaceholderPathArg('{{deploy_path}}', 'shared/backend/.env'),
+            $mode,
         ));
     } finally {
         @unlink($local);
