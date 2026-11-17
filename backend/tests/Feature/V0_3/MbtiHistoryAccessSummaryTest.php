@@ -20,6 +20,7 @@ final class MbtiHistoryAccessSummaryTest extends TestCase
 
     public function test_me_attempts_mbti_returns_row_level_access_summary(): void
     {
+        config(['report_unlock.mbti_access_mode' => 'paid_unlock']);
         (new ScaleRegistrySeeder)->run();
         (new Pr19CommerceSeeder)->run();
 
@@ -190,6 +191,48 @@ final class MbtiHistoryAccessSummaryTest extends TestCase
         $response->assertJsonPath('items.4.access_summary.actions.wait_href', null);
         $response->assertJsonPath('items.4.access_summary.actions.history_href', '/history/mbti');
         $response->assertJsonPath('items.4.access_summary.actions.lookup_href', '/orders/lookup');
+    }
+
+    public function test_signed_in_free_mbti_history_offers_pdf_for_completed_reports_without_a_projection(): void
+    {
+        config(['report_unlock.mbti_access_mode' => 'free_full']);
+        (new ScaleRegistrySeeder)->run();
+        $userId = 9102;
+        $anonId = 'anon_mbti_history_free_pdf';
+        $this->seedUser($userId);
+        $token = $this->seedFmToken($anonId, $userId);
+
+        $short = $this->seedMbtiAttempt($anonId, (string) $userId, 'INTJ-T', now(), 'mbti_93');
+        $long = $this->seedMbtiAttempt($anonId, (string) $userId, 'INTJ-T', now()->subDay());
+        $deleted = $this->seedMbtiAttempt($anonId, (string) $userId, 'INTJ-T', now()->subDays(2));
+        $pending = $this->seedMbtiAttempt($anonId, (string) $userId, 'INTJ-T', now()->subDays(3));
+        $this->seedMbtiResult($short, 'INTJ-T', 'mbti_93');
+        $this->seedMbtiResult($long, 'INTJ-T');
+        $this->seedMbtiResult($deleted, 'INTJ-T');
+        $this->seedAccessProjection($deleted, [
+            'access_state' => 'deleted',
+            'report_state' => 'deleted',
+            'pdf_state' => 'missing',
+            'reason_code' => 'projection_deleted',
+            'payload_json' => [],
+        ]);
+
+        $response = $this->withToken($token)->getJson('/api/v0.3/me/attempts')->assertOk()->assertJsonCount(4, 'items');
+        foreach ([$short, $long] as $index => $attemptId) {
+            $response->assertJsonPath("items.{$index}.attempt_id", $attemptId)
+                ->assertJsonPath("items.{$index}.access_summary.access_state", 'ready')
+                ->assertJsonPath("items.{$index}.access_summary.pdf_state", 'ready')
+                ->assertJsonPath("items.{$index}.access_summary.actions.pdf_href", "/api/v0.3/attempts/{$attemptId}/report.pdf");
+        }
+        $response->assertJsonPath('items.2.attempt_id', $deleted)
+            ->assertJsonPath('items.2.access_summary.actions.pdf_href', null)
+            ->assertJsonPath('items.3.attempt_id', $pending)
+            ->assertJsonPath('items.3.access_summary.actions.pdf_href', null);
+
+        config(['report_unlock.mbti_access_mode' => 'paid_unlock']);
+        $this->getJson('/api/v0.3/me/attempts')->assertOk()
+            ->assertJsonPath('items.0.access_summary.actions.pdf_href', null)
+            ->assertJsonPath('items.1.access_summary.actions.pdf_href', null);
     }
 
     private function seedMbtiAttempt(

@@ -22,6 +22,7 @@ use App\Services\Riasec\RiasecPublicFormSummaryBuilder;
 use App\Services\Scale\ScaleRegistry;
 use App\Services\Scale\ScaleRolloutGate;
 use App\Support\ApiPagination;
+use App\Support\Mbti\MbtiReportAccessPolicy;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
@@ -477,6 +478,22 @@ class MeAttemptsService
                 ReportAccess::allDefaultModulesOffered(ReportAccess::SCALE_BIG5_OCEAN)
             ));
             $payload['modules_preview'] = $payload['modules_allowed'];
+        }
+
+        if ($resultExists
+            && (int) $attempt->org_id === 0
+            && MbtiReportAccessPolicy::grantsFreeFull((string) $attempt->scale_code)
+            && $reportState === 'ready'
+            && in_array($accessState, ['locked', 'ready'], true)
+            && ! $this->supportsPdfDownload($accessState, $pdfState)
+        ) {
+            $accessState = 'ready';
+            $pdfState = 'ready';
+            $reasonCode = 'free_full_report_mode';
+            $unlockStage = ReportAccess::UNLOCK_STAGE_FULL;
+            $unlockSource = ReportAccess::UNLOCK_SOURCE_NONE;
+            $payload['access_level'] = ReportAccess::REPORT_ACCESS_FULL;
+            $payload['variant'] = ReportAccess::VARIANT_FULL;
         }
 
         return [
