@@ -28,7 +28,7 @@ final class JungAssessmentFlowTest extends TestCase
         $slug = $scale === JungBank::ARCHETYPES ? 'jung-archetypes' : 'jung-cognitive-functions';
         $this->getJson("/api/v0.3/scales/lookup?slug={$slug}&locale={$locale}")->assertOk()
             ->assertJsonPath('forms.0.question_count', $count)
-            ->assertJsonPath('is_indexable', false);
+            ->assertJsonPath('is_indexable', true);
         $questions = $this->getJson("/api/v0.3/scales/{$scale}/questions?locale={$locale}")
             ->assertOk()->assertJsonCount($count, 'questions.items');
         $items = $questions->json('questions.items');
