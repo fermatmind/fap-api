@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\V0_3;
 
 use App\Http\Controllers\Controller;
+use App\Services\Assessment\Jung\JungBank;
 use App\Services\PublicSurface\LandingSurfaceContractService;
 use App\Services\Scale\PublicScaleCatalogCache;
 use App\Services\Scale\PublicScaleCatalogUnavailable;
@@ -435,6 +436,11 @@ class ScalesLookupController extends Controller
      */
     private function hasCatalogMetadata(array $row, string $locale): bool
     {
+        if (JungBank::supports((string) ($row['code'] ?? ''))) {
+            return $this->publicScaleFormsProjector->defaultQuestionCount($row, $locale) > 0
+                && $this->publicScaleFormsProjector->defaultEstimatedMinutes($row, $locale) > 0;
+        }
+
         $contentI18n = $this->toArray($row['content_i18n_json'] ?? null);
         $lang = $this->localeToLanguage($locale);
         $localizedCatalog = $this->toArray($this->toArray($contentI18n[$lang] ?? null)['catalog'] ?? null);

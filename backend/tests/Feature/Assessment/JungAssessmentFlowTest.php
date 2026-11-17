@@ -29,6 +29,13 @@ final class JungAssessmentFlowTest extends TestCase
         $this->getJson("/api/v0.3/scales/lookup?slug={$slug}&locale={$locale}")->assertOk()
             ->assertJsonPath('forms.0.question_count', $count)
             ->assertJsonPath('is_indexable', true);
+        $catalog = $this->getJson("/api/v0.3/scales/catalog?locale={$locale}")
+            ->assertOk()->json('items');
+        $item = collect($catalog)->firstWhere('slug', $slug);
+        self::assertIsArray($item);
+        self::assertSame($count, $item['questions_count']);
+        self::assertSame($count === 48 ? 10 : 13, $item['time_minutes']);
+        self::assertTrue($item['is_indexable']);
         $questions = $this->getJson("/api/v0.3/scales/{$scale}/questions?locale={$locale}")
             ->assertOk()->assertJsonCount($count, 'questions.items');
         $items = $questions->json('questions.items');
