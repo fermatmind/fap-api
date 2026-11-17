@@ -287,10 +287,10 @@ class ReportGatekeeper
         $requiresSnapshotBoundReport = $scaleCode === ReportAccess::SCALE_RIASEC
             && $unlockStage !== ReportAccess::UNLOCK_STAGE_PARTIAL
             && $shouldUseSnapshot;
-        $snapshotStrictMode = ($scaleCode === ReportAccess::SCALE_EQ_60 && app()->environment('production'))
+        $snapshotStrictMode = ! $isJung && (($scaleCode === ReportAccess::SCALE_EQ_60 && app()->environment('production'))
             || $scaleCode === ReportAccess::SCALE_ENNEAGRAM
-            || (! in_array($scaleCode, [ReportAccess::SCALE_EQ_60, ReportAccess::SCALE_RIASEC], true) && $this->strictSnapshotModeEnabled());
-        $shouldReadFromSnapshot = ! $isJung && $unlockStage !== ReportAccess::UNLOCK_STAGE_PARTIAL
+            || (! in_array($scaleCode, [ReportAccess::SCALE_EQ_60, ReportAccess::SCALE_RIASEC], true) && $this->strictSnapshotModeEnabled()));
+        $shouldReadFromSnapshot = $unlockStage !== ReportAccess::UNLOCK_STAGE_PARTIAL
             && ($snapshotStrictMode || $shouldUseSnapshot);
         $allowLiveBuildFallbackForSnapshot = $scaleCode === ReportAccess::SCALE_EQ_60
             && ! app()->environment('production');

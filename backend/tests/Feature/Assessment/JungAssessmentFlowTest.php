@@ -24,6 +24,7 @@ final class JungAssessmentFlowTest extends TestCase
     #[DataProvider('scales')]
     public function test_public_questions_and_owned_free_report(string $scale, string $locale, int $count, string $dimension): void
     {
+        config(['fap.features.report_snapshot_strict_v2' => true]);
         $slug = $scale === JungBank::ARCHETYPES ? 'jung-archetypes' : 'jung-cognitive-functions';
         $this->getJson("/api/v0.3/scales/lookup?slug={$slug}&locale={$locale}")->assertOk()
             ->assertJsonPath('forms.0.question_count', $count)
@@ -50,6 +51,10 @@ final class JungAssessmentFlowTest extends TestCase
             'answers' => $answers,
         ], $owner)->assertOk()->assertJsonPath('ok', true);
 
+        $this->getJson("/api/v0.3/attempts/{$attemptId}/report-access", $owner)
+            ->assertOk()
+            ->assertJsonPath('access_state', 'ready')
+            ->assertJsonPath('report_state', 'ready');
         $this->getJson("/api/v0.3/attempts/{$attemptId}/report", $owner)
             ->assertOk()
             ->assertJsonPath('ok', true)
