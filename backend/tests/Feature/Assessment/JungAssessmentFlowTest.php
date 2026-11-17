@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Assessment;
 
+use App\Models\User;
+use App\Services\Account\AccountAssetLinker;
 use App\Services\Assessment\Jung\JungBank;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -56,5 +58,13 @@ final class JungAssessmentFlowTest extends TestCase
             ->assertJsonPath("report.jung.scores.{$dimension}", 50);
         $this->getJson("/api/v0.3/attempts/{$attemptId}/report", ['X-Anon-Id' => 'jung-other-browser'])
             ->assertNotFound();
+        $this->assertDatabaseHas('attempt_drafts', ['attempt_id' => $attemptId, 'answers_json' => null, 'answered_count' => 0]);
+        $user = User::factory()->create();
+        $linked = app(AccountAssetLinker::class)->linkAttempts((string) $user->getKey(), [[
+            'attempt_id' => $attemptId,
+            'resume_token' => $start->json('resume_token'),
+        ]]);
+        self::assertSame([$attemptId], $linked['linked_attempt_ids']);
+        $this->assertDatabaseHas('attempts', ['id' => $attemptId, 'user_id' => $user->getKey()]);
     }
 }

@@ -42,7 +42,7 @@ return new class extends Migration
                         'zh' => ['title' => $zh, 'description' => $zhDescription, 'catalog' => $catalog],
                         'en' => ['title' => $en, 'description' => $enDescription, 'catalog' => $catalog],
                     ],
-                ]);
+                ], invalidateProjection: false);
             }
         });
     }

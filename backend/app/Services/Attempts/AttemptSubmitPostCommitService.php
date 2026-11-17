@@ -5,6 +5,7 @@ namespace App\Services\Attempts;
 use App\Jobs\GenerateReportSnapshotJob;
 use App\Models\Attempt;
 use App\Services\Analytics\ResultReadyEventRecorder;
+use App\Services\Assessment\Jung\JungBank;
 use App\Services\Observability\ClinicalComboTelemetry;
 use App\Services\Observability\Sds20Telemetry;
 use App\Support\OrgContext;
@@ -51,7 +52,7 @@ class AttemptSubmitPostCommitService
         }
 
         if (($responsePayload['ok'] ?? false) === true) {
-            $this->core->progressService()->clearProgress($attemptId);
+            $this->core->progressService()->clearProgress($attemptId, retainOwnershipProof: JungBank::supports($scaleCode) && $actorUserId === null);
             $this->core->sideEffects()->recordSubmitEvent(
                 $ctx,
                 $attemptId,

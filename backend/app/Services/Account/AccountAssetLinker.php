@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Account;
 
+use App\Services\Assessment\Jung\JungBank;
 use App\Services\Attempts\AttemptProgressService;
 use App\Services\Commerce\MembershipService;
 use Illuminate\Support\Facades\DB;
@@ -23,7 +24,7 @@ final class AccountAssetLinker
             $linked = [];
             foreach ($proofs as $proof) {
                 $attempt = DB::table('attempts')->where('org_id', 0)->where('id', $proof['attempt_id'])->lockForUpdate()->first();
-                abort_if(! $attempt || ! in_array($attempt->scale_code, self::SCALES, true), 404, 'Result not found.');
+                abort_if(! $attempt || (! in_array($attempt->scale_code, self::SCALES, true) && ! JungBank::supports($attempt->scale_code)), 404, 'Result not found.');
                 abort_if(! $this->progress->hasValidResumeToken($attempt->id, $proof['resume_token']), 403, 'A valid result ownership proof is required.');
                 $this->claimResult($userId, $attempt);
                 $linked[] = $attempt->id;

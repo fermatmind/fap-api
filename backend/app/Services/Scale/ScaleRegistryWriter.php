@@ -23,7 +23,7 @@ class ScaleRegistryWriter
         private PublicScaleCatalogCache $publicScaleCatalogCache,
     ) {}
 
-    public function upsertScale(array $payload): ScaleRegistryModel
+    public function upsertScale(array $payload, bool $invalidateProjection = true): ScaleRegistryModel
     {
         $code = strtoupper(trim((string) ($payload['code'] ?? '')));
         $orgId = (int) ($payload['org_id'] ?? 0);
@@ -90,7 +90,9 @@ class ScaleRegistryWriter
             return [$scale, $affectedSlugs];
         });
 
-        $this->invalidatePublicProjection($orgId, $code, $affectedSlugs);
+        if ($invalidateProjection) {
+            $this->invalidatePublicProjection($orgId, $code, $affectedSlugs);
+        }
 
         return $scale;
     }

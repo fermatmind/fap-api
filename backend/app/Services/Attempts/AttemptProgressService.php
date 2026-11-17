@@ -3,6 +3,7 @@
 namespace App\Services\Attempts;
 
 use App\Models\Attempt;
+use App\Services\Assessment\Jung\JungBank;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -40,6 +41,9 @@ class AttemptProgressService
 
     public function saveProgress(Attempt $attempt, ?string $token, ?int $userId, array $payload): array
     {
+        if ($attempt->submitted_at !== null && JungBank::supports((string) $attempt->scale_code)) {
+            return ['ok' => false, 'status' => 404, 'error' => 'DRAFT_NOT_FOUND', 'message' => 'draft not found.'];
+        }
         $attemptId = (string) $attempt->id;
         $orgId = (int) ($attempt->org_id ?? 0);
         $draft = $this->loadDraft($attemptId);
@@ -139,6 +143,9 @@ class AttemptProgressService
 
     public function getProgress(Attempt $attempt, ?string $token, ?int $userId): array
     {
+        if ($attempt->submitted_at !== null && JungBank::supports((string) $attempt->scale_code)) {
+            return ['ok' => false, 'status' => 404, 'error' => 'DRAFT_NOT_FOUND', 'message' => 'draft not found.'];
+        }
         $attemptId = (string) $attempt->id;
         $draft = $this->loadDraft($attemptId);
         if (! $draft) {
@@ -192,10 +199,15 @@ class AttemptProgressService
         ];
     }
 
-    public function clearProgress(string $attemptId): void
+    public function clearProgress(string $attemptId, bool $retainOwnershipProof = false): void
     {
+        $draft = DB::table('attempt_drafts')->where('attempt_id', $attemptId);
+        if ($retainOwnershipProof) {
+            $draft->update(['answers_json' => null, 'answered_count' => 0, 'cursor' => null, 'duration_ms' => 0]);
+        } else {
+            $draft->delete();
+        }
         $this->forgetCache($attemptId);
-        DB::table('attempt_drafts')->where('attempt_id', $attemptId)->delete();
     }
 
     public function reissueDraftForAttemptWithProof(
