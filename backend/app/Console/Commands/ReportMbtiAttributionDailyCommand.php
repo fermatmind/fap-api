@@ -163,10 +163,9 @@ final class ReportMbtiAttributionDailyCommand extends Command
             $isClick = $event->event_code === MbtiLandingAttribution::CLICK_EVENT;
             $path = MbtiLandingAttribution::path($meta['landing_path'] ?? null);
             $form = MbtiLandingAttribution::form($meta['form_code'] ?? null);
-            if ($form === null || ($path === null && ($isClick || ($meta['entry_surface'] ?? null) !== 'mbti_test_landing'))) {
+            if ($form === null || $path === null) {
                 continue;
             }
-            $path ??= 'unknown';
 
             $identity = $isClick ? ($event->request_id ?: $event->id) : $event->attempt_id;
             if (! $identity) {

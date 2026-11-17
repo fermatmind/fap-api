@@ -415,7 +415,9 @@ class AttemptStartService
 
         if (! $reused) {
             $safeDimensions = app(MeasurementAttributionDimensions::class)->fromAttempt($attempt);
-            if (strtoupper($scaleCode) === 'MBTI' && ($answersMeta['entry_surface'] ?? null) === 'mbti_test_landing') {
+            if (strtoupper($scaleCode) === 'MBTI'
+                && ($answersMeta['entry_surface'] ?? null) === 'mbti_test_landing'
+                && ($answersMeta['mbti_landing_analytics_consent'] ?? null) === true) {
                 $landingPath = MbtiLandingAttribution::path($answersMeta['landing_path'] ?? null);
                 if ($landingPath !== null) {
                     $safeDimensions['landing_path'] = $landingPath;

@@ -89,6 +89,7 @@ final class MbtiFormVersionFlowTest extends TestCase
             'form_code' => 'mbti_93',
             'meta' => [
                 'entry_surface' => 'mbti_test_landing',
+                'mbti_landing_analytics_consent' => true,
                 'landing_path' => '/zh-TW/tests/mbti-personality-test-16-personality-types',
             ],
         ]);
@@ -135,11 +136,18 @@ final class MbtiFormVersionFlowTest extends TestCase
             'scale_code' => 'MBTI',
             'anon_id' => $anonId,
             'form_code' => 'mbti_93',
+            'meta' => [
+                'entry_surface' => 'mbti_test_landing',
+                'landing_path' => '/zh/tests/mbti-personality-test-16-personality-types',
+            ],
         ]);
         $start->assertStatus(200);
 
         $attemptId = (string) $start->json('attempt_id');
         $this->assertNotSame('', $attemptId);
+        $startMeta = DB::table('events')->where('event_code', 'test_start')->where('attempt_id', $attemptId)->value('meta_json');
+        $this->assertNotNull($startMeta);
+        $this->assertArrayNotHasKey('landing_path', json_decode((string) $startMeta, true));
 
         $doc = json_decode((string) File::get(base_path('../content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3-form-93/questions.json')), true);
         $items = is_array($doc['items'] ?? null) ? $doc['items'] : [];
