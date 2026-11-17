@@ -19,6 +19,23 @@ final class ResultAccessLinkTemplateDeliveryTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_browser_preflight_allows_result_access_token_from_frontend_only(): void
+    {
+        $path = '/api/v0.3/attempts/00000000-0000-4000-8000-000000000000/report-access';
+        $headers = [
+            'Access-Control-Request-Method' => 'GET',
+            'Access-Control-Request-Headers' => 'x-result-access-token,x-anon-id',
+        ];
+
+        $allowed = $this->options($path, [], $headers + ['Origin' => 'https://fermatmind.com']);
+        $allowed->assertNoContent()->assertHeader('Access-Control-Allow-Origin', 'https://fermatmind.com');
+        $allowedHeaders = strtolower((string) $allowed->headers->get('Access-Control-Allow-Headers'));
+        $this->assertContains('x-result-access-token', array_map('trim', explode(',', $allowedHeaders)));
+
+        $denied = $this->options($path, [], $headers + ['Origin' => 'https://untrusted.example.test']);
+        $denied->assertHeaderMissing('Access-Control-Allow-Origin');
+    }
+
     #[DataProvider('localeProvider')]
     public function test_result_access_link_renders_signed_frontend_link_without_persisting_plaintext_token(
         string $locale,

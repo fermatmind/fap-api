@@ -32,6 +32,7 @@ return [
         'X-FM-Org-Id',
         'X-Anon-Id',
         'X-Payment-Recovery-Token',
+        'X-Result-Access-Token',
         'X-Region',
         'X-Fap-Locale',
         'Idempotency-Key',
