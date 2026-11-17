@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Services\Analytics\AnalyticsTrafficExclusionPolicy;
+use App\Services\Analytics\MbtiLandingAttribution;
 use Carbon\CarbonImmutable;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -15,6 +17,7 @@ final class ReportMbtiAttributionDailyCommand extends Command
         {--to= : Inclusive end date (Y-m-d)}
         {--org=* : Limit to one or more org ids}
         {--entry-surface= : Filter one entry surface}
+        {--canonical-landing : Read MBTI landing clicks and durable starts by canonical path and form}
         {--json : Output JSON rows}';
 
     protected $description = 'Read MBTI attribution funnel metrics grouped by entry surface/source page type.';
@@ -34,6 +37,16 @@ final class ReportMbtiAttributionDailyCommand extends Command
             static fn (mixed $value): int => max(0, (int) $value),
             (array) $this->option('org')
         ), static fn (int $value): bool => $value >= 0));
+
+        if ($this->option('canonical-landing')) {
+            if ($from->diffInDays($to) > 30) {
+                $this->error('Canonical landing reporting accepts up to 31 calendar days.');
+
+                return self::FAILURE;
+            }
+
+            return $this->reportCanonicalLanding($from, $to, $orgIds);
+        }
 
         $query = DB::table('analytics_mbti_attribution_daily')
             ->whereBetween('day', [$from->toDateString(), $to->toDateString()])
@@ -126,6 +139,57 @@ final class ReportMbtiAttributionDailyCommand extends Command
             $row['invite_completions'],
             $row['invite_unlock_contribution_rate'],
         ], $rows));
+
+        return self::SUCCESS;
+    }
+
+    private function reportCanonicalLanding(CarbonImmutable $from, CarbonImmutable $to, array $orgIds): int
+    {
+        $exclusions = app(AnalyticsTrafficExclusionPolicy::class);
+        $events = DB::table('events')->select(['id', 'org_id', 'event_code', 'request_id', 'attempt_id', 'anon_id', 'session_id', 'meta_json'])->where('scale_code', 'MBTI')
+            ->whereIn('event_code', [MbtiLandingAttribution::CLICK_EVENT, 'test_start'])
+            ->where('occurred_at', '>=', $from)
+            ->where('occurred_at', '<', $to->addDay())
+            ->when($orgIds !== [], fn ($query) => $query->whereIn('org_id', $orgIds));
+        $rows = [];
+        $seen = [];
+
+        foreach ($events->lazyById() as $event) {
+            $meta = json_decode((string) $event->meta_json, true) ?: [];
+            if ($exclusions->isExcludedSeoConversionEvent($event, $meta)) {
+                continue;
+            }
+
+            $isClick = $event->event_code === MbtiLandingAttribution::CLICK_EVENT;
+            $path = MbtiLandingAttribution::path($meta['landing_path'] ?? null);
+            $form = MbtiLandingAttribution::form($meta['form_code'] ?? null);
+            if ($form === null || ($path === null && ($isClick || ($meta['entry_surface'] ?? null) !== 'mbti_test_landing'))) {
+                continue;
+            }
+            $path ??= 'unknown';
+
+            $identity = $isClick ? ($event->request_id ?: $event->id) : $event->attempt_id;
+            if (! $identity) {
+                continue;
+            }
+            $eventKey = $event->org_id.'|'.$event->event_code.'|'.$identity;
+            if (isset($seen[$eventKey])) {
+                continue;
+            }
+            $seen[$eventKey] = true;
+
+            $key = $event->org_id.'|'.$path.'|'.$form;
+            $rows[$key] ??= ['org_id' => $event->org_id, 'landing_path' => $path, 'form_code' => $form, 'cta_clicks' => 0, 'successful_starts' => 0];
+            $rows[$key][$isClick ? 'cta_clicks' : 'successful_starts']++;
+        }
+
+        ksort($rows);
+        $rows = array_values($rows);
+        if ($this->option('json')) {
+            $this->line(json_encode(['from' => $from->toDateString(), 'to' => $to->toDateString(), 'rows' => $rows], JSON_UNESCAPED_SLASHES));
+        } else {
+            $this->table(['org_id', 'landing_path', 'form_code', 'cta_clicks', 'successful_starts'], $rows);
+        }
 
         return self::SUCCESS;
     }

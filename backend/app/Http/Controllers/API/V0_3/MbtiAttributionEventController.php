@@ -7,6 +7,7 @@ namespace App\Http\Controllers\API\V0_3;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Services\Analytics\AccessTestIdentity;
+use App\Services\Analytics\MbtiLandingAttribution;
 use App\Services\Analytics\MeasurementFailureEventContract;
 use App\Support\SchemaBaseline;
 use Illuminate\Http\JsonResponse;
@@ -113,6 +114,7 @@ final class MbtiAttributionEventController extends Controller
     private const ALLOWED_EVENT_NAMES = [
         'landing_view',
         'start_click',
+        MbtiLandingAttribution::CLICK_EVENT,
         'start_attempt',
         'submit_attempt',
         'view_result',
@@ -272,6 +274,20 @@ final class MbtiAttributionEventController extends Controller
         }
 
         $payload = is_array($data['payload'] ?? null) ? $data['payload'] : [];
+        if ($eventName === MbtiLandingAttribution::CLICK_EVENT) {
+            abort_unless($authenticatedServer, 401);
+            $landingPath = MbtiLandingAttribution::path($payload['landing_path'] ?? null);
+            if ($landingPath === null || $landingPath !== ($data['path'] ?? null)
+                || MbtiLandingAttribution::form($payload['form_code'] ?? null) === null) {
+                throw ValidationException::withMessages(['payload' => 'Expected a canonical MBTI landing and supported form.']);
+            }
+            $payload = array_intersect_key($payload, array_flip([
+                'landing_path', 'form_code', 'target_action', 'locale', 'traffic_quality',
+            ]));
+            $payload['entry_surface'] = 'mbti_test_landing';
+            $payload['source_page_type'] = 'test_landing';
+            $payload['scale_code'] = 'MBTI';
+        }
         $isFailureMeasurementEvent = MeasurementFailureEventContract::isFailureEvent($eventName);
         $path = $this->normalizeOptionalString($data['path'] ?? null, 2048) ?? '/';
         $isSeoConversionEvent = $this->isSeoPrivacyIngest($request)
@@ -318,6 +334,9 @@ final class MbtiAttributionEventController extends Controller
             'attempt_id' => $attemptId,
             'raw_payload' => $payload,
         ];
+        if ($eventName === MbtiLandingAttribution::CLICK_EVENT) {
+            $meta['traffic_quality'] = $payload['traffic_quality'] ?? null;
+        }
         if ($isSeoConversionEvent) {
             $meta['seo_conversion'] = [
                 'event_name' => $eventName,

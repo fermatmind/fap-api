@@ -7,12 +7,48 @@ namespace Tests\Feature\Analytics;
 use App\Services\Analytics\AccessTestDailyBuilder;
 use Carbon\CarbonImmutable;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 final class MbtiAttributionEventIngestTest extends TestCase
 {
     use RefreshDatabase;
+
+    public function test_mbti_cta_ingest_counts_canonical_paths_separately_and_rejects_mismatches(): void
+    {
+        config()->set('fap.events.ingest_token', 'ingest_test_token');
+        $this->withHeaders(['X-Track-Ingest-Token' => 'ingest_test_token']);
+        foreach (['zh', 'zh-TW'] as $locale) {
+            $path = '/'.$locale.'/tests/mbti-personality-test-16-personality-types';
+            $event = [
+                'eventName' => 'mbti_landing_cta_click',
+                'requestId' => 'mbti-cta-'.$locale,
+                'path' => $path,
+                'timestamp' => '2026-11-17T10:00:00Z',
+                'payload' => ['form_code' => 'mbti_93', 'landing_path' => $path, 'locale' => 'zh'],
+            ];
+            $this->postJson('/api/v0.5/seo/attribution/events', $event)->assertStatus(202);
+            $this->postJson('/api/v0.5/seo/attribution/events', [
+                ...$event, 'path' => '/zh/tests/mbti',
+            ])->assertStatus(422);
+        }
+
+        $this->assertSame(0, Artisan::call('analytics:report-mbti-attribution-daily', [
+            '--canonical-landing' => true,
+            '--from' => '2026-11-17',
+            '--to' => '2026-11-17',
+            '--json' => true,
+        ]));
+        $rows = array_column(json_decode(Artisan::output(), true)['rows'], null, 'landing_path');
+        $this->assertCount(2, $rows);
+        foreach (['zh', 'zh-TW'] as $locale) {
+            $row = $rows['/'.$locale.'/tests/mbti-personality-test-16-personality-types'];
+            $this->assertSame('mbti_93', $row['form_code']);
+            $this->assertSame(1, $row['cta_clicks']);
+            $this->assertSame(0, $row['successful_starts']);
+        }
+    }
 
     public function test_empty_envelope_authentication_probe_never_creates_an_event(): void
     {

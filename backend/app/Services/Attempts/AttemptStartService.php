@@ -6,6 +6,7 @@ use App\DTO\Attempts\StartAttemptDTO;
 use App\Exceptions\Api\ApiProblemException;
 use App\Models\Attempt;
 use App\Services\Analytics\EventRecorder;
+use App\Services\Analytics\MbtiLandingAttribution;
 use App\Services\Analytics\MeasurementAttributionDimensions;
 use App\Services\BigFive\BigFiveFormCatalog;
 use App\Services\Content\BigFivePackLoader;
@@ -414,6 +415,12 @@ class AttemptStartService
 
         if (! $reused) {
             $safeDimensions = app(MeasurementAttributionDimensions::class)->fromAttempt($attempt);
+            if (strtoupper($scaleCode) === 'MBTI' && ($answersMeta['entry_surface'] ?? null) === 'mbti_test_landing') {
+                $landingPath = MbtiLandingAttribution::path($answersMeta['landing_path'] ?? null);
+                if ($landingPath !== null) {
+                    $safeDimensions['landing_path'] = $landingPath;
+                }
+            }
             $this->eventRecorder()->record('test_start', $ctx->userId(), $safeDimensions, [
                 'org_id' => $orgId,
                 'anon_id' => $anonId,

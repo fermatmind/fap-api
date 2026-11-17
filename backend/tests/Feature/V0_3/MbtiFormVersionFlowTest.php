@@ -87,6 +87,10 @@ final class MbtiFormVersionFlowTest extends TestCase
             'scale_code' => 'MBTI',
             'anon_id' => $anonId,
             'form_code' => 'mbti_93',
+            'meta' => [
+                'entry_surface' => 'mbti_test_landing',
+                'landing_path' => '/zh-TW/tests/mbti-personality-test-16-personality-types',
+            ],
         ]);
 
         $response->assertStatus(200);
@@ -113,6 +117,8 @@ final class MbtiFormVersionFlowTest extends TestCase
             ->latest('created_at')
             ->first();
         $this->assertNotNull($startEvent);
+        $this->assertSame('/zh-TW/tests/mbti-personality-test-16-personality-types', data_get(json_decode((string) $startEvent->meta_json, true), 'landing_path'));
+
         $this->assertSame('mbti_93', (string) data_get(json_decode((string) ($startEvent->meta_json ?? '{}'), true), 'form_code'));
     }
 
