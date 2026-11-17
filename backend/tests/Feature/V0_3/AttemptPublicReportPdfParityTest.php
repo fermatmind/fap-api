@@ -198,9 +198,22 @@ final class AttemptPublicReportPdfParityTest extends TestCase
         $this->createResult($attemptId);
         Attempt::whereKey($attemptId)->update(['locale' => 'en']);
         $token = $this->issueAnonToken('locked-owner');
-        $this->withHeaders(['Authorization' => 'Bearer '.$token, 'X-Anon-Id' => 'locked-owner'])
-            ->getJson("/api/v0.3/attempts/{$attemptId}/report?locale=en")
+        $headers = ['Authorization' => 'Bearer '.$token, 'X-Anon-Id' => 'locked-owner'];
+        $this->withHeaders($headers)->getJson("/api/v0.3/attempts/{$attemptId}/report?locale=en")
             ->assertOk()->assertJsonPath('locked', false)->assertJsonMissingPath('mbti_pdf_content');
+
+        config()->set('gotenberg.enabled', true);
+        Storage::fake('local');
+        Http::fake();
+
+        foreach (['report.pdf', 'result-page.pdf'] as $endpoint) {
+            $this->withHeaders($headers)->getJson("/api/v0.3/attempts/{$attemptId}/{$endpoint}")
+                ->assertStatus(503)->assertJsonPath('error_code', 'PDF_CONTENT_UNAVAILABLE')
+                ->assertHeader('X-Pdf-Error-Stage', 'report_content')
+                ->assertHeader('Cache-Control', 'no-store, private');
+        }
+
+        Http::assertNothingSent();
     }
 
     public function test_print_cache_key_changes_with_published_body_and_intro_revision(): void
@@ -426,6 +439,9 @@ final class AttemptPublicReportPdfParityTest extends TestCase
     public function test_public_mbti_report_pdf_prefers_gotenberg_result_print_route_when_enabled(string $mode, string $variant, string $locked, string $locale, int $questionCount): void
     {
         $this->seedScales($mode === 'paid_unlock');
+        if ($locale === 'en') {
+            $this->seedEnglishClone();
+        }
         config()->set('report_unlock.mbti_access_mode', $mode);
         config()->set('fap.features.report_snapshot_strict_v2', false);
         config()->set('gotenberg.enabled', true);

@@ -3419,13 +3419,13 @@ class AttemptReadController extends Controller
             'message' => $publicMessage,
             'request_id' => $requestId,
             'trace_id' => $traceId,
-        ], 503)->withHeaders($this->resultPagePdfFailureHeaders($request, $traceId));
+        ], 503)->withHeaders($this->resultPagePdfFailureHeaders($request, $traceId, $errorCode));
     }
 
     /**
      * @return array<string, string>
      */
-    private function resultPagePdfFailureHeaders(Request $request, string $traceId): array
+    private function resultPagePdfFailureHeaders(Request $request, string $traceId, string $errorCode): array
     {
         $headers = [
             'Cache-Control' => 'private, no-store',
@@ -3437,7 +3437,10 @@ class AttemptReadController extends Controller
             'X-Pdf-Print-Asset-Hash' => ReportPdfDocumentService::mbtiResultPageSnapshotPrintAssetHash(),
             'X-Gotenberg-Trace' => $traceId,
             'X-Legacy-Mpdf-Fallback' => 'false',
-            'X-Pdf-Error-Stage' => 'gotenberg.convert_url',
+            'X-Pdf-Error-Stage' => match ($errorCode) {
+                'REPORT_NOT_READY', 'PDF_CONTENT_UNAVAILABLE' => 'report_content',
+                default => 'gotenberg.convert_url',
+            },
             'Vary' => 'Origin',
         ];
 

@@ -564,10 +564,10 @@ final class ReportPdfDocumentService
         if (strtoupper(trim((string) $attempt->scale_code)) === 'MBTI') {
             $variant = $this->normalizeVariant($variant);
 
-            return $this->resolveResultPageExportManifestHash($attempt, [
+            return $this->resolveResultPageExportArtifact($attempt, [
                 'variant' => $variant,
                 'locked' => $variant !== 'full',
-            ], $result);
+            ], $result)['manifest_hash'];
         }
 
         return $this->resolveManifestHash($attempt, $result);
@@ -614,7 +614,8 @@ final class ReportPdfDocumentService
             && array_diff(\App\Services\Report\ReportAccess::allDefaultModulesOffered('MBTI'), (array) $gate['modules_allowed']) !== []) {
             throw new ResultPagePdfExportException($traceId, 'PDF_CONTENT_UNAVAILABLE', 'Complete report modules are unavailable.');
         }
-        $manifestHash = $this->resolveResultPageExportManifestHash($attempt, $gate, $result, $displayLocale);
+        $artifact = $this->resolveResultPageExportArtifact($attempt, $gate, $result, $displayLocale);
+        $manifestHash = $artifact['manifest_hash'];
         $path = $this->artifactStore->path('MBTI', (string) $attempt->id, $manifestHash, $variant);
 
         $cached = $this->artifactStore->get($path);
@@ -635,8 +636,15 @@ final class ReportPdfDocumentService
             ];
         }
 
+        if ($attempt->locale === 'en' && ! $locked && $variant === 'full' && ! $artifact['has_published_clone']) {
+            throw new ResultPagePdfExportException(
+                $traceId, 'PDF_CONTENT_UNAVAILABLE', 'The published English print content is unavailable.'
+            );
+        }
+
         $pdfBinary = $this->buildMbtiResultPageExportDocument($attempt, $gate, $traceId, $displayLocale);
-        if (! hash_equals($manifestHash, $this->resolveResultPageExportManifestHash($attempt, $gate, $result, $displayLocale))) {
+        $currentManifestHash = $this->resolveResultPageExportArtifact($attempt, $gate, $result, $displayLocale)['manifest_hash'];
+        if (! hash_equals($manifestHash, $currentManifestHash)) {
             throw new ResultPagePdfExportException(
                 $traceId, 'pdf_content_revision_changed', 'Published report content changed during PDF generation.'
             );
@@ -661,8 +669,9 @@ final class ReportPdfDocumentService
 
     /**
      * @param  array<string,mixed>  $gate
+     * @return array{manifest_hash:string,has_published_clone:bool}
      */
-    private function resolveResultPageExportManifestHash(Attempt $attempt, array $gate, ?Result $result, ?string $displayLocale = null): string
+    private function resolveResultPageExportArtifact(Attempt $attempt, array $gate, ?Result $result, ?string $displayLocale = null): array
     {
         $baseHash = $this->baseContentManifestHash($attempt, $result);
         $rawLocale = strtolower(trim((string) ($attempt->locale ?? '')));
@@ -692,7 +701,10 @@ final class ReportPdfDocumentService
         $variant = $this->normalizeVariant((string) ($gate['variant'] ?? 'free'));
         $entitlement = ((bool) ($gate['locked'] ?? true)) ? 'locked' : 'unlocked';
 
-        return self::mbtiResultPageExportManifestHash($baseHash, $displayLocale ?? $locale, $entitlement, $variant);
+        return [
+            'manifest_hash' => self::mbtiResultPageExportManifestHash($baseHash, $displayLocale ?? $locale, $entitlement, $variant),
+            'has_published_clone' => $content !== null,
+        ];
     }
 
     public static function mbtiResultPageSnapshotPrintAssetHash(?string $displayLocale = null): string
