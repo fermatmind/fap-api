@@ -489,11 +489,12 @@ class MeAttemptsService
         ) {
             $accessState = 'ready';
             $pdfState = 'ready';
-            $reasonCode = 'free_full_report_mode';
-            $unlockStage = ReportAccess::UNLOCK_STAGE_FULL;
-            $unlockSource = ReportAccess::UNLOCK_SOURCE_NONE;
-            $payload['access_level'] = ReportAccess::REPORT_ACCESS_FULL;
-            $payload['variant'] = ReportAccess::VARIANT_FULL;
+            if ($unlockStage !== ReportAccess::UNLOCK_STAGE_FULL) {
+                $reasonCode = 'free_full_report_mode';
+                $unlockStage = ReportAccess::UNLOCK_STAGE_FULL;
+                $payload['access_level'] = ReportAccess::REPORT_ACCESS_FULL;
+                $payload['variant'] = ReportAccess::VARIANT_FULL;
+            }
         }
 
         return [

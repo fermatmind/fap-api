@@ -233,6 +233,19 @@ final class MbtiHistoryAccessSummaryTest extends TestCase
         $this->getJson('/api/v0.3/me/attempts')->assertOk()
             ->assertJsonPath('items.0.access_summary.actions.pdf_href', null)
             ->assertJsonPath('items.1.access_summary.actions.pdf_href', null);
+
+        $this->seedAccessProjection($long, [
+            'access_state' => 'ready',
+            'report_state' => 'ready',
+            'pdf_state' => 'missing',
+            'reason_code' => 'entitlement_granted',
+            'payload_json' => ['unlock_stage' => 'full', 'unlock_source' => 'payment', 'access_level' => 'full', 'variant' => 'full'],
+        ]);
+        config(['report_unlock.mbti_access_mode' => 'free_full']);
+        $this->getJson('/api/v0.3/me/attempts')->assertOk()
+            ->assertJsonPath('items.1.access_summary.reason_code', 'entitlement_granted')
+            ->assertJsonPath('items.1.access_summary.unlock_source', 'payment')
+            ->assertJsonPath('items.1.access_summary.actions.pdf_href', "/api/v0.3/attempts/{$long}/report.pdf");
     }
 
     private function seedMbtiAttempt(
