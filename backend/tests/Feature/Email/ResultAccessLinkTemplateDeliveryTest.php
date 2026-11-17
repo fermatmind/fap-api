@@ -27,7 +27,8 @@ final class ResultAccessLinkTemplateDeliveryTest extends TestCase
     ): void {
         config([
             'fap.runtime.EMAIL_OUTBOX_SEND' => true,
-            'fap.runtime.FAP_BASE_URL' => 'https://app.example.test',
+            'fap.runtime.FAP_BASE_URL' => null,
+            'app.frontend_url' => 'https://app.example.test',
             'app.url' => 'https://api.example.test',
             'mail.default' => 'array',
         ]);

@@ -5,6 +5,7 @@ namespace App\Services\Email;
 use App\Models\AttemptEmailBinding;
 use App\Models\EmailPreference;
 use App\Models\EmailSubscriber;
+use App\Support\CanonicalFrontendUrl;
 use App\Support\PiiCipher;
 use App\Support\PiiReadFallbackMonitor;
 use App\Support\RuntimeConfig;
@@ -1750,7 +1751,9 @@ class EmailOutboxService
         array $guard
     ): array {
         $backendBaseUrl = rtrim((string) config('app.url', 'http://localhost'), '/');
-        $frontendBaseUrl = $this->frontendBaseUrl($backendBaseUrl);
+        $frontendBaseUrl = $templateKey === self::RESULT_ACCESS_LINK_TEMPLATE
+            ? CanonicalFrontendUrl::fromConfig()
+            : $this->frontendBaseUrl($backendBaseUrl);
         $legalUrls = $this->resolveLegalUrls($locale, $frontendBaseUrl);
         $supportEmail = $this->resolveSupportEmail();
         $normalizedAttribution = $this->normalizeAttribution(is_array($payload['attribution'] ?? null) ? $payload['attribution'] : []);
