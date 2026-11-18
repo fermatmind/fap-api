@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\API\V0_5\Career;
 
 use App\Services\Assessment\Scorers\CareerAssessmentScorer;
+use App\Services\Riasec\RiasecPublicProjectionService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use InvalidArgumentException;
@@ -37,10 +38,18 @@ final class CareerAssessmentController
         }
 
         try {
-            return $this->respond($scorer->score($formVersion, $answers));
+            $scores = $scorer->score($formVersion, $answers);
         } catch (InvalidArgumentException) {
             return $this->respond(['error_code' => 'INVALID_ASSESSMENT'], 422);
         }
+
+        if (($payload['include_report'] ?? false) === true) {
+            $locale = ($payload['locale'] ?? null) === 'en' ? 'en' : 'zh-CN';
+            $scores['riasec_public_projection_v2'] = app(RiasecPublicProjectionService::class)
+                ->buildForCareerAssessment($scores['axes']['interest'], $locale);
+        }
+
+        return $this->respond($scores);
     }
 
     private function respond(array $payload, int $status = 200): JsonResponse
