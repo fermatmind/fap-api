@@ -146,11 +146,11 @@ final class FreemiumLocalePolicyTest extends TestCase
                 ->assertJsonPath('purchase_preparation.purchase_type', 'one_time')
                 ->assertJsonPath('purchase_preparation.scope', 'attempt')
                 ->assertJsonPath('purchase_preparation.basic_result_free', true)
-                ->assertJsonPath('purchase_preparation.market_prices.CN_MAINLAND.price_cents', 999)
+                ->assertJsonPath('purchase_preparation.market_prices.CN_MAINLAND.price_cents', 299)
                 ->assertJsonPath('purchase_preparation.market_prices.CN_MAINLAND.currency', 'CNY')
-                ->assertJsonPath('purchase_preparation.market_prices.TW.price_cents', 199)
+                ->assertJsonPath('purchase_preparation.market_prices.TW.price_cents', 299)
                 ->assertJsonPath('purchase_preparation.market_prices.TW.currency', 'USD')
-                ->assertJsonPath('purchase_preparation.market_prices.US.price_cents', 199)
+                ->assertJsonPath('purchase_preparation.market_prices.US.price_cents', 299)
                 ->assertJsonPath('purchase_preparation.market_prices.US.currency', 'USD');
         }
         $this->assertSame(199, (int) DB::table('skus')->where('sku', 'MBTI_REPORT_FULL_199')->value('price_cents'));

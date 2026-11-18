@@ -54,7 +54,7 @@ final class PublicContent53PricingRefundTest extends TestCase
         foreach ($immutable as $revision) {
             self::assertSame($revision, CmsTranslationRevision::findOrFail($revision['id'])->getRawOriginal());
         }
-        foreach (ContentPage::query()->where('locale', 'en')->whereIn('slug', ['terms', 'policies', 'help-payment-refund', 'help-faq', 'help-contact', 'help-unlock-failure', 'help-result-recovery'])->get() as $page) {
+        foreach (ContentPage::query()->whereIn('locale', ['en', 'zh-TW'])->whereIn('slug', ['terms', 'policies', 'help-payment-refund', 'help-faq', 'help-contact', 'help-unlock-failure', 'help-result-recovery'])->get() as $page) {
             self::assertSame(ContentPage::findOrFail($page->source_content_id)->source_version_hash, $page->translated_from_version_hash);
         }
         DB::transaction(fn () => $writer->restore($this->context(), $before, $after['state']));
@@ -186,11 +186,11 @@ final class PublicContent53PricingRefundTest extends TestCase
                 'status' => 'published', 'is_public' => true, 'is_indexable' => $slug !== 'help-payment-refund',
                 'schema_enabled' => $slug === 'help-payment-refund', 'faq_schema_eligible' => true, 'schema_eligibility_reviewed_at' => now(),
                 'legal_review_required' => false, 'science_review_required' => false,
-                'path' => '/'.($locale === 'en' ? 'en' : 'zh').'/'.(str_starts_with($slug, 'help-') ? 'help/'.substr($slug, 5) : $slug),
+                'path' => '/'.($locale === 'zh-CN' ? 'zh' : $locale).'/'.(str_starts_with($slug, 'help-') ? 'help/'.substr($slug, 5) : $slug),
                 'kind' => str_starts_with($slug, 'help-') ? 'help' : 'policy', 'content_html' => '',
                 'seo_title' => $copy['title'], 'seo_description' => 'Existing reviewed public policy metadata.',
                 'translation_group_id' => 'pricing-policy-'.$slug, 'source_locale' => 'zh-CN',
-                'source_content_id' => $locale === 'en' ? $sources[$slug] : null,
+                'source_content_id' => $locale !== 'zh-CN' ? $sources[$slug] : null,
                 'review_state' => 'approved', 'publish_allowed' => true, 'operator_approval_required' => false,
                 'claim_gate_status' => 'passed', 'published_at' => now()->subDay(),
             ]);
@@ -199,8 +199,8 @@ final class PublicContent53PricingRefundTest extends TestCase
             }
             $page->forceFill([
                 'translation_group_id' => 'pricing-policy-'.$slug, 'source_locale' => 'zh-CN',
-                'source_content_id' => $locale === 'en' ? $sources[$slug] : null,
-                'translated_from_version_hash' => $locale === 'en' ? ContentPage::findOrFail($sources[$slug])->source_version_hash : null,
+                'source_content_id' => $locale !== 'zh-CN' ? $sources[$slug] : null,
+                'translated_from_version_hash' => $locale !== 'zh-CN' ? ContentPage::findOrFail($sources[$slug])->source_version_hash : null,
             ])->saveQuietly();
             $revision = CmsTranslationRevision::query()->create([
                 'org_id' => 0, 'content_type' => 'content_page', 'content_id' => $page->id,

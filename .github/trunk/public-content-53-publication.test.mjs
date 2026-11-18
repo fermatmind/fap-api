@@ -30,23 +30,24 @@ test('support contact selects ten existing bilingual pages with only approved em
   if(row.identity.slug!=='help-contact') assert.equal(after.content_md,before.content_md.replaceAll('support@fermatmind.com',after.support_contact));
  }
 });
-test('pricing/refund publication selects only eight existing bilingual pages and keeps native publication controls',()=>{
+test('pricing/refund publication selects only twelve existing localized pages and keeps native publication controls',()=>{
  const paths=['backend/content_assets/public_content_53/pricing-refund.json','backend/content_assets/public_content_53/pricing-refund-review.json'];
  assert.equal(selectPublicContentPackage(paths),'pricing-refund');
  assert.equal(classifyPaths(paths).operations.public_content_53_package,'pricing-refund');
  assert.throws(()=>selectPublicContentPackage([...paths,'backend/content_assets/public_content_53/translation-batch.json']),/MULTIPLE_PACKAGES/);
  const binding=inspectPackage(root,'pricing-refund');
- assert.equal(binding.expected_row_count,8);
+ assert.equal(binding.expected_row_count,12);
  const rows=readCandidateRows(root,binding.package_sha256).candidates;
- assert.deepEqual(new Set(rows.map(row=>pathFor(row))),new Set(['terms','policies','help/payment-refund','help/faq'].flatMap(path=>['zh','en'].map(locale=>`/${locale}/${path}`))));
+ assert.deepEqual(new Set(rows.map(row=>pathFor(row))),new Set(['terms','policies','help/payment-refund','help/faq'].flatMap(path=>['zh','en','zh-TW'].map(locale=>`/${locale}/${path}`))));
  for(const row of rows) {
   assert.equal(row.kind,'page');
   assert.deepEqual(Object.keys(row.snapshot),['title','summary','content_md','faq_items']);
   assert.equal(row.snapshot.title,row.before.title);
   assert.equal(row.staging_snapshot.title,row.staging_before.title);
   const body=row.snapshot.content_md;
-  assert.ok(body.includes('9.99')&&body.includes('1.99'));
-  assert.ok(body.includes(row.identity.locale==='en'?'7 business days':'7 个工作日')||row.identity.slug==='help-faq'||row.identity.slug==='policies');
+  assert.ok(body.includes('¥2.99') && body.includes('US$2.99'));
+  assert.equal(body, row.before.content_md.replaceAll('¥9.99', '¥2.99').replaceAll('US$1.99', 'US$2.99'));
+  assert.ok(body.includes(row.identity.locale==='en'?'7 business days':row.identity.locale==='zh-TW'?'7 個工作日':'7 个工作日')||row.identity.slug==='help-faq'||row.identity.slug==='policies');
   if(row.identity.slug==='help-payment-refund') {
    assert.equal(row.snapshot.faq_items.length,4);
    for(const faq of row.snapshot.faq_items) assert.ok(body.includes(faq.question)&&body.includes(faq.answer));
