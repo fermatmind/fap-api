@@ -21,9 +21,9 @@ return [
         'scope' => 'attempt',
         'basic_result_free' => true,
         'market_prices' => [
-            'CN_MAINLAND' => ['currency' => 'CNY', 'price_cents' => 999],
-            'TW' => ['currency' => 'USD', 'price_cents' => 199, 'presentment' => 'platform_local_currency'],
-            'US' => ['currency' => 'USD', 'price_cents' => 199],
+            'CN_MAINLAND' => ['currency' => 'CNY', 'price_cents' => 299],
+            'TW' => ['currency' => 'USD', 'price_cents' => 299, 'presentment' => 'platform_local_currency'],
+            'US' => ['currency' => 'USD', 'price_cents' => 299],
         ],
     ],
     'benefit' => 'full_report',

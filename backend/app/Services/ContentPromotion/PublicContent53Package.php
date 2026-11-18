@@ -1111,7 +1111,7 @@ final class PublicContent53Package
         $rows = $package['candidates'] ?? [];
         $targets = [];
         foreach (['TERMS' => 'terms', 'POLICIES' => 'policies', 'REFUND' => 'help-payment-refund', 'FAQ' => 'help-faq'] as $key => $slug) {
-            foreach (['ZH' => 'zh-CN', 'EN' => 'en'] as $suffix => $locale) {
+            foreach (['ZH' => 'zh-CN', 'EN' => 'en', 'TW' => 'zh-TW'] as $suffix => $locale) {
                 $targets['PR-'.$key.'-'.$suffix] = ['org_id' => 0, 'slug' => $slug, 'locale' => $locale];
             }
         }
