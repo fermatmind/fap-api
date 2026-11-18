@@ -6,6 +6,9 @@ $sharedWechatReportProductId = 'FullReport199';
 $sharedWechatReportPriceCents = 199;
 $mbtiReportSku = 'MBTI_REPORT_FULL_199';
 
+$waffoMode = env('WAFFO_ENVIRONMENT', 'test');
+$waffoProduction = $waffoMode === 'prod';
+
 return [
     'provider_priority' => [
         'CN_MAINLAND' => [
@@ -32,17 +35,19 @@ return [
     ], static fn (mixed $provider): bool => is_string($provider) && trim($provider) !== ''),
 
     'fallback_provider' => env('FAP_PAYMENT_FALLBACK_PROVIDER', 'billing'),
+    'career94' => ['enabled' => (bool) env('CAREER94_CHECKOUT_ENABLED', false)],
     'waffo' => [
-        'environment' => 'test',
-        'merchant_id' => env('WAFFO_TEST_MERCHANT_ID', ''),
-        'store_id' => env('WAFFO_TEST_STORE_ID', ''),
-        'product_id' => env('WAFFO_TEST_MBTI_PRODUCT_ID', ''),
-        'private_key_path' => env('WAFFO_TEST_PRIVATE_KEY_PATH', ''),
-        // Pinned public verification key from official @waffo/pancake-ts 0.28.0.
-        'webhook_public_key' => file_get_contents(resource_path('payments/waffo-test-public.pem')),
+        'environment' => $waffoMode,
+        'career94_product_id' => env($waffoProduction ? 'WAFFO_PROD_CAREER94_PRODUCT_ID' : 'WAFFO_TEST_CAREER94_PRODUCT_ID', ''),
+        'merchant_id' => env($waffoProduction ? 'WAFFO_PROD_MERCHANT_ID' : 'WAFFO_TEST_MERCHANT_ID', ''),
+        'store_id' => env($waffoProduction ? 'WAFFO_PROD_STORE_ID' : 'WAFFO_TEST_STORE_ID', ''),
+        'product_id' => $waffoProduction ? '' : env('WAFFO_TEST_MBTI_PRODUCT_ID', ''),
+        'private_key_path' => env($waffoProduction ? 'WAFFO_PROD_PRIVATE_KEY_PATH' : 'WAFFO_TEST_PRIVATE_KEY_PATH', ''),
+        // Pinned environment keys from the official Pancake Go SDK v0.19.0.
+        'webhook_public_key' => file_get_contents(resource_path($waffoProduction ? 'payments/waffo-prod-public.pem' : 'payments/waffo-test-public.pem')),
     ],
     'providers' => [
-        'waffo' => ['enabled' => (bool) env('PAYMENTS_PROVIDER_WAFFO_TEST_ENABLED', false)],
+        'waffo' => ['enabled' => (bool) env($waffoProduction ? 'PAYMENTS_PROVIDER_WAFFO_PROD_ENABLED' : 'PAYMENTS_PROVIDER_WAFFO_TEST_ENABLED', false)],
         'billing' => [
             'enabled' => (bool) env('PAYMENTS_PROVIDER_BILLING_ENABLED', true),
         ],

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Services\BigFive\BigFivePublicFormSummaryBuilder;
 use App\Services\Commerce\AppleIapPaymentService;
+use App\Services\Commerce\CareerAssessmentPurchase;
 use App\Services\Commerce\Checkout\AlipayCheckoutService;
 use App\Services\Commerce\Checkout\LemonSqueezyCheckoutService;
 use App\Services\Commerce\Checkout\WechatPayCheckoutService;
@@ -360,6 +361,17 @@ class CommerceController extends Controller
             $status === 'pending' && ($request->boolean('include_payment_action') || $paymentRecoveryVerified)
         );
         $exactResultEntry = $this->mbtiAccessHubBuilder->buildExactResultEntryForOrder($order);
+        if ($ownershipVerified && $userId !== null && (string) $userId === (string) ($order->user_id ?? '')
+            && in_array($order->sku ?? '', CareerAssessmentPurchase::SKUS, true)
+            && is_string($order->target_attempt_id) && $recoveryUrls['result_url'] !== null
+            && app(CareerAssessmentPurchase::class)->hasAccess($order->target_attempt_id, (string) $userId)) {
+            $exactResultEntry = [
+                'attempt_id' => $order->target_attempt_id,
+                'access_state' => 'ready',
+                'report_state' => 'ready',
+                'actions' => ['page_href' => $recoveryUrls['result_url']],
+            ];
+        }
         $big5FormSummary = $this->big5FormSummaryForOrder($order, $request);
         if (is_array($exactResultEntry) && is_array($big5FormSummary)) {
             $exactResultEntry['big5_form_v1'] = $big5FormSummary;

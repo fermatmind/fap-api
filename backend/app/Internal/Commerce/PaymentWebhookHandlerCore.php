@@ -1856,11 +1856,17 @@ class PaymentWebhookHandlerCore
         int $orgId
     ): array {
         $now = now();
-        if (($order->provider ?? '') === 'waffo'
+        if ((($order->provider ?? '') === 'waffo'
+            || in_array($order->sku ?? '', \App\Services\Commerce\CareerAssessmentPurchase::SKUS, true))
             && ((int) ($normalized['amount_cents'] ?? 0) !== (int) ($order->amount_cents ?? 0)
                 || (int) ($normalized['refund_amount_cents'] ?? 0) !== (int) ($order->amount_cents ?? 0)
                 || ($normalized['currency'] ?? '') !== ($order->currency ?? ''))) {
-            return $this->semanticReject('REFUND_AMOUNT_MISMATCH', 'Waffo refund does not match the original order.');
+            return $this->semanticReject('REFUND_AMOUNT_MISMATCH', 'Refund does not match the original order.');
+        }
+        if (in_array($order->sku ?? '', \App\Services\Commerce\CareerAssessmentPurchase::SKUS, true)
+            && filled($order->provider_trade_no ?? null)
+            && ($normalized['external_trade_no'] ?? null) !== $order->provider_trade_no) {
+            return $this->semanticReject('REFUND_TRADE_MISMATCH', 'Refund does not match the provider transaction.');
         }
         $refundAmount = (int) ($normalized['refund_amount_cents'] ?? 0);
         $refundReason = trim((string) ($normalized['refund_reason'] ?? ''));

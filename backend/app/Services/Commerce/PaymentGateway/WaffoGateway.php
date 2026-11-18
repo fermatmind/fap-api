@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Services\Commerce\PaymentGateway;
 
+use App\Services\Commerce\CareerAssessmentPurchase;
 use App\Services\Payments\PaymentProviderRegistry;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 final class WaffoGateway implements PaymentGatewayInterface
 {
@@ -25,7 +27,8 @@ final class WaffoGateway implements PaymentGatewayInterface
         }
         // Waffo retries retain the original signature for 31+ minutes.
         // Replay protection is the existing provider/event identity transaction.
-        if (abs((int) floor(microtime(true) * 1000) - (int) $matches[1]) > 45 * 60 * 1000) {
+        $age = (int) floor(microtime(true) * 1000) - (int) $matches[1];
+        if ($age > 45 * 60 * 1000 || $age < -60 * 1000) {
             return false;
         }
         $signature = base64_decode($matches[2], true);
@@ -42,21 +45,40 @@ final class WaffoGateway implements PaymentGatewayInterface
         $data = $payload['data'] ?? [];
         $meta = is_array($data) ? ($data['orderMetadata'] ?? []) : [];
         $event = $payload['eventType'] ?? '';
+        $mode = config('payments.waffo.environment', 'test');
         if (! is_array($data) || ! is_array($meta)
-            || ($payload['mode'] ?? '') !== 'test'
+            || ($payload['mode'] ?? '') !== $mode
             || ($payload['storeId'] ?? '') !== config('payments.waffo.store_id')
             || ! in_array($event, ['order.completed', 'refund.succeeded'], true)
-            || ($meta['fap_product_id'] ?? '') !== config('payments.waffo.product_id')
-            || ($meta['fap_order_no'] ?? '') !== ($data['orderMerchantExternalId'] ?? null)
-            || ($data['currency'] ?? '') !== 'USD'
+            || ! is_string($data['orderMerchantExternalId'] ?? null)
+            || ($meta['fap_order_no'] ?? '') !== $data['orderMerchantExternalId']
             || ! is_string($data['orderId'] ?? null) || $data['orderId'] === ''
             || ! is_string($payload['eventId'] ?? null) || $payload['eventId'] === '') {
             return [];
         }
+
+        $product = $meta['fap_product_id'] ?? '';
+        $currency = $data['currency'] ?? '';
+        $careerProduct = config('payments.waffo.career94_product_id');
+        $career = is_string($careerProduct) && $careerProduct !== '' && $product === $careerProduct;
+        if ($career) {
+            $sku = is_string($currency) ? (CareerAssessmentPurchase::SKUS[$currency] ?? null) : null;
+            $attemptId = $meta['fap_attempt_id'] ?? null;
+            if ($sku === null || ! is_string($attemptId) || ! DB::table('orders')
+                ->where('order_no', $data['orderMerchantExternalId'])->where('org_id', 0)->where('provider', 'waffo')
+                ->where('sku', $sku)->where('currency', $currency)->where('amount_cents', CareerAssessmentPurchase::PRICE)
+                ->where('target_attempt_id', $attemptId)->exists()) {
+                return [];
+            }
+        } elseif ($mode !== 'test' || $product === '' || $product !== config('payments.waffo.product_id') || $currency !== 'USD') {
+            return [];
+        }
+
         $refund = $event === 'refund.succeeded';
         $amount = self::cents($refund ? ($data['originalPayment']['total'] ?? null) : ($data['chargedAmount'] ?? null));
         $refundAmount = $refund ? self::cents($data['refundedAmount'] ?? null) : 0;
-        if ($amount === null || $amount <= 0 || ($refund && ($refundAmount !== $amount || ($data['refundStatus'] ?? '') !== 'succeeded'))
+        if ($amount === null || $amount <= 0 || ($career && $amount !== CareerAssessmentPurchase::PRICE)
+            || ($refund && ($refundAmount !== $amount || ($data['refundStatus'] ?? '') !== 'succeeded'))
             || (! $refund && (($data['paymentStatus'] ?? '') !== 'succeeded' || ($data['orderStatus'] ?? '') !== 'completed'))) {
             return [];
         }
@@ -67,7 +89,7 @@ final class WaffoGateway implements PaymentGatewayInterface
             'external_trade_no' => $data['orderId'] ?? null,
             'paid_at' => $payload['timestamp'] ?? null,
             'amount_cents' => $amount,
-            'currency' => 'USD',
+            'currency' => $currency,
             'event_type' => $event,
             'refund_amount_cents' => $refundAmount,
             'refund_reason' => $refund ? 'Waffo verified full refund' : null,

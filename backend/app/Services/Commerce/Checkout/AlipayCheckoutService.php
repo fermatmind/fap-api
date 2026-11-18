@@ -61,6 +61,20 @@ class AlipayCheckoutService
         return Pay::alipay()->web($payload);
     }
 
+    public function requestFullRefund(string $orderNo, string $tradeNo, string $refundNo, string $amount): array
+    {
+        Pay::config(config('pay'));
+        $refund = Pay::alipay()->refund([
+            'out_trade_no' => $orderNo,
+            'trade_no' => $tradeNo,
+            'out_request_no' => $refundNo,
+            'refund_amount' => $amount,
+        ]);
+        $result = $refund instanceof \JsonSerializable ? $refund->jsonSerialize() : $refund;
+
+        return is_array($result) ? $result : [];
+    }
+
     private function isMobileUserAgent(string $userAgent): bool
     {
         return preg_match('/android|iphone|ipad|ipod|mobile|micromessenger/i', $userAgent) === 1;

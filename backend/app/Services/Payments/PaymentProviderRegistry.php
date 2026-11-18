@@ -54,6 +54,17 @@ final class PaymentProviderRegistry
         }
 
         if ($provider === 'waffo') {
+            if (app()->environment('production')) {
+                $path = (string) config('payments.waffo.private_key_path');
+
+                return config('payments.waffo.environment') === 'prod'
+                    && (bool) config('payments.providers.waffo.enabled')
+                    && filled(config('payments.waffo.merchant_id'))
+                    && filled(config('payments.waffo.store_id'))
+                    && filled(config('payments.waffo.career94_product_id'))
+                    && is_file($path) && is_readable($path);
+            }
+
             return app()->environment(['local', 'testing', 'staging'])
                 && config('payments.waffo.environment') === 'test'
                 && (bool) config('payments.providers.waffo.enabled', false);

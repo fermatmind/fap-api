@@ -49,29 +49,29 @@ final class WaffoTestClient
         return $rows[0];
     }
 
-    public function requestFullRefund(string $paymentId, string $reference): array
+    public function requestFullRefund(string $paymentId, string $reference, string $amount = '1.99', string $currency = 'USD', string $reason = 'MBTI sandbox full refund'): array
     {
         return $this->post('/v1/actions/refund-ticket/create-ticket', [
             'paymentId' => $paymentId,
-            'reason' => 'MBTI sandbox full refund',
-            'requestedAmount' => ['amount' => '1.99', 'currency' => 'USD'],
+            'reason' => $reason,
+            'requestedAmount' => ['amount' => $amount, 'currency' => $currency],
             'refundTicketMerchantExternalId' => $reference,
-        ], 'mbti-refund-'.hash('sha256', $reference));
+        ], ($amount === '1.99' ? 'mbti-refund-' : 'career94-refund-').hash('sha256', $reference));
     }
 
     private function post(string $path, array $payload, ?string $idempotencyKey = null): array
     {
         if (! app(PaymentProviderRegistry::class)->isEnabled('waffo')) {
-            throw new RuntimeException('Waffo test provider is disabled.');
+            throw new RuntimeException('Waffo provider is disabled.');
         }
         $keyPath = (string) config('payments.waffo.private_key_path', '');
         $merchant = (string) config('payments.waffo.merchant_id', '');
         if ($merchant === '' || $keyPath === '' || ! is_readable($keyPath)) {
-            throw new RuntimeException('Waffo test credentials are unavailable.');
+            throw new RuntimeException('Waffo credentials are unavailable.');
         }
         $key = openssl_pkey_get_private((string) file_get_contents($keyPath));
         if ($key === false) {
-            throw new RuntimeException('Waffo test key is invalid.');
+            throw new RuntimeException('Waffo key is invalid.');
         }
         $body = json_encode($payload, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         $timestamp = (string) time();
@@ -87,15 +87,15 @@ final class WaffoTestClient
                 ...($idempotencyKey !== null ? ['X-Idempotency-Key' => $idempotencyKey] : []),
             ])->withBody($body, 'application/json')->post('https://api.waffo.ai'.$path);
         } catch (\Throwable) {
-            throw new RuntimeException('Waffo test request failed.');
+            throw new RuntimeException('Waffo request failed.');
         }
         $json = $response->json();
         if (! $response->successful() || ! is_array($json) || ! empty($json['errors'])) {
-            throw new RuntimeException('Waffo test response rejected.');
+            throw new RuntimeException('Waffo response rejected.');
         }
         $data = $json['data'] ?? null;
         if (! is_array($data)) {
-            throw new RuntimeException('Waffo test response is incomplete.');
+            throw new RuntimeException('Waffo response is incomplete.');
         }
 
         return $data;

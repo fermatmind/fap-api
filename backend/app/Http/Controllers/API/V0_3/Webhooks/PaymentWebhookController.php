@@ -15,6 +15,7 @@ use App\Services\Payments\PaymentProviderRegistry;
 use App\Support\Logging\SensitiveDiagnosticRedactor;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Psr\Http\Message\ResponseInterface as PsrResponseInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -200,6 +201,19 @@ final class PaymentWebhookController extends Controller
             ]);
 
             return $this->errorResponse(400, 'INVALID_SIGNATURE', 'invalid signature.');
+        }
+
+        $alipayOrderNo = $payload['out_trade_no'] ?? null;
+        $careerOrder = is_string($alipayOrderNo) && DB::table('orders')->where('order_no', $alipayOrderNo)
+            ->where('provider', 'alipay')->whereIn('sku', \App\Services\Commerce\CareerAssessmentPurchase::SKUS)->exists();
+        if ($careerOrder) {
+            $appId = config('pay.alipay.default.app_id');
+            $seller = config('pay.alipay.default.seller_id');
+            if (! filled($appId) || ! filled($seller) || ($payload['app_id'] ?? null) !== $appId || ($payload['seller_id'] ?? null) !== $seller
+                || ! is_string($payload['trade_status'] ?? null) || ! is_string($payload['trade_no'] ?? null)
+                || ! is_string($payload['notify_id'] ?? null)) {
+                return $this->errorResponse(400, 'ALIPAY_ORDER_IDENTITY_MISMATCH', 'alipay order identity does not match');
+            }
         }
 
         $result = $this->processWithRetry($provider, $payload, true, $requestId);

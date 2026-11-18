@@ -26,6 +26,12 @@ class SkuCatalog
             return null;
         }
 
+        if (in_array($sku, CareerAssessmentPurchase::SKUS, true)) {
+            // Reserved for the server-validated career checkout and settlement.
+            return $orgId === 0 ? $this->baseQuery($scaleCode, false, 0, false)
+                ->where('sku', $sku)->where('scale_code', CareerAssessmentPurchase::SCALE)->first() : null;
+        }
+
         $rows = $this->baseQuery($scaleCode, true, $orgId, $includeGlobalFallback)
             ->where('sku', $sku)
             ->get();

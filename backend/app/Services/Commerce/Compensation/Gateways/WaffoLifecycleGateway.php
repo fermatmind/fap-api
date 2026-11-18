@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Commerce\Compensation\Gateways;
 
+use App\Services\Commerce\CareerAssessmentPurchase;
 use App\Services\Commerce\Checkout\WaffoTestClient;
 use App\Services\Commerce\Compensation\Contracts\PaymentLifecycleGatewayInterface;
 use App\Services\Commerce\PaymentGateway\WaffoGateway;
@@ -24,7 +25,13 @@ final class WaffoLifecycleGateway implements PaymentLifecycleGatewayInterface
             'reason' => 'Waffo payment has not been verified.',
         ];
         $reference = trim((string) ($context['order_no'] ?? ''));
-        if ($reference === '' || (int) ($context['amount_expected'] ?? 0) !== 199 || ($context['currency'] ?? '') !== 'USD') {
+        $amount = (int) ($context['amount_expected'] ?? 0);
+        $currency = $context['currency'] ?? '';
+        $career = $amount === CareerAssessmentPurchase::PRICE && is_string($currency)
+            && isset(CareerAssessmentPurchase::SKUS[$currency]);
+        $sandboxMbti = config('payments.waffo.environment') === 'test' && $amount === 199 && $currency === 'USD';
+        $product = config($career ? 'payments.waffo.career94_product_id' : 'payments.waffo.product_id');
+        if ($reference === '' || (! $career && ! $sandboxMbti) || ! filled($product)) {
             return $result;
         }
         try {
@@ -38,9 +45,9 @@ final class WaffoLifecycleGateway implements PaymentLifecycleGatewayInterface
         $meta = $order['metadata'] ?? [];
         if (($order['orderMerchantExternalId'] ?? '') !== $reference
             || ($meta['fap_order_no'] ?? '') !== $reference
-            || ($meta['fap_product_id'] ?? '') !== config('payments.waffo.product_id')
-            || ($order['currency'] ?? '') !== 'USD'
-            || WaffoGateway::cents($order['priceSnapshot']['total'] ?? null) !== 199) {
+            || ($meta['fap_product_id'] ?? '') !== $product
+            || ($order['currency'] ?? '') !== $currency
+            || WaffoGateway::cents($order['priceSnapshot']['total'] ?? null) !== $amount) {
             return $result;
         }
         $status = match ($order['status'] ?? '') {
@@ -58,8 +65,8 @@ final class WaffoLifecycleGateway implements PaymentLifecycleGatewayInterface
             }
             if (($payment['orderId'] ?? '') !== ($order['id'] ?? null)
                 || ($payment['status'] ?? '') !== 'succeeded' || ($payment['refundStatus'] ?? '') !== 'none'
-                || ($payment['snapshotAmountDetails']['currency'] ?? '') !== 'USD'
-                || WaffoGateway::cents($payment['snapshotAmountDetails']['total'] ?? null) !== 199) {
+                || ($payment['snapshotAmountDetails']['currency'] ?? '') !== $currency
+                || WaffoGateway::cents($payment['snapshotAmountDetails']['total'] ?? null) !== $amount) {
                 return $result;
             }
         }

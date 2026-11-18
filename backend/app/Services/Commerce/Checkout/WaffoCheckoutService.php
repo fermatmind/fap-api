@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Commerce\Checkout;
 
+use App\Services\Commerce\CareerAssessmentPurchase;
 use Illuminate\Support\Facades\DB;
 
 final class WaffoCheckoutService
@@ -12,14 +13,19 @@ final class WaffoCheckoutService
     {
         $order = DB::table('orders')->where('order_no', $orderNo)->first();
         $attempt = $attemptId ? DB::table('attempts')->where('id', $attemptId)->first() : null;
+        $career = $attempt?->scale_code === CareerAssessmentPurchase::SCALE;
+        $sandboxMbti = config('payments.waffo.environment') === 'test'
+            && $attempt?->scale_code === 'MBTI' && $amountCents === 199 && $currency === 'USD';
+        $careerContract = $career && $amountCents === CareerAssessmentPurchase::PRICE
+            && (CareerAssessmentPurchase::SKUS[$currency] ?? null) === ($order->sku ?? '')
+            && ($attempt->region === 'CN_MAINLAND' ? $currency === 'CNY' : $currency === 'USD');
         if (! $order || ! $attempt || $order->provider !== 'waffo'
-            || $attempt->scale_code !== 'MBTI' || $order->target_attempt_id !== $attemptId
-            || (int) $order->amount_cents !== 199 || $order->currency !== 'USD'
-            || $amountCents !== 199 || $currency !== 'USD'
+            || (! $sandboxMbti && ! $careerContract) || $order->target_attempt_id !== $attemptId
+            || (int) $order->amount_cents !== $amountCents || $order->currency !== $currency
             || ! in_array(\App\Models\Order::normalizePaymentState($order->payment_state ?? '', $order->status ?? ''), ['created', 'pending'], true)) {
             return $this->unavailable();
         }
-        $productId = (string) config('payments.waffo.product_id', '');
+        $productId = (string) config($career ? 'payments.waffo.career94_product_id' : 'payments.waffo.product_id', '');
         if ($productId === '') {
             return $this->unavailable();
         }
@@ -38,15 +44,17 @@ final class WaffoCheckoutService
             }
             $data = $client->createSession([
                 'productId' => $productId,
-                'currency' => 'USD',
+                'currency' => $currency,
                 'successUrl' => $waitUrl,
-                'priceSnapshot' => ['amount' => '1.99', 'taxIncluded' => true, 'taxCategory' => 'digital_goods'],
+                'priceSnapshot' => ['amount' => $career ? '2.99' : '1.99', 'taxIncluded' => true, 'taxCategory' => 'digital_goods'],
                 'orderMerchantExternalId' => $orderNo,
                 'metadata' => ['fap_order_no' => $orderNo, 'fap_attempt_id' => $attemptId, 'fap_product_id' => $productId],
                 'language' => $language,
                 'expiresInSeconds' => 1800,
                 'allowPromotionCodes' => false,
-            ], 'mbti-checkout-'.hash('sha256', $orderNo));
+                ...($career ? ['includePaymentMethods' => $currency === 'CNY'
+                    ? ['wechat'] : ['card', 'applepay', 'googlepay']] : []),
+            ], ($career ? 'career94-checkout-' : 'mbti-checkout-').hash('sha256', $orderNo));
             if (! is_string($data['expiresAt'] ?? null) || \Illuminate\Support\Carbon::parse($data['expiresAt'])->isPast()) {
                 return $this->unavailable();
             }

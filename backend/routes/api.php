@@ -625,6 +625,10 @@ Route::prefix('v0.5')->group(function () {
         ->middleware('throttle:api_public');
     Route::post('/career-assessment/score', [CareerAssessmentController::class, 'score'])
         ->middleware([\App\Http\Middleware\LimitApiPublicPayloadSize::class, 'throttle:api_attempt_submit']);
+    Route::post('/career-assessment/results', [CareerAssessmentController::class, 'store'])
+        ->middleware([\App\Http\Middleware\LimitApiPublicPayloadSize::class, \App\Http\Middleware\FmTokenAuth::class, 'throttle:api_attempt_submit']);
+    Route::get('/career-assessment/results/{id}', [CareerAssessmentController::class, 'show'])
+        ->whereUuid('id')->middleware([\App\Http\Middleware\FmTokenAuth::class, 'throttle:api_public']);
 
     Route::post('/career/attribution/events', [CareerAttributionEventController::class, 'store'])
         ->middleware('throttle:api_track');

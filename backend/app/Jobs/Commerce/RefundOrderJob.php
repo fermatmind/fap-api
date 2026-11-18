@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Jobs\Commerce;
 
+use App\Services\Commerce\CareerAssessmentPurchase;
+use App\Services\Commerce\CareerAssessmentRefund;
 use App\Services\Commerce\EntitlementManager;
 use App\Services\Commerce\OrderManager;
 use Illuminate\Bus\Queueable;
@@ -52,6 +54,12 @@ class RefundOrderJob implements ShouldQueue
             ->first();
 
         if (! $order) {
+            return;
+        }
+
+        if (in_array($order->sku, CareerAssessmentPurchase::SKUS, true)) {
+            app(CareerAssessmentRefund::class)->submit($order, $this->reason);
+
             return;
         }
 

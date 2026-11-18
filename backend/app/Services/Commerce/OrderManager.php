@@ -214,6 +214,25 @@ class OrderManager
             return $this->applyLegacyColumns($row, $requestId);
         };
 
+        if (in_array($skuToLookup, CareerAssessmentPurchase::SKUS, true)) {
+            $expectedCurrency = array_search($skuToLookup, CareerAssessmentPurchase::SKUS, true);
+            if ($unitPriceCents !== CareerAssessmentPurchase::PRICE || $skuRow->currency !== $expectedCurrency
+                || $skuRow->benefit_code !== CareerAssessmentPurchase::BENEFIT
+                || $skuRow->scale_code !== CareerAssessmentPurchase::SCALE || $skuRow->scope !== 'attempt'
+                || $skuRow->kind !== 'report_unlock') {
+                return $this->badRequest('PRICE_INVALID', 'Career report price contract does not match.');
+            }
+
+            return app(CareerAssessmentPurchase::class)->createOrder(
+                $targetAttemptId, $orgId, $normalizedUserId, $skuToLookup, $provider, $quantity, $createRow
+            );
+        }
+
+        if ($targetAttemptId !== null && DB::table('attempts')->where('id', $targetAttemptId)
+            ->where('org_id', $orgId)->where('scale_code', CareerAssessmentPurchase::SCALE)->exists()) {
+            return $this->badRequest('SKU_NOT_ELIGIBLE', 'This result requires a career report product.');
+        }
+
         if ($useIdempotency) {
             return DB::transaction(function () use ($orgId, $provider, $idempotencyKey, $createRow) {
                 $existing = $this->findIdempotentOrder($orgId, $provider, $idempotencyKey, true);
@@ -430,10 +449,14 @@ class OrderManager
                 ]);
         }
 
+        $resultPath = in_array($order->sku ?? '', CareerAssessmentPurchase::SKUS, true)
+            ? '/career/assessment/result/'
+            : '/result/';
+
         return [
             'wait_url' => $waitUrl,
             'result_url' => $attemptId !== null
-                ? $base.'/'.$localeSegment.'/result/'.urlencode($attemptId)
+                ? $base.'/'.$localeSegment.$resultPath.urlencode($attemptId)
                 : null,
         ];
     }

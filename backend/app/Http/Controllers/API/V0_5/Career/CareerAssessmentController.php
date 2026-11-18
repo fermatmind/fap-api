@@ -4,10 +4,15 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\API\V0_5\Career;
 
+use App\Models\Attempt;
+use App\Models\Order;
+use App\Services\Assessment\CareerAssessmentDeepReport;
 use App\Services\Assessment\Scorers\CareerAssessmentScorer;
+use App\Services\Commerce\CareerAssessmentPurchase;
 use App\Services\Riasec\RiasecPublicProjectionService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use InvalidArgumentException;
 use JsonException;
 
@@ -19,6 +24,29 @@ final class CareerAssessmentController
     }
 
     public function score(Request $request, CareerAssessmentScorer $scorer): JsonResponse
+    {
+        return $this->submit($request, $scorer, false);
+    }
+
+    public function store(Request $request, CareerAssessmentScorer $scorer): JsonResponse
+    {
+        return $this->submit($request, $scorer, true);
+    }
+
+    public function show(Request $request, string $id, CareerAssessmentPurchase $purchase): JsonResponse
+    {
+        $userId = $this->ownerId($request);
+        $attempt = $userId !== null ? Attempt::withoutGlobalScopes()->whereKey($id)
+            ->where('org_id', 0)->where('scale_code', CareerAssessmentPurchase::SCALE)
+            ->where('user_id', $userId)->whereNotNull('submitted_at')->first() : null;
+        if (! $attempt) {
+            return $this->respond(['error_code' => 'ASSESSMENT_NOT_FOUND'], 404);
+        }
+
+        return $this->respond($this->publicResult($attempt, $purchase, $purchase->hasAccess((string) $attempt->id, $userId)));
+    }
+
+    private function submit(Request $request, CareerAssessmentScorer $scorer, bool $persist): JsonResponse
     {
         if (! $request->isJson()) {
             return $this->respond(['error_code' => 'EXPECTED_JSON'], 415);
@@ -43,13 +71,99 @@ final class CareerAssessmentController
             return $this->respond(['error_code' => 'INVALID_ASSESSMENT'], 422);
         }
 
+        $locale = ($payload['locale'] ?? null) === 'en' ? 'en' : 'zh-CN';
+        if ($persist) {
+            return $this->persist($request, $payload, $answers, $scores, $locale);
+        }
+
         if (($payload['include_report'] ?? false) === true) {
-            $locale = ($payload['locale'] ?? null) === 'en' ? 'en' : 'zh-CN';
             $scores['riasec_public_projection_v2'] = app(RiasecPublicProjectionService::class)
                 ->buildForCareerAssessment($scores['axes']['interest'], $locale);
+            $purchase = app(CareerAssessmentPurchase::class);
+            if ($scores['interest_shape']['state'] === 'differentiated') {
+                $scores['purchase_markets'] = array_values(array_filter(
+                    ['CN_MAINLAND', 'INTERNATIONAL'],
+                    static fn (string $market): bool => $purchase->offers($market) !== []
+                ));
+            }
         }
 
         return $this->respond($scores);
+    }
+
+    private function persist(Request $request, array $payload, array $answers, array $scores, string $locale): JsonResponse
+    {
+        $userId = $this->ownerId($request);
+        if ($userId === null) {
+            return $this->respond(['error_code' => 'ACCOUNT_REQUIRED'], 403);
+        }
+
+        $id = $payload['submission_id'] ?? null;
+        $market = $payload['market'] ?? null;
+        if (! is_string($id) || ! Str::isUuid($id) || ! in_array($market, ['CN_MAINLAND', 'INTERNATIONAL'], true)) {
+            return $this->respond(['error_code' => 'INVALID_SUBMISSION'], 422);
+        }
+
+        ksort($answers);
+        $digest = hash('sha256', json_encode($answers, JSON_THROW_ON_ERROR));
+        $attempt = Attempt::withoutGlobalScopes()->firstOrCreate(['id' => strtolower($id)], [
+            'org_id' => 0,
+            'user_id' => $userId,
+            'anon_id' => (string) Str::uuid(),
+            'scale_code' => CareerAssessmentPurchase::SCALE,
+            'scale_version' => $scores['form_version'],
+            'question_count' => 94,
+            'answers_summary_json' => [],
+            'answers_digest' => $digest,
+            'client_platform' => 'web',
+            'region' => $market,
+            'locale' => $locale,
+            'scoring_spec_version' => $scores['model_version'],
+            'submitted_at' => now(),
+            'result_json' => $scores,
+        ]);
+        if ((string) $attempt->user_id !== $userId || (int) $attempt->org_id !== 0
+            || $attempt->scale_code !== CareerAssessmentPurchase::SCALE
+            || $attempt->answers_digest !== $digest || $attempt->region !== $market) {
+            return $this->respond(['error_code' => 'SUBMISSION_CONFLICT'], 409);
+        }
+
+        return $this->show($request, (string) $attempt->id, app(CareerAssessmentPurchase::class));
+    }
+
+    private function ownerId(Request $request): ?string
+    {
+        $userId = $request->attributes->get('fm_user_id');
+
+        return (int) $request->attributes->get('fm_org_id', 0) === 0 && is_string($userId) && $userId !== ''
+            ? $userId : null;
+    }
+
+    private function publicResult(Attempt $attempt, CareerAssessmentPurchase $purchase, bool $unlocked): array
+    {
+        $result = $attempt->result_json;
+        $result['riasec_public_projection_v2'] = app(RiasecPublicProjectionService::class)
+            ->buildForCareerAssessment($result['axes']['interest'], $attempt->locale);
+
+        $order = $purchase->latestOrder($attempt->id);
+        $state = $order ? Order::normalizePaymentState($order->payment_state, $order->status) : null;
+        $offers = $unlocked || ($result['interest_shape']['state'] ?? '') !== 'differentiated' ? [] : $purchase->offers($attempt->region);
+        if ($order && $state !== 'canceled') {
+            $offers = in_array($state, ['created', 'pending'], true)
+                ? array_values(array_filter($offers, static fn (array $offer): bool => $offer['provider'] === $order->provider))
+                : [];
+        }
+
+        return [
+            'attempt_id' => $attempt->id,
+            'market' => $attempt->region,
+            'result' => $result,
+            'unlocked' => $unlocked,
+            ...($unlocked ? ['premium' => app(CareerAssessmentDeepReport::class)->build($result, $attempt->locale)] : []),
+            'offers' => $offers,
+            'order_no' => $order->order_no ?? null,
+            'payment_state' => $state,
+        ];
     }
 
     private function respond(array $payload, int $status = 200): JsonResponse
