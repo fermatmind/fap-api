@@ -27,9 +27,7 @@ class SkuCatalog
         }
 
         if (in_array($sku, CareerAssessmentPurchase::SKUS, true)) {
-            // Reserved for the server-validated career checkout and settlement.
-            return $orgId === 0 ? $this->baseQuery($scaleCode, false, 0, false)
-                ->where('sku', $sku)->where('scale_code', CareerAssessmentPurchase::SCALE)->first() : null;
+            return $this->findSkuRow($sku, $scaleCode, $orgId, $includeGlobalFallback);
         }
 
         $rows = $this->baseQuery($scaleCode, true, $orgId, $includeGlobalFallback)
@@ -334,6 +332,28 @@ class SkuCatalog
         ?int $orgId = null,
         bool $includeGlobalFallback = true
     ): ?Sku {
+        $careerCurrency = array_search($sku, CareerAssessmentPurchase::SKUS, true);
+        if (is_string($careerCurrency)) {
+            if ($orgId !== 0 || ! in_array($this->normalizeScaleCode($scaleCode), [null, CareerAssessmentPurchase::SCALE], true)) {
+                return null;
+            }
+
+            // Server-owned offers stay outside the generic database product listing.
+            return new Sku([
+                'org_id' => 0,
+                'sku' => $sku,
+                'scale_code' => CareerAssessmentPurchase::SCALE,
+                'kind' => 'report_unlock',
+                'unit_qty' => 1,
+                'benefit_code' => CareerAssessmentPurchase::BENEFIT,
+                'scope' => 'attempt',
+                'price_cents' => CareerAssessmentPurchase::PRICE,
+                'currency' => $careerCurrency,
+                'is_active' => true,
+                'meta_json' => ['entitlement_id' => 'career94_report'],
+            ]);
+        }
+
         $rows = $this->baseQuery($scaleCode, false, $orgId, $includeGlobalFallback)
             ->where('sku', $sku)
             ->get();
