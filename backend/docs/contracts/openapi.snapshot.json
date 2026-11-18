@@ -3470,6 +3470,45 @@
                 ]
             }
         },
+        "/api/v0.5/career-assessment/results": {
+            "post": {
+                "operationId": "post_api_v0_5_career_assessment_results",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerAssessmentController@store",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\LimitApiPublicPayloadSize",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_attempt_submit"
+                ]
+            }
+        },
+        "/api/v0.5/career-assessment/results/{id}": {
+            "get": {
+                "operationId": "get_api_v0_5_career_assessment_results_id_",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerAssessmentController@show",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public"
+                ]
+            }
+        },
         "/api/v0.5/career-assessment/score": {
             "post": {
                 "operationId": "post_api_v0_5_career_assessment_score",
