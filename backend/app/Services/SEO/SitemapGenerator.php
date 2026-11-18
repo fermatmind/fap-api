@@ -272,6 +272,10 @@ class SitemapGenerator
                 $technicalNoteUrls = $this->getEnneagramTechnicalNoteUrls($baseUrl, $slug);
             }
 
+            if (in_array($slug, ['jung-archetypes', 'jung-cognitive-functions'], true)) {
+                $slug = 'jung-test';
+            }
+
             if (! array_key_exists($slug, $slugDates)) {
                 $slugDates[$slug] = $updatedAt;
 
@@ -1324,6 +1328,7 @@ class SitemapGenerator
             '/en',
             '/en/business',
             '/en/career',
+            '/en/career/assessment',
             '/en/career/guides',
             '/en/career/recommendations',
             '/en/career/tests',
@@ -1334,6 +1339,7 @@ class SitemapGenerator
             '/en/tests/category/personality',
             '/zh/business',
             '/zh/career',
+            '/zh/career/assessment',
             '/zh/career/guides',
             '/zh/career/recommendations',
             '/zh/career/tests',

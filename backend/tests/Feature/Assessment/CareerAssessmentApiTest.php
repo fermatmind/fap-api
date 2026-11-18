@@ -57,6 +57,41 @@ final class CareerAssessmentApiTest extends TestCase
         self::assertStringContainsString('no-store', $response->headers->get('Cache-Control', ''));
     }
 
+    public function test_native_holland_report_uses_career_interest_scores_and_preserves_missing_dimensions(): void
+    {
+        $form = $this->getJson(self::PATH.'/questions')->assertOk()->json();
+        $ratings = ['R' => 5, 'I' => 4, 'A' => 2, 'S' => 3, 'E' => 2, 'C' => 1];
+        $answers = [];
+        foreach ($form['items'] as $item) {
+            $answers[$item['id']] = match ($item['section']) {
+                'interest' => $ratings[$item['axis']],
+                'context' => null,
+                default => 3,
+            };
+        }
+
+        $projection = 'riasec_public_projection_v2';
+        $payload = ['form_version' => 'career_v1', 'include_report' => true, 'answers' => $answers];
+        $this->postJson(self::PATH.'/score', $payload)
+            ->assertOk()
+            ->assertJsonPath($projection.'.form.form_code', 'career_v1')
+            ->assertJsonPath($projection.'.form.question_count', 94)
+            ->assertJsonPath($projection.'.holland_code.code', 'RIS')
+            ->assertJsonPath($projection.'.scores.dimensions.0.score', 100)
+            ->assertJsonPath($projection.'.measurement_evidence.snapshot_bound', false)
+            ->assertJsonCount(6, $projection.'.scores.dimensions')
+            ->assertJsonStructure([$projection => ['deep_content_slots_v1' => ['slots' => [['content']]]]]);
+
+        $payload['locale'] = 'en';
+        $payload['answers']['career_v1_001'] = null;
+        $payload['answers']['career_v1_007'] = null;
+        $this->postJson(self::PATH.'/score', $payload)
+            ->assertOk()
+            ->assertJsonPath($projection.'.locale', 'en')
+            ->assertJsonPath($projection.'.scores.dimensions.0.score', null)
+            ->assertJsonPath($projection.'.holland_code.code', '');
+    }
+
     public function test_public_scoring_is_bound_to_the_expected_action_and_request_limits(): void
     {
         $route = app('router')->getRoutes()->match(Request::create(self::PATH.'/score', 'POST'));

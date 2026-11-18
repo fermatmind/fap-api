@@ -32,6 +32,53 @@ final class RiasecPublicProjectionService
         private readonly RiasecPrivateResultSourceRepository $privateResultSource = new RiasecPrivateResultSourceRepository,
     ) {}
 
+    public function buildForCareerAssessment(array $interestAxes, string $locale): array
+    {
+        $scores = [];
+        foreach ($interestAxes as $dimension => $axis) {
+            $scores[$dimension] = $axis['score'];
+        }
+
+        $complete = $this->hasCompleteValidDimensionScores($scores);
+        $interpretation = $this->interpretationRuleContract->build(['scores_0_100' => $scores]);
+        $code = $complete ? (string) data_get($interpretation, 'tie_display_v1.ordered_code', '') : '';
+
+        $contract = $this->measurementContract->forFormCode('riasec_60');
+        $contract['form'] = [
+            'form_code' => 'career_v1',
+            'question_count' => 94,
+            'form_kind' => 'career_assessment',
+            'score_space_version' => 'career_v1_interest_0_100',
+        ];
+        $contract['scoring']['normalization_method'] = 'mean_valid_responses_to_0_100';
+        $contract['compare_policy']['form_code'] = 'career_v1';
+        $contract['compare_policy']['score_space_version'] = 'career_v1_interest_0_100';
+        $contract['compare_policy']['compare_compatibility_group'] = '';
+        $result = new Result;
+        $result->result_json = [
+            'top_code' => $code,
+            'form_code' => 'career_v1',
+            'answer_count' => 94,
+            'scores_0_100' => $scores,
+            'measurement_contract_v1' => $contract,
+        ];
+
+        $projection = $this->buildV2FromResult($result, $locale);
+        foreach ($projection['scores']['dimensions'] as &$row) {
+            $row['score'] = $scores[$row['code']] ?? null;
+        }
+        unset($row);
+
+        // Reuse the interest-only report copy without claiming this is a stored Holland attempt.
+        $content = $projection;
+        $content['form']['form_code'] = 'riasec_60';
+        $content['_dimension_scores_complete'] = $complete;
+        $projection['deep_content_slots_v1'] = $this->deepContentSlotsEnvelope($content, $locale);
+        unset($projection['exploration_feedback_overlay_v0_1'], $projection['lifecycle_copy_v1'], $projection['report_content_v1']);
+
+        return $projection;
+    }
+
     public function buildFromResult(Result $result, string $locale = 'zh-CN'): array
     {
         $payload = is_array($result->result_json ?? null) ? $result->result_json : [];

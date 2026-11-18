@@ -300,6 +300,7 @@ class SitemapGeneratorTest extends TestCase
             'https://fermatmind.com/en',
             'https://fermatmind.com/en/business',
             'https://fermatmind.com/en/career',
+            'https://fermatmind.com/en/career/assessment',
             'https://fermatmind.com/en/career/guides',
             'https://fermatmind.com/en/career/recommendations',
             'https://fermatmind.com/en/career/tests',
@@ -310,6 +311,7 @@ class SitemapGeneratorTest extends TestCase
             'https://fermatmind.com/en/tests/category/personality',
             'https://fermatmind.com/zh/business',
             'https://fermatmind.com/zh/career',
+            'https://fermatmind.com/zh/career/assessment',
             'https://fermatmind.com/zh/career/guides',
             'https://fermatmind.com/zh/career/recommendations',
             'https://fermatmind.com/zh/career/tests',
@@ -320,6 +322,12 @@ class SitemapGeneratorTest extends TestCase
             'https://fermatmind.com/zh/tests/category/personality',
         ] as $loc) {
             $this->assertStringContainsString($loc, $xml);
+        }
+
+        foreach (['en', 'zh'] as $locale) {
+            $this->assertSame(1, substr_count($xml, "https://fermatmind.com/{$locale}/tests/jung-test</loc>"));
+            $this->assertStringNotContainsString("https://fermatmind.com/{$locale}/tests/jung-archetypes</loc>", $xml);
+            $this->assertStringNotContainsString("https://fermatmind.com/{$locale}/tests/jung-cognitive-functions</loc>", $xml);
         }
 
         $this->assertStringNotContainsString('https://fermatmind.com/en/help/about', $xml);
