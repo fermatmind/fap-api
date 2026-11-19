@@ -52,6 +52,20 @@ class CareerRefundWorkflowTest extends TestCase
         $this->assertDatabaseCount('career_refund_requests', 1);
     }
 
+    public function test_customer_view_uses_verified_refund_amount_and_prevents_repeat_application(): void
+    {
+        [$order, $token] = $this->order();
+        $url = '/api/v0.5/career-assessment/orders/'.$order.'/refund';
+        DB::table('orders')->where('order_no', $order)->update(['refund_amount_cents' => 297]);
+        $this->withToken($token)->getJson($url)->assertOk()
+            ->assertJsonPath('amount_refunded', 297)->assertJsonPath('can_request', false);
+        $this->withToken($token)->postJson($url, ['reason_code' => 'other', 'acknowledged' => true])->assertConflict();
+        DB::table('orders')->where('order_no', $order)->update(['payment_state' => 'refunded', 'status' => 'refunded']);
+        $this->withToken($token)->getJson($url)->assertOk()
+            ->assertJsonPath('payment_state', 'refunded')->assertJsonPath('amount_refunded', 297);
+        $this->assertDatabaseCount('career_refund_requests', 0);
+    }
+
     public function test_batch_requires_owner_permissions_mfa_and_exact_pending_selection(): void
     {
         Queue::fake();

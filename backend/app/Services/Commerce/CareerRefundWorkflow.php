@@ -44,11 +44,11 @@ final class CareerRefundWorkflow
         $order = $this->ownedOrder($number, $owner);
         $row = CareerRefundRequest::where('org_id', 0)->where('order_no', $number)->first();
         $state = Order::normalizePaymentState($order->payment_state, $order->status);
-        $paid = $state === 'paid' && (int) $order->amount_refunded === 0;
+        $paid = $state === 'paid' && (int) ($order->refund_amount_cents ?? 0) === 0;
 
         return [
             'order_no' => $number, 'provider' => $order->provider, 'currency' => $order->currency,
-            'amount_cents' => (int) $order->amount_cents, 'amount_refunded' => (int) $order->amount_refunded,
+            'amount_cents' => (int) $order->amount_cents, 'amount_refunded' => (int) ($order->refund_amount_cents ?? 0),
             'payment_state' => $state,
             'can_request' => $paid && (! $row || $row->status === 'withdrawn'),
             'request' => $row ? [
@@ -67,7 +67,7 @@ final class CareerRefundWorkflow
             $order = DB::table('orders')->where('org_id', 0)->where('order_no', $number)->lockForUpdate()->first();
             $this->ownedOrder($number, $owner);
             abort_unless(Order::normalizePaymentState($order->payment_state, $order->status) === 'paid'
-                && (int) $order->amount_refunded === 0, 409, 'Order is not refundable.');
+                && (int) ($order->refund_amount_cents ?? 0) === 0, 409, 'Order is not refundable.');
             $row = CareerRefundRequest::where('org_id', 0)->where('order_no', $number)->first();
             if ($row && $row->status !== 'withdrawn') {
                 return;
@@ -108,7 +108,7 @@ final class CareerRefundWorkflow
                 foreach ($rows as $row) {
                     $order = $this->ownedOrder($row->order_no, $row->owner_key);
                     abort_unless(Order::normalizePaymentState($order->payment_state, $order->status) === 'paid'
-                        && (int) $order->amount_refunded === 0 && (int) $order->amount_cents === $row->amount_cents
+                        && (int) ($order->refund_amount_cents ?? 0) === 0 && (int) $order->amount_cents === $row->amount_cents
                         && $order->currency === $row->currency && $order->provider === $row->provider, 409, 'Order changed. Refresh the selection.');
                     $approval = AdminApproval::create([
                         'org_id' => 0, 'type' => AdminApproval::TYPE_REFUND, 'status' => AdminApproval::STATUS_PENDING,
