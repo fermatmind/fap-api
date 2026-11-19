@@ -3452,6 +3452,60 @@
                 ]
             }
         },
+        "/api/v0.5/career-assessment/orders/{orderNo}/refund": {
+            "delete": {
+                "operationId": "delete_api_v0_5_career_assessment_orders_orderno_refund",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerRefundController@withdraw",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public"
+                ]
+            },
+            "get": {
+                "operationId": "get_api_v0_5_career_assessment_orders_orderno_refund",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerRefundController@show",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public"
+                ]
+            },
+            "post": {
+                "operationId": "post_api_v0_5_career_assessment_orders_orderno_refund",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerRefundController@store",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\LimitApiPublicPayloadSize"
+                ]
+            }
+        },
         "/api/v0.5/career-assessment/questions": {
             "get": {
                 "operationId": "get_api_v0_5_career_assessment_questions",
