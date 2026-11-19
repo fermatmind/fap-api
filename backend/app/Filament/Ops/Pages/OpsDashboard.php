@@ -79,6 +79,10 @@ class OpsDashboard extends Dashboard
     protected function getHeaderActions(): array
     {
         return [
+            Action::make('refundRequests')
+                ->label('退款申请'.(($count = \App\Filament\Ops\Resources\CareerRefundRequestResource::getNavigationBadge()) ? ' ('.$count.')' : ''))
+                ->visible(\App\Filament\Ops\Resources\CareerRefundRequestResource::canViewAny())
+                ->url('/ops/refund-requests'),
             Action::make('orderLookup')
                 ->label(__('ops.dashboard.actions.order_lookup'))
                 ->url('/ops/order-lookup'),

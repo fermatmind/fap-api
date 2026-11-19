@@ -223,7 +223,7 @@ final class AccountController extends Controller
     {
         $userId = $this->userId($request);
         $page = DB::table('orders')->where('org_id', 0)->where('user_id', $userId)->orderByDesc('created_at')
-            ->paginate(20, ['order_no', 'status', 'payment_state', 'grant_state', 'amount_cents', 'currency', 'target_attempt_id', 'created_at']);
+            ->paginate(20, ['order_no', 'sku', 'status', 'payment_state', 'grant_state', 'amount_cents', 'currency', 'target_attempt_id', 'created_at']);
 
         $membership = app(MembershipService::class)->status(0, $userId, null);
 

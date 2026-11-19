@@ -33,6 +33,7 @@ class RequireOpsOrgSelected
      * @var list<string>
      */
     private array $allowWithoutOrgPrefixes = [
+        'filament.ops.resources.refund-requests.',
         'filament.ops.resources.admin-users.',
         'filament.ops.resources.roles.',
         'filament.ops.resources.permissions.',

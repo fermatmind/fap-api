@@ -86,6 +86,11 @@ final readonly class HighRiskApprovalService
     ): AdminApproval {
         $this->assertFreshStepUp($actorAdminUserId, $freshStepUpCode, 'approve');
 
+        return $this->approveVerified($approvalId, $actorAdminUserId);
+    }
+
+    private function approveVerified(string $approvalId, int $actorAdminUserId): AdminApproval
+    {
         return DB::transaction(function () use ($approvalId, $actorAdminUserId): AdminApproval {
             $approval = AdminApproval::query()->whereKey($approvalId)->lockForUpdate()->first();
             if (! $approval) {
@@ -138,6 +143,11 @@ final readonly class HighRiskApprovalService
     ): AdminApproval {
         $this->assertFreshStepUp($actorAdminUserId, $freshStepUpCode, 'reject');
 
+        return $this->rejectVerified($approvalId, $actorAdminUserId, $reasonAppend);
+    }
+
+    private function rejectVerified(string $approvalId, int $actorAdminUserId, string $reasonAppend): AdminApproval
+    {
         return DB::transaction(function () use ($approvalId, $actorAdminUserId, $reasonAppend): AdminApproval {
             $approval = AdminApproval::query()->whereKey($approvalId)->lockForUpdate()->first();
             if (! $approval) {
@@ -252,6 +262,11 @@ final readonly class HighRiskApprovalService
             $retryFailed ? 'retry' : 'execute',
         );
 
+        return $this->authorizeExecutionVerified($approvalId, $actorAdminUserId, $retryFailed);
+    }
+
+    private function authorizeExecutionVerified(string $approvalId, int $actorAdminUserId, bool $retryFailed): AdminApproval
+    {
         return DB::transaction(function () use ($approvalId, $actorAdminUserId, $retryFailed): AdminApproval {
             $approval = AdminApproval::query()->whereKey($approvalId)->lockForUpdate()->first();
             if (! $approval) {
@@ -316,6 +331,33 @@ final readonly class HighRiskApprovalService
 
             return $approval;
         }, 3);
+    }
+
+    /** A single fresh step-up authorizes this exact, bounded set of refund targets. */
+    public function reviewRefundBatch(array $approvalIds, int $actorId, string $code, string $decision = 'approve', string $note = ''): void
+    {
+        if ($approvalIds === [] || count($approvalIds) > 50 || count(array_unique($approvalIds)) !== count($approvalIds)) {
+            throw new HighRiskApprovalValidationException('Select between 1 and 50 unique refunds.');
+        }
+        if (! in_array($decision, ['approve', 'reject'], true)) {
+            throw new HighRiskApprovalValidationException('Invalid refund decision.');
+        }
+        $this->assertFreshStepUp($actorId, $code, 'refund_batch');
+        DB::transaction(function () use ($approvalIds, $actorId, $decision, $note): void {
+            foreach ($approvalIds as $id) {
+                $approval = AdminApproval::query()->whereKey($id)->lockForUpdate()->first();
+                if (! $approval || $approval->type !== AdminApproval::TYPE_REFUND || (int) $approval->org_id !== 0) {
+                    throw new HighRiskApprovalValidationException('Refund target is invalid.');
+                }
+                $this->assertExecutionActorPolicy($approval, $actorId);
+                if ($decision === 'reject') {
+                    $this->rejectVerified($id, $actorId, $note);
+                } else {
+                    $this->approveVerified($id, $actorId);
+                    $this->authorizeExecutionVerified($id, $actorId, false);
+                }
+            }
+        });
     }
 
     public function executionActor(AdminApproval $approval): AdminUser

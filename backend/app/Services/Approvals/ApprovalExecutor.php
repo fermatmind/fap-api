@@ -240,13 +240,15 @@ final class ApprovalExecutor
                 (string) $approval->reason,
                 (string) $approval->correlation_id,
             ),
-            AdminApproval::TYPE_REFUND => $this->refundOrderAction->execute(
-                $actor,
-                (int) $approval->org_id,
-                (string) ($payload['order_no'] ?? ''),
-                (string) $approval->reason,
-                (string) $approval->correlation_id,
-            ),
+            AdminApproval::TYPE_REFUND => isset($payload['refund_request_id'])
+                ? app(\App\Services\Commerce\CareerRefundWorkflow::class)->queueApproved($approval)
+                : $this->refundOrderAction->execute(
+                    $actor,
+                    (int) $approval->org_id,
+                    (string) ($payload['order_no'] ?? ''),
+                    (string) $approval->reason,
+                    (string) $approval->correlation_id,
+                ),
             AdminApproval::TYPE_REPROCESS_EVENT => $this->reprocessPaymentEventAction->execute(
                 $actor,
                 (int) $approval->org_id,

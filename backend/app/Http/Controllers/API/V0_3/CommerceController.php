@@ -109,6 +109,9 @@ class CommerceController extends Controller
         $orgId = $this->orgContext->orgId();
         $userId = $this->orgContext->userId();
         $anonId = $this->resolveAnonId($request);
+        if (in_array($payload['sku'] ?? '', CareerAssessmentPurchase::SKUS, true)) {
+            $anonId = CareerAssessmentPurchase::guestAnonId($request);
+        }
         $contactEmail = $this->resolveContactEmail($payload, $userId !== null ? (string) $userId : null);
         if ($userId === null && $anonId === null && $contactEmail === null) {
             abort(422, 'email is required.');
@@ -341,7 +344,7 @@ class CommerceController extends Controller
         $order = $result['order'];
         $ownershipVerified = (bool) ($result['ownership_verified'] ?? true);
         $paymentRecoveryVerified = (bool) ($result['payment_recovery_verified'] ?? false);
-        if ($ownershipVerified && $userId !== null && (string) $userId === (string) ($order->user_id ?? '')
+        if ($ownershipVerified && ($careerOwner = CareerAssessmentPurchase::ownerKeyForOrder($request, $order)) !== null && CareerAssessmentPurchase::owns($order, $careerOwner)
             && (int) $order->org_id === 0 && in_array($order->sku ?? '', CareerAssessmentPurchase::SKUS, true)) {
             $order = $this->reconcileCareer94Order($order);
         }
@@ -366,10 +369,10 @@ class CommerceController extends Controller
             $status === 'pending' && ($request->boolean('include_payment_action') || $paymentRecoveryVerified)
         );
         $exactResultEntry = $this->mbtiAccessHubBuilder->buildExactResultEntryForOrder($order);
-        if ($ownershipVerified && $userId !== null && (string) $userId === (string) ($order->user_id ?? '')
+        if ($ownershipVerified && ($careerOwner = CareerAssessmentPurchase::ownerKeyForOrder($request, $order)) !== null && CareerAssessmentPurchase::owns($order, $careerOwner)
             && in_array($order->sku ?? '', CareerAssessmentPurchase::SKUS, true)
             && is_string($order->target_attempt_id) && $recoveryUrls['result_url'] !== null
-            && app(CareerAssessmentPurchase::class)->hasAccess($order->target_attempt_id, (string) $userId)) {
+            && app(CareerAssessmentPurchase::class)->hasAccess($order->target_attempt_id, $careerOwner)) {
             $exactResultEntry = [
                 'attempt_id' => $order->target_attempt_id,
                 'access_state' => 'ready',
@@ -593,6 +596,9 @@ class CommerceController extends Controller
         $orgId = $this->orgContext->orgId();
         $userId = $this->orgContext->userId();
         $anonId = $this->resolveAnonId($request);
+        if (in_array($payload['sku'] ?? '', CareerAssessmentPurchase::SKUS, true)) {
+            $anonId = CareerAssessmentPurchase::guestAnonId($request);
+        }
         $contactEmail = $this->resolveContactEmail($payload, $userId !== null ? (string) $userId : null);
         if ($userId === null && $anonId === null && $contactEmail === null) {
             abort(422, 'email is required.');

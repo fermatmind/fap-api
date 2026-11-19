@@ -36,9 +36,14 @@ final class CareerAssessmentController
     public function show(Request $request, string $id, CareerAssessmentPurchase $purchase): JsonResponse
     {
         $userId = $this->ownerId($request);
-        $attempt = $userId !== null ? Attempt::withoutGlobalScopes()->whereKey($id)
+        $attempt = $userId !== null ? CareerAssessmentPurchase::scopeOwner(Attempt::withoutGlobalScopes()->whereKey($id), $userId)
             ->where('org_id', 0)->where('scale_code', CareerAssessmentPurchase::SCALE)
-            ->where('user_id', $userId)->whereNotNull('submitted_at')->first() : null;
+            ->whereNotNull('submitted_at')->first() : null;
+        if (! $attempt && ($anon = CareerAssessmentPurchase::guestAnonId($request)) !== null) {
+            $userId = 'guest:'.$anon;
+            $attempt = CareerAssessmentPurchase::scopeOwner(Attempt::withoutGlobalScopes()->whereKey($id), $userId)
+                ->where('org_id', 0)->where('scale_code', CareerAssessmentPurchase::SCALE)->whereNotNull('submitted_at')->first();
+        }
         if (! $attempt) {
             return $this->respond(['error_code' => 'ASSESSMENT_NOT_FOUND'], 404);
         }
@@ -112,8 +117,8 @@ final class CareerAssessmentController
         $digest = hash('sha256', json_encode($answers, JSON_THROW_ON_ERROR));
         $attempt = Attempt::withoutGlobalScopes()->firstOrCreate(['id' => strtolower($id)], [
             'org_id' => 0,
-            'user_id' => $userId,
-            'anon_id' => (string) Str::uuid(),
+            'user_id' => str_starts_with($userId, 'guest:') ? null : $userId,
+            'anon_id' => str_starts_with($userId, 'guest:') ? substr($userId, 6) : (string) Str::uuid(),
             'scale_code' => CareerAssessmentPurchase::SCALE,
             'scale_version' => $scores['form_version'],
             'question_count' => 94,
@@ -126,7 +131,7 @@ final class CareerAssessmentController
             'submitted_at' => now(),
             'result_json' => $scores,
         ]);
-        if ((string) $attempt->user_id !== $userId || (int) $attempt->org_id !== 0
+        if (! CareerAssessmentPurchase::owns($attempt, $userId) || (int) $attempt->org_id !== 0
             || $attempt->scale_code !== CareerAssessmentPurchase::SCALE
             || $attempt->answers_digest !== $digest || $attempt->region !== $market) {
             return $this->respond(['error_code' => 'SUBMISSION_CONFLICT'], 409);
@@ -137,10 +142,7 @@ final class CareerAssessmentController
 
     private function ownerId(Request $request): ?string
     {
-        $userId = $request->attributes->get('fm_user_id');
-
-        return (int) $request->attributes->get('fm_org_id', 0) === 0 && is_string($userId) && $userId !== ''
-            ? $userId : null;
+        return CareerAssessmentPurchase::ownerKey($request);
     }
 
     private function publicResult(Attempt $attempt, CareerAssessmentPurchase $purchase, bool $unlocked): array

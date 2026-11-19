@@ -224,7 +224,7 @@ class OrderManager
             }
 
             return app(CareerAssessmentPurchase::class)->createOrder(
-                $targetAttemptId, $orgId, $normalizedUserId, $skuToLookup, $provider, $quantity, $createRow
+                $targetAttemptId, $orgId, $normalizedUserId, $skuToLookup, $provider, $quantity, $createRow, $normalizedAnonId
             );
         }
 
@@ -360,6 +360,10 @@ class OrderManager
 
         $uid = $this->trimOrNull($userId);
         $aid = $this->trimOrNull($anonId);
+        if ($orgId === 0 && in_array($order->sku ?? '', CareerAssessmentPurchase::SKUS, true)) {
+            // Public analytics IDs are not purchase credentials.
+            $aid = CareerAssessmentPurchase::guestAnonId(request());
+        }
 
         $ownedByUser = $uid !== null && $uid === $this->trimOrNull($order->user_id ?? null);
         $ownedByAnon = $aid !== null && $aid === $this->trimOrNull($order->anon_id ?? null);
@@ -1395,7 +1399,7 @@ class OrderManager
         ], true) && $toStatus === Order::STATUS_PAID) {
             return true;
         }
-        if ($fromStatus === Order::STATUS_PAID && $toStatus === Order::STATUS_FULFILLED) {
+        if ($fromStatus === Order::STATUS_PAID && in_array($toStatus, [Order::STATUS_FULFILLED, Order::STATUS_REFUNDED], true)) {
             return true;
         }
         if ($fromStatus === Order::STATUS_FULFILLED && $toStatus === Order::STATUS_REFUNDED) {

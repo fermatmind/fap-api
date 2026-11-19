@@ -49,6 +49,49 @@ final class CareerAssessmentRefund
         }
     }
 
+    public function reconcileWaffoRefund(object $order): bool
+    {
+        if ((int) $order->org_id !== 0 || $order->provider !== 'waffo'
+            || (CareerAssessmentPurchase::SKUS[$order->currency] ?? null) !== $order->sku
+            || (int) $order->amount_cents !== CareerAssessmentPurchase::PRICE) {
+            throw new RuntimeException('Invalid career refund order.');
+        }
+        $reference = 'career94-'.substr(hash('sha256', $order->order_no), 0, 32);
+        $client = app(WaffoTestClient::class);
+        $payment = $client->findPayment($order->provider_trade_no);
+        $refund = $client->findRefund($reference);
+        if (! $refund || ! in_array($refund['status'] ?? '', ['pending', 'succeeded'], true)
+            || ($refund['refundTicketMerchantExternalId'] ?? '') !== $reference
+            || ($refund['paymentId'] ?? '') !== ($payment['id'] ?? null)
+            || ($payment['orderId'] ?? '') !== $order->provider_trade_no
+            || ($payment['snapshotAmountDetails']['currency'] ?? '') !== $order->currency
+            || WaffoGateway::cents($payment['snapshotAmountDetails']['total'] ?? null) !== CareerAssessmentPurchase::PRICE
+            || ($refund['orderMerchantExternalId'] ?? '') !== $order->order_no
+            || ($refund['testMode'] ?? null) !== (config('payments.waffo.environment') === 'test')
+            || ($refund['amount']['currency'] ?? '') !== $order->currency
+            || WaffoGateway::cents($refund['amount']['amount'] ?? null) !== CareerAssessmentPurchase::PRICE) {
+            throw new RuntimeException('Waffo has not confirmed the exact refund.');
+        }
+        if ($refund['status'] === 'pending') {
+            return false;
+        }
+        $result = app(PaymentWebhookProcessor::class)->process('waffo', [
+            'mode' => config('payments.waffo.environment'), 'storeId' => config('payments.waffo.store_id'),
+            'eventId' => 'career94-refund-query-'.hash('sha256', $reference),
+            'eventType' => 'refund.succeeded', 'timestamp' => now()->toIso8601String(),
+            'data' => ['orderId' => $order->provider_trade_no, 'orderMerchantExternalId' => $order->order_no,
+                'currency' => $order->currency, 'refundStatus' => 'succeeded', 'refundedAmount' => '2.99',
+                'originalPayment' => ['total' => '2.99'],
+                'orderMetadata' => ['fap_order_no' => $order->order_no, 'fap_attempt_id' => $order->target_attempt_id,
+                    'fap_product_id' => config('payments.waffo.career94_product_id')]],
+        ]);
+        if (! ($result['ok'] ?? false)) {
+            throw new RuntimeException('Could not record the Waffo refund.');
+        }
+
+        return true;
+    }
+
     public function submit(object $order, string $reason): void
     {
         $state = Order::normalizePaymentState($order->payment_state, $order->status);

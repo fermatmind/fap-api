@@ -92,6 +92,7 @@ $app = Application::configure(basePath: dirname(__DIR__))
         $schedule->command('payments:prune-events --days=90')->dailyAt('03:00')->withoutOverlapping();
         $schedule->command('email:outbox-send --limit=50')->runInBackground()->everyMinute()->withoutOverlapping();
         $schedule->command('commerce:compensate-pending-orders --provider=alipay --include-created --only-stale --limit=10 --older-than-minutes=60')->everyTenMinutes()->withoutOverlapping();
+        $schedule->command('commerce:reconcile-career-refunds')->everyFiveMinutes()->withoutOverlapping();
         $schedule->command('commerce:repair-paid-orders --limit=50')->everyFiveMinutes()->withoutOverlapping();
         $schedule->command('commerce:repair-post-commit-failed --limit=50')->everyFiveMinutes()->withoutOverlapping();
         $schedule->command('analytics:refresh-test-metrics-daily --scheduled-current-day')->everyFifteenMinutes()->withoutOverlapping(20);

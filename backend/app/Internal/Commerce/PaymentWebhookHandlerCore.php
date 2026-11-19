@@ -1911,6 +1911,15 @@ class PaymentWebhookHandlerCore
             return $revoked;
         }
 
+        if ($orgId === 0 && in_array($order->sku ?? '', \App\Services\Commerce\CareerAssessmentPurchase::SKUS, true)
+            && \App\Support\SchemaBaseline::hasTable('career_refund_requests')) {
+            DB::table('career_refund_requests')->where('org_id', 0)->where('order_no', $orderNo)
+                ->where('status', '!=', 'succeeded')->update([
+                    'status' => 'succeeded', 'error_code' => null, 'resolved_at' => $now,
+                    'checked_at' => $now, 'updated_at' => $now,
+                ]);
+        }
+
         return [
             'ok' => true,
             'order_no' => $orderNo,

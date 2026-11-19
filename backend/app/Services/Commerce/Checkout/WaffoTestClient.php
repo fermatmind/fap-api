@@ -59,6 +59,20 @@ final class WaffoTestClient
         ], ($amount === '1.99' ? 'mbti-refund-' : 'career94-refund-').hash('sha256', $reference));
     }
 
+    public function findRefund(string $reference): ?array
+    {
+        $data = $this->post('/v1/graphql', [
+            'query' => 'query($ref: String!) { refunds(filter: { refundTicketMerchantExternalId: { eq: $ref } }, limit: 2) { id paymentId status amount { amount currency } testMode orderMerchantExternalId refundTicketMerchantExternalId } }',
+            'variables' => ['ref' => $reference],
+        ]);
+        $rows = $data['refunds'] ?? null;
+        if (! is_array($rows) || count($rows) > 1) {
+            throw new RuntimeException('Waffo refund query is ambiguous.');
+        }
+
+        return $rows[0] ?? null;
+    }
+
     private function post(string $path, array $payload, ?string $idempotencyKey = null): array
     {
         if (! app(PaymentProviderRegistry::class)->isEnabled('waffo')) {

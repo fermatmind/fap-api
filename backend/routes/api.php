@@ -630,6 +630,13 @@ Route::prefix('v0.5')->group(function () {
     Route::get('/career-assessment/results/{id}', [CareerAssessmentController::class, 'show'])
         ->whereUuid('id')->middleware([\App\Http\Middleware\FmTokenAuth::class, 'throttle:api_public']);
 
+    Route::middleware([\App\Http\Middleware\FmTokenAuth::class, 'throttle:api_public'])->group(function () {
+        Route::get('/career-assessment/orders/{orderNo}/refund', [\App\Http\Controllers\API\V0_5\Career\CareerRefundController::class, 'show']);
+        Route::post('/career-assessment/orders/{orderNo}/refund', [\App\Http\Controllers\API\V0_5\Career\CareerRefundController::class, 'store'])
+            ->middleware(\App\Http\Middleware\LimitApiPublicPayloadSize::class);
+        Route::delete('/career-assessment/orders/{orderNo}/refund', [\App\Http\Controllers\API\V0_5\Career\CareerRefundController::class, 'withdraw']);
+    });
+
     Route::post('/career/attribution/events', [CareerAttributionEventController::class, 'store'])
         ->middleware('throttle:api_track');
     Route::middleware([PublicApiCacheHeaders::class, RecordPublicContentRuntime::class])->group(function () {

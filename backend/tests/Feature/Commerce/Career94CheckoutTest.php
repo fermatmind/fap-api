@@ -26,6 +26,13 @@ final class Career94CheckoutTest extends TestCase
 
     private string $keyFile;
 
+    private array $guestKeys = [];
+
+    public function withToken($value, $type = 'Bearer')
+    {
+        return parent::withToken($value, $type)->withHeader('X-Career-Guest-Token', $this->guestKeys[$value] ?? '');
+    }
+
     protected function tearDown(): void
     {
         if (isset($this->keyFile)) {
@@ -39,13 +46,15 @@ final class Career94CheckoutTest extends TestCase
         return [
             'WeChat' => ['CN_MAINLAND', 'CNY', ['wechat']],
             'international' => ['INTERNATIONAL', 'USD', ['card', 'applepay', 'googlepay']],
+            'guest WeChat' => ['CN_MAINLAND', 'CNY', ['wechat'], true],
+            'guest international' => ['INTERNATIONAL', 'USD', ['card', 'applepay', 'googlepay'], true],
         ];
     }
 
     #[DataProvider('markets')]
-    public function test_order_and_signed_refund_are_bound_to_the_saved_result(string $market, string $currency, array $methods): void
+    public function test_order_and_signed_refund_are_bound_to_the_saved_result(string $market, string $currency, array $methods, bool $guest = false): void
     {
-        $owner = $this->token();
+        $owner = $this->token($guest);
         $other = $this->token();
         $key = $this->configureWaffo();
         $payload = $this->submission($market);
@@ -74,7 +83,7 @@ final class Career94CheckoutTest extends TestCase
             && $request['includePaymentMethods'] === $methods
             && $request['priceSnapshot']['amount'] === '2.99'
             && $request['metadata']['fap_attempt_id'] === $id
-            && filter_var($request['buyerEmail'], FILTER_VALIDATE_EMAIL)
+            && ($guest ? ! isset($request['buyerEmail']) : filter_var($request['buyerEmail'] ?? '', FILTER_VALIDATE_EMAIL))
             && ($currency !== 'CNY' || $request['billingDetail']['country'] === 'CN'));
         $this->assertDatabaseCount('orders', 1);
         $this->withToken($owner)->getJson(self::PATH.'/results/'.$id)->assertJsonPath('unlocked', false)->assertJsonMissingPath('premium');
@@ -364,11 +373,88 @@ final class Career94CheckoutTest extends TestCase
         $this->assertSame([], $gateway->normalizePayload($event));
     }
 
-    private function token(): string
+    public function test_guest_can_pay_read_and_request_refund_without_creating_an_account(): void
+    {
+        config(['payments.career94.enabled' => true, 'payments.providers.alipay.enabled' => true,
+            'pay.alipay.default.app_id' => 'app_fixture', 'pay.alipay.default.seller_id' => 'seller_fixture']);
+        $users = DB::table('users')->count();
+        $guest = $this->token(true);
+        $other = $this->token(true);
+        $id = $this->withToken($guest)->postJson(self::PATH.'/results', $this->submission('CN_MAINLAND'))
+            ->assertOk()->json('attempt_id');
+        $this->withToken($other)->getJson(self::PATH.'/results/'.$id)->assertNotFound();
+        $originalAnon = DB::table('auth_tokens')->where('token_hash', hash('sha256', $guest))->value('anon_id');
+        DB::table('auth_tokens')->where('token_hash', hash('sha256', $other))->update(['anon_id' => $originalAnon]);
+        $this->withToken($other)->getJson(self::PATH.'/results/'.$id)->assertNotFound();
+        $payload = ['attempt_id' => $id, 'provider' => 'alipay', 'sku' => CareerAssessmentPurchase::SKUS['CNY']];
+        $this->withToken($other)->postJson('/api/v0.3/orders/checkout', $payload)->assertNotFound();
+        $number = $this->withToken($guest)->postJson('/api/v0.3/orders/checkout', $payload)->assertOk()->json('order_no');
+        $this->assertDatabaseHas('orders', ['order_no' => $number, 'user_id' => null]);
+        $this->assertTrue(app(PaymentWebhookProcessor::class)->process('alipay', [
+            'out_trade_no' => $number, 'trade_no' => 'guest_trade', 'trade_status' => 'TRADE_SUCCESS',
+            'total_amount' => '2.99', 'notify_id' => 'guest_paid',
+        ])['ok']);
+        $this->withToken($guest)->getJson(self::PATH.'/results/'.$id)->assertOk()->assertJsonPath('unlocked', true)->assertJsonCount(6, 'premium.dimensions');
+        $this->withToken($guest)->getJson('/api/v0.3/orders/'.$number)->assertOk()
+            ->assertJsonPath('exact_result_entry.access_state', 'ready');
+        $url = self::PATH.'/orders/'.$number.'/refund';
+        $this->withToken($other)->postJson($url, ['reason_code' => 'other', 'acknowledged' => true])->assertNotFound();
+        $this->withToken($guest)->postJson($url, ['reason_code' => 'other', 'acknowledged' => true])->assertOk()->assertJsonPath('request.status', 'pending');
+        $renewed = $this->token(true);
+        $this->guestKeys[$renewed] = $this->guestKeys[$guest];
+        $this->withToken($renewed)->getJson(self::PATH.'/results/'.$id)->assertOk()->assertJsonPath('unlocked', true);
+        $this->assertSame($users, DB::table('users')->count());
+    }
+
+    public function test_verified_waffo_query_recovers_a_missing_refund_callback_and_keeps_pending_access(): void
+    {
+        $owner = $this->token(true);
+        $key = $this->configureWaffo();
+        $id = $this->withToken($owner)->postJson(self::PATH.'/results', $this->submission('CN_MAINLAND'))->assertOk()->json('attempt_id');
+        $number = $this->withToken($owner)->postJson('/api/v0.3/orders/checkout', [
+            'attempt_id' => $id, 'provider' => 'waffo', 'sku' => CareerAssessmentPurchase::SKUS['CNY'],
+        ])->assertOk()->json('order_no');
+        $this->deliver(['eventType' => 'order.completed', 'eventId' => 'paid-before-query', 'mode' => 'test',
+            'storeId' => 'STO_fixture', 'timestamp' => now()->toIso8601String(), 'data' => [
+                'orderId' => 'ORD_query', 'orderStatus' => 'completed', 'paymentStatus' => 'succeeded', 'currency' => 'CNY',
+                'chargedAmount' => '2.99', 'orderMerchantExternalId' => $number,
+                'orderMetadata' => ['fap_order_no' => $number, 'fap_attempt_id' => $id, 'fap_product_id' => 'PROD_career94'],
+            ]], $key)->assertOk();
+        $this->withToken($owner)->postJson(self::PATH.'/orders/'.$number.'/refund', ['reason_code' => 'other', 'acknowledged' => true])->assertOk();
+        foreach ([['succeeded', '2.97'], ['pending', '2.99'], ['succeeded', '2.99']] as [$state, $amount]) {
+            Http::swap(new \Illuminate\Http\Client\Factory);
+            Http::preventStrayRequests();
+            Http::fake(['https://api.waffo.ai/v1/graphql' => function ($request) use ($number, $state, $amount) {
+                return Http::response(['data' => str_contains($request['query'], 'refunds(') ? ['refunds' => [[
+                    'id' => 'refund_query', 'paymentId' => 'pay_query', 'status' => $state,
+                    'amount' => ['amount' => $amount, 'currency' => 'CNY'], 'testMode' => true,
+                    'orderMerchantExternalId' => $number,
+                    'refundTicketMerchantExternalId' => 'career94-'.substr(hash('sha256', $number), 0, 32),
+                ]]] : ['payments' => [['id' => 'pay_query', 'orderId' => 'ORD_query', 'status' => 'succeeded',
+                    'refundStatus' => 'none', 'snapshotAmountDetails' => ['total' => '2.99', 'currency' => 'CNY']]]]]);
+            }]);
+            $order = DB::table('orders')->where('order_no', $number)->first();
+            try {
+                $confirmed = app(\App\Services\Commerce\CareerAssessmentRefund::class)->reconcileWaffoRefund($order);
+                $this->assertSame($state === 'succeeded', $confirmed);
+            } catch (\RuntimeException $error) {
+                $this->assertSame('2.97', $amount, $error->getMessage());
+            }
+            $this->withToken($owner)->getJson(self::PATH.'/results/'.$id)
+                ->assertJsonPath('unlocked', ! ($state === 'succeeded' && $amount === '2.99'));
+        }
+        $this->assertDatabaseHas('career_refund_requests', ['order_no' => $number, 'status' => 'succeeded']);
+        Http::assertNotSent(fn ($request) => str_contains($request->url(), '/refund-ticket/'));
+    }
+
+    private function token(bool $guest = false): string
     {
         $token = 'fm_'.Str::uuid();
+        if ($guest) {
+            $this->guestKeys[$token] = bin2hex(random_bytes(32));
+        }
         DB::table('auth_tokens')->insert([
-            'anon_id' => (string) Str::uuid(), 'token_hash' => hash('sha256', $token), 'user_id' => User::factory()->create()->getKey(),
+            'anon_id' => (string) Str::uuid(), 'token_hash' => hash('sha256', $token), 'user_id' => $guest ? null : User::factory()->create()->getKey(),
             'org_id' => 0, 'role' => 'public', 'expires_at' => now()->addDay(),
             'created_at' => now(), 'updated_at' => now(),
         ]);

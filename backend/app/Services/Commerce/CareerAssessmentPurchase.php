@@ -7,6 +7,7 @@ namespace App\Services\Commerce;
 use App\Models\Attempt;
 use App\Models\Order;
 use App\Services\Payments\PaymentProviderRegistry;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 final class CareerAssessmentPurchase
@@ -19,15 +20,65 @@ final class CareerAssessmentPurchase
 
     public const SKUS = ['CNY' => 'CAREER94_REPORT_CNY_299', 'USD' => 'CAREER94_REPORT_USD_299'];
 
+    public static function ownerKey(Request $request): ?string
+    {
+        if ((int) $request->attributes->get('fm_org_id', 0) !== 0) {
+            return null;
+        }
+        $user = $request->attributes->get('fm_user_id');
+        if (is_string($user) && $user !== '') {
+            return $user;
+        }
+        $anon = self::guestAnonId($request);
+
+        return $anon !== null ? 'guest:'.$anon : null;
+    }
+
+    public static function guestAnonId(Request $request): ?string
+    {
+        $key = (string) $request->header('X-Career-Guest-Token', '');
+
+        return preg_match('/^[a-f0-9]{64}$/D', $key) === 1 ? 'c94_'.substr(hash('sha256', $key), 0, 48) : null;
+    }
+
+    public static function ownerKeyForOrder(Request $request, object $order): ?string
+    {
+        $anon = self::guestAnonId($request);
+
+        return $order->user_id === null && $anon !== null ? 'guest:'.$anon : self::ownerKey($request);
+    }
+
+    public static function scopeOwner($query, string $owner, string $userColumn = 'user_id', string $anonColumn = 'anon_id')
+    {
+        return str_starts_with($owner, 'guest:')
+            ? $query->whereNull($userColumn)->where($anonColumn, substr($owner, 6))
+            : $query->where($userColumn, $owner);
+    }
+
+    public static function owns(object $record, string $owner): bool
+    {
+        return str_starts_with($owner, 'guest:')
+            ? $record->user_id === null && (string) $record->anon_id === substr($owner, 6)
+            : (string) $record->user_id === $owner;
+    }
+
     public function hasAccess(string $attemptId, string $userId): bool
     {
-        return DB::table('benefit_grants as grants')->join('orders', 'orders.order_no', '=', 'grants.order_no')
-            ->where('grants.org_id', 0)->where('grants.attempt_id', $attemptId)->where('grants.user_id', $userId)
-            ->where('grants.benefit_code', CareerAssessmentPurchase::BENEFIT)->where('grants.scope', 'attempt')
+        $query = DB::table('benefit_grants as grants')->join('orders', 'orders.order_no', '=', 'grants.order_no')
+            ->where('grants.org_id', 0)->where('grants.attempt_id', $attemptId)
+            ->where('grants.benefit_code', self::BENEFIT)->where('grants.scope', 'attempt')
             ->where('grants.status', 'active')
             ->where(fn ($query) => $query->whereNull('grants.expires_at')->orWhere('grants.expires_at', '>', now()))
-            ->where('orders.org_id', 0)->where('orders.target_attempt_id', $attemptId)->where('orders.user_id', $userId)
-            ->whereIn('orders.sku', CareerAssessmentPurchase::SKUS)->where('orders.payment_state', 'paid')->exists();
+            ->where('orders.org_id', 0)->where('orders.target_attempt_id', $attemptId)
+            ->whereIn('orders.sku', self::SKUS)->where('orders.payment_state', 'paid');
+        self::scopeOwner($query, $userId, 'orders.user_id', 'orders.anon_id');
+        if (str_starts_with($userId, 'guest:')) {
+            $query->where('grants.user_id', substr($userId, 6))->where('grants.benefit_ref', substr($userId, 6));
+        } else {
+            $query->where('grants.user_id', $userId);
+        }
+
+        return $query->exists();
     }
 
     public function offers(string $market): array
@@ -61,13 +112,15 @@ final class CareerAssessmentPurchase
             ->whereIn('sku', array_values(self::SKUS))->orderByDesc('created_at')->orderByDesc('id')->first();
     }
 
-    public function createOrder(?string $attemptId, int $orgId, ?string $userId, string $sku, string $provider, int $quantity, callable $createRow): array
+    public function createOrder(?string $attemptId, int $orgId, ?string $userId, string $sku, string $provider, int $quantity, callable $createRow, ?string $anonId = null): array
     {
-        return DB::transaction(function () use ($attemptId, $orgId, $userId, $sku, $provider, $quantity, $createRow) {
-            $attempt = $userId !== null && $orgId === 0
-                ? Attempt::withoutGlobalScopes()->whereKey($attemptId)->where('org_id', 0)
-                    ->where('user_id', $userId)->where('scale_code', self::SCALE)->whereNotNull('submitted_at')
-                    ->lockForUpdate()->first()
+        $anonId = $userId === null ? self::guestAnonId(request()) : $anonId;
+
+        return DB::transaction(function () use ($attemptId, $orgId, $userId, $sku, $provider, $quantity, $createRow, $anonId) {
+            $owner = $userId ?? ($anonId ? 'guest:'.$anonId : null);
+            $attempt = $owner !== null && $orgId === 0
+                ? self::scopeOwner(Attempt::withoutGlobalScopes()->whereKey($attemptId)->where('org_id', 0), $owner)
+                    ->where('scale_code', self::SCALE)->whereNotNull('submitted_at')->lockForUpdate()->first()
                 : null;
             if (! $attempt || $attempt->question_count !== 94 || $attempt->scale_version !== 'career_v1') {
                 return ['ok' => false, 'error_code' => 'ATTEMPT_NOT_FOUND', 'message' => 'Career assessment result not found.'];
@@ -84,7 +137,7 @@ final class CareerAssessmentPurchase
                 $state = Order::normalizePaymentState($existing->payment_state, $existing->status);
                 if (in_array($state, ['created', 'pending'], true)
                     && $existing->provider === $provider && $existing->sku === $sku
-                    && (string) $existing->user_id === $userId) {
+                    && self::owns($existing, $owner)) {
                     return ['ok' => true, 'order_no' => $existing->order_no, 'order' => $existing, 'idempotent' => true];
                 }
                 // A timeout or local failure is not proof that the provider stopped collecting this order.
@@ -95,7 +148,7 @@ final class CareerAssessmentPurchase
 
             $row = $createRow();
             unset($row['idempotency_key']);
-            $row['anon_id'] = null;
+            $row['anon_id'] = $userId !== null ? null : $anonId;
             DB::table('orders')->insert($row);
 
             return [
