@@ -736,6 +736,8 @@ final class ScaleRegistrySeeder extends Seeder
             'is_active' => true,
         ]);
 
+        $this->call(JungAssessmentIndexabilitySeeder::class);
+
         $writer->syncSlugsForScale($eq60);
         $this->command?->info('ScaleRegistrySeeder: EQ_60 scale upserted.');
     }

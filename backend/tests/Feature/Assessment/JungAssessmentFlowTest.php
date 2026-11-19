@@ -15,6 +15,38 @@ final class JungAssessmentFlowTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->seed(\Database\Seeders\JungAssessmentIndexabilitySeeder::class);
+    }
+
+    public function test_indexability_publication_is_idempotent_and_rolls_back_on_identity_drift(): void
+    {
+        $this->seed(\Database\Seeders\JungAssessmentIndexabilitySeeder::class);
+        foreach (['scales_registry', 'scales_registry_v2'] as $table) {
+            \Illuminate\Support\Facades\DB::table($table)->where('org_id', 0)
+                ->whereIn('code', [JungBank::ARCHETYPES, JungBank::FUNCTIONS])
+                ->update(['is_indexable' => false]);
+        }
+        \Illuminate\Support\Facades\DB::table('scales_registry_v2')
+            ->where('org_id', 0)->where('code', JungBank::FUNCTIONS)
+            ->update(['primary_slug' => 'unexpected-identity']);
+
+        try {
+            $this->seed(\Database\Seeders\JungAssessmentIndexabilitySeeder::class);
+            self::fail('Identity drift must reject the complete publication.');
+        } catch (\RuntimeException $error) {
+            self::assertSame('Expected published Jung assessment identity is unavailable.', $error->getMessage());
+        }
+
+        foreach (['scales_registry', 'scales_registry_v2'] as $table) {
+            self::assertSame(0, \Illuminate\Support\Facades\DB::table($table)
+                ->where('org_id', 0)->whereIn('code', [JungBank::ARCHETYPES, JungBank::FUNCTIONS])
+                ->where('is_indexable', true)->count());
+        }
+    }
+
     public static function scales(): iterable
     {
         yield [JungBank::ARCHETYPES, 'zh-CN', 48, 'hero'];
