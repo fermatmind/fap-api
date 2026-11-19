@@ -48,6 +48,7 @@ class AlipayCheckoutService
             'total_amount' => $totalAmount,
             'subject' => (string) ($order['sku'] ?? 'FermatMind Order'),
             'notify_url' => $notifyUrl,
+            ...(($order['redirect_checkout'] ?? false) === true ? ['_method' => 'GET'] : []),
         ];
         if ($returnUrl !== '') {
             $payload['return_url'] = $returnUrl;

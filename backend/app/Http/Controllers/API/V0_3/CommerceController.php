@@ -26,6 +26,7 @@ use App\Support\OrgContext;
 use App\Support\RegionContext;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -340,6 +341,10 @@ class CommerceController extends Controller
         $order = $result['order'];
         $ownershipVerified = (bool) ($result['ownership_verified'] ?? true);
         $paymentRecoveryVerified = (bool) ($result['payment_recovery_verified'] ?? false);
+        if ($ownershipVerified && $userId !== null && (string) $userId === (string) ($order->user_id ?? '')
+            && (int) $order->org_id === 0 && in_array($order->sku ?? '', CareerAssessmentPurchase::SKUS, true)) {
+            $order = $this->reconcileCareer94Order($order);
+        }
         $status = $this->resolvePublicOrderStatus($order);
         $message = $this->publicOrderMessage($order);
         $delivery = $this->buildOrderDelivery($order);
@@ -1035,6 +1040,10 @@ class CommerceController extends Controller
             $this->resolveRequestedLocale($request)
         );
         $launchOrder = (array) $order;
+        $careerRedirect = $request->expectsJson() && in_array($order->sku ?? '', CareerAssessmentPurchase::SKUS, true);
+        if ($careerRedirect) {
+            $launchOrder['redirect_checkout'] = true;
+        }
         $enrichedReturnUrl = $this->buildAlipayReturnUrl(
             $order,
             $recoveryUrls
@@ -1047,6 +1056,18 @@ class CommerceController extends Controller
             $launch = $this->alipayCheckout->launch($launchOrder, $scene);
             $response = $this->toHttpResponse($launch);
             if ($response instanceof Response) {
+                if ($careerRedirect) {
+                    $url = $response->headers->get('Location');
+                    $parts = is_string($url) ? parse_url($url) : false;
+                    if (! is_array($parts) || ($parts['scheme'] ?? '') !== 'https'
+                        || ($parts['host'] ?? '') !== 'openapi.alipay.com' || ($parts['path'] ?? '') !== '/gateway.do'
+                        || isset($parts['user']) || isset($parts['pass']) || isset($parts['port'])) {
+                        abort(502, 'payment redirect unavailable.');
+                    }
+
+                    return response()->json(['ok' => true, 'redirect_url' => $url]);
+                }
+
                 return $response;
             }
         } catch (\Throwable $e) {
@@ -2408,6 +2429,34 @@ class CommerceController extends Controller
         }
 
         return null;
+    }
+
+    private function reconcileCareer94Order(object $order): object
+    {
+        if (($order->provider ?? '') !== 'waffo'
+            || ! in_array($this->orders->resolvedPaymentState($order), ['created', 'pending', 'paid'], true)
+            || $this->orders->resolvedGrantState($order) === Order::GRANT_STATE_GRANTED) {
+            return $order;
+        }
+
+        $key = 'career94:payment-sync:'.hash('sha256', (string) $order->order_no);
+        try {
+            Cache::lock($key.':lock', 60)->get(function () use ($key, $order): void {
+                if (! Cache::add($key, true, 5)) {
+                    return;
+                }
+                // Reuse provider verification and idempotent paid-order fulfillment.
+                // A browser return or refresh alone never proves payment.
+                $this->pendingOrderCompensation->compensate([
+                    'order' => $order->order_no, 'provider' => $order->provider,
+                    'limit' => 1, 'include_created' => true,
+                ]);
+            });
+        } catch (\Throwable) {
+            Log::warning('CAREER94_PAYMENT_SYNC_UNAVAILABLE');
+        }
+
+        return $this->orders->findOrderByOrderNo((string) $order->order_no, 0) ?? $order;
     }
 
     /**

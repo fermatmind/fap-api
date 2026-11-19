@@ -49,6 +49,8 @@ final class Career94CheckoutTest extends TestCase
         $other = $this->token();
         $key = $this->configureWaffo();
         $payload = $this->submission($market);
+        $this->postJson(self::PATH.'/score', $payload + ['include_report' => true])->assertOk()
+            ->assertJsonPath('purchase_offers.0.amount_cents', 299);
 
         $id = $this->withToken($owner)->postJson(self::PATH.'/results', $payload)
             ->assertOk()->assertJsonPath('unlocked', false)
@@ -71,13 +73,15 @@ final class Career94CheckoutTest extends TestCase
             && $request['currency'] === $currency
             && $request['includePaymentMethods'] === $methods
             && $request['priceSnapshot']['amount'] === '2.99'
-            && $request['metadata']['fap_attempt_id'] === $id);
+            && $request['metadata']['fap_attempt_id'] === $id
+            && filter_var($request['buyerEmail'], FILTER_VALIDATE_EMAIL)
+            && ($currency !== 'CNY' || $request['billingDetail']['country'] === 'CN'));
         $this->assertDatabaseCount('orders', 1);
         $this->withToken($owner)->getJson(self::PATH.'/results/'.$id)->assertJsonPath('unlocked', false)->assertJsonMissingPath('premium');
 
         $event = [
             'eventType' => 'order.completed', 'eventId' => 'evt_career94', 'mode' => 'test',
-            'storeId' => 'STO_fixture', 'timestamp' => now()->toIso8601String(),
+            'storeId' => 'STO_fixture', 'timestamp' => now()->format('Y-m-d\TH:i:s.v\Z'),
             'data' => [
                 'orderId' => 'ORD_fixture', 'orderStatus' => 'completed',
                 'paymentStatus' => 'succeeded', 'currency' => $currency, 'chargedAmount' => '2.99',
@@ -91,6 +95,9 @@ final class Career94CheckoutTest extends TestCase
         $this->deliver($wrongAttempt, $key)->assertJsonPath('ok', false);
         $this->deliver($event, $key)->assertOk()->assertJsonPath('ok', true);
         $this->deliver($event, $key)->assertOk()->assertJsonPath('ok', true);
+        $this->assertDatabaseHas('payment_attempts', [
+            'order_no' => $order, 'callback_received_at' => \Illuminate\Support\Carbon::parse($event['timestamp'])->toDateTimeString(),
+        ]);
         $this->withToken($owner)->getJson(self::PATH.'/results/'.$id)->assertJsonPath('unlocked', true)->assertJsonCount(6, 'premium.dimensions');
         $this->assertDatabaseCount('benefit_grants', 1);
 
@@ -119,6 +126,16 @@ final class Career94CheckoutTest extends TestCase
             'attempt_id' => $id, 'provider' => 'alipay', 'sku' => CareerAssessmentPurchase::SKUS['CNY'],
         ])->assertOk()->assertJsonPath('provider', 'alipay')->assertJsonPath('pay.type', 'html')->json('order_no');
 
+        $launch = \Mockery::mock(AlipayCheckoutService::class);
+        $launch->shouldReceive('launch')->twice()->withArgs(fn ($order, $scene) => ($order['redirect_checkout'] ?? false) === true)
+            ->andReturn(new \Symfony\Component\HttpFoundation\Response('', 302, ['Location' => 'https://openapi.alipay.com/gateway.do?sign=fixture']),
+                new \Symfony\Component\HttpFoundation\Response('', 302, ['Location' => 'https://untrusted.example/checkout']));
+        $this->app->instance(AlipayCheckoutService::class, $launch);
+        $this->withToken($this->token())->getJson('/api/v0.3/orders/'.$order.'/pay/alipay')->assertNotFound();
+        $this->withToken($owner)->getJson('/api/v0.3/orders/'.$order.'/pay/alipay')->assertOk()
+            ->assertJsonPath('redirect_url', 'https://openapi.alipay.com/gateway.do?sign=fixture');
+        $this->withToken($owner)->getJson('/api/v0.3/orders/'.$order.'/pay/alipay')->assertStatus(502);
+
         $processor = app(PaymentWebhookProcessor::class);
         $payment = [
             'out_trade_no' => $order, 'trade_no' => 'ali_trade_fixture',
@@ -143,6 +160,55 @@ final class Career94CheckoutTest extends TestCase
         $this->withToken($owner)->getJson(self::PATH.'/results/'.$id)
             ->assertJsonPath('unlocked', false)->assertJsonMissingPath('premium');
         $this->assertDatabaseHas('orders', ['order_no' => $order, 'payment_state' => 'refunded']);
+    }
+
+    public static function paymentRecoveryStates(): array
+    {
+        return [
+            'paid CNY' => ['CN_MAINLAND', 'CNY', 'completed', '2.99', 'none', true],
+            'paid USD' => ['INTERNATIONAL', 'USD', 'completed', '2.99', 'none', true],
+            'unpaid' => ['CN_MAINLAND', 'CNY', 'pending', '2.99', 'none', false],
+            'wrong amount' => ['CN_MAINLAND', 'CNY', 'completed', '0.01', 'none', false],
+            'refunded' => ['CN_MAINLAND', 'CNY', 'completed', '2.99', 'full', false],
+        ];
+    }
+
+    #[DataProvider('paymentRecoveryStates')]
+    public function test_order_poll_recovers_verified_payment_without_a_webhook(string $market, string $currency, string $state, string $amount, string $refund, bool $ready): void
+    {
+        $owner = $this->token();
+        $other = $this->token();
+        $this->configureWaffo();
+        $id = $this->withToken($owner)->postJson(self::PATH.'/results', $this->submission($market))->json('attempt_id');
+        $order = $this->withToken($owner)->postJson('/api/v0.3/orders/checkout', [
+            'attempt_id' => $id, 'sku' => CareerAssessmentPurchase::SKUS[$currency], 'provider' => 'waffo',
+        ])->assertOk()->json('order_no');
+        Http::swap(new \Illuminate\Http\Client\Factory);
+        Http::preventStrayRequests();
+        Http::fake(['https://api.waffo.ai/v1/graphql' => function ($request) use ($id, $order, $currency, $state, $amount, $refund) {
+            return Http::response(['data' => str_contains($request['query'], 'onetimeOrders') ? ['onetimeOrders' => [[
+                'id' => 'ORD_recovery', 'status' => $state, 'orderMerchantExternalId' => $order,
+                'currency' => $currency, 'priceSnapshot' => ['total' => '2.99', 'currency' => $currency],
+                'metadata' => json_encode(['fap_order_no' => $order, 'fap_attempt_id' => $id, 'fap_product_id' => 'PROD_career94']),
+            ]]] : ['payments' => [[
+                'id' => 'PMT_recovery', 'orderId' => 'ORD_recovery', 'status' => 'succeeded', 'refundStatus' => $refund,
+                'snapshotAmountDetails' => ['total' => $amount, 'currency' => $currency],
+            ]]]]);
+        }]);
+        $this->withToken($other)->getJson('/api/v0.3/orders/'.$order)->assertNotFound();
+        Http::assertNothingSent();
+        $response = $this->withToken($owner)->getJson('/api/v0.3/orders/'.$order)->assertOk()
+            ->assertJsonPath('result_url', 'https://fermatmind.com/en/career/assessment/result/'.$id)
+            ->assertJsonPath('status', $ready ? 'paid' : 'pending');
+        if ($ready) {
+            $response->assertJsonPath('exact_result_entry.access_state', 'ready')
+                ->assertJsonPath('exact_result_entry.actions.page_href', 'https://fermatmind.com/en/career/assessment/result/'.$id);
+        }
+        $this->withToken($owner)->getJson('/api/v0.3/orders/'.$order)->assertOk();
+        $this->withToken($owner)->getJson(self::PATH.'/results/'.$id)->assertJsonPath('unlocked', $ready);
+        $this->assertDatabaseCount('orders', 1);
+        $this->assertDatabaseCount('benefit_grants', $ready ? 1 : 0);
+        Http::assertSentCount($state === 'completed' ? 2 : 1);
     }
 
     private function token(): string

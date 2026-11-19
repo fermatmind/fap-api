@@ -85,6 +85,10 @@ final class CareerAssessmentController
                     ['CN_MAINLAND', 'INTERNATIONAL'],
                     static fn (string $market): bool => $purchase->offers($market) !== []
                 ));
+                $scores['purchase_offers'] = array_merge(...array_map(
+                    static fn (string $market): array => $purchase->offers($market),
+                    $scores['purchase_markets']
+                ));
             }
         }
 

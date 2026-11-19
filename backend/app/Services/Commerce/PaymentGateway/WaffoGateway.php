@@ -7,6 +7,7 @@ namespace App\Services\Commerce\PaymentGateway;
 use App\Services\Commerce\CareerAssessmentPurchase;
 use App\Services\Payments\PaymentProviderRegistry;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 final class WaffoGateway implements PaymentGatewayInterface
@@ -83,11 +84,21 @@ final class WaffoGateway implements PaymentGatewayInterface
             return [];
         }
 
+        try {
+            if (! is_string($payload['timestamp'] ?? null) || trim($payload['timestamp']) === '') {
+                return [];
+            }
+            // MySQL DATETIME rejects Waffo's RFC3339 timestamp with milliseconds.
+            $paidAt = Carbon::parse($payload['timestamp'])->utc()->toDateTimeString();
+        } catch (\Throwable) {
+            return [];
+        }
+
         return [
             'provider_event_id' => $event.':'.$payload['eventId'],
             'order_no' => (string) $data['orderMerchantExternalId'],
             'external_trade_no' => $data['orderId'] ?? null,
-            'paid_at' => $payload['timestamp'] ?? null,
+            'paid_at' => $paidAt,
             'amount_cents' => $amount,
             'currency' => $currency,
             'event_type' => $event,

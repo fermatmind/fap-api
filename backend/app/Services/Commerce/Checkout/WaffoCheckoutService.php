@@ -42,6 +42,9 @@ final class WaffoCheckoutService
             if ($client->findOrder($orderNo) !== null) {
                 return $this->unavailable();
             }
+            $buyerEmail = $career && (int) $order->org_id === 0 && $order->user_id === $attempt->user_id
+                ? DB::table('users')->where('id', $order->user_id)->whereNotNull('email_verified_at')->value('email')
+                : null;
             $data = $client->createSession([
                 'productId' => $productId,
                 'currency' => $currency,
@@ -52,6 +55,8 @@ final class WaffoCheckoutService
                 'language' => $language,
                 'expiresInSeconds' => 1800,
                 'allowPromotionCodes' => false,
+                ...(is_string($buyerEmail) && filter_var($buyerEmail, FILTER_VALIDATE_EMAIL) ? ['buyerEmail' => $buyerEmail] : []),
+                ...($career && $attempt->region === 'CN_MAINLAND' ? ['billingDetail' => ['country' => 'CN', 'isBusiness' => false]] : []),
                 ...($career ? ['includePaymentMethods' => $currency === 'CNY'
                     ? ['wechat'] : ['card', 'applepay', 'googlepay']] : []),
             ], ($career ? 'career94-checkout-' : 'mbti-checkout-').hash('sha256', $orderNo));
