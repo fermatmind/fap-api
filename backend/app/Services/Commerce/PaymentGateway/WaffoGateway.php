@@ -85,7 +85,8 @@ final class WaffoGateway implements PaymentGatewayInterface
         }
 
         try {
-            if (! is_string($payload['timestamp'] ?? null) || trim($payload['timestamp']) === '') {
+            if (! is_string($payload['timestamp'] ?? null)
+                || ! preg_match('/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?(?:Z|[+-]\d{2}:\d{2})$/D', $payload['timestamp'])) {
                 return [];
             }
             // MySQL DATETIME rejects Waffo's RFC3339 timestamp with milliseconds.

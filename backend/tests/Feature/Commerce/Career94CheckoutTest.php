@@ -211,6 +211,27 @@ final class Career94CheckoutTest extends TestCase
         Http::assertSentCount($state === 'completed' ? 2 : 1);
     }
 
+    public function test_waffo_timestamps_require_rfc3339_and_are_normalized_to_utc(): void
+    {
+        $this->configureWaffo();
+        config(['payments.waffo.product_id' => 'PROD_timestamp']);
+        $event = [
+            'eventType' => 'order.completed', 'eventId' => 'evt_timestamp', 'mode' => 'test',
+            'storeId' => 'STO_fixture', 'timestamp' => '2026-11-19T12:12:32.178+08:00',
+            'data' => [
+                'orderId' => 'ORD_timestamp', 'orderStatus' => 'completed', 'paymentStatus' => 'succeeded',
+                'currency' => 'USD', 'chargedAmount' => '1.99', 'orderMerchantExternalId' => 'ord_timestamp',
+                'orderMetadata' => ['fap_order_no' => 'ord_timestamp', 'fap_product_id' => 'PROD_timestamp'],
+            ],
+        ];
+        $gateway = app(\App\Services\Commerce\PaymentGateway\WaffoGateway::class);
+        $this->assertSame('2026-11-19 04:12:32', $gateway->normalizePayload($event)['paid_at']);
+        $event['timestamp'] = 'tomorrow';
+        $this->assertSame([], $gateway->normalizePayload($event));
+        unset($event['timestamp']);
+        $this->assertSame([], $gateway->normalizePayload($event));
+    }
+
     private function token(): string
     {
         $token = 'fm_'.Str::uuid();
