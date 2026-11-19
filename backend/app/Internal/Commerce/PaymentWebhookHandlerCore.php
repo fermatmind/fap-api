@@ -1856,10 +1856,16 @@ class PaymentWebhookHandlerCore
         int $orgId
     ): array {
         $now = now();
+        $refundAmount = (int) ($normalized['refund_amount_cents'] ?? 0);
+        $careerAlipay = ($order->provider ?? '') === 'alipay'
+            && in_array($order->sku ?? '', \App\Services\Commerce\CareerAssessmentPurchase::SKUS, true);
+        $refundAmountMatches = $careerAlipay
+            ? $refundAmount > 0 && $refundAmount <= (int) ($order->amount_cents ?? 0)
+            : $refundAmount === (int) ($order->amount_cents ?? 0);
         if ((($order->provider ?? '') === 'waffo'
             || in_array($order->sku ?? '', \App\Services\Commerce\CareerAssessmentPurchase::SKUS, true))
             && ((int) ($normalized['amount_cents'] ?? 0) !== (int) ($order->amount_cents ?? 0)
-                || (int) ($normalized['refund_amount_cents'] ?? 0) !== (int) ($order->amount_cents ?? 0)
+                || ! $refundAmountMatches
                 || ($normalized['currency'] ?? '') !== ($order->currency ?? ''))) {
             return $this->semanticReject('REFUND_AMOUNT_MISMATCH', 'Refund does not match the original order.');
         }
@@ -1868,7 +1874,10 @@ class PaymentWebhookHandlerCore
             && ($normalized['external_trade_no'] ?? null) !== $order->provider_trade_no) {
             return $this->semanticReject('REFUND_TRADE_MISMATCH', 'Refund does not match the provider transaction.');
         }
-        $refundAmount = (int) ($normalized['refund_amount_cents'] ?? 0);
+        if ($careerAlipay) {
+            // Alipay refund notifications carry the cumulative refunded amount.
+            $refundAmount = max($refundAmount, (int) ($order->refund_amount_cents ?? 0));
+        }
         $refundReason = trim((string) ($normalized['refund_reason'] ?? ''));
 
         $updates = [

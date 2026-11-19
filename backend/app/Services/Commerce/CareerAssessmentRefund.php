@@ -12,6 +12,43 @@ use RuntimeException;
 
 final class CareerAssessmentRefund
 {
+    public function reconcileAlipayRefund(object $order, string $refundNo): void
+    {
+        $trade = (string) ($order->provider_trade_no ?? '');
+        if ((int) $order->org_id !== 0 || $order->provider !== 'alipay' || $order->currency !== 'CNY'
+            || $order->sku !== CareerAssessmentPurchase::SKUS['CNY']
+            || (int) $order->amount_cents !== CareerAssessmentPurchase::PRICE
+            || ! in_array(Order::normalizePaymentState($order->payment_state, $order->status), [Order::PAYMENT_STATE_PAID, Order::PAYMENT_STATE_REFUNDED], true)
+            || $trade === '' || trim($refundNo) === '' || strlen($refundNo) > 64) {
+            throw new RuntimeException('A paid career assessment order and refund reference are required.');
+        }
+
+        $result = app(AlipayCheckoutService::class)->queryRefund($order->order_no, $trade, $refundNo);
+        $amount = WaffoGateway::cents($result['refund_amount'] ?? null);
+        if (($result['code'] ?? '') !== '10000' || ($result['refund_status'] ?? '') !== 'REFUND_SUCCESS'
+            || ($result['out_trade_no'] ?? '') !== $order->order_no || ($result['trade_no'] ?? '') !== $trade
+            || ($result['out_request_no'] ?? '') !== $refundNo
+            || WaffoGateway::cents($result['total_amount'] ?? null) !== CareerAssessmentPurchase::PRICE
+            || $amount <= 0 || $amount > CareerAssessmentPurchase::PRICE
+            || ($result['currency'] ?? 'CNY') !== 'CNY') {
+            throw new RuntimeException('Alipay did not verify the career assessment refund.');
+        }
+
+        $record = app(PaymentWebhookProcessor::class)->process('alipay', [
+            'out_trade_no' => $order->order_no,
+            'trade_no' => $trade,
+            'provider_event_id' => 'career94-refund-query-'.hash('sha256', $order->order_no."\n".$refundNo),
+            'event_type' => 'refund.succeeded',
+            'amount_cents' => CareerAssessmentPurchase::PRICE,
+            'refund_amount_cents' => $amount,
+            'refund_reason' => 'Verified Alipay merchant refund',
+            'currency' => 'CNY',
+        ]);
+        if (! ($record['ok'] ?? false)) {
+            throw new RuntimeException('Could not record the verified Alipay career assessment refund.');
+        }
+    }
+
     public function submit(object $order, string $reason): void
     {
         $state = Order::normalizePaymentState($order->payment_state, $order->status);

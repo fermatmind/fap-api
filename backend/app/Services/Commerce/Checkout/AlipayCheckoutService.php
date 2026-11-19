@@ -76,6 +76,20 @@ class AlipayCheckoutService
         return is_array($result) ? $result : [];
     }
 
+    public function queryRefund(string $orderNo, string $tradeNo, string $refundNo): array
+    {
+        Pay::config(config('pay'));
+        // The SDK verifies the Alipay response signature before returning this result.
+        $response = Pay::alipay()->query([
+            'out_trade_no' => $orderNo,
+            'trade_no' => $tradeNo,
+            'out_request_no' => $refundNo,
+        ]);
+        $result = $response instanceof \JsonSerializable ? $response->jsonSerialize() : $response;
+
+        return is_array($result) ? $result : [];
+    }
+
     private function isMobileUserAgent(string $userAgent): bool
     {
         return preg_match('/android|iphone|ipad|ipod|mobile|micromessenger/i', $userAgent) === 1;

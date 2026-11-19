@@ -103,6 +103,10 @@ final class Career94CheckoutTest extends TestCase
 
         $refund = array_replace($event, ['eventType' => 'refund.succeeded', 'eventId' => 'evt_refund']);
         $refund['data'] += ['refundStatus' => 'succeeded', 'refundedAmount' => '2.99', 'originalPayment' => ['total' => '2.99']];
+        $partialRefund = array_replace($refund, ['eventId' => 'evt_partial_refund']);
+        $partialRefund['data']['refundedAmount'] = '2.97';
+        $this->deliver($partialRefund, $key)->assertJsonPath('ok', false);
+        $this->withToken($owner)->getJson(self::PATH.'/results/'.$id)->assertJsonPath('unlocked', true);
         $this->deliver($refund, $key)->assertOk()->assertJsonPath('ok', true);
         $this->withToken($owner)->getJson(self::PATH.'/results/'.$id)->assertJsonPath('unlocked', false)->assertJsonMissingPath('premium');
         $this->deliver($event, $key)->assertOk()->assertJsonPath('ok', true);
@@ -160,6 +164,134 @@ final class Career94CheckoutTest extends TestCase
         $this->withToken($owner)->getJson(self::PATH.'/results/'.$id)
             ->assertJsonPath('unlocked', false)->assertJsonMissingPath('premium');
         $this->assertDatabaseHas('orders', ['order_no' => $order, 'payment_state' => 'refunded']);
+    }
+
+    public static function alipayRefundCases(): array
+    {
+        return [
+            'partial refund' => [297, 299, 'CNY', 'ali_trade_fixture', true, true],
+            'full refund' => [299, 299, 'CNY', 'ali_trade_fixture', true, true],
+            'refund exceeds payment' => [300, 299, 'CNY', 'ali_trade_fixture', true, false],
+            'zero refund' => [0, 299, 'CNY', 'ali_trade_fixture', true, false],
+            'wrong original amount' => [297, 298, 'CNY', 'ali_trade_fixture', true, false],
+            'wrong currency' => [297, 299, 'USD', 'ali_trade_fixture', true, false],
+            'wrong transaction' => [297, 299, 'CNY', 'another_trade', true, false],
+            'invalid signature' => [297, 299, 'CNY', 'ali_trade_fixture', false, false],
+        ];
+    }
+
+    #[DataProvider('alipayRefundCases')]
+    public function test_alipay_refund_records_actual_amount_and_revokes_report_only_after_verification(
+        int $refundCents,
+        int $originalCents,
+        string $currency,
+        string $trade,
+        bool $signatureOk,
+        bool $accepted,
+    ): void {
+        config([
+            'payments.career94.enabled' => true,
+            'payments.providers.alipay.enabled' => true,
+            'pay.alipay.default.app_id' => 'app_fixture',
+            'pay.alipay.default.seller_id' => 'seller_fixture',
+        ]);
+        $owner = $this->token();
+        $id = $this->withToken($owner)->postJson(self::PATH.'/results', $this->submission('CN_MAINLAND'))
+            ->assertOk()->json('attempt_id');
+        $order = $this->withToken($owner)->postJson('/api/v0.3/orders/checkout', [
+            'attempt_id' => $id, 'provider' => 'alipay', 'sku' => CareerAssessmentPurchase::SKUS['CNY'],
+        ])->assertOk()->json('order_no');
+        $processor = app(PaymentWebhookProcessor::class);
+        $payment = [
+            'out_trade_no' => $order, 'trade_no' => 'ali_trade_fixture',
+            'trade_status' => 'TRADE_SUCCESS', 'total_amount' => '2.99', 'notify_id' => 'ali_paid',
+        ];
+        $this->assertTrue($processor->process('alipay', $payment)['ok']);
+        $refund = [
+            'out_trade_no' => $order, 'trade_no' => $trade, 'notify_id' => 'ali_refund',
+            'total_amount' => number_format($originalCents / 100, 2, '.', ''),
+            'refund_fee' => number_format($refundCents / 100, 2, '.', ''), 'currency' => $currency,
+            ...($refundCents > 0 ? ['trade_status' => 'TRADE_SUCCESS'] : ['event_type' => 'refund.succeeded']),
+        ];
+        $result = $processor->handle('alipay', $refund, signatureOk: $signatureOk);
+        $this->assertSame($accepted, (bool) ($result['ok'] ?? false));
+        $this->withToken($owner)->getJson(self::PATH.'/results/'.$id)
+            ->assertOk()->assertJsonPath('unlocked', ! $accepted);
+        $this->assertDatabaseHas('orders', [
+            'order_no' => $order, 'payment_state' => $accepted ? 'refunded' : 'paid',
+            'refund_amount_cents' => $accepted ? $refundCents : null,
+        ]);
+        $this->assertSame($accepted ? 0 : 1, DB::table('benefit_grants')->where('order_no', $order)->where('status', 'active')->count());
+        if ($accepted) {
+            $this->assertTrue($processor->process('alipay', $refund)['ok']);
+            $this->assertFalse($processor->process('alipay', array_replace($payment, ['notify_id' => 'ali_paid_late']))['ok']);
+            $olderRefund = array_replace($refund, ['notify_id' => 'ali_refund_older', 'refund_fee' => '0.01']);
+            $this->assertTrue($processor->process('alipay', $olderRefund)['ok']);
+            $this->assertDatabaseHas('orders', ['order_no' => $order, 'refund_amount_cents' => $refundCents]);
+            $this->withToken($owner)->getJson(self::PATH.'/results/'.$id)
+                ->assertJsonPath('unlocked', false)->assertJsonMissingPath('premium');
+            $this->assertDatabaseCount('benefit_grants', 1);
+        }
+    }
+
+    public static function alipayRefundQueryCases(): array
+    {
+        return [
+            'verified refund' => [[], true],
+            'processing refund' => [['refund_status' => 'REFUND_PROCESSING'], false],
+            'wrong original amount' => [['total_amount' => '3.00'], false],
+            'wrong transaction' => [['trade_no' => 'another_trade'], false],
+            'wrong refund reference' => [['out_request_no' => 'another_refund'], false],
+            'wrong currency' => [['currency' => 'USD'], false],
+        ];
+    }
+
+    #[DataProvider('alipayRefundQueryCases')]
+    public function test_merchant_refund_reconciliation_requires_verified_alipay_identity_and_amount(array $replacement, bool $accepted): void
+    {
+        config([
+            'payments.career94.enabled' => true,
+            'payments.providers.alipay.enabled' => true,
+            'pay.alipay.default.app_id' => 'app_fixture',
+            'pay.alipay.default.seller_id' => 'seller_fixture',
+        ]);
+        $owner = $this->token();
+        $id = $this->withToken($owner)->postJson(self::PATH.'/results', $this->submission('CN_MAINLAND'))
+            ->assertOk()->json('attempt_id');
+        $orderNo = $this->withToken($owner)->postJson('/api/v0.3/orders/checkout', [
+            'attempt_id' => $id, 'provider' => 'alipay', 'sku' => CareerAssessmentPurchase::SKUS['CNY'],
+        ])->assertOk()->json('order_no');
+        $processor = app(PaymentWebhookProcessor::class);
+        $this->assertTrue($processor->process('alipay', [
+            'out_trade_no' => $orderNo, 'trade_no' => 'ali_trade_fixture',
+            'trade_status' => 'TRADE_SUCCESS', 'total_amount' => '2.99', 'notify_id' => 'ali_paid',
+        ])['ok']);
+        $sdk = \Mockery::mock(AlipayCheckoutService::class);
+        $sdk->shouldReceive('requestFullRefund')->never();
+        $sdk->shouldReceive('queryRefund')->times($accepted ? 2 : 1)
+            ->with($orderNo, 'ali_trade_fixture', 'merchant_refund_fixture')
+            ->andReturn(array_replace([
+                'code' => '10000', 'refund_status' => 'REFUND_SUCCESS',
+                'out_trade_no' => $orderNo, 'trade_no' => 'ali_trade_fixture',
+                'out_request_no' => 'merchant_refund_fixture', 'total_amount' => '2.99', 'refund_amount' => '2.97',
+            ], $replacement));
+        $this->app->instance(AlipayCheckoutService::class, $sdk);
+        $service = app(\App\Services\Commerce\CareerAssessmentRefund::class);
+        $order = DB::table('orders')->where('order_no', $orderNo)->first();
+        try {
+            $service->reconcileAlipayRefund($order, 'merchant_refund_fixture');
+            $this->assertTrue($accepted, 'Unverified refund was accepted.');
+            $service->reconcileAlipayRefund(DB::table('orders')->where('order_no', $orderNo)->first(), 'merchant_refund_fixture');
+        } catch (\RuntimeException $e) {
+            $this->assertFalse($accepted, $e->getMessage());
+        }
+        $this->assertDatabaseHas('orders', [
+            'order_no' => $orderNo, 'payment_state' => $accepted ? 'refunded' : 'paid',
+            'refund_amount_cents' => $accepted ? 297 : null,
+        ]);
+        $this->withToken($owner)->getJson(self::PATH.'/results/'.$id)
+            ->assertOk()->assertJsonPath('unlocked', ! $accepted);
+        $this->assertDatabaseCount('benefit_grants', 1);
     }
 
     public static function paymentRecoveryStates(): array
