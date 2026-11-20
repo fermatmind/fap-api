@@ -219,6 +219,16 @@ final class PersonalityCurrentRemainingRuntimeTest extends TestCase
         }
     }
 
+    public function test_mbti_base_profile_seo_projection_matches_its_public_metadata(): void
+    {
+        foreach (['zh-CN', 'en', 'zh-TW'] as $locale) {
+            $response = $this->getJson("/api/v0.5/personality/istj?locale={$locale}&org_id=0&scale_code=MBTI")
+                ->assertOk();
+            $response->assertJsonPath('mbti_public_projection_v1.seo.title', $response->json('seo_meta.seo_title'))
+                ->assertJsonPath('mbti_public_projection_v1.seo.description', $response->json('seo_meta.seo_description'));
+        }
+    }
+
     public function test_traditional_mbti_reader_receives_native_profile_locales(): void
     {
         $query = 'locale=zh-TW&org_id=0&scale_code=MBTI';
