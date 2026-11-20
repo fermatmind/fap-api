@@ -13,23 +13,23 @@
   "payload": {
     "landing_surface_v1": {
       "attribution_scope": "public_personality_landing",
-      "content_continue_target": "/zh/topics/mbti",
+      "content_continue_target": "/zh-TW/topics/mbti",
       "continue_reading_keys": [
         "topic_cluster",
         "personality_detail"
       ],
       "cta_bundle": [
         {
-          "href": "/zh/tests/mbti-personality-test-16-personality-types",
+          "href": "/zh-TW/tests/mbti-personality-test-16-personality-types",
           "key": "start_test",
           "kind": "start_test",
           "label": "開始測驗"
         },
         {
-          "href": "/zh/topics/mbti",
+          "href": "/zh-TW/topics/mbti",
           "key": "topic_cluster",
           "kind": "discover",
-          "label": "瀏覽主題總覽"
+          "label": "查看主題總覽"
         }
       ],
       "discoverability_items": [],
@@ -43,7 +43,7 @@
       "entry_type": "personality_family_index",
       "indexability_state": "indexable",
       "landing_contract_version": "landing.surface.v1",
-      "landing_fingerprint": "e750535df93db1e5bb62884be225bc8a9e132d89",
+      "landing_fingerprint": "aa32c55c44f2d6ac7c70c73bc689c3d189f690e9",
       "landing_scope": "public_indexable_index",
       "primary_content_ref": "personality:index",
       "public_surface_ref": null,
@@ -55,13 +55,13 @@
       "runtime_artifact_ref": null,
       "seo_surface_ref": null,
       "share_safety_state": null,
-      "start_test_target": "/zh/tests/mbti-personality-test-16-personality-types",
+      "start_test_target": "/zh-TW/tests/mbti-personality-test-16-personality-types",
       "summary_blocks": [
         {
-          "body": "MBTI 的四組偏好 E/I、S/N、T/F、J/P 組合成 16 個四字母代碼。本目錄提供基礎人格、32 個 A/T 描述與 23 個對比：先了解類型，再按問題選擇後綴或對比頁。A/T 來自另外的延伸架構，不是官方第五組偏好。你可以直接瀏覽，也可以從測驗問卷開始。",
+          "body": "MBTI 的十六型由 E/I、S/N、T/F、J/P 四組偏好組合而成。手上只有四個字母時，先從目錄進入對應的基礎頁；在兩組代碼之間猶豫時，先找出不同的字母，再逐一對照。只看到 A 或 T 後綴時，請讀同型對照頁：這組後綴來自 16Personalities 的 NERIS Identity，描述自我評價與壓力反應，不會讓官方 MBTI 多出新的類型。",
           "key": "hero",
           "kind": "hero",
-          "title": "MBTI 16 型人格"
+          "title": "MBTI 16 型人格大全：四組偏好怎麼讀，A/T 與類型對照從哪裡進"
         }
       ],
       "surface_family": "personality",
@@ -70,7 +70,7 @@
     "sections": [
       {
         "body_html": null,
-        "body_md": "MBTI 的四組偏好 E/I、S/N、T/F、J/P 組合成 16 個四字母代碼。本目錄提供基礎人格、32 個 A/T 描述與 23 個對比：先了解類型，再按問題選擇後綴或對比頁。A/T 來自另外的延伸架構，不是官方第五組偏好。你可以直接瀏覽，也可以從測驗問卷開始。",
+        "body_md": "MBTI 的十六型由 E/I、S/N、T/F、J/P 四組偏好組合而成。手上只有四個字母時，先從目錄進入對應的基礎頁；在兩組代碼之間猶豫時，先找出不同的字母，再逐一對照。只看到 A 或 T 後綴時，請讀同型對照頁：這組後綴來自 16Personalities 的 NERIS Identity，描述自我評價與壓力反應，不會讓官方 MBTI 多出新的類型。",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
@@ -80,17 +80,17 @@
       },
       {
         "body_html": null,
-        "body_md": "### 四個字母分別在問什麼\n\n**E/I — 外向與內向：**描述注意力與精力較朝向外部互動或內部反思。可以回想一次討論：交談中形成想法，還是先整理再表達更合自己的偏好？兩種方式都能使用；喜歡獨處不證明社交能力低，能熱情發言也不排除內向。\n\n**S/N — 實感與直覺：**描述獲取資訊時較關注具體事實和經驗，還是關聯、模式與可能性。可以問：了解新事物時，我先看實際例子和步驟，還是先想它與其他事情有什麼關聯？體驗需要解釋，想法需要核查；字母不給智力、創造力或思想深度排名。\n\n**T/F — 思考與情感：**描述作判斷時較先考慮邏輯一致、非個人化標準，還是價值與對人的影響。可以問：比較方案時，我希望說明哪些標準、哪些人的需要？兩種判斷都可運用推理並涉及情緒，T 不等於沒有關心，F 不等於不會分析。\n\n**J/P — 判斷與知覺：**描述面對外部生活較偏向確定安排，還是向新資訊和選項保持開放。可以問：哪些事情希望提前定下，哪些願意繼續了解？期限、任務與角色會要求任何人安排或調整，字母不能測量責任心、整潔或規劃技能。\n\n### 怎樣讀一個代碼和目錄分組\n\n四個位置分別從四組偏好取一個字母，例如 INTP 為 I、N、T、P；並不是四項能力分數相加。基礎頁解釋這些描述如何一起閱讀，也提供不符合描述的情況。\n\n目錄沿用 NT、NF、SJ、SP 四個瀏覽分組，分別組合 N/T、N/F、S/J、S/P。顏色和“邏輯學家”等暱稱幫助找到頁面，不是另一項測量，也不保證對應職業、智力、道德或技能。不同網站的暱稱可能不同；比較時以完整代碼和所用框架為準。",
+        "body_md": "### 四個字母分別在問什麼\n\n**E/I — 外向與內向：**描述注意力與精力比較常朝向外部的人與事，還是內部的想法與反思。在同樣有選擇空間時，可以問自己：和別人互動、以及獨處反思，分別怎麼影響你的注意力與精力？哪些活動結束後你還覺得有餘力，哪些需要先緩一緩？喜歡獨處不代表社交能力差，能在會議上熱絡發言也不排除你是內向。\n\n**S/N — 實感與直覺：**描述取得資訊時比較關注具體事實與經驗，還是連結、模式與可能性。可以問：認識新事物時，我先看實際例子與步驟，還是先想它和別的事情怎麼連在一起？經驗需要解釋，想法需要核查；這兩個字母不替智力、創造力或思考深度排名。\n\n**T/F — 思考與情感：**描述作判斷時比較先考慮邏輯一致、非個人化的標準，還是價值與對人的影響。可以問：比較方案時，我希望說清楚哪些標準、哪些人的需要？兩種判斷都能核對證據、考慮後果；T 不等於不關心人，F 不等於不會分析。\n\n**J/P — 判斷與知覺：**描述面對外在生活比較偏向確定安排，還是對新資訊與選項保持開放。可以問：哪些事情希望提前定下來，哪些願意再了解看看？期限、任務與角色會要求任何人做安排或調整，這兩個字母量不出責任感、整潔程度或規劃能力。\n\n### 怎麼讀一組代碼與目錄分組\n\n四個位置分別從四組偏好取一個字母，例如 INTP 是 I、N、T、P；它不是四項能力分數相加。基礎頁會解釋這些描述怎麼一起讀，也會提供不符合描述的情況。\n\n目錄沿用 NT、NF、SJ、SP 四個瀏覽分組，分別組合 N/T、N/F、S/J、S/P。顏色與「邏輯學家」這類暱稱只是幫你找到頁面，不是另一種測量，也不保證對應職業、智力、道德或技能。不同網站的暱稱可能不一樣；要比較時，以完整代碼和它所使用的框架為準。",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
         "section_key": "meaning",
         "sort_order": 10,
-        "title": "四組偏好怎樣組合"
+        "title": "四組偏好怎麼組合"
       },
       {
         "body_html": null,
-        "body_md": "### 先確定閱讀問題，再選擇入口\n\n| 你想解決的問題 | 先讀哪裡 | 讀完應獲得什麼 |\n| --- | --- | --- |\n| 四字母是什麼意思、整個人格描述怎樣理解？ | 基礎人格頁，例如 [INTP](/zh-TW/personality/intp) | 字母、理論解釋、工作與關係情景、實踐及反例；不要求後綴。 |\n| INTP-A 或 INTP-T 的後綴在說什麼？ | [INTP-A](/zh-TW/personality/intp-a) 或 [INTP-T](/zh-TW/personality/intp-t) | 自我評價、回饋與壓力的延伸描述及適用邊界。 |\n| 相同類型的 A 和 T 有什麼區別？ | [INTP-A 與 INTP-T](/zh-TW/personality/intp-a-vs-intp-t) | 同一事件下的兩種描述、代價與觀察問題；不排名能力。 |\n| 兩個基礎類型都像自己，該比較哪一處？ | 跨類型對比，例如 [INTJ 與 INTP](/zh-TW/personality/intj-vs-intp)、[ISFP 與 INFP](/zh-TW/personality/isfp-vs-infp) | 分別檢查 J/P、S/N 的含義及實際情境，不以暱稱、愛好或壓力定型。 |\n| 我想回答問卷並檢視結果 | [MBTI 免費測驗入口](/zh/tests/mbti-personality-test-16-personality-types) | 檢視具體問卷與結果說明；目錄本身不計分或產生結果。 |\n\n### 先分清基礎類型和 A/T\n\n不帶後綴的基礎類型已經可以閱讀。A（Assertive）與 T（Turbulent）屬於 16Personalities 框架的 Identity 延伸架構，用於描述自我確信、自我評價與對壓力的反應；該框架的量表不等同於官方 MBTI。末尾的 T 也不同於四字母中的 T（Thinking，思考）。\n\n本目錄的 A/T 頁提供教育性解讀和原創情境，不能驗證你的後綴結果或預測心理健康。基礎頁負責完整類型說明，後綴頁說明 A/T 的延伸描述，同類型對比負責 A/T，跨類型對比負責實際不同的偏好；它們回答不同問題，不需要依次讀完所有頁面。代碼能夠幫你找到對應解釋頁，卻不能由閱讀共鳴確定真實的個人類型。例如 INTP-T 可以先看 INTP 的四偏好，再看 INTP-T；若問題是 A 與 T 在同一事件中怎樣描述，直接進入 A/T 對比即可，不必把基礎頁重複讀三遍。\n\n### 類型未定時，先保留問題與反例\n\n若幾種描述都像你，先寫下最想澄清的問題，讀對應的基礎頁和已有對比。原創閱讀例子：某次討論先整理再發言，另一次通過交談理清問題；比較的是過程選擇、任務要求和經歷，不是把一次行為當作 I 或 E 的證明。\n\n讀到熟悉的描述時，也記錄一個反例，分別問：\n\n- 發生了什麼？\n- 你注意或重視什麼？\n- 哪些條件影響做法？\n- 下一次願意嘗試什麼？\n\n不同工具、計分方式和回答條件會影響結果；共鳴或標籤變化本身不能驗證測驗，也不能證明持續人格變化。無需為了得到一個確定標籤反覆重測。\n\n### 兩個類型只差一個字母，先比較那個問題\n\n若在 ISTJ 與 ISFJ 間猶豫，可讀 [ISTJ 與 ISFJ](/zh-TW/personality/istj-vs-isfj)，比較判斷理由中的 T/F；若在 ENFP 與 ENTP 間猶豫，可讀 [ENFP 與 ENTP](/zh-TW/personality/enfp-vs-entp)，也圍繞 T/F，但使用不同的實際情境。若是 ENTJ 與 INTJ，可讀 [ENTJ 與 INTJ](/zh-TW/personality/entj-vs-intj)，先檢查 E/I，而不是領導能力。前面的 INTJ–INTP 和 ISFP–INFP 示例則分別比較 J/P 和 S/N。若比較 ESTJ 與 ENTJ，可讀 [ESTJ 與 ENTJ](/zh-TW/personality/estj-vs-entj)，檢查 S/N 中具體資訊、經驗和模式假設怎樣得到核查，不把它們分成執行者與戰略家。這些入口不能把單次回答變成判型規則。\n\n沒有對應對比時，先結對讀兩個已有基礎頁，寫下真正不同的字母及尚不清楚的條件。不需要為了一個暱稱尋找不存在的“最佳類型”，也不把僅有相同字母的描述視為對彼此的完整了解。\n\n### 看到功能縮寫，先問它屬於哪種解釋\n\n基礎頁中的 Si、Ne、Ti 或 Fe 等詞來自類型動力學理論；“內向/外向”在這些縮寫中描述理論過程的態度，不等於當時有沒有與人說話。先讀頁面給出的定義、第三功能解釋分歧及侷限，再用它提出觀察問題。不能憑一個功能詞推斷能力、腦內機制或困擾的原因。A/T 來源另屬框架，也不能據此調整認知功能排序。\n\n若下一步是工作或關係，帶著具體問題繼續了解實際任務、技能、資格、負擔、需要與邊界。人格頁可以幫助組織對話，不能替你篩選職務或伴侶。\n\n### 原創閱讀記錄：兩次結果不同，先澄清哪一處\n\n假設兩個工具分別給出 ENTJ 與 INTJ，你想了解的其實是“我何時希望先討論，何時先整理”。先記工具、版本和回答時的情境；無法找到的資訊保持未知，不選更喜歡的暱稱作為正確結果。讀兩篇基礎頁的 E/I，再按這個問題讀 [ENTJ 與 INTJ 對比](/zh-TW/personality/entj-vs-intj)，功能縮寫仍按理論層次閱讀。\n\n寫一次有選擇空間的經歷：獨立列出大綱後更容易說明問題；再寫反例：他人提問讓你發現缺項。若工作要求立即回應，或當天資料、人手、疲勞不同，不把這些條件自動當偏好。可以與有關人商量下一次提前給資料和實際可接受的回應時間，檢查是否幫助溝通；提出安排不等於別人接受。\n\n閱讀可以澄清詞義、未知和一個可協商的下一步，不會判定哪個工具準確、證明長期人格變化或授予職務能力。若只想了解四字母，可停在基礎頁；若實際問題是後綴，再進入相應 A/T 頁。沒有比較結果也可以保留疑問，不必繼續重測求一個固定標籤。",
+        "body_md": "### 先確定要解決的問題，再挑入口\n\n目錄頁的用途是幫你少繞路：先看手上的問題屬於哪一類，再決定要讀一頁還是兩頁。\n\n| 你想解決的問題 | 先讀哪裡 | 讀完應該得到什麼 |\n| --- | --- | --- |\n| 四字母是什麼意思、整體的人格描述怎麼理解？ | 下方類型索引的基礎頁，例如 [INTP](/zh-TW/personality/intp) | 字母、理論解釋、工作與關係情境、練習與反例；不需要後綴。 |\n| INTP-A 或 INTP-T 的後綴在說什麼？ | [INTP-A](/zh-TW/personality/intp-a) 或 [INTP-T](/zh-TW/personality/intp-t) | 自我評價、自我確信與壓力反應的延伸描述與適用邊界。 |\n| 同一型的 A 和 T 差在哪裡？ | [INTP-A 與 INTP-T](/zh-TW/personality/intp-a-vs-intp-t) | 同一事件下兩種描述、代價與觀察問題；不替能力排名。 |\n| 兩個基礎類型都像自己，該比哪一處？ | 跨型對照，例如 [INTJ 與 INTP](/zh-TW/personality/intj-vs-intp)、[ISFP 與 INFP](/zh-TW/personality/isfp-vs-infp) | 分別檢查 J/P、S/N 的意思與實際情境，不靠暱稱、嗜好或壓力下的樣子定型。 |\n| 我想直接作答、看結果 | [MBTI 免費測驗入口](/zh-TW/tests/mbti-personality-test-16-personality-types) | 看得到實際題目與結果說明；目錄本身不計分、也不產生結果。 |\n\n### 依類型瀏覽：基礎頁、後綴頁與同型對照\n\n下表涵蓋 16 組四字母類型。每一型都有基礎頁、A 與 T 兩個後綴頁，以及一組只比較這兩端的同型對照頁。依四字母代碼找到對應的列，再從右側選擇想讀的頁面。\n\n| 類型 | 基礎頁 | A/T 後綴頁 | 同型 A/T 對照 |\n| --- | --- | --- | --- |\n| INTP | [INTP 人格解析](/zh-TW/personality/intp) | [INTP-A](/zh-TW/personality/intp-a) · [INTP-T](/zh-TW/personality/intp-t) | [INTP-A 與 INTP-T](/zh-TW/personality/intp-a-vs-intp-t) |\n| INTJ | [INTJ 人格解析](/zh-TW/personality/intj) | [INTJ-A](/zh-TW/personality/intj-a) · [INTJ-T](/zh-TW/personality/intj-t) | [INTJ-A 與 INTJ-T](/zh-TW/personality/intj-a-vs-intj-t) |\n| ENTJ | [ENTJ 人格解析](/zh-TW/personality/entj) | [ENTJ-A](/zh-TW/personality/entj-a) · [ENTJ-T](/zh-TW/personality/entj-t) | [ENTJ-A 與 ENTJ-T](/zh-TW/personality/entj-a-vs-entj-t) |\n| ENTP | [ENTP 人格解析](/zh-TW/personality/entp) | [ENTP-A](/zh-TW/personality/entp-a) · [ENTP-T](/zh-TW/personality/entp-t) | [ENTP-A 與 ENTP-T](/zh-TW/personality/entp-a-vs-entp-t) |\n| INFJ | [INFJ 人格解析](/zh-TW/personality/infj) | [INFJ-A](/zh-TW/personality/infj-a) · [INFJ-T](/zh-TW/personality/infj-t) | [INFJ-A 與 INFJ-T](/zh-TW/personality/infj-a-vs-infj-t) |\n| INFP | [INFP 人格解析](/zh-TW/personality/infp) | [INFP-A](/zh-TW/personality/infp-a) · [INFP-T](/zh-TW/personality/infp-t) | [INFP-A 與 INFP-T](/zh-TW/personality/infp-a-vs-infp-t) |\n| ENFJ | [ENFJ 人格解析](/zh-TW/personality/enfj) | [ENFJ-A](/zh-TW/personality/enfj-a) · [ENFJ-T](/zh-TW/personality/enfj-t) | [ENFJ-A 與 ENFJ-T](/zh-TW/personality/enfj-a-vs-enfj-t) |\n| ENFP | [ENFP 人格解析](/zh-TW/personality/enfp) | [ENFP-A](/zh-TW/personality/enfp-a) · [ENFP-T](/zh-TW/personality/enfp-t) | [ENFP-A 與 ENFP-T](/zh-TW/personality/enfp-a-vs-enfp-t) |\n| ISTJ | [ISTJ 人格解析](/zh-TW/personality/istj) | [ISTJ-A](/zh-TW/personality/istj-a) · [ISTJ-T](/zh-TW/personality/istj-t) | [ISTJ-A 與 ISTJ-T](/zh-TW/personality/istj-a-vs-istj-t) |\n| ISFJ | [ISFJ 人格解析](/zh-TW/personality/isfj) | [ISFJ-A](/zh-TW/personality/isfj-a) · [ISFJ-T](/zh-TW/personality/isfj-t) | [ISFJ-A 與 ISFJ-T](/zh-TW/personality/isfj-a-vs-isfj-t) |\n| ESTJ | [ESTJ 人格解析](/zh-TW/personality/estj) | [ESTJ-A](/zh-TW/personality/estj-a) · [ESTJ-T](/zh-TW/personality/estj-t) | [ESTJ-A 與 ESTJ-T](/zh-TW/personality/estj-a-vs-estj-t) |\n| ESFJ | [ESFJ 人格解析](/zh-TW/personality/esfj) | [ESFJ-A](/zh-TW/personality/esfj-a) · [ESFJ-T](/zh-TW/personality/esfj-t) | [ESFJ-A 與 ESFJ-T](/zh-TW/personality/esfj-a-vs-esfj-t) |\n| ISTP | [ISTP 人格解析](/zh-TW/personality/istp) | [ISTP-A](/zh-TW/personality/istp-a) · [ISTP-T](/zh-TW/personality/istp-t) | [ISTP-A 與 ISTP-T](/zh-TW/personality/istp-a-vs-istp-t) |\n| ISFP | [ISFP 人格解析](/zh-TW/personality/isfp) | [ISFP-A](/zh-TW/personality/isfp-a) · [ISFP-T](/zh-TW/personality/isfp-t) | [ISFP-A 與 ISFP-T](/zh-TW/personality/isfp-a-vs-isfp-t) |\n| ESTP | [ESTP 人格解析](/zh-TW/personality/estp) | [ESTP-A](/zh-TW/personality/estp-a) · [ESTP-T](/zh-TW/personality/estp-t) | [ESTP-A 與 ESTP-T](/zh-TW/personality/estp-a-vs-estp-t) |\n| ESFP | [ESFP 人格解析](/zh-TW/personality/esfp) | [ESFP-A](/zh-TW/personality/esfp-a) · [ESFP-T](/zh-TW/personality/esfp-t) | [ESFP-A 與 ESFP-T](/zh-TW/personality/esfp-a-vs-esfp-t) |\n\n### 已上線的跨型對照\n\n跨型對照頁負責兩件事：先交代雙方共有的偏好，再用同一個情境比較各自更重視的依據。下列是目錄提供的對照入口；其餘類型組合，可以用「兩篇基礎頁一起讀」的方式，先確認真正不同的字母。\n\n- [INTJ 與 INTP](/zh-TW/personality/intj-vs-intp)：同有 I、N、T，比較 J/P 與對外安排。\n- [ENTJ 與 INTJ](/zh-TW/personality/entj-vs-intj)：同有 N、T、J，比較 E/I 的注意力取向。\n- [ESTJ 與 ENTJ](/zh-TW/personality/estj-vs-entj)：同有 E、T、J，比較 S/N 的取材依據。\n- [ISTJ 與 ISFJ](/zh-TW/personality/istj-vs-isfj)：同有 I、S、J，比較 T/F 的判斷標準。\n- [ENFP 與 ENTP](/zh-TW/personality/enfp-vs-entp)：同有 E、N、P，比較 T/F 與決定依據。\n- [INFJ 與 INFP](/zh-TW/personality/infj-vs-infp)：同有 I、N、F，比較 J/P 與收束方式。\n- [ISFP 與 INFP](/zh-TW/personality/isfp-vs-infp)：共用 I、F、P，差在 S/N 的資訊偏好。\n\n### 先分清楚基礎類型與 A/T\n\n不帶後綴的基礎類型已經可以閱讀。A（Assertive，自信型）與 T（Turbulent，動盪型）屬於 16Personalities 框架的 NERIS Identity 延伸，用來描述自我評價、自我確信與對壓力的反應：A 端通常比較相信自己的判斷、較少被壓力擾動，T 端通常比較容易自我懷疑、對壓力更敏感。這套量表不等同官方 MBTI，末尾的 T 也不同於四字母裡的 T（Thinking，思考）。\n\n本目錄的 A/T 頁提供教育性解讀與原創情境，不能驗證你的後綴結果，也不能預測心理健康。基礎頁負責完整類型說明，後綴頁負責延伸，同型對照負責 A/T，跨型對照負責真正不同的偏好；它們回答不同問題，不需要依序讀完所有頁面。代碼能幫你找到對應的解釋頁，卻不能因為讀起來有共鳴就確定真實的個人類型。例如 INTP-T 可以先看 INTP 的四組偏好，再看 INTP-T；若你的問題是 A 與 T 在同一事件裡怎麼描述，直接進 A/T 對照就好，不必把基礎頁重讀三次。\n\n### 類型還沒定下來時，先留下問題與反例\n\n若幾種描述都像你，先寫下最想釐清的問題，讀對應的基礎頁與已有的對照。原創閱讀例子：某次討論先整理再發言，另一次透過交談才把問題想清楚；比較的是注意力與精力的去向、任務要求與經歷，不是把一次行為當成 I 或 E 的證明。\n\n讀到熟悉的描述時，也記一個反例，分別問：\n\n- 發生了什麼？\n- 你注意到或重視什麼？\n- 哪些條件影響了做法？\n- 下一次願意嘗試什麼？\n\n不同工具、計分方式與作答條件都會影響結果；有共鳴或標籤改變，本身不能驗證測驗，也不能證明人格持續改變。不必為了一個確定標籤反覆重測。\n\n### 只差一個字母時，先比較那一個問題\n\n若在 ISTJ 與 ISFJ 之間猶豫，可以讀 [ISTJ 與 ISFJ](/zh-TW/personality/istj-vs-isfj)，比較判斷理由裡的 T/F；若在 ENFP 與 ENTP 之間猶豫，可以讀 [ENFP 與 ENTP](/zh-TW/personality/enfp-vs-entp)，同樣圍繞 T/F，但用的是不同情境。若是 ENTJ 與 INTJ，可以讀 [ENTJ 與 INTJ](/zh-TW/personality/entj-vs-intj)，先檢查 E/I，而不是領導能力。前面的 INTJ–INTP 與 ISFP–INFP 例子則分別比較 J/P 與 S/N。若比較 ESTJ 與 ENTJ，可以讀 [ESTJ 與 ENTJ](/zh-TW/personality/estj-vs-entj)，檢查 S/N 裡具體資訊、經驗與模式假設怎麼被核對，不要把兩型分成執行者與策略家。這些入口都不能把單次回答變成判型規則。\n\n沒有對應對照時，先把兩篇已有的基礎頁配對讀，寫下真正不同的字母與還不清楚的條件。不需要為了一個暱稱去找不存在的「最佳類型」，也不要把只有字母相同的描述當成對彼此的完整了解。\n\n### 看到功能縮寫，先問它屬於哪一種解釋\n\n基礎頁裡的 Si、Ne、Ti 或 Fe 這些詞來自類型動力學理論；這些縮寫裡的「內向／外向」描述的是理論過程的態度，不等於當時有沒有和別人說話。先讀頁面給的定義、第三功能解釋的分歧與限制，再用它提出觀察問題。不能憑一個功能詞推斷能力、腦內機制或困擾的原因。A/T 屬於另一套框架，也不能拿它調整認知功能順序。\n\n若下一步是工作或關係，帶著具體問題去了解實際任務、技能、資格、負擔、需要與界線。人格頁可以幫你組織對話，不能替你篩選職缺或伴侶。\n\n### 原創閱讀紀錄：兩次結果不同，先釐清哪一處\n\n假設兩個工具分別給你 ENTJ 與 INTJ，你真正想了解的是「我什麼時候比較自然地把注意力轉到外面，什麼時候更需要獨處整理」。先記下工具、版本與作答時的情境；找不到的資訊就保持未知，不要選比較喜歡的暱稱當正確結果。讀兩篇基礎頁的 E/I，再按這個問題讀 [ENTJ 與 INTJ 對照](/zh-TW/personality/entj-vs-intj)，功能縮寫仍按理論層次閱讀。\n\n寫一次有選擇空間的經歷：自己列完提綱比較容易說清楚問題；再寫一個反例：別人提問讓你發現漏了哪一項。若工作要求立即回應，或當天資料、人手、疲勞程度不同，不要把這些條件自動當成偏好。可以和相關的人商量，下次提前給資料並約定可接受的回應時間，再看溝通有沒有變好；提出安排不等於對方一定接受。\n\n閱讀可以釐清詞義、未知與一個可協商的下一步，不會判定哪個工具準確、證明長期人格改變或授予職務能力。若只想了解四字母，可以停在基礎頁；若實際問題是後綴，再進對應的 A/T 頁。沒有比較結果也可以保留疑問，不必繼續重測去求一個固定標籤。",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
@@ -100,36 +100,36 @@
       },
       {
         "body_html": null,
-        "body_md": null,
+        "body_md": "",
         "is_enabled": true,
         "payload_json": {
           "items": [
             {
-              "answer": "官方四組偏好組合為 16 個四字母代碼。本目錄另列 32 個 A/T 描述與 23 個對比，其中 16 個比較同類型 A/T、7 個比較基礎類型；加目錄共 72 個頁面身份。閱讀頁多並不增加官方偏好維度。先按你想了解四字母、後綴還是類型差異來選擇入口。",
+              "answer": "MBTI 的四組偏好組成 16 個四字母類型。會看到 32，通常是把每組四字母代碼下的 A 與 T 兩端分別算一型。A/T 屬於 16Personalities 的 NERIS Identity，要和官方四組偏好分開理解。\n\n如果你只想讀懂一組代碼，先開目錄裡的基礎頁；想比較不同後綴，看同型 A/T 對照；想分辨兩組四字母，從精選的跨型對照入口進去。目錄列了幾個連結，不代表官方人格類型有幾個。",
               "question": "MBTI 是 16 型還是 32 型？"
             },
             {
-              "answer": "可以。開啟卡片上的“基礎人格”或閱讀路徑中的基礎頁連結，就能了解四偏好、類型理論、實際情境和反例。A/T 是另一套框架提供的可選延伸描述，不是理解四字母的前提。只知道類型代碼也不能直接推導自己的後綴。",
-              "question": "只知道四字母，沒有 A/T 能讀嗎？"
+              "answer": "可以。「依類型瀏覽」表的第一欄就是基礎頁，點進去能讀到四組偏好、類型理論、實際情境與反例。A/T 屬於另一套框架的選用延伸，不是理解四字母的前提；只知道類型代碼，也推不出自己的後綴。\n\n手上只有一組四字母結果時，先按代碼讀基礎頁，再看頁尾的相關類型區。那裡會指向兩個後綴頁與同型對照頁；要不要繼續讀，取決於你想了解的是四字母本身，還是收到回饋與壓力下的反應差異。",
+              "question": "只知道四字母、沒有 A/T，還能讀嗎？"
             },
             {
-              "answer": "位置不同，含義也不同。INTP 第三位 T 是 Thinking（思考），用於 T/F 判斷偏好；連字元後的 -T 是 Turbulent，來自 16Personalities 的 Identity 延伸架構。一個人可以同時讀這兩種描述，但不能將它們當同一量尺，或把 -T 解釋成“更加思考型”。",
-              "question": "為什麼有 T 的人也可以叫 INTP-T？"
+              "answer": "位置不同，意思就不同。INTP 第三位的 T 是 Thinking（思考），用在 T/F 的判斷偏好；連字號後面的 -T 是 Turbulent（動盪型），來自 16Personalities 的 Identity 延伸。同一個人可以同時讀這兩種描述，但不能當成同一把尺，也不能把 -T 解釋成「更思考型」。\n\n翻報告時先看字母位置：第三位屬於四字母代碼，連字號後屬於後綴。若某份報告只有四字母、沒有後綴欄位，代表它沒提供這個維度的結果，不能因此推斷你比較接近 A 還是 T。",
+              "question": "第三個字母是 T，為什麼還能叫 INTP-T？"
             },
             {
-              "answer": "不能。顏色、分組與“邏輯學家”“指揮官”等暱稱幫助瀏覽，不是能力或職業資格測量。不同網站的暱稱可能不同，查詢時以完整代碼和框架為準。分析、領導、照護與創作需要看訓練、經驗、任務條件和實際表現。",
-              "question": "暱稱和顏色可以證明職業能力嗎？"
+              "answer": "不能。顏色、分組與「邏輯學家」「指揮官」這類暱稱只是協助瀏覽，不是能力或職業資格測量。不同網站的暱稱可能不一樣，查找時以完整代碼與框架為準。分析、領導、照顧與創作要看訓練、經驗、任務條件與實際表現。\n\n暱稱還有一層來源差異：目錄裡多數中文稱呼是從 16Personalities 的英文名轉寫而來，同一組代碼在不同網站可能叫法不同。它適合當記憶鉤子，不適合當職缺篩選條件。",
+              "question": "暱稱和顏色能證明職業能力嗎？"
             },
             {
-              "answer": "先確認是不是同一工具、同一版本及同一種計分解釋，再檢查回答條件和結果的不確定性；資料不足時不能判定哪一個更準確。不同網站共用字母並不表示量表等價，也不能憑喜歡某種結果或描述共鳴選擇“正確答案”。可保留兩種解釋與反例，不必反覆重測以求固定標籤。",
-              "question": "不同測驗結果不一致，應該相信哪個？"
+              "answer": "先確認是不是同一個工具、同一版本、同一種計分解釋，再檢查作答條件與結果的不確定性；資料不足時，不能判定哪一個更準。不同網站共用字母，不代表量表等價，也不能因為喜歡某個結果或覺得描述很像就挑它當「正確答案」。可以保留兩種解釋與反例，不必反覆重測去求一個固定標籤。\n\n若兩次結果只差一個字母，可以先做那個字母的對照頁練習：兩邊用同一件事，比較各自重視的依據。若差到兩個字母以上，通常更值得先核對題目語言、作答當時的處境與近期壓力，而不是急著選一個更像自己的標籤。",
+              "question": "不同測驗結果不一致，該相信哪一個？"
             },
             {
-              "answer": "不能給匹配分或勝任結論。對比頁幫助把實際不同的偏好轉成資訊、判斷、安排或回饋的問題。關係中仍要了解需要、同意、邊界和真實行為；職業中仍要核查任務、技能、資格、機會與限制。選一個具體下一步並觀察結果，比按類型決定人選更有用。",
-              "question": "人格對比能判斷相處或選職業嗎？"
+              "answer": "不能給配對分數或勝任結論。對照頁的用途，是把實際不同的偏好轉成關於資訊、判斷、安排或回饋的問題。關係裡仍要了解需要、同意、界線與真實行為；職涯裡仍要核對任務、技能、資格、機會與限制。選一個具體的下一步並觀察結果，比按類型決定人選更有用。\n\n對照頁提供的是共同語言：當兩人對同一件事的處理方式不同，可以借用頁面裡的維度說清楚「我在意哪一條依據」，而不是用類型替對方定性。",
+              "question": "人格對照能判斷相處或選職業嗎？"
             },
             {
-              "answer": "頁面提供官方框架說明、理論解釋、原始研究或研究回顧，並說明各自能支持哪些主張；工作、關係與練習場景標為原創教育示例。研究要結合具體工具、樣本和年份理解，支持 MBTI 某版本的證據不能自動驗證費馬測試或 A/T。閱讀來源與方法邊界時，也留意未被證明的部分。",
+              "answer": "頁面提供官方框架說明、理論解釋、原始研究或研究回顧，並說明各自能支持什麼；工作、關係與練習情境都標為原創教學示例。研究要連同工具、樣本與年份一起讀，支持 MBTI 某一版本的證據，不能自動驗證費馬測驗或 A/T。讀來源與方法邊界時，也請留意還沒被證明的部分。\n\n各頁末尾的來源段會寫明所引研究與適用範圍。若某項主張只有框架說明、沒有對應研究，頁面會標明它是理論解釋；看到沒有出處的比例、預測或配對分數，可以先當成未核實資訊。",
               "question": "這些頁面有科學依據和原始來源嗎？"
             }
           ]
@@ -137,11 +137,11 @@
         "render_variant": "faq",
         "section_key": "faq",
         "sort_order": 30,
-        "title": "常见问题"
+        "title": "常見問題"
       },
       {
         "body_html": null,
-        "body_md": "官方 MBTI 描述四組偏好。A/T 屬於另外的延伸架構；使用相似字母不表示不同測驗完全等價。類型敘述與認知功能屬於理論解釋，不是已證實的心理機制。\n\nMcCrae 與 Costa（1989）在 267 名男性、201 名女性（19–93 歲）中，對照 1985 年 MBTI 與 NEO-PI 自評及同伴評價；摘要未說明具有代表性的國家樣本。其分析不支持真實二分或性質截然不同的類型，並發現與五因素模型部分維度重合。工具版本與樣本不可混用：出版方介紹了後續修訂，本頁沒有證明費馬測試分數的信度或效度。這項具體研究不能驗證本頁情境、判定個人類型，也不能解決所有後續測驗的問題。\n\nErford 等（2025）另彙總了 1999–2024 年使用英文版 MBTI Form M 的 193 項研究，報告較好的內部一致性（0.845–0.921）及與相似構念的聚合證據；但其納入的文獻中，手冊以外沒有獨立結構效度或重測信度研究。分數一致性不等於證實自然類型，也不能驗證 A/T 或移用於費馬測試。支持證據和研究缺口都要結合具體工具與樣本理解。\n\n本頁情境與練習為原創教育示例，不是臨床指導或群體研究結論。對照真實經歷和反例使用；不能僅憑類型診斷、招聘、選定職業或篩選伴侶。\n\n內容修訂於 2026 年 10 月 8 日。本頁為基於來源的教育性整理，不聲稱經過獨立臨床審校。\n\n- [四組偏好與使用範圍](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [A/T 來源與框架](https://www.16personalities.com/articles/our-theory)\n- [研究摘要](https://scholars.duke.edu/publication/1458465)\n- [Form M 信效度回顧](https://doi.org/10.1002/jcad.70006)\n- [類型使用倫理](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)\n\n- [官方偏好定義](https://www.myersbriggs.org/my-mbti-personality-type/the-mbti-preferences/)",
+        "body_md": "官方 MBTI 描述四組偏好。A/T 屬於另一套延伸；使用相似字母，不代表不同測驗完全等價。類型敘述與認知功能屬於理論解釋，不是已證實的心理機制。\n\nMcCrae 與 Costa（1989）在 267 名男性、201 名女性（19–93 歲）中，對照 1985 年 MBTI 與 NEO-PI 的自評及同伴評量；摘要未說明這是具代表性的全國樣本。分析結果不支持真實二分或性質截然不同的類型，並發現與五因素模型部分維度重疊。工具版本與樣本不能混用：出版方介紹了後續修訂，本頁沒有證明費馬測驗分數的信度或效度。這項研究不能驗證本頁情境、判定個人類型，也不能解決後續所有測驗的問題。\n\nErford 等（2025）另外彙整 1999–2024 年使用英文版 MBTI Form M 的 193 項研究，報告良好的內部一致性（0.845–0.921）以及與相似構念的聚合證據；但在納入的文獻中，手冊以外沒有獨立的結構效度或重測信度研究。分數一致性不等於證實自然類型，也不能驗證 A/T 或移用到費馬測驗。支持證據與研究缺口都要連同工具與樣本理解。\n\n本頁情境與練習為原創教學示例，不是臨床指導或群體研究結論。請對照真實經驗與反例使用；不能只憑類型診斷、招募、選定職涯或篩選伴侶。\n\n內容修訂於 2026 年 11 月 19 日。本頁是基於來源的教育性整理，不聲稱經過獨立臨床審閱。\n\n- [四組偏好與使用範圍](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [A/T 來源與框架](https://www.16personalities.com/articles/our-theory)\n- [研究摘要](https://scholars.duke.edu/publication/1458465)\n- [Form M 信效度回顧](https://doi.org/10.1002/jcad.70006)\n- [類型使用倫理](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)\n\n- [官方偏好定義](https://www.myersbriggs.org/my-mbti-personality-type/the-mbti-preferences/)\n\n費馬測驗採用獨立題本與計分，具體範圍見[計分與證據說明](/zh-TW/tests/mbti-personality-test-16-personality-types#method-and-evidence)。",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
@@ -152,16 +152,16 @@
     ],
     "seo_meta": {
       "canonical_url": "https://fermatmind.com/zh-TW/personality",
-      "og_description": "MBTI 16 型人格目录：解释四个字母、A/T 与功能理论边界，按问题浏览基础页、32 个后缀页和23个对比。提供阅读路径、FAQ、反例与研究来源。",
-      "og_title": "MBTI 16 型人格大全：字母解释、A/T 与类型对比",
+      "og_description": "查閱 MBTI 16 型人格、E/I 等四組字母的意思，以及 32 個 A/T 後綴說明。依手上的類型代碼找基礎介紹、同型 A/T 或跨型對照。",
+      "og_title": "MBTI 16 型人格完整解析：四組偏好、A/T 後綴與 16 型對照",
       "robots": "index,follow",
-      "seo_description": "MBTI 16 型人格目錄：解釋四個字母、A/T 與功能理論邊界，按問題瀏覽基礎頁、32 個後綴頁和23個對比。提供閱讀路徑、FAQ、反例與研究來源。",
-      "seo_title": "MBTI 16 型人格大全：字母解釋、A/T 與類型對比 | FermatMind",
-      "twitter_description": "MBTI 16 型人格目录：解释四个字母、A/T 与功能理论边界，按问题浏览基础页、32 个后缀页和23个对比。提供阅读路径、FAQ、反例与研究来源。",
-      "twitter_title": "MBTI 16 型人格大全：字母解释、A/T 与类型对比",
+      "seo_description": "查閱 MBTI 16 型人格、E/I 等四組字母的意思，以及 32 個 A/T 後綴說明。依手上的類型代碼找基礎介紹、同型 A/T 或跨型對照。",
+      "seo_title": "MBTI 16 型人格完整解析：四組偏好、A/T 後綴與 16 型對照 | FermatMind",
+      "twitter_description": "查閱 MBTI 16 型人格、E/I 等四組字母的意思，以及 32 個 A/T 後綴說明。依手上的類型代碼找基礎介紹、同型 A/T 或跨型對照。",
+      "twitter_title": "MBTI 16 型人格完整解析：四組偏好、A/T 後綴與 16 型對照",
       "updated_at": "2026-10-08"
     }
   },
   "payload_contract": "personality.mbti.hub.current.v1",
-  "source_content_sha256": "95943df1d2b35b8ed3768ad3257a00438a73d97f4b501d0ac0cb58fb4ae8acec"
+  "source_content_sha256": "5ddf32adf9de0d3cc6c7fe768d586b3791ebf0553b620fb8d4ca8515ed7b95e8"
 }
