@@ -17,7 +17,9 @@ final class PersonalityCurrentAuthorityPackage
 
     public const COMPILER_VERSION = 'personality.page.per_page.compiler.v1';
 
-    public const EXPECTED_PAGES_PER_LOCALE = 182;
+    public const EXPECTED_PAGES_PER_LOCALE = 295;
+
+    private const BASELINE_PAGES_PER_LOCALE = 182;
 
     /** @return array{root:string,manifest:array<string,mixed>,entries:array<string,array<string,mixed>>} */
     public function manifestIndex(string $backendRoot): array
@@ -88,10 +90,10 @@ final class PersonalityCurrentAuthorityPackage
         $coverage = $manifest['coverage'];
         $localeCount = count($manifest['locales']);
         $forAllLocales = static fn (int $count): int => $count * $localeCount;
-        if ($localeCounts !== array_fill_keys($manifest['locales'], self::EXPECTED_PAGES_PER_LOCALE)
-            || $frameworkCounts !== array_map($forAllLocales, ['big_five' => 52, 'enneagram' => 58, 'mbti' => 72])
+        if ($localeCounts !== array_fill_keys($manifest['locales'], self::pagesPerLocale($manifest['locales']))
+            || $frameworkCounts !== array_map($forAllLocales, ['big_five' => 52, 'enneagram' => 58, 'mbti' => $localeCount === 3 ? 185 : 72])
             || $pageKindCounts !== array_map($forAllLocales, [
-                'center' => 3, 'comparison_at' => 16, 'comparison_cross' => 7, 'core_type' => 9,
+                'center' => 3, 'comparison_at' => 16, 'comparison_cross' => $localeCount === 3 ? 120 : 7, 'core_type' => 9,
                 'domain' => 5, 'facet_detail' => 30, 'facet_hub' => 1, 'hub' => 3,
                 'instinctual_subtype' => 27, 'polarity' => 15, 'profile' => 16, 'variant' => 32,
                 'wing' => 18,
@@ -226,7 +228,7 @@ final class PersonalityCurrentAuthorityPackage
             || ! in_array($locales, [PersonalityPageContentContract::BASE_LOCALES, PersonalityPageContentContract::LOCALES], true)
             || ! $this->isHash($manifest['aggregate_sha256'] ?? null)
             || ! is_array($manifest['files'] ?? null) || ! array_is_list($manifest['files'])
-            || count($manifest['files']) !== self::EXPECTED_PAGES_PER_LOCALE * count($locales)
+            || count($manifest['files']) !== self::pagesPerLocale($locales) * count($locales)
             || ! is_array($manifest['coverage'] ?? null) || array_is_list($manifest['coverage'])
             || ! is_array($manifest['set_hashes'] ?? null) || array_is_list($manifest['set_hashes'])) {
             self::fail('PERSONALITY_CURRENT_MANIFEST_INVALID');
@@ -244,13 +246,21 @@ final class PersonalityCurrentAuthorityPackage
                 self::fail('PERSONALITY_CURRENT_MANIFEST_INVALID');
             }
         }
-        $expectedFiles = self::EXPECTED_PAGES_PER_LOCALE * count($locales);
+        $expectedFiles = self::pagesPerLocale($locales) * count($locales);
         if (($manifest['coverage']['files'] ?? null) !== $expectedFiles
             || ($manifest['coverage']['locale_pages'] ?? null) !== $expectedFiles
             || ($manifest['coverage']['locales'] ?? null) !== count($locales)
-            || ($manifest['coverage']['pages_per_locale'] ?? null) !== self::EXPECTED_PAGES_PER_LOCALE) {
+            || ($manifest['coverage']['pages_per_locale'] ?? null) !== self::pagesPerLocale($locales)) {
             self::fail('PERSONALITY_CURRENT_COVERAGE_INVALID');
         }
+    }
+
+    /** @param list<string> $locales */
+    private static function pagesPerLocale(array $locales): int
+    {
+        return $locales === PersonalityPageContentContract::BASE_LOCALES
+            ? self::BASELINE_PAGES_PER_LOCALE
+            : self::EXPECTED_PAGES_PER_LOCALE;
     }
 
     /** @param array<string,mixed> $entry */

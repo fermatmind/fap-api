@@ -17,11 +17,11 @@ final class PersonalityCurrentAuthorityPackageTest extends TestCase
         $index = $package->manifestIndex(base_path());
 
         $localeCount = count($index['manifest']['locales']);
-        $this->assertCount(182 * $localeCount, $index['entries']);
-        $this->assertSame(182, $index['manifest']['coverage']['pages_per_locale']);
-        $this->assertSame(['big_five' => 52 * $localeCount, 'enneagram' => 58 * $localeCount, 'mbti' => 72 * $localeCount], $index['manifest']['coverage']['by_framework']);
+        $this->assertCount(295 * $localeCount, $index['entries']);
+        $this->assertSame(295, $index['manifest']['coverage']['pages_per_locale']);
+        $this->assertSame(['big_five' => 52 * $localeCount, 'enneagram' => 58 * $localeCount, 'mbti' => 185 * $localeCount], $index['manifest']['coverage']['by_framework']);
         $this->assertSame(0, $index['manifest']['coverage']['baseline_locale_pages']);
-        $this->assertSame(182 * $localeCount, $index['manifest']['coverage']['enhanced_locale_pages']);
+        $this->assertSame(295 * $localeCount, $index['manifest']['coverage']['enhanced_locale_pages']);
         $this->assertSame(
             count($index['entries']),
             $index['manifest']['coverage']['baseline_locale_pages']
