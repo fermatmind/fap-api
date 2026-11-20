@@ -48,7 +48,8 @@ final class RiasecEnglishSelectedSourceReleaseTest extends TestCase
                     }
                     $atlas = $source['desktop_atlas_by_decile'][min(9, (int) floor($projection['scores']['dimensions'][array_search($selection['dimension_code'], array_column($projection['scores']['dimensions'], 'code'))]['score'] / 10))];
                     $this->assertSame($atlas['next_steps'], $slot['content']['atlas_next_steps']);
-                    $this->assertSame(array_slice($atlas['next_steps'], 1), $slot['content']['desktop_insight_questions']);
+                    $this->assertSame($source['validation_questions'], $slot['content']['desktop_insight_questions']);
+                    $this->assertCount(3, $slot['content']['desktop_insight_questions']);
                     $this->assertSame($source[$selection['selected_detail_key']], $slot['content'][$selection['selected_detail_key']]);
                     $this->assertCount(1, array_intersect(['high_score_reading', 'medium_score_reading', 'low_score_safe_reading'], array_keys($slot['content'])));
                     $this->assertSame($selection['is_top_three'] ? 'visible' : 'collapsed', $slot['slot_visibility']);
