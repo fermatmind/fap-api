@@ -9,7 +9,7 @@ use RuntimeException;
 
 final class EnneagramPrivateResultPackLoader
 {
-    private const SUPPORTED_COMPILER_VERSIONS = ['1.1.0', '1.2.0', '1.3.0', '1.4.0'];
+    private const SUPPORTED_COMPILER_VERSIONS = ['1.1.0', '1.2.0', '1.3.0'];
 
     public function __construct(
         private readonly ContentPackV2Resolver $resolver,
@@ -107,28 +107,25 @@ final class EnneagramPrivateResultPackLoader
         $compiledHash = strtolower(trim((string) ($payload['compiled_hash'] ?? '')));
         $unsigned = $payload;
         unset($unsigned['compiled_hash']);
-        $compilerVersion = data_get($payload, 'compiler.version');
-        $legacyCompiler = in_array($compilerVersion, ['1.1.0', '1.2.0', '1.3.0'], true);
-        $expectedForms = $legacyCompiler ? ['e105', 'fc144'] : ['e105'];
         if (($payload['schema'] ?? null) !== EnneagramPrivateResultCompileService::SCHEMA
             || ($payload['authority_id'] ?? null) !== EnneagramPrivateResultCompileService::AUTHORITY_ID
             || ($payload['scale_code'] ?? null) !== 'ENNEAGRAM'
             || ($payload['version'] ?? null) !== EnneagramPrivateResultCompileService::PACK_VERSION
             || ($payload['runtime_contract'] ?? null) !== 'enneagram.report.v2'
             || data_get($payload, 'compiler.schema') !== EnneagramPrivateResultCompileService::COMPILER_SCHEMA
-            || ! in_array($compilerVersion, self::SUPPORTED_COMPILER_VERSIONS, true)
+            || ! in_array(data_get($payload, 'compiler.version'), self::SUPPORTED_COMPILER_VERSIONS, true)
             || preg_match('/\A[0-9a-f]{64}\z/', $sourceHash) !== 1
             || preg_match('/\A[0-9a-f]{64}\z/', $compiledHash) !== 1
             || ! hash_equals($compiledHash, hash('sha256', $this->canonicalJson($unsigned)))
             || data_get($payload, 'coverage.locales') !== ['zh-CN', 'en']
             || (int) data_get($payload, 'coverage.pair_count', 0) !== 36
-            || data_get($payload, 'coverage.forms') !== $expectedForms
-            || array_keys((array) ($payload['form_projections'] ?? [])) !== $expectedForms
+            || data_get($payload, 'coverage.forms') !== ['e105', 'fc144']
+            || data_get($payload, 'coverage.active_forms', ['e105']) !== ['e105']
             || (int) data_get($payload, 'coverage.type_section_count', 0) !== 20
             || (int) data_get($payload, 'coverage.total_section_count_per_locale', 0) !== 180
             || (int) data_get($payload, 'coverage.growth_action_count_per_type', 0) !== 5
             || data_get($payload, 'form_projections.e105.source_hash') !== $sourceHash
-            || ($legacyCompiler && data_get($payload, 'form_projections.fc144.source_hash') !== $sourceHash)) {
+            || data_get($payload, 'form_projections.fc144.source_hash') !== $sourceHash) {
             throw new RuntimeException('ENNEAGRAM_PRIVATE_RESULT_ACTIVE_ARTIFACT_CONTRACT_INVALID');
         }
 

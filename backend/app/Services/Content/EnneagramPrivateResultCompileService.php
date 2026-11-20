@@ -20,7 +20,7 @@ final class EnneagramPrivateResultCompileService
 
     public const COMPILER_SCHEMA = 'fap.enneagram.private_result.compiler.v1';
 
-    public const COMPILER_VERSION = '1.4.0';
+    public const COMPILER_VERSION = '1.3.0';
 
     private const MAX_SECTION_BIGRAM_SIMILARITY = 0.62;
 
@@ -108,6 +108,7 @@ final class EnneagramPrivateResultCompileService
             'coverage' => $coverage,
             'form_projections' => [
                 'e105' => ['form_code' => 'enneagram_likert_105', 'methodology_variant' => 'e105_standard', 'source_hash' => $sourceHash],
+                'fc144' => ['form_code' => 'enneagram_forced_choice_144', 'methodology_variant' => 'fc144_forced_choice', 'source_hash' => $sourceHash],
             ],
             'locale_assets' => $localeAssets,
         ];
@@ -248,7 +249,7 @@ final class EnneagramPrivateResultCompileService
             'locales' => ['zh-CN', 'en'], 'types' => ['1', '2', '3', '4', '5', '6', '7', '8', '9'], 'pair_count' => 36,
             'type_section_count' => 20, 'total_section_count_per_locale' => 180, 'growth_action_count_per_type' => 5,
             'groups' => ['centers', 'stances', 'harmonics'], 'interpretation_states' => ['clear', 'close_call', 'diffuse', 'low_quality'],
-            'scenarios' => ['work', 'relationship', 'growth', 'state', 'observation'], 'forms' => ['e105'],
+            'scenarios' => ['work', 'relationship', 'growth', 'state', 'observation'], 'forms' => ['e105', 'fc144'], 'active_forms' => ['e105'],
             'secondary_surfaces' => ['faq', 'technical_note', 'share', 'pdf', 'print', 'history', 'compare', 'secondary'],
         ];
     }
