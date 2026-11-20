@@ -7,9 +7,12 @@ use App\Models\Result;
 use App\Services\Analytics\ResultVisibilityObservation;
 use App\Services\Auth\FmTokenService;
 use Carbon\CarbonImmutable;
+use Illuminate\Database\Connection;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use PDOException;
 use Tests\Concerns\SeedsFunnelAnalyticsScenario;
 use Tests\TestCase;
 
@@ -80,8 +83,17 @@ class ResultVisibilityObservationTest extends TestCase
     public function test_write_failure_is_not_accepted(): void
     {
         [$id, $token, $body] = $this->scenario();
-        DB::unprepared("CREATE TRIGGER fail_visible BEFORE INSERT ON events WHEN NEW.event_code = 'result_visible_observed' BEGIN SELECT RAISE(FAIL, 'simulated write failure'); END");
+        $failedWrites = 0;
+        DB::connection()->beforeExecuting(static function (string $query, array $bindings, Connection $connection) use (&$failedWrites): void {
+            $eventsTable = $connection->getQueryGrammar()->wrapTable('events');
+            if (str_starts_with($query, "insert into {$eventsTable} ") && in_array(ResultVisibilityObservation::EVENT, $bindings, true)) {
+                $failedWrites++;
+                throw new QueryException($connection->getName(), $query, $bindings, new PDOException('Simulated observation write failure'));
+            }
+        });
+
         $this->withToken($token)->postJson("/api/v0.3/attempts/$id/result-observation", $body)->assertStatus(503)->assertJsonPath('ok', false);
+        $this->assertSame(1, $failedWrites);
         $this->assertSame(0, DB::table('events')->where('event_code', ResultVisibilityObservation::EVENT)->count());
     }
 }

@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace Tests\Feature\Friendship;
 
 use App\Services\Friendship\FriendshipQuiz;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
 final class FriendshipQuizTest extends TestCase
 {
+    use RefreshDatabase;
+
     private string $owner;
 
     private string $friend;
@@ -22,9 +25,6 @@ final class FriendshipQuizTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        (require database_path('migrations/2026_10_26_150000_create_friendship_challenges.php'))->up();
-        (require database_path('migrations/2026_10_26_180000_create_friendship_progress.php'))->up();
-        (require database_path('migrations/2026_11_12_130000_create_friendship_browser_grants.php'))->up();
         $this->owner = bin2hex(random_bytes(32));
         $this->friend = bin2hex(random_bytes(32));
         $pack = app(FriendshipQuiz::class)->catalog();
