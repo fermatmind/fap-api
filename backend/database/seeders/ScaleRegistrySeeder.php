@@ -151,7 +151,7 @@ final class ScaleRegistrySeeder extends Seeder
         $this->command?->info('ScaleRegistrySeeder: MBTI scale upserted.');
 
         $big5PackId = 'BIG5_OCEAN';
-        $big5DirVersion = 'v1';
+        $big5DirVersion = 'v1-form-90';
         $big5Content = $this->catalogContent(
             enTitle: 'Big Five Personality Test (OCEAN Model)',
             zhTitle: '大五人格测试（OCEAN 模型）',
@@ -172,12 +172,12 @@ final class ScaleRegistrySeeder extends Seeder
             enSeoCopy: 'This report describes five continuous trait dimensions for self-observation. FermatMind does not currently publish specific reliability, validity, norm, or percentile evidence for this assessment.',
             zhSeoCopy: '该报告描述五个连续特质维度，供自我观察参考；费马测试当前未公开本测评的具体信度、效度、常模或百分位证据。'
         );
-        $big5Content['zh']['when_to_use'] = '120题完整版约15分钟，90题标准版约11分钟；可根据希望的题量与细度选择版本。';
-        $big5Content['zh']['how_it_works'][0] = '选择120题完整版（约15分钟）或90题标准版（约11分钟），并在一次专注会话中完成。';
-        $big5Content['zh']['faq'][0]['a'] = '120题完整版约15分钟，90题标准版约11分钟。';
-        $big5Content['en']['when_to_use'] = 'Choose the 120-question full version (about 15 minutes) or the 90-question standard version (about 11 minutes) based on the depth you want.';
-        $big5Content['en']['how_it_works'][0] = 'Choose either the 120-question full version (about 15 minutes) or the 90-question standard version (about 11 minutes), then complete it in one focused session.';
-        $big5Content['en']['faq'][0]['a'] = 'The 120-question full version takes about 15 minutes; the 90-question standard version takes about 11 minutes.';
+        $big5Content['zh']['when_to_use'] = '90 题，预计约 11 分钟。';
+        $big5Content['zh']['how_it_works'][0] = '请按自己平时的情况完成全部 90 题，预计约 11 分钟。';
+        $big5Content['zh']['faq'][0]['a'] = '90 题，预计约 11 分钟。';
+        $big5Content['en']['when_to_use'] = 'The 90-question test takes about 11 minutes.';
+        $big5Content['en']['how_it_works'][0] = 'Answer all 90 items based on what is typical for you. Allow about 11 minutes.';
+        $big5Content['en']['faq'][0]['a'] = 'The 90-question test takes about 11 minutes.';
 
         $big5Payload = [
             'code' => 'BIG5_OCEAN',
@@ -206,8 +206,8 @@ final class ScaleRegistrySeeder extends Seeder
                 'enabled_regions' => ['CN_MAINLAND', 'GLOBAL'],
                 'rollout_ratio' => 1.0,
                 'paywall_mode' => 'free_only',
-                'forms' => ['big5_120', 'big5_90'],
-                'default_form_code' => 'big5_120',
+                'forms' => ['big5_90'],
+                'default_form_code' => 'big5_90',
             ],
             'view_policy_json' => [
                 'free_sections' => ['disclaimer_top', 'summary', 'domains_overview', 'disclaimer'],

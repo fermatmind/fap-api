@@ -142,11 +142,11 @@ class AttemptStartService
             $resolvedQualityVersion = trim((string) ($resolvedForm['quality_version'] ?? ''));
             $resolvedQuestionCount = (int) ($resolvedForm['question_count'] ?? 0);
         } elseif (strtoupper($scaleCode) === 'BIG5_OCEAN') {
-            $resolvedForm = $this->bigFiveFormCatalog()->resolve($dto->formCode, $packId);
+            $resolvedForm = $this->bigFiveFormCatalog()->resolveActive($dto->formCode, $packId);
             $packId = (string) ($resolvedForm['pack_id'] ?? $packId);
             $dirVersion = (string) ($resolvedForm['dir_version'] ?? $dirVersion);
             $contentPackageVersion = (string) ($resolvedForm['content_package_version'] ?? '');
-            $resolvedFormCode = (string) ($resolvedForm['form_code'] ?? 'big5_120');
+            $resolvedFormCode = (string) ($resolvedForm['form_code'] ?? 'big5_90');
             $resolvedNormVersion = trim((string) ($resolvedForm['norm_version'] ?? ''));
             $resolvedScoringSpecVersion = trim((string) ($resolvedForm['scoring_spec_version'] ?? ''));
             $resolvedQualityVersion = trim((string) ($resolvedForm['quality_version'] ?? ''));

@@ -202,13 +202,13 @@ class ScalesController extends Controller
                 $dirVersion = (string) ($resolvedForm['dir_version'] ?? $dirVersion);
                 $resolvedFormCode = (string) ($resolvedForm['form_code'] ?? 'mbti_144');
             } elseif ($resolvedScaleCode === 'BIG5_OCEAN') {
-                $resolvedForm = $this->bigFiveFormCatalog->resolve(
+                $resolvedForm = $this->bigFiveFormCatalog->resolveActive(
                     $this->requestedFormCode($request),
                     $packId
                 );
                 $packId = (string) ($resolvedForm['pack_id'] ?? $packId);
                 $dirVersion = (string) ($resolvedForm['dir_version'] ?? $dirVersion);
-                $resolvedFormCode = (string) ($resolvedForm['form_code'] ?? 'big5_120');
+                $resolvedFormCode = (string) ($resolvedForm['form_code'] ?? 'big5_90');
                 $resolvedQuestionCount = (int) ($resolvedForm['question_count'] ?? 0);
             } elseif ($resolvedScaleCode === 'ENNEAGRAM') {
                 $resolvedForm = $this->enneagramFormCatalog->resolveActive(

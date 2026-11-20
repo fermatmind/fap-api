@@ -31,9 +31,9 @@ return [
     'mbti_response_cache_store' => env('MBTI_RESPONSE_CACHE_STORE', 'hot_redis'),
     'mbti_lookup_cache_ttl_seconds' => (int) env('MBTI_LOOKUP_CACHE_TTL_SECONDS', 600),
     'public_scale_cache_store' => env('PUBLIC_SCALE_CACHE_STORE'),
-    'public_scale_lookup_schema_version' => env('PUBLIC_SCALE_LOOKUP_CACHE_SCHEMA_VERSION', 'v1'),
+    'public_scale_lookup_schema_version' => env('PUBLIC_SCALE_LOOKUP_CACHE_SCHEMA_VERSION', 'v2'),
     'public_scale_lookup_cache_ttl_seconds' => (int) env('PUBLIC_SCALE_LOOKUP_CACHE_TTL_SECONDS', env('MBTI_LOOKUP_CACHE_TTL_SECONDS', 600)),
-    'public_scale_catalog_schema_version' => env('PUBLIC_SCALE_CATALOG_CACHE_SCHEMA_VERSION', 'v1'),
+    'public_scale_catalog_schema_version' => env('PUBLIC_SCALE_CATALOG_CACHE_SCHEMA_VERSION', 'v2'),
     'public_scale_catalog_fresh_ttl_seconds' => (int) env('PUBLIC_SCALE_CATALOG_FRESH_TTL_SECONDS', 300),
     'public_scale_catalog_stale_ttl_seconds' => (int) env('PUBLIC_SCALE_CATALOG_STALE_TTL_SECONDS', 3600),
     'public_scale_catalog_ttl_jitter_seconds' => (int) env('PUBLIC_SCALE_CATALOG_TTL_JITTER_SECONDS', 30),
@@ -114,9 +114,10 @@ return [
         ],
     ],
     'big5_forms' => [
-        'default_form_code' => 'big5_120',
+        'default_form_code' => 'big5_90',
         'forms' => [
             'big5_120' => [
+                'accepts_new_attempts' => false,
                 'dir_version' => 'v1',
                 'question_count' => 120,
                 'aliases' => [

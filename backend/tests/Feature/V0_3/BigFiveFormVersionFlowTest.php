@@ -75,16 +75,39 @@ final class BigFiveFormVersionFlowTest extends TestCase
         return $answers;
     }
 
+    public function test_lookup_does_not_publish_retired_forms_from_stale_registry_rows(): void
+    {
+        $this->seedScales();
+
+        foreach (['scales_registry', 'scales_registry_v2'] as $table) {
+            $row = DB::table($table)->where('org_id', 0)->where('code', 'BIG5_OCEAN');
+            $capabilities = json_decode((string) $row->value('capabilities_json'), true, 512, JSON_THROW_ON_ERROR);
+            $capabilities['forms'] = ['big5_120', 'big5_90'];
+            $capabilities['default_form_code'] = 'big5_120';
+            $row->update(['capabilities_json' => json_encode($capabilities, JSON_THROW_ON_ERROR)]);
+        }
+
+        $this->getJson('/api/v0.3/scales/lookup?slug=big-five-personality-test-ocean-model&locale=zh')
+            ->assertOk()
+            ->assertJsonPath('capabilities.forms', ['big5_90'])
+            ->assertJsonPath('capabilities.default_form_code', 'big5_90')
+            ->assertJsonPath('forms.0.question_count', 90)
+            ->assertJsonCount(1, 'forms');
+    }
+
     public function test_big5_questions_support_form_version_delivery(): void
     {
         $this->seedScales();
 
         $default = $this->getJson('/api/v0.3/scales/BIG5_OCEAN/questions');
         $default->assertStatus(200);
-        $default->assertJsonPath('form_code', 'big5_120');
-        $default->assertJsonPath('dir_version', 'v1');
-        $default->assertJsonPath('content_package_version', 'v1');
-        $this->assertCount(120, (array) $default->json('questions.items'));
+        $default->assertJsonPath('form_code', 'big5_90');
+        $default->assertJsonPath('dir_version', 'v1-form-90');
+        $default->assertJsonPath('content_package_version', 'v1-form-90');
+        $this->assertCount(90, (array) $default->json('questions.items'));
+
+        $this->getJson('/api/v0.3/scales/BIG5_OCEAN/questions?form=120')
+            ->assertStatus(422)->assertJsonPath('error_code', 'INVALID_FORM_CODE');
 
         $short = $this->getJson('/api/v0.3/scales/BIG5_OCEAN/questions?form=standard_90');
         $short->assertStatus(200);
@@ -98,7 +121,7 @@ final class BigFiveFormVersionFlowTest extends TestCase
         $invalid->assertJsonPath('error_code', 'INVALID_FORM_CODE');
     }
 
-    public function test_big5_start_submit_scoring_supports_90_and_keeps_120_default(): void
+    public function test_big5_start_submit_scoring_supports_90_and_finishes_existing_120(): void
     {
         $this->seedScales();
 
@@ -167,6 +190,7 @@ final class BigFiveFormVersionFlowTest extends TestCase
         $this->assertNotNull($submitEvent90);
         $this->assertSame('big5_90', (string) data_get(json_decode((string) ($submitEvent90->meta_json ?? '{}'), true), 'form_code'));
 
+        config(['content_packs.big5_forms.forms.big5_120.accepts_new_attempts' => true]);
         $anon120 = 'big5-form-120-anon';
         $token120 = $this->issueAnonToken($anon120);
 
@@ -175,6 +199,7 @@ final class BigFiveFormVersionFlowTest extends TestCase
         ])->postJson('/api/v0.3/attempts/start', [
             'scale_code' => 'BIG5_OCEAN',
             'anon_id' => $anon120,
+            'form_code' => 'big5_120',
         ]);
         $start120->assertStatus(200);
         $start120->assertJsonPath('form_code', 'big5_120');
@@ -183,10 +208,17 @@ final class BigFiveFormVersionFlowTest extends TestCase
         $start120->assertJsonPath('scoring_spec_version', 'big5_spec_2026Q1_v1');
 
         $attemptId120 = (string) $start120->json('attempt_id');
-        $questions120 = $this->getJson('/api/v0.3/scales/BIG5_OCEAN/questions');
+        $questions120 = $this->getJson('/api/v0.3/scales/BIG5_OCEAN/questions?form=big5_120');
         $questions120->assertStatus(200);
         $answers120 = $this->buildAnswersFromItems((array) $questions120->json('questions.items'));
         $this->assertCount(120, $answers120);
+
+        config(['content_packs.big5_forms.forms.big5_120.accepts_new_attempts' => false]);
+        $this->withHeaders(['X-Anon-Id' => 'big5-retired-new'])->postJson('/api/v0.3/attempts/start', [
+            'scale_code' => 'BIG5_OCEAN',
+            'anon_id' => 'big5-retired-new',
+            'form_code' => 'big5_120',
+        ])->assertStatus(422)->assertJsonPath('error_code', 'INVALID_FORM_CODE');
 
         $submit120 = $this->withHeaders([
             'X-Anon-Id' => $anon120,

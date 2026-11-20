@@ -208,10 +208,10 @@ final class AttemptStartReuseTest extends TestCase
     {
         $this->seedScales();
 
-        $first = $this->startAttempt('anon-big5-reuse', 'BIG5_OCEAN', 'big5_120');
+        $first = $this->startAttempt('anon-big5-reuse', 'BIG5_OCEAN', 'big5_90');
         $first->assertStatus(200);
 
-        $second = $this->startAttempt('anon-big5-reuse', 'BIG5_OCEAN', 'big5_120', [
+        $second = $this->startAttempt('anon-big5-reuse', 'BIG5_OCEAN', 'big5_90', [
             'X-Resume-Token' => (string) $first->json('resume_token'),
         ]);
         $second->assertStatus(200);
@@ -219,6 +219,6 @@ final class AttemptStartReuseTest extends TestCase
         $this->assertSame((string) $first->json('attempt_id'), (string) $second->json('attempt_id'));
         $this->assertSame(1, DB::table('attempts')->count());
         $this->assertSame(1, DB::table('attempt_drafts')->count());
-        $this->assertSame('big5_120', (string) $second->json('form_code'));
+        $this->assertSame('big5_90', (string) $second->json('form_code'));
     }
 }

@@ -130,8 +130,8 @@ class ScalesLookupTest extends TestCase
             $response->assertJsonPath('commercial.upgrade_sku', null);
             $response->assertJsonPath('commercial.upgrade_sku_anchor', null);
             $response->assertJsonPath('commercial.offers', []);
-            $response->assertJsonPath('forms.0.form_code', 'big5_120');
-            $response->assertJsonPath('forms.1.form_code', 'big5_90');
+            $response->assertJsonPath('forms.0.form_code', 'big5_90');
+            $response->assertJsonCount(1, 'forms');
             $this->assertStringNotContainsString('SKU_BIG5_FULL_REPORT_299', $response->getContent());
         }
     }
@@ -148,8 +148,7 @@ class ScalesLookupTest extends TestCase
                 ['mbti_93', false, 93, 10],
             ],
             'big-five-personality-test-ocean-model' => [
-                ['big5_120', true, 120, 15],
-                ['big5_90', false, 90, 11],
+                ['big5_90', true, 90, 11],
             ],
             'enneagram-personality-test-nine-types' => [
                 ['enneagram_likert_105', true, 105, 12],
@@ -268,11 +267,11 @@ class ScalesLookupTest extends TestCase
 
         $bigFive = $items->firstWhere('slug', 'big-five-personality-test-ocean-model');
         $this->assertIsArray($bigFive);
-        $this->assertSame(120, $bigFive['questions_count']);
-        $this->assertSame(15, $bigFive['time_minutes']);
+        $this->assertSame(90, $bigFive['questions_count']);
+        $this->assertSame(11, $bigFive['time_minutes']);
         $this->assertSame(0, $bigFive['highlight_rating']);
-        $this->assertSame('big5_120', data_get($bigFive, 'forms.0.form_code'));
-        $this->assertSame('big5_90', data_get($bigFive, 'forms.1.form_code'));
+        $this->assertSame('big5_90', data_get($bigFive, 'forms.0.form_code'));
+        $this->assertCount(1, $bigFive['forms']);
 
         $enneagram = $items->firstWhere('slug', 'enneagram-personality-test-nine-types');
         $this->assertIsArray($enneagram);
