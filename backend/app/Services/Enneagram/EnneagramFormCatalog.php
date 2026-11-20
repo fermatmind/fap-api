@@ -18,6 +18,16 @@ final class EnneagramFormCatalog
         private readonly EnneagramPackLoader $packLoader,
     ) {}
 
+    public function resolveActive(?string $requestedFormCode, string $packId): array
+    {
+        $canonical = $this->canonicalize($requestedFormCode);
+        if (($this->formsConfig()[$canonical]['accepts_new_attempts'] ?? true) === false) {
+            throw new ApiProblemException(410, 'FORM_RETIRED', 'This assessment form no longer accepts new attempts.');
+        }
+
+        return $this->resolve($canonical, $packId);
+    }
+
     /**
      * @return array{
      *   form_code:string,

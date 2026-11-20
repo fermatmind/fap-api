@@ -16,7 +16,7 @@ final class EnneagramAssessmentFlowTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_enneagram_questions_support_likert_105_and_forced_choice_144_forms(): void
+    public function test_enneagram_serves_105_questions_and_rejects_retired_forms(): void
     {
         $this->seedScales();
 
@@ -31,16 +31,16 @@ final class EnneagramAssessmentFlowTest extends TestCase
         $likert->assertJsonPath('questions.items.0.options.0.code', '-2');
         $likert->assertJsonPath('questions.items.0.options.4.code', '2');
 
-        $forced = $this->getJson('/api/v0.3/scales/ENNEAGRAM/questions?form_code=enneagram_forced_choice_144&locale=zh-CN');
-        $forced->assertStatus(200);
-        $forced->assertJsonPath('ok', true);
-        $forced->assertJsonPath('scale_code', 'ENNEAGRAM');
-        $forced->assertJsonPath('form_code', 'enneagram_forced_choice_144');
-        $forced->assertJsonPath('dir_version', 'v1-forced-choice-144');
-        $forced->assertJsonPath('questions.schema', 'fap.questions.v1');
-        $this->assertCount(144, (array) $forced->json('questions.items'));
-        $forced->assertJsonPath('questions.items.0.options.0.code', 'A');
-        $forced->assertJsonPath('questions.items.0.options.1.code', 'B');
+        foreach (['enneagram_forced_choice_144', '144', 'forced_choice_144', 'rheti_style_144'] as $formCode) {
+            $this->getJson('/api/v0.3/scales/ENNEAGRAM/questions?form_code='.$formCode)
+                ->assertStatus(410)
+                ->assertJsonPath('error_code', 'FORM_RETIRED');
+            $this->withHeaders(['X-Anon-Id' => 'anon_enneagram_retired'])->postJson('/api/v0.3/attempts/start', [
+                'scale_code' => 'ENNEAGRAM',
+                'anon_id' => 'anon_enneagram_retired',
+                'form_code' => $formCode,
+            ])->assertStatus(410)->assertJsonPath('error_code', 'FORM_RETIRED');
+        }
     }
 
     public function test_enneagram_likert_105_start_submit_and_result_readback_use_backend_result(): void
@@ -105,13 +105,14 @@ final class EnneagramAssessmentFlowTest extends TestCase
         $readback->assertJsonPath('result.computed_at', (string) data_get($stored->result_json, 'computed_at'));
     }
 
-    public function test_enneagram_forced_choice_144_start_submit_and_result_readback_use_backend_result(): void
+    public function test_existing_forced_choice_attempt_can_submit_and_read_result_after_retirement(): void
     {
         $this->seedScales();
 
         $anonId = 'anon_enneagram_forced';
         $token = $this->issueAnonToken($anonId);
 
+        config(['content_packs.enneagram_forms.forms.enneagram_forced_choice_144.accepts_new_attempts' => true]);
         $start = $this->withHeaders(['X-Anon-Id' => $anonId])->postJson('/api/v0.3/attempts/start', [
             'scale_code' => 'ENNEAGRAM',
             'anon_id' => $anonId,
@@ -134,6 +135,8 @@ final class EnneagramAssessmentFlowTest extends TestCase
         $questions = $this->getJson('/api/v0.3/scales/ENNEAGRAM/questions?form_code=enneagram_forced_choice_144');
         $answers = $this->buildAnswersFromItems((array) $questions->json('questions.items'));
         $this->assertCount(144, $answers);
+
+        config(['content_packs.enneagram_forms.forms.enneagram_forced_choice_144.accepts_new_attempts' => false]);
 
         $submit = $this->withHeaders([
             'X-Anon-Id' => $anonId,

@@ -182,7 +182,7 @@ final class MbtiPrewarm extends Command
                 default => $forms,
             },
             'BIG5_OCEAN' => ['big5_120', 'big5_90'],
-            'ENNEAGRAM' => ['enneagram_likert_105', 'enneagram_forced_choice_144'],
+            'ENNEAGRAM' => ['enneagram_likert_105'],
             'RIASEC' => ['riasec_60', 'riasec_140'],
             default => [null],
         };

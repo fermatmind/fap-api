@@ -50,6 +50,8 @@ final class EnneagramGoldenCasesTest extends TestCase
         $anonId = 'anon_enneagram_'.$scenarioId;
         $token = $this->issueAnonToken($anonId);
 
+        config(['content_packs.enneagram_forms.forms.enneagram_forced_choice_144.accepts_new_attempts' => $questionCount === 144]);
+
         $start = $this->withHeaders(['X-Anon-Id' => $anonId])->postJson('/api/v0.3/attempts/start', [
             'scale_code' => 'ENNEAGRAM',
             'anon_id' => $anonId,
@@ -70,6 +72,8 @@ final class EnneagramGoldenCasesTest extends TestCase
             'Authorization' => 'Bearer '.$token,
             'X-Anon-Id' => $anonId,
         ];
+        config(['content_packs.enneagram_forms.forms.enneagram_forced_choice_144.accepts_new_attempts' => false]);
+
         $submit = $this->withHeaders($headers)->postJson('/api/v0.3/attempts/submit', [
             'attempt_id' => $attemptId,
             'answers' => $answers,

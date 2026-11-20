@@ -2,18 +2,18 @@
     "artifacts": [
         {
             "path": "private_result.compiled.json",
-            "sha256": "f0f2401b1c313b1d3f80cb2479cff470d345f90bbeb540e2e4d836e6d7a2634c"
+            "sha256": "2163daecadfdb83d9c991c4662f3b93aae18a1e2d352d9d2a43a3ed49fb50bf8"
         }
     ],
     "authority_id": "FERMATMIND_ENNEAGRAM_PRIVATE_RESULT_CANONICAL",
     "authority_root": "backend/content_packs/ENNEAGRAM/v2/registry",
-    "compiled_hash": "cd8812aa5d8c7cc45b68a1ec7e87090b90eb1bcab62a2d2bfd6b86a8e655c1cd",
+    "compiled_hash": "bc25a2755dd67008c59bad7ac02cd53e8d88ef981e5b95a0f599740945fca9ad",
     "compiled_hash_rule": "sha256(canonical JSON of compiled payload excluding compiled_hash)",
     "compiler": {
         "schema": "fap.enneagram.private_result.compiler.v1",
-        "version": "1.3.0"
+        "version": "1.4.0"
     },
-    "content_hash": "7fe3a9ebb43d42a42a55ab90e63964eb511f0d509f6f6d2ac7f1fe3304e15365",
+    "content_hash": "5ca34643f38383286e45962b3a2642b8533b65d517e3db26158838cd1ecf659f",
     "content_maturity_values": [
         "scaffold",
         "p0_placeholder",
@@ -24,8 +24,7 @@
     ],
     "coverage": {
         "forms": [
-            "e105",
-            "fc144"
+            "e105"
         ],
         "groups": [
             "centers",
@@ -109,7 +108,7 @@
                 ],
                 "role": "seven-chapter candidate sections and growth actions",
                 "schema": "fap.enneagram.chapter_registry.v1",
-                "sha256": "ce491ceda5b12b7f0f049fe8bee59a71e36ac15d1b5f49d50af05f89a2b7186b"
+                "sha256": "96080bbeceb8abb55cb001977a00c3ecdc300ffcf957e88fa2a5c6411a197f67"
             },
             {
                 "consumer_surfaces": [
@@ -162,9 +161,9 @@
                     "locale",
                     "entries"
                 ],
-                "role": "E105 and FC144 method boundaries",
+                "role": "active E105 and historical method boundaries",
                 "schema": "fap.enneagram.method_registry.v1",
-                "sha256": "d62556fc1cfcb67a772781272bba17953bc89e1de646af7a96e942b3da3fdc01"
+                "sha256": "eb6bea2cec6391c354f9e46c5af7fb0666f5c73c490e27d9243a89a088d951e7"
             },
             {
                 "consumer_surfaces": [
@@ -283,7 +282,7 @@
                 ],
                 "role": "page, FAQ, share, PDF, print, history, compare, and secondary surface copy",
                 "schema": "fap.enneagram.surface_registry.v1",
-                "sha256": "335c63152dbc583f257af1009a784bf05df733265b725be1b38db892bbdaf321"
+                "sha256": "e9af987532fe8b61ba02f37de29deb9a1e7d1787d8ae7c30c4d79aa1f038cf8c"
             },
             {
                 "consumer_surfaces": [
@@ -303,7 +302,7 @@
                 ],
                 "role": "technical note sections",
                 "schema": "fap.enneagram.technical_note_registry.v1",
-                "sha256": "df0e2edadb537fd4cf71fddce472e5e916d912c1c764c42b80ad89edb59aa52d"
+                "sha256": "5fb7190cc54c6f245db5cfb4e8e34829476ae9ccffa0a7ee7f2e419f55906891"
             },
             {
                 "consumer_surfaces": [
@@ -382,7 +381,7 @@
                 ],
                 "role": "seven-chapter candidate sections and growth actions",
                 "schema": "fap.enneagram.chapter_registry.v1",
-                "sha256": "b687eaff4981732ea772158659cfd16272fdade1e6da676c4ca0b555998ba37a"
+                "sha256": "273e67760a2986c59bf5e4d8d0dd1537be8eb82862eaf98fdc4320211ae5fb78"
             },
             {
                 "consumer_surfaces": [
@@ -435,9 +434,9 @@
                     "locale",
                     "entries"
                 ],
-                "role": "E105 and FC144 method boundaries",
+                "role": "active E105 and historical method boundaries",
                 "schema": "fap.enneagram.method_registry.v1",
-                "sha256": "50831948e46690bd732697c659da3873bb8f65e794214531e5fded653e253b50"
+                "sha256": "116ec17708b09f7e029d61cc7a324fb545892641575f461aff20584c06167f2b"
             },
             {
                 "consumer_surfaces": [
@@ -556,7 +555,7 @@
                 ],
                 "role": "page, FAQ, share, PDF, print, history, compare, and secondary surface copy",
                 "schema": "fap.enneagram.surface_registry.v1",
-                "sha256": "560b708446aeb2af6ab17ab4f5f5916d56e4fa874a157c12e9557cac3e9e2eaa"
+                "sha256": "1a0dd926fd1223f22be94b910a46f7c50942c03b0f851d6f95bd736d751ef931"
             },
             {
                 "consumer_surfaces": [
@@ -576,7 +575,7 @@
                 ],
                 "role": "technical note sections",
                 "schema": "fap.enneagram.technical_note_registry.v1",
-                "sha256": "1a71ab86862e97513b1a2f8cb1072be7af6d15ae132129161d5587f1f93c3d9e"
+                "sha256": "e4dbdc49a7659525ce0dd230e5ecb3ac2956cbbeea574d436606eaaf774c969e"
             },
             {
                 "consumer_surfaces": [
@@ -638,8 +637,8 @@
         ]
     },
     "locale_source_hashes": {
-        "en": "8592110210dfeb7a646254e3f16a1ef0f5a5078fd943cd8c179898ff37197ae6",
-        "zh-CN": "5239f7147d4b88d57f5a13b0d2afedb732487626dca5bdbd599c800d6ac7645c"
+        "en": "90a1647267187afccf2d7c9298cffb97f89528e08e7616677e39af8fd3d40528",
+        "zh-CN": "83a5cb650385df94797933fc1a5c41b8387d52ec7b0f1515a269ef5b3d3bf757"
     },
     "locales": [
         "zh-CN",
@@ -748,7 +747,7 @@
             ],
             "role": "seven-chapter candidate sections and growth actions",
             "schema": "fap.enneagram.chapter_registry.v1",
-            "sha256": "b687eaff4981732ea772158659cfd16272fdade1e6da676c4ca0b555998ba37a"
+            "sha256": "273e67760a2986c59bf5e4d8d0dd1537be8eb82862eaf98fdc4320211ae5fb78"
         },
         {
             "consumer_surfaces": [
@@ -801,9 +800,9 @@
                 "locale",
                 "entries"
             ],
-            "role": "E105 and FC144 method boundaries",
+            "role": "active E105 and historical method boundaries",
             "schema": "fap.enneagram.method_registry.v1",
-            "sha256": "50831948e46690bd732697c659da3873bb8f65e794214531e5fded653e253b50"
+            "sha256": "116ec17708b09f7e029d61cc7a324fb545892641575f461aff20584c06167f2b"
         },
         {
             "consumer_surfaces": [
@@ -922,7 +921,7 @@
             ],
             "role": "page, FAQ, share, PDF, print, history, compare, and secondary surface copy",
             "schema": "fap.enneagram.surface_registry.v1",
-            "sha256": "560b708446aeb2af6ab17ab4f5f5916d56e4fa874a157c12e9557cac3e9e2eaa"
+            "sha256": "1a0dd926fd1223f22be94b910a46f7c50942c03b0f851d6f95bd736d751ef931"
         },
         {
             "consumer_surfaces": [
@@ -942,7 +941,7 @@
             ],
             "role": "technical note sections",
             "schema": "fap.enneagram.technical_note_registry.v1",
-            "sha256": "1a71ab86862e97513b1a2f8cb1072be7af6d15ae132129161d5587f1f93c3d9e"
+            "sha256": "e4dbdc49a7659525ce0dd230e5ecb3ac2956cbbeea574d436606eaaf774c969e"
         },
         {
             "consumer_surfaces": [
@@ -1002,7 +1001,7 @@
             "sha256": "f82f7481cfc5319785788f9ff9d54153fcaebf7dcccee0d31d78963016b365fa"
         }
     ],
-    "source_hash": "7fe3a9ebb43d42a42a55ab90e63964eb511f0d509f6f6d2ac7f1fe3304e15365",
+    "source_hash": "5ca34643f38383286e45962b3a2642b8533b65d517e3db26158838cd1ecf659f",
     "source_hash_rule": "sha256(concat(sorted locale/path + NUL + sha256(canonical decoded JSON) + LF))",
     "supported_context_modes": [
         "individual",

@@ -119,7 +119,6 @@ final class EnneagramObservationStateService
             $storedPayload['day7_resonance_feedback'] = [
                 'final_resonance' => $this->nullableText($payload['final_resonance'] ?? null),
                 'user_confirmed_type' => $normalizedConfirmedType,
-                'wants_fc144' => (bool) ($payload['wants_fc144'] ?? false),
                 'wants_retake_same_form' => (bool) ($payload['wants_retake_same_form'] ?? false),
                 'user_disagreed_reason' => $normalizedDisagreedReason,
             ];
@@ -132,7 +131,7 @@ final class EnneagramObservationStateService
             $state->user_disagreed_reason = $normalizedDisagreedReason;
             $state->resonance_score = $this->finalResonanceScore($payload);
             $state->observation_completion_rate = 100;
-            $state->status = $this->day7Status($basis, $payload, $normalizedConfirmedType, $normalizedDisagreedReason);
+            $state->status = $this->day7Status($payload, $normalizedConfirmedType, $normalizedDisagreedReason);
             $state->suggested_next_action = $this->day7SuggestedNextAction($basis, $payload, $normalizedConfirmedType, $normalizedDisagreedReason);
             if ($state->status === 'user_confirmed') {
                 $state->user_confirmed_at = now();
@@ -170,7 +169,7 @@ final class EnneagramObservationStateService
             'status' => $this->normalizeStatus($state->status),
             'observation_completion_rate' => (int) ($state->observation_completion_rate ?? 0),
             'user_confirmed_type' => $this->nullableText($state->user_confirmed_type),
-            'suggested_next_action' => $this->nullableText($state->suggested_next_action) ?? $this->defaultSuggestedNextAction($basis),
+            'suggested_next_action' => $this->storedNextAction($state) ?? $this->defaultSuggestedNextAction($basis),
             'day7_submitted' => $state->day7_submitted_at !== null,
         ];
     }
@@ -230,7 +229,7 @@ final class EnneagramObservationStateService
             ? $this->normalizeStatus($state->status)
             : 'initial_result';
         $suggestedNextAction = $state instanceof EnneagramObservationState
-            ? $this->nullableText($state->suggested_next_action)
+            ? $this->storedNextAction($state)
             : null;
 
         return [
@@ -390,15 +389,20 @@ final class EnneagramObservationStateService
         return in_array($status, self::SUPPORTED_STATUSES, true) ? $status : 'initial_result';
     }
 
+    private function storedNextAction(EnneagramObservationState $state): ?string
+    {
+        $action = $this->nullableText($state->suggested_next_action);
+
+        return $action === 'do_fc144' ? null : $action;
+    }
+
     private function defaultSuggestedNextAction(array $basis): string
     {
         $scope = (string) ($basis['interpretation_scope'] ?? 'clear');
-        $formCode = (string) ($basis['form_code'] ?? '');
 
         return match ($scope) {
             'low_quality' => 'retest_same_form',
             'diffuse' => 'read_top3',
-            'close_call' => $formCode === 'enneagram_forced_choice_144' ? 'observe_7_days' : 'do_fc144',
             default => 'observe_7_days',
         };
     }
@@ -444,10 +448,9 @@ final class EnneagramObservationStateService
     }
 
     /**
-     * @param  array<string,mixed>  $basis
      * @param  array<string,mixed>  $payload
      */
-    private function day7Status(array $basis, array $payload, ?string $confirmedType, ?string $disagreedReason): string
+    private function day7Status(array $payload, ?string $confirmedType, ?string $disagreedReason): string
     {
         if ($confirmedType !== null) {
             return 'user_confirmed';
@@ -455,10 +458,6 @@ final class EnneagramObservationStateService
 
         if ((string) ($payload['final_resonance'] ?? '') === 'other' || $disagreedReason !== null) {
             return 'user_disagreed';
-        }
-
-        if ((bool) ($payload['wants_fc144'] ?? false) && (string) ($basis['form_code'] ?? '') !== 'enneagram_forced_choice_144') {
-            return 'fc144_recommended';
         }
 
         return 'resonance_feedback_submitted';
@@ -474,10 +473,6 @@ final class EnneagramObservationStateService
             return 'retest_same_form';
         }
 
-        if ((bool) ($payload['wants_fc144'] ?? false) && (string) ($basis['form_code'] ?? '') !== 'enneagram_forced_choice_144') {
-            return 'do_fc144';
-        }
-
         if ($confirmedType !== null) {
             return 'no_action';
         }
@@ -487,7 +482,7 @@ final class EnneagramObservationStateService
         }
 
         if ($disagreedReason !== null) {
-            return (string) ($basis['form_code'] ?? '') === 'enneagram_forced_choice_144' ? 'read_top3' : 'do_fc144';
+            return 'read_top3';
         }
 
         return $this->defaultSuggestedNextAction($basis);

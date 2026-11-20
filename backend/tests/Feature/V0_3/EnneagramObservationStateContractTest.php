@@ -35,7 +35,7 @@ final class EnneagramObservationStateContractTest extends TestCase
         $assign->assertJsonPath('observation_state_v1.version', 'enneagram_observation_state.v1');
         $assign->assertJsonPath('observation_state_v1.status', 'observation_assigned');
         $assign->assertJsonPath('observation_state_v1.selected_action_id', 'type-4-action-01');
-        $assign->assertJsonPath('observation_state_v1.suggested_next_action', 'do_fc144');
+        $assign->assertJsonPath('observation_state_v1.suggested_next_action', 'observe_7_days');
         $this->assertCount(7, (array) $assign->json('observation_state_v1.tasks'));
 
         $show = $this->withHeaders([

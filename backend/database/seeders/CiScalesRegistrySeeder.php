@@ -186,7 +186,7 @@ final class CiScalesRegistrySeeder extends Seeder
                     'enabled_regions' => ['CN_MAINLAND', 'GLOBAL'],
                     'rollout_ratio' => 1.0,
                     'paywall_mode' => 'free_only',
-                    'forms' => ['enneagram_likert_105', 'enneagram_forced_choice_144'],
+                    'forms' => ['enneagram_likert_105'],
                 ], JSON_UNESCAPED_UNICODE),
                 'commercial_json' => json_encode([
                     'report_benefit_code' => 'ENNEAGRAM_REPORT',

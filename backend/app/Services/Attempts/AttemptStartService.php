@@ -152,7 +152,7 @@ class AttemptStartService
             $resolvedQualityVersion = trim((string) ($resolvedForm['quality_version'] ?? ''));
             $resolvedQuestionCount = (int) ($resolvedForm['question_count'] ?? 0);
         } elseif (strtoupper($scaleCode) === 'ENNEAGRAM') {
-            $resolvedForm = $this->enneagramFormCatalog()->resolve($dto->formCode, $packId);
+            $resolvedForm = $this->enneagramFormCatalog()->resolveActive($dto->formCode, $packId);
             $packId = (string) ($resolvedForm['pack_id'] ?? $packId);
             $dirVersion = (string) ($resolvedForm['dir_version'] ?? $dirVersion);
             $contentPackageVersion = (string) ($resolvedForm['content_package_version'] ?? '');

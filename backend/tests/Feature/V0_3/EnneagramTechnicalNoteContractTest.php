@@ -45,7 +45,6 @@ final class EnneagramTechnicalNoteContractTest extends TestCase
             'confidence_band',
             'diffuse',
             'dominance_gap',
-            'e105_fc144_agreement',
             'e105_fc144_forms',
             'low_quality',
             'method_boundaries',

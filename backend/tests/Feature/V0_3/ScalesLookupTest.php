@@ -153,7 +153,6 @@ class ScalesLookupTest extends TestCase
             ],
             'enneagram-personality-test-nine-types' => [
                 ['enneagram_likert_105', true, 105, 12],
-                ['enneagram_forced_choice_144', false, 144, 18],
             ],
             'holland-career-interest-test-riasec' => [
                 ['riasec_60', true, 60, 8],
@@ -278,7 +277,7 @@ class ScalesLookupTest extends TestCase
         $enneagram = $items->firstWhere('slug', 'enneagram-personality-test-nine-types');
         $this->assertIsArray($enneagram);
         $this->assertSame('enneagram_likert_105', data_get($enneagram, 'forms.0.form_code'));
-        $this->assertSame('enneagram_forced_choice_144', data_get($enneagram, 'forms.1.form_code'));
+        $this->assertCount(1, $enneagram['forms']);
 
         $riasec = $items->firstWhere('slug', 'holland-career-interest-test-riasec');
         $this->assertIsArray($riasec);

@@ -275,7 +275,7 @@ final class ScaleRegistrySeeder extends Seeder
                 'enabled_regions' => ['CN_MAINLAND', 'GLOBAL'],
                 'rollout_ratio' => 1.0,
                 'paywall_mode' => 'free_only',
-                'forms' => ['enneagram_likert_105', 'enneagram_forced_choice_144'],
+                'forms' => ['enneagram_likert_105'],
                 'default_form_code' => 'enneagram_likert_105',
             ],
             'view_policy_json' => [

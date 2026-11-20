@@ -211,7 +211,7 @@ class ScalesController extends Controller
                 $resolvedFormCode = (string) ($resolvedForm['form_code'] ?? 'big5_120');
                 $resolvedQuestionCount = (int) ($resolvedForm['question_count'] ?? 0);
             } elseif ($resolvedScaleCode === 'ENNEAGRAM') {
-                $resolvedForm = $this->enneagramFormCatalog->resolve(
+                $resolvedForm = $this->enneagramFormCatalog->resolveActive(
                     $this->requestedFormCode($request),
                     $packId
                 );

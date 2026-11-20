@@ -65,7 +65,7 @@ final class EnneagramCanonicalPrivateResultAuthorityTest extends TestCase
         $this->assertSame(['1', '2', '3', '4', '5', '6', '7', '8', '9'], $manifest['coverage']['types']);
         $this->assertSame(36, $manifest['coverage']['pair_count']);
         $this->assertSame(['clear', 'close_call', 'diffuse', 'low_quality'], $manifest['coverage']['interpretation_states']);
-        $this->assertSame(['e105', 'fc144'], $manifest['coverage']['forms']);
+        $this->assertSame(['e105'], $manifest['coverage']['forms']);
         $this->assertSame(['faq', 'technical_note', 'share', 'pdf', 'print', 'history', 'compare', 'secondary'], $manifest['coverage']['secondary_surfaces']);
     }
 

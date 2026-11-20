@@ -53,6 +53,10 @@ final class EnneagramHistorySummaryTest extends TestCase
 
     private function createSubmittedEnneagramAttempt(string $anonId, string $token, string $formCode, int $durationMs): string
     {
+        if ($formCode === 'enneagram_forced_choice_144') {
+            config(['content_packs.enneagram_forms.forms.enneagram_forced_choice_144.accepts_new_attempts' => true]);
+        }
+
         $start = $this->withHeaders(['X-Anon-Id' => $anonId])->postJson('/api/v0.3/attempts/start', [
             'scale_code' => 'ENNEAGRAM',
             'anon_id' => $anonId,
@@ -66,6 +70,8 @@ final class EnneagramHistorySummaryTest extends TestCase
         $questions = $this->getJson('/api/v0.3/scales/ENNEAGRAM/questions?form_code='.$formCode);
         $questions->assertStatus(200);
         $answers = $this->buildAnswersFromItems((array) $questions->json('questions.items'));
+
+        config(['content_packs.enneagram_forms.forms.enneagram_forced_choice_144.accepts_new_attempts' => false]);
 
         $submit = $this->withHeaders([
             'X-Anon-Id' => $anonId,

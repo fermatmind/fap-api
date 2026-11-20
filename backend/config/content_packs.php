@@ -182,6 +182,7 @@ return [
             ],
             'enneagram_forced_choice_144' => [
                 'dir_version' => 'v1-forced-choice-144',
+                'accepts_new_attempts' => false,
                 'question_count' => 144,
                 'form_kind' => 'forced_choice',
                 'aliases' => [

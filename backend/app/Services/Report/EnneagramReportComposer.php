@@ -61,7 +61,7 @@ final class EnneagramReportComposer
 
         $projection = $this->projectionService->build($scoreResult, $locale, $variant, $locked);
         $projectionV2 = $this->projectionService->buildV2($scoreResult, $locale, $variant, $locked);
-        $reportV2 = $this->buildReportV2($projectionV2, $locale);
+        $reportV2 = $this->buildReportV2($projectionV2, $locale, $locked);
         $sections = is_array($projection['sections'] ?? null) ? $projection['sections'] : [];
 
         return [
@@ -156,7 +156,7 @@ final class EnneagramReportComposer
      * @param  array<string,mixed>  $projectionV2
      * @return array<string,mixed>
      */
-    private function buildReportV2(array $projectionV2, string $locale): array
+    private function buildReportV2(array $projectionV2, string $locale, bool $locked): array
     {
         $language = $this->normalizeLanguage($locale);
 
@@ -170,6 +170,21 @@ final class EnneagramReportComposer
                     if (is_array($module)) {
                         $modules[] = $module;
                     }
+                }
+            }
+
+            $candidates = $this->buildCanonicalCandidates($projectionV2, $indexes);
+            $reportAssets = [];
+            if (! $locked && data_get($projectionV2, 'form.form_code') === 'enneagram_likert_105') {
+                $chapterRegistry = (array) data_get($pack, 'registries.enneagram_chapter_registry', []);
+                $shared = $chapterRegistry['e105_shared_report_assets'] ?? null;
+                if (is_array($shared)) {
+                    $reportAssets['e105_report_assets'] = $shared + [
+                        'candidates' => array_map(static fn (array $candidate): array => [
+                            'type_id' => $candidate['type_id'],
+                            ...$indexes['chapter_entries'][$candidate['type_id']]['e105_report_assets'],
+                        ], $candidates),
+                    ];
                 }
             }
 
@@ -197,7 +212,8 @@ final class EnneagramReportComposer
                     'interpretation_reason' => data_get($projectionV2, 'classification.interpretation_reason'),
                 ],
                 'distribution' => array_values((array) data_get($projectionV2, 'scores.all9_profile', [])),
-                'candidates' => $this->buildCanonicalCandidates($projectionV2, $indexes),
+                'candidates' => $candidates,
+                ...$reportAssets,
                 'pages' => $pages,
                 'modules' => $modules,
                 'provenance' => [

@@ -111,6 +111,19 @@ final class EnneagramReadReportContractTest extends TestCase
         $report->assertJsonPath('enneagram_report_v2.schema_version', 'enneagram.report.v2');
         $report->assertJsonPath('enneagram_report_v2.locale', $expectedLocale);
         $report->assertJsonCount(7, 'enneagram_report_v2.pages');
+        $assets = $report->json('enneagram_report_v2.e105_report_assets');
+        if ($formCode === 'enneagram_likert_105') {
+            $this->assertCount(8, $assets['plan']);
+            $this->assertSame(
+                array_column($report->json('enneagram_report_v2.candidates'), 'type_id'),
+                array_column($assets['candidates'], 'type_id')
+            );
+            $this->assertCount(3, $assets['candidates'][0]['careers']);
+            $this->assertCount(4, $assets['candidates'][0]['life_scenarios']);
+        } else {
+            $this->assertNull($assets);
+        }
+
         $report->assertJsonPath('report._meta.enneagram_public_projection_v2.schema_version', 'enneagram.public_projection.v2');
         $report->assertJsonPath('report._meta.enneagram_report_v2.schema_version', 'enneagram.report.v2');
         $report->assertJsonPath('report._meta.enneagram_report_v2.pages.0.page_key', 'chapter_1_result');
@@ -206,6 +219,10 @@ final class EnneagramReadReportContractTest extends TestCase
     private function createSubmittedEnneagramAttempt(string $anonId, string $formCode, string $locale = 'zh-CN'): array
     {
         $token = $this->issueAnonToken($anonId);
+        if ($formCode === 'enneagram_forced_choice_144') {
+            config(['content_packs.enneagram_forms.forms.enneagram_forced_choice_144.accepts_new_attempts' => true]);
+        }
+
         $start = $this->withHeaders(['X-Anon-Id' => $anonId])->postJson('/api/v0.3/attempts/start', [
             'scale_code' => 'ENNEAGRAM',
             'anon_id' => $anonId,
@@ -219,6 +236,8 @@ final class EnneagramReadReportContractTest extends TestCase
         $questions = $this->getJson('/api/v0.3/scales/ENNEAGRAM/questions?form_code='.$formCode);
         $questions->assertStatus(200);
         $answers = $this->buildAnswersFromItems((array) $questions->json('questions.items'));
+
+        config(['content_packs.enneagram_forms.forms.enneagram_forced_choice_144.accepts_new_attempts' => false]);
 
         $submit = $this->withHeaders([
             'X-Anon-Id' => $anonId,

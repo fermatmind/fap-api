@@ -103,7 +103,7 @@ final class Packs2Publish extends Command
                 $this->line('source_hash='.(string) data_get($zh, 'authority.source_hash'));
                 $this->line('compiled_hash='.(string) data_get($zh, 'authority.compiled_hash'));
                 $this->line('locale_inventory=zh-CN,en');
-                $this->line('form_projection_inventory=e105,fc144');
+                $this->line('form_projection_inventory=e105');
                 $this->line('interpretation_state_inventory=clear,close_call,diffuse,low_quality');
                 $this->line('surface_inventory=api,report,snapshot,pdf,print,history,compare,share,technical_note,observation,secondary');
             }

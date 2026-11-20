@@ -20,7 +20,7 @@ final class EnneagramPrivateResultCompileService
 
     public const COMPILER_SCHEMA = 'fap.enneagram.private_result.compiler.v1';
 
-    public const COMPILER_VERSION = '1.3.0';
+    public const COMPILER_VERSION = '1.4.0';
 
     private const MAX_SECTION_BIGRAM_SIMILARITY = 0.62;
 
@@ -37,7 +37,7 @@ final class EnneagramPrivateResultCompileService
         'chapter_registry.json' => ['registry_key' => 'enneagram_chapter_registry', 'role' => 'seven-chapter candidate sections and growth actions', 'schema' => 'fap.enneagram.chapter_registry.v1', 'surfaces' => ['result', 'report', 'pdf', 'history']],
         'evidence_registry.json' => ['registry_key' => 'enneagram_evidence_registry', 'role' => 'non-rendered evidence and theory provenance', 'schema' => 'fap.enneagram.evidence_registry.v1', 'surfaces' => ['technical_note']],
         'group_registry.json' => ['registry_key' => 'enneagram_group_registry', 'role' => 'centers, stances, and harmonics', 'schema' => 'fap.enneagram.group_registry.v1', 'surfaces' => ['result', 'report']],
-        'method_registry.json' => ['registry_key' => 'enneagram_method_registry', 'role' => 'E105 and FC144 method boundaries', 'schema' => 'fap.enneagram.method_registry.v1', 'surfaces' => ['result', 'report', 'technical_note', 'compare']],
+        'method_registry.json' => ['registry_key' => 'enneagram_method_registry', 'role' => 'active E105 and historical method boundaries', 'schema' => 'fap.enneagram.method_registry.v1', 'surfaces' => ['result', 'report', 'technical_note', 'compare']],
         'observation_registry.json' => ['registry_key' => 'enneagram_observation_registry', 'role' => 'observation workflow copy', 'schema' => 'fap.enneagram.observation_registry.v1', 'surfaces' => ['result', 'history']],
         'pair_registry.json' => ['registry_key' => 'enneagram_pair_registry', 'role' => 'all 36 close-call comparisons', 'schema' => 'fap.enneagram.pair_registry.v1', 'surfaces' => ['result', 'report', 'pdf', 'history', 'compare', 'share']],
         'sample_report_registry.json' => ['registry_key' => 'enneagram_sample_report_registry', 'role' => 'canonical sample reports', 'schema' => 'fap.enneagram.sample_report_registry.v1', 'surfaces' => ['result', 'report']],
@@ -108,7 +108,6 @@ final class EnneagramPrivateResultCompileService
             'coverage' => $coverage,
             'form_projections' => [
                 'e105' => ['form_code' => 'enneagram_likert_105', 'methodology_variant' => 'e105_standard', 'source_hash' => $sourceHash],
-                'fc144' => ['form_code' => 'enneagram_forced_choice_144', 'methodology_variant' => 'fc144_forced_choice', 'source_hash' => $sourceHash],
             ],
             'locale_assets' => $localeAssets,
         ];
@@ -160,6 +159,36 @@ final class EnneagramPrivateResultCompileService
         }
     }
 
+    /** @param  array<string,mixed>  $registry */
+    private function validateE105ReportAssets(array $registry, string $locale): void
+    {
+        $shared = (array) ($registry['e105_shared_report_assets'] ?? []);
+        if (count((array) ($shared['plan'] ?? [])) !== 8
+            || count((array) ($shared['science'] ?? [])) !== 3
+            || count((array) ($shared['science_sources'] ?? [])) < 1
+            || trim((string) ($shared['ai_prompt'] ?? '')) === '') {
+            throw new RuntimeException("Enneagram E105 shared report assets are incomplete: {$locale}");
+        }
+
+        foreach ($registry['entries'] as $entry) {
+            $assets = (array) ($entry['e105_report_assets'] ?? []);
+            $careers = (array) ($assets['careers'] ?? []);
+            if (count($careers) !== 3 || count(array_unique(array_column($careers, 'slug'))) !== 3
+                || array_keys((array) ($assets['life_scenarios'] ?? [])) !== ['work', 'stress', 'money', 'relationships']
+                || trim((string) ($assets['practice_experiment'] ?? '')) === '') {
+                throw new RuntimeException("Enneagram E105 candidate assets are incomplete: {$locale}:".$entry['type_id']);
+            }
+
+            foreach ($careers as $career) {
+                foreach (['slug', 'name', 'task', 'connection', 'verify', 'source'] as $field) {
+                    if (trim((string) ($career[$field] ?? '')) === '') {
+                        throw new RuntimeException("Enneagram E105 career field is missing: {$locale}:".$entry['type_id'].":{$field}");
+                    }
+                }
+            }
+        }
+    }
+
     private function validateEditorialHygiene(mixed $value, string $locale, string $relative, string $path = '$'): void
     {
         if (is_array($value)) {
@@ -204,6 +233,7 @@ final class EnneagramPrivateResultCompileService
                     throw new RuntimeException("Enneagram canonical chapter coverage is incomplete: {$locale}:".(string) ($entry['type_id'] ?? 'unknown'));
                 }
             }
+            $this->validateE105ReportAssets($assets['chapter_registry.json'], $locale);
             $this->validateChapterDifferentiation((array) ($assets['chapter_registry.json']['entries'] ?? []), $locale);
             $this->validatePairDifferentiation((array) ($assets['pair_registry.json']['entries'] ?? []), $locale);
             $this->validateEvidenceClaims($assets, $locale);
@@ -218,7 +248,7 @@ final class EnneagramPrivateResultCompileService
             'locales' => ['zh-CN', 'en'], 'types' => ['1', '2', '3', '4', '5', '6', '7', '8', '9'], 'pair_count' => 36,
             'type_section_count' => 20, 'total_section_count_per_locale' => 180, 'growth_action_count_per_type' => 5,
             'groups' => ['centers', 'stances', 'harmonics'], 'interpretation_states' => ['clear', 'close_call', 'diffuse', 'low_quality'],
-            'scenarios' => ['work', 'relationship', 'growth', 'state', 'observation'], 'forms' => ['e105', 'fc144'],
+            'scenarios' => ['work', 'relationship', 'growth', 'state', 'observation'], 'forms' => ['e105'],
             'secondary_surfaces' => ['faq', 'technical_note', 'share', 'pdf', 'print', 'history', 'compare', 'secondary'],
         ];
     }

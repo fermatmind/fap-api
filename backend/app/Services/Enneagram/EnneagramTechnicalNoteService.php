@@ -38,7 +38,7 @@ final class EnneagramTechnicalNoteService
             }
 
             $sectionKey = trim((string) ($entry['section_key'] ?? ''));
-            if ($sectionKey === '') {
+            if ($sectionKey === '' || $sectionKey === 'e105_fc144_agreement') {
                 continue;
             }
 
@@ -47,11 +47,12 @@ final class EnneagramTechnicalNoteService
                 if (! is_array($copy)) {
                     throw new \DomainException('technical_note_section_locale_unavailable');
                 }
-                if ($sectionKey === 'diffuse') {
+                if (in_array($sectionKey, ['diffuse', 'e105_fc144_forms'], true)) {
                     if (! is_string($entry['body'] ?? null) || trim($entry['body']) === '') {
                         throw new \DomainException('technical_note_section_locale_unavailable');
                     }
                     $copy['body'] = $entry['body'];
+                    $copy['title'] = $entry['title'];
                 }
                 $entry = array_replace($entry, $copy);
             }
@@ -138,7 +139,7 @@ final class EnneagramTechnicalNoteService
                 continue;
             }
             $key = trim((string) ($entry['method_key'] ?? ''));
-            if ($key === '') {
+            if ($key === '' || $key === 'fc144_forced_choice_methodology') {
                 continue;
             }
 
