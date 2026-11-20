@@ -57,7 +57,7 @@ class RefundOrderJob implements ShouldQueue
             return;
         }
 
-        if (in_array($order->sku, CareerAssessmentPurchase::SKUS, true)) {
+        if (in_array($order->sku, CareerAssessmentPurchase::allSkus(), true)) {
             app(CareerAssessmentRefund::class)->submit($order, $this->reason);
 
             return;

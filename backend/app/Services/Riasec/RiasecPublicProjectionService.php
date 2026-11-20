@@ -1108,6 +1108,11 @@ final class RiasecPublicProjectionService
             if (is_array($desktopAtlas) || is_array($panels)) {
                 $content['atlas_examples'] = $desktopAtlas['examples'] ?? $panels['examples'];
                 $content['atlas_next_step'] = $desktopAtlas['next_step'] ?? $panels['next_step'];
+                $steps = $desktopAtlas['next_steps'] ?? $panels['next_steps'] ?? null;
+                if (is_array($steps) && array_is_list($steps)) {
+                    $content['atlas_next_steps'] = $steps;
+                    $content['desktop_insight_questions'] = array_slice($steps, 1);
+                }
             }
             if (is_string($atlas) && trim($atlas) !== '') {
                 $content['atlas_reading'] = $atlas;

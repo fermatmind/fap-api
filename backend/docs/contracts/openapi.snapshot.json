@@ -5937,6 +5937,43 @@
                 ]
             }
         },
+        "/api/v0.5/riasec-assessment/results/{id}": {
+            "get": {
+                "operationId": "get_api_v0_5_riasec_assessment_results_id_",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\RiasecPurchaseController@show",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public"
+                ]
+            }
+        },
+        "/api/v0.5/riasec-assessment/sample": {
+            "get": {
+                "operationId": "get_api_v0_5_riasec_assessment_sample",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\RiasecPurchaseController@sample",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public"
+                ]
+            }
+        },
         "/api/v0.5/seo/attribution/events": {
             "post": {
                 "operationId": "api.v0_5.seo.attribution_events.store",

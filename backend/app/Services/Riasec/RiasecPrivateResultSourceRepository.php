@@ -82,7 +82,7 @@ final class RiasecPrivateResultSourceRepository
     public function englishReportCopy(string $path, mixed $legacy): mixed
     {
         $loaded = $this->loaded();
-        if (($loaded['payload']['compiler']['version'] ?? null) !== '1.9.0') {
+        if (! in_array($loaded['payload']['compiler']['version'] ?? null, ['1.9.0', '1.10.0'], true)) {
             return $legacy;
         }
         $value = data_get($this->asset(RiasecEnglishReportSourceContract::SURFACE_ASSET, 'en'), $path);

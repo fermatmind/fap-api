@@ -1,0 +1,72 @@
+{
+  "asset_id": "near_tie_alternate_code_copy_v1.zh-CN",
+  "asset_status": "content_review_v7_3_final_preflight_candidate",
+  "locale": "zh-TW",
+  "scale_code": "RIASEC",
+  "review_status": "machine_translated",
+  "target_review_status_after_owner_signoff": "owner_signoff_required_before_runtime_import_after_owner_signoff",
+  "states": [
+    {
+      "state": "top1_top2_near_tie",
+      "title": "前兩維接近",
+      "copy": "主讀當前 Code，同時參考前兩維交換順序後的活動線索組合。你不是“另一個 Code”，而是兩條興趣入口接近。"
+    },
+    {
+      "state": "top2_top3_near_tie",
+      "title": "第二、第三維接近",
+      "copy": "第三維不是邊緣裝飾。它可能決定這條活動線索組合最終面向材料、表達、真實人、目標還是秩序。"
+    },
+    {
+      "state": "multi_near_tie",
+      "title": "多維接近",
+      "copy": "請先看活動，而不是看字母。多維接近時，真正有用的是用小任務觀察哪類活動更吸引你。"
+    },
+    {
+      "state": "alternate_code_available",
+      "title": "可參考 alternate code",
+      "copy": "alternate code 是閱讀輔助，不是第二個答案。它幫助你理解不同排序下活動線索組合的重心變化。"
+    }
+  ],
+  "user_visible_boundary": "Alternate code 是並讀參考，不是推翻結果，也不是新的身份標籤。",
+  "required_boundaries": [
+    "interest_evidence_only",
+    "not_personality_identity",
+    "not_ability_or_skill_measure",
+    "not_career_recommendation",
+    "examples_not_matches",
+    "not_job_fit",
+    "not_success_prediction",
+    "not_hiring_or_screening_use",
+    "no_60q_140q_raw_delta",
+    "140q_contextual_not_more_accurate",
+    "feedback_does_not_mutate_measured_result",
+    "missing_content_fails_closed",
+    "frontend_fallback_forbidden"
+  ],
+  "forbidden_claims": [
+    "personality_identity",
+    "ability_or_skill_inference",
+    "career_match",
+    "career_recommendation",
+    "job_fit",
+    "fit_score",
+    "occupation_ranking",
+    "success_prediction",
+    "hiring_suitability",
+    "screening_use",
+    "140q_more_accurate",
+    "raw_score_delta",
+    "onet_soc_source_invention"
+  ],
+  "frontend_fallback_allowed": false,
+  "fallback_behavior": "omit_module",
+  "translation_source": {
+    "locale": "zh-CN",
+    "path": "near_tie_alternate_code_copy_v1.zh-CN.json",
+    "raw_sha256": "6173bdcc0610863f4effc524f839f42f8ad89ab0f131f476e086d6afecb1ac30",
+    "method": "OpenCC-cn-to-twp-1.4.2",
+    "status": "machine_translated",
+    "human_review_completed": false,
+    "canonical_sha256": "a17b698b2033b202564f00617593ed54907e2ca0e04b823dba0711ad78fa50c0"
+  }
+}

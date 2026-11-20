@@ -1858,18 +1858,18 @@ class PaymentWebhookHandlerCore
         $now = now();
         $refundAmount = (int) ($normalized['refund_amount_cents'] ?? 0);
         $careerAlipay = ($order->provider ?? '') === 'alipay'
-            && in_array($order->sku ?? '', \App\Services\Commerce\CareerAssessmentPurchase::SKUS, true);
+            && in_array($order->sku ?? '', \App\Services\Commerce\CareerAssessmentPurchase::allSkus(), true);
         $refundAmountMatches = $careerAlipay
             ? $refundAmount > 0 && $refundAmount <= (int) ($order->amount_cents ?? 0)
             : $refundAmount === (int) ($order->amount_cents ?? 0);
         if ((($order->provider ?? '') === 'waffo'
-            || in_array($order->sku ?? '', \App\Services\Commerce\CareerAssessmentPurchase::SKUS, true))
+            || in_array($order->sku ?? '', \App\Services\Commerce\CareerAssessmentPurchase::allSkus(), true))
             && ((int) ($normalized['amount_cents'] ?? 0) !== (int) ($order->amount_cents ?? 0)
                 || ! $refundAmountMatches
                 || ($normalized['currency'] ?? '') !== ($order->currency ?? ''))) {
             return $this->semanticReject('REFUND_AMOUNT_MISMATCH', 'Refund does not match the original order.');
         }
-        if (in_array($order->sku ?? '', \App\Services\Commerce\CareerAssessmentPurchase::SKUS, true)
+        if (in_array($order->sku ?? '', \App\Services\Commerce\CareerAssessmentPurchase::allSkus(), true)
             && filled($order->provider_trade_no ?? null)
             && ($normalized['external_trade_no'] ?? null) !== $order->provider_trade_no) {
             return $this->semanticReject('REFUND_TRADE_MISMATCH', 'Refund does not match the provider transaction.');
@@ -1911,7 +1911,7 @@ class PaymentWebhookHandlerCore
             return $revoked;
         }
 
-        if ($orgId === 0 && in_array($order->sku ?? '', \App\Services\Commerce\CareerAssessmentPurchase::SKUS, true)
+        if ($orgId === 0 && in_array($order->sku ?? '', \App\Services\Commerce\CareerAssessmentPurchase::allSkus(), true)
             && \App\Support\SchemaBaseline::hasTable('career_refund_requests')) {
             DB::table('career_refund_requests')->where('org_id', 0)->where('order_no', $orderNo)
                 ->where('status', '!=', 'succeeded')->update([

@@ -1,0 +1,90 @@
+{
+  "asset_id": "professional_method_boundary_v1.zh-CN",
+  "asset_status": "content_review_v7_3_final_preflight_candidate",
+  "locale": "zh-TW",
+  "content_version": "riasec_professional_method_boundary_v1.zh-CN",
+  "review_status": "machine_translated",
+  "sections": [
+    {
+      "key": "measurement_object",
+      "title": "測量物件",
+      "body": "RIASEC 解釋職業興趣活動傾向，不測能力、人格身份、職業價值觀、心理狀態、收入潛力或職業成功機率。"
+    },
+    {
+      "key": "score_space",
+      "title": "分數空間",
+      "body": "0–100 是當前表單內興趣強度換算，不是人群百分位，也不應跨 60Q / 140Q 直接比較 raw score delta。"
+    },
+    {
+      "key": "forms",
+      "title": "60Q 與 140Q",
+      "body": "60Q 看基礎興趣結構；140Q 看任務、環境、角色責任等情境化興趣線索。140Q 更具體，不是更準確。"
+    },
+    {
+      "key": "examples",
+      "title": "職業例子邊界",
+      "body": "職業例子必須經過活動和任務解釋，只能叫內容示例，不得叫 Matches、推薦、排名、崗位適配。"
+    },
+    {
+      "key": "validation_status",
+      "title": "觀察狀態",
+      "body": "沒有外部效度證據時，只能寫 theory_based、under_validation 或 internally_pilot_required，不得寫 externally_validated。"
+    },
+    {
+      "key": "feedback",
+      "title": "反饋邊界",
+      "body": "使用者收藏、排除、願望、不認同等反饋隻影響探索路徑，不改 本次測得的霍蘭德程式碼、不改分數、不改報告快照。"
+    },
+    {
+      "key": "privacy",
+      "title": "隱私與使用",
+      "body": "分享和 PDF 預設不展示原始反饋、生活階段、組織上下文或內部 snapshot_id。"
+    },
+    {
+      "key": "restricted_use",
+      "title": "禁止用途",
+      "body": "不得用於招聘篩選、錄取、晉升、淘汰、資格判斷、醫療或心理診斷。"
+    }
+  ],
+  "required_boundaries": [
+    "interest_evidence_only",
+    "not_personality_identity",
+    "not_ability_or_skill_measure",
+    "not_career_recommendation",
+    "examples_not_matches",
+    "not_job_fit",
+    "not_success_prediction",
+    "not_hiring_or_screening_use",
+    "no_60q_140q_raw_delta",
+    "140q_contextual_not_more_accurate",
+    "feedback_does_not_mutate_measured_result",
+    "missing_content_fails_closed",
+    "frontend_fallback_forbidden"
+  ],
+  "forbidden_claims": [
+    "personality_identity",
+    "ability_or_skill_inference",
+    "career_match",
+    "career_recommendation",
+    "job_fit",
+    "fit_score",
+    "occupation_ranking",
+    "success_prediction",
+    "hiring_suitability",
+    "screening_use",
+    "140q_more_accurate",
+    "raw_score_delta",
+    "onet_soc_source_invention"
+  ],
+  "frontend_fallback_allowed": false,
+  "v5_editorial_note": "Professional boundary copy keeps prohibited terms only in negative constraint context.",
+  "translation_source": {
+    "locale": "zh-CN",
+    "path": "professional_method_boundary_v1.zh-CN.json",
+    "raw_sha256": "61b61e01bd043abc2a4eb0491c3ddbfaf2739a0b8d81d176c6a2f8963ed163c1",
+    "method": "OpenCC-cn-to-twp-1.4.2",
+    "status": "machine_translated",
+    "human_review_completed": false,
+    "canonical_sha256": "01f4cbc37ed7b147d9eeb8f47b74ae98c653630cc67efdfdc50e0e1857fda77a"
+  }
+}

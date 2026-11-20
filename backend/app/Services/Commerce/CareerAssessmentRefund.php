@@ -16,7 +16,7 @@ final class CareerAssessmentRefund
     {
         $trade = (string) ($order->provider_trade_no ?? '');
         if ((int) $order->org_id !== 0 || $order->provider !== 'alipay' || $order->currency !== 'CNY'
-            || $order->sku !== CareerAssessmentPurchase::SKUS['CNY']
+            || ! in_array($order->sku, [CareerAssessmentPurchase::SKUS['CNY'], CareerAssessmentPurchase::RIASEC_SKUS['CNY']], true)
             || (int) $order->amount_cents !== CareerAssessmentPurchase::PRICE
             || ! in_array(Order::normalizePaymentState($order->payment_state, $order->status), [Order::PAYMENT_STATE_PAID, Order::PAYMENT_STATE_REFUNDED], true)
             || $trade === '' || trim($refundNo) === '' || strlen($refundNo) > 64) {
@@ -52,7 +52,7 @@ final class CareerAssessmentRefund
     public function reconcileWaffoRefund(object $order): bool
     {
         if ((int) $order->org_id !== 0 || $order->provider !== 'waffo'
-            || (CareerAssessmentPurchase::SKUS[$order->currency] ?? null) !== $order->sku
+            || (CareerAssessmentPurchase::contract((string) $order->sku)['currency'] ?? null) !== $order->currency
             || (int) $order->amount_cents !== CareerAssessmentPurchase::PRICE) {
             throw new RuntimeException('Invalid career refund order.');
         }
@@ -103,7 +103,7 @@ final class CareerAssessmentRefund
         $trade = (string) ($order->provider_trade_no ?? '');
         if ($state !== Order::PAYMENT_STATE_PAID || $trade === ''
             || (int) $order->amount_cents !== CareerAssessmentPurchase::PRICE
-            || (CareerAssessmentPurchase::SKUS[$currency] ?? null) !== $order->sku) {
+            || (CareerAssessmentPurchase::contract((string) $order->sku)['currency'] ?? null) !== $currency) {
             throw new RuntimeException('Career report refund requires a confirmed payment.');
         }
 

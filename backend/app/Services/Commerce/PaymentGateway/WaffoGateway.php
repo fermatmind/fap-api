@@ -63,9 +63,11 @@ final class WaffoGateway implements PaymentGatewayInterface
         $careerProduct = config('payments.waffo.career94_product_id');
         $career = is_string($careerProduct) && $careerProduct !== '' && $product === $careerProduct;
         if ($career) {
-            $sku = is_string($currency) ? (CareerAssessmentPurchase::SKUS[$currency] ?? null) : null;
+            $order = DB::table('orders')->where('order_no', $data['orderMerchantExternalId'])->where('org_id', 0)->first();
+            $sku = $order->sku ?? null;
+            $contract = is_string($sku) ? CareerAssessmentPurchase::contract($sku) : null;
             $attemptId = $meta['fap_attempt_id'] ?? null;
-            if ($sku === null || ! is_string($attemptId) || ! DB::table('orders')
+            if ($contract === null || $contract['currency'] !== $currency || ! is_string($attemptId) || ! DB::table('orders')
                 ->where('order_no', $data['orderMerchantExternalId'])->where('org_id', 0)->where('provider', 'waffo')
                 ->where('sku', $sku)->where('currency', $currency)->where('amount_cents', CareerAssessmentPurchase::PRICE)
                 ->where('target_attempt_id', $attemptId)->exists()) {

@@ -41,11 +41,14 @@ final class RiasecEnglishSelectedSourceReleaseTest extends TestCase
                     $this->assertSame($source['source_binding']['source_evidence_level'], $slot['source_evidence_level']);
                     $this->assertSame($slot['source_evidence_level'], $slot['evidence_level']);
                     $legacyContent = Arr::except($slot['content'], [
-                        'desktop_insight_reading', 'atlas_reading', 'atlas_examples', 'atlas_next_step', 'atlas_profile_focus',
+                        'desktop_insight_reading', 'atlas_reading', 'atlas_examples', 'atlas_next_step', 'atlas_next_steps', 'desktop_insight_questions', 'atlas_profile_focus',
                     ]);
                     foreach ($legacyContent as $field => $value) {
                         $this->assertSame($source[$field], $value, $code.':'.$field);
                     }
+                    $atlas = $source['desktop_atlas_by_decile'][min(9, (int) floor($projection['scores']['dimensions'][array_search($selection['dimension_code'], array_column($projection['scores']['dimensions'], 'code'))]['score'] / 10))];
+                    $this->assertSame($atlas['next_steps'], $slot['content']['atlas_next_steps']);
+                    $this->assertSame(array_slice($atlas['next_steps'], 1), $slot['content']['desktop_insight_questions']);
                     $this->assertSame($source[$selection['selected_detail_key']], $slot['content'][$selection['selected_detail_key']]);
                     $this->assertCount(1, array_intersect(['high_score_reading', 'medium_score_reading', 'low_score_safe_reading'], array_keys($slot['content'])));
                     $this->assertSame($selection['is_top_three'] ? 'visible' : 'collapsed', $slot['slot_visibility']);
@@ -190,10 +193,14 @@ final class RiasecEnglishSelectedSourceReleaseTest extends TestCase
     {
         $compiled = app(Compiler::class)->compile();
         $asset = $compiled['payload']['assets']['dimension_deep_copy_v1.en.json'];
-        $this->assertSame('94063d7e8ef0886bb1fe2882ab16b3a4c501d8d6', $asset['source_binding']['repository_commit']);
-        // This digest is bound to the frozen source at the commit above, not the mutable Chinese asset.
-        $this->assertSame('12f7fe4bff50fe978f3ef03aa720be21b8166e2a1cbcc396184403498f1267fd', $asset['source_binding']['raw_sha256']);
-        $this->assertSame('f222c798dd7d12c43bb003d2957e9bfb44a533bf485c2850cb0fc2be138cd3c7', $asset['source_binding']['manifest_source_hash']);
+        $declared = json_decode(file_get_contents(base_path('content_assets/riasec/dimension_deep_copy_v1.en.json')), true, 512, JSON_THROW_ON_ERROR);
+        $chinesePath = base_path('content_assets/riasec/dimension_deep_copy_v1.zh-CN.r3.json');
+        $chinese = json_decode(file_get_contents($chinesePath), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertSame($declared['source_binding'], $asset['source_binding']);
+        $this->assertMatchesRegularExpression('/\A[a-f0-9]{40}\z/', $asset['source_binding']['repository_commit']);
+        $this->assertSame(hash_file('sha256', $chinesePath), $asset['source_binding']['raw_sha256']);
+        $this->assertSame(\App\Services\Riasec\RiasecEnglishReportSourceContract::digest($chinese), $asset['source_binding']['canonical_decoded_sha256']);
+        // Immutable 1.8/1.9 source hashes are checked separately against their frozen metadata.
         foreach (['provenance', 'permission_scope', 'third_party_license'] as $field) {
             $this->assertNotEmpty($asset['source_binding'][$field]);
         }

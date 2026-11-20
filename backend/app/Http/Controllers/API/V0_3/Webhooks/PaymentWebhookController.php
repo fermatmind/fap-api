@@ -205,7 +205,7 @@ final class PaymentWebhookController extends Controller
 
         $alipayOrderNo = $payload['out_trade_no'] ?? null;
         $careerOrder = is_string($alipayOrderNo) && DB::table('orders')->where('order_no', $alipayOrderNo)
-            ->where('provider', 'alipay')->whereIn('sku', \App\Services\Commerce\CareerAssessmentPurchase::SKUS)->exists();
+            ->where('provider', 'alipay')->whereIn('sku', \App\Services\Commerce\CareerAssessmentPurchase::allSkus())->exists();
         if ($careerOrder) {
             $appId = config('pay.alipay.default.app_id');
             $seller = config('pay.alipay.default.seller_id');

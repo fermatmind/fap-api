@@ -75,6 +75,15 @@ class ReportGatekeeper
         $result = $subject['result'];
         $effectiveOrgId = (int) ($subject['org_id'] ?? $orgId);
 
+        $riasecPurchase = app(\App\Services\Commerce\RiasecReportPurchase::class);
+        if ($riasecPurchase->managed($attempt)) {
+            $owner = $riasecPurchase->owner(request(), $attempt);
+            $paid = app(\App\Services\Commerce\CareerAssessmentPurchase::class)->hasAccess((string) $attempt->id, $owner);
+
+            return ['ok' => true, 'locked' => ! $paid, 'access_source' => 'payment',
+                'free_full_report_mode' => false, 'paywall_suppressed' => false];
+        }
+
         $scaleCode = strtoupper((string) ($attempt->scale_code ?? ''));
         if ($scaleCode === '') {
             return $this->badRequest('SCALE_REQUIRED', 'scale_code missing on attempt.');
@@ -141,6 +150,12 @@ class ReportGatekeeper
         /** @var Result $result */
         $result = $subject['result'];
         $effectiveOrgId = (int) ($subject['org_id'] ?? $orgId);
+
+        $riasecPurchase = app(\App\Services\Commerce\RiasecReportPurchase::class);
+        if (! $forceSystemAccess && $riasecPurchase->managed($attempt)) {
+            $owner = $riasecPurchase->owner(request(), $attempt);
+            abort_unless(app(\App\Services\Commerce\CareerAssessmentPurchase::class)->hasAccess((string) $attempt->id, $owner), 403, 'Payment is required.');
+        }
 
         $scaleCode = strtoupper((string) ($attempt->scale_code ?? ''));
         if ($scaleCode === '') {

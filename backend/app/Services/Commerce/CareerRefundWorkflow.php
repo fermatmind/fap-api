@@ -33,7 +33,7 @@ final class CareerRefundWorkflow
     public function ownedOrder(string $number, string $owner): object
     {
         $order = CareerAssessmentPurchase::scopeOwner(DB::table('orders')->where('org_id', 0)->where('order_no', $number), $owner)
-            ->whereIn('sku', CareerAssessmentPurchase::SKUS)->first();
+            ->whereIn('sku', CareerAssessmentPurchase::allSkus())->first();
         abort_unless($order, 404);
 
         return $order;

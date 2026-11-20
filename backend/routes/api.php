@@ -621,6 +621,10 @@ Route::prefix('v0.4')->middleware(NormalizeApiErrorContract::class)->group(funct
 });
 
 Route::prefix('v0.5')->group(function () {
+    Route::get('/riasec-assessment/sample', [\App\Http\Controllers\API\V0_5\Career\RiasecPurchaseController::class, 'sample'])->middleware('throttle:api_public');
+    Route::get('/riasec-assessment/results/{id}', [\App\Http\Controllers\API\V0_5\Career\RiasecPurchaseController::class, 'show'])
+        ->whereUuid('id')->defaults('public_realm', true)
+        ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'throttle:api_public']);
     Route::get('/career-assessment/questions', [CareerAssessmentController::class, 'questions'])
         ->middleware('throttle:api_public');
     Route::post('/career-assessment/score', [CareerAssessmentController::class, 'score'])
