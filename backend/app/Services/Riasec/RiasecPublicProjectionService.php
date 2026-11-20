@@ -1111,7 +1111,7 @@ final class RiasecPublicProjectionService
                 $steps = $desktopAtlas['next_steps'] ?? $panels['next_steps'] ?? null;
                 if (is_array($steps) && array_is_list($steps)) {
                     $content['atlas_next_steps'] = $steps;
-                    $content['desktop_insight_questions'] = array_slice($steps, 1);
+                    $content['desktop_insight_questions'] = array_values($slot['validation_questions'] ?? []);
                 }
             }
             if (is_string($atlas) && trim($atlas) !== '') {

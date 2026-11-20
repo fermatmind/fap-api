@@ -21,7 +21,7 @@ final class RiasecEnglishActivityReleaseTest extends TestCase
         $loader->assertPackage($compiled['manifest'], $compiled['payload'], $compiled['bytes']);
         $english = $loader->load('en-US');
         $chinese = $loader->load('zh-CN');
-        $this->assertCount(12, $english['assets']);
+        $this->assertCount(20, $english['assets']);
         $this->assertCount(19, $chinese['assets']);
         $this->assertSame('FERMATMIND_RIASEC_PRIVATE_RESULT_EN_SELECTED', $english['authority']['authority_id']);
         $this->assertSame('riasec.public_projection.v2', $english['authority']['runtime_contract']);
@@ -149,7 +149,7 @@ final class RiasecEnglishActivityReleaseTest extends TestCase
     {
         $directory = sys_get_temp_dir().'/riasec-en-source-'.bin2hex(random_bytes(6));
         File::ensureDirectoryExists($directory);
-        foreach (array_keys(Compiler::SOURCE_CONTRACT) as $name) {
+        foreach (array_keys(Compiler::sourceContract(Compiler::COMPILER_VERSION)) as $name) {
             File::copy(base_path('content_assets/riasec/'.$name), $directory.'/'.$name);
         }
         $filename = $directory.'/'.Compiler::ENGLISH_ACTIVITY_ASSET;
