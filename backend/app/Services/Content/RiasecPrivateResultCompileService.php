@@ -23,7 +23,7 @@ final class RiasecPrivateResultCompileService
 
     public const COMPILER_SCHEMA = 'fap.riasec.private_result.compiler.v1';
 
-    public const COMPILER_VERSION = '1.9.0';
+    public const COMPILER_VERSION = '1.10.0';
 
     public const ENGLISH_NEAR_TIE_ASSET = 'near_tie_alternate_code_copy_v1.en.json';
 
@@ -95,7 +95,7 @@ final class RiasecPrivateResultCompileService
         $sourceFiles = [];
         $sourceHashInput = '';
 
-        foreach (self::SOURCE_CONTRACT as $path => $contract) {
+        foreach (self::sourceContract(self::COMPILER_VERSION) as $path => $contract) {
             $absolutePath = $this->root().'/'.$path;
             if (! is_file($absolutePath) || ! is_readable($absolutePath)) {
                 throw new RuntimeException("RIASEC canonical source is missing: {$path}");
@@ -124,6 +124,7 @@ final class RiasecPrivateResultCompileService
         $this->assertWorkDivision($assets['pair_blend_15_pairs_v1.en.jsonl']);
         $this->assertDesktopReading($assets['dimension_deep_copy_v1.zh-CN.r3.json'], $assets['top3_code_chain_strategy_v1.zh-CN.jsonl'], 'zh-CN');
         $this->assertDesktopReading($assets['dimension_deep_copy_v1.en.json'], $assets['top3_code_chain_strategy_v1.en.jsonl'], 'en');
+        $this->assertDesktopReading($assets['dimension_deep_copy_v1.zh-TW.json'], $assets['top3_code_chain_strategy_v1.zh-TW.jsonl'], 'zh-TW');
         $this->assertSelectedEnglishSources($assets);
         $sourceHash = hash('sha256', $sourceHashInput);
         $coverage = $this->coverage($assets);
@@ -237,11 +238,16 @@ final class RiasecPrivateResultCompileService
             }
             foreach ($desktopAtlas as $entry) {
                 $examples = $entry['examples'] ?? null;
+                $nextSteps = $entry['next_steps'] ?? null;
                 if (! is_string($entry['reading'] ?? null) || trim($entry['reading']) === ''
                     || ! is_string($entry['next_step'] ?? null) || trim($entry['next_step']) === ''
-                    || ! is_array($examples) || ! array_is_list($examples) || count($examples) !== 3
-                    || count(array_filter($examples, static fn (mixed $text): bool => is_string($text) && trim($text) !== '')) !== 3
-                    || count(array_unique($examples)) !== 3) {
+                    || ! is_array($examples) || ! array_is_list($examples) || count($examples) !== 4
+                    || count(array_filter($examples, static fn (mixed $text): bool => is_string($text) && trim($text) !== '')) !== 4
+                    || count(array_unique($examples)) !== 4
+                    || ! is_array($nextSteps) || ! array_is_list($nextSteps) || count($nextSteps) !== 4
+                    || count(array_filter($nextSteps, static fn (mixed $text): bool => is_string($text) && trim($text) !== '')) !== 4
+                    || count(array_unique($nextSteps)) !== 4
+                    || $nextSteps[0] !== $entry['next_step']) {
                     throw new RuntimeException('RIASEC desktop atlas reading, activities, or next step are incomplete.');
                 }
             }
@@ -268,9 +274,14 @@ final class RiasecPrivateResultCompileService
             foreach (['low', 'medium', 'high'] as $band) {
                 $panels = $row['atlas_score_panels'][$band] ?? [];
                 $examples = $panels['examples'] ?? null;
-                if (! is_array($examples) || ! array_is_list($examples) || count($examples) !== 3
-                    || count(array_filter($examples, static fn ($text): bool => is_string($text) && trim($text) !== '')) !== 3
-                    || count(array_unique($examples)) !== 3
+                $nextSteps = $panels['next_steps'] ?? null;
+                if (! is_array($examples) || ! array_is_list($examples) || count($examples) !== 4
+                    || count(array_filter($examples, static fn ($text): bool => is_string($text) && trim($text) !== '')) !== 4
+                    || count(array_unique($examples)) !== 4
+                    || ! is_array($nextSteps) || ! array_is_list($nextSteps) || count($nextSteps) !== 4
+                    || count(array_filter($nextSteps, static fn (mixed $text): bool => is_string($text) && trim($text) !== '')) !== 4
+                    || count(array_unique($nextSteps)) !== 4
+                    || $nextSteps[0] !== $panels['next_step']
                     || ! is_string($panels['next_step'] ?? null) || trim($panels['next_step']) === ''
                     || ! is_string($panels['profile_focus'] ?? null) || trim($panels['profile_focus']) === '') {
                     throw new RuntimeException('RIASEC canonical dimension atlas panels are incomplete.');
@@ -317,7 +328,7 @@ final class RiasecPrivateResultCompileService
     }
 
     /** @param array<string,mixed> $assets @return array<string,mixed> */
-    private function coverage(array $assets): array
+    private function coverage(array $assets, string $compilerVersion = self::COMPILER_VERSION): array
     {
         $dimensionAsset = (array) $assets['dimension_deep_copy_v1.zh-CN.r3.json'];
         $dimensions = array_values(array_unique(array_filter(array_map(
@@ -352,6 +363,7 @@ final class RiasecPrivateResultCompileService
             'secondary_surfaces' => ['faq', 'technical_note', 'pdf', 'print', 'history', 'compare', 'share', 'lifecycle'],
             'locale_modules' => ['en' => ['activity_explorer_v0_1', 'deep_content_slots_v1', 'lifecycle_copy_v1']],
             'english_report_sources' => RiasecEnglishReportSourceContract::coverage($assets),
+            ...($compilerVersion === '1.10.0' ? ['localized_sources' => RiasecLocalizedSourceContract::coverage($assets)] : []),
             'english_selected_sources' => ['dimensions' => ['R', 'I', 'A', 'S', 'E', 'C'], 'pairs' => self::englishPairCoverage(self::COMPILER_VERSION), 'top3_groups' => self::englishTop3Coverage(self::COMPILER_VERSION), 'ordered_codes' => self::englishOrderedCodeCoverage(self::COMPILER_VERSION), 'generic_context_cards' => 4, 'dimension_state_rows' => 126, 'faq_items' => 20, 'technical_sections' => 8, 'method_sections' => 8, 'generic_disagree_cards' => 3, 'generic_aspirations_cards' => 3, 'near_tie_states' => self::ENGLISH_NEAR_TIE_STATES],
         ];
     }
@@ -416,7 +428,7 @@ final class RiasecPrivateResultCompileService
             if (! isset($row['schema_version']) && (! isset($row['asset_id']) || trim((string) $row['asset_id']) === '')) {
                 throw new RuntimeException("RIASEC canonical source lacks schema identity: {$location}");
             }
-            if (! $jsonLines && ($row['locale'] ?? null) !== (str_contains($path, '.en.') ? 'en' : 'zh-CN')) {
+            if (! $jsonLines && ($row['locale'] ?? null) !== (str_contains($path, '.zh-TW.') ? 'zh-TW' : (str_contains($path, '.en.') ? 'en' : 'zh-CN'))) {
                 throw new RuntimeException("RIASEC canonical source locale mismatch: {$location}");
             }
         }
@@ -433,7 +445,8 @@ final class RiasecPrivateResultCompileService
             '1.4.0' => self::legacySelectedSourceContract(completePairs: true),
             '1.5.0', '1.6.0', '1.7.0' => array_diff_key(self::SOURCE_CONTRACT, [self::ENGLISH_NEAR_TIE_ASSET => true, RiasecEnglishReportSourceContract::SURFACE_ASSET => true]),
             '1.8.0' => array_diff_key(self::SOURCE_CONTRACT, [RiasecEnglishReportSourceContract::SURFACE_ASSET => true]),
-            self::COMPILER_VERSION => self::SOURCE_CONTRACT,
+            '1.9.0' => self::SOURCE_CONTRACT,
+            self::COMPILER_VERSION => RiasecLocalizedSourceContract::contract(self::SOURCE_CONTRACT),
             default => throw new RuntimeException('RIASEC_PRIVATE_RESULT_COMPILER_UNSUPPORTED'),
         };
     }
@@ -454,7 +467,7 @@ final class RiasecPrivateResultCompileService
     {
         return match ($compilerVersion) {
             '1.2.0', '1.3.0' => ['R_I', 'R_A', 'I_A'],
-            '1.4.0', '1.5.0', '1.6.0', '1.7.0', '1.8.0', self::COMPILER_VERSION => self::ENGLISH_PAIR_KEYS,
+            '1.4.0', '1.5.0', '1.6.0', '1.7.0', '1.8.0', '1.9.0', self::COMPILER_VERSION => self::ENGLISH_PAIR_KEYS,
             default => throw new RuntimeException('RIASEC_PRIVATE_RESULT_COMPILER_UNSUPPORTED'),
         };
     }
@@ -463,7 +476,7 @@ final class RiasecPrivateResultCompileService
     {
         return match ($compilerVersion) {
             '1.2.0', '1.3.0', '1.4.0' => ['R_I_A'],
-            '1.5.0', '1.6.0', '1.7.0', '1.8.0', self::COMPILER_VERSION => self::ENGLISH_TOP3_KEYS,
+            '1.5.0', '1.6.0', '1.7.0', '1.8.0', '1.9.0', self::COMPILER_VERSION => self::ENGLISH_TOP3_KEYS,
             default => throw new RuntimeException('RIASEC_PRIVATE_RESULT_COMPILER_UNSUPPORTED'),
         };
     }
@@ -808,35 +821,35 @@ final class RiasecPrivateResultCompileService
                     }
                 }
             }
-            if (str_contains($filename, '.en.') && preg_match('/[\x{3400}-\x{9fff}]/u', json_encode($assets[$filename] ?? [], JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE)) === 1) {
+            if (isset(self::SOURCE_CONTRACT[$filename]) && str_contains($filename, '.en.') && preg_match('/[\x{3400}-\x{9fff}]/u', json_encode($assets[$filename] ?? [], JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE)) === 1) {
                 throw new RuntimeException('RIASEC selected English source contains Chinese text.');
             }
         }
         if (isset(self::sourceContract($compilerVersion)[self::ENGLISH_DIMENSION_STATE_ASSET])) {
             $this->assertEnglishDimensionStates($assets[self::ENGLISH_DIMENSION_STATE_ASSET] ?? [], $assets['140q_task_environment_role_v1.zh-CN.jsonl'] ?? []);
         }
-        if ($compilerVersion === '1.9.0') {
+        if (in_array($compilerVersion, ['1.9.0', self::COMPILER_VERSION], true)) {
             RiasecEnglishReportSourceContract::assertSurface($assets);
         }
         $dimensions = $assets['dimension_deep_copy_v1.en.json']['dimensions'] ?? [];
         $pairs = $assets['pair_blend_15_pairs_v1.en.jsonl'] ?? [];
         $pairKeys = array_column($pairs, 'pair_key');
         $expectedPairKeys = self::englishPairCoverage($compilerVersion);
-        if (in_array($compilerVersion, ['1.4.0', '1.5.0', '1.6.0', '1.7.0', '1.8.0', self::COMPILER_VERSION], true)) {
+        if (in_array($compilerVersion, ['1.4.0', '1.5.0', '1.6.0', '1.7.0', '1.8.0', '1.9.0', self::COMPILER_VERSION], true)) {
             sort($pairKeys, SORT_STRING);
             sort($expectedPairKeys, SORT_STRING);
             $this->assertEnglishPairSources($pairs, $assets['pair_blend_15_pairs_v1.zh-CN.jsonl'] ?? []);
         }
         $top3 = $assets['top3_code_chain_strategy_v1.en.jsonl'] ?? [];
         $runtime = $assets['runtime_surface_copy_v1.en.json'] ?? [];
-        $completeTop3 = in_array($compilerVersion, ['1.5.0', '1.6.0', '1.7.0', '1.8.0', self::COMPILER_VERSION], true);
-        if (in_array($compilerVersion, ['1.6.0', '1.7.0', '1.8.0', self::COMPILER_VERSION], true)) {
+        $completeTop3 = in_array($compilerVersion, ['1.5.0', '1.6.0', '1.7.0', '1.8.0', '1.9.0', self::COMPILER_VERSION], true);
+        if (in_array($compilerVersion, ['1.6.0', '1.7.0', '1.8.0', '1.9.0', self::COMPILER_VERSION], true)) {
             $this->assertEnglishDisagreeSources($runtime, $assets['runtime_surface_copy_v1.zh-CN.json'] ?? [], $compilerVersion);
         }
-        if (in_array($compilerVersion, ['1.7.0', '1.8.0', self::COMPILER_VERSION], true)) {
+        if (in_array($compilerVersion, ['1.7.0', '1.8.0', '1.9.0', self::COMPILER_VERSION], true)) {
             $this->assertEnglishAspirationsSources($runtime, $assets['runtime_surface_copy_v1.zh-CN.json'] ?? []);
         }
-        if (in_array($compilerVersion, ['1.8.0', self::COMPILER_VERSION], true)) {
+        if (in_array($compilerVersion, ['1.8.0', '1.9.0', self::COMPILER_VERSION], true)) {
             $this->assertEnglishNearTieSources($assets[self::ENGLISH_NEAR_TIE_ASSET] ?? [], $assets['near_tie_alternate_code_copy_v1.zh-CN.json'] ?? []);
         }
         if ($completeTop3) {

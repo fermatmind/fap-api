@@ -22,7 +22,7 @@ final class RiasecPrivateResultCompileDeterminismTest extends TestCase
         $this->assertSame($first['compiled_hash'], $second['compiled_hash']);
         $this->assertMatchesRegularExpression('/\A[a-f0-9]{64}\z/', $first['source_hash']);
         $this->assertMatchesRegularExpression('/\A[a-f0-9]{64}\z/', $first['compiled_hash']);
-        $this->assertSame(array_keys(RiasecPrivateResultCompileService::SOURCE_CONTRACT), array_column($first['manifest']['source_files'], 'path'));
+        $this->assertSame(array_keys(RiasecPrivateResultCompileService::sourceContract(RiasecPrivateResultCompileService::COMPILER_VERSION)), array_column($first['manifest']['source_files'], 'path'));
         $this->assertSame(['riasec_60', 'riasec_140'], $first['manifest']['coverage']['forms']);
         $this->assertSame(15, $first['manifest']['coverage']['pair_count']);
         $this->assertSame($first['manifest_bytes'], file_get_contents(base_path('content_assets/riasec/compiled/manifest.json')));

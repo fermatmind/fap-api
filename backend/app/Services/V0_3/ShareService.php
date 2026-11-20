@@ -594,6 +594,10 @@ class ShareService
     {
         $scaleCode = strtoupper(trim((string) ($attempt->scale_code ?? '')));
         if ($scaleCode === 'RIASEC') {
+            if (app(\App\Services\Commerce\RiasecReportPurchase::class)->managed($attempt)) {
+                return []; // Public shares expose only the interest summary of a paid result.
+            }
+
             return $this->resolveRiasecSnapshotReport($attempt);
         }
 

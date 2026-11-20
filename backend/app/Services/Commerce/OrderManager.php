@@ -214,11 +214,12 @@ class OrderManager
             return $this->applyLegacyColumns($row, $requestId);
         };
 
-        if (in_array($skuToLookup, CareerAssessmentPurchase::SKUS, true)) {
-            $expectedCurrency = array_search($skuToLookup, CareerAssessmentPurchase::SKUS, true);
+        if (in_array($skuToLookup, CareerAssessmentPurchase::allSkus(), true)) {
+            $contract = CareerAssessmentPurchase::contract($skuToLookup);
+            $expectedCurrency = $contract['currency'];
             if ($unitPriceCents !== CareerAssessmentPurchase::PRICE || $skuRow->currency !== $expectedCurrency
-                || $skuRow->benefit_code !== CareerAssessmentPurchase::BENEFIT
-                || $skuRow->scale_code !== CareerAssessmentPurchase::SCALE || $skuRow->scope !== 'attempt'
+                || $skuRow->benefit_code !== $contract['benefit']
+                || $skuRow->scale_code !== $contract['scale'] || $skuRow->scope !== 'attempt'
                 || $skuRow->kind !== 'report_unlock') {
                 return $this->badRequest('PRICE_INVALID', 'Career report price contract does not match.');
             }
@@ -231,6 +232,13 @@ class OrderManager
         if ($targetAttemptId !== null && DB::table('attempts')->where('id', $targetAttemptId)
             ->where('org_id', $orgId)->where('scale_code', CareerAssessmentPurchase::SCALE)->exists()) {
             return $this->badRequest('SKU_NOT_ELIGIBLE', 'This result requires a career report product.');
+        }
+
+        if ($targetAttemptId !== null) {
+            $target = \App\Models\Attempt::withoutGlobalScopes()->where('org_id', $orgId)->whereKey($targetAttemptId)->first();
+            if ($target && app(RiasecReportPurchase::class)->managed($target)) {
+                return $this->badRequest('SKU_NOT_ELIGIBLE', 'This result requires its Holland report product.');
+            }
         }
 
         if ($useIdempotency) {
@@ -360,13 +368,17 @@ class OrderManager
 
         $uid = $this->trimOrNull($userId);
         $aid = $this->trimOrNull($anonId);
-        if ($orgId === 0 && in_array($order->sku ?? '', CareerAssessmentPurchase::SKUS, true)) {
+        if ($orgId === 0 && in_array($order->sku ?? '', CareerAssessmentPurchase::allSkus(), true)) {
             // Public analytics IDs are not purchase credentials.
-            $aid = CareerAssessmentPurchase::guestAnonId(request());
+            $aid = CareerAssessmentPurchase::purchaseAnonId(request(), (string) $order->sku);
         }
 
         $ownedByUser = $uid !== null && $uid === $this->trimOrNull($order->user_id ?? null);
         $ownedByAnon = $aid !== null && $aid === $this->trimOrNull($order->anon_id ?? null);
+        if ($ownedByAnon && in_array($order->sku ?? '', CareerAssessmentPurchase::RIASEC_SKUS, true)) {
+            $attempt = \App\Models\Attempt::withoutGlobalScopes()->where('org_id', 0)->whereKey($order->target_attempt_id)->first();
+            $ownedByAnon = $attempt && app(RiasecReportPurchase::class)->guestOwns(request(), $attempt);
+        }
         $ownershipVerified = $ownedByUser || $ownedByAnon;
         $paymentRecoveryVerified = false;
         $paymentRecoveryFailure = null;

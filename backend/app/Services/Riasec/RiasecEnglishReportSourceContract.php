@@ -76,7 +76,7 @@ final class RiasecEnglishReportSourceContract
     /** Called only for the new package; old selected-module identities remain unchanged. */
     public static function sourceAuthority(array $payload): ?array
     {
-        if (($payload['compiler']['version'] ?? null) !== '1.9.0') {
+        if (! in_array($payload['compiler']['version'] ?? null, ['1.9.0', '1.10.0'], true)) {
             return null;
         }
         $assets = (array) ($payload['assets'] ?? []);
@@ -85,7 +85,7 @@ final class RiasecEnglishReportSourceContract
         $compiler->assertEnglishActivities($assets[RiasecPrivateResultCompileService::ENGLISH_ACTIVITY_ASSET], $assets['activity_task_examples_v1.zh-CN.jsonl']);
         $coverage = self::coverage($assets);
         $sourceInput = '';
-        foreach (RiasecPrivateResultCompileService::sourceContract('1.9.0') as $path => $contract) {
+        foreach (RiasecPrivateResultCompileService::sourceContract($payload['compiler']['version']) as $path => $contract) {
             if (! isset($assets[$path])) {
                 throw new RuntimeException('RIASEC_EN_REPORT_SOURCE_MISSING:'.$path);
             }

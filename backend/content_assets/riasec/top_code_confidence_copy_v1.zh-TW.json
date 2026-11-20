@@ -1,0 +1,77 @@
+{
+  "asset_id": "top_code_confidence_copy_v1.zh-CN",
+  "asset_status": "content_review_science_boundary_repair_v1",
+  "locale": "zh-TW",
+  "scale_code": "RIASEC",
+  "review_status": "machine_translated",
+  "target_review_status_after_owner_signoff": "owner_signoff_required_before_runtime_import_after_owner_signoff",
+  "states": [
+    {
+      "state": "high_confidence",
+      "label": "閱讀力度較高",
+      "copy": "第一維與後續維度差距較明顯，說明本次結果的閱讀力度較高，並有一個較清楚的閱讀入口。可以先按三字碼閱讀，但仍要用第二、第三維補充任務條件；這不是準確率、能力判斷或職業前景判斷。"
+    },
+    {
+      "state": "moderate_confidence",
+      "label": "可正常閱讀",
+      "copy": "主線索可讀，但不應被寫成單一結論。建議先看 Top2 組合，再看 Top3 活動線索，把差距當作閱讀力度而不是能力高低。"
+    },
+    {
+      "state": "near_tie",
+      "label": "近似並列",
+      "copy": "前兩維或前三維接近時，不要急著固定一個字母順序。把它讀成幾條興趣線索都值得觀察，並用小實驗比較具體活動，而不是比較誰更強。"
+    },
+    {
+      "state": "broad_profile",
+      "label": "興趣較廣",
+      "copy": "多個維度都較接近時，應少強調單一 Code，更多展示可觀察活動與低風險選擇。平坦分佈只說明線索分散，不說明結果無效或使用者能力不足。"
+    },
+    {
+      "state": "low_clarity",
+      "label": "謹慎閱讀",
+      "copy": "本次結果更適合當作初步線索。建議先看六維相對分佈，不輸出強活動線索組合，也不把低清晰度解釋成作答者的問題。"
+    }
+  ],
+  "user_visible_boundary": "結果閱讀力度只說明本次興趣線索相對集中、接近或需要謹慎閱讀；它不是準確率、職業前景、能力判斷或穩定人格結論。",
+  "required_boundaries": [
+    "interest_evidence_only",
+    "not_personality_identity",
+    "not_ability_or_skill_measure",
+    "not_career_recommendation",
+    "examples_not_matches",
+    "not_job_fit",
+    "not_success_prediction",
+    "not_hiring_or_screening_use",
+    "no_60q_140q_raw_delta",
+    "140q_contextual_not_more_accurate",
+    "feedback_does_not_mutate_measured_result",
+    "missing_content_fails_closed",
+    "frontend_fallback_forbidden"
+  ],
+  "forbidden_claims": [
+    "personality_identity",
+    "ability_or_skill_inference",
+    "career_match",
+    "career_recommendation",
+    "job_fit",
+    "fit_score",
+    "occupation_ranking",
+    "success_prediction",
+    "hiring_suitability",
+    "screening_use",
+    "140q_more_accurate",
+    "raw_score_delta",
+    "onet_soc_source_invention"
+  ],
+  "frontend_fallback_allowed": false,
+  "fallback_behavior": "omit_module",
+  "translation_source": {
+    "locale": "zh-CN",
+    "path": "top_code_confidence_copy_v1.zh-CN.json",
+    "raw_sha256": "6db4d7179dd673595e6a899c0f1630252216c8fe6e57dc0f0633c2339919f966",
+    "method": "OpenCC-cn-to-twp-1.4.2",
+    "status": "machine_translated",
+    "human_review_completed": false,
+    "canonical_sha256": "fc679fa3db96c18efff72af3523e4bedc548f2bf1dce8c36e97000b9bdc28140"
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "asset_id": "top_code_confidence_copy_v1.zh-CN",
+  "asset_status": "content_review_science_boundary_repair_v1",
+  "locale": "en",
+  "scale_code": "RIASEC",
+  "review_status": "machine_translated",
+  "target_review_status_after_owner_signoff": "owner_signoff_required_before_runtime_import_after_owner_signoff",
+  "states": [
+    {
+      "state": "high_confidence",
+      "label": "It's better to read.",
+      "copy": "The sharper gap between the first and subsequent dimensions suggests that the results are read more strongly and have a clearer reading portal. Three-word readings can be done first, but the second and third-dimensional terms of the mission must be supplemented; This is not an accurate rate, a competency judgement or a career outlook judgement."
+    },
+    {
+      "state": "moderate_confidence",
+      "label": "Readable",
+      "copy": "The main thread is readable, but should not be written in a single conclusion. It is suggested to look at Top2 combinations and then look at Top3 activity threads, using the gap as a reading strength rather than a low capacity."
+    },
+    {
+      "state": "near_tie",
+      "label": "Approximate Parallel",
+      "copy": "When the first two or the first three dimensions approach, do not rush to fix an alphabetical order. It is worth reading it into several interest lines and using small experiments to be more specific than who is stronger."
+    },
+    {
+      "state": "broad_profile",
+      "label": "There's a lot of interest.",
+      "copy": "When multiple dimensions are closer, less emphasis should be placed on a single Code, with more demonstration of observable activities and low-risk options. The flat distribution only indicates that the clues are scattered, that the result is not valid or that the user ' s capacity is inadequate."
+    },
+    {
+      "state": "low_clarity",
+      "label": "Read carefully.",
+      "copy": "This result is more appropriate as a preliminary clue. It is suggested to look first at the six-dimensional relative distribution, not output the strong activity thread combination, and not explain the low resolution to the respondent."
+    }
+  ],
+  "user_visible_boundary": "The result is only an indication of the relative concentration of interest, proximity or need for careful reading; It is not an accurate rate, career prospects, competency judgement or stable personality conclusion.",
+  "required_boundaries": [
+    "interest_evidence_only",
+    "not_personality_identity",
+    "not_ability_or_skill_measure",
+    "not_career_recommendation",
+    "examples_not_matches",
+    "not_job_fit",
+    "not_success_prediction",
+    "not_hiring_or_screening_use",
+    "no_60q_140q_raw_delta",
+    "140q_contextual_not_more_accurate",
+    "feedback_does_not_mutate_measured_result",
+    "missing_content_fails_closed",
+    "frontend_fallback_forbidden"
+  ],
+  "forbidden_claims": [
+    "personality_identity",
+    "ability_or_skill_inference",
+    "career_match",
+    "career_recommendation",
+    "job_fit",
+    "fit_score",
+    "occupation_ranking",
+    "success_prediction",
+    "hiring_suitability",
+    "screening_use",
+    "140q_more_accurate",
+    "raw_score_delta",
+    "onet_soc_source_invention"
+  ],
+  "frontend_fallback_allowed": false,
+  "fallback_behavior": "omit_module",
+  "translation_source": {
+    "locale": "zh-CN",
+    "path": "top_code_confidence_copy_v1.zh-CN.json",
+    "raw_sha256": "6db4d7179dd673595e6a899c0f1630252216c8fe6e57dc0f0633c2339919f966",
+    "method": "argos-translate-zh_en-1.9-offline",
+    "status": "machine_translated",
+    "human_review_completed": false,
+    "canonical_sha256": "fc679fa3db96c18efff72af3523e4bedc548f2bf1dce8c36e97000b9bdc28140"
+  }
+}

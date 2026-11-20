@@ -1,0 +1,188 @@
+{
+  "asset_id": "low_quality_cautious_reading_v1.zh-CN",
+  "asset_status": "content_review_v7_3_final_preflight_candidate",
+  "locale": "en",
+  "scale_code": "RIASEC",
+  "review_status": "machine_translated",
+  "target_review_status_after_owner_signoff": "owner_signoff_required_before_runtime_import_after_owner_signoff",
+  "global_message": "Please read the results carefully. It only serves as a six-dimensional sketch of interest under the present response, helping you first to see which activities you are willing to approach and which are clearly burdened; For the time being, it is not appropriate to have a strong combination of explanations, examples of career scenarios or deep successions.",
+  "states": [
+    {
+      "quality_state": "normal",
+      "visible_modules": [
+        "hero",
+        "dimension_map",
+        "pair_blend",
+        "activity_explorer",
+        "140q_cta"
+      ],
+      "copy": "This result could serve as an entry point for career interest, but it still provides only an indication of interest, which does not represent competence, identity or professional conclusions.",
+      "reading_strength": "normal_reading",
+      "strong_interpretation_allowed": true,
+      "recommended_action_type": "standard_interest_exploration"
+    },
+    {
+      "quality_state": "caution",
+      "visible_modules": [
+        "hero",
+        "dimension_map",
+        "pair_blend_collapsed",
+        "activity_explorer_limited"
+      ],
+      "copy": "This result is readable, but it is recommended that the strong conclusions be downgraded to a “to be seen trail”; A small experiment is used to determine the attractiveness of the activity, and there is no rush to make a professional judgement.",
+      "reading_strength": "cautious_reading",
+      "strong_interpretation_allowed": false,
+      "recommended_action_type": "cautious_reading_or_low_risk_observation"
+    },
+    {
+      "quality_state": "low_quality",
+      "visible_modules": [
+        "dimension_map_only",
+        "retake_guidance"
+      ],
+      "copy": "The emphasis on the three letters is suspended, Code, and only six-dimensional preliminary clues; It is suggested to re-test at a later stage when the situation is stable, if time is running out, distractions or the imagination of the subject matter is difficult.",
+      "reading_strength": "retake_recommended",
+      "strong_interpretation_allowed": false,
+      "recommended_action_type": "cautious_reading_or_retake_only"
+    },
+    {
+      "quality_state": "minimal_60q",
+      "visible_modules": [
+        "dimension_map",
+        "method_boundary"
+      ],
+      "copy": "60Q Currently only downgrades are imposed when the issues are identified or the degree of completion is insufficient; Other weaker signals use caution only and do not write 60Q as a low-quality personality judgement.",
+      "reading_strength": "cautious_reading",
+      "strong_interpretation_allowed": false,
+      "recommended_action_type": "minimal_boundary_cautious_reading"
+    },
+    {
+      "quality_state": "retake_recommended",
+      "visible_modules": [
+        "retake_card",
+        "safe_boundary"
+      ],
+      "copy": "The re-engineering proposal is intended to obtain a more stable interest trail, not to pursue a “good-looking outcome” or to require a longer version.",
+      "reading_strength": "retake_recommended",
+      "strong_interpretation_allowed": false,
+      "recommended_action_type": "retake_when_ready"
+    }
+  ],
+  "copy_slots": [
+    {
+      "slot": "top_notice",
+      "title": "The results need to be read carefully.",
+      "text": "This result needs to be read with caution. You can keep it as a preliminary source of interest without using the three letters Code as a fixed identity or professional judgment.",
+      "strong_interpretation_allowed": false,
+      "recommended_action_type": "cautious_reading_or_retake_only"
+    },
+    {
+      "slot": "user_not_blamed_message",
+      "title": "That's not your opinion.",
+      "text": "Too quick to answer, distracted, ill-conceived topics, missing questions or instability at the time could all affect the readability of the results.",
+      "strong_interpretation_allowed": false,
+      "recommended_action_type": "cautious_reading_or_retake_only"
+    },
+    {
+      "slot": "what_happened_explanation",
+      "title": "Why do you have to downgrade reading?",
+      "text": "When the response quality or the result clarity is insufficient, the system does not present the results as a strong explanation to avoid misreading the initial clues as a fixed conclusion.",
+      "strong_interpretation_allowed": false,
+      "recommended_action_type": "cautious_reading_or_retake_only"
+    },
+    {
+      "slot": "retake_guidance",
+      "title": "Next time you answer, try to do it.",
+      "text": "If you were distracted, in a hurry, or had no idea of the subject, you could have recalculated at a later stage when the situation was stable; This is just an improvement in the terms of the answer, not a blame, nor a request for a longer version.",
+      "strong_interpretation_allowed": false,
+      "recommended_action_type": "retake_when_ready"
+    },
+    {
+      "slot": "hidden_modules_explanation",
+      "title": "Which modules will be temporarily hidden",
+      "text": "The page reduces strong interpretation, career scene presentation and depth grouping, and avoids reading this unstable thread into directional judgement.",
+      "strong_interpretation_allowed": false,
+      "recommended_action_type": "hide_strong_interpretation"
+    },
+    {
+      "slot": "share_pdf_boundary",
+      "title": "Sharing and PDF Borders",
+      "text": "Carefully read results should be shown by default in sharing and PDF, without displaying strong activity trails, career examples or public Holland Code summaries.",
+      "strong_interpretation_allowed": false,
+      "recommended_action_type": "safe_private_record_only"
+    },
+    {
+      "slot": "next_step",
+      "title": "Next",
+      "text": "Save a carefully read version first, or re-measure later when the situation is more stable. It is not recommended to continue with the longer version.",
+      "strong_interpretation_allowed": false,
+      "recommended_action_type": "retake_when_ready"
+    }
+  ],
+  "runtime_copy_boundaries": {
+    "default": "Quality status limits the reading intensity of this result, does not evaluate the user, and does not change the score or Holland Code.",
+    "caution": "Careful reading only suggests that this clue needs to be observed, not that it is ineffective or that it is capable of judgement.",
+    "minimal_60q": "Quality boundaries of 60Q limit only reading methods and do not compare the correctness of 60Q and 140Q."
+  },
+  "runtime_state_titles": {
+    "caution": "Light Reference",
+    "minimal_60q": "60Q Minimum mass boundary"
+  },
+  "upsell_140q_allowed": false,
+  "user_blame_allowed": false,
+  "strong_interpretation_allowed": false,
+  "result_mutation_allowed": false,
+  "score_mutation_allowed": false,
+  "measured_holland_code_mutation_allowed": false,
+  "recommended_action_type": "cautious_reading_or_retake_only",
+  "required_boundaries": [
+    "interest_evidence_only",
+    "not_personality_identity",
+    "not_ability_or_skill_measure",
+    "not_career_recommendation",
+    "examples_not_matches",
+    "not_job_fit",
+    "not_success_prediction",
+    "not_hiring_or_screening_use",
+    "no_60q_140q_raw_delta",
+    "140q_contextual_not_more_accurate",
+    "feedback_does_not_mutate_measured_result",
+    "missing_content_fails_closed",
+    "frontend_fallback_forbidden"
+  ],
+  "forbidden_claims": [
+    "personality_identity",
+    "ability_or_skill_inference",
+    "career_match",
+    "career_recommendation",
+    "job_fit",
+    "fit_score",
+    "occupation_ranking",
+    "success_prediction",
+    "hiring_suitability",
+    "screening_use",
+    "140q_more_accurate",
+    "raw_score_delta",
+    "onet_soc_source_invention"
+  ],
+  "frontend_fallback_allowed": false,
+  "fallback_behavior": "omit_module",
+  "commercial_operations_internal_notes": {
+    "trust_policy": "Don't blame users, don't sell 140Q, don't output strong conclusions.",
+    "recommended_next_step": "Rescale after break, or do only one low-risk activity check",
+    "hidden_or_collapsed_modules": [
+      "strong_pair_chain",
+      "occupation_examples",
+      "deep_report_cta"
+    ]
+  },
+  "translation_source": {
+    "locale": "zh-CN",
+    "path": "low_quality_cautious_reading_v1.zh-CN.json",
+    "raw_sha256": "d362ae6e3f06e3d5adb22b34c9fb5ad1da0521686c29eba9088a1f2192c3e9b5",
+    "method": "argos-translate-zh_en-1.9-offline",
+    "status": "machine_translated",
+    "human_review_completed": false,
+    "canonical_sha256": "ba43b4d29af86e332047c6d6ec24e33ffd0296258b04fecfd9c083e87e7a25cf"
+  }
+}

@@ -109,8 +109,8 @@ class CommerceController extends Controller
         $orgId = $this->orgContext->orgId();
         $userId = $this->orgContext->userId();
         $anonId = $this->resolveAnonId($request);
-        if (in_array($payload['sku'] ?? '', CareerAssessmentPurchase::SKUS, true)) {
-            $anonId = CareerAssessmentPurchase::guestAnonId($request);
+        if (in_array($payload['sku'] ?? '', CareerAssessmentPurchase::allSkus(), true)) {
+            $anonId = CareerAssessmentPurchase::purchaseAnonId($request, (string) $payload['sku']);
         }
         $contactEmail = $this->resolveContactEmail($payload, $userId !== null ? (string) $userId : null);
         if ($userId === null && $anonId === null && $contactEmail === null) {
@@ -345,7 +345,7 @@ class CommerceController extends Controller
         $ownershipVerified = (bool) ($result['ownership_verified'] ?? true);
         $paymentRecoveryVerified = (bool) ($result['payment_recovery_verified'] ?? false);
         if ($ownershipVerified && ($careerOwner = CareerAssessmentPurchase::ownerKeyForOrder($request, $order)) !== null && CareerAssessmentPurchase::owns($order, $careerOwner)
-            && (int) $order->org_id === 0 && in_array($order->sku ?? '', CareerAssessmentPurchase::SKUS, true)) {
+            && (int) $order->org_id === 0 && in_array($order->sku ?? '', CareerAssessmentPurchase::allSkus(), true)) {
             $order = $this->reconcileCareer94Order($order);
         }
         $status = $this->resolvePublicOrderStatus($order);
@@ -370,7 +370,7 @@ class CommerceController extends Controller
         );
         $exactResultEntry = $this->mbtiAccessHubBuilder->buildExactResultEntryForOrder($order);
         if ($ownershipVerified && ($careerOwner = CareerAssessmentPurchase::ownerKeyForOrder($request, $order)) !== null && CareerAssessmentPurchase::owns($order, $careerOwner)
-            && in_array($order->sku ?? '', CareerAssessmentPurchase::SKUS, true)
+            && in_array($order->sku ?? '', CareerAssessmentPurchase::allSkus(), true)
             && is_string($order->target_attempt_id) && $recoveryUrls['result_url'] !== null
             && app(CareerAssessmentPurchase::class)->hasAccess($order->target_attempt_id, $careerOwner)) {
             $exactResultEntry = [
@@ -596,8 +596,8 @@ class CommerceController extends Controller
         $orgId = $this->orgContext->orgId();
         $userId = $this->orgContext->userId();
         $anonId = $this->resolveAnonId($request);
-        if (in_array($payload['sku'] ?? '', CareerAssessmentPurchase::SKUS, true)) {
-            $anonId = CareerAssessmentPurchase::guestAnonId($request);
+        if (in_array($payload['sku'] ?? '', CareerAssessmentPurchase::allSkus(), true)) {
+            $anonId = CareerAssessmentPurchase::purchaseAnonId($request, (string) $payload['sku']);
         }
         $contactEmail = $this->resolveContactEmail($payload, $userId !== null ? (string) $userId : null);
         if ($userId === null && $anonId === null && $contactEmail === null) {
@@ -1046,7 +1046,7 @@ class CommerceController extends Controller
             $this->resolveRequestedLocale($request)
         );
         $launchOrder = (array) $order;
-        $careerRedirect = $request->expectsJson() && in_array($order->sku ?? '', CareerAssessmentPurchase::SKUS, true);
+        $careerRedirect = $request->expectsJson() && in_array($order->sku ?? '', CareerAssessmentPurchase::allSkus(), true);
         if ($careerRedirect) {
             $launchOrder['redirect_checkout'] = true;
         }

@@ -256,7 +256,16 @@ final class RiasecEnglishReportSourceContractTest extends TestCase
     {
         $payload = $compiled['payload'];
         $manifest = $compiled['manifest'];
-        // Historical fixtures predate both desktop reading packages.
+        // Reconstruct the original source set before editing historical reader bytes.
+        $legacy = Compiler::sourceContract('1.9.0');
+        $payload['assets'] = array_intersect_key($payload['assets'], $legacy);
+        $manifest['source_files'] = array_values(array_filter($manifest['source_files'], static fn ($row) => isset($legacy[$row['path']])));
+        $payload['compiler']['version'] = '1.9.0';
+        $manifest['compiler'] = $payload['compiler'];
+        // Historical fixtures predate both desktop reading packages and local editorial metadata.
+        $chineseDimension = 'dimension_deep_copy_v1.zh-CN.r3.json';
+        $payload['assets'][$chineseDimension]['editorial_revision'] = 'r5_reading_report_consolidation';
+        unset($payload['assets'][$chineseDimension]['local_revision_status'], $payload['assets'][$chineseDimension]['local_revision_scope']);
         foreach (['zh-CN', 'en'] as $locale) {
             foreach ($payload['assets']["pair_blend_15_pairs_v1.{$locale}.jsonl"] as &$pair) {
                 unset($pair['work_division_v1']);
@@ -283,9 +292,17 @@ final class RiasecEnglishReportSourceContractTest extends TestCase
             \PHPUnit\Framework\Assert::assertArrayHasKey($row['asset'], $payload['assets']);
             data_set($payload['assets'][$row['asset']], implode('.', $row['path']), $row['copy']);
         }
+        // Current machine-check metadata must not rewrite historical source hashes.
+        $metadata = json_decode(file_get_contents(base_path('tests/Fixtures/riasec_english_dimension_metadata_1_9.json')), true, 512, JSON_THROW_ON_ERROR);
+        $dimensions = $payload['assets']['dimension_deep_copy_v1.en.json']['dimensions'];
+        foreach ($dimensions as $index => &$dimension) {
+            $dimension['review_status'] = $metadata['dimension_review_status'][$index];
+        }
+        unset($dimension);
+        $payload['assets']['dimension_deep_copy_v1.en.json'] = [...$metadata['root'], 'dimensions' => $dimensions];
         $compiler = app(Compiler::class);
         $canonical = new \ReflectionMethod($compiler, 'canonicalJson');
-        $coverage = (new \ReflectionMethod($compiler, 'coverage'))->invoke($compiler, $payload['assets']);
+        $coverage = (new \ReflectionMethod($compiler, 'coverage'))->invoke($compiler, $payload['assets'], '1.9.0');
         $payload['coverage'] = $manifest['coverage'] = $coverage;
         foreach ($manifest['source_files'] as &$source) {
             $source['sha256'] = Contract::digest($payload['assets'][$source['path']]);

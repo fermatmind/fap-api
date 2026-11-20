@@ -1,0 +1,88 @@
+{
+  "asset_id": "profile_shape_copy_v1.zh-CN",
+  "asset_status": "content_review_science_boundary_repair_v1",
+  "locale": "en",
+  "scale_code": "RIASEC",
+  "review_status": "machine_translated",
+  "target_review_status_after_owner_signoff": "owner_signoff_required_before_runtime_import_after_owner_signoff",
+  "profile_shapes": [
+    {
+      "shape": "clear_code",
+      "title": "The main thread is relatively clear.",
+      "summary": "The six-dimensional distribution shows a relatively more forward-looking entry of interest. A three-letter sequence could be used to get to the results, but the second and third dimensions would still be used as additional observations; This is not a fixed identity, competency or professional conclusion.",
+      "module_policy": "show_standard_chain_and_pair_blends"
+    },
+    {
+      "shape": "blended_code",
+      "title": "We've got a lot of clues.",
+      "summary": "The first two or three interest lines are worth reading. It is recommended to look at the differences between Top2 and Top3 activities and to see which type of activity would prefer to continue with a small mission; Do not just sum up the whole result in the first letter.",
+      "module_policy": "show_pair_blend_first"
+    },
+    {
+      "shape": "broad_profile",
+      "title": "Broader distribution of interest",
+      "summary": "When multiple dimensions approach, the result is more like an interest map to be validated than a single path. Start with activities and small experiments: which tasks make you more interested in continuing and which just seem attractive.",
+      "module_policy": "hide_strong_code_claims"
+    },
+    {
+      "shape": "near_tie",
+      "title": "The first few close.",
+      "summary": "Alphabetical order is only the reading order of this fraction, not the ranking, the ranking of abilities or the final answer. Please read the combination explanation of the adernate code at the same time and observe it with 1-2 real tasks.",
+      "module_policy": "show_alternate_code_boundary"
+    },
+    {
+      "shape": "low_quality",
+      "title": "Read carefully.",
+      "summary": "The result is not suitable for a strong output interpretation. The page should first protect the user: weakens the three-word code, hides the career example, suggests a re-diagnosing or looks only at the six-dimensional relative distribution.",
+      "module_policy": "show_minimal_dimension_only"
+    },
+    {
+      "shape": "low_clarity",
+      "title": "The main line isn't focused enough.",
+      "summary": "The result was not ineffective, but the six-dimensional gap was not sufficient to support strong reading. It would be more appropriate to look first at candidate activities and observation issues rather than to form immediate directional judgements.",
+      "module_policy": "show_candidate_activities"
+    }
+  ],
+  "required_boundaries": [
+    "interest_evidence_only",
+    "not_personality_identity",
+    "not_ability_or_skill_measure",
+    "not_career_recommendation",
+    "examples_not_matches",
+    "not_job_fit",
+    "not_success_prediction",
+    "not_hiring_or_screening_use",
+    "no_60q_140q_raw_delta",
+    "140q_contextual_not_more_accurate",
+    "feedback_does_not_mutate_measured_result",
+    "missing_content_fails_closed",
+    "frontend_fallback_forbidden"
+  ],
+  "forbidden_claims": [
+    "personality_identity",
+    "ability_or_skill_inference",
+    "career_match",
+    "career_recommendation",
+    "job_fit",
+    "fit_score",
+    "occupation_ranking",
+    "success_prediction",
+    "hiring_suitability",
+    "screening_use",
+    "140q_more_accurate",
+    "raw_score_delta",
+    "onet_soc_source_invention"
+  ],
+  "frontend_fallback_allowed": false,
+  "fallback_behavior": "omit_module",
+  "v5_editorial_note": "Profile-shape copy repaired for relative distribution, flat/near-tie boundaries, and no identity, ability, or career-outcome framing.",
+  "translation_source": {
+    "locale": "zh-CN",
+    "path": "profile_shape_copy_v1.zh-CN.json",
+    "raw_sha256": "c6a14141cb06f03494c6ed8004dc53e36e934105a474db13a354e6c57cc0ccb0",
+    "method": "argos-translate-zh_en-1.9-offline",
+    "status": "machine_translated",
+    "human_review_completed": false,
+    "canonical_sha256": "2829c88316f947643c875b0669b83e015032a544d39233b1360c1b1efa56e864"
+  }
+}

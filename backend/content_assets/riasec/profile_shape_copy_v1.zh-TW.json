@@ -1,0 +1,88 @@
+{
+  "asset_id": "profile_shape_copy_v1.zh-CN",
+  "asset_status": "content_review_science_boundary_repair_v1",
+  "locale": "zh-TW",
+  "scale_code": "RIASEC",
+  "review_status": "machine_translated",
+  "target_review_status_after_owner_signoff": "owner_signoff_required_before_runtime_import_after_owner_signoff",
+  "profile_shapes": [
+    {
+      "shape": "clear_code",
+      "title": "主線索相對清楚",
+      "summary": "六維分佈顯示一個相對更靠前的興趣入口。可以先從三字母順序進入結果，但仍要把第二、第三維當作補充觀察線索；這不是固定身份、能力結論或職業結論。",
+      "module_policy": "show_standard_chain_and_pair_blends"
+    },
+    {
+      "shape": "blended_code",
+      "title": "多條線索共同參與",
+      "summary": "前兩到三條興趣線索都值得閱讀。建議先看 Top2 與 Top3 的活動差異，再用小任務觀察哪類活動更想繼續；不要只用第一個字母概括整個結果。",
+      "module_policy": "show_pair_blend_first"
+    },
+    {
+      "shape": "broad_profile",
+      "title": "興趣分佈較寬",
+      "summary": "多個維度接近時，結果更像一張待驗證的興趣地圖，而不是單一路徑。先用活動和小實驗收窄：哪些任務讓你更想繼續，哪些只是看起來有吸引力。",
+      "module_policy": "hide_strong_code_claims"
+    },
+    {
+      "shape": "near_tie",
+      "title": "前幾項接近",
+      "summary": "字母順序只是本次分數的閱讀順序，不是身份等級、能力排序或最終答案。請同時閱讀 alternate code 的組合解釋，並用 1-2 個真實任務觀察。",
+      "module_policy": "show_alternate_code_boundary"
+    },
+    {
+      "shape": "low_quality",
+      "title": "謹慎閱讀",
+      "summary": "這次結果不適合輸出強解釋。頁面應先保護使用者：弱化三字碼、隱藏職業例子、建議重測或僅看六維相對分佈。",
+      "module_policy": "show_minimal_dimension_only"
+    },
+    {
+      "shape": "low_clarity",
+      "title": "主線不夠集中",
+      "summary": "結果並非無效，但六維差距不足以支援強閱讀。更適合先看候選活動和觀察問題，而不是馬上形成方向判斷。",
+      "module_policy": "show_candidate_activities"
+    }
+  ],
+  "required_boundaries": [
+    "interest_evidence_only",
+    "not_personality_identity",
+    "not_ability_or_skill_measure",
+    "not_career_recommendation",
+    "examples_not_matches",
+    "not_job_fit",
+    "not_success_prediction",
+    "not_hiring_or_screening_use",
+    "no_60q_140q_raw_delta",
+    "140q_contextual_not_more_accurate",
+    "feedback_does_not_mutate_measured_result",
+    "missing_content_fails_closed",
+    "frontend_fallback_forbidden"
+  ],
+  "forbidden_claims": [
+    "personality_identity",
+    "ability_or_skill_inference",
+    "career_match",
+    "career_recommendation",
+    "job_fit",
+    "fit_score",
+    "occupation_ranking",
+    "success_prediction",
+    "hiring_suitability",
+    "screening_use",
+    "140q_more_accurate",
+    "raw_score_delta",
+    "onet_soc_source_invention"
+  ],
+  "frontend_fallback_allowed": false,
+  "fallback_behavior": "omit_module",
+  "v5_editorial_note": "Profile-shape copy repaired for relative distribution, flat/near-tie boundaries, and no identity, ability, or career-outcome framing.",
+  "translation_source": {
+    "locale": "zh-CN",
+    "path": "profile_shape_copy_v1.zh-CN.json",
+    "raw_sha256": "c6a14141cb06f03494c6ed8004dc53e36e934105a474db13a354e6c57cc0ccb0",
+    "method": "OpenCC-cn-to-twp-1.4.2",
+    "status": "machine_translated",
+    "human_review_completed": false,
+    "canonical_sha256": "2829c88316f947643c875b0669b83e015032a544d39233b1360c1b1efa56e864"
+  }
+}

@@ -1,0 +1,375 @@
+{
+  "schema_version": "riasec.runtime_surface_copy.v1",
+  "asset_id": "runtime_surface_copy_v1.zh-CN",
+  "locale": "zh-TW",
+  "frontend_fallback_allowed": false,
+  "dimension_labels": {
+    "R": "現實型",
+    "I": "研究型",
+    "A": "藝術型",
+    "S": "社會型",
+    "E": "企業型",
+    "C": "常規型"
+  },
+  "dimension_reading_lines": {
+    "R": {
+      "label": "實作型",
+      "short": "實作",
+      "focus": "真實物件、工具、現場、材料和可見成果",
+      "action": "接觸真實物件、工具或現場條件"
+    },
+    "I": {
+      "label": "研究型",
+      "short": "研究",
+      "focus": "問題、證據、機制、變數和解釋路徑",
+      "action": "分析問題、證據、變數或解釋路徑"
+    },
+    "A": {
+      "label": "藝術型",
+      "short": "表達",
+      "focus": "表達、風格、敘事、形式和體驗",
+      "action": "嘗試表達、風格、敘事或形式處理"
+    },
+    "S": {
+      "label": "社會型",
+      "short": "支援",
+      "focus": "真實的人、理解、支援、溝通和協作",
+      "action": "觀察真實人的理解、支援、溝通或協作需求"
+    },
+    "E": {
+      "label": "企業型",
+      "short": "推進",
+      "focus": "目標、資源、機會、影響和推進",
+      "action": "觀察目標、資源、機會、影響或推進動作"
+    },
+    "C": {
+      "label": "常規型",
+      "short": "流程",
+      "focus": "規則、資料、流程、秩序和可複查記錄",
+      "action": "整理規則、資料、流程、秩序或可複查記錄"
+    }
+  },
+  "boundaries": {
+    "dimension": "以下解讀描述活動興趣；技能、資格和職業選擇需結合其他資訊。",
+    "pair": "這是興趣組合解釋，不是人格標籤、能力結論或職業結論。",
+    "top3": "這是前三興趣活動線索組合解釋，不是人格型別、職業結論或成功預測。",
+    "layer_140q": "140Q 是任務、環境和角色責任線索；它只讓工作日常觀察更具體，不改寫 60Q，不比較原始分，也不輸出崗位結論。",
+    "quality": "質量狀態只限制本次結果的閱讀強度，不評價使用者，也不改變分數或 Holland Code。",
+    "structural": "跨表單摘要只說明興趣線索強調不同；不比較分數，不改寫結果，也不形成職業結論。",
+    "aspirations": "願望只校準探索問題，不覆蓋本次測得的霍蘭德程式碼，不改變 RIASEC 分數，也不形成職業結論。",
+    "disagree": "不認同結果隻影響探索路徑，不修改本次測得的霍蘭德程式碼、RIASEC 分數、報告快照、分享或 PDF。"
+  },
+  "top3_ordered_templates": {
+    "strategy_label": "{shorts}三線索觀察",
+    "activity_chain": "按順序觀察：先{first_action}；再{second_action}；最後{third_action}。",
+    "core_reading": "這組前三個興趣維度說明 {labels} 三類興趣活動在本次作答中相對靠前。{code} 只給出閱讀順序：{first_label} 是優先觀察入口，{second_label} 和 {third_label} 是補充觀察入口；它不能推斷人格身份、能力水平或職業結論。",
+    "positive_value": "這組內容的價值，是把 {first_label}關注{first_focus}；{second_label}關注{second_focus}；{third_label}關注{third_focus} 拆成可觀察的小任務。先看哪一位，只表示先從哪類活動收集證據；它們提供探索問題，不提供崗位答案。",
+    "first_experiment": "用 30 分鐘做一次低風險觀察：先加入{first_short}動作，再加入{second_short}動作，最後加入{third_short}動作；只記錄哪個部分更想繼續。",
+    "ordered_code_handling": "{code} 是本次測量的有序三字碼：第一位 {first_label} 作為優先觀察入口，第二位 {second_label} 和第三位 {third_label} 作為補充觀察入口；排序改變先問什麼、後驗證什麼，不等於固定身份、能力或職業答案。",
+    "low_risk_validation": "低風險觀察：選擇一個能容納{first_short}、{second_short}、{third_short}線索的小任務，把三個動作分開記錄，只看活動偏好和想繼續的證據。",
+    "primary_activity_chain": "先看第一位 {first_label}：把它當作優先觀察入口，尋找與“{first_focus}”相關的小任務證據。",
+    "secondary_support_line": "再看第二位 {second_label}：把它當作補充觀察入口，記錄“{second_focus}”是否讓任務更吸引你。",
+    "tertiary_stabilizer": "第三位 {third_label} 只作補充線索：觀察“{third_focus}”是否幫助你區分更具體的任務條件。",
+    "activity_sequence": [
+      "優先觀察入口：{first_action}",
+      "第二觀察入口：{second_action}",
+      "第三觀察入口：{third_action}"
+    ],
+    "free_page_teaser": "{labels} 三類興趣線索可以按 {code} 的順序觀察，但不急著得出職業答案。"
+  },
+  "aspiration_state_tokens": {
+    "tension": [
+      "想排除",
+      "曾經受挫"
+    ],
+    "needs_reality_check": [
+      "已有機會",
+      "正在考慮"
+    ]
+  },
+  "result_summary": {
+    "headline": "你的興趣結果摘要",
+    "next_step": "先看六維解讀了解興趣特點，再從活動探索中選擇一項，結合實際體驗判斷是否想繼續瞭解。",
+    "boundary": "結果只描述本次職業興趣線索，不代表能力、人格身份、職業匹配或未來結果。",
+    "dimension_bands": {
+      "R": {
+        "high": "動手操作和處理具體物件是本次較突出的興趣線索。",
+        "medium": "你對實作活動有一定興趣，是否投入往往取決於工具、目標和現場條件。",
+        "low": "本次對實作活動的興趣分處於本表單較低範圍；這不代表做不到，可在確有需要時用短任務核對體驗。"
+      },
+      "I": {
+        "high": "追問原因和分析證據是本次較突出的興趣線索。",
+        "medium": "你對研究分析有一定興趣，問題難度和探索空間可能影響投入程度。",
+        "low": "本次對研究分析的興趣分處於本表單較低範圍；先觀察你在具體問題上是否仍願意查證和推理。"
+      },
+      "A": {
+        "high": "表達想法和創造形式是本次較突出的興趣線索。",
+        "medium": "你對創意表達有一定興趣，自主空間和表達媒介可能影響體驗。",
+        "low": "本次對創意表達的興趣分處於本表單較低範圍；不妨用一個輕量作品核對真實感受。"
+      },
+      "S": {
+        "high": "理解、支援或幫助他人是本次較突出的興趣線索。",
+        "medium": "你對助人互動有一定興趣，關係距離和互動方式可能影響投入程度。",
+        "low": "本次對助人互動的興趣分處於本表單較低範圍；可區分不喜歡持續互動，還是更偏好特定物件和方式。"
+      },
+      "E": {
+        "high": "推動目標和組織行動是本次較突出的興趣線索。",
+        "medium": "你對推動事情有一定興趣，目標意義和自主權可能影響投入程度。",
+        "low": "本次對推動與影響活動的興趣分處於本表單較低範圍；可觀察你是否更願意貢獻方案而非主導過程。"
+      },
+      "C": {
+        "high": "整理資訊和維護流程是本次較突出的興趣線索。",
+        "medium": "你對秩序和流程有一定興趣，規則是否清晰、是否有改進空間可能影響體驗。",
+        "low": "本次對規則化任務的興趣分處於本表單較低範圍；可區分對重複流程的排斥與對清晰結構的實際需要。"
+      }
+    }
+  },
+  "quality_display": {
+    "headlines": {
+      "A": "作答狀態穩定，可正常閱讀",
+      "B": "存在輕度作答質量提示，建議結合實際經歷謹慎閱讀",
+      "C": "作答質量提示較明顯，本次僅作初步線索，建議狀態穩定時重測"
+    },
+    "reasons": {
+      "attention_133_failed": "有一道注意力檢查題未通過，部分回答可能沒有充分反映你的真實偏好。",
+      "attention_137_failed": "有一道注意力檢查題未通過，部分回答可能沒有充分反映你的真實偏好。",
+      "low_consistency": "部分相近題目的回答差異較大，結果的穩定性可能受到影響。",
+      "idealization": "部分回答可能偏向理想狀態，而不是你通常會做出的選擇。",
+      "strong_idealization": "多組回答可能偏向理想狀態，而不是你通常會做出的選擇。",
+      "broad_agreement": "較多題目選擇了同意或喜歡，各興趣維度之間的區分度可能不足。",
+      "too_fast": "作答速度明顯偏快，可能沒有留出足夠時間理解題意。",
+      "neutral_overuse": "中立選項使用較多，本次結果能夠區分出的興趣差異有限。",
+      "missing_items": "存在未完成題目，本次結果無法支援完整解讀。",
+      "both_attention_failed": "兩道注意力檢查題均未通過，部分回答可能沒有充分反映你的真實偏好。",
+      "generic": "本次作答出現了質量提示，因此結果的區分度或穩定性可能有限。"
+    },
+    "improvements": {
+      "attention_133_failed": "重測時請逐題閱讀，並在不受打擾的環境中作答。",
+      "attention_137_failed": "重測時請逐題閱讀，並在不受打擾的環境中作答。",
+      "low_consistency": "重測時以平時真實、反覆出現的行為為準，不必追求前後看起來一致。",
+      "idealization": "重測時請選擇最接近日常狀態的答案，而不是你認為更理想或更受期待的答案。",
+      "strong_idealization": "重測時請選擇最接近日常狀態的答案，而不是你認為更理想或更受期待的答案。",
+      "broad_agreement": "遇到都感興趣的選項時，可比較自己是否願意長期、重複地投入這些活動。",
+      "too_fast": "在時間充足、狀態穩定時重新作答，每題先聯絡一個具體經歷再選擇。",
+      "neutral_overuse": "重測時可結合具體經歷，儘量區分更接近喜歡還是不喜歡。",
+      "missing_items": "請完成全部題目後重新生成結果。",
+      "generic": "建議在狀態穩定、不受打擾時，結合日常真實經歷重新作答。"
+    },
+    "boundary": "質量提示只說明本次作答的可讀性，不評價你的能力、人格或個人價值。"
+  },
+  "tie_display": {
+    "score_code_mismatch": {
+      "headline": "本次結果暫不可解釋",
+      "note": "分數順序與結果程式碼不一致，已隱藏解釋內容；六維分數仍可供核對。",
+      "boundary": "請重新檢查結果；不要根據本頁推斷興趣排序、能力或職業結論。"
+    },
+    "exact_tie_note": "這些維度本次得分相同，字母順序不代表高低。",
+    "exact_tie_boundary": "並列只描述本次興趣分數，不代表能力、人格身份或職業結論。",
+    "exact_tie_headline": "{code}（並列：{groups}）",
+    "near_tie_headline": "{code}（{dimensions}接近）",
+    "near_tie_note": "這些維度分數接近，不宜據此強調先後順序。",
+    "near_tie_boundary": "這是解釋用的暫定閱讀閾值，不是統計顯著性或測量誤差結論，也不產生第二個測量結果。"
+  },
+  "generic_slots": {
+    "structural_public_boundary": "60Q 與 140Q 只能讀作線索強調不同，不比較原始分數，不輸出優劣或覆蓋判斷。",
+    "layer_140q": {
+      "task_activity_card": {
+        "title": "任務活動卡",
+        "question": "你真正喜歡做的，是哪類工作活動？",
+        "summary": "這張卡把興趣拆成更具體的任務活動，幫助區分你喜歡的是問題本身，還是某個職業名帶來的想像。",
+        "what_user_sees": [
+          "更容易吸引你的任務活動",
+          "可能降低興趣的任務活動",
+          "值得先觀察的一個小任務"
+        ],
+        "layer_state": "140q_completed_state"
+      },
+      "environment_card": {
+        "title": "工作環境卡",
+        "question": "這些活動出現在哪種環境裡，你仍然有興趣？",
+        "summary": "同一個任務在不同環境裡感受會不同。環境卡幫助把任務興趣和工作日常拆開。",
+        "what_user_sees": [
+          "安靜深研 vs 真實反饋",
+          "合作支援 vs 結果導向",
+          "開放表達 vs 流程約束"
+        ],
+        "layer_state": "140q_completed_state"
+      },
+      "role_responsibility_card": {
+        "title": "角色責任卡",
+        "question": "你願意在工作裡承擔哪種責任？",
+        "summary": "喜歡一個任務，不等於喜歡它所在崗位的責任。角色卡幫助看見你想定義問題、表達答案、支援理解、推動落地，還是守住流程。",
+        "what_user_sees": [
+          "定義問題",
+          "表達答案",
+          "支援理解",
+          "推動落地",
+          "守住流程"
+        ],
+        "layer_state": "140q_completed_state"
+      },
+      "layer_agreement": {
+        "title": "任務、環境和角色線索大體一致",
+        "summary": "你的任務活動、工作環境和角色責任線索大體一致。下一步可以選擇一個低風險任務進行觀察，而不是急著鎖定職業名稱。",
+        "layer_state": "agreement"
+      },
+      "layer_tension": {
+        "title": "任務興趣和工作日常線索有張力",
+        "summary": "你的任務興趣和工作日常線索強調了不同層面。更穩妥的讀法是：喜歡的任務、可持續的環境、願意承擔的角色責任，需要分開觀察。",
+        "layer_state": "tension"
+      },
+      "layer_unavailable": {
+        "title": "工作日常三張卡暫不可用",
+        "summary": "當前 60Q 結果已經可以閱讀基礎興趣結構。任務、環境和角色責任三張卡需要完成 140Q 後才會顯示；它們只補充工作日常觀察角度，不修正或覆蓋 60Q。",
+        "applicable_form_codes": [
+          "riasec_60"
+        ],
+        "contextual_detail_only": true,
+        "overrides_60q_result": false,
+        "layer_state": "not_applicable_60q_only"
+      },
+      "140q_cta": {
+        "title": "你喜歡的是任務本身，還是這份工作的真實日常？",
+        "summary": "60Q 已經給出本次興趣結構。140Q 只是把觀察拆到任務、環境和角色責任三層，讓你多看工作日常線索；它不是用來修正本次結果的版本，也不會修復、推翻或覆蓋 60Q。",
+        "button_label": "檢視 140Q 情境線索",
+        "applicable_form_codes": [
+          "riasec_60"
+        ],
+        "contextual_detail_only": true,
+        "accuracy_upgrade_claim_allowed": false,
+        "overrides_60q_result": false,
+        "layer_state": "unavailable"
+      },
+      "140q_not_recommended": {
+        "title": "暫不建議繼續深入版",
+        "summary": "由於本次作答需要謹慎閱讀，暫不展示 140Q 三張卡。建議稍後重測，而不是繼續做強解釋。",
+        "layer_state": "insufficient_quality"
+      }
+    },
+    "structural_difference": {
+      "summary": {
+        "title": "有兩份不同題本結果時，如何並讀",
+        "summary": "以下是通用閱讀說明，不表示系統已經比較你的歷史結果。如果你有60題與140題兩份結果，可分別檢視興趣活動、任務、環境和角色責任的線索；兩種題本使用不同分數參照，不比較數值漲跌，也不以長題本覆蓋短題本。",
+        "structural_difference_state": "different_emphasis"
+      },
+      "task_layer_explanation": {
+        "title": "任務活動層",
+        "summary": "任務活動層關注你更容易被哪些具體活動吸引，例如分析、表達、支援、推動或整理。它不說明能力高低，也不替代基礎興趣結構。",
+        "structural_difference_state": "same_structure"
+      },
+      "environment_layer_explanation": {
+        "title": "工作環境層",
+        "summary": "同一類任務出現在不同環境裡，感受可能不同。環境層幫助你看見哪些情境更容易支援長期投入。",
+        "structural_difference_state": "different_emphasis"
+      },
+      "role_layer_explanation": {
+        "title": "角色責任層",
+        "summary": "角色責任層關注你更願意承擔定義問題、表達答案、支援理解、推動落地或守住流程中的哪類責任。",
+        "structural_difference_state": "layer_tension"
+      },
+      "correct_reading": {
+        "title": "正確讀法",
+        "summary": "先看兩次結果中仍然重疊的活動線索，再看任務、環境和角色責任各自需要觀察的部分。排序接近時，也要把近似並列當作閱讀邊界。",
+        "structural_difference_state": "near_tie_shift"
+      },
+      "forbidden_reading": {
+        "title": "不要這樣讀",
+        "summary": "不要把跨表單差異讀成某一次結果失效、長表單覆蓋短表單、興趣身份發生轉換，或任何分數漲跌結論。",
+        "structural_difference_state": "cross_form_not_comparable"
+      },
+      "next_validation_step": {
+        "title": "下一步觀察",
+        "summary": "選擇一個低風險任務、一個真實環境和一個角色責任進行小實驗。記錄它們分別更吸引你還是需要調整，再決定是否需要重測。",
+        "structural_difference_state": "insufficient_basis"
+      }
+    },
+    "aspirations": {
+      "intro": {
+        "title": "把你原本想探索的方向放到旁邊看",
+        "summary": "你可以記錄職業、專業、課程、專案或工作場景。它們只用於生成探索問題，不進入測評分數。",
+        "aspirations_state": "not_provided"
+      },
+      "input_boundary": {
+        "title": "輸入邊界",
+        "summary": "願望是探索材料，不是測評答案。系統只會幫助你看這些方向裡有哪些活動與當前興趣線索重疊，哪些現實部分需要觀察。",
+        "aspirations_state": "not_provided"
+      },
+      "overlap_reading": {
+        "title": "有活動重疊",
+        "summary": "這個方向與你當前興趣結構有活動重疊。下一步是觀察這些活動進入真實任務、環境和角色責任後是否仍然吸引你。",
+        "aspirations_state": "overlap"
+      },
+      "tension_reading": {
+        "title": "有張力，需要拆開看",
+        "summary": "這個方向與你當前興趣結構存在張力。張力不是排除結論，只說明其中的日常任務、環境或角色責任需要先觀察。",
+        "aspirations_state": "tension"
+      },
+      "reality_questions": {
+        "title": "現實觀察問題",
+        "summary": "先問三個問題：你喜歡的是任務本身還是職業想像；你能接受這個方向的環境約束嗎；你願意承擔它的角色責任嗎。",
+        "aspirations_state": "needs_reality_check"
+      },
+      "education_skill_qualification_boundary": {
+        "title": "教育、技能、資格和倫理邊界",
+        "summary": "涉及教育要求、專業技能、資格證書、行業法規或倫理責任的方向，必須另行確認訓練、作品、證書、監督和現實機會。",
+        "aspirations_state": "high_risk_boundary"
+      },
+      "next_experiment_prompt": {
+        "title": "下一步小實驗",
+        "summary": "選擇一個低風險任務，用 15 到 30 分鐘觀察它是否仍然吸引你。先觀察活動，不急著形成職業結論。",
+        "aspirations_state": "needs_reality_check"
+      },
+      "no_score_mutation_boundary": {
+        "title": "不改寫測評結果",
+        "summary": "願望不會覆蓋本次測得的霍蘭德程式碼，也不會改變 RIASEC 分數、報告快照、分享內容或 PDF 內容。",
+        "aspirations_state": "not_provided"
+      }
+    },
+    "disagree": {
+      "user_not_wrong_message": {
+        "title": "你可以不認同這個結果",
+        "summary": "不認同結果本身是有效反饋。它會進入探索路徑，幫助你檢查作答狀態、近似並列和活動探索方向。",
+        "disagree_state": "disagrees_quality_normal"
+      },
+      "possible_reasons": {
+        "title": "可能原因",
+        "summary": "結果不像你，可能來自按能力作答、職業名想像、前幾個維度接近、profile 較寬，或當時狀態不穩定。",
+        "disagree_state": "disagrees_quality_normal"
+      },
+      "retake_when": {
+        "title": "什麼時候適合重測",
+        "summary": "如果作答時注意力不穩定、題目想像不清楚，或結果質量需要謹慎閱讀，稍後重測比手動修正結果更可靠。",
+        "disagree_state": "retake_recommended"
+      },
+      "experiment_when": {
+        "title": "什麼時候適合做實驗",
+        "summary": "如果你只是更認同另一個方向，可以選擇一個活動做低風險實驗。實驗記錄只幫助探索下一步，不形成職業結論。",
+        "disagree_state": "save_feedback_only"
+      },
+      "record_preferred_direction_boundary": {
+        "title": "記錄偏好方向的邊界",
+        "summary": "你可以記錄更想探索的方向；它只作為偏好線索儲存，不覆蓋本次測得的霍蘭德程式碼，不重算六維分數。",
+        "disagree_state": "save_feedback_only"
+      },
+      "feedback_no_mutation_boundary": {
+        "title": "反饋不改分",
+        "summary": "不認同、收藏、排除和實驗反饋都不會修改測評結果、報告快照、預設分享內容或 PDF 內容。",
+        "disagree_state": "disagrees_quality_caution"
+      },
+      "next_step": {
+        "title": "下一步",
+        "summary": "先檢查作答質量和近似並列，再選擇重測、儲存偏好方向，或做一個小實驗觀察具體活動。",
+        "disagree_state": "save_feedback_only"
+      }
+    }
+  },
+  "translation_source": {
+    "locale": "zh-CN",
+    "path": "runtime_surface_copy_v1.zh-CN.json",
+    "raw_sha256": "0b7cf1cdf2f60f573b7b62763c5b0c84415f97466bccc505c13094ea3135ddec",
+    "method": "OpenCC-cn-to-twp-1.4.2",
+    "status": "machine_translated",
+    "human_review_completed": false,
+    "canonical_sha256": "187d7da9ec28a2f5da8bfae0efc9cb77aaa5b44cf69dbb02b3a1bf38fcad5dc4"
+  }
+}

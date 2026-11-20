@@ -1,0 +1,131 @@
+{
+  "asset_id": "faq_v1.zh-CN",
+  "asset_status": "content_review_v7_3_final_preflight_candidate",
+  "locale": "zh-TW",
+  "scale_code": "RIASEC",
+  "review_status": "machine_translated",
+  "questions": [
+    {
+      "q": "IAS 是什麼意思？",
+      "a": "I、A、S 是你本次結果中較突出的三個興趣維度。順序表示本次排序，不是固定身份。"
+    },
+    {
+      "q": "這是不是告訴我該做什麼職業？",
+      "a": "不是。它告訴你哪些工作活動值得先了解、先觀察；真實選擇還要看能力、經驗、機會、價值觀、門檻和市場條件。"
+    },
+    {
+      "q": "80 分是不是超過 80% 的人？",
+      "a": "不是。當前 0–100 是表單內興趣強度換算，不是人群百分位，也不是能力分。"
+    },
+    {
+      "q": "低 E 是不是不能創業、銷售或管理？",
+      "a": "不是。低 E 只表示強推動、高曝光、高競爭不一定是最自然的興趣入口；是否能做還要看能力、經驗和現實機會。"
+    },
+    {
+      "q": "低 R 是不是不能做技術或實操？",
+      "a": "不是。低 R 不代表手笨，也不代表不能學技術。它只說明工具、現場、實物操作不是當前最自然的興趣入口。"
+    },
+    {
+      "q": "140Q 會不會更準？",
+      "a": "不能這樣理解。140Q 更具體地觀察任務、環境和角色責任，不推翻 60Q，也不比較不同表單原始分。"
+    },
+    {
+      "q": "如果我不認同結果怎麼辦？",
+      "a": "可以記錄不認同點，檢查作答狀態、近似並列和活動想像，再用小實驗或同表單重測觀察。反饋不會改分數。"
+    },
+    {
+      "q": "職業例子為什麼不直接展開成清單？",
+      "a": "因為職業名稱很容易被誤讀成結論。費馬測試先展示活動和任務，職業名稱只作為場景例子，並標註來源狀態。"
+    },
+    {
+      "q": "可以把報告給老師、諮詢師或朋友看嗎？",
+      "a": "可以優先分享安全版。完整報告涉及個人興趣結構和反饋記錄時，應由你決定是否展示。"
+    },
+    {
+      "q": "公司可以拿這個做篩選嗎？",
+      "a": "不可以。本報告不能用於招聘、錄取、晉升、淘汰或資格判斷。"
+    },
+    {
+      "q": "為什麼結果頁會有 Action Lab？",
+      "a": "因為職業興趣需要回到現實觀察。Action Lab 只幫你做低風險小實驗，不生成職業結論。"
+    },
+    {
+      "q": "複測結果不同怎麼辦？",
+      "a": "先看是否同表單、作答質量、近似並列和當時狀態。不要把不同表單的原始分畫成漲跌。"
+    },
+    {
+      "q": "Holland Code 會不會隨時間變化？",
+      "a": "興趣結構通常有一定穩定性，但經歷、機會和環境會影響表達方式。建議把複測當作變化線索，而不是輸贏。"
+    },
+    {
+      "q": "這個測試和能力測試有什麼區別？",
+      "a": "RIASEC 只看你對活動的興趣，不判斷你是否已經擅長；能力需要用其他證據觀察。"
+    },
+    {
+      "q": "為什麼不直接告訴我“最應該選什麼”？",
+      "a": "直接給結論會讓你忽略現實門檻。更穩妥的方式是先看活動、任務、環境和角色，再做小實驗。"
+    },
+    {
+      "q": "如果我已經有目標職業，還要看 RIASEC 嗎？",
+      "a": "可以把目標放在願望校準裡並讀，看看其中哪些活動與當前興趣線索重疊，哪些現實部分需要觀察。"
+    },
+    {
+      "q": "PDF 可以給諮詢師看嗎？",
+      "a": "可以，但 PDF 一旦轉發平臺無法遠端撤回。諮詢討論版應只在你授權後使用。"
+    },
+    {
+      "q": "結果頁為什麼不預設顯示所有分數細節？",
+      "a": "預設展示等級和解釋，避免使用者把小數分當成假精確。展開後可以看更完整證據。"
+    },
+    {
+      "q": "分數很高是不是一定更好？",
+      "a": "不是。高興趣只是更自然的興趣入口，也可能帶來現實成本；低興趣也不是缺點。"
+    },
+    {
+      "q": "我可以用這份報告選專業嗎？",
+      "a": "可以作為探索入口，但不能單獨決定。選專業還要看課程內容、能力基礎、作品、資源、地域和長期投入。"
+    }
+  ],
+  "required_boundaries": [
+    "interest_evidence_only",
+    "not_personality_identity",
+    "not_ability_or_skill_measure",
+    "not_career_recommendation",
+    "examples_not_matches",
+    "not_job_fit",
+    "not_success_prediction",
+    "not_hiring_or_screening_use",
+    "no_60q_140q_raw_delta",
+    "140q_contextual_not_more_accurate",
+    "feedback_does_not_mutate_measured_result",
+    "missing_content_fails_closed",
+    "frontend_fallback_forbidden"
+  ],
+  "forbidden_claims": [
+    "personality_identity",
+    "ability_or_skill_inference",
+    "career_match",
+    "career_recommendation",
+    "job_fit",
+    "fit_score",
+    "occupation_ranking",
+    "success_prediction",
+    "hiring_suitability",
+    "screening_use",
+    "140q_more_accurate",
+    "raw_score_delta",
+    "onet_soc_source_invention"
+  ],
+  "frontend_fallback_allowed": false,
+  "fallback_behavior": "omit_module",
+  "v5_editorial_note": "FAQ reviewed for user misunderstanding paths and no score mutation claims.",
+  "translation_source": {
+    "locale": "zh-CN",
+    "path": "faq_v1.zh-CN.json",
+    "raw_sha256": "9b256fef5965da6d3c6854f4e9447f470b1dcf2ad7576f1deddaa76f69830d01",
+    "method": "OpenCC-cn-to-twp-1.4.2",
+    "status": "machine_translated",
+    "human_review_completed": false,
+    "canonical_sha256": "8bbd192cfb4038712de77ff3f888778759e1a6c4483c068009b9a0d61d968c70"
+  }
+}

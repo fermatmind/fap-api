@@ -1,0 +1,188 @@
+{
+  "asset_id": "low_quality_cautious_reading_v1.zh-CN",
+  "asset_status": "content_review_v7_3_final_preflight_candidate",
+  "locale": "zh-TW",
+  "scale_code": "RIASEC",
+  "review_status": "machine_translated",
+  "target_review_status_after_owner_signoff": "owner_signoff_required_before_runtime_import_after_owner_signoff",
+  "global_message": "這次結果請謹慎閱讀。它只適合作為本次作答條件下的六維興趣草圖，幫助你先觀察哪些活動讓你願意靠近、哪些活動明顯負擔；暫時不適合展開強組合解釋、職業場景例子或深度承接。",
+  "states": [
+    {
+      "quality_state": "normal",
+      "visible_modules": [
+        "hero",
+        "dimension_map",
+        "pair_blend",
+        "activity_explorer",
+        "140q_cta"
+      ],
+      "copy": "本次結果可以作為職業興趣探索入口，但仍然只說明興趣線索，不代表能力、身份或職業結論。",
+      "reading_strength": "normal_reading",
+      "strong_interpretation_allowed": true,
+      "recommended_action_type": "standard_interest_exploration"
+    },
+    {
+      "quality_state": "caution",
+      "visible_modules": [
+        "hero",
+        "dimension_map",
+        "pair_blend_collapsed",
+        "activity_explorer_limited"
+      ],
+      "copy": "本次結果可讀，但建議把強結論降級為“待觀察線索”；先用小實驗確認活動吸引力，不急著做職業判斷。",
+      "reading_strength": "cautious_reading",
+      "strong_interpretation_allowed": false,
+      "recommended_action_type": "cautious_reading_or_low_risk_observation"
+    },
+    {
+      "quality_state": "low_quality",
+      "visible_modules": [
+        "dimension_map_only",
+        "retake_guidance"
+      ],
+      "copy": "先暫緩強調三字母 Code，只看六維初步線索；如果當時趕時間、分心或題目想像困難，建議稍後在狀態穩定時重測。",
+      "reading_strength": "retake_recommended",
+      "strong_interpretation_allowed": false,
+      "recommended_action_type": "cautious_reading_or_retake_only"
+    },
+    {
+      "quality_state": "minimal_60q",
+      "visible_modules": [
+        "dimension_map",
+        "method_boundary"
+      ],
+      "copy": "60Q 當前只在明確缺題或完成度不足時強降級；其他較弱訊號只做謹慎提示，不把 60Q 寫成低質量人格判斷。",
+      "reading_strength": "cautious_reading",
+      "strong_interpretation_allowed": false,
+      "recommended_action_type": "minimal_boundary_cautious_reading"
+    },
+    {
+      "quality_state": "retake_recommended",
+      "visible_modules": [
+        "retake_card",
+        "safe_boundary"
+      ],
+      "copy": "重測建議是為了獲得更穩定的興趣線索，不是為了追求某個“好看結果”，也不是要求進入更長版本。",
+      "reading_strength": "retake_recommended",
+      "strong_interpretation_allowed": false,
+      "recommended_action_type": "retake_when_ready"
+    }
+  ],
+  "copy_slots": [
+    {
+      "slot": "top_notice",
+      "title": "這次結果需要謹慎閱讀",
+      "text": "本次結果需要謹慎閱讀。你可以先保留它作為初步興趣線索，不用把三字母 Code 當成固定身份或職業判斷。",
+      "strong_interpretation_allowed": false,
+      "recommended_action_type": "cautious_reading_or_retake_only"
+    },
+    {
+      "slot": "user_not_blamed_message",
+      "title": "這不是對你的評價",
+      "text": "作答太快、注意力分散、題目想像不清楚、缺題或當時狀態不穩定，都可能影響結果的可讀性。",
+      "strong_interpretation_allowed": false,
+      "recommended_action_type": "cautious_reading_or_retake_only"
+    },
+    {
+      "slot": "what_happened_explanation",
+      "title": "為什麼要降級閱讀",
+      "text": "當作答質量或結果清晰度不足時，系統暫不把結果寫成強解釋，以避免把初步線索誤讀成固定結論。",
+      "strong_interpretation_allowed": false,
+      "recommended_action_type": "cautious_reading_or_retake_only"
+    },
+    {
+      "slot": "retake_guidance",
+      "title": "下次作答時，試著這樣做",
+      "text": "如果你當時注意力分散、趕時間或對題目想像不清，可以稍後在狀態穩定時重測；這只是改善作答條件，不是責備你，也不是要求購買更長版本。",
+      "strong_interpretation_allowed": false,
+      "recommended_action_type": "retake_when_ready"
+    },
+    {
+      "slot": "hidden_modules_explanation",
+      "title": "哪些模組會暫時隱藏",
+      "text": "頁面會減少強解釋、職業場景展示和深度組合承接，避免把本次不穩定線索讀成方向判斷。",
+      "strong_interpretation_allowed": false,
+      "recommended_action_type": "hide_strong_interpretation"
+    },
+    {
+      "slot": "share_pdf_boundary",
+      "title": "分享和 PDF 邊界",
+      "text": "謹慎閱讀結果在分享和 PDF 中應預設展示邊界提示，不展示強活動線索組合、職業例子或公開 Holland Code 摘要。",
+      "strong_interpretation_allowed": false,
+      "recommended_action_type": "safe_private_record_only"
+    },
+    {
+      "slot": "next_step",
+      "title": "下一步",
+      "text": "先儲存謹慎閱讀版，或稍後在狀態更穩定時重測。當前不推薦繼續進入更長版本。",
+      "strong_interpretation_allowed": false,
+      "recommended_action_type": "retake_when_ready"
+    }
+  ],
+  "runtime_copy_boundaries": {
+    "default": "質量狀態只限制本次結果的閱讀強度，不評價使用者，也不改變分數或 Holland Code。",
+    "caution": "謹慎閱讀只說明本次線索需要觀察，不是結果無效，也不是能力判斷。",
+    "minimal_60q": "60Q 的質量邊界只限制閱讀方式，不比較 60Q 和 140Q 的正確性。"
+  },
+  "runtime_state_titles": {
+    "caution": "輕量參考",
+    "minimal_60q": "60Q 最小質量邊界"
+  },
+  "upsell_140q_allowed": false,
+  "user_blame_allowed": false,
+  "strong_interpretation_allowed": false,
+  "result_mutation_allowed": false,
+  "score_mutation_allowed": false,
+  "measured_holland_code_mutation_allowed": false,
+  "recommended_action_type": "cautious_reading_or_retake_only",
+  "required_boundaries": [
+    "interest_evidence_only",
+    "not_personality_identity",
+    "not_ability_or_skill_measure",
+    "not_career_recommendation",
+    "examples_not_matches",
+    "not_job_fit",
+    "not_success_prediction",
+    "not_hiring_or_screening_use",
+    "no_60q_140q_raw_delta",
+    "140q_contextual_not_more_accurate",
+    "feedback_does_not_mutate_measured_result",
+    "missing_content_fails_closed",
+    "frontend_fallback_forbidden"
+  ],
+  "forbidden_claims": [
+    "personality_identity",
+    "ability_or_skill_inference",
+    "career_match",
+    "career_recommendation",
+    "job_fit",
+    "fit_score",
+    "occupation_ranking",
+    "success_prediction",
+    "hiring_suitability",
+    "screening_use",
+    "140q_more_accurate",
+    "raw_score_delta",
+    "onet_soc_source_invention"
+  ],
+  "frontend_fallback_allowed": false,
+  "fallback_behavior": "omit_module",
+  "commercial_operations_internal_notes": {
+    "trust_policy": "不責備使用者，不推銷 140Q，不輸出強結論",
+    "recommended_next_step": "休息後重測，或只做一個低風險活動檢查",
+    "hidden_or_collapsed_modules": [
+      "strong_pair_chain",
+      "occupation_examples",
+      "deep_report_cta"
+    ]
+  },
+  "translation_source": {
+    "locale": "zh-CN",
+    "path": "low_quality_cautious_reading_v1.zh-CN.json",
+    "raw_sha256": "d362ae6e3f06e3d5adb22b34c9fb5ad1da0521686c29eba9088a1f2192c3e9b5",
+    "method": "OpenCC-cn-to-twp-1.4.2",
+    "status": "machine_translated",
+    "human_review_completed": false,
+    "canonical_sha256": "ba43b4d29af86e332047c6d6ec24e33ffd0296258b04fecfd9c083e87e7a25cf"
+  }
+}

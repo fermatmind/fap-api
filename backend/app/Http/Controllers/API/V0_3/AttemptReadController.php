@@ -183,6 +183,9 @@ class AttemptReadController extends Controller
         $responseCodes = $this->resolveResponseScaleCodes($result);
         $scaleCode = $this->resolveNormalizedScaleCode($responseCodes);
         $attempt = $this->resolveAttemptForResultRead($request, $orgId, $id, $scaleCode);
+        if (app(\App\Services\Commerce\RiasecReportPurchase::class)->managed($attempt)) {
+            return $this->privateNoStoreJson(app(\App\Services\Commerce\RiasecReportPurchase::class)->present($request, $attempt));
+        }
         $this->enforceEmailBindingForRead($request, $orgId, $attempt, $scaleCode);
         $attemptId = $this->resolveAttemptId($result, $attempt, $id);
         $emailTokenActor = $this->resultEmailReadAccess()->tokenActorForRequest($request, $orgId, $attemptId);
@@ -561,6 +564,9 @@ class AttemptReadController extends Controller
         $responseCodes = $this->resolveResponseScaleCodes($result);
         $scaleCode = $this->resolveNormalizedScaleCode($responseCodes);
         $attempt = $this->resolveAttemptForReportRead($request, $id, $scaleCode);
+        if (app(\App\Services\Commerce\RiasecReportPurchase::class)->managed($attempt)) {
+            return $this->privateNoStoreJson(app(\App\Services\Commerce\RiasecReportPurchase::class)->present($request, $attempt));
+        }
         $this->enforceEmailBindingForRead($request, $orgId, $attempt, $scaleCode);
         $emailTokenActor = $this->resultEmailReadAccess()->tokenActorForRequest($request, $orgId, $id);
         $readUserId = $emailTokenActor['user_id'] ?? ($userId !== null ? (string) $userId : null);
@@ -1024,6 +1030,20 @@ class AttemptReadController extends Controller
         $startedAt = hrtime(true);
         $orgId = $this->currentOrgContext()->orgId();
         $attempt = $this->resolveAttemptForAccessRead($request, $orgId, $id);
+        $riasecPurchase = app(\App\Services\Commerce\RiasecReportPurchase::class);
+        if ($riasecPurchase->managed($attempt) && $riasecPurchase->eligible($attempt)) {
+            $owner = $riasecPurchase->owner($request, $attempt);
+            $unlocked = app(\App\Services\Commerce\CareerAssessmentPurchase::class)->hasAccess((string) $attempt->id, $owner);
+
+            return $this->privateNoStoreJson([
+                'ok' => true, 'attempt_id' => $attempt->id,
+                'access_state' => $unlocked ? 'ready' : 'locked', 'report_state' => 'ready',
+                'pdf_state' => $unlocked ? 'ready' : 'missing', 'projection_version' => 1,
+                'reason_code' => $unlocked ? 'payment_verified' : 'payment_required',
+                'actions' => $this->reportAccessActions($attempt, $unlocked ? 'ready' : 'locked', 'ready', $unlocked ? 'ready' : 'missing'),
+                'payload' => ['locked' => ! $unlocked, 'paywall_suppressed' => false, 'free_full_report_mode' => false],
+            ]);
+        }
         $scaleCode = strtoupper(trim((string) ($attempt->scale_code ?? '')));
         $resultPagePdfTokenGrant = $this->resultPagePdfTokenGrantForRequest($request, $orgId, (string) $attempt->id);
         $hasResultPagePdfTokenAccess = is_array($resultPagePdfTokenGrant);
@@ -3089,6 +3109,11 @@ class AttemptReadController extends Controller
         $scaleCode = $this->resolveNormalizedScaleCode($responseCodes);
         try {
             $attempt = $this->resolveAttemptForReportRead($request, $id, $scaleCode);
+            $riasecPurchase = app(\App\Services\Commerce\RiasecReportPurchase::class);
+            if ($riasecPurchase->managed($attempt)) {
+                $owner = $riasecPurchase->owner($request, $attempt);
+                abort_unless(app(\App\Services\Commerce\CareerAssessmentPurchase::class)->hasAccess((string) $attempt->id, $owner), 403);
+            }
         } catch (ApiProblemException $e) {
             if (($scaleCode !== 'MBTI' && ! ReportAccess::isIqScale($scaleCode)) || $e->getStatusCode() !== 404) {
                 throw $e;

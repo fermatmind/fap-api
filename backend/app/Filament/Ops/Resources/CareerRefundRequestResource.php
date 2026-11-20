@@ -144,7 +144,7 @@ class CareerRefundRequestResource extends Resource
                 $totals = $records->groupBy('currency')->map(fn ($rows, $currency) => $currency.' '.number_format($rows->sum('amount_cents') / 100, 2))->implode('；');
                 $orders = $records->map(fn ($r) => $r->order_no.' '.$r->currency.' '.number_format($r->amount_cents / 100, 2))->implode('；');
 
-                return '官网 94 题报告，选中 '.$records->count().' 笔。'.$totals.'。'.$orders.'。批准后将原路全额退款，成功后停止本次报告的付费访问。每批最多 50 笔。';
+                return '官网职业报告（94 题／霍兰德 60 题），选中 '.$records->count().' 笔。'.$totals.'。'.$orders.'。批准后将原路全额退款，成功后停止本次报告的付费访问。每批最多 50 笔。';
             })
             ->form([
                 TextInput::make('fresh_step_up_code')->label('当前验证码／恢复码')->password()->autocomplete('one-time-code')->required()->maxLength(32),

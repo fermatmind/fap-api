@@ -13,6 +13,15 @@ use Tests\TestCase;
 
 final class RiasecChineseScoreContentTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+        // The source package is immutable during one test; reuse its validated reader
+        // while checking every score combination against a fresh Result instance.
+        $this->app->singleton(RiasecPrivateResultSourceRepository::class);
+        $this->app->singleton(RiasecPublicProjectionService::class);
+    }
+
     #[DataProvider('desktopLocales')]
     public function test_projection_selects_distinct_work_scenarios_and_all_six_score_cards(string $locale, string $dimensionFile): void
     {
@@ -58,6 +67,10 @@ final class RiasecChineseScoreContentTest extends TestCase
                 $atlas = $dimensions[$code]['desktop_atlas_by_decile'][min(9, (int) floor($scores[$code] / 10))];
                 $this->assertSame($atlas['examples'], $slot['content']['atlas_examples']);
                 $this->assertSame($atlas['next_step'], $slot['content']['atlas_next_step']);
+                $this->assertSame($atlas['next_steps'], $slot['content']['atlas_next_steps']);
+                $this->assertCount(4, $slot['content']['atlas_examples']);
+                $this->assertCount(4, $slot['content']['atlas_next_steps']);
+                $this->assertSame(array_slice($atlas['next_steps'], 1), $slot['content']['desktop_insight_questions']);
                 $focus = $locale === 'en' ? $dimensions[$code]['desktop_focus_by_band'][$band] : $dimensions[$code]['atlas_score_panels'][$band]['profile_focus'];
                 $this->assertSame($focus, $slot['content']['atlas_profile_focus']);
                 $seenBands[$code][$band] = true;
@@ -107,6 +120,10 @@ final class RiasecChineseScoreContentTest extends TestCase
                 $this->assertSame($atlas['reading'], $slot['content']['atlas_reading']);
                 $this->assertSame($atlas['examples'], $slot['content']['atlas_examples']);
                 $this->assertSame($atlas['next_step'], $slot['content']['atlas_next_step']);
+                $this->assertSame($atlas['next_steps'], $slot['content']['atlas_next_steps']);
+                $this->assertCount(4, $slot['content']['atlas_examples']);
+                $this->assertCount(4, $slot['content']['atlas_next_steps']);
+                $this->assertSame(array_slice($atlas['next_steps'], 1), $slot['content']['desktop_insight_questions']);
             }
         }
 

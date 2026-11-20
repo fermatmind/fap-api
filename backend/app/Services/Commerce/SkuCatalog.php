@@ -26,7 +26,7 @@ class SkuCatalog
             return null;
         }
 
-        if (in_array($sku, CareerAssessmentPurchase::SKUS, true)) {
+        if (in_array($sku, CareerAssessmentPurchase::allSkus(), true)) {
             return $this->findSkuRow($sku, $scaleCode, $orgId, $includeGlobalFallback);
         }
 
@@ -332,9 +332,10 @@ class SkuCatalog
         ?int $orgId = null,
         bool $includeGlobalFallback = true
     ): ?Sku {
-        $careerCurrency = array_search($sku, CareerAssessmentPurchase::SKUS, true);
+        $contract = CareerAssessmentPurchase::contract($sku);
+        $careerCurrency = $contract['currency'] ?? null;
         if (is_string($careerCurrency)) {
-            if ($orgId !== 0 || ! in_array($this->normalizeScaleCode($scaleCode), [null, CareerAssessmentPurchase::SCALE], true)) {
+            if ($orgId !== 0 || ! in_array($this->normalizeScaleCode($scaleCode), [null, $contract['scale']], true)) {
                 return null;
             }
 
@@ -342,15 +343,15 @@ class SkuCatalog
             return new Sku([
                 'org_id' => 0,
                 'sku' => $sku,
-                'scale_code' => CareerAssessmentPurchase::SCALE,
+                'scale_code' => $contract['scale'],
                 'kind' => 'report_unlock',
                 'unit_qty' => 1,
-                'benefit_code' => CareerAssessmentPurchase::BENEFIT,
+                'benefit_code' => $contract['benefit'],
                 'scope' => 'attempt',
                 'price_cents' => CareerAssessmentPurchase::PRICE,
                 'currency' => $careerCurrency,
                 'is_active' => true,
-                'meta_json' => ['entitlement_id' => 'career94_report'],
+                'meta_json' => ['entitlement_id' => $contract['scale'] === 'RIASEC' ? 'riasec60_report' : 'career94_report'],
             ]);
         }
 

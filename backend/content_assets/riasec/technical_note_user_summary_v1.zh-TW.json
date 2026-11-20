@@ -1,0 +1,181 @@
+{
+  "asset_id": "technical_note_user_summary_v1.zh-CN",
+  "asset_status": "content_review_v7_3_final_preflight_candidate",
+  "locale": "zh-TW",
+  "scale_code": "RIASEC",
+  "review_status": "machine_translated",
+  "summary_sections": [
+    {
+      "title": "這個測試測什麼",
+      "copy": "RIASEC 測的是你對不同職業活動的興趣強度，例如操作、分析、表達、支援、推動、整理。",
+      "section_key": "test_goal",
+      "data_status": "currently_operational"
+    },
+    {
+      "title": "這個測試不測什麼",
+      "copy": "它不測能力、人格身份、職業成功、收入、崗位表現或招聘風險。",
+      "section_key": "measurement_boundary",
+      "data_status": "currently_operational"
+    },
+    {
+      "title": "60Q 和 140Q 的關係",
+      "copy": "60Q 看基礎興趣結構；140Q 拆開任務、環境和角色責任。140Q 更具體，不是更準確，也不推翻 60Q。",
+      "section_key": "riasec_140_context",
+      "data_status": "currently_operational"
+    },
+    {
+      "title": "如何讀分數",
+      "copy": "0–100 是本表單內興趣強度換算，不是人群百分位，也不是能力分。",
+      "section_key": "score_space_boundary",
+      "data_status": "currently_operational"
+    },
+    {
+      "title": "如何讀職業例子",
+      "copy": "職業例子只說明某些活動可能出現在哪些場景中；沒有來源行時必須標註內容示例。",
+      "section_key": "career_examples_boundary",
+      "data_status": "partial"
+    },
+    {
+      "title": "反饋如何使用",
+      "copy": "收藏、排除、不認同和實驗反饋隻影響探索路徑，不改測評分數、報告快照或分享內容。",
+      "section_key": "feedback_boundary",
+      "data_status": "planned"
+    },
+    {
+      "title": "質量邊界",
+      "copy": "60Q 當前只宣告最小答題完成規則，不輸出強 low_quality 判斷。",
+      "section_key": "quality_boundary",
+      "data_status": "currently_operational"
+    },
+    {
+      "title": "報告快照",
+      "copy": "正式報告必須繫結生成時的 snapshot，後續 share、PDF、history 應讀取同一份可審計結果。",
+      "section_key": "snapshot_boundary",
+      "data_status": "currently_operational"
+    }
+  ],
+  "runtime_method_boundaries": {
+    "career_interest_only": {
+      "label": "測量物件",
+      "copy": "RIASEC 解釋職業興趣活動傾向，不測能力、人格身份、職業價值觀、心理狀態、收入潛力或職業成功機率。",
+      "evidence_level": "runtime_contract",
+      "content_maturity": "v0.1"
+    },
+    "not_career_recommendation": {
+      "label": "職業例子邊界",
+      "copy": "職業例子必須經過活動和任務解釋，只能叫內容示例，不得叫 Matches、推薦、排名、崗位適配。",
+      "evidence_level": "method_boundary",
+      "content_maturity": "v0.1"
+    },
+    "same_scale_not_same_score_space": {
+      "label": "分數空間",
+      "copy": "riasec_60 與 riasec_140 同屬 RIASEC，但 raw score space 不同，不預設比較 raw score delta。",
+      "evidence_level": "measurement_contract",
+      "content_maturity": "v0.1"
+    },
+    "riasec_140_contextual_not_more_accurate": {
+      "label": "60Q 與 140Q",
+      "copy": "140Q 只能稱為工作日常情境化興趣線索，不能稱為更準確答案。",
+      "evidence_level": "method_boundary",
+      "content_maturity": "v0.1"
+    },
+    "content_examples_not_registry_match": {
+      "label": "職業例子邊界",
+      "copy": "沒有 reviewed registry source 時，occupation examples 必須標註 content_example_not_registry_match。",
+      "evidence_level": "content_boundary",
+      "content_maturity": "v0.1"
+    },
+    "feedback_no_score_mutation": {
+      "label": "反饋邊界",
+      "copy": "使用者反饋只進入探索層，不會覆蓋 measured_holland_code、維度分數或正式報告快照。",
+      "evidence_level": "method_boundary",
+      "content_maturity": "v0.1"
+    },
+    "snapshot_bound_report": {
+      "label": "正式報告快照繫結",
+      "copy": "正式報告、share、PDF、history 必須以 snapshot-bound report 為展示依據。",
+      "evidence_level": "runtime_contract",
+      "content_maturity": "v0.1"
+    },
+    "quality_boundary_60q_minimal": {
+      "label": "60Q 質量邊界",
+      "copy": "60Q 當前沒有強 low_quality rule，只能宣告 minimal_answer_completion_only。",
+      "evidence_level": "measurement_contract",
+      "content_maturity": "v0.1"
+    }
+  },
+  "runtime_disclaimers": [
+    {
+      "key": "not_ability_or_personality",
+      "label": "非能力/人格測量",
+      "copy": "RIASEC 不測能力、人格、價值觀或長期職業結果。"
+    },
+    {
+      "key": "not_hiring_screening",
+      "label": "非招聘篩選用途",
+      "copy": "RIASEC 不用於招聘、晉升、淘汰或僱傭篩選。"
+    },
+    {
+      "key": "no_cross_form_raw_delta",
+      "label": "不比較跨 form raw delta",
+      "copy": "60Q 與 140Q 不預設比較 raw score delta。"
+    },
+    {
+      "key": "riasec_140_not_more_accurate",
+      "label": "140Q 非更準確宣告",
+      "copy": "140Q 只能作為更具體的情境化興趣線索。"
+    },
+    {
+      "key": "examples_not_matches",
+      "label": "職業例子不是匹配",
+      "copy": "職業例子是內容示例，不是職業資料庫匹配或崗位推薦。"
+    },
+    {
+      "key": "feedback_overlay_boundary",
+      "label": "反饋層邊界",
+      "copy": "反饋不會修改 measured_holland_code、分數或正式報告快照。"
+    }
+  ],
+  "required_boundaries": [
+    "interest_evidence_only",
+    "not_personality_identity",
+    "not_ability_or_skill_measure",
+    "not_career_recommendation",
+    "examples_not_matches",
+    "not_job_fit",
+    "not_success_prediction",
+    "not_hiring_or_screening_use",
+    "no_60q_140q_raw_delta",
+    "140q_contextual_not_more_accurate",
+    "feedback_does_not_mutate_measured_result",
+    "missing_content_fails_closed",
+    "frontend_fallback_forbidden"
+  ],
+  "forbidden_claims": [
+    "personality_identity",
+    "ability_or_skill_inference",
+    "career_match",
+    "career_recommendation",
+    "job_fit",
+    "fit_score",
+    "occupation_ranking",
+    "success_prediction",
+    "hiring_suitability",
+    "screening_use",
+    "140q_more_accurate",
+    "raw_score_delta",
+    "onet_soc_source_invention"
+  ],
+  "frontend_fallback_allowed": false,
+  "fallback_behavior": "omit_module",
+  "v5_editorial_note": "Technical note reviewed to separate measurement boundaries, quality state, form specificity, and feedback scope.",
+  "translation_source": {
+    "locale": "zh-CN",
+    "path": "technical_note_user_summary_v1.zh-CN.json",
+    "raw_sha256": "11f173197d35fbb030c060adb505dbe5c6e4dd658fbe092cea347f2aad8c1b70",
+    "method": "OpenCC-cn-to-twp-1.4.2",
+    "status": "machine_translated",
+    "human_review_completed": false,
+    "canonical_sha256": "c5b8f543a8fcd581714a8ca00f2f5767f9f57fb57ff0db910c7e23323d58da17"
+  }
+}

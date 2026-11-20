@@ -13,12 +13,13 @@ final class WaffoCheckoutService
     {
         $order = DB::table('orders')->where('order_no', $orderNo)->first();
         $attempt = $attemptId ? DB::table('attempts')->where('id', $attemptId)->first() : null;
-        $career = $attempt?->scale_code === CareerAssessmentPurchase::SCALE;
+        $contract = $order ? CareerAssessmentPurchase::contract((string) $order->sku) : null;
+        $career = $contract !== null && $attempt?->scale_code === $contract['scale'];
         $sandboxMbti = config('payments.waffo.environment') === 'test'
             && $attempt?->scale_code === 'MBTI' && $amountCents === 199 && $currency === 'USD';
         $careerContract = $career && $amountCents === CareerAssessmentPurchase::PRICE
-            && (CareerAssessmentPurchase::SKUS[$currency] ?? null) === ($order->sku ?? '')
-            && ($attempt->region === 'CN_MAINLAND' ? $currency === 'CNY' : $currency === 'USD');
+            && ($contract['currency'] ?? null) === $currency
+            && ($contract['scale'] === 'RIASEC' || ($attempt->region === 'CN_MAINLAND' ? $currency === 'CNY' : $currency === 'USD'));
         if (! $order || ! $attempt || $order->provider !== 'waffo'
             || (! $sandboxMbti && ! $careerContract) || $order->target_attempt_id !== $attemptId
             || (int) $order->amount_cents !== $amountCents || $order->currency !== $currency
@@ -56,7 +57,7 @@ final class WaffoCheckoutService
                 'expiresInSeconds' => 1800,
                 'allowPromotionCodes' => false,
                 ...(is_string($buyerEmail) && filter_var($buyerEmail, FILTER_VALIDATE_EMAIL) ? ['buyerEmail' => $buyerEmail] : []),
-                ...($career && $attempt->region === 'CN_MAINLAND' ? ['billingDetail' => ['country' => 'CN', 'isBusiness' => false]] : []),
+                ...($career && $currency === 'CNY' ? ['billingDetail' => ['country' => 'CN', 'isBusiness' => false]] : []),
                 ...($career ? ['includePaymentMethods' => $currency === 'CNY'
                     ? ['wechat'] : ['card', 'applepay', 'googlepay']] : []),
             ], ($career ? 'career94-checkout-' : 'mbti-checkout-').hash('sha256', $orderNo));
