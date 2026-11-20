@@ -440,7 +440,20 @@ final class RiasecFullContentFixtureMatrixTest extends TestCase
         foreach ($projections as $projection) {
             $counts = [];
             foreach ((array) data_get($projection, 'deep_content_slots_v1.slots', []) as $slot) {
-                foreach ((array) ($slot['content'] ?? []) as $value) {
+                $content = (array) ($slot['content'] ?? []);
+                // Legacy transport aliases are rendered through the new field once.
+                // Keep checking every sentence, including all new actions and questions.
+                foreach ($content as $key => $value) {
+                    if ($key === 'atlas_next_step' && isset($content['atlas_next_steps'])) {
+                        $this->assertSame($value, $content['atlas_next_steps'][0]);
+
+                        continue;
+                    }
+                    if ($key === 'validation_questions' && isset($content['desktop_insight_questions'])) {
+                        $this->assertSame($value, $content['desktop_insight_questions']);
+
+                        continue;
+                    }
                     foreach (is_array($value) ? $value : [$value] as $text) {
                         if (! is_string($text)) {
                             continue;
