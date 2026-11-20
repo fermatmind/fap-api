@@ -219,6 +219,28 @@ final class PersonalityCurrentRemainingRuntimeTest extends TestCase
         }
     }
 
+    public function test_traditional_mbti_reader_receives_native_profile_locales(): void
+    {
+        $query = 'locale=zh-TW&org_id=0&scale_code=MBTI';
+
+        foreach ([0 => 16, 1 => 32] as $includeVariants => $count) {
+            $hub = $this->getJson("/api/v0.5/personality?{$query}&per_page=100&include_variants={$includeVariants}")
+                ->assertOk()
+                ->assertJsonCount($count, 'items');
+
+            foreach ($hub->json('items') as $item) {
+                self::assertSame('zh-TW', $item['locale']);
+            }
+        }
+
+        foreach (['istj', 'entj-t'] as $slug) {
+            $this->getJson("/api/v0.5/personality/{$slug}?{$query}")
+                ->assertOk()
+                ->assertJsonPath('profile.locale', 'zh-TW')
+                ->assertJsonPath('mbti_public_projection_v1.seo.jsonld.inLanguage', 'zh-TW');
+        }
+    }
+
     public function test_big_five_and_enneagram_hubs_are_current_pages(): void
     {
         $this->getJson('/api/v0.5/personality-content-assets/big_five/hub/big-five?locale=zh-CN&org_id=0')
