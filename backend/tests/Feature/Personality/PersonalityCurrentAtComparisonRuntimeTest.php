@@ -47,7 +47,7 @@ final class PersonalityCurrentAtComparisonRuntimeTest extends TestCase
     {
         $index = (new PersonalityCurrentAuthorityPackage)->runtimeIndex(base_path());
 
-        self::assertCount(182 * count($index['manifest']['locales']), $index['entries']);
+        self::assertCount(295 * count($index['manifest']['locales']), $index['entries']);
         self::assertArrayHasKey('mbti|comparison_at|intj-a-vs-intj-t|en', $index['entries']);
     }
 

@@ -45,6 +45,14 @@ final class PersonalityCurrentRemainingRuntimeTest extends TestCase
             '/api/v0.5/personality/comparisons/intj-vs-intp?locale=en&org_id=0&scale_code=MBTI',
             'content_assets/personality_public/current/pages/mbti/comparison-cross/intj-vs-intp/en.json',
         ];
+        foreach (['intj-vs-isfj', 'infj-vs-intp', 'enfp-vs-intj'] as $slug) {
+            foreach (['zh-CN', 'en', 'zh-TW'] as $locale) {
+                yield "released cross type {$slug} {$locale}" => [
+                    "/api/v0.5/personality/comparisons/{$slug}?locale={$locale}&org_id=0&scale_code=MBTI",
+                    "content_assets/personality_public/current/pages/mbti/comparison-cross/{$slug}/{$locale}.json",
+                ];
+            }
+        }
         yield 'MBTI profile' => [
             '/api/v0.5/personality/intj?locale=zh-CN&org_id=0&scale_code=MBTI',
             'content_assets/personality_public/current/pages/mbti/profile/intj/zh-CN.json',
@@ -145,7 +153,7 @@ final class PersonalityCurrentRemainingRuntimeTest extends TestCase
             $this->assertArrayNotHasKey('career.preferred_roles', $sections);
             $this->assertArrayNotHasKey('growth.strengths', $sections);
             $this->assertNotEmpty($sections['work_style']['body_md']);
-            $this->assertStringContainsString('不能仅凭类型', $sections['sources_and_method']['body_md']);
+            $this->assertMatchesRegularExpression('/(?:(?:不能|不)用于招聘筛选|不评价[^。；]*职业适配)/u', $sections['sources_and_method']['body_md']);
             $this->assertSame([], $response->json("{$projection}.dimensions"));
             $this->assertNull($response->json("{$projection}.profile.rarity"));
         }
@@ -195,14 +203,52 @@ final class PersonalityCurrentRemainingRuntimeTest extends TestCase
 
     public function test_mbti_comparison_index_is_projected_from_per_page_files(): void
     {
-        $this->getJson('/api/v0.5/personality/comparisons?locale=zh-CN&org_id=0&scale_code=MBTI')
-            ->assertOk()
-            ->assertHeader('X-Fermat-Content-Authority', 'personality.page.content.v1')
-            ->assertHeader('X-Fermat-Content-Aggregate', $this->currentAggregate())
-            ->assertJsonCount(16, 'at_comparisons')
-            ->assertJsonCount(7, 'cross_type_comparisons')
-            ->assertJsonPath('at_comparisons.0.slug', 'intj-a-vs-intj-t')
-            ->assertJsonPath('cross_type_comparisons.0.slug', 'enfp-vs-entp');
+        foreach (['zh-CN', 'en', 'zh-TW'] as $locale) {
+            $response = $this->getJson("/api/v0.5/personality/comparisons?locale={$locale}&org_id=0&scale_code=MBTI")
+                ->assertOk()
+                ->assertHeader('X-Fermat-Content-Authority', 'personality.page.content.v1')
+                ->assertHeader('X-Fermat-Content-Aggregate', $this->currentAggregate())
+                ->assertJsonCount(16, 'at_comparisons')
+                ->assertJsonCount(120, 'cross_type_comparisons')
+                ->assertJsonPath('at_comparisons.0.slug', 'intj-a-vs-intj-t');
+            $items = array_column($response->json('cross_type_comparisons'), null, 'slug');
+            self::assertCount(120, $items);
+            self::assertSame($locale, $items['enfp-vs-entp']['locale']);
+            self::assertSame($locale, $items['intj-vs-isfj']['locale']);
+            self::assertTrue($items['intj-vs-isfj']['is_indexable']);
+        }
+    }
+
+    public function test_mbti_base_profile_seo_projection_matches_its_public_metadata(): void
+    {
+        foreach (['zh-CN', 'en', 'zh-TW'] as $locale) {
+            $response = $this->getJson("/api/v0.5/personality/istj?locale={$locale}&org_id=0&scale_code=MBTI")
+                ->assertOk();
+            $response->assertJsonPath('mbti_public_projection_v1.seo.title', $response->json('seo_meta.seo_title'))
+                ->assertJsonPath('mbti_public_projection_v1.seo.description', $response->json('seo_meta.seo_description'));
+        }
+    }
+
+    public function test_traditional_mbti_reader_receives_native_profile_locales(): void
+    {
+        $query = 'locale=zh-TW&org_id=0&scale_code=MBTI';
+
+        foreach ([0 => 16, 1 => 32] as $includeVariants => $count) {
+            $hub = $this->getJson("/api/v0.5/personality?{$query}&per_page=100&include_variants={$includeVariants}")
+                ->assertOk()
+                ->assertJsonCount($count, 'items');
+
+            foreach ($hub->json('items') as $item) {
+                self::assertSame('zh-TW', $item['locale']);
+            }
+        }
+
+        foreach (['istj', 'entj-t'] as $slug) {
+            $this->getJson("/api/v0.5/personality/{$slug}?{$query}")
+                ->assertOk()
+                ->assertJsonPath('profile.locale', 'zh-TW')
+                ->assertJsonPath('mbti_public_projection_v1.seo.jsonld.inLanguage', 'zh-TW');
+        }
     }
 
     public function test_big_five_and_enneagram_hubs_are_current_pages(): void
