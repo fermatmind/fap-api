@@ -25,13 +25,13 @@
         }
       ],
       "answer_contract_version": "answer.surface.v1",
-      "answer_fingerprint": "84eed4da727ebc42f246c86eb92d3db0536fb85f",
+      "answer_fingerprint": "27d52ec7e0d972274d4cd34ba81668e0438fe094",
       "answer_scope": "public_indexable_detail",
       "attribution_scope": "public_personality_answer",
       "compare_blocks": [],
       "evidence_refs": [
-        "019f6a58455986b0c2efff3dde0cd47b578479aa",
-        "6c47e21ad8cbf01c4051ee1fc3ce83d363cd605d",
+        "f27e2e90a0bde879ef139b0c0cb2b1494697b9fb",
+        "ca0ed67072d6a90d25fbba4b0407a273c0fb73ab",
         "mbti_public_projection_v1",
         "projection_dimensions",
         "personality_sections",
@@ -83,7 +83,7 @@
         }
       ],
       "indexability_state": "indexable",
-      "landing_surface_ref": "6c47e21ad8cbf01c4051ee1fc3ce83d363cd605d",
+      "landing_surface_ref": "ca0ed67072d6a90d25fbba4b0407a273c0fb73ab",
       "next_step_blocks": [],
       "primary_content_ref": "ESTJ-T",
       "public_safety_state": "public_indexable",
@@ -95,7 +95,7 @@
       ],
       "runtime_artifact_ref": null,
       "scene_summary_blocks": [],
-      "seo_surface_ref": "019f6a58455986b0c2efff3dde0cd47b578479aa",
+      "seo_surface_ref": "f27e2e90a0bde879ef139b0c0cb2b1494697b9fb",
       "summary_blocks": [
         {
           "body": "ESTJ-T 的 -T 是 16Personalities 在 NERIS Identity 中使用的 Turbulent 後綴，描述較容易自我懷疑、對壓力較敏感的一端。可以用排班或紀錄被質疑時的經驗來理解它：把收到的回饋與當下的自我評價分開看。它不改變 ESTJ 四組偏好的含義，也不能評定能力。連字號後的 -T 與代碼裡的 T（Thinking，思考偏好）含義不同。\n\nESTJ 是四項偏好的組合：E 外向，注意力與精力主要朝外，先從人與外部事項入手；S 實感，取材偏重具體事實與以往經驗；T 思考，判斷時偏重客觀、前後一致的標準；J 判斷，對外偏好儘早形成安排。ESTJ-A 與 ESTJ-T 共享這四個字母，差別只在連字號後面那一位。\n\n連字號右邊的 T 屬於 16Personalities 的 NERIS Identity，是這個維度的 T 端（Turbulent，動盪型）：描述自我評價與自我確信，也描述對壓力的敏感度，通常較容易自我懷疑、較容易被壓力擾動。它不是官方 MBTI 的第五維，不衡量判斷品質；它也不等於第三位的 T——那一位是 Thinking（思考），兩者只是字母寫法相同。功能堆疊上，本文採用 Te–Si–Ne–Fi 的四位置寫法，它與後綴分屬兩套框架，不能互相換算。\n\n在虛構的盤點情境裡，兩人收到相同的回饋，核對同一份資料，也更正了同一欄。有人可能對整體判斷仍有把握，有人可能還擔心其他欄位也有漏失。這個例子比較的是查證後的感受，兩端都能依同樣的程序更正。\n\n下表是這一頁的核心檔案，觀察時點統一為交表之後、收到同一條抽查回饋的那一刻；它用來說明後綴的含義；單次回饋不足以判定 A/T。\n\n| 檔案項 | 本頁寫法 |\n| --- | --- |\n| 四個字母 | E 外向、S 實感、T 思考、J 判斷，A 端與 T 端共享 |\n| 連字號後的 T | Turbulent，動盪型，NERIS Identity 的一端 |\n| 這一端描述什麼 | 自我評價、自我確信，以及對壓力的敏感度 |\n| 這一端不描述什麼 | 思考能力、專業資格、責任心，也不決定複核次數 |\n| 常見中文譯法 | 動盪型，另見敏感型一類譯法，只標位置，不評人 |\n| A 端對照 | Assertive，自信型，通常較少感到壓力影響 |",
@@ -142,7 +142,7 @@
     ],
     "landing_surface_v1": {
       "attribution_scope": "public_personality_landing",
-      "content_continue_target": "/zh-TW/career/recommendations/mbti/estj-t",
+      "content_continue_target": "/zh-TW/career",
       "continue_reading_keys": [
         "career_recommendation",
         "topic_cluster",
@@ -156,10 +156,10 @@
           "label": "開始測驗"
         },
         {
-          "href": "/zh-TW/career/recommendations/mbti/estj-t",
+          "href": "/zh-TW/career",
           "key": "career_recommendation",
           "kind": "content_continue",
-          "label": "查看職涯推薦"
+          "label": "瀏覽職業庫"
         },
         {
           "href": "/zh-TW/topics/mbti",
@@ -179,7 +179,7 @@
       "entry_type": "personality_profile",
       "indexability_state": "indexable",
       "landing_contract_version": "landing.surface.v1",
-      "landing_fingerprint": "6c47e21ad8cbf01c4051ee1fc3ce83d363cd605d",
+      "landing_fingerprint": "ca0ed67072d6a90d25fbba4b0407a273c0fb73ab",
       "landing_scope": "public_indexable_detail",
       "primary_content_ref": "ESTJ-T",
       "public_surface_ref": null,
@@ -571,14 +571,15 @@
     "seo_surface_v1": {
       "alternates": {
         "en": "https://fermatmind.com/en/personality/estj-t",
-        "zh-CN": "https://fermatmind.com/zh-TW/personality/estj-t"
+        "zh-CN": "https://fermatmind.com/zh/personality/estj-t",
+        "zh-TW": "https://fermatmind.com/zh-TW/personality/estj-t"
       },
       "canonical_url": "https://fermatmind.com/zh-TW/personality/estj-t",
       "description": "ESTJ-T 的 -T 是 16Personalities 的 Turbulent（動盪型），描述自我評價與壓力感受。用月底盤點的情境，分辨必要的查證、自我懷疑，以及 ESTJ 裡 Thinking 的 T。",
       "indexability_state": "indexable",
       "llms_exposure_state": "allow",
       "metadata_contract_version": "seo.surface.v1",
-      "metadata_fingerprint": "019f6a58455986b0c2efff3dde0cd47b578479aa",
+      "metadata_fingerprint": "f27e2e90a0bde879ef139b0c0cb2b1494697b9fb",
       "metadata_scope": "public_indexable_detail",
       "og_payload": {
         "description": "ESTJ-T 的 -T 是 16Personalities 的 Turbulent（動盪型），描述自我評價與壓力感受。用月底盤點的情境，分辨必要的查證、自我懷疑，以及 ESTJ 裡 Thinking 的 T。",
@@ -607,5 +608,5 @@
     }
   },
   "payload_contract": "mbti.public.detail.v1",
-  "source_content_sha256": "0606fe1783ce9ed71ec88d6b06d77e806534b2561cd9e647f003cf8b78d00e85"
+  "source_content_sha256": "a5bea3e1818b748af126e452c862174240163216b7f8649efd700fe2fd0cc800"
 }

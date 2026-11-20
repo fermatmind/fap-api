@@ -25,13 +25,13 @@
         }
       ],
       "answer_contract_version": "answer.surface.v1",
-      "answer_fingerprint": "0152fbd78a04cede604393db9a089fadbb414eae",
+      "answer_fingerprint": "73f9a0242b54ecfbba5ab7f735acdb6c94643e5c",
       "answer_scope": "public_indexable_detail",
       "attribution_scope": "public_personality_answer",
       "compare_blocks": [],
       "evidence_refs": [
-        "3158352db13bda3ac1ce461b8906864e384d0bea",
-        "c18eea04acce051aff839bceca24864183584d34",
+        "707ab9f592703568467093e91f604fef8ff537fe",
+        "838199f036406223ae7570814ee209eaee2c5cd2",
         "personality_public_projection_v1",
         "mbti_public_projection_v1",
         "personality_sections",
@@ -82,7 +82,7 @@
         }
       ],
       "indexability_state": "indexable",
-      "landing_surface_ref": "c18eea04acce051aff839bceca24864183584d34",
+      "landing_surface_ref": "838199f036406223ae7570814ee209eaee2c5cd2",
       "next_step_blocks": [],
       "primary_content_ref": "ISFJ",
       "public_safety_state": "public_indexable",
@@ -94,7 +94,7 @@
       ],
       "runtime_artifact_ref": null,
       "scene_summary_blocks": [],
-      "seo_surface_ref": "3158352db13bda3ac1ce461b8906864e384d0bea",
+      "seo_surface_ref": "707ab9f592703568467093e91f604fef8ff537fe",
       "summary_blocks": [
         {
           "body": "ISFJ 是 MBTI 十六型之一，四个字母分别表示内向、实感、情感、判断。例如做交接时，可以用可对照的旧记录核清事实，再问接手的人还需要哪些支持。\n\n四组偏好各回答一个问题。I 指注意力与精力较常朝向内部的想法与感受，E 则较常朝向外部的人与活动；S 取材时更倚重具体事实与过往经验，N 更倚重模式、关联与尚未发生的可能；F 定夺时更看重人与价值，T 更看重客观、可一致应用的标准；J 对外事务偏向形成安排、把事定下来，P 偏向保留选项。常见类型动力学写作 Si–Fe–Ti–Ne，本文用它描述偏好侧重，不当作做事先后；字母讲的是取向，不给人打分。\n\n| 核心档案 | 快速理解 |\n| --- | --- |\n| 四字母偏好 | 内向 I、实感 S、情感 F、判断 J；每项只是一个取向，单独一项都不足以概括一个人。 |\n| 常见功能写法 | 本文采用常见四位置写法 Si–Fe–Ti–Ne，位置描述偏好侧重，不是任务顺序。 |\n| 可能的偏好表现 | 遇到新安排，较常先找可参照的既往做法，再看这项安排影响谁。 |\n| 常见盲点 | 把「上次有效」当成「这次应照做」，或把没人反对当成已经同意。 |\n| 关系里可先沟通的事 | 过去的接受不等于本次同意；承诺、联系频率与边界分开谈。 |\n| 工作探索入口 | 先试做岗位里的代表任务，再看是否愿意长期承担重复的支持性工作。 |",
@@ -146,7 +146,7 @@
     ],
     "landing_surface_v1": {
       "attribution_scope": "public_personality_landing",
-      "content_continue_target": "/zh/career/recommendations/mbti/isfj",
+      "content_continue_target": "/zh/career",
       "continue_reading_keys": [
         "career_recommendation",
         "topic_cluster",
@@ -160,10 +160,10 @@
           "label": "开始测试"
         },
         {
-          "href": "/zh/career/recommendations/mbti/isfj",
+          "href": "/zh/career",
           "key": "career_recommendation",
           "kind": "content_continue",
-          "label": "查看职业推荐"
+          "label": "浏览职业库"
         },
         {
           "href": "/zh/topics/mbti",
@@ -183,7 +183,7 @@
       "entry_type": "personality_profile",
       "indexability_state": "indexable",
       "landing_contract_version": "landing.surface.v1",
-      "landing_fingerprint": "c18eea04acce051aff839bceca24864183584d34",
+      "landing_fingerprint": "838199f036406223ae7570814ee209eaee2c5cd2",
       "landing_scope": "public_indexable_detail",
       "primary_content_ref": "ISFJ",
       "public_surface_ref": null,
@@ -767,14 +767,15 @@
     "seo_surface_v1": {
       "alternates": {
         "en": "https://fermatmind.com/en/personality/isfj",
-        "zh-CN": "https://fermatmind.com/zh/personality/isfj"
+        "zh-CN": "https://fermatmind.com/zh/personality/isfj",
+        "zh-TW": "https://fermatmind.com/zh-TW/personality/isfj"
       },
       "canonical_url": "https://fermatmind.com/zh/personality/isfj",
       "description": "ISFJ 四组偏好与 Si–Fe 理论怎样理解？通过新人交接、朋友支持和家务分担，区分经验、真实需要、权限与责任；含反例、压力实践、相关对比、FAQ 和研究边界。",
       "indexability_state": "indexable",
       "llms_exposure_state": "allow",
       "metadata_contract_version": "seo.surface.v1",
-      "metadata_fingerprint": "3158352db13bda3ac1ce461b8906864e384d0bea",
+      "metadata_fingerprint": "707ab9f592703568467093e91f604fef8ff537fe",
       "metadata_scope": "public_indexable_detail",
       "og_payload": {
         "description": "ISFJ 四组偏好与 Si–Fe 理论怎样理解？通过新人交接、朋友支持和家务分担，区分经验、真实需要、权限与责任；含反例、压力实践、相关对比、FAQ 和研究边界。",
@@ -803,5 +804,5 @@
     }
   },
   "payload_contract": "mbti.public.detail.v1",
-  "source_content_sha256": "9051b12a515feef067de2e40d43b7029aec04b6eefbe1070e6196cfff0912bfa"
+  "source_content_sha256": "259f9884411f63e1049bb8f0a15fd32383e26934050082105d32fe6c6bc8d788"
 }

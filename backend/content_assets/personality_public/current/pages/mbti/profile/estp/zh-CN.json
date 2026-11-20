@@ -25,13 +25,13 @@
         }
       ],
       "answer_contract_version": "answer.surface.v1",
-      "answer_fingerprint": "a087e29b010a03853de0a7dc3999c1d2b8d9defb",
+      "answer_fingerprint": "3362aab5693609b24698af6941e6efbb5dea3b20",
       "answer_scope": "public_indexable_detail",
       "attribution_scope": "public_personality_answer",
       "compare_blocks": [],
       "evidence_refs": [
-        "9e390ea1adfaa087b026871440de7386087ca272",
-        "04ac53c6f0d39f4015a611c1f32e05d7604295d5",
+        "a2c5bcbe486f080c1f5df1e2eff07213ef3a7dae",
+        "a403b575363a859b6b9580239c83e69f1970c1e6",
         "personality_public_projection_v1",
         "mbti_public_projection_v1",
         "personality_sections",
@@ -87,7 +87,7 @@
         }
       ],
       "indexability_state": "indexable",
-      "landing_surface_ref": "04ac53c6f0d39f4015a611c1f32e05d7604295d5",
+      "landing_surface_ref": "a403b575363a859b6b9580239c83e69f1970c1e6",
       "next_step_blocks": [],
       "primary_content_ref": "ESTP",
       "public_safety_state": "public_indexable",
@@ -99,7 +99,7 @@
       ],
       "runtime_artifact_ref": null,
       "scene_summary_blocks": [],
-      "seo_surface_ref": "9e390ea1adfaa087b026871440de7386087ca272",
+      "seo_surface_ref": "a2c5bcbe486f080c1f5df1e2eff07213ef3a7dae",
       "summary_blocks": [
         {
           "body": "ESTP 是 MBTI 中外向、实感、思考、知觉的四字母类型。E 指注意力与精力较常朝向外部的人和事，S 指取材时更信任可观察的具体信息，T 指判断时更看重客观、一致的标准，P 指对外的安排倾向于保留选择。常见类型动力学写作 Se–Ti–Fe–Ni，用来讨论偏好与可能的盲点。中文常说的「企业家型」是 16Personalities 的昵称，不表示 MBTI 判断创业能力。\n\n| 核心档案 | 快速理解 |\n| --- | --- |\n| 核心特质词 | 取材偏向可观察的具体信息，判断偏向能说清、可复核的标准。 |\n| 认知功能栈 | 常见写法 Se–Ti–Fe–Ni；Se 是主导、Ti 是辅助，后两项是理论位置。 |\n| ESTP 核心优势 | 现场的具体变化容易被捕捉到，也能被拆成可检验的说法。 |\n| 常见盲点 | 眼前的信息占上风时，长周期的推演容易被推到后面。 |\n| 感情与关系 | 常用一起做事表达在意，需要练习把打算说成对方能选择的提议。 |\n| 工作探索 | 可试做需要现场判断与实操的岗位，再看是否愿意长期做记录与复盘。 |",
@@ -156,7 +156,7 @@
     ],
     "landing_surface_v1": {
       "attribution_scope": "public_personality_landing",
-      "content_continue_target": "/zh/career/recommendations/mbti/estp",
+      "content_continue_target": "/zh/career",
       "continue_reading_keys": [
         "career_recommendation",
         "topic_cluster",
@@ -170,10 +170,10 @@
           "label": "开始测试"
         },
         {
-          "href": "/zh/career/recommendations/mbti/estp",
+          "href": "/zh/career",
           "key": "career_recommendation",
           "kind": "content_continue",
-          "label": "查看职业推荐"
+          "label": "浏览职业库"
         },
         {
           "href": "/zh/topics/mbti",
@@ -193,7 +193,7 @@
       "entry_type": "personality_profile",
       "indexability_state": "indexable",
       "landing_contract_version": "landing.surface.v1",
-      "landing_fingerprint": "04ac53c6f0d39f4015a611c1f32e05d7604295d5",
+      "landing_fingerprint": "a403b575363a859b6b9580239c83e69f1970c1e6",
       "landing_scope": "public_indexable_detail",
       "primary_content_ref": "ESTP",
       "public_surface_ref": null,
@@ -789,14 +789,15 @@
     "seo_surface_v1": {
       "alternates": {
         "en": "https://fermatmind.com/en/personality/estp",
-        "zh-CN": "https://fermatmind.com/zh/personality/estp"
+        "zh-CN": "https://fermatmind.com/zh/personality/estp",
+        "zh-TW": "https://fermatmind.com/zh-TW/personality/estp"
       },
       "canonical_url": "https://fermatmind.com/zh/personality/estp",
       "description": "ESTP（外向、实感、思考、知觉）是 MBTI 十六型人格之一，常见类型动力学写作 Se–Ti–Fe–Ni。本文用一次市集布场和一次爬山改约，说明现场取材、判断标准与可交接的分工，并附 ESTP-A 与 ESTP-T 入口。",
       "indexability_state": "indexable",
       "llms_exposure_state": "allow",
       "metadata_contract_version": "seo.surface.v1",
-      "metadata_fingerprint": "9e390ea1adfaa087b026871440de7386087ca272",
+      "metadata_fingerprint": "a2c5bcbe486f080c1f5df1e2eff07213ef3a7dae",
       "metadata_scope": "public_indexable_detail",
       "og_payload": {
         "description": "ESTP（外向、实感、思考、知觉）是 MBTI 十六型人格之一，常见类型动力学写作 Se–Ti–Fe–Ni。本文用一次市集布场和一次爬山改约，说明现场取材、判断标准与可交接的分工，并附 ESTP-A 与 ESTP-T 入口。",
@@ -825,5 +826,5 @@
     }
   },
   "payload_contract": "mbti.public.detail.v1",
-  "source_content_sha256": "fe73ce2c1e1d88cc3a9f7b38c852b57383092318267ec054d46ea82842446a6b"
+  "source_content_sha256": "58b6cf227d3535ff4aeb4f30f094aa9a2e5120a9dc858ee179fca4699f54a3de"
 }

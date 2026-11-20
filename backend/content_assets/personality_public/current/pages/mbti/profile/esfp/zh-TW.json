@@ -25,13 +25,13 @@
         }
       ],
       "answer_contract_version": "answer.surface.v1",
-      "answer_fingerprint": "43691d68b9e4c2ddf17dbec05a2a46b77b4d6a77",
+      "answer_fingerprint": "75e1a00d3bd711dc085b0f52196576b92a8eb048",
       "answer_scope": "public_indexable_detail",
       "attribution_scope": "public_personality_answer",
       "compare_blocks": [],
       "evidence_refs": [
-        "9ba466a575ad534d908ee3549b2dca7616af2aaf",
-        "38a0e35ac2216247639374693c9a52b2bf2cbe67",
+        "4b13c607923a3ae7527e0a60ad9b9c7857a2b4c8",
+        "61f06ad893d24b5d2feefcf24b5b783a06d0ad15",
         "personality_public_projection_v1",
         "mbti_public_projection_v1",
         "personality_sections",
@@ -82,7 +82,7 @@
         }
       ],
       "indexability_state": "indexable",
-      "landing_surface_ref": "38a0e35ac2216247639374693c9a52b2bf2cbe67",
+      "landing_surface_ref": "61f06ad893d24b5d2feefcf24b5b783a06d0ad15",
       "next_step_blocks": [],
       "primary_content_ref": "ESFP",
       "public_safety_state": "public_indexable",
@@ -94,7 +94,7 @@
       ],
       "runtime_artifact_ref": null,
       "scene_summary_blocks": [],
-      "seo_surface_ref": "9ba466a575ad534d908ee3549b2dca7616af2aaf",
+      "seo_surface_ref": "4b13c607923a3ae7527e0a60ad9b9c7857a2b4c8",
       "summary_blocks": [
         {
           "body": "ESFP 是 MBTI 十六型之一，代表外向（E）、實感（S）、情感（F）與知覺（P）。這四組偏好分別涉及注意力的方向、較重視哪類資訊、如何作判斷，以及對外部事務較偏好保留多少彈性。\n\n「表演者」是 ESFP 的常見暱稱。表演能力、受歡迎程度和是否擅長炒熱氣氛，都無法用來判定 ESFP。\n\n| 欄位 | 本頁寫法 |\n| --- | --- |\n| 四字母 | E 外向 · S 實感 · F 情感 · P 知覺 |\n| 本站中文暱稱 | 表演者（常見暱稱，無法用來判斷表演能力） |\n| 其他發布者用名 | 16Personalities：Entertainer；Truity：The Performer |\n| 常見功能堆疊 | Se–Fi–Te–Ni，本文採用的四位置寫法 |\n| 輔助過程 | Fi 內向情感：個人價值與選擇的一致性 |\n| 第三過程 | ESFP 的第三過程是思考。本頁採 Te，Myers & Briggs Foundation 的表格並列 Te 或 Ti |\n| A/T 後綴 | 16Personalities 的 NERIS Identity，不是官方 MBTI 第五維 |\n\n這些偏好描述用來理解取捨，不能評估能力、職業勝任或關係結果。",
@@ -151,7 +151,7 @@
     ],
     "landing_surface_v1": {
       "attribution_scope": "public_personality_landing",
-      "content_continue_target": "/zh-TW/career/recommendations/mbti/esfp",
+      "content_continue_target": "/zh-TW/career",
       "continue_reading_keys": [
         "career_recommendation",
         "topic_cluster",
@@ -165,10 +165,10 @@
           "label": "開始測驗"
         },
         {
-          "href": "/zh-TW/career/recommendations/mbti/esfp",
+          "href": "/zh-TW/career",
           "key": "career_recommendation",
           "kind": "content_continue",
-          "label": "查看職涯推薦"
+          "label": "瀏覽職業庫"
         },
         {
           "href": "/zh-TW/topics/mbti",
@@ -188,7 +188,7 @@
       "entry_type": "personality_profile",
       "indexability_state": "indexable",
       "landing_contract_version": "landing.surface.v1",
-      "landing_fingerprint": "38a0e35ac2216247639374693c9a52b2bf2cbe67",
+      "landing_fingerprint": "61f06ad893d24b5d2feefcf24b5b783a06d0ad15",
       "landing_scope": "public_indexable_detail",
       "primary_content_ref": "ESFP",
       "public_surface_ref": null,
@@ -774,14 +774,15 @@
     "seo_surface_v1": {
       "alternates": {
         "en": "https://fermatmind.com/en/personality/esfp",
-        "zh-CN": "https://fermatmind.com/zh-TW/personality/esfp"
+        "zh-CN": "https://fermatmind.com/zh/personality/esfp",
+        "zh-TW": "https://fermatmind.com/zh-TW/personality/esfp"
       },
       "canonical_url": "https://fermatmind.com/zh-TW/personality/esfp",
       "description": "ESFP 常被稱為「表演者」，四個字母代表外向、實感、情感與知覺。了解 Se–Fi–Te–Ni 的常見寫法，從手作、出遊和職涯試做看偏好如何影響取捨。",
       "indexability_state": "indexable",
       "llms_exposure_state": "allow",
       "metadata_contract_version": "seo.surface.v1",
-      "metadata_fingerprint": "9ba466a575ad534d908ee3549b2dca7616af2aaf",
+      "metadata_fingerprint": "4b13c607923a3ae7527e0a60ad9b9c7857a2b4c8",
       "metadata_scope": "public_indexable_detail",
       "og_payload": {
         "description": "ESFP 常被稱為「表演者」，四個字母代表外向、實感、情感與知覺。了解 Se–Fi–Te–Ni 的常見寫法，從手作、出遊和職涯試做看偏好如何影響取捨。",
@@ -810,5 +811,5 @@
     }
   },
   "payload_contract": "mbti.public.detail.v1",
-  "source_content_sha256": "642b23fc4d8b617a1fd45153eb6f0b4f066a8f35e737605d5b9275c0a59705f2"
+  "source_content_sha256": "89e366529edfe8cad586c6b6a8cc5ec80be8838813b3347f82bbd8b87bf74017"
 }

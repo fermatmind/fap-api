@@ -25,13 +25,13 @@
         }
       ],
       "answer_contract_version": "answer.surface.v1",
-      "answer_fingerprint": "6ec5756915ba668c78da4893504b871c68eee29c",
+      "answer_fingerprint": "2e4f5130b25266711756774c5bbc2c8b6bd0154d",
       "answer_scope": "public_indexable_detail",
       "attribution_scope": "public_personality_answer",
       "compare_blocks": [],
       "evidence_refs": [
-        "9b7d1e92c2ac485e02e1265567b834d882f50966",
-        "c18564f9e554cbb05876258c9ff1e8f8c3bc4ec4",
+        "fe696ee32df8d802f4b5c20c7002ecaadf7d59b8",
+        "27109be326741bd3085144c4752e65787fd4e21e",
         "personality_public_projection_v1",
         "mbti_public_projection_v1",
         "personality_sections",
@@ -82,7 +82,7 @@
         }
       ],
       "indexability_state": "indexable",
-      "landing_surface_ref": "c18564f9e554cbb05876258c9ff1e8f8c3bc4ec4",
+      "landing_surface_ref": "27109be326741bd3085144c4752e65787fd4e21e",
       "next_step_blocks": [],
       "primary_content_ref": "ESFP",
       "public_safety_state": "public_indexable",
@@ -94,7 +94,7 @@
       ],
       "runtime_artifact_ref": null,
       "scene_summary_blocks": [],
-      "seo_surface_ref": "9b7d1e92c2ac485e02e1265567b834d882f50966",
+      "seo_surface_ref": "fe696ee32df8d802f4b5c20c7002ecaadf7d59b8",
       "summary_blocks": [
         {
           "body": "ESFP 是 MBTI 十六型之一，四个字母分别表示外向、实感、情感、感知。例如临场调整方案时，可以结合现场反馈和当事人的感受，核对变化是否符合真实需要。\n\nESFP 对应外向、实感、情感、知觉四组偏好。本站中文昵称「表演者」只借用发布方的描述重点（共同活动与现场体验），不指表演天赋，也不要求谁负责活跃气氛。\n\n| 项目 | 本页写法 |\n| --- | --- |\n| 四字母 | E 外向 · S 实感 · F 情感 · P 知觉 |\n| 本站中文昵称 | 表演者（借用发布方描述，不指表演能力） |\n| 其他发布者用名 | 16Personalities：Entertainer；Truity：The Performer |\n| 常见功能栈 | Se–Fi–Te–Ni，本文采用的四位置写法 |\n| 辅助过程 | Fi 内向情感：个人价值与选择的一致性 |\n| 第三过程 | 常见 Te 读法；官方过程表也列 Ti，标注另有分歧 |\n| A/T 后缀 | 16Personalities 的 NERIS Identity，不是官方 MBTI 第五维 |\n\n这些偏好描述用于理解取舍，不能评估能力、职业胜任或关系结果。",
@@ -151,7 +151,7 @@
     ],
     "landing_surface_v1": {
       "attribution_scope": "public_personality_landing",
-      "content_continue_target": "/zh/career/recommendations/mbti/esfp",
+      "content_continue_target": "/zh/career",
       "continue_reading_keys": [
         "career_recommendation",
         "topic_cluster",
@@ -165,10 +165,10 @@
           "label": "开始测试"
         },
         {
-          "href": "/zh/career/recommendations/mbti/esfp",
+          "href": "/zh/career",
           "key": "career_recommendation",
           "kind": "content_continue",
-          "label": "查看职业推荐"
+          "label": "浏览职业库"
         },
         {
           "href": "/zh/topics/mbti",
@@ -188,7 +188,7 @@
       "entry_type": "personality_profile",
       "indexability_state": "indexable",
       "landing_contract_version": "landing.surface.v1",
-      "landing_fingerprint": "c18564f9e554cbb05876258c9ff1e8f8c3bc4ec4",
+      "landing_fingerprint": "27109be326741bd3085144c4752e65787fd4e21e",
       "landing_scope": "public_indexable_detail",
       "primary_content_ref": "ESFP",
       "public_surface_ref": null,
@@ -774,14 +774,15 @@
     "seo_surface_v1": {
       "alternates": {
         "en": "https://fermatmind.com/en/personality/esfp",
-        "zh-CN": "https://fermatmind.com/zh/personality/esfp"
+        "zh-CN": "https://fermatmind.com/zh/personality/esfp",
+        "zh-TW": "https://fermatmind.com/zh-TW/personality/esfp"
       },
       "canonical_url": "https://fermatmind.com/zh/personality/esfp",
       "description": "ESFP 人格的四字母与 Se–Fi 功能理论怎样理解？用手作体验课、临时出游与失约修复区分现场感受、个人价值和实际结果，阅读工作关系情景、压力练习、类型差异及研究边界。",
       "indexability_state": "indexable",
       "llms_exposure_state": "allow",
       "metadata_contract_version": "seo.surface.v1",
-      "metadata_fingerprint": "9b7d1e92c2ac485e02e1265567b834d882f50966",
+      "metadata_fingerprint": "fe696ee32df8d802f4b5c20c7002ecaadf7d59b8",
       "metadata_scope": "public_indexable_detail",
       "og_payload": {
         "description": "ESFP 人格的四字母与 Se–Fi 功能理论怎样理解？用手作体验课、临时出游与失约修复区分现场感受、个人价值和实际结果，阅读工作关系情景、压力练习、类型差异及研究边界。",
@@ -810,5 +811,5 @@
     }
   },
   "payload_contract": "mbti.public.detail.v1",
-  "source_content_sha256": "35eaa3235ed2fb730c83936f97c2908fc7ddc1590e89da653be169ba55171527"
+  "source_content_sha256": "ad17e27e21358c2cba12fcb405fcdcbb5ce89b39374ce8b77b87881545762768"
 }

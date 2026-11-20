@@ -25,13 +25,13 @@
         }
       ],
       "answer_contract_version": "answer.surface.v1",
-      "answer_fingerprint": "7121f18145bafe7607dcd1a99ebacb7ed00f52e8",
+      "answer_fingerprint": "fb0071bdf6688f29ccc8ce26157ec9e0ccd47895",
       "answer_scope": "public_indexable_detail",
       "attribution_scope": "public_personality_answer",
       "compare_blocks": [],
       "evidence_refs": [
-        "d5bcb0bac3c1d61ef60a2a9b8da08d1126e9010b",
-        "035c221db1c74ecf30b107ad5f110ca62767e657",
+        "4a1e7239bfd3016b3f2510525bc0f4598a2c8c9e",
+        "290737eb5dcf0fff8053c4a2c39d99c9a7bd7297",
         "mbti_public_projection_v1",
         "projection_dimensions",
         "personality_sections",
@@ -84,7 +84,7 @@
         }
       ],
       "indexability_state": "indexable",
-      "landing_surface_ref": "035c221db1c74ecf30b107ad5f110ca62767e657",
+      "landing_surface_ref": "290737eb5dcf0fff8053c4a2c39d99c9a7bd7297",
       "next_step_blocks": [],
       "primary_content_ref": "ISFP-A",
       "public_safety_state": "public_indexable",
@@ -96,7 +96,7 @@
       ],
       "runtime_artifact_ref": null,
       "scene_summary_blocks": [],
-      "seo_surface_ref": "d5bcb0bac3c1d61ef60a2a9b8da08d1126e9010b",
+      "seo_surface_ref": "4a1e7239bfd3016b3f2510525bc0f4598a2c8c9e",
       "summary_blocks": [
         {
           "body": "ISFP-A 的 -A 指 16Personalities 的 Assertive（自信型），是 NERIS Identity 維度的一端，描述較常對自己的判斷有把握、在壓力下較少動搖的傾向。官方 MBTI 的 ISFP 由四組偏好組成，A/T 屬於另一套架構，無法衡量手藝、審美或作品品質。\n\nISFP 的四個字母描述偏好：I 指注意力與精力較常朝內，先從自己的體驗與反思裡取得推進力；S 指取材時偏重可感的實情與已經驗過的做法；F 指判斷時偏重這件事對人的影響與自己看重的價值；P 指面向外部世界時較常保留餘地、邊做邊定。連字號後的 A 是 16Personalities 的 NERIS Identity 的一端，中文常說自我確信型或堅定型，涉及自我評價、自我確信與壓力反應。A 只是 NERIS Identity 的一端，不是官方 MBTI 的第五維，也不衡量能力；該框架把這一端描述為較有自信、較少自我懷疑、較少被壓力擾動，這是群體層面的傾向，落到個人仍要看處境。費馬測驗的計分方式見文末方法說明。\n\n| 核心檔案 | ISFP-A 的讀法 |\n| --- | --- |\n| 四字母 | I 精力朝內、S 重實情與經驗、F 重人與價值、P 對外保留餘地 |\n| 後綴含義 | A 即 Assertive，常譯自我確信型、堅定型、自信型 |\n| 框架歸屬 | 16Personalities 的 NERIS Identity；非官方 MBTI 第五維 |\n| 描述範圍 | 自我評價、自我確信、主觀壓力反應 |\n| 不描述什麼 | 手藝、審美、作品品質、能力高低、職涯歸屬、關係品質 |\n| 與 ISFP-T 的差別 | 收到同一則回饋並查過相同的證據後，A 端較可能仍對自己的判斷有把握，T 端較可能懷疑自己的判斷 |\n| 同一情境下的觀察線索 | 攤上一天沒人問價時，你對這批杯子的原判斷有沒有改變；一次反應不足以區分兩端 |\n\n表裡各行都停在自我評價這一層，推不出某一次會先核對還是先維持：兩端都可能立刻去問細節、翻出樣品複查，差別在聽完之後對原判斷的把握動了多少。下面幾節用具體情境說明這條界線落在哪裡。",
@@ -143,7 +143,7 @@
     ],
     "landing_surface_v1": {
       "attribution_scope": "public_personality_landing",
-      "content_continue_target": "/zh-TW/career/recommendations/mbti/isfp-a",
+      "content_continue_target": "/zh-TW/career",
       "continue_reading_keys": [
         "career_recommendation",
         "topic_cluster",
@@ -157,10 +157,10 @@
           "label": "開始測驗"
         },
         {
-          "href": "/zh-TW/career/recommendations/mbti/isfp-a",
+          "href": "/zh-TW/career",
           "key": "career_recommendation",
           "kind": "content_continue",
-          "label": "查看職涯推薦"
+          "label": "瀏覽職業庫"
         },
         {
           "href": "/zh-TW/topics/mbti",
@@ -180,7 +180,7 @@
       "entry_type": "personality_profile",
       "indexability_state": "indexable",
       "landing_contract_version": "landing.surface.v1",
-      "landing_fingerprint": "035c221db1c74ecf30b107ad5f110ca62767e657",
+      "landing_fingerprint": "290737eb5dcf0fff8053c4a2c39d99c9a7bd7297",
       "landing_scope": "public_indexable_detail",
       "primary_content_ref": "ISFP-A",
       "public_surface_ref": null,
@@ -572,14 +572,15 @@
     "seo_surface_v1": {
       "alternates": {
         "en": "https://fermatmind.com/en/personality/isfp-a",
-        "zh-CN": "https://fermatmind.com/zh-TW/personality/isfp-a"
+        "zh-CN": "https://fermatmind.com/zh/personality/isfp-a",
+        "zh-TW": "https://fermatmind.com/zh-TW/personality/isfp-a"
       },
       "canonical_url": "https://fermatmind.com/zh-TW/personality/isfp-a",
       "description": "ISFP-A 的 -A 指 16Personalities 的 Assertive（自信型）。從陶杯寄賣與作品回饋，了解自我評價、壓力反應與作品品質的差別。",
       "indexability_state": "indexable",
       "llms_exposure_state": "allow",
       "metadata_contract_version": "seo.surface.v1",
-      "metadata_fingerprint": "d5bcb0bac3c1d61ef60a2a9b8da08d1126e9010b",
+      "metadata_fingerprint": "4a1e7239bfd3016b3f2510525bc0f4598a2c8c9e",
       "metadata_scope": "public_indexable_detail",
       "og_payload": {
         "description": "ISFP-A 的 -A 指 16Personalities 的 Assertive（自信型）。從陶杯寄賣與作品回饋，了解自我評價、壓力反應與作品品質的差別。",
@@ -608,5 +609,5 @@
     }
   },
   "payload_contract": "mbti.public.detail.v1",
-  "source_content_sha256": "53d90b5624e9035685003b9c144e361180662db7042064883e423447079a9560"
+  "source_content_sha256": "4930b7fc0b2af97efd606589c6f46ebcbbdbb58d6e1cfbc15abdc9f21cf8f345"
 }

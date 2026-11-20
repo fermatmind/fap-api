@@ -25,13 +25,13 @@
         }
       ],
       "answer_contract_version": "answer.surface.v1",
-      "answer_fingerprint": "ef963ba085fc9c0d77e64db0a5af4303e3f4fe69",
+      "answer_fingerprint": "0db1dbf0af4eb985e44f37d0bb549cd183bd7b93",
       "answer_scope": "public_indexable_detail",
       "attribution_scope": "public_personality_answer",
       "compare_blocks": [],
       "evidence_refs": [
-        "6bb2accf40de7d3a04b922f31847972d7573cf27",
-        "4ca111030dc0a04d1b7cf98cfee3791b6470b6a4",
+        "26567fee33152ea0fe8227afdfb034b09f408e43",
+        "a9b468c00dd6bbc5012aaeaa2207a0a8c575f817",
         "personality_public_projection_v1",
         "mbti_public_projection_v1",
         "personality_sections",
@@ -87,7 +87,7 @@
         }
       ],
       "indexability_state": "indexable",
-      "landing_surface_ref": "4ca111030dc0a04d1b7cf98cfee3791b6470b6a4",
+      "landing_surface_ref": "a9b468c00dd6bbc5012aaeaa2207a0a8c575f817",
       "next_step_blocks": [],
       "primary_content_ref": "INTJ",
       "public_safety_state": "public_indexable",
@@ -99,7 +99,7 @@
       ],
       "runtime_artifact_ref": null,
       "scene_summary_blocks": [],
-      "seo_surface_ref": "6bb2accf40de7d3a04b922f31847972d7573cf27",
+      "seo_surface_ref": "26567fee33152ea0fe8227afdfb034b09f408e43",
       "summary_blocks": [
         {
           "body": "INTJ stands for Introversion, Intuition, Thinking and Judging, one of the 16 MBTI personality types. In type dynamics, INTJ pairs dominant introverted Intuition (Ni), which looks for underlying patterns, with auxiliary extraverted Thinking (Te), which organizes decisions around external criteria. Architect is a nickname used by 16Personalities, not a claim about someone’s occupation or skills.\n\nIn a fictional project, someone spots a pattern in several reports, writes down what would disprove it and agrees what evidence would justify proceeding. That example illustrates how Ni and Te can complement each other in the model. It cannot establish who is an INTJ or how anyone will perform.\n\n| Core profile | A quick reading |\n| --- | --- |\n| Four letters | Introversion, intuition, thinking, judging; each pair is a continuum of preference, not four fixed labels. |\n| Cognitive function stack | Ni–Te–Fi–Se in the convention used here. The Foundation lists Fi or Fe for tertiary Feeling. |\n| What to observe | How you connect separate clues and decide what evidence would support or challenge your explanation. |\n| A reasoning risk | A coherent explanation can still rest on untested assumptions. Check the evidence before treating it as fact. |\n| What to raise early in a relationship | Talk about commitment, how often you are in touch and how much space you need separately; confirm with one sentence the other person can repeat back. |\n| Where career exploration starts | Try one representative task and check how the role makes decisions, gives feedback and signs off work. |\n| The A/T suffix | Part of the NERIS Identity from 16Personalities, covering self-assessment, self-assurance and response to pressure; not a fifth official MBTI dimension. |",
@@ -156,7 +156,7 @@
     ],
     "landing_surface_v1": {
       "attribution_scope": "public_personality_landing",
-      "content_continue_target": "/en/career/recommendations/mbti/intj",
+      "content_continue_target": "/en/career",
       "continue_reading_keys": [
         "career_recommendation",
         "topic_cluster",
@@ -170,10 +170,10 @@
           "label": "Take the test"
         },
         {
-          "href": "/en/career/recommendations/mbti/intj",
+          "href": "/en/career",
           "key": "career_recommendation",
           "kind": "content_continue",
-          "label": "See career fits"
+          "label": "Explore the Career Library"
         },
         {
           "href": "/en/topics/mbti",
@@ -193,7 +193,7 @@
       "entry_type": "personality_profile",
       "indexability_state": "indexable",
       "landing_contract_version": "landing.surface.v1",
-      "landing_fingerprint": "4ca111030dc0a04d1b7cf98cfee3791b6470b6a4",
+      "landing_fingerprint": "a9b468c00dd6bbc5012aaeaa2207a0a8c575f817",
       "landing_scope": "public_indexable_detail",
       "primary_content_ref": "INTJ",
       "public_surface_ref": null,
@@ -900,14 +900,15 @@
     "seo_surface_v1": {
       "alternates": {
         "en": "https://fermatmind.com/en/personality/intj",
-        "zh-CN": "https://fermatmind.com/zh/personality/intj"
+        "zh-CN": "https://fermatmind.com/zh/personality/intj",
+        "zh-TW": "https://fermatmind.com/zh-TW/personality/intj"
       },
       "canonical_url": "https://fermatmind.com/en/personality/intj",
       "description": "INTJ stands for Introversion, Intuition, Thinking and Judging. Learn how Ni–Te is used, what the preferences describe and which work tasks to explore.",
       "indexability_state": "indexable",
       "llms_exposure_state": "allow",
       "metadata_contract_version": "seo.surface.v1",
-      "metadata_fingerprint": "6bb2accf40de7d3a04b922f31847972d7573cf27",
+      "metadata_fingerprint": "26567fee33152ea0fe8227afdfb034b09f408e43",
       "metadata_scope": "public_indexable_detail",
       "og_payload": {
         "description": "INTJ stands for Introversion, Intuition, Thinking and Judging. Learn how Ni–Te is used, what the preferences describe and which work tasks to explore.",
@@ -936,5 +937,5 @@
     }
   },
   "payload_contract": "mbti.public.detail.v1",
-  "source_content_sha256": "ded76d0fc588c3fa965a281f5f8aa252d183aa9faed3a9759c955494fc2479c8"
+  "source_content_sha256": "905396ff01d0a42f0508d1495fbcdc4ed086596c94bc87c2d7216f73dc4c94c1"
 }

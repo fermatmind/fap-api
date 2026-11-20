@@ -25,13 +25,13 @@
         }
       ],
       "answer_contract_version": "answer.surface.v1",
-      "answer_fingerprint": "7e597b76d31add4b4ffb64211efbe8c9ac6f81fe",
+      "answer_fingerprint": "433ccfdfc7f4d2587620650f8896e075c86959a5",
       "answer_scope": "public_indexable_detail",
       "attribution_scope": "public_personality_answer",
       "compare_blocks": [],
       "evidence_refs": [
-        "7a266c29c1d41eff9f72c70a8d8439fac4d42b5b",
-        "bfcd30215d9e094cd4324690228e1945e84de01a",
+        "50e443ee70dc84912a36bca4371ef972e9bfe29b",
+        "6f15dcb45238139d579e72b68a7fd05fcb85c228",
         "personality_public_projection_v1",
         "mbti_public_projection_v1",
         "personality_sections",
@@ -86,7 +86,7 @@
         }
       ],
       "indexability_state": "indexable",
-      "landing_surface_ref": "bfcd30215d9e094cd4324690228e1945e84de01a",
+      "landing_surface_ref": "6f15dcb45238139d579e72b68a7fd05fcb85c228",
       "next_step_blocks": [],
       "primary_content_ref": "INTP",
       "public_safety_state": "public_indexable",
@@ -98,7 +98,7 @@
       ],
       "runtime_artifact_ref": null,
       "scene_summary_blocks": [],
-      "seo_surface_ref": "7a266c29c1d41eff9f72c70a8d8439fac4d42b5b",
+      "seo_surface_ref": "50e443ee70dc84912a36bca4371ef972e9bfe29b",
       "summary_blocks": [
         {
           "body": "INTP 是 MBTI 十六型之一，四字母代表內向、直覺、思考、知覺。「邏輯學家」是 16Personalities 對 INTP 的稱呼。類型動力學常以內向思考（Ti）與外向直覺（Ne）描述兩種偏好：檢查推論是否一致，以及探索其他解釋。智力、社交能力與職務適配需要各自的證據。\n\nI 指注意力與精力較常朝內，先在內部整理再對外表達；N 指取材偏模式、關聯與可能性，習慣從個別現象往上找解釋；T 指判斷時更倚重可複核、前後一致的標準；P 指面向外部世界時偏向保留選項，讓方案隨資訊更新。四個字母合起來是偏好描述，不是能力刻度。\n\n按類型動力學的常見推導，INTP 的 P 表示面向外部的過程偏感知，其外向感知過程寫作 Ne，內向判斷過程 Ti 在這一寫法裡居主導位。本文採用的四位置寫法是 Ti–Ne–Si–Fe，第三位實感過程的態度標註另有分歧。\n\n同一件事上，熟悉度、職責、期限與手裡有多少資訊都可能蓋過偏好，所以下面的情境都只當觀察練習。\n\n| 核心檔案 | 快速理解 |\n| --- | --- |\n| 四字母 | 內向、直覺、思考、知覺，各自對應一組偏好。 |\n| 認知功能堆疊 | 本文採用 Ti–Ne–Si–Fe 的四位置寫法，第三位另有態度標註分歧。 |\n| 可能更常出現的做法 | 把混亂現象整理成幾條可核對的規則，並指出它們在哪一處衝突。 |\n| 解釋與後續行動 | 確認規則後，還可以說明誰負責、何時有下一步。 |\n| 感情與關係 | 如果你想提供建議，可以先問對方此刻想被聽見，還是想一起找辦法。 |\n| 工作探索 | 可試做規則梳理、資料核對、工具設計與技術文件類任務，再看是否願意長期跟人對接。 |",
@@ -155,7 +155,7 @@
     ],
     "landing_surface_v1": {
       "attribution_scope": "public_personality_landing",
-      "content_continue_target": "/zh-TW/career/recommendations/mbti/intp",
+      "content_continue_target": "/zh-TW/career",
       "continue_reading_keys": [
         "career_recommendation",
         "topic_cluster",
@@ -169,10 +169,10 @@
           "label": "開始測驗"
         },
         {
-          "href": "/zh-TW/career/recommendations/mbti/intp",
+          "href": "/zh-TW/career",
           "key": "career_recommendation",
           "kind": "content_continue",
-          "label": "查看職涯推薦"
+          "label": "瀏覽職業庫"
         },
         {
           "href": "/zh-TW/topics/mbti",
@@ -192,7 +192,7 @@
       "entry_type": "personality_profile",
       "indexability_state": "indexable",
       "landing_contract_version": "landing.surface.v1",
-      "landing_fingerprint": "bfcd30215d9e094cd4324690228e1945e84de01a",
+      "landing_fingerprint": "6f15dcb45238139d579e72b68a7fd05fcb85c228",
       "landing_scope": "public_indexable_detail",
       "primary_content_ref": "INTP",
       "public_surface_ref": null,
@@ -788,14 +788,15 @@
     "seo_surface_v1": {
       "alternates": {
         "en": "https://fermatmind.com/en/personality/intp",
-        "zh-CN": "https://fermatmind.com/zh-TW/personality/intp"
+        "zh-CN": "https://fermatmind.com/zh/personality/intp",
+        "zh-TW": "https://fermatmind.com/zh-TW/personality/intp"
       },
       "canonical_url": "https://fermatmind.com/zh-TW/personality/intp",
       "description": "INTP 是 MBTI 的內向、直覺、思考、知覺型，常見功能堆疊是 Ti–Ne–Si–Fe。用報帳單被退回的情境說明偏好，並提供職涯試做與 A/T 後綴的讀法。",
       "indexability_state": "indexable",
       "llms_exposure_state": "allow",
       "metadata_contract_version": "seo.surface.v1",
-      "metadata_fingerprint": "7a266c29c1d41eff9f72c70a8d8439fac4d42b5b",
+      "metadata_fingerprint": "50e443ee70dc84912a36bca4371ef972e9bfe29b",
       "metadata_scope": "public_indexable_detail",
       "og_payload": {
         "description": "INTP 是 MBTI 的內向、直覺、思考、知覺型，常見功能堆疊是 Ti–Ne–Si–Fe。用報帳單被退回的情境說明偏好，並提供職涯試做與 A/T 後綴的讀法。",
@@ -824,5 +825,5 @@
     }
   },
   "payload_contract": "mbti.public.detail.v1",
-  "source_content_sha256": "c8c51afa6b9de0dad8a061f05c9afeaf902ec8a42374feeebf998f9d7030056d"
+  "source_content_sha256": "8763482930a19f839945894ee9445362d2592ed1c4b2a182b6ac5bb9c4938a56"
 }

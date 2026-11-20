@@ -25,13 +25,13 @@
         }
       ],
       "answer_contract_version": "answer.surface.v1",
-      "answer_fingerprint": "56f6fed6c54e6ac4d9250f66226487abce3ec6a6",
+      "answer_fingerprint": "ed3e58108e424bc933c438b0f993fa190b6427ea",
       "answer_scope": "public_indexable_detail",
       "attribution_scope": "public_personality_answer",
       "compare_blocks": [],
       "evidence_refs": [
-        "592fd48c3bd9d942ad2226caa1ff4087ebed443e",
-        "52a2f9addc0a3e356f6f117f41d1713576a9f241",
+        "9684b87ddf09dd9007ea846a5c1b00af8dc71e00",
+        "55d47b179f24ed8b38ea62591c948e53fb80c948",
         "personality_public_projection_v1",
         "mbti_public_projection_v1",
         "personality_sections",
@@ -81,7 +81,7 @@
         }
       ],
       "indexability_state": "indexable",
-      "landing_surface_ref": "52a2f9addc0a3e356f6f117f41d1713576a9f241",
+      "landing_surface_ref": "55d47b179f24ed8b38ea62591c948e53fb80c948",
       "next_step_blocks": [],
       "primary_content_ref": "ISFP",
       "public_safety_state": "public_indexable",
@@ -93,7 +93,7 @@
       ],
       "runtime_artifact_ref": null,
       "scene_summary_blocks": [],
-      "seo_surface_ref": "592fd48c3bd9d942ad2226caa1ff4087ebed443e",
+      "seo_surface_ref": "9684b87ddf09dd9007ea846a5c1b00af8dc71e00",
       "summary_blocks": [
         {
           "body": "ISFP 是 MBTI 十六型之一，四个字母分别表示内向、实感、情感、感知。例如选择一种表达方式时，可以用实际材料试一下，再看作品是否符合自己重视的东西。常见类型动力学写作 Fi–Se–Ni–Te。\n\nISFP 是内向 I、实感 S、情感 F、知觉 P 四组偏好的组合。「探险家」「艺术家」是常见昵称，不需要旅行、冒险或具备艺术天赋。可观察的倾向是：判断时先看是否符合自己在意的价值，取材时先看现场实际发生了什么，对外则保留调整选项。偏好是描述，不是证书；它不证明技艺、善良、责任心或职业胜任。\n\n**核心档案**\n\n| 项目 | 内容 |\n| --- | --- |\n| 四个字母 | I 内向 · S 实感 · F 情感 · P 知觉 |\n| 常见昵称 | 探险家（16Personalities）、艺术家、Composer（Truity） |\n| 本文采用的功能次序 | Fi → Se → Ni → Te，常见四位置写法，第三位态度另有主张 |\n| 常见的核心问题 | 这符合我在意的价值吗？现场实际是什么样？ |\n| 容易混淆的点 | 内向不等于害羞；实感不等于缺想象；情感不等于不讲逻辑；知觉不等于不负责 |\n| 本页不涉及 | 职业推荐、伴侣匹配、能力排序、健康或临床诊断 |\n| 相近类型 | INFP（S/N）、ISTP（T/F）、ISFJ（J/P）、ESFP（I/E） |",
@@ -160,7 +160,7 @@
     ],
     "landing_surface_v1": {
       "attribution_scope": "public_personality_landing",
-      "content_continue_target": "/zh/career/recommendations/mbti/isfp",
+      "content_continue_target": "/zh/career",
       "continue_reading_keys": [
         "career_recommendation",
         "topic_cluster",
@@ -174,10 +174,10 @@
           "label": "开始测试"
         },
         {
-          "href": "/zh/career/recommendations/mbti/isfp",
+          "href": "/zh/career",
           "key": "career_recommendation",
           "kind": "content_continue",
-          "label": "查看职业推荐"
+          "label": "浏览职业库"
         },
         {
           "href": "/zh/topics/mbti",
@@ -197,7 +197,7 @@
       "entry_type": "personality_profile",
       "indexability_state": "indexable",
       "landing_contract_version": "landing.surface.v1",
-      "landing_fingerprint": "52a2f9addc0a3e356f6f117f41d1713576a9f241",
+      "landing_fingerprint": "55d47b179f24ed8b38ea62591c948e53fb80c948",
       "landing_scope": "public_indexable_detail",
       "primary_content_ref": "ISFP",
       "public_surface_ref": null,
@@ -781,14 +781,15 @@
     "seo_surface_v1": {
       "alternates": {
         "en": "https://fermatmind.com/en/personality/isfp",
-        "zh-CN": "https://fermatmind.com/zh/personality/isfp"
+        "zh-CN": "https://fermatmind.com/zh/personality/isfp",
+        "zh-TW": "https://fermatmind.com/zh-TW/personality/isfp"
       },
       "canonical_url": "https://fermatmind.com/zh/personality/isfp",
       "description": "了解 ISFP 四组偏好与 Fi–Se 功能理论的使用边界。区分价值、体验和技能；通过海报反馈、活动改约、期限冲突及 FAQ，练习有依据的选择与行动。",
       "indexability_state": "indexable",
       "llms_exposure_state": "allow",
       "metadata_contract_version": "seo.surface.v1",
-      "metadata_fingerprint": "592fd48c3bd9d942ad2226caa1ff4087ebed443e",
+      "metadata_fingerprint": "9684b87ddf09dd9007ea846a5c1b00af8dc71e00",
       "metadata_scope": "public_indexable_detail",
       "og_payload": {
         "description": "了解 ISFP 四组偏好与 Fi–Se 功能理论的使用边界。区分价值、体验和技能；通过海报反馈、活动改约、期限冲突及 FAQ，练习有依据的选择与行动。",
@@ -817,5 +818,5 @@
     }
   },
   "payload_contract": "mbti.public.detail.v1",
-  "source_content_sha256": "d6108a2e76c9c143557044e284b04afd0580e29c0c7c86b04b563840d59ba17b"
+  "source_content_sha256": "7229ec0552a53d0904b31461bff90e707cf8e93cff7d287e6dba22e3f4ca4d62"
 }
