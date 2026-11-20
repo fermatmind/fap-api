@@ -1,6 +1,6 @@
 {
   "schema": "fermatmind.public_content_pricing_refund.review.v1",
-  "candidate_sha256": "9ccf708abfc543224f05628424bfb86a6845e80d31e2edd6fd9964e153a816e7",
+  "candidate_sha256": "9b786364039ea91dd30bd67c97e9a382e53d60c6f2717440b53eae5abc245a3b",
   "verdict": "PASS",
   "pages": {
     "PR-TERMS-ZH": "PASS",
@@ -16,5 +16,5 @@
     "PR-FAQ-EN": "PASS",
     "PR-FAQ-TW": "PASS"
   },
-  "review_scope": "Editorial comparison against the live and staging public snapshots in Simplified Chinese, Traditional Chinese, and English. Only planned CNY and USD amounts change to 2.99. Refund terms, free access, and non-sale status are preserved."
+  "review_scope": "Verified staging and production pre-state for twelve existing policy pages. Updated only sale status, supported assessment versions, payment channels and anonymous/self-service access. Existing refund eligibility, statutory rights, 7-day request window, 3-business-day response and 7-business-day review remain unchanged. No report narratives, new URLs, SEO controls or draft pointers are changed."
 }

@@ -189,6 +189,7 @@
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
                     "App\\Http\\Middleware\\ForcePublicAttemptRealm",
+                    "App\\Http\\Middleware\\MainstreamReportAccess",
                     "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_attempt_start"
                 ],
                 "x-laravel-name": "api.v0_3.attempts.start"
@@ -213,6 +214,7 @@
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
                     "App\\Http\\Middleware\\ForcePublicAttemptRealm",
+                    "App\\Http\\Middleware\\MainstreamReportAccess",
                     "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_attempt_submit",
                     "App\\Http\\Middleware\\FmTokenAuth"
                 ],
@@ -238,6 +240,7 @@
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
                     "App\\Http\\Middleware\\ForcePublicAttemptRealm",
+                    "App\\Http\\Middleware\\MainstreamReportAccess",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:attempt_id"
                 ]
             },
@@ -259,6 +262,7 @@
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
                     "App\\Http\\Middleware\\ForcePublicAttemptRealm",
+                    "App\\Http\\Middleware\\MainstreamReportAccess",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:attempt_id"
                 ]
             }
@@ -282,6 +286,7 @@
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
                     "App\\Http\\Middleware\\ForcePublicAttemptRealm",
+                    "App\\Http\\Middleware\\MainstreamReportAccess",
                     "App\\Http\\Middleware\\FmTokenAuth",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:attempt_id"
                 ],
@@ -307,6 +312,7 @@
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
                     "App\\Http\\Middleware\\ForcePublicAttemptRealm",
+                    "App\\Http\\Middleware\\MainstreamReportAccess",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:attempt_id"
                 ],
                 "x-laravel-name": "api.v0_3.attempts.submission"
@@ -331,6 +337,7 @@
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
                     "App\\Http\\Middleware\\ForcePublicAttemptRealm",
+                    "App\\Http\\Middleware\\MainstreamReportAccess",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:id"
                 ],
                 "x-laravel-name": "api.v0_3.attempts.show"
@@ -355,6 +362,7 @@
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
                     "App\\Http\\Middleware\\ForcePublicAttemptRealm",
+                    "App\\Http\\Middleware\\MainstreamReportAccess",
                     "App\\Http\\Middleware\\FmTokenAuth",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:id"
                 ],
@@ -380,6 +388,7 @@
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
                     "App\\Http\\Middleware\\ForcePublicAttemptRealm",
+                    "App\\Http\\Middleware\\MainstreamReportAccess",
                     "App\\Http\\Middleware\\FmTokenAuth",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:id"
                 ],
@@ -405,6 +414,7 @@
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
                     "App\\Http\\Middleware\\ForcePublicAttemptRealm",
+                    "App\\Http\\Middleware\\MainstreamReportAccess",
                     "App\\Http\\Middleware\\FmTokenAuth",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:id"
                 ],
@@ -430,6 +440,7 @@
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
                     "App\\Http\\Middleware\\ForcePublicAttemptRealm",
+                    "App\\Http\\Middleware\\MainstreamReportAccess",
                     "App\\Http\\Middleware\\FmTokenAuth",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:id"
                 ],
@@ -455,6 +466,7 @@
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
                     "App\\Http\\Middleware\\ForcePublicAttemptRealm",
+                    "App\\Http\\Middleware\\MainstreamReportAccess",
                     "App\\Http\\Middleware\\FmTokenAuth",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:id"
                 ],
@@ -480,6 +492,7 @@
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
                     "App\\Http\\Middleware\\ForcePublicAttemptRealm",
+                    "App\\Http\\Middleware\\MainstreamReportAccess",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:id"
                 ],
                 "x-laravel-name": "api.v0_3.attempts.eq.agent_context"
@@ -504,6 +517,7 @@
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
                     "App\\Http\\Middleware\\ForcePublicAttemptRealm",
+                    "App\\Http\\Middleware\\MainstreamReportAccess",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:id"
                 ],
                 "x-laravel-name": "api.v0_3.attempts.eq.agent_runtime.messages"
@@ -528,6 +542,7 @@
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
                     "App\\Http\\Middleware\\ForcePublicAttemptRealm",
+                    "App\\Http\\Middleware\\MainstreamReportAccess",
                     "App\\Http\\Middleware\\FmTokenAuth",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:id"
                 ],
@@ -551,6 +566,7 @@
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
                     "App\\Http\\Middleware\\ForcePublicAttemptRealm",
+                    "App\\Http\\Middleware\\MainstreamReportAccess",
                     "App\\Http\\Middleware\\FmTokenAuth",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:id"
                 ],
@@ -576,6 +592,7 @@
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
                     "App\\Http\\Middleware\\ForcePublicAttemptRealm",
+                    "App\\Http\\Middleware\\MainstreamReportAccess",
                     "App\\Http\\Middleware\\FmTokenAuth",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:id"
                 ],
@@ -601,6 +618,7 @@
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
                     "App\\Http\\Middleware\\ForcePublicAttemptRealm",
+                    "App\\Http\\Middleware\\MainstreamReportAccess",
                     "App\\Http\\Middleware\\FmTokenAuth",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:id",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:gift_request_id"
@@ -627,6 +645,7 @@
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
                     "App\\Http\\Middleware\\ForcePublicAttemptRealm",
+                    "App\\Http\\Middleware\\MainstreamReportAccess",
                     "App\\Http\\Middleware\\FmTokenAuth",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:id",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:gift_request_id"
@@ -653,6 +672,7 @@
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
                     "App\\Http\\Middleware\\ForcePublicAttemptRealm",
+                    "App\\Http\\Middleware\\MainstreamReportAccess",
                     "App\\Http\\Middleware\\FmTokenAuth",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:id"
                 ],
@@ -676,6 +696,7 @@
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
                     "App\\Http\\Middleware\\ForcePublicAttemptRealm",
+                    "App\\Http\\Middleware\\MainstreamReportAccess",
                     "App\\Http\\Middleware\\FmTokenAuth",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:id"
                 ],
@@ -701,6 +722,7 @@
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
                     "App\\Http\\Middleware\\ForcePublicAttemptRealm",
+                    "App\\Http\\Middleware\\MainstreamReportAccess",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:id"
                 ],
                 "x-laravel-name": "api.v0_3.attempts.report"
@@ -725,6 +747,7 @@
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
                     "App\\Http\\Middleware\\ForcePublicAttemptRealm",
+                    "App\\Http\\Middleware\\MainstreamReportAccess",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:id"
                 ],
                 "x-laravel-name": "api.v0_3.attempts.report_access"
@@ -749,6 +772,7 @@
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
                     "App\\Http\\Middleware\\ForcePublicAttemptRealm",
+                    "App\\Http\\Middleware\\MainstreamReportAccess",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:id"
                 ],
                 "x-laravel-name": "api.v0_3.attempts.report_pdf"
@@ -773,6 +797,7 @@
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
                     "App\\Http\\Middleware\\ForcePublicAttemptRealm",
+                    "App\\Http\\Middleware\\MainstreamReportAccess",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:id"
                 ],
                 "x-laravel-name": "api.v0_3.attempts.result"
@@ -797,6 +822,7 @@
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
                     "App\\Http\\Middleware\\ForcePublicAttemptRealm",
+                    "App\\Http\\Middleware\\MainstreamReportAccess",
                     "App\\Http\\Middleware\\FmTokenAuth",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:id",
                     "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_track"
@@ -823,6 +849,7 @@
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
                     "App\\Http\\Middleware\\ForcePublicAttemptRealm",
+                    "App\\Http\\Middleware\\MainstreamReportAccess",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:id"
                 ],
                 "x-laravel-name": "api.v0_3.attempts.result_page_pdf"
@@ -847,6 +874,7 @@
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
                     "App\\Http\\Middleware\\ForcePublicAttemptRealm",
+                    "App\\Http\\Middleware\\MainstreamReportAccess",
                     "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_attempt_submit",
                     "App\\Http\\Middleware\\FmTokenAuth",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:id"
@@ -873,6 +901,7 @@
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
                     "App\\Http\\Middleware\\ForcePublicAttemptRealm",
+                    "App\\Http\\Middleware\\MainstreamReportAccess",
                     "App\\Http\\Middleware\\FmTokenAuth",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:id",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:session_id"
@@ -899,6 +928,7 @@
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
                     "App\\Http\\Middleware\\ForcePublicAttemptRealm",
+                    "App\\Http\\Middleware\\MainstreamReportAccess",
                     "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_attempt_submit",
                     "App\\Http\\Middleware\\FmTokenAuth",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:id",
@@ -925,7 +955,8 @@
                     "App\\Http\\Middleware\\NormalizeApiErrorContract",
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
-                    "App\\Http\\Middleware\\FmTokenAuth"
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\MainstreamReportAccess"
                 ]
             },
             "post": {
@@ -945,7 +976,8 @@
                     "App\\Http\\Middleware\\NormalizeApiErrorContract",
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
-                    "App\\Http\\Middleware\\FmTokenAuth"
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\MainstreamReportAccess"
                 ]
             }
         },
@@ -1285,6 +1317,30 @@
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:id",
                     "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_auth"
                 ]
+            }
+        },
+        "/api/v0.3/disc-assessment/results": {
+            "post": {
+                "operationId": "api.v0_3.disc_assessment.store",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\DiscAssessmentController@store",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_attempt_submit"
+                ],
+                "x-laravel-name": "api.v0_3.disc_assessment.store"
             }
         },
         "/api/v0.3/email/capture": {

@@ -46,7 +46,12 @@ test('pricing/refund publication selects only twelve existing localized pages an
   assert.equal(row.staging_snapshot.title,row.staging_before.title);
   const body=row.snapshot.content_md;
   assert.ok(body.includes('¥2.99') && body.includes('US$2.99'));
-  assert.equal(body, row.before.content_md.replaceAll('¥9.99', '¥2.99').replaceAll('US$1.99', 'US$2.99'));
+  assert.ok(!/尚未开售|尚未開賣|not on sale yet|Live charging is not enabled/.test(body));
+  assert.ok(body.includes(row.identity.locale==='en'?'sign-in':row.identity.locale==='zh-TW'?'登入':'登录'));
+  if(['terms','help-payment-refund'].includes(row.identity.slug)) {
+   assert.ok(body.includes('IQ 30/40') || body.includes('IQ 30／40'));
+   assert.ok(body.includes('144') && body.includes('94') && body.includes('60'));
+  }
   assert.ok(body.includes(row.identity.locale==='en'?'7 business days':row.identity.locale==='zh-TW'?'7 個工作日':'7 个工作日')||row.identity.slug==='help-faq'||row.identity.slug==='policies');
   if(row.identity.slug==='help-payment-refund') {
    assert.equal(row.snapshot.faq_items.length,4);
