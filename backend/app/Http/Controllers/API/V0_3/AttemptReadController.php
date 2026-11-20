@@ -2772,6 +2772,11 @@ class AttemptReadController extends Controller
 
     private function enforceEmailBindingForRead(Request $request, int $orgId, Attempt $attempt, string $scaleCode): void
     {
+        if (app(\App\Services\Commerce\MainstreamReportPurchase::class)->managed($attempt)) {
+            app(\App\Services\Commerce\MainstreamReportPurchase::class)->owner($request, $attempt);
+
+            return;
+        }
         $attemptId = trim((string) ($attempt->id ?? ''));
         if ($attemptId === '' || ! $this->shouldApplyEmailBindingGate($scaleCode)) {
             return;

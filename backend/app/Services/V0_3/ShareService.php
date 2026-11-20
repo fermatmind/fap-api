@@ -1129,6 +1129,20 @@ class ShareService
         ?string $shareId,
         ?string $createdAt
     ): array {
+        if (app(\App\Services\Commerce\MainstreamReportPurchase::class)->managed($attempt)) {
+            // Public sharing keeps only the free identity/score overview. A public
+            // link never carries paid narratives, facets, snapshots or report authority.
+            $locale = $this->normalizeLocale((string) $attempt->locale);
+            $segment = $locale === 'en' ? 'en' : 'zh';
+            $shareUrl = $shareId ? $this->buildLocalizedShareUrl($shareId, $locale) : null;
+
+            return ['share_id' => $shareId, 'share_url' => $shareUrl, 'id' => $shareId, 'attempt_id' => $attempt->id,
+                'created_at' => $createdAt, 'org_id' => 0, 'scale_code' => $attempt->scale_code, 'locale' => $locale,
+                'title' => $attempt->scale_code, 'type_code' => $result->type_code, 'type_name' => $result->type_code,
+                'subtitle' => null, 'summary' => null, 'tagline' => null, 'rarity' => null, 'tags' => [], 'dimensions' => [],
+                'primary_cta_label' => $locale === 'en' ? 'Take a test' : '开始测试', 'primary_cta_path' => '/'.$segment.'/tests',
+                'compare_enabled' => false, 'compare_cta_label' => null];
+        }
         $publicSafeReport = $this->buildPublicSafeReportSnapshot($attempt, $result);
         $normalizedScaleCode = strtoupper(trim((string) ($attempt->scale_code ?? $result->scale_code ?? 'MBTI')));
         $normalizedLocale = $this->normalizeLocale((string) ($attempt->locale ?? config('content_packs.default_locale', 'zh-CN')));

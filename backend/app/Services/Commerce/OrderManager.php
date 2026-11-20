@@ -236,7 +236,7 @@ class OrderManager
 
         if ($targetAttemptId !== null) {
             $target = \App\Models\Attempt::withoutGlobalScopes()->where('org_id', $orgId)->whereKey($targetAttemptId)->first();
-            if ($target && app(RiasecReportPurchase::class)->managed($target)) {
+            if ($target && (app(RiasecReportPurchase::class)->managed($target) || app(MainstreamReportPurchase::class)->managed($target))) {
                 return $this->badRequest('SKU_NOT_ELIGIBLE', 'This result requires its Holland report product.');
             }
         }
@@ -375,9 +375,11 @@ class OrderManager
 
         $ownedByUser = $uid !== null && $uid === $this->trimOrNull($order->user_id ?? null);
         $ownedByAnon = $aid !== null && $aid === $this->trimOrNull($order->anon_id ?? null);
-        if ($ownedByAnon && in_array($order->sku ?? '', CareerAssessmentPurchase::RIASEC_SKUS, true)) {
+        if ($ownedByAnon && in_array($order->sku ?? '', [...CareerAssessmentPurchase::RIASEC_SKUS, ...MainstreamReportPurchase::skus()], true)) {
             $attempt = \App\Models\Attempt::withoutGlobalScopes()->where('org_id', 0)->whereKey($order->target_attempt_id)->first();
-            $ownedByAnon = $attempt && app(RiasecReportPurchase::class)->guestOwns(request(), $attempt);
+            $ownedByAnon = $attempt && (app(MainstreamReportPurchase::class)->managed($attempt)
+                ? app(MainstreamReportPurchase::class)->guestOwns(request(), $attempt)
+                : app(RiasecReportPurchase::class)->guestOwns(request(), $attempt));
         }
         $ownershipVerified = $ownedByUser || $ownedByAnon;
         $paymentRecoveryVerified = false;

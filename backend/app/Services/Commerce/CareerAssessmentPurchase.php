@@ -24,15 +24,15 @@ final class CareerAssessmentPurchase
 
     public static function allSkus(): array
     {
-        return [...array_values(self::SKUS), ...array_values(self::RIASEC_SKUS)];
+        return [...array_values(self::SKUS), ...array_values(self::RIASEC_SKUS), ...MainstreamReportPurchase::skus()];
     }
 
     public static function contract(string $sku): ?array
     {
-        foreach ([self::SCALE => self::SKUS, 'RIASEC' => self::RIASEC_SKUS] as $scale => $skus) {
+        foreach ([self::SCALE => self::SKUS, 'RIASEC' => self::RIASEC_SKUS, ...MainstreamReportPurchase::skuMap()] as $scale => $skus) {
             $currency = array_search($sku, $skus, true);
             if (is_string($currency)) {
-                return ['scale' => $scale, 'currency' => $currency, 'benefit' => $scale === 'RIASEC' ? 'RIASEC60_REPORT' : self::BENEFIT];
+                return ['scale' => $scale, 'currency' => $currency, 'benefit' => $scale === 'RIASEC' ? 'RIASEC60_REPORT' : ($scale === self::SCALE ? self::BENEFIT : $scale.'_WEB_REPORT')];
             }
         }
 
@@ -41,7 +41,7 @@ final class CareerAssessmentPurchase
 
     public static function purchaseAnonId(Request $request, string $sku): ?string
     {
-        if (in_array($sku, self::RIASEC_SKUS, true)) {
+        if (in_array($sku, [...self::RIASEC_SKUS, ...MainstreamReportPurchase::skus()], true)) {
             $anon = $request->attributes->get('fm_anon_id');
 
             return is_string($anon) && $anon !== '' ? $anon : null;
@@ -73,6 +73,11 @@ final class CareerAssessmentPurchase
 
     public static function ownerKeyForOrder(Request $request, object $order): ?string
     {
+        if (in_array($order->sku, MainstreamReportPurchase::skus(), true)) {
+            $attempt = Attempt::withoutGlobalScopes()->where('org_id', 0)->whereKey($order->target_attempt_id)->firstOrFail();
+
+            return app(MainstreamReportPurchase::class)->owner($request, $attempt);
+        }
         if (in_array($order->sku, self::RIASEC_SKUS, true)) {
             $attempt = Attempt::withoutGlobalScopes()->where('org_id', 0)->whereKey($order->target_attempt_id)->firstOrFail();
 
@@ -104,6 +109,9 @@ final class CareerAssessmentPurchase
             ->where(function ($query) {
                 $query->where(fn ($q) => $q->where('grants.benefit_code', self::BENEFIT)->whereIn('orders.sku', self::SKUS))
                     ->orWhere(fn ($q) => $q->where('grants.benefit_code', 'RIASEC60_REPORT')->whereIn('orders.sku', self::RIASEC_SKUS));
+                foreach (MainstreamReportPurchase::skuMap() as $scale => $skus) {
+                    $query->orWhere(fn ($q) => $q->where('grants.benefit_code', $scale.'_WEB_REPORT')->whereIn('orders.sku', $skus));
+                }
             })->where('grants.scope', 'attempt')
             ->where('grants.status', 'active')
             ->where(fn ($query) => $query->whereNull('grants.expires_at')->orWhere('grants.expires_at', '>', now()))
@@ -125,8 +133,13 @@ final class CareerAssessmentPurchase
             return [];
         }
 
-        if ($scale === 'RIASEC') {
-            return array_map(static fn (array $offer): array => array_replace($offer, ['sku' => self::RIASEC_SKUS[$offer['currency']]]),
+        if ($scale !== self::SCALE) {
+            $skus = $scale === 'RIASEC' ? self::RIASEC_SKUS : (MainstreamReportPurchase::skuMap()[$scale] ?? []);
+            if ($skus === []) {
+                return [];
+            }
+
+            return array_map(static fn (array $offer): array => array_replace($offer, ['sku' => $skus[$offer['currency']]]),
                 [...$this->offers('CN_MAINLAND'), ...$this->offers('INTERNATIONAL')]);
         }
 
@@ -166,12 +179,17 @@ final class CareerAssessmentPurchase
                 ? self::scopeOwner(Attempt::withoutGlobalScopes()->whereKey($attemptId)->where('org_id', 0), $owner)
                     ->where('scale_code', $contract['scale'] ?? '')->whereNotNull('submitted_at')->lockForUpdate()->first()
                 : null;
-            if (! $attempt || ($contract['scale'] === 'RIASEC'
+            if (! $attempt || (MainstreamReportPurchase::supports($contract['scale'] ?? '')
+                ? ! app(MainstreamReportPurchase::class)->eligible($attempt)
+                : ($contract['scale'] === 'RIASEC'
                 ? ! app(RiasecReportPurchase::class)->eligible($attempt)
-                : ($attempt->question_count !== 94 || $attempt->scale_version !== 'career_v1'))) {
+                : ($attempt->question_count !== 94 || $attempt->scale_version !== 'career_v1')))) {
                 return ['ok' => false, 'error_code' => 'ATTEMPT_NOT_FOUND', 'message' => 'Career assessment result not found.'];
             }
 
+            if (MainstreamReportPurchase::supports($contract['scale'])) {
+                app(MainstreamReportPurchase::class)->owner(request(), $attempt);
+            }
             if ($contract['scale'] === 'RIASEC') {
                 app(RiasecReportPurchase::class)->owner(request(), $attempt);
             }

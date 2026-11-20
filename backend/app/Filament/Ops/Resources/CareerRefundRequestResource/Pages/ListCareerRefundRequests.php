@@ -21,6 +21,6 @@ class ListCareerRefundRequests extends ListRecords
 
     public function getSubheading(): ?string
     {
-        return '官网职业报告退款（94 题／霍兰德 60 题）；不随顶部组织切换。待审核可批量批准／拒绝，异常单独核对。各币种分别结算。';
+        return '官网测评付费报告退款；不随顶部组织切换。待审核可批量批准／拒绝，异常单独核对。各币种分别结算。';
     }
 }

@@ -19,6 +19,11 @@ class CareerRefundRequest extends Model
 
     protected $guarded = ['id'];
 
+    public function order(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Order::class, 'order_no', 'order_no')->withoutGlobalScopes()->where('org_id', 0);
+    }
+
     protected $casts = [
         'amount_cents' => 'integer',
         'org_id' => 'integer',

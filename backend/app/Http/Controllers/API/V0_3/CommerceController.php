@@ -1791,6 +1791,17 @@ class CommerceController extends Controller
         }
 
         $skuScaleCode = strtoupper(trim((string) ($skuRow->scale_code ?? '')));
+        if ($orgId === 0 && in_array($payload['sku'] ?? '', \App\Services\Commerce\MainstreamReportPurchase::skus(), true)) {
+            $attempt = \App\Models\Attempt::withoutGlobalScopes()->where('org_id', 0)->whereKey($targetAttemptId)->first();
+            $webPurchase = app(\App\Services\Commerce\MainstreamReportPurchase::class);
+            if ($webPurchase->managed($attempt)) {
+                $webPurchase->owner($request, $attempt);
+
+                // New server-enrolled purchases use the fixed web product contract;
+                // legacy locale promotions remain authoritative for historical attempts.
+                return null;
+            }
+        }
         $requestedLocale = $this->resolveExplicitRequestedLocale($request);
         $policy = $this->freemiumLocalePolicy->resolve($skuScaleCode, $requestedLocale);
         if (! (bool) ($policy['applies'] ?? false)) {

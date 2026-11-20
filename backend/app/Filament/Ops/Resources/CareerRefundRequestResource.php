@@ -77,7 +77,7 @@ class CareerRefundRequestResource extends Resource
         // Explicit owner-only public-site workspace, independent of the tenant selector.
         abort_unless(static::canViewAny(), 403);
 
-        return CareerRefundRequest::query()->where('org_id', 0);
+        return CareerRefundRequest::query()->where('org_id', 0)->with('order');
     }
 
     public static function getNavigationBadge(): ?string
@@ -101,6 +101,7 @@ class CareerRefundRequestResource extends Resource
                 Tables\Columns\TextColumn::make('created_at')->label('申请时间')->dateTime('Y-m-d H:i')->timezone('Asia/Shanghai')->sortable(),
                 Tables\Columns\TextColumn::make('created_at')->label('等待时长')->since(),
                 Tables\Columns\TextColumn::make('order_no')->label('订单号')->searchable()->copyable(),
+                Tables\Columns\TextColumn::make('order.sku')->label('测试产品')->searchable(),
                 Tables\Columns\TextColumn::make('provider')->label('支付渠道')->badge(),
                 Tables\Columns\TextColumn::make('amount_cents')->label('申请全额退款')
                     ->formatStateUsing(fn ($state, CareerRefundRequest $record) => $record->currency.' '.number_format((int) $state / 100, 2)),
@@ -116,6 +117,11 @@ class CareerRefundRequestResource extends Resource
                 Tables\Columns\TextColumn::make('checked_at')->label('最近核对')->dateTime()->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
+                Tables\Filters\SelectFilter::make('product')->label('测试产品')
+                    ->options(array_combine(\App\Services\Commerce\CareerAssessmentPurchase::allSkus(), \App\Services\Commerce\CareerAssessmentPurchase::allSkus()))
+                    ->query(fn (Builder $query, array $data) => $query->when($data['value'] ?? null,
+                        fn (Builder $query, string $sku) => $query->whereHas('order', fn (Builder $order) => $order->where('sku', $sku)))),
+                Tables\Filters\SelectFilter::make('currency')->label('币种')->options(['CNY' => 'CNY', 'USD' => 'USD']),
                 Tables\Filters\SelectFilter::make('status')->label('进度')->options($labels)->default('pending'),
                 Tables\Filters\SelectFilter::make('provider')->label('渠道')->options(['alipay' => '支付宝', 'waffo' => 'Waffo / 微信 / 国际支付']),
                 Tables\Filters\SelectFilter::make('reason_code')->label('原因')->options($reasons),
@@ -144,7 +150,7 @@ class CareerRefundRequestResource extends Resource
                 $totals = $records->groupBy('currency')->map(fn ($rows, $currency) => $currency.' '.number_format($rows->sum('amount_cents') / 100, 2))->implode('；');
                 $orders = $records->map(fn ($r) => $r->order_no.' '.$r->currency.' '.number_format($r->amount_cents / 100, 2))->implode('；');
 
-                return '官网职业报告（94 题／霍兰德 60 题），选中 '.$records->count().' 笔。'.$totals.'。'.$orders.'。批准后将原路全额退款，成功后停止本次报告的付费访问。每批最多 50 笔。';
+                return '官网测评付费报告，选中 '.$records->count().' 笔。'.$totals.'。'.$orders.'。批准后将原路全额退款，成功后停止本次报告的付费访问。每批最多 50 笔。';
             })
             ->form([
                 TextInput::make('fresh_step_up_code')->label('当前验证码／恢复码')->password()->autocomplete('one-time-code')->required()->maxLength(32),

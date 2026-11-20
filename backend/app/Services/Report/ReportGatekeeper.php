@@ -75,6 +75,15 @@ class ReportGatekeeper
         $result = $subject['result'];
         $effectiveOrgId = (int) ($subject['org_id'] ?? $orgId);
 
+        $webPurchase = app(\App\Services\Commerce\MainstreamReportPurchase::class);
+        if ($webPurchase->managed($attempt)) {
+            $owner = $webPurchase->owner(request(), $attempt);
+            $paid = app(\App\Services\Commerce\CareerAssessmentPurchase::class)->hasAccess((string) $attempt->id, $owner);
+
+            return ['ok' => true, 'locked' => ! $paid, 'access_source' => 'payment',
+                'free_full_report_mode' => false, 'paywall_suppressed' => false];
+        }
+
         $riasecPurchase = app(\App\Services\Commerce\RiasecReportPurchase::class);
         if ($riasecPurchase->managed($attempt)) {
             $owner = $riasecPurchase->owner(request(), $attempt);
@@ -150,6 +159,13 @@ class ReportGatekeeper
         /** @var Result $result */
         $result = $subject['result'];
         $effectiveOrgId = (int) ($subject['org_id'] ?? $orgId);
+
+        $webPurchase = app(\App\Services\Commerce\MainstreamReportPurchase::class);
+        $managedWebPurchase = $webPurchase->managed($attempt);
+        if (! $forceSystemAccess && $managedWebPurchase) {
+            $owner = $webPurchase->owner(request(), $attempt);
+            abort_unless(app(\App\Services\Commerce\CareerAssessmentPurchase::class)->hasAccess((string) $attempt->id, $owner), 403, 'Payment is required.');
+        }
 
         $riasecPurchase = app(\App\Services\Commerce\RiasecReportPurchase::class);
         if (! $forceSystemAccess && $riasecPurchase->managed($attempt)) {
@@ -274,6 +290,15 @@ class ReportGatekeeper
             $modulesPreview = [];
             $hasFullAccess = true;
             $hasPaidModuleAccess = true;
+        }
+        if ($managedWebPurchase) {
+            $hasFullAccess = true;
+            $hasPaidModuleAccess = true;
+            $modulesAllowed = $this->fullRuntimeModulesForScale($scaleCode);
+            $modulesPreview = [];
+            $accessSource = 'payment';
+            $freeFullReportMode = false;
+            $paywallSuppressed = false;
         }
         $unlockStage = $hasFullAccess
             ? ReportAccess::UNLOCK_STAGE_FULL

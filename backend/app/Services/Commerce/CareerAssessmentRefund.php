@@ -16,7 +16,7 @@ final class CareerAssessmentRefund
     {
         $trade = (string) ($order->provider_trade_no ?? '');
         if ((int) $order->org_id !== 0 || $order->provider !== 'alipay' || $order->currency !== 'CNY'
-            || ! in_array($order->sku, [CareerAssessmentPurchase::SKUS['CNY'], CareerAssessmentPurchase::RIASEC_SKUS['CNY']], true)
+            || (CareerAssessmentPurchase::contract((string) $order->sku)['currency'] ?? null) !== 'CNY'
             || (int) $order->amount_cents !== CareerAssessmentPurchase::PRICE
             || ! in_array(Order::normalizePaymentState($order->payment_state, $order->status), [Order::PAYMENT_STATE_PAID, Order::PAYMENT_STATE_REFUNDED], true)
             || $trade === '' || trim($refundNo) === '' || strlen($refundNo) > 64) {

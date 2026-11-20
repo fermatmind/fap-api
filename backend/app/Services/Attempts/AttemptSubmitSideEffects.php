@@ -293,6 +293,14 @@ final class AttemptSubmitSideEffects
         ?string $actorAnonId,
         array &$responsePayload
     ): void {
+        $attempt = \App\Models\Attempt::withoutGlobalScopes()->where('org_id', $ctx->orgId())->whereKey($attemptId)->first();
+        $webPurchase = app(\App\Services\Commerce\MainstreamReportPurchase::class);
+        if ($webPurchase->managed($attempt)) {
+            $responsePayload = $webPurchase->overview(request(), $attempt, ['attempt_id' => $attempt->id, 'unlocked' => false,
+                'order_no' => null, 'payment_state' => null, 'offers' => []]);
+
+            return;
+        }
         $userId = $this->resolveUserId($ctx, $actorUserId);
         $anonId = $this->resolveAnonId($ctx, $actorAnonId);
 

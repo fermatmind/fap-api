@@ -34,7 +34,7 @@ class GenericReportBuilder
             return [
                 'schema_version' => 'report.v0.3',
                 'scale_code' => (string) $attempt->scale_code,
-                'jung' => $jung,
+                'jung' => $jung + ['reading' => json_decode(file_get_contents(base_path('content_assets/web_report/jung.json')), true, 512, JSON_THROW_ON_ERROR)],
                 'version_snapshot' => $breakdown['version_snapshot'] ?? null,
             ];
         }

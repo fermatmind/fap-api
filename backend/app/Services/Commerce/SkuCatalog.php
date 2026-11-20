@@ -351,7 +351,7 @@ class SkuCatalog
                 'price_cents' => CareerAssessmentPurchase::PRICE,
                 'currency' => $careerCurrency,
                 'is_active' => true,
-                'meta_json' => ['entitlement_id' => $contract['scale'] === 'RIASEC' ? 'riasec60_report' : 'career94_report'],
+                'meta_json' => ['entitlement_id' => $contract['scale'] === 'RIASEC' ? 'riasec60_report' : ($contract['scale'] === 'CAREER94' ? 'career94_report' : strtolower($contract['benefit']))],
             ]);
         }
 

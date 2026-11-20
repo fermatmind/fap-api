@@ -298,7 +298,7 @@ Route::prefix('v0.3')->middleware([
             ->name('api.v0_3.results.lookup_by_email');
 
         // 2) Attempts lifecycle
-        Route::middleware(ForcePublicAttemptRealm::class)->group(function () {
+        Route::middleware([ForcePublicAttemptRealm::class, \App\Http\Middleware\MainstreamReportAccess::class])->group(function () {
             Route::post('/attempts/start', [AttemptWriteController::class, 'start'])
                 ->middleware('throttle:api_attempt_start')
                 ->defaults('public_realm', true)
@@ -418,7 +418,12 @@ Route::prefix('v0.3')->middleware([
         });
         // Share contract routes stay fixed; summary/click semantics are implemented in ShareController/services.
         Route::match(['GET', 'POST'], '/attempts/{id}/share', [ShareV03Controller::class, 'getShare'])
-            ->middleware(\App\Http\Middleware\FmTokenAuth::class);
+            ->middleware([\App\Http\Middleware\FmTokenAuth::class, \App\Http\Middleware\MainstreamReportAccess::class]);
+
+        Route::post('/disc-assessment/results', [\App\Http\Controllers\API\V0_3\DiscAssessmentController::class, 'store'])
+            ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'throttle:api_attempt_submit'])
+            ->defaults('public_realm', true)
+            ->name('api.v0_3.disc_assessment.store');
 
         // 3) Commerce v2 (public with org context)
         Route::post('/local-report-sessions', [LocalReportSessionController::class, 'store'])

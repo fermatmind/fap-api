@@ -19,7 +19,7 @@ final class WaffoCheckoutService
             && $attempt?->scale_code === 'MBTI' && $amountCents === 199 && $currency === 'USD';
         $careerContract = $career && $amountCents === CareerAssessmentPurchase::PRICE
             && ($contract['currency'] ?? null) === $currency
-            && ($contract['scale'] === 'RIASEC' || ($attempt->region === 'CN_MAINLAND' ? $currency === 'CNY' : $currency === 'USD'));
+            && ($contract['scale'] !== CareerAssessmentPurchase::SCALE || ($attempt->region === 'CN_MAINLAND' ? $currency === 'CNY' : $currency === 'USD'));
         if (! $order || ! $attempt || $order->provider !== 'waffo'
             || (! $sandboxMbti && ! $careerContract) || $order->target_attempt_id !== $attemptId
             || (int) $order->amount_cents !== $amountCents || $order->currency !== $currency

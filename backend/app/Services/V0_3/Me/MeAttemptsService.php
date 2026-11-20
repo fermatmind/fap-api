@@ -302,6 +302,18 @@ class MeAttemptsService
                     $presented['riasec_snapshot_binding_v1'] = $snapshotBinding;
                 }
             }
+            $webPurchase = app(\App\Services\Commerce\MainstreamReportPurchase::class);
+            if ($webPurchase->managed($attempt)) {
+                if ($userId === null && ! $webPurchase->guestOwns(request(), $attempt)) {
+                    continue;
+                }
+                $purchase = $webPurchase->purchase(request(), $attempt);
+                $presented = array_intersect_key($presented, array_flip(['attempt_id', 'scale_code', 'scale_version', 'type_code', 'has_result', 'is_submitted', 'question_count', 'region', 'locale', 'submitted_at', 'mbti_form_v1', 'big5_form_v1', 'enneagram_form_v1']));
+                $presented['report_purchase'] = $purchase;
+                $presented['access_summary'] = ['access_state' => $purchase['unlocked'] ? 'ready' : 'locked',
+                    'report_state' => $result ? 'ready' : 'pending', 'pdf_state' => $purchase['unlocked'] ? 'ready' : 'missing',
+                    'unlock_stage' => $purchase['unlocked'] ? 'full' : 'locked', 'unlock_source' => $purchase['unlocked'] ? 'payment' : 'none'];
+            }
             $items[] = $presented;
         }
 
@@ -328,6 +340,11 @@ class MeAttemptsService
             $historyCompare = $this->buildEnneagramHistorySummary($attemptModels, $resultByAttemptId, $enneagramSnapshotReportByAttemptId);
         } elseif ($normalizedScaleCode === 'RIASEC') {
             $historyCompare = $this->buildRiasecHistorySummary($attemptModels, $resultByAttemptId, $riasecSnapshotReportByAttemptId);
+        }
+
+        // Do not emit an alternate facet/type comparison projection for paid cohorts.
+        if (collect($attemptModels)->contains(fn ($attempt) => app(\App\Services\Commerce\MainstreamReportPurchase::class)->managed($attempt))) {
+            $historyCompare = null;
         }
 
         return [

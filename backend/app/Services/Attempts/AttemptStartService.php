@@ -366,6 +366,13 @@ class AttemptStartService
             $answersMeta['riasec60_commerce'] = 'v1';
             $answersMeta['riasec60_guest_owner'] = $purchaseGuest;
         }
+        unset($answersMeta['web_report_commerce'], $answersMeta['web_report_guest_owner']);
+        if ($orgId === 0 && \App\Services\Commerce\MainstreamReportPurchase::supportsForm($scaleCode, $resolvedFormCode, $questionCount)
+            && config('payments.career94.enabled')) {
+            abort_unless($ctx->userId() !== null || $purchaseGuest !== null, 422, 'A private browser purchase credential is required.');
+            $answersMeta['web_report_commerce'] = 'v1';
+            $answersMeta['web_report_guest_owner'] = $purchaseGuest;
+        }
         $answersSummaryMeta = $answersMeta;
 
         $clientPlatform = (string) ($dto->clientPlatform ?? 'unknown');
