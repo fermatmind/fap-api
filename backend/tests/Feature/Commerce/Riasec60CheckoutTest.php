@@ -221,6 +221,34 @@ final class Riasec60CheckoutTest extends TestCase
         $this->assertFalse(app(\App\Services\Commerce\RiasecReportPurchase::class)->managed(new \App\Models\Attempt(['org_id' => 0, 'scale_code' => 'RIASEC', 'question_count' => 60])));
     }
 
+    public function test_english_sample_uses_the_active_package_within_a_192_mb_request_budget(): void
+    {
+        $process = new \Symfony\Component\Process\Process([
+            PHP_BINARY, '-d', 'memory_limit=192M', '-r', <<<'PHP'
+require 'vendor/autoload.php';
+$app = require 'bootstrap/app.php';
+$app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+$app->detectEnvironment(fn () => 'production');
+config(['database.default' => 'sqlite', 'database.connections.sqlite.database' => ':memory:', 'database.connections.sqlite.url' => null,
+    'storage_rollout.resolver_materialization_enabled' => false]);
+Illuminate\Support\Facades\DB::purge('sqlite');
+$db = Illuminate\Support\Facades\DB::connection('sqlite');
+$db->statement('CREATE TABLE content_pack_activations (pack_id TEXT, pack_version TEXT, release_id TEXT)');
+$db->statement('CREATE TABLE content_pack_releases (id TEXT, to_pack_id TEXT, storage_path TEXT)');
+$pack = App\Services\Content\RiasecPrivateResultCompileService::PACK_ID;
+$db->table('content_pack_activations')->insert(['pack_id' => $pack, 'pack_version' => 'v1', 'release_id' => 'synthetic-local']);
+$db->table('content_pack_releases')->insert(['id' => 'synthetic-local', 'to_pack_id' => $pack,
+    'storage_path' => base_path('content_assets/riasec/compiled')]);
+$result = $app->make(App\Services\Commerce\RiasecReportPurchase::class)->sample('en');
+echo json_encode(['ok' => $result['ok'], 'code' => $result['riasec_public_projection_v2']['holland_code']['code'],
+    'locale' => $result['riasec_public_projection_v2']['locale']], JSON_THROW_ON_ERROR);
+PHP,
+        ], base_path());
+        $process->setTimeout(60)->run();
+        $this->assertTrue($process->isSuccessful(), $process->getErrorOutput().$process->getOutput());
+        $this->assertSame(['ok' => true, 'code' => 'IAR', 'locale' => 'en'], json_decode($process->getOutput(), true, 512, JSON_THROW_ON_ERROR));
+    }
+
     private function token(bool $guest = false): string
     {
         $token = 'fm_'.Str::uuid();

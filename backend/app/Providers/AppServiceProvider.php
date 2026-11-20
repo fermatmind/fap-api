@@ -44,6 +44,7 @@ use App\Services\Content\ContentPacksIndex;
 use App\Services\Content\ContentStore;
 use App\Services\ContentPackResolver;
 use App\Services\Ops\OpsDistributedLimiter;
+use App\Services\Riasec\RiasecPrivateResultSourceRepository;
 use App\Services\SeoIntel\Sources\CurrentPublicUrlAuthoritySource;
 use App\Services\SeoIntel\Sources\UrlTruthInventorySource;
 use App\Support\Career\CareerVerifyOnlyRequestAuthorizer;
@@ -81,6 +82,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(UrlTruthInventorySource::class, CurrentPublicUrlAuthoritySource::class);
 
         $this->app->singleton(OrgContext::class, static fn (): OrgContext => new OrgContext);
+
+        // Reuse the immutable content snapshot across report collaborators within one request.
+        $this->app->scoped(RiasecPrivateResultSourceRepository::class);
 
         $this->app->singleton(
             ArticleMachineTranslationProvider::class,
