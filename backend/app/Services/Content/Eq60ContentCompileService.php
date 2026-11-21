@@ -197,6 +197,7 @@ final class Eq60ContentCompileService
                 'authority_id' => (string) $authorityManifest['authority_id'],
                 'source_hash' => $sourceHash,
                 'assets' => $reportAssets,
+                'result_page_content' => $this->compileResultPageContent($version),
             ],
             'golden_cases.compiled.json' => [
                 'schema' => 'eq_60.golden_cases.compiled.v2',
@@ -738,6 +739,24 @@ final class Eq60ContentCompileService
     /**
      * @return array<string,mixed>
      */
+    private function compileResultPageContent(string $version): array
+    {
+        $document = $this->loader->readJson($this->loader->rawPath('report_assets/result_page_depth_modules.json', $version));
+        $library = $document['redesign_preview'] ?? null;
+        if (! is_array($library) || ($library['status'] ?? '') !== 'runtime_editorial_view'
+            || ($library['locales'] ?? []) !== ['zh-CN', 'en', 'zh-TW']
+            || count($library['profiles'] ?? []) !== 9 || count($library['result_labels'] ?? []) !== 10) {
+            throw new \RuntimeException('EQ_60_RESULT_PAGE_CONTENT_INVALID');
+        }
+        foreach ($library['profiles'] as &$profile) {
+            unset($profile['raw_scores']);
+        }
+        unset($profile, $library['default_result'], $library['reference_version']);
+        $library['schema'] = 'eq60.result_page_library.v1';
+
+        return $library;
+    }
+
     private function compileReportAssets(string $version): array
     {
         $assets = [];

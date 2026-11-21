@@ -300,7 +300,7 @@ final class Eq60CompiledPromotionAuthority
         // phrase examples deliberately, so it remains bound by the compiled-file
         // hash but is not a public English release target.
         $publicAssets = $assets;
-        unset($publicAssets['assets']['agent_knowledge_base_schema']);
+        unset($publicAssets['assets']['agent_knowledge_base_schema'], $publicAssets['result_page_content']);
         $projection = $this->englishOnly($publicAssets);
         if (! is_array($projection) || ! is_array($projection['assets'] ?? null) || $projection['assets'] === []) {
             throw new DomainException('eq60_promotion_report_assets_english_missing');

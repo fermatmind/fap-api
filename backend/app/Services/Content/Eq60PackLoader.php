@@ -331,6 +331,21 @@ final class Eq60PackLoader
         throw new RuntimeException('EQ_60_COMPILED_REPORT_ASSETS_INVALID');
     }
 
+    /** Latest editorial view; preserves the attempt's immutable release and snapshot. */
+    public function loadResultPageLibrary(): array
+    {
+        $directory = $this->repoCompiledDir('v1');
+        $manifest = $this->requireManifest($directory, 'v1');
+        $assets = $this->readJson($directory.'/report_assets.compiled.json');
+        $library = $assets['result_page_content'] ?? null;
+        if (! is_array($library) || ($library['schema'] ?? '') !== 'eq60.result_page_library.v1'
+            || ($assets['source_hash'] ?? '') !== $manifest['source_hash']) {
+            throw new RuntimeException('EQ_60_RESULT_PAGE_CONTENT_INVALID');
+        }
+
+        return ['source_hash' => $manifest['source_hash'], 'compiled_hash' => $manifest['compiled_hash'], 'library' => $library];
+    }
+
     public function resolveManifestHash(?string $version = null): string
     {
         $manifest = $this->readCompiledJson('manifest.json', $version);

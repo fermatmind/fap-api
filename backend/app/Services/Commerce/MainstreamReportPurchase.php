@@ -164,13 +164,22 @@ final class MainstreamReportPurchase
         $quality = data_get($source, 'quality.level', data_get($score, 'quality.level'));
         $type = $result?->type_code;
 
-        return ['ok' => true, 'attempt_id' => $attempt->id, 'scale_code' => $attempt->scale_code,
+        $overview = ['ok' => true, 'attempt_id' => $attempt->id, 'scale_code' => $attempt->scale_code,
             'meta' => ['scale_code' => $attempt->scale_code, 'form_code' => data_get($attempt->answers_summary_json, 'meta.form_code')],
             'result' => ['scale_code' => $attempt->scale_code, 'type_code' => $type, 'scores_pct' => $scores, 'summary' => $summary,
                 'quality' => is_string($quality) ? ['level' => $quality] : null],
             'report_purchase' => $purchase ?? $this->purchase($request, $attempt),
             'locked' => true, 'access_level' => 'free', 'variant' => 'free',
             'free_full_report_mode' => false, 'paywall_suppressed' => false];
+        if ($attempt->scale_code === 'EQ_60') {
+            $eqScore = is_array($source['normed_json'] ?? null) ? $source['normed_json'] : $score;
+            $teaser = app(\App\Services\Eq\Eq60ResultPageProjection::class)->unlock($eqScore);
+            if ($teaser !== null) {
+                $overview['eq60_unlock_v1'] = $teaser;
+            }
+        }
+
+        return $overview;
     }
 
     public function access(Request $request, Attempt $attempt, array $purchase): array

@@ -253,6 +253,57 @@ final class MainstreamReportCheckoutTest extends TestCase
         }
     }
 
+    public function test_eq_result_page_uses_real_scores_only_after_purchase(): void
+    {
+        $this->seed(\Database\Seeders\ScaleRegistrySeeder::class);
+        config(['payments.career94.enabled' => true, 'payments.providers.alipay.enabled' => true,
+            'pay.alipay.default.app_id' => 'fixture', 'pay.alipay.default.seller_id' => 'fixture']);
+        $token = $this->token(true);
+        foreach (['EQ_60' => ['eq_60']] as $scale => $forms) {
+            foreach ($forms as $form) {
+                $questions = $this->getJson('/api/v0.3/scales/'.$scale.'/questions?locale=en&form='.$form)->assertOk()->json('questions.items');
+                $id = $this->withToken($token)->postJson('/api/v0.3/attempts/start', ['scale_code' => $scale, 'form_code' => $form, 'locale' => 'en'])->assertOk()->json('attempt_id');
+                $attempt = \App\Models\Attempt::withoutGlobalScopes()->findOrFail($id);
+                $answers = [];
+                foreach ($questions as $index => $item) {
+                    $options = $item['options'] ?? ($scale === 'EQ_60' ? array_map(static fn ($code) => ['code' => $code], ['A', 'B', 'C', 'D', 'E']) : []);
+                    $this->assertNotEmpty($options, $scale.' '.$form.' '.json_encode(array_keys($item)));
+                    $chosen = $options[hexdec(substr(hash('sha256', $form.$index), 0, 4)) % count($options)];
+                    $answers[] = ['question_id' => $item['question_id'], 'code' => $chosen['code']];
+                }
+                $this->travel(12)->minutes();
+                $this->withToken($token)->postJson('/api/v0.3/attempts/submit', ['attempt_id' => $id, 'duration_ms' => 600000, 'answers' => $answers])->assertOk()->assertJsonPath('report_purchase.unlocked', false);
+                $locked = $this->withToken($token)->getJson('/api/v0.3/attempts/'.$id.'/report')->assertOk();
+                $locked->assertJsonPath('locked', true)->assertJsonPath('eq60_unlock_v1.schema', 'eq60.unlock.v1')->assertJsonMissingPath('eq60_result_page_v1');
+                $this->assertStringNotContainsString('careers', $locked->getContent());
+                $this->assertStringNotContainsString('dimension_cards', $locked->getContent());
+                $orderResponse = $this->withToken($token)->postJson('/api/v0.3/orders', ['target_attempt_id' => $id, 'sku' => \App\Services\Commerce\MainstreamReportPurchase::skuMap()[$scale]['CNY'], 'provider' => 'alipay']);
+                $scored = \App\Models\Result::withoutGlobalScopes()->where('attempt_id', $id)->first();
+                $this->assertSame(200, $orderResponse->status(), $scale.' '.$form.' '.json_encode(['error' => $orderResponse->json('error_code'), 'message' => $orderResponse->json('message'), 'valid' => $scored->is_valid, 'quality' => data_get($scored->result_json, 'quality')]));
+                $number = $orderResponse->json('order_no');
+                $paid = app(\App\Services\Commerce\PaymentWebhookProcessor::class)->process('alipay', ['out_trade_no' => $number, 'trade_no' => 'ali_'.$number,
+                    'trade_status' => 'TRADE_SUCCESS', 'total_amount' => '2.99', 'notify_id' => 'paid_'.$number]);
+                $this->assertTrue($paid['ok']);
+                $snapshot = app(\App\Services\Report\ReportSnapshotStore::class)->createSnapshotForAttempt(['org_id' => 0, 'attempt_id' => $id, 'trigger_source' => 'payment_webhook',
+                    'order_no' => $number, 'user_id' => null, 'anon_id' => $attempt->anon_id]);
+                $this->assertTrue($snapshot['ok'] ?? false, $scale.' '.$form.' '.json_encode($snapshot));
+                $full = $this->withToken($token)->getJson('/api/v0.3/attempts/'.$id.'/report')->assertOk()->assertJsonPath('locked', false)->assertJsonPath('report_purchase.unlocked', true);
+                $full->assertJsonPath('eq60_result_page_v1.schema', 'eq60.result_page.v1');
+                $this->assertSame($full->json('report.interpretation.core_formulation_id'), $full->json('eq60_result_page_v1.result_id'));
+                $page = $full->json('eq60_result_page_v1');
+                foreach (['en', 'zh-CN', 'zh-TW'] as $language) {
+                    if ($page['quality'] === null) {
+                        $this->assertCount(8, $page['copy'][$language]['careers']);
+                        foreach ($page['copy'][$language]['dimensions'] as $dimension) {
+                            $this->assertEquals($full->json('report.scores.dimensions.'.$dimension['code'].'.standard_score'), $dimension['score']);
+                        }
+                    }
+                }
+                $this->assertStringNotContainsString('raw_scores', json_encode($page));
+            }
+        }
+    }
+
     public function test_history_and_public_summary_do_not_expose_paid_report_content(): void
     {
         config(['payments.career94.enabled' => true]);

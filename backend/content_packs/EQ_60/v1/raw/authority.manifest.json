@@ -6,7 +6,7 @@
   "editable_source_root": "backend/content_packs/EQ_60/v1/raw",
   "editable_authority_count": 1,
   "locales": ["zh-CN", "en"],
-  "source_hash": "09aff6c3e77581f66ca5997e75be940d7b39102d487b318b7af6ad80bacdc3b5",
+  "source_hash": "5c3b4fd83b4ca1565f0a07d64fe969ad605af70f427d31d441ed66238a14781a",
   "source_hash_rule": "sha256(concat(POSIX-byte-sorted relative_path + NUL + sha256(exact UTF-8 LF file bytes) + LF)); this manifest is excluded",
   "compiler_contract": {
     "schema": "eq_60.deterministic_compiler.v1",
@@ -48,7 +48,7 @@
     {"path":"report_assets/quality_confidence.json","locale":"bilingual","schema":"eq60.report_assets.quality_confidence.v1","role":"quality flags and low-confidence explanations","required_fields":["schema","assets","flag_explanations"],"consumer_surfaces":["result","report","history","share","agent"],"sha256":"71a4531249191a28eaa800611daa0cd2357695f6c6de87234307652c0bcdef96"},
     {"path":"report_assets/reality_scene_variants.json","locale":"bilingual","schema":"eq60.reality_scene_variants.v2","role":"personalized real-life scene copy","required_fields":["schema","assets"],"consumer_surfaces":["result","report","agent"],"sha256":"f718f58083cf0f24c489b567aa92d050246cb01d6db8c89846beb58887a76a3a"},
     {"path":"report_assets/reality_translation.json","locale":"bilingual","schema":"eq60.report_assets.reality_translation.v1","role":"scene families and formulation mapping","required_fields":["schema","scenes","formulation_scenes"],"consumer_surfaces":["result","report","agent"],"sha256":"21444a8a76fa23fc342c54ab8579f7927f5bfc5c53672ef1631d5237b54d967f"},
-    {"path":"report_assets/result_page_depth_modules.json","locale":"bilingual","schema":"eq60.report_assets.result_page_depth_modules.v1","role":"evidence-stack and development-path depth copy","required_fields":["schema","assets"],"consumer_surfaces":["result","report"],"sha256":"d991a83d16a038adfb69e2fb95084ee53beab40c137cce28c2fc50a3093e41e8"},
+    {"path":"report_assets/result_page_depth_modules.json","locale":"bilingual","schema":"eq60.report_assets.result_page_depth_modules.v1","role":"evidence-stack and development-path depth copy","required_fields":["schema","assets"],"consumer_surfaces":["result","report"],"sha256":"5cf471a5c953cc0ef7e61e3076cb8a37e082bdbab302f8cb74d8467873613b4d"},
     {"path":"report_assets/result_snapshot.json","locale":"bilingual","schema":"eq60.report_assets.result_snapshot.v1","role":"canonical immutable result snapshot copy","required_fields":["schema","assets"],"consumer_surfaces":["result","snapshot","pdf","history","share"],"sha256":"c90fada06db8fbffd7171e16a1cd7503bbbd1c0bed418f79564343c36d9ddc93"},
     {"path":"report_assets/scientific_contract.json","locale":"bilingual","schema":"eq60.report_assets.scientific_contract.v1","role":"non-ability, non-diagnostic and non-hiring boundaries","required_fields":["schema","assets"],"consumer_surfaces":["result","report","pdf","history","share","agent"],"sha256":"8269638fa4067b78a8ac648603846fe3f45fa49240c07efb192ced46f465c08d"},
     {"path":"report_assets/score_system.json","locale":"bilingual","schema":"eq60.report_assets.score_system.v1","role":"user-facing global, dimension, band and maturity explanations","required_fields":["schema","global_index","dimensions","dimension_bands","bands"],"consumer_surfaces":["result","report","pdf"],"sha256":"ffa8dbf19f778836947420e90c495d4b1fef08e84f8b53dd4fae98514ef7131b"},
