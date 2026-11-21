@@ -10,7 +10,11 @@ final class ArticleBrandByline
 {
     public static function editorialName(string $locale): string
     {
-        return in_array($locale, ['zh', 'zh-CN'], true) ? '费马测试编辑部' : 'FermatMind Editorial';
+        return match ($locale) {
+            'zh', 'zh-CN' => '费马测试编辑部',
+            'zh-TW' => '費馬測試編輯部',
+            default => 'FermatMind Editorial',
+        };
     }
 
     /** Project the operator-selected brand default without modifying CMS history or schema gates. */
@@ -26,7 +30,7 @@ final class ArticleBrandByline
             'zh-TW' => ['費馬測試', 'zh-TW'],
             default => ['FermatMind', 'en'],
         };
-        $editorialName = $locale === 'zh-TW' ? '費馬測試編輯部' : self::editorialName($locale);
+        $editorialName = self::editorialName($locale);
         $name = $editorial ? $editorialName : $brandName;
         $url = CanonicalFrontendUrl::fromConfig().'/'.$brandLocale.'/brand';
         $author = ['@type' => 'Organization', 'name' => $name, 'url' => $url];

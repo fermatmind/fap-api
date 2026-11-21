@@ -433,7 +433,7 @@ final class UpdateArticlePublicReaderMetadataTest extends TestCase
 
     public function test_published_provenance_previews_without_writes_and_atomically_releases_only_schema(): void
     {
-        foreach (['en', 'zh-CN'] as $locale) {
+        foreach (['en', 'zh-CN', 'zh-TW'] as $locale) {
             foreach ([null, [], ['old_metadata' => true]] as $metadata) {
                 [$article, $actor, $package] = $this->provenanceFixture($locale, $metadata);
                 $before = Updater::state($article);
@@ -601,7 +601,11 @@ final class UpdateArticlePublicReaderMetadataTest extends TestCase
         $actor = $this->actor();
         $article = $this->article();
         $article->forceFill(['slug' => 'big-five-provenance-'.strtolower($locale).'-'.$article->id, 'locale' => $locale,
-            'author_name' => $locale === 'en' ? 'FermatMind Editorial' : '费马测试编辑部',
+            'author_name' => match ($locale) {
+                'en' => 'FermatMind Editorial',
+                'zh-TW' => '費馬測試編輯部',
+                default => '费马测试编辑部',
+            },
             'is_indexable' => true, 'published_at' => now()->subDays(10)])->saveQuietly();
         $old = $article->publishedRevision;
         $body = "Sources\n- Soto & John (2017). [BFI-2](https://doi.org/10.1037/pspp0000096).\n"
