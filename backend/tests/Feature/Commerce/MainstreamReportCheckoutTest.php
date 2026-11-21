@@ -157,7 +157,7 @@ final class MainstreamReportCheckoutTest extends TestCase
         $this->seed(\Database\Seeders\JungAssessmentIndexabilitySeeder::class);
         config(['payments.career94.enabled' => true]);
         $token = $this->token(true);
-        $forms = ['MBTI' => ['mbti_93' => 93, 'mbti_144' => 144], 'BIG5_OCEAN' => ['big5_90' => 90, 'big5_120' => 120],
+        $forms = ['MBTI' => ['mbti_93' => 93, 'mbti_144' => 144], 'BIG5_OCEAN' => ['big5_90' => 90],
             'ENNEAGRAM' => ['enneagram_likert_105' => 105],
             'IQ_RAVEN' => ['IQ_OWNER_ORIGINAL_30' => 30, 'IQ_MERGED_40' => 40], 'EQ_60' => ['eq_60' => 60],
             'JUNG_ARCHETYPES' => ['jung_archetypes_48' => 48], 'JUNG_COGNITIVE_FUNCTIONS' => ['jung_cognitive_functions_64' => 64]];
@@ -217,13 +217,25 @@ final class MainstreamReportCheckoutTest extends TestCase
         }
     }
 
+    public function test_retired_big5_form_is_not_enrolled_for_new_web_purchases(): void
+    {
+        $this->seed(\Database\Seeders\ScaleRegistrySeeder::class);
+        config(['payments.career94.enabled' => true]);
+        $token = $this->token(true);
+        $this->withToken($token)->postJson('/api/v0.3/attempts/start', [
+            'scale_code' => 'BIG5_OCEAN', 'form_code' => 'big5_120', 'locale' => 'en',
+        ])->assertNotFound()->assertJsonPath('error_code', 'FORM_NOT_FOUND');
+        $this->getJson('/api/v0.3/scales/BIG5_OCEAN/questions?locale=en&form=big5_120')
+            ->assertNotFound()->assertJsonPath('error_code', 'FORM_NOT_FOUND');
+    }
+
     public function test_native_personality_and_eq_forms_keep_the_existing_full_report_payload(): void
     {
         $this->seed(\Database\Seeders\ScaleRegistrySeeder::class);
         config(['payments.career94.enabled' => true, 'payments.providers.alipay.enabled' => true,
             'pay.alipay.default.app_id' => 'fixture', 'pay.alipay.default.seller_id' => 'fixture']);
         $token = $this->token(true);
-        foreach (['MBTI' => ['mbti_93', 'mbti_144'], 'BIG5_OCEAN' => ['big5_90', 'big5_120'],
+        foreach (['MBTI' => ['mbti_93', 'mbti_144'], 'BIG5_OCEAN' => ['big5_90'],
             'ENNEAGRAM' => ['enneagram_likert_105'], 'EQ_60' => ['eq_60']] as $scale => $forms) {
             foreach ($forms as $form) {
                 $questions = $this->getJson('/api/v0.3/scales/'.$scale.'/questions?locale=en&form='.$form)->assertOk()->json('questions.items');
