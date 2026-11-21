@@ -52,7 +52,9 @@ final class EnneagramTechnicalNoteService
                         throw new \DomainException('technical_note_section_locale_unavailable');
                     }
                     $copy['body'] = $entry['body'];
-                    $copy['title'] = $entry['title'];
+                    if ($sectionKey === 'e105_fc144_forms') {
+                        $copy['title'] = $entry['title'];
+                    }
                 }
                 $entry = array_replace($entry, $copy);
             }

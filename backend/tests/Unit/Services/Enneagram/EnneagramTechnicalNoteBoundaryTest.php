@@ -40,7 +40,7 @@ final class EnneagramTechnicalNoteBoundaryTest extends TestCase
         $this->assertContains('top1_resonance_rate', (array) data_get($contract, 'technical_note_v1.data_status_summary.metrics.collecting_data', []));
     }
 
-    public function test_only_diffuse_canonical_fields_override_legacy_english_copy(): void
+    public function test_only_current_form_and_diffuse_fields_override_legacy_english_copy(): void
     {
         $legacyPath = base_path('content_assets/public_content_53/enneagram_public_copy.en.json');
         $legacyBytes = file_get_contents($legacyPath);
@@ -51,6 +51,14 @@ final class EnneagramTechnicalNoteBoundaryTest extends TestCase
             $canonical = collect($pack['technical_note_registry']['entries'])->firstWhere('section_key', 'diffuse');
             $actual = collect($note['sections'])->firstWhere('section_key', 'diffuse');
             $this->assertSame($canonical['body'], $actual['body']);
+            $form = collect($pack['technical_note_registry']['entries'])->firstWhere('section_key', 'e105_fc144_forms');
+            $currentForm = collect($note['sections'])->firstWhere('section_key', 'e105_fc144_forms');
+            $this->assertSame($form['title'], $currentForm['title']);
+            $this->assertSame($form['body'], $currentForm['body']);
+            $this->assertStringContainsString('105', $currentForm['title']);
+            $this->assertStringNotContainsString('144', $currentForm['body']);
+            $this->assertArrayNotHasKey('fc144_forced_choice_methodology', $note['method_boundaries']);
+            $this->assertNull(collect($note['sections'])->firstWhere('section_key', 'e105_fc144_agreement'));
             $method = collect($pack['method_registry']['entries'])->firstWhere('method_key', 'diffuse_boundary');
             $this->assertSame($method['copy'], $note['method_boundaries']['diffuse_boundary']['copy']);
             foreach ($note['method_boundaries'] as $entry) {
@@ -58,6 +66,9 @@ final class EnneagramTechnicalNoteBoundaryTest extends TestCase
             }
             if ($locale === 'en') {
                 foreach ($note['sections'] as $section) {
+                    if ($section['section_key'] === 'e105_fc144_forms') {
+                        continue;
+                    }
                     $this->assertSame($legacy['sections'][$section['section_key']]['title'], $section['title']);
                     if ($section['section_key'] !== 'diffuse') {
                         $this->assertSame($legacy['sections'][$section['section_key']]['body'], $section['body']);
