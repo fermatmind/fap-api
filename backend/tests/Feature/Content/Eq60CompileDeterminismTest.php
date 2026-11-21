@@ -41,6 +41,7 @@ final class Eq60CompileDeterminismTest extends TestCase
             $this->assertStringNotContainsString('compiled_at', $manifestBytes);
 
             $assets = json_decode((string) file_get_contents($first.'/report_assets.compiled.json'), true, 512, JSON_THROW_ON_ERROR);
+            $this->assertArrayNotHasKey('redesign_preview', $assets['assets']['result_page_depth_modules']);
             $this->assertSame(
                 '作答速度过快，建议在注意力充足时重新作答。',
                 data_get($assets, 'assets.quality_confidence.flag_explanations.SPEEDING.zh-CN'),
