@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Eq;
 
 use App\Services\Content\Eq60PackLoader;
+use App\Services\Report\Eq60ReportComposer;
 use DomainException;
 
 /** Response-only editorial projection. Scores and classification remain report authority. */
@@ -46,9 +47,7 @@ final class Eq60ResultPageProjection
             return null;
         }
         $library = $this->loader->loadResultPageLibrary()['library'];
-        $level = strtoupper((string) data_get($score, 'quality.level'));
-        $low = in_array($level, ['C', 'D', 'INVALID'], true)
-            || array_intersect((array) data_get($score, 'quality.flags', []), ['SPEEDING', 'LONGSTRING', 'INCONSISTENCY']) !== [];
+        $low = Eq60ReportComposer::isLowConfidenceQuality((array) ($score['quality'] ?? []));
         $dimensions = [];
         foreach ($library['locales'] as $locale) {
             $dimensions[$locale] = $low ? [] : $this->dimensions($library, (array) ($score['scores'] ?? []), $locale, false);

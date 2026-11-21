@@ -379,7 +379,7 @@ final class Eq60ReportComposer
             static fn ($flag): string => strtoupper(trim((string) $flag)),
             (array) ($quality['flags'] ?? [])
         )));
-        $runtimeLowConfidence = $this->isLowConfidenceQuality($quality);
+        $runtimeLowConfidence = self::isLowConfidenceQuality($quality);
         $quality['confidence_label'] = $runtimeLowConfidence ? 'low' : match ($level) {
             'A' => 'high',
             'B' => 'medium',
@@ -393,7 +393,7 @@ final class Eq60ReportComposer
     /**
      * @param  array<string,mixed>  $quality
      */
-    private function isLowConfidenceQuality(array $quality): bool
+    public static function isLowConfidenceQuality(array $quality): bool
     {
         $level = strtoupper(trim((string) ($quality['level'] ?? '')));
         if (in_array($level, ['C', 'D'], true)) {
@@ -417,7 +417,7 @@ final class Eq60ReportComposer
     {
         $dimensionScores = is_array($scores['dimensions'] ?? null) ? $scores['dimensions'] : [];
         $qualityLevel = strtoupper(trim((string) ($quality['level'] ?? '')));
-        $lowConfidence = $this->isLowConfidenceQuality($quality);
+        $lowConfidence = self::isLowConfidenceQuality($quality);
         $formulationId = $this->selectCoreFormulation($dimensionScores, $qualityLevel, $lowConfidence);
         $dimensionRanking = $this->dimensionRanking($dimensionScores, $lowConfidence);
         $strongest = $this->uniqueRankedDimension($dimensionRanking['strongest']);
@@ -510,7 +510,7 @@ final class Eq60ReportComposer
             static fn ($level): string => strtoupper(trim((string) $level)),
             (array) ($match['quality_levels'] ?? [])
         ));
-        $runtimeLowConfidence = $this->isLowConfidenceQuality($quality);
+        $runtimeLowConfidence = self::isLowConfidenceQuality($quality);
         if (
             $qualityLevels !== []
             && ! in_array($qualityLevel, $qualityLevels, true)

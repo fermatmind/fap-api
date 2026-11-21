@@ -67,6 +67,17 @@ final class Eq60ResultPageProjectionTest extends TestCase
         app(Eq60ResultPageProjection::class)->project($this->report('unknown'));
     }
 
+    public function test_unlock_reuses_every_report_quality_flag_without_exposing_scores(): void
+    {
+        foreach (['SPEEDING', 'VERY_SHORT_DURATION', 'LOW_ATTENTION', 'LONGSTRING', 'INCONSISTENCY'] as $flag) {
+            $unlock = app(Eq60ResultPageProjection::class)->unlock(['scale_code' => 'EQ_60', 'quality' => ['level' => 'A', 'flags' => [$flag]]]);
+            $this->assertTrue($unlock['low_confidence']);
+            foreach ($unlock['dimensions'] as $dimensions) {
+                $this->assertSame([], $dimensions);
+            }
+        }
+    }
+
     public function test_fixed_public_sample_cannot_read_an_attempt_or_accept_scores(): void
     {
         $first = $this->getJson('/api/v0.5/eq-assessment/sample')->assertOk()->assertJsonPath('sample', true);
