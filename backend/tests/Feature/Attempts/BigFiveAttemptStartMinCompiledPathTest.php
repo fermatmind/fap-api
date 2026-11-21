@@ -16,16 +16,15 @@ final class BigFiveAttemptStartMinCompiledPathTest extends TestCase
 
     public function test_big5_start_uses_min_compiled_question_index_when_full_questions_payload_is_missing(): void
     {
-        $this->artisan('content:compile --pack=BIG5_OCEAN --pack-version=v1')->assertExitCode(0);
         (new ScaleRegistrySeeder)->run();
 
         /** @var BigFivePackLoader $loader */
         $loader = app(BigFivePackLoader::class);
-        $fullPath = $loader->compiledPath('questions.compiled.json', 'v1');
+        $fullPath = $loader->compiledPath('questions.compiled.json', 'v1-form-90');
         $backupPath = $fullPath.'.bak_test';
 
         $this->assertFileExists($fullPath);
-        $this->assertFileExists($loader->compiledPath('questions.min.compiled.json', 'v1'));
+        $this->assertFileExists($loader->compiledPath('questions.min.compiled.json', 'v1-form-90'));
 
         File::move($fullPath, $backupPath);
 
@@ -40,7 +39,7 @@ final class BigFiveAttemptStartMinCompiledPathTest extends TestCase
             $response->assertStatus(200);
             $response->assertJsonPath('ok', true);
             $response->assertJsonPath('scale_code', 'BIG5_OCEAN');
-            $response->assertJsonPath('question_count', 120);
+            $response->assertJsonPath('question_count', 90);
         } finally {
             if (File::exists($backupPath)) {
                 File::move($backupPath, $fullPath);
