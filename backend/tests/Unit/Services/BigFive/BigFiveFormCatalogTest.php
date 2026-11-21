@@ -14,18 +14,11 @@ final class BigFiveFormCatalogTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_it_resolves_default_big5_120_form_truth(): void
+    public function test_default_resolves_to_the_90_item_form(): void
     {
-        $resolved = app(BigFiveFormCatalog::class)->resolve(null);
+        $catalog = app(BigFiveFormCatalog::class);
 
-        $this->assertSame('big5_120', $resolved['form_code']);
-        $this->assertSame('BIG5_OCEAN', $resolved['pack_id']);
-        $this->assertSame('v1', $resolved['dir_version']);
-        $this->assertSame('v1', $resolved['content_package_version']);
-        $this->assertSame('big5_spec_2026Q1_v1', $resolved['scoring_spec_version']);
-        $this->assertSame('big5_spec_2026Q1_v1', $resolved['quality_version']);
-        $this->assertSame('2026Q1_v1', $resolved['norm_version']);
-        $this->assertSame(120, $resolved['question_count']);
+        $this->assertSame($catalog->resolve('90'), $catalog->resolve(null));
     }
 
     public function test_it_resolves_big5_90_form_truth_and_aliases(): void
