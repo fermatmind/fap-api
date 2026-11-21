@@ -766,6 +766,10 @@ final class Eq60ContentCompileService
             if (! is_array($doc)) {
                 throw new \RuntimeException('EQ_60 required report asset is missing or invalid: '.$key);
             }
+            // Local design candidates are source-bound, but never runtime report assets.
+            if ($key === 'result_page_depth_modules') {
+                unset($doc['redesign_preview']);
+            }
             $assets[$key] = $doc;
         }
         $routeMatrix = $this->loader->readJson($this->loader->rawPath('personalization_routes/route_matrix.json', $version));
