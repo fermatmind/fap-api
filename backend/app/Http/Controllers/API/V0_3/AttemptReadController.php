@@ -638,7 +638,7 @@ class AttemptReadController extends Controller
             ]),
         ]);
 
-        if ($scaleCode === 'EQ_60' && ! ($gate['locked'] ?? true)
+        if ($scaleCode === 'EQ_60' && $eqReadingCopy !== null && ! ($gate['locked'] ?? true)
             && ($gate['access_level'] ?? '') === 'full' && is_array($gate['report'] ?? null)) {
             $responsePayload['eq60_result_page_v1'] = app(\App\Services\Eq\Eq60ResultPageProjection::class)->project($gate['report']);
         }
