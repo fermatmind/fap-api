@@ -59,15 +59,20 @@ JSON;
             $mapping[$row['before']] = $row;
         }
         $applied = [];
+        $reading90 = $locale === 'zh-CN'
+            && data_get($originalAuthority, 'mode') === 'canonical'
+            && data_get($engine, 'form_code') === 'big5_90'
+            ? $loaded['registry']['atomic']
+            : [];
         $projected = $report;
-        $projected['sections'] = $this->sections($report['sections'], $mapping, $applied);
+        $projected['sections'] = $this->sections($report['sections'], $mapping, $applied, $reading90);
         foreach (['big5_report_engine_v2', 'big5_public_projection_v1'] as $key) {
             $source = data_get($report, '_meta.'.$key);
             if (! is_array($source)) {
                 continue;
             }
             if (is_array($source['sections'] ?? null)) {
-                $source['sections'] = $this->sections($source['sections'], $mapping, $applied);
+                $source['sections'] = $this->sections($source['sections'], $mapping, $applied, $reading90);
             }
             $source = $this->selectedCopies($source, $mapping, $applied);
             data_set($projected, '_meta.'.$key, $source);
@@ -127,7 +132,7 @@ JSON;
         return $value;
     }
 
-    private function sections(array $sections, array $mapping, array &$applied): array
+    private function sections(array $sections, array $mapping, array &$applied, array $reading90): array
     {
         foreach ($sections as &$section) {
             if (! is_array($section) || ! is_array($section['blocks'] ?? null)) {
@@ -165,6 +170,20 @@ JSON;
                 }
                 if (is_array($block['resolved_copy'] ?? null)) {
                     $block['resolved_copy'] = $this->copyTree($block['resolved_copy'], $mapping, $applied, $block);
+                    if ($reading90 !== [] && $sectionKey === 'domain_deep_dive'
+                        && ($section['status'] ?? null) === 'populated'
+                        && ! isset($block['resolved_copy']['reading'])
+                        && in_array($trait, ['O', 'C', 'E', 'A', 'N'], true) && in_array($band, ['low', 'mid', 'high'], true)
+                        && ($block['kind'] ?? null) === 'trait_atomic'
+                        && ($block['block_uid'] ?? null) === "domain_deep_dive.atomic.$trait.$band"
+                        && ($block['block_id'] ?? null) === "atomic_{$trait}_{$band}"
+                        && in_array("atomic/$trait.json#bands.$band.slots.domain_deep_dive", (array) data_get($block, 'provenance.atomic_refs'), true)) {
+                        $reading = $reading90[$trait]['bands'][$band]['slots']['domain_deep_dive']['reading'] ?? null;
+                        if (is_array($reading)) {
+                            $block['resolved_copy']['reading'] = $reading;
+                            $applied[] = "domain_deep_dive.reading.$trait.$band";
+                        }
+                    }
                 }
                 $blocks[] = $block;
             }
