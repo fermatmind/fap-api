@@ -45,7 +45,11 @@ final class MainstreamReportPurchase
 
     public function managed(?Attempt $attempt): bool
     {
-        return $attempt !== null && (int) $attempt->org_id === 0
+        // MBTI follows its native free-full policy, including attempts enrolled
+        // before this exception. Ownership remains enforced by native readers.
+        return $attempt !== null
+            && ! \App\Support\Mbti\MbtiReportAccessPolicy::grantsFreeFull((string) $attempt->scale_code)
+            && (int) $attempt->org_id === 0
             && self::supportsForm((string) $attempt->scale_code, null, (int) $attempt->question_count)
             && data_get($attempt->answers_summary_json, 'meta.web_report_commerce') === 'v1';
     }

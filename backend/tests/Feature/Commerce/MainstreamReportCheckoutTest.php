@@ -26,6 +26,12 @@ final class MainstreamReportCheckoutTest extends TestCase
         return parent::withToken($value, $type)->withHeader('X-Career-Guest-Token', $this->guestKeys[$value] ?? '');
     }
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        config()->set('report_unlock.mbti_access_mode', 'paid_unlock');
+    }
+
     protected function tearDown(): void
     {
         if (isset($this->keyFile)) {

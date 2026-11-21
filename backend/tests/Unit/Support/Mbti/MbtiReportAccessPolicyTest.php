@@ -20,6 +20,25 @@ final class MbtiReportAccessPolicyTest extends TestCase
         $this->assertFalse(MbtiReportAccessPolicy::grantsFreeFull('big5'));
     }
 
+    public function test_free_full_mbti_skips_web_purchase_for_both_forms_and_existing_enrollment(): void
+    {
+        config()->set('report_unlock.mbti_access_mode', MbtiReportAccessPolicy::MODE_FREE_FULL);
+        $commerce = app(\App\Services\Commerce\MainstreamReportPurchase::class);
+        foreach ([93, 144] as $count) {
+            $attempt = new \App\Models\Attempt([
+                'org_id' => 0, 'scale_code' => 'MBTI', 'question_count' => $count,
+                'answers_summary_json' => ['meta' => ['web_report_commerce' => 'v1']],
+            ]);
+            $this->assertFalse($commerce->managed($attempt));
+        }
+        $other = new \App\Models\Attempt([
+            'org_id' => 0, 'scale_code' => 'BIG5_OCEAN', 'question_count' => 90,
+            'answers_summary_json' => ['meta' => ['web_report_commerce' => 'v1']],
+        ]);
+        $this->assertTrue($commerce->managed($other));
+        $this->assertFalse($commerce->managed(null));
+    }
+
     public function test_paid_and_invalid_modes_fail_closed(): void
     {
         $policy = app(MbtiReportAccessPolicy::class);
