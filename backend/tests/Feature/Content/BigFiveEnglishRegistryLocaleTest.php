@@ -17,6 +17,13 @@ final class BigFiveEnglishRegistryLocaleTest extends TestCase
         $zh = $loader->load('zh-CN');
         $en = $loader->load('en-US');
 
+        // The 90-item Chinese report adds a local reading block to the shared registry shape.
+        foreach ($zh['atomic'] as $trait => $pack) {
+            foreach ($pack['bands'] as $band => $dossier) {
+                $this->assertIsArray($dossier['slots']['domain_deep_dive']['reading']);
+                unset($zh['atomic'][$trait]['bands'][$band]['slots']['domain_deep_dive']['reading']);
+            }
+        }
         $this->assertSame($this->shape($zh, ['root', 'manifest']), $this->shape($en, ['root', 'manifest']));
         $this->assertSame($this->identityMap($zh), $this->identityMap($en));
         $this->assertSame('zh-CN', data_get($zh, 'manifest.locale'));
