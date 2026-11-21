@@ -56,6 +56,11 @@ final class PublicScaleFormsProjector
             $formCodes = array_keys($configuredForms);
         }
 
+        if ($scaleCode === 'BIG5_OCEAN') {
+            $formCodes = array_keys($configuredForms);
+            $defaultFormCode = $configuredDefault;
+        }
+
         $projected = [];
         foreach ($formCodes as $formCode) {
             if (! is_array($configuredForms[$formCode] ?? null)) {

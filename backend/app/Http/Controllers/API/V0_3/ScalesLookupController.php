@@ -147,7 +147,9 @@ class ScalesLookupController extends Controller
             'og_image_url' => $seo['og_image_url'],
             'is_public' => (bool) ($row['is_public'] ?? false),
             'is_indexable' => $isIndexable,
-            'content_i18n_json' => $row['content_i18n_json'] ?? null,
+            'content_i18n_json' => $legacyScaleCode === 'BIG5_OCEAN'
+                ? $this->projectBigFiveLandingContent($row['content_i18n_json'] ?? null)
+                : ($row['content_i18n_json'] ?? null),
             'report_summary_i18n_json' => $row['report_summary_i18n_json'] ?? null,
             'seo_schema_json' => $row['seo_schema_json'] ?? null,
             'seo_schema' => $row['seo_schema_json'] ?? null,
@@ -455,6 +457,72 @@ class ScalesLookupController extends Controller
         $int = (int) $value;
 
         return $int > 0 ? $int : 0;
+    }
+
+    private function projectBigFiveLandingContent(mixed $content): array
+    {
+        $content = $this->toArray($content);
+        foreach (['zh', 'en'] as $language) {
+            if (! is_array($content[$language] ?? null)) {
+                continue;
+            }
+
+            $zh = $language === 'zh';
+            $duration = $zh ? '90 题，预计约 11 分钟。' : 'The 90-question test takes about 11 minutes.';
+            $landing = $content[$language];
+            unset($landing['version_comparison']);
+            $landing['when_to_use'] = $duration;
+            $landing['how_it_works'][0] = $zh
+                ? '请按自己平时的情况完成全部 90 题，预计约 11 分钟。'
+                : 'Answer all 90 items based on what is typical for you. Allow about 11 minutes.';
+
+            if (is_array($landing['why_choose'] ?? null)) {
+                if (str_contains((string) ($landing['why_choose']['intro'] ?? ''), '120')) {
+                    $landing['why_choose']['intro'] = $zh
+                        ? '用五个连续维度理解日常倾向，再用具体经历核对。'
+                        : 'Explore five continuous traits and compare the results with specific experiences.';
+                }
+                $landing['why_choose']['items'] = array_values(array_filter(
+                    $landing['why_choose']['items'] ?? [],
+                    static fn (mixed $item): bool => is_array($item) && ($item['id'] ?? null) !== 'versions'
+                ));
+                foreach ($landing['why_choose']['items'] as &$item) {
+                    if (($item['id'] ?? null) === 'big5-method' && str_contains((string) ($item['body'] ?? ''), '120')) {
+                        $item['body'] = $zh
+                            ? '90 题题本有对应的计分规则与常模。模型研究、计分核查和本题本的测量验证分别需要证据。'
+                            : 'The 90-question form has its own scoring rules and norms. Evidence for the model, scoring and questionnaire validation addresses different questions.';
+                    }
+                }
+                unset($item);
+            }
+
+            foreach ($landing['faq'] ?? [] as $index => $item) {
+                if (! is_array($item)) {
+                    continue;
+                }
+                $id = $item['id'] ?? null;
+                $mentionsRetiredForm = str_contains((string) ($item['a'] ?? ''), '120');
+                if ($id === 'faq-big5-forms') {
+                    $item['q'] = $zh ? '大五人格测试需要多久？' : 'How long does the Big Five test take?';
+                    $item['a'] = $duration;
+                    unset($item['related_links']);
+                } elseif ($id === 'faq-big5-evidence' && $mentionsRetiredForm) {
+                    $item['a'] = $zh
+                        ? '大五人格模型已有量表研究。费马 90 题题本的信度、效度与常模适用性，需要查看该题本自己的证据。'
+                        : 'Research supports the Big Five framework. The reliability, validity and norm coverage of FermatMind’s 90-question form require evidence for that specific form.';
+                } elseif ($id === 'faq-big5-free' && $mentionsRetiredForm) {
+                    $item['a'] = $zh ? '可以免费完成 90 题并查看结果。' : 'You can answer all 90 questions and view the results for free.';
+                } elseif ($id === 'faq-big5-method' && $mentionsRetiredForm) {
+                    $item['a'] = $zh
+                        ? '90 题覆盖五个维度和 30 个细分面向。分数按该题本的规则换算，结果页会说明参照信息。'
+                        : 'The 90 questions cover five domains and 30 facets. Scores use the rules for this form, with reference information in the report.';
+                }
+                $landing['faq'][$index] = $item;
+            }
+            $content[$language] = $landing;
+        }
+
+        return $content;
     }
 
     private function isFreeOnlyAssessment(string $scaleCode): bool

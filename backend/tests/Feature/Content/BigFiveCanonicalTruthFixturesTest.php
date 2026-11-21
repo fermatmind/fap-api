@@ -78,6 +78,7 @@ final class BigFiveCanonicalTruthFixturesTest extends TestCase
 
     private function bootstrapBigFiveRuntime(): void
     {
+        config(['content_packs.big5_forms.forms.big5_120.accepts_new_attempts' => true]);
         $this->artisan('content:compile --pack=BIG5_OCEAN --pack-version=v1')->assertExitCode(0);
         $this->artisan('norms:import --scale=BIG5_OCEAN --csv=resources/norms/big5/big5_norm_stats_seed.csv --activate=1')
             ->assertExitCode(0);

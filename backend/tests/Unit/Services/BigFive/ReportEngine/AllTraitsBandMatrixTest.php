@@ -45,6 +45,13 @@ final class AllTraitsBandMatrixTest extends TestCase
             $payload = $block->toArray();
             $this->assertSame("atomic_{$targetTrait}_{$band}", $payload['block_id']);
             $this->assertNotEmpty($payload['resolved_copy']);
+            if ($sectionKey === 'domain_deep_dive') {
+                $reading = $payload['resolved_copy']['reading'];
+                $this->assertSame($registry['atomic'][$targetTrait]['bands'][$band]['slots'][$sectionKey]['reading'], $reading);
+                foreach (['definition', 'headline', 'interpretation', 'observation', 'application', 'experiment'] as $field) {
+                    $this->assertNotEmpty($reading[$field]);
+                }
+            }
             $this->assertContains("atomic/{$targetTrait}.json#bands.{$band}.slots.{$sectionKey}", $payload['provenance']['atomic_refs']);
         }
     }

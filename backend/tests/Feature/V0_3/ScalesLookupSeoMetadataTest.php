@@ -128,50 +128,46 @@ final class ScalesLookupSeoMetadataTest extends TestCase
     {
         $response = $this->getJson('/api/v0.3/scales/lookup?slug=big-five-personality-test-ocean-model&locale=zh')
             ->assertOk()
-            ->assertJsonPath('forms.0.form_code', 'big5_120')
-            ->assertJsonPath('forms.0.question_count', 120)
-            ->assertJsonPath('forms.0.estimated_minutes', 15)
-            ->assertJsonPath('forms.1.form_code', 'big5_90')
-            ->assertJsonPath('forms.1.question_count', 90)
-            ->assertJsonPath('forms.1.estimated_minutes', 11)
+            ->assertJsonPath('forms.0.form_code', 'big5_90')
+            ->assertJsonPath('forms.0.question_count', 90)
+            ->assertJsonPath('forms.0.estimated_minutes', 11)
+            ->assertJsonCount(1, 'forms')
             ->assertJsonPath(
                 'content_i18n_json.zh.when_to_use',
-                '120题完整版约15分钟，90题标准版约11分钟；可根据希望的题量与细度选择版本。'
+                '90 题，预计约 11 分钟。'
             )
             ->assertJsonPath(
                 'content_i18n_json.zh.how_it_works.0',
-                '选择120题完整版（约15分钟）或90题标准版（约11分钟），并在一次专注会话中完成。'
+                '请按自己平时的情况完成全部 90 题，预计约 11 分钟。'
             );
 
         $faq = $response->json('content_i18n_json.zh.faq');
-        $this->assertJsonValueSame($this->reviewedFaq('BIG5_OCEAN'), $faq);
+        $this->assertSame('90 题，预计约 11 分钟。', collect($faq)->firstWhere('id', 'faq-big5-forms')['a']);
+        $this->assertNull($response->json('content_i18n_json.zh.version_comparison'));
     }
 
     public function test_big_five_lookup_keeps_form_minutes_and_en_content_in_sync(): void
     {
         $response = $this->getJson('/api/v0.3/scales/lookup?slug=big-five-personality-test-ocean-model&locale=en')
             ->assertOk()
-            ->assertJsonPath('forms.0.form_code', 'big5_120')
-            ->assertJsonPath('forms.0.question_count', 120)
-            ->assertJsonPath('forms.0.estimated_minutes', 15)
-            ->assertJsonPath('forms.1.form_code', 'big5_90')
-            ->assertJsonPath('forms.1.question_count', 90)
-            ->assertJsonPath('forms.1.estimated_minutes', 11)
+            ->assertJsonPath('forms.0.form_code', 'big5_90')
+            ->assertJsonPath('forms.0.question_count', 90)
+            ->assertJsonPath('forms.0.estimated_minutes', 11)
+            ->assertJsonCount(1, 'forms')
             ->assertJsonPath(
                 'content_i18n_json.en.when_to_use',
-                'Choose the 120-question full version (about 15 minutes) or the 90-question standard version (about 11 minutes) based on the depth you want.'
+                'The 90-question test takes about 11 minutes.'
             )
             ->assertJsonPath(
                 'content_i18n_json.en.how_it_works.0',
-                'Choose either the 120-question full version (about 15 minutes) or the 90-question standard version (about 11 minutes), then complete it in one focused session.'
+                'Answer all 90 items based on what is typical for you. Allow about 11 minutes.'
             );
 
         $faq = $response->json('content_i18n_json.en.faq');
         $duration = collect($faq)->firstWhere('id', 'faq-big5-forms');
-        $this->assertStringContainsString('120-question version takes about 15 minutes', $duration['a'] ?? '');
-        $this->assertStringContainsString('90-question version about 11 minutes', $duration['a'] ?? '');
-        $package = json_decode(file_get_contents(database_path('data/assessment_landing_en_20260907.json')), true, 512, JSON_THROW_ON_ERROR);
-        $this->assertJsonValueSame($package['scales']['BIG5_OCEAN']['content']['faq'], $faq);
+        $this->assertStringNotContainsString('120', $duration['a'] ?? '');
+        $this->assertStringContainsString('90-question test takes about 11 minutes', $duration['a'] ?? '');
+        $this->assertNull($response->json('content_i18n_json.en.version_comparison'));
     }
 
     public function test_default_scale_seed_preserves_existing_big_five_editorial_content_bytes(): void

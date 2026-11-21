@@ -48,6 +48,19 @@ final class BigFiveReadingCopyProjectionTest extends TestCase
             $this->assertSame($report['_meta']['big5_private_result_authority'], $view['original_authority']);
             $this->assertNotSame($view['original_report_sha256'], $view['projected_report_sha256']);
             $reading = $view['report'];
+            foreach (data_get($reading, '_meta.big5_report_engine_v2.sections', []) as $section) {
+                if ($section['section_key'] !== 'domain_deep_dive') {
+                    continue;
+                }
+                $atomic = array_values(array_filter($section['blocks'], static fn (array $block): bool => $block['kind'] === 'trait_atomic'));
+                foreach ($atomic as $block) {
+                    if ($case === 'zh-CN/big5_90') {
+                        $this->assertNotEmpty($block['resolved_copy']['reading']['headline']);
+                    } else {
+                        $this->assertArrayNotHasKey('reading', $block['resolved_copy']);
+                    }
+                }
+            }
             $this->assertSame([], $this->oldPointers($reading, $this->knownBefore()), $case);
             foreach (['norms', 'quality', 'variant', 'report_snapshot_identity'] as $key) {
                 $this->assertSame($report[$key] ?? null, $reading[$key] ?? null, $case.'.'.$key);

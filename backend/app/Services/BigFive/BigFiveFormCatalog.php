@@ -18,6 +18,17 @@ final class BigFiveFormCatalog
         private readonly BigFivePackLoader $packLoader,
     ) {}
 
+    /** @return array<string, mixed> */
+    public function resolveActive(?string $requestedFormCode, ?string $packId = null): array
+    {
+        $canonical = $this->canonicalize($requestedFormCode);
+        if (($this->formsConfig()[$canonical]['accepts_new_attempts'] ?? true) === false) {
+            throw new ApiProblemException(404, 'FORM_NOT_FOUND', 'Big Five form not found.');
+        }
+
+        return $this->resolve($canonical, $packId);
+    }
+
     /**
      * @return array{
      *   form_code:string,
@@ -41,15 +52,15 @@ final class BigFiveFormCatalog
             throw new ApiProblemException(500, 'CONTENT_PACK_ERROR', "BIG5 form pack mismatch: {$effectivePackId}");
         }
 
-        $cacheKey = $effectivePackId.'|'.$canonical;
-        if (isset($this->resolved[$cacheKey])) {
-            return $this->resolved[$cacheKey];
-        }
-
         $forms = $this->formsConfig();
         $formConfig = $forms[$canonical] ?? null;
         if (! is_array($formConfig)) {
             throw new ApiProblemException(500, 'CONTENT_PACK_ERROR', 'BIG5 form mapping is not configured.');
+        }
+
+        $cacheKey = $effectivePackId.'|'.$canonical;
+        if (isset($this->resolved[$cacheKey])) {
+            return $this->resolved[$cacheKey];
         }
 
         $dirVersion = trim((string) ($formConfig['dir_version'] ?? ''));
@@ -130,9 +141,9 @@ final class BigFiveFormCatalog
 
     private function defaultFormCode(): string
     {
-        $default = trim((string) config('content_packs.big5_forms.default_form_code', 'big5_120'));
+        $default = trim((string) config('content_packs.big5_forms.default_form_code', 'big5_90'));
 
-        return $default !== '' ? $default : 'big5_120';
+        return $default !== '' ? $default : 'big5_90';
     }
 
     private function canonicalize(?string $requestedFormCode): string
