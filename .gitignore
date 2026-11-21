@@ -16,6 +16,11 @@ tools/compose/.env
 /backend/public/css/
 /backend/public/js/
 
+# Local tooling output
+.playwright-cli/
+__pycache__/
+*.pyc
+
 # local logs
 coscli.log
 coscli_output/
