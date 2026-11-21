@@ -106,8 +106,10 @@ final class BigFiveFormVersionFlowTest extends TestCase
         $default->assertJsonPath('content_package_version', 'v1-form-90');
         $this->assertCount(90, (array) $default->json('questions.items'));
 
-        $this->getJson('/api/v0.3/scales/BIG5_OCEAN/questions?form=120')
-            ->assertStatus(422)->assertJsonPath('error_code', 'INVALID_FORM_CODE');
+        foreach (['big5_120', '120', 'standard_120', 'big5-120'] as $retiredForm) {
+            $this->getJson('/api/v0.3/scales/BIG5_OCEAN/questions?form='.$retiredForm)
+                ->assertNotFound()->assertJsonPath('error_code', 'FORM_NOT_FOUND');
+        }
 
         $short = $this->getJson('/api/v0.3/scales/BIG5_OCEAN/questions?form=standard_90');
         $short->assertStatus(200);
@@ -218,7 +220,7 @@ final class BigFiveFormVersionFlowTest extends TestCase
             'scale_code' => 'BIG5_OCEAN',
             'anon_id' => 'big5-retired-new',
             'form_code' => 'big5_120',
-        ])->assertStatus(422)->assertJsonPath('error_code', 'INVALID_FORM_CODE');
+        ])->assertNotFound()->assertJsonPath('error_code', 'FORM_NOT_FOUND');
 
         $submit120 = $this->withHeaders([
             'X-Anon-Id' => $anon120,

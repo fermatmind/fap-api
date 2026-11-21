@@ -123,6 +123,7 @@ return [
                 'aliases' => [
                     '120',
                     'standard_120',
+                    'big5-120',
                 ],
                 'public' => [
                     'label' => [

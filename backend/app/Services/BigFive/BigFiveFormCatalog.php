@@ -23,7 +23,7 @@ final class BigFiveFormCatalog
     {
         $canonical = $this->canonicalize($requestedFormCode);
         if (($this->formsConfig()[$canonical]['accepts_new_attempts'] ?? true) === false) {
-            throw new ApiProblemException(422, 'INVALID_FORM_CODE', 'This Big Five form is retired.');
+            throw new ApiProblemException(404, 'FORM_NOT_FOUND', 'Big Five form not found.');
         }
 
         return $this->resolve($canonical, $packId);
