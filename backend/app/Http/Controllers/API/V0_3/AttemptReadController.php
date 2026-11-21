@@ -616,6 +616,10 @@ class AttemptReadController extends Controller
         $eqReadingCopy = $scaleCode === 'EQ_60' && is_array($gate['report'] ?? null)
             ? app(\App\Services\Eq\Eq60ReadingCopyProjection::class)->project($gate['report'])
             : null;
+        $eqResultPage = $eqReadingCopy !== null && ! ($gate['locked'] ?? true)
+            && ($gate['access_level'] ?? '') === 'full'
+            ? app(\App\Services\Eq\Eq60ResultPageProjection::class)->project($gate['report'])
+            : null;
         if (isset($gate['report']) && is_array($gate['report'])) {
             $gate['report'] = $this->projectScaleCodePayload($gate['report'], $responseCodes);
         }
@@ -638,9 +642,8 @@ class AttemptReadController extends Controller
             ]),
         ]);
 
-        if ($scaleCode === 'EQ_60' && $eqReadingCopy !== null && ! ($gate['locked'] ?? true)
-            && ($gate['access_level'] ?? '') === 'full' && is_array($gate['report'] ?? null)) {
-            $responsePayload['eq60_result_page_v1'] = app(\App\Services\Eq\Eq60ResultPageProjection::class)->project($gate['report']);
+        if ($eqResultPage !== null) {
+            $responsePayload['eq60_result_page_v1'] = $eqResultPage;
         }
 
         if ($eqReadingCopy !== null) {

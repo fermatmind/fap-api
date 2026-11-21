@@ -312,6 +312,11 @@ final class MainstreamReportCheckoutTest extends TestCase
                     }
                 }
                 $this->assertStringNotContainsString('raw_scores', json_encode($page));
+                config(['scale_identity.api_response_scale_code_mode' => 'v2']);
+                $aliased = $this->withToken($token)->getJson('/api/v0.3/attempts/'.$id.'/report')->assertOk();
+                $aliased->assertJsonPath('scale_code', 'EQ_EMOTIONAL_INTELLIGENCE');
+                $this->assertSame($page, $aliased->json('eq60_result_page_v1'));
+
             }
         }
     }
