@@ -4551,6 +4551,24 @@
                 ]
             }
         },
+        "/api/v0.5/eq-assessment/sample": {
+            "get": {
+                "operationId": "get_api_v0_5_eq_assessment_sample",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\EqSampleController@show",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public"
+                ]
+            }
+        },
         "/api/v0.5/foundation/giving-records": {
             "get": {
                 "operationId": "get_api_v0_5_foundation_giving_records",
