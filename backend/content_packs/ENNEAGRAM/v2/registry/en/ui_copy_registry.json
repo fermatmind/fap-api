@@ -17,19 +17,19 @@
     "entries": {
         "result_overview.clear": {
             "title_template": "The current primary candidates are relatively clear",
-            "body_template": "This answer presents a relatively concentrated primary candidate, which can be used to sort out recent common motivations, attention and coping methods. Please treat this result as an observable, retrospective explanatory hypothesis rather than an absolute label or diagnostic conclusion on personality."
+            "body_template": "One candidate stands out relative to the others in these responses. Start with a recent event, notice what you most wanted to protect, then look for an exception."
         },
         "result_overview.close_call": {
             "title_template": "The leading candidates need close-call comparison",
-            "body_template": "The first two candidates are close in this response. Compare their stress triggers, relationship expectations, work patterns, and conflict reactions side by side, and look for recent situations that contradict either candidate. For the next seven days, record the situation, trigger, first reaction, and later reflection without fixing a personality label."
+            "body_template": "The first two candidates scored close together. Compare their motivations against the same event and note your first move and the outcome you cared about. Keep both explanations open when both fit."
         },
         "result_overview.diffuse": {
             "title_template": "The current profile is broadly distributed",
-            "body_template": "Signals are spread across several types, so the first candidate does not support a single-type conclusion. Read the top three candidates, and observation task together, then record which motivations recur in real situations and which appear only occasionally."
+            "body_template": "Several candidates have support in these responses. Compare two settings and notice which motivations recur and which differences track your role, deadline, or information."
         },
         "result_overview.low_quality": {
             "title_template": "The current result has a quality boundary",
-            "body_template": "The results are still readable this time, but the response signal shows that the scope of interpretation needs to be narrowed: it is more suitable for helping you look back at which questions, situations, or states affected your choices, and is not suitable for confirming the primary type, evaluating personality stability, or inferring ability. This prompt does not blame the respondent, nor does it mean that you are not serious; it only shows that the answer sheet does not provide an interpretable signal to the system. A more prudent next step is to retest the same question type when your attention and state are more stable; switching to another form can only be used as a supplementary observation and cannot be regarded as finding better answers or comparing across question types."
+            "body_template": "These responses offer limited evidence for distinguishing candidates. Review how you understood the items and the circumstances in which you answered. You can take the 105-item form again when you can focus. Use the current scores to review this set of answers."
         },
         "form_badge.e105": {
             "label": "E105 Five-point Likert Form",

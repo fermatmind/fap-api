@@ -2,18 +2,18 @@
     "artifacts": [
         {
             "path": "private_result.compiled.json",
-            "sha256": "6b9544fe3063d422c1fe7eb001b999db723b1233db9e585137d93e315b5dbe47"
+            "sha256": "4bb1d32d347ee64730c4caf8a7f991a1f7219507564414ecbdc9e52b2890c82a"
         }
     ],
     "authority_id": "FERMATMIND_ENNEAGRAM_PRIVATE_RESULT_CANONICAL",
     "authority_root": "backend/content_packs/ENNEAGRAM/v2/registry",
-    "compiled_hash": "88a22d9464478eda7376cb3109097ce934476d52256055779c697026c6d707b2",
+    "compiled_hash": "c5b204ae900ab082c6ae4510ab19aa640658b6be6ae1ae1d19c9e5f7ad4241fb",
     "compiled_hash_rule": "sha256(canonical JSON of compiled payload excluding compiled_hash)",
     "compiler": {
         "schema": "fap.enneagram.private_result.compiler.v1",
         "version": "1.3.0"
     },
-    "content_hash": "5ca34643f38383286e45962b3a2642b8533b65d517e3db26158838cd1ecf659f",
+    "content_hash": "459481e10b901db7ee8a6c0ca7af62d0bd9d6f02e980c33c2e4bd7f3ef8967be",
     "content_maturity_values": [
         "scaffold",
         "p0_placeholder",
@@ -112,7 +112,7 @@
                 ],
                 "role": "seven-chapter candidate sections and growth actions",
                 "schema": "fap.enneagram.chapter_registry.v1",
-                "sha256": "96080bbeceb8abb55cb001977a00c3ecdc300ffcf957e88fa2a5c6411a197f67"
+                "sha256": "1d1051426defd14462f6388577166c919d94de337efbd84063286ca803254e8f"
             },
             {
                 "consumer_surfaces": [
@@ -207,7 +207,7 @@
                 ],
                 "role": "all 36 close-call comparisons",
                 "schema": "fap.enneagram.pair_registry.v1",
-                "sha256": "93b311a916d24a01c0adf0b3fe08910b9bb79f6d9de24aa36c64e7ef4661fb6a"
+                "sha256": "75b1351b65f3c8b7f73333e876e97845ff3d44064a2d2f6b11b5d2a25849d311"
             },
             {
                 "consumer_surfaces": [
@@ -363,7 +363,7 @@
                 ],
                 "role": "result states and form labels",
                 "schema": "fap.enneagram.ui_copy_registry.v1",
-                "sha256": "b4015144a1d2c5a83230372c2ca2c57ed5f74e7d9e86d4c753353d8a54e9afd4"
+                "sha256": "f5d1ad33aef8a225d8984f04597ebca5924554382359cbf1b9907958e9fc015b"
             }
         ],
         "zh-CN": [
@@ -385,7 +385,7 @@
                 ],
                 "role": "seven-chapter candidate sections and growth actions",
                 "schema": "fap.enneagram.chapter_registry.v1",
-                "sha256": "273e67760a2986c59bf5e4d8d0dd1537be8eb82862eaf98fdc4320211ae5fb78"
+                "sha256": "4f7ce7844aecfb21e0da13dcc427bf5e0e4e5d757551a0165c6267fe4536ee0c"
             },
             {
                 "consumer_surfaces": [
@@ -480,7 +480,7 @@
                 ],
                 "role": "all 36 close-call comparisons",
                 "schema": "fap.enneagram.pair_registry.v1",
-                "sha256": "89d8346513a3805b470350bbd9f2c439ceca1f9719de87313e2db04f19197c69"
+                "sha256": "e10a1cd10d275c143e7037b2dea16e75d154e3b34e3a15f88b7bade3d500c1a4"
             },
             {
                 "consumer_surfaces": [
@@ -636,13 +636,13 @@
                 ],
                 "role": "result states and form labels",
                 "schema": "fap.enneagram.ui_copy_registry.v1",
-                "sha256": "f82f7481cfc5319785788f9ff9d54153fcaebf7dcccee0d31d78963016b365fa"
+                "sha256": "ac5e8789ed15e8ee6fa5e0d3ea12e88051c163062dc17315e7860e86bc322a92"
             }
         ]
     },
     "locale_source_hashes": {
-        "en": "90a1647267187afccf2d7c9298cffb97f89528e08e7616677e39af8fd3d40528",
-        "zh-CN": "83a5cb650385df94797933fc1a5c41b8387d52ec7b0f1515a269ef5b3d3bf757"
+        "en": "b219f2ff34b2e62ff47aeda43b3b8df5165bbfcc6f6ce17f14fe3f1c1444405a",
+        "zh-CN": "c5da2553a962cab5993c539e7acc410712bed12ef8f24fbea0ff6ef6eb01833a"
     },
     "locales": [
         "en"
@@ -750,7 +750,7 @@
             ],
             "role": "seven-chapter candidate sections and growth actions",
             "schema": "fap.enneagram.chapter_registry.v1",
-            "sha256": "96080bbeceb8abb55cb001977a00c3ecdc300ffcf957e88fa2a5c6411a197f67"
+            "sha256": "1d1051426defd14462f6388577166c919d94de337efbd84063286ca803254e8f"
         },
         {
             "consumer_surfaces": [
@@ -845,7 +845,7 @@
             ],
             "role": "all 36 close-call comparisons",
             "schema": "fap.enneagram.pair_registry.v1",
-            "sha256": "93b311a916d24a01c0adf0b3fe08910b9bb79f6d9de24aa36c64e7ef4661fb6a"
+            "sha256": "75b1351b65f3c8b7f73333e876e97845ff3d44064a2d2f6b11b5d2a25849d311"
         },
         {
             "consumer_surfaces": [
@@ -1001,10 +1001,10 @@
             ],
             "role": "result states and form labels",
             "schema": "fap.enneagram.ui_copy_registry.v1",
-            "sha256": "b4015144a1d2c5a83230372c2ca2c57ed5f74e7d9e86d4c753353d8a54e9afd4"
+            "sha256": "f5d1ad33aef8a225d8984f04597ebca5924554382359cbf1b9907958e9fc015b"
         }
     ],
-    "source_hash": "5ca34643f38383286e45962b3a2642b8533b65d517e3db26158838cd1ecf659f",
+    "source_hash": "459481e10b901db7ee8a6c0ca7af62d0bd9d6f02e980c33c2e4bd7f3ef8967be",
     "source_hash_rule": "sha256(concat(sorted locale/path + NUL + sha256(canonical decoded JSON) + LF))",
     "supported_context_modes": [
         "individual",

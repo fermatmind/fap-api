@@ -74,6 +74,25 @@ final class EnneagramReadingCopyProjectionTest extends TestCase
         }
     }
 
+    public function test_previous_diffuse_copy_projects_to_current_copy_without_changing_the_snapshot(): void
+    {
+        $report = $this->reports()['zh-CN/enneagram_forced_choice_144'];
+        $service = app(EnneagramReadingCopyProjection::class);
+        $current = $service->project($report)['report_v2'];
+        $index = array_search('result_overview', array_column($current['modules'], 'module_key'), true);
+        $this->assertNotFalse($index);
+        $previous = '这次作答的分布较分散，多个类型线索同时出现，第一候选还不足以单独承载整页解释。请先并排阅读前三候选、近期反例和观察任务，记录哪些动机在真实情境中反复出现，哪些只是偶然状态。';
+        $expected = $current['modules'][$index]['content']['body'];
+        $current['modules'][$index]['content']['body'] = $previous;
+        $report['_meta']['enneagram_report_v2'] = $current;
+
+        $reading = $service->project($report);
+
+        $this->assertSame('ready', $reading['status']);
+        $this->assertSame($expected, $reading['report_v2']['modules'][$index]['content']['body']);
+        $this->assertSame($previous, $report['_meta']['enneagram_report_v2']['modules'][$index]['content']['body']);
+    }
+
     public function test_locale_binding_and_broken_canonical_structure_do_not_fall_back_to_old_copy(): void
     {
         $report = $this->reports()['en/enneagram_likert_105'];
