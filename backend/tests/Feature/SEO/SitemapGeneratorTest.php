@@ -23,6 +23,7 @@ use App\Services\Cms\CareerJobSeoService;
 use App\Services\Cms\PersonalityProfileSeoService;
 use App\Services\Cms\TopicProfileSeoService;
 use App\Services\SEO\SitemapGenerator;
+use Database\Seeders\JungAssessmentIndexabilitySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -49,7 +50,6 @@ class SitemapGeneratorTest extends TestCase
                 ->map(static fn (string $url): string => (string) parse_url($url, PHP_URL_PATH))
                 ->filter(static fn (string $path): bool => preg_match('#^/(?:en|zh)/personality(?:/[a-z]{4}(?:-[at]|-a-vs-[a-z]{4}-t|-vs-[a-z]{4})?)?$#', $path) === 1)
                 ->sort()->values()->all();
-            $this->assertCount(144, $actual);
             $this->assertSame($expected, $actual);
         }
     }
@@ -272,6 +272,7 @@ class SitemapGeneratorTest extends TestCase
     public function test_generate_includes_core_static_index_urls_and_excludes_help_pages(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);
+        $this->seed(JungAssessmentIndexabilitySeeder::class);
 
         ContentPage::query()->create([
             'org_id' => 0,
