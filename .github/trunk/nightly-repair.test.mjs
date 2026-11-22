@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {nightlyRunHistory,phpRepairBaseline,repairDomains,weeklyPhpShards} from './nightly-repair.mjs';
+import {focusedPhpShards,nightlyRunHistory,phpRepairBaseline,repairDomains,weeklyPhpShards} from './nightly-repair.mjs';
 
 import {mkdtempSync,writeFileSync,rmSync,readFileSync,chmodSync,mkdirSync} from 'node:fs';
 import {execFileSync,spawnSync} from 'node:child_process';
@@ -36,6 +36,18 @@ test('all scheduled PHP shards must succeed at the same revision before they est
  const names = weeklyPhpShards.map(shard => 'Full PHPUnit regression and performance contracts (' + shard + ')');
  const jobs = id => (id === 3 ? names.slice(1) : names).map(name => ({
   name, conclusion: id === 2 && name === names[0] ? 'cancelled' : 'success',
+ }));
+ assert.equal(await phpRepairBaseline(runs, jobs, head, () => true), base);
+});
+
+test('all focused PHP shards must succeed at the same revision before they establish a repair baseline', async () => {
+ assert.deepEqual(focusedPhpShards(0), []);
+ assert.deepEqual(focusedPhpShards(1), ['focused-1-of-1']);
+ assert.equal(focusedPhpShards(100).length, 6);
+ const runs = [run(3), run(2), run(1, {head_sha:base})];
+ const names = focusedPhpShards(3).map(shard => `Focused PHPUnit regression and performance contracts (${shard})`);
+ const jobs = id => (id === 3 ? names.slice(0, -1) : names).map(name => ({
+  name, conclusion: id === 2 && name === names[1] ? 'cancelled' : 'success',
  }));
  assert.equal(await phpRepairBaseline(runs, jobs, head, () => true), base);
 });
@@ -118,6 +130,7 @@ process.stdout.write(JSON.stringify(path.includes('/jobs?')?{total_count:1,jobs:
   assert.equal(phpReceipt.base,base);assert.equal(phpReceipt.push_base,head);
   assert.ok(phpReceipt.paths.includes('new.mjs'));assert.equal(phpReceipt.security,false);
   assert.deepEqual(phpReceipt.php_files,['tests/Unit/ChangedTest.php']);
+  assert.match(readFileSync(join(root,'outputs'),'utf8'), /php_shards=\["focused-1-of-1"\]/);
   const missingProof=execute(head,phpHead);assert.notEqual(missingProof.status,0);assert.match(missingProof.stderr,/Unexpected PHP history lookup/);
   for(const [before,sha] of [['',head],['0'.repeat(40),head],['unknown',head],[head,base]]) {
    const failed=execute(before,sha);assert.notEqual(failed.status,0);assert.match(failed.stderr,/NIGHTLY_(?:REPAIR|PUSH)_BASE_HOLD/);

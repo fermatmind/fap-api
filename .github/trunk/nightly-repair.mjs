@@ -36,13 +36,22 @@ export async function* nightlyRunHistory(listRuns,currentRunId) {
 }
 export const weeklyPhpShards = ['career', 'unit', 'feature-a-m', 'feature-rest', 'architecture-sre', 'mysql-redis'];
 const fullPhpJobName = 'Full PHPUnit regression and performance contracts';
+const focusedPhpJobName = 'Focused PHPUnit regression and performance contracts';
+
+export function focusedPhpShards(fileCount) {
+ const count = Math.min(fileCount, weeklyPhpShards.length);
+ return Array.from({length: count}, (_, index) => `focused-${index + 1}-of-${count}`);
+}
 
 export async function phpRepairBaseline(runs,listJobs,head,isAncestor) {
  for await(const run of runs) {
   if(run.status!=='completed'||!['success','failure'].includes(run.conclusion)||run.head_branch!=='main'||run.run_attempt!==1||!isAncestor(run.head_sha,head))continue;
   const jobs=await listJobs(run.id);
   const succeeded = new Set(jobs.filter(job => job.conclusion === 'success').map(job => job.name));
-  if (succeeded.has('Focused PHPUnit regression and performance contracts')
+  const firstFocusedJob = jobs.find(job => job.name.startsWith(`${focusedPhpJobName} (focused-1-of-`));
+  const focusedTotal = Number(firstFocusedJob?.name.match(/-of-([1-6])\)$/)?.[1] ?? 0);
+  if (succeeded.has(focusedPhpJobName)
+      || (focusedTotal > 0 && focusedPhpShards(focusedTotal).every(shard => succeeded.has(`${focusedPhpJobName} (${shard})`)))
       || succeeded.has(fullPhpJobName)
       || weeklyPhpShards.every(shard => succeeded.has(fullPhpJobName + ' (' + shard + ')'))) return run.head_sha;
  }
@@ -68,4 +77,5 @@ if(import.meta.url===`file://${process.argv[1]}`){
  writeFileSync('nightly-repair.json',JSON.stringify({sha:head,base,push_base:pushBase,paths,scan_paths:scanPaths,...plan})+'\n');
  for(const key of ['php_required','workflow','authority','dependency','security','semgrep'])appendFileSync(process.env.GITHUB_OUTPUT,`${key}=${plan[key]}\n`);
  appendFileSync(process.env.GITHUB_OUTPUT,`php_files=${JSON.stringify(plan.php_files)}\n`);
+ appendFileSync(process.env.GITHUB_OUTPUT,`php_shards=${JSON.stringify(focusedPhpShards(plan.php_files.length))}\n`);
 }

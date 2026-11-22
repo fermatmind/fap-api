@@ -175,9 +175,11 @@ final class BigFivePdfDeliveryTest extends TestCase
             ->assertHeader('X-Report-Filename-Hint', 'fermatmind-big-five-zh-TW.pdf')
             ->assertHeader('X-Pdf-Artifact-Cache', 'MISS');
         $this->assertStringStartsWith('%PDF-', $traditional->getContent());
-        $this->assertNotSame($pdf, $traditional->getContent());
-        $this->get($path.'?display_locale=zh-TW')->assertOk()->assertHeader('X-Pdf-Artifact-Cache', 'HIT');
-        $this->assertSame($pdf, $this->get($path)->assertOk()->getContent());
+        $this->assertNotSame($this->pdfWithoutVolatileMetadata($pdf), $this->pdfWithoutVolatileMetadata($traditional->getContent()));
+        $traditionalCached = $this->get($path.'?display_locale=zh-TW')->assertOk()->assertHeader('X-Pdf-Artifact-Cache', 'HIT');
+        $this->assertSame($traditional->getContent(), $traditionalCached->getContent());
+        $defaultAgain = $this->get($path)->assertOk()->getContent();
+        $this->assertSame($this->pdfWithoutVolatileMetadata($pdf), $this->pdfWithoutVolatileMetadata($defaultAgain));
         $this->getJson($path.'?display_locale=en')->assertStatus(422)
             ->assertJsonPath('error_code', 'PDF_DISPLAY_LOCALE_UNAVAILABLE');
 
@@ -186,6 +188,18 @@ final class BigFivePdfDeliveryTest extends TestCase
             DB::table('events')
                 ->where('event_code', 'report_pdf_view')
                 ->count()
+        );
+    }
+
+    private function pdfWithoutVolatileMetadata(string $pdf): string
+    {
+        // mPDF writes these fields when rendering, independently of the report content.
+        return preg_replace_callback(
+            '~^(/(?:CreationDate|ModDate) \(D:)(\d{14})(?=[+\-Z)])|^(/ID \[<)([a-f0-9]+)(>\s+<)([a-f0-9]+)(?=>\])~mi',
+            static fn (array $match): string => ($match[1] ?? '') !== ''
+                ? $match[1].str_repeat('0', strlen($match[2]))
+                : $match[3].str_repeat('0', strlen($match[4])).$match[5].str_repeat('0', strlen($match[6])),
+            $pdf,
         );
     }
 

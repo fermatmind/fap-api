@@ -11,6 +11,7 @@ use App\Support\OrgContext;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Queue\Factory as QueueFactory;
 use Illuminate\Contracts\Queue\Queue;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Queue\Failed\DatabaseUuidFailedJobProvider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -19,11 +20,10 @@ use Tests\TestCase;
 
 final class QueueMonitorReplayContractTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_replay_uses_the_numeric_row_id_even_when_another_uuid_matches_it_numerically(): void
     {
-        (require database_path('migrations/0001_01_01_000002_create_jobs_table.php'))->up();
-        (require database_path('migrations/2026_02_08_030000_create_queue_dlq_replays_table.php'))->up();
-
         $neighbor = [
             'id' => 11,
             'uuid' => '12af0000-0000-4000-8000-000000000011',

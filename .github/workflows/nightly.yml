@@ -67,6 +67,7 @@ jobs:
     outputs:
       php_required: ${{ steps.scope.outputs.php_required }}
       php_files: ${{ steps.scope.outputs.php_files }}
+      php_shards: ${{ steps.scope.outputs.php_shards }}
       workflow: ${{ steps.scope.outputs.workflow }}
       authority: ${{ steps.scope.outputs.authority }}
       dependency: ${{ steps.scope.outputs.dependency }}
@@ -267,14 +268,14 @@ jobs:
       - run: bash backend/scripts/ci_verify_mbti.sh
 
   full-phpunit:
-    name: ${{ github.event_name == 'push' && 'Focused PHPUnit regression and performance contracts' || format('Full PHPUnit regression and performance contracts ({0})', matrix.shard) }}
+    name: ${{ github.event_name == 'push' && format('Focused PHPUnit regression and performance contracts ({0})', matrix.shard) || format('Full PHPUnit regression and performance contracts ({0})', matrix.shard) }}
     needs: repair-scope
     if: always() && !cancelled() && ((github.event_name == 'push' && needs.repair-scope.outputs.php_required == 'true') || (github.event_name == 'schedule' && github.event.schedule == '37 18 * * 0'))
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        shard: ${{ github.event_name == 'push' && fromJSON('["focused"]') || fromJSON('["career","unit","feature-a-m","feature-rest","architecture-sre","mysql-redis"]') }}
+        shard: ${{ github.event_name == 'push' && fromJSON(needs.repair-scope.outputs.php_shards) || fromJSON('["career","unit","feature-a-m","feature-rest","architecture-sre","mysql-redis"]') }}
     timeout-minutes: 180
     services:
       mysql:
@@ -342,8 +343,8 @@ jobs:
       - name: Run PHPUnit shard and retain machine-readable evidence
         id: full-tests
         continue-on-error: true
-        # Reserve time for weekly shard validation and artifact upload.
-        timeout-minutes: ${{ matrix.shard == 'focused' && 180 || 165 }}
+        # Reserve time for shard validation and artifact upload.
+        timeout-minutes: 165
         working-directory: backend
         env:
           SELECTED_PHP_FILES: ${{ needs.repair-scope.outputs.php_files }}
@@ -352,8 +353,14 @@ jobs:
           topology=".*\\\\($REQUIRED_TOPOLOGY_CLASSES)::"
           exclude="/^(?:$CAREER_TEST_PREFIX|$topology)/"
           case "$PHPUNIT_SHARD" in
-            focused)
-              mapfile -t selected < <(jq -r '.[]' <<<"$SELECTED_PHP_FILES")
+            focused-*)
+              [[ "$PHPUNIT_SHARD" =~ ^focused-([1-6])-of-([1-6])$ ]]
+              index=${BASH_REMATCH[1]}
+              count=${BASH_REMATCH[2]}
+              (( index <= count ))
+              mapfile -t selected < <(jq -r --argjson index "$index" --argjson count "$count" '
+                to_entries[] | select((.key % $count) == ($index - 1)) | .value
+              ' <<<"$SELECTED_PHP_FILES")
               test "${#selected[@]}" -gt 0
               ;;
             career)

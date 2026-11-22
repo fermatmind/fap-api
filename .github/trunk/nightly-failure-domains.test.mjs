@@ -4,7 +4,7 @@ import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'no
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
-import { weeklyPhpShards } from './nightly-repair.mjs';
+import { focusedPhpShards, weeklyPhpShards } from './nightly-repair.mjs';
 
 const workflow = readFileSync(new URL('../workflows/nightly.yml', import.meta.url), 'utf8');
 
@@ -30,6 +30,34 @@ test('nightly executes authority and full PHPUnit as independent failure domains
   assert.deepEqual(JSON.parse(fullPhpunit.match(/\|\| fromJSON\('([^']+)'\)/)[1]), weeklyPhpShards);
   assert.match(fullPhpunit, /fail-fast: false/);
   assert.match(fullPhpunit, /name: nightly-full-phpunit-[^\n]+matrix\.shard/);
+});
+
+test('focused PHPUnit executes every selected file once across nonempty shards', () => {
+  const section = jobSection('full-phpunit', 'codeql');
+  assert.match(section, /fromJSON\(needs\.repair-scope\.outputs\.php_shards\)/);
+  assert.match(section, /timeout-minutes: 180\b/);
+  assert.match(section, /id: full-tests[\s\S]*timeout-minutes: 165\b/);
+  const source = section.split('id: full-tests')[1].split('        run: |\n')[1].split('\n      - name:')[0];
+  const root = mkdtempSync(join(tmpdir(), 'nightly-focused-'));
+  try {
+    for (const count of [1, 4, 19]) {
+      const files = Array.from({ length: count }, (_, index) => `tests/Unit/Fixture${index}Test.php`);
+      const batches = focusedPhpShards(count).map(shard => {
+        const result = spawnSync('bash', ['-c', 'php() { printf "%s\\n" "$@"; }\n' + source], {
+          encoding: 'utf8',
+          env: { ...process.env, RUNNER_TEMP: root, PHPUNIT_SHARD: shard, SELECTED_PHP_FILES: JSON.stringify(files), REQUIRED_TOPOLOGY_CLASSES: 'Fixture', CAREER_TEST_PREFIX: 'Fixture' },
+        });
+        assert.equal(result.status, 0, result.stderr);
+        const selected = result.stdout.trim().split('\n').filter(arg => arg.startsWith('tests/'));
+        assert.ok(selected.length > 0);
+        return selected;
+      });
+      assert.deepEqual(batches.flat().sort(), files.sort());
+      assert.ok(Math.max(...batches.map(batch => batch.length)) - Math.min(...batches.map(batch => batch.length)) <= 1);
+    }
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
 });
 
 test('nightly keeps dependency, workflow, security, scheduler, and GSC evidence separate', () => {
