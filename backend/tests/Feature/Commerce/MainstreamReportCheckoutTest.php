@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Commerce;
 
+use App\Jobs\GenerateReportPdfJob;
 use App\Models\User;
 use App\Services\Commerce\CareerAssessmentPurchase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
@@ -102,6 +105,40 @@ final class MainstreamReportCheckoutTest extends TestCase
             $this->withToken($token)->getJson('/api/v0.3/attempts/'.$id.'/result')->assertOk()->assertJsonPath('report_purchase.unlocked', false)->assertJsonMissingPath('report');
             $this->assertFalse(app(CareerAssessmentPurchase::class)->hasAccess($id, 'guest:'.$actor->anon_id));
         }
+    }
+
+    public function test_paid_web_report_pdf_job_runs_without_browser_identity(): void
+    {
+        $this->seed(\Database\Seeders\ScaleRegistrySeeder::class);
+        $disk = Storage::fake('local');
+        config(['payments.career94.enabled' => true, 'payments.providers.alipay.enabled' => true,
+            'pay.alipay.default.app_id' => 'fixture', 'pay.alipay.default.seller_id' => 'fixture']);
+        $token = $this->token(true);
+        $id = $this->fixture($token, 'ENNEAGRAM', 105, 'en');
+        $pdfUrl = '/api/v0.3/attempts/'.$id.'/report.pdf';
+        $inputs = ['target_attempt_id' => $id, 'provider' => 'alipay', 'sku' => \App\Services\Commerce\MainstreamReportPurchase::skuMap()['ENNEAGRAM']['CNY']];
+        $number = $this->withToken($token)->postJson('/api/v0.3/orders', $inputs)->assertOk()->json('order_no');
+        $job = new GenerateReportPdfJob(0, $id, 'payment_unlock', $number);
+        $this->app->instance('request', Request::create('/'));
+        $this->app->call([$job, 'handle']);
+        $this->assertDatabaseMissing('events', ['attempt_id' => $id, 'event_code' => 'report_pdf_generated']);
+
+        $outcome = app(\App\Services\Commerce\PaymentWebhookProcessor::class)->process('alipay', [
+            'out_trade_no' => $number, 'trade_no' => 'ali_'.$number, 'trade_status' => 'TRADE_SUCCESS',
+            'total_amount' => '2.99', 'notify_id' => 'paid_'.$number,
+        ]);
+        $this->assertTrue($outcome['ok']);
+        DB::table('report_snapshots')->where('attempt_id', $id)->update([
+            'status' => 'ready',
+            'report_full_json' => json_encode(['locale' => 'en', 'sections' => [['key' => 'overview']]], JSON_THROW_ON_ERROR),
+        ]);
+        $this->app->call([$job, 'handle']);
+
+        $artifact = DB::table('events')->where('attempt_id', $id)->where('event_code', 'report_pdf_generated')->value('meta_json');
+        $artifact = json_decode((string) $artifact, true, 512, JSON_THROW_ON_ERROR);
+        $this->assertSame('full', $artifact['variant']);
+        $this->assertStringStartsWith('%PDF-', $disk->get($artifact['artifact_path']));
+        $this->withToken($this->token(true))->getJson($pdfUrl)->assertNotFound();
     }
 
     public function test_disc_preserves_all_fifteen_existing_scores_and_gates_the_current_report(): void

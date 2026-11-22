@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\Commerce;
 
 use App\Jobs\Commerce\RefundOrderJob;
+use App\Jobs\GenerateReportPdfJob;
 use App\Models\User;
 use App\Services\Commerce\CareerAssessmentPurchase;
 use App\Services\Commerce\Checkout\AlipayCheckoutService;
@@ -12,8 +13,10 @@ use App\Services\Commerce\EntitlementManager;
 use App\Services\Commerce\OrderManager;
 use App\Services\Commerce\PaymentWebhookProcessor;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
@@ -54,6 +57,8 @@ final class Riasec60CheckoutTest extends TestCase
     #[DataProvider('markets')]
     public function test_order_and_signed_refund_are_bound_to_the_saved_result(string $market, string $currency, array $methods, bool $guest = false): void
     {
+        $this->seed(\Database\Seeders\ScaleRegistrySeeder::class);
+        $disk = Storage::fake('local');
         $owner = $this->token($guest);
         $other = $this->token();
         $key = $this->configureWaffo();
@@ -102,6 +107,17 @@ final class Riasec60CheckoutTest extends TestCase
         ]);
         $this->withToken($owner)->getJson(self::PATH.'/results/'.$id)->assertJsonPath('riasec_purchase.unlocked', true)->assertJsonStructure(['riasec_public_projection_v2' => ['deep_content_slots_v1']]);
         $this->assertDatabaseCount('benefit_grants', 1);
+        $job = new GenerateReportPdfJob(0, $id, 'payment_unlock', $order);
+        $this->app->instance('request', Request::create('/'));
+        $wrongOrderJob = new GenerateReportPdfJob(0, $id, 'payment_unlock', 'unrelated-order');
+        $this->app->call([$wrongOrderJob, 'handle']);
+        $this->assertDatabaseMissing('events', ['attempt_id' => $id, 'event_code' => 'report_pdf_generated']);
+        $this->app->call([$job, 'handle']);
+        $artifact = DB::table('events')->where('attempt_id', $id)->where('event_code', 'report_pdf_generated')->value('meta_json');
+        $artifact = json_decode((string) $artifact, true, 512, JSON_THROW_ON_ERROR);
+        $this->assertSame('full', $artifact['variant']);
+        $this->assertStringStartsWith('%PDF-', $disk->get($artifact['artifact_path']));
+        $this->withToken($other)->getJson('/api/v0.3/attempts/'.$id.'/report.pdf')->assertNotFound();
         $this->withToken($owner)->postJson('/api/v0.5/career-assessment/orders/'.$order.'/refund', ['reason_code' => 'not_as_expected', 'acknowledged' => true])->assertOk()->assertJsonPath('request.status', 'pending');
 
         $refund = array_replace($event, ['eventType' => 'refund.succeeded', 'eventId' => 'evt_refund']);
@@ -116,6 +132,9 @@ final class Riasec60CheckoutTest extends TestCase
         $this->withToken($owner)->getJson(self::PATH.'/results/'.$id)->assertJsonPath('riasec_purchase.unlocked', false)->assertJsonMissingPath('riasec_public_projection_v2.deep_content_slots_v1');
         $this->assertDatabaseHas('orders', ['order_no' => $order, 'payment_state' => 'refunded']);
         $this->assertDatabaseHas('career_refund_requests', ['order_no' => $order, 'status' => 'succeeded']);
+        $this->app->instance('request', Request::create('/'));
+        $this->app->call([$job, 'handle']);
+        $this->assertSame(1, DB::table('events')->where('attempt_id', $id)->where('event_code', 'report_pdf_generated')->count());
     }
 
     public function test_alipay_cny_checkout_and_verified_refund_revoke_only_the_owned_report(): void

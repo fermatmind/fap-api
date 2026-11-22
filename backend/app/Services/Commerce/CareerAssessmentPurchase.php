@@ -7,6 +7,7 @@ namespace App\Services\Commerce;
 use App\Models\Attempt;
 use App\Models\Order;
 use App\Services\Payments\PaymentProviderRegistry;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -104,6 +105,28 @@ final class CareerAssessmentPurchase
 
     public function hasAccess(string $attemptId, string $userId): bool
     {
+        return $this->activeReportGrantQuery($attemptId, $userId)->exists();
+    }
+
+    public function hasAccessThroughOrder(Attempt $attempt, string $orderNo): bool
+    {
+        $skus = $attempt->scale_code === 'RIASEC'
+            ? self::RIASEC_SKUS
+            : (MainstreamReportPurchase::skuMap()[$attempt->scale_code] ?? []);
+        $owner = $attempt->user_id !== null ? (string) $attempt->user_id : 'guest:'.$attempt->anon_id;
+        if ((int) $attempt->org_id !== 0 || $orderNo === '' || $skus === [] || $owner === '' || $owner === 'guest:') {
+            return false;
+        }
+
+        return $this->activeReportGrantQuery((string) $attempt->id, $owner)
+            ->useWritePdo()
+            ->where('orders.order_no', $orderNo)
+            ->whereIn('orders.sku', $skus)
+            ->exists();
+    }
+
+    private function activeReportGrantQuery(string $attemptId, string $userId): Builder
+    {
         $query = DB::table('benefit_grants as grants')->join('orders', 'orders.order_no', '=', 'grants.order_no')
             ->where('grants.org_id', 0)->where('grants.attempt_id', $attemptId)
             ->where(function ($query) {
@@ -124,7 +147,7 @@ final class CareerAssessmentPurchase
             $query->where('grants.user_id', $userId);
         }
 
-        return $query->exists();
+        return $query;
     }
 
     public function offers(string $market, string $scale = self::SCALE): array

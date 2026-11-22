@@ -7,6 +7,9 @@ namespace App\Jobs;
 use App\Models\Attempt;
 use App\Models\Result;
 use App\Services\Analytics\EventRecorder;
+use App\Services\Commerce\CareerAssessmentPurchase;
+use App\Services\Commerce\MainstreamReportPurchase;
+use App\Services\Commerce\RiasecReportPurchase;
 use App\Services\Report\Pdf\ReportPdfDocumentService;
 use App\Services\Report\ReportGatekeeper;
 use Illuminate\Bus\Queueable;
@@ -68,6 +71,13 @@ final class GenerateReportPdfJob implements ShouldQueue
             return;
         }
 
+        $managedPurchase = app(MainstreamReportPurchase::class)->managed($attempt)
+            || app(RiasecReportPurchase::class)->managed($attempt);
+        if ($managedPurchase && ($this->triggerSource !== 'payment_unlock'
+            || ! app(CareerAssessmentPurchase::class)->hasAccessThroughOrder($attempt, trim((string) $this->orderNo)))) {
+            return;
+        }
+
         $userId = $attempt->user_id !== null ? (string) $attempt->user_id : null;
         $anonId = $attempt->anon_id !== null ? (string) $attempt->anon_id : null;
 
@@ -77,13 +87,17 @@ final class GenerateReportPdfJob implements ShouldQueue
             $userId,
             $anonId,
             'system',
-            false,
+            $managedPurchase,
             false
         );
         if (! ($gate['ok'] ?? false)) {
             $errorCode = (string) ($gate['error_code'] ?? $gate['error'] ?? 'REPORT_GATE_FAILED');
             $message = (string) ($gate['message'] ?? 'report gate failed');
             throw new \RuntimeException($errorCode.': '.$message);
+        }
+
+        if ($managedPurchase && (($gate['generating'] ?? false) || empty($gate['report']))) {
+            throw new \RuntimeException('REPORT_NOT_READY: report is unavailable for PDF generation.');
         }
 
         $built = $pdfService->getOrGenerate($attempt, $gate, $result);
