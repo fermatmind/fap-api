@@ -251,6 +251,16 @@ final class MainstreamReportCheckoutTest extends TestCase
             }
             $this->withToken($token)->postJson('/api/v0.3/attempts/submit', ['attempt_id' => $id, 'duration_ms' => 600000, 'answers' => $answers])->assertOk()
                 ->assertJsonPath('report_purchase.unlocked', false)->assertJsonMissingPath('report');
+            if (str_starts_with($scale, 'IQ_')) {
+                $stored = app(\App\Services\Commerce\MainstreamReportPurchase::class)->result($attempt);
+                $score = data_get($stored->result_json, 'breakdown_json.score_result', data_get($stored->result_json, 'axis_scores_json.score_result', $stored->result_json));
+                $reference = app(\App\Services\Iq\IqBetaReferenceScore::class)->fromScore($score);
+                $this->assertNotNull($reference);
+                $this->withToken($token)->getJson('/api/v0.3/attempts/'.$id.'/report')->assertOk()
+                    ->assertJsonPath('result.summary.model_reference_score', $reference['display_score'])
+                    ->assertJsonMissingPath('report.dimensions')
+                    ->assertJsonMissingPath('result.breakdown_json');
+            }
             $sku = \App\Services\Commerce\MainstreamReportPurchase::skuMap()[$attempt->scale_code]['CNY'];
             $number = $this->withToken($token)->postJson('/api/v0.3/orders', ['target_attempt_id' => $id, 'sku' => $sku, 'provider' => 'alipay'])->assertOk()->json('order_no');
             $paid = app(\App\Services\Commerce\PaymentWebhookProcessor::class)->process('alipay', ['out_trade_no' => $number, 'trade_no' => 'ali_'.$number,

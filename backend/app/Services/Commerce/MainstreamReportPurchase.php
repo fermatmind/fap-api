@@ -7,6 +7,7 @@ namespace App\Services\Commerce;
 use App\Models\Attempt;
 use App\Models\Order;
 use App\Models\Result;
+use App\Services\Iq\IqBetaReferenceScore;
 use App\Services\Report\Pdf\CompleteAssessmentPdf;
 use App\Services\Report\Pdf\ReportPdfDocumentService;
 use Illuminate\Http\Request;
@@ -162,6 +163,13 @@ final class MainstreamReportPurchase
                 $summary['correct'] = (int) $correct;
                 $summary['total'] = (int) $total;
                 $summary['percent_correct'] = round($correct / $total * 100, 1);
+                $reference = $result?->is_valid !== false
+                    ? app(IqBetaReferenceScore::class)->fromScore($score)
+                    : null;
+                if ($reference !== null && $reference['raw_score'] === $summary['correct']
+                    && $attempt->question_count === $summary['total']) {
+                    $summary['model_reference_score'] = $reference['display_score'];
+                }
             }
         }
         if (is_numeric($attempt->duration_ms)) {
