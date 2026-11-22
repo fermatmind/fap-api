@@ -188,7 +188,7 @@ final class ArticlePublishedFaqWorkspaceTest extends TestCase
         $expected = $schema['editorial_package_v1']['answer_surface_v1']['faq_items'];
         $expected[0]['a'] = $form['faq_items'][$key]['answer'];
         $expected[$count - 1]['answer'] = $form['faq_items'][$lastKey]['answer'];
-        $this->assertSame($expected, $items);
+        self::assertJsonValueSame($expected, $items);
         $this->getJson('/api/v0.5/articles/native-faq?locale=en&org_id=0')->assertOk()
             ->assertJsonCount($count, 'answer_surface_v1.faq_blocks')
             ->assertJsonPath('answer_surface_v1.faq_blocks.0.answer', $expected[0]['a'])

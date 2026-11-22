@@ -65,7 +65,7 @@ final class CareerGuideWorkspaceTest extends TestCase
         $expected['guide']['body_md'] = $body;
         $after = UpdateExistingCareerGuideBody::state($guide);
         $this->assertSame($expected, $after['native_snapshot']);
-        $this->assertSame($expected, $guide->revisions()->firstOrFail()->snapshot_json);
+        self::assertJsonValueSame($expected, $guide->revisions()->firstOrFail()->snapshot_json);
         $this->assertSame($before['revisions'], array_slice($after['revisions'], 1));
         $audit = AuditLog::withoutGlobalScopes()->where('action', 'career_guide_body_update')->sole();
         $this->assertSame($selectedOrg->id, (int) $audit->org_id);

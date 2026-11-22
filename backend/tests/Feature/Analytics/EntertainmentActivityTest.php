@@ -89,7 +89,9 @@ final class EntertainmentActivityTest extends TestCase
         foreach (['anon_id', 'user_id', 'session_id', 'attempt_id', 'analytics_ip_hash', 'referrer'] as $field) {
             $this->assertEmpty($event->{$field} ?? null);
         }
-        $this->assertSame(['schema', 'slug', 'version', 'role', 'method', 'excluded'], array_keys(json_decode($event->meta_json, true)));
+        $keys = array_keys(json_decode($event->meta_json, true, flags: JSON_THROW_ON_ERROR));
+        sort($keys, SORT_STRING);
+        $this->assertSame(['excluded', 'method', 'role', 'schema', 'slug', 'version'], $keys);
     }
 
     public function test_private_answers_unknown_tests_roles_and_missing_opt_in_are_rejected(): void

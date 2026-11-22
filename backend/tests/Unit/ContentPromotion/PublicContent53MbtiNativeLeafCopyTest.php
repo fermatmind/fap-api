@@ -242,7 +242,8 @@ final class PublicContent53MbtiNativeLeafCopyTest extends TestCase
         DB::flushQueryLog();
         try {
             $published = DB::transaction(fn () => $writer->publish($this->context(), $before));
-            $sectionWrites = array_filter(DB::getQueryLog(), static fn (array $query): bool => str_starts_with($query['query'], 'update "personality_profile_variant_sections"'));
+            $table = DB::connection()->getQueryGrammar()->wrapTable('personality_profile_variant_sections');
+            $sectionWrites = array_filter(DB::getQueryLog(), static fn (array $query): bool => str_starts_with($query['query'], 'update '.$table.' '));
             $this->assertCount(128, $sectionWrites, 'Only208 new leaves in128 sections are physically written; accepted187 stay zero delta.');
         } finally {
             DB::disableQueryLog();

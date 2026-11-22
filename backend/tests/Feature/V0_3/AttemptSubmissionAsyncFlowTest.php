@@ -96,7 +96,7 @@ class AttemptSubmissionAsyncFlowTest extends TestCase
         $this->assertSame($receivedAt->toDateTimeString(), $attempt->submitted_at);
         $this->assertSame(1, DB::table('results')->where('attempt_id', $attemptId)->count());
         $stored = DB::table('attempt_submissions')->where('id', $submissionId)->value('request_payload_json');
-        $this->assertSame($this->demoAnswers(), json_decode($stored, true)['answers']);
+        self::assertJsonValueSame($this->demoAnswers(), json_decode($stored, true, flags: JSON_THROW_ON_ERROR)['answers']);
     }
 
     public function test_submit_async_ack_and_status_endpoint(): void

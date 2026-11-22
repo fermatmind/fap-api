@@ -22,7 +22,7 @@ class ResultVisibilityObservationTest extends TestCase
 
     private function scenario(): array
     {
-        $this->travelTo(CarbonImmutable::parse('2026-10-23T08:00:00Z'));
+        $this->travelTo(CarbonImmutable::now('UTC')->startOfSecond());
         config(['fap.result_email_gate.require_binding_for_read' => false]);
         $id = (string) Str::uuid();
         $this->insertAttempt($id, 0, 'en', CarbonImmutable::now()->subHour(), CarbonImmutable::now()->subMinutes(2));

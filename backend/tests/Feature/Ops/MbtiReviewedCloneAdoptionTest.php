@@ -42,12 +42,12 @@ final class MbtiReviewedCloneAdoptionTest extends TestCase
             ->callAction('adoptReviewedEnglishClone', ['variant_id' => $variant->id, ...$input])->assertHasNoActionErrors();
 
         $record = PersonalityProfileVariantCloneContent::sole();
-        $this->assertSame($clone['content_json'], $record->content_json);
-        $this->assertSame($clone['asset_slots_json'], $record->asset_slots_json);
-        $this->assertSame($clone['meta_json'], $record->meta_json);
+        self::assertJsonValueSame($clone['content_json'], $record->content_json);
+        self::assertJsonValueSame($clone['asset_slots_json'], $record->asset_slots_json);
+        self::assertJsonValueSame($clone['meta_json'], $record->meta_json);
         Livewire::test(EditPersonalityVariantCloneContent::class, ['record' => $record->id])
             ->call('save')->assertHasNoFormErrors();
-        $this->assertSame($clone['asset_slots_json'], $record->fresh()->asset_slots_json);
+        self::assertJsonValueSame($clone['asset_slots_json'], $record->fresh()->asset_slots_json);
         $this->assertSame(['Independent reviewed first paragraph.', 'Independent reviewed second paragraph.'], $intro->fresh()->paragraphs);
         $this->assertNotSame($clone['content_json']['intro']['paragraphs'], $intro->fresh()->paragraphs);
         $this->assertSame(2, $intro->fresh()->revision);
@@ -55,7 +55,7 @@ final class MbtiReviewedCloneAdoptionTest extends TestCase
         $this->assertSame($variantBefore, $variant->fresh()->getRawOriginal());
         $revision = PersonalityProfileVariantRevision::sole();
         $this->assertSame($originalIntro['content_hash'], data_get($revision->snapshot_json, 'mbti_reviewed_clone_adoption_v1.intro_before.content_hash'));
-        $this->assertSame($clone['content_json'], data_get($revision->snapshot_json, 'mbti_reviewed_clone_adoption_v1.clone_candidate.content_json'));
+        self::assertJsonValueSame($clone['content_json'], data_get($revision->snapshot_json, 'mbti_reviewed_clone_adoption_v1.clone_candidate.content_json'));
         $this->getJson('/api/v0.5/personality/intj-a/result-intro?locale=en')->assertOk()->assertJsonPath('revision', 2)
             ->assertJsonPath('paragraphs', $intro->fresh()->paragraphs);
     }

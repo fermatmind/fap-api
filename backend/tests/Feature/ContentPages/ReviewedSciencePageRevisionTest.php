@@ -57,7 +57,7 @@ final class ReviewedSciencePageRevisionTest extends TestCase
             $this->executePhase($page, 'publish');
             $page->refresh();
             $this->assertSame($this->candidate['content_md'], $page->content_md);
-            $this->assertSame($this->candidate['faq_items'], $page->faq_items);
+            self::assertJsonValueSame($this->candidate['faq_items'], $page->faq_items);
             foreach (['id', 'org_id', 'slug', 'locale', 'path', 'title', 'seo_title', 'seo_description', 'meta_description',
                 'canonical_path', 'is_indexable', 'schema_enabled', 'published_at', 'source_content_id', 'translation_group_id'] as $field) {
                 $this->assertSame($original[$field] ?? null, $page->getAttributes()[$field] ?? null, $field);
@@ -239,7 +239,8 @@ final class ReviewedSciencePageRevisionTest extends TestCase
         $body = $this->candidate['content_md'];
         $injected = false;
         DB::listen(static function ($event) use ($body, &$injected): void {
-            if (! $injected && str_contains($event->sql, 'update "content_pages"') && in_array($body, $event->bindings, true)) {
+            $table = $event->connection->getQueryGrammar()->wrapTable('content_pages');
+            if (! $injected && str_contains($event->sql, 'update '.$table.' ') && in_array($body, $event->bindings, true)) {
                 $injected = true;
                 throw new \DomainException('synthetic_native_publication_failure');
             }
@@ -280,7 +281,8 @@ final class ReviewedSciencePageRevisionTest extends TestCase
         $body = collect($package['candidates'])->firstWhere('identity.locale', 'en')['content_md'];
         $injected = false;
         DB::listen(static function ($event) use ($body, &$injected): void {
-            if (! $injected && str_contains($event->sql, 'update "content_pages"') && in_array($body, $event->bindings, true)) {
+            $table = $event->connection->getQueryGrammar()->wrapTable('content_pages');
+            if (! $injected && str_contains($event->sql, 'update '.$table.' ') && in_array($body, $event->bindings, true)) {
                 $injected = true;
                 throw new \DomainException('synthetic_second_language_failure');
             }

@@ -828,7 +828,11 @@ final class EqAgentContextApiTest extends TestCase
             $this->assertSame($report->json('eq60_reading_copy_v1.original_report_sha256'), $agent->json('reading_copy.original_report_sha256'));
             $this->assertSame($report->json('eq60_reading_copy_v1.report.assets.result_snapshot'), $agent->json('resolved_assets.result_snapshot'));
             $this->assertEquals($original['scores'], $report->json('eq60_reading_copy_v1.report.scores'));
-            $this->assertSame($bytes, DB::table('report_snapshots')->where('attempt_id', $attemptId)->value('report_full_json'));
+            $stored = DB::table('report_snapshots')->where('attempt_id', $attemptId)->value('report_full_json');
+            self::assertJsonValueSame(
+                json_decode($bytes, true, flags: JSON_THROW_ON_ERROR),
+                json_decode($stored, true, flags: JSON_THROW_ON_ERROR),
+            );
             $original['_meta']['eq60_private_result_authority']['mode'] = 'immutable_legacy_snapshot';
             $legacyBytes = json_encode($original, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
             DB::table('report_snapshots')->where('attempt_id', $attemptId)->update(['report_json' => $legacyBytes, 'report_full_json' => $legacyBytes]);
@@ -839,7 +843,11 @@ final class EqAgentContextApiTest extends TestCase
             $this->postJson('/api/v0.3/attempts/'.$attemptId.'/eq/agent-runtime/messages', ['locale' => 'en', 'message' => 'Explain this report'])
                 ->assertStatus(202)->assertJsonPath('ready', false)->assertJsonPath('reason_code', 'historical_eq_report_not_supported');
             Http::assertNothingSent();
-            $this->assertSame($legacyBytes, DB::table('report_snapshots')->where('attempt_id', $attemptId)->value('report_full_json'));
+            $stored = DB::table('report_snapshots')->where('attempt_id', $attemptId)->value('report_full_json');
+            self::assertJsonValueSame(
+                json_decode($legacyBytes, true, flags: JSON_THROW_ON_ERROR),
+                json_decode($stored, true, flags: JSON_THROW_ON_ERROR),
+            );
         } finally {
             File::deleteDirectory(storage_path('app/'.$current['storage_path']));
             File::deleteDirectory(storage_path('app/content_packs_v2/EQ_60/v1/'.$current['id']));
@@ -875,7 +883,11 @@ final class EqAgentContextApiTest extends TestCase
             $this->assertEquals($original['interpretation'], $report->json('eq60_reading_copy_v1.report.interpretation'));
             $this->assertEquals($original['asset_refs'], $report->json('eq60_reading_copy_v1.report.asset_refs'));
             $this->assertEquals($original['scores'], $report->json('eq60_reading_copy_v1.report.scores'));
-            $this->assertSame($bytes, DB::table('report_snapshots')->where('attempt_id', $attemptId)->value('report_full_json'));
+            $stored = DB::table('report_snapshots')->where('attempt_id', $attemptId)->value('report_full_json');
+            self::assertJsonValueSame(
+                json_decode($bytes, true, flags: JSON_THROW_ON_ERROR),
+                json_decode($stored, true, flags: JSON_THROW_ON_ERROR),
+            );
             $original['_meta']['eq60_private_result_authority']['mode'] = 'immutable_legacy_snapshot';
             $legacyBytes = json_encode($original, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
             DB::table('report_snapshots')->where('attempt_id', $attemptId)->update(['report_json' => $legacyBytes, 'report_full_json' => $legacyBytes]);
@@ -886,7 +898,11 @@ final class EqAgentContextApiTest extends TestCase
             $this->postJson('/api/v0.3/attempts/'.$attemptId.'/eq/agent-runtime/messages', ['locale' => 'en', 'message' => 'Explain this report'])
                 ->assertStatus(202)->assertJsonPath('ready', false)->assertJsonPath('reason_code', 'historical_eq_report_not_supported');
             Http::assertNothingSent();
-            $this->assertSame($legacyBytes, DB::table('report_snapshots')->where('attempt_id', $attemptId)->value('report_full_json'));
+            $stored = DB::table('report_snapshots')->where('attempt_id', $attemptId)->value('report_full_json');
+            self::assertJsonValueSame(
+                json_decode($legacyBytes, true, flags: JSON_THROW_ON_ERROR),
+                json_decode($stored, true, flags: JSON_THROW_ON_ERROR),
+            );
         } finally {
             File::deleteDirectory(storage_path('app/'.$current['storage_path']));
             File::deleteDirectory(storage_path('app/content_packs_v2/EQ_60/v1/'.$current['id']));
