@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Report;
 
+use App\Jobs\GenerateReportSnapshotJob;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
@@ -22,6 +23,8 @@ final class EnneagramPdfDeliveryTest extends TestCase
 
         $token = $this->issueAnonToken($anonId);
         $attemptId = $this->createSubmittedEnneagramAttempt($anonId, $token, $formCode);
+        $snapshot = new GenerateReportSnapshotJob(0, $attemptId, 'submit');
+        app()->call([$snapshot, 'handle']);
 
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '.$token,
@@ -34,6 +37,7 @@ final class EnneagramPdfDeliveryTest extends TestCase
         $response->assertHeader('X-Report-Variant', 'full');
         $response->assertHeader('X-Report-Locked', 'false');
         $this->assertStringStartsWith('%PDF-', (string) $response->getContent());
+        $this->assertGreaterThan(10000, strlen((string) $response->getContent()));
         $this->assertDatabaseHas('events', [
             'event_code' => 'report_pdf_view',
             'attempt_id' => $attemptId,

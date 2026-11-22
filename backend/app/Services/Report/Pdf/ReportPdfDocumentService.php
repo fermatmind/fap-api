@@ -67,7 +67,9 @@ final class ReportPdfDocumentService
 
     public static function supportsTraditionalReportPdf(Attempt $attempt): bool
     {
-        return self::supportsTraditionalBigFivePdf($attempt) || self::supportsTraditionalIqPdf($attempt);
+        return self::supportsTraditionalBigFivePdf($attempt) || self::supportsTraditionalIqPdf($attempt)
+            || (CompleteAssessmentPdf::supports((string) $attempt->scale_code)
+                && str_starts_with(strtolower((string) $attempt->locale), 'zh'));
     }
 
     public static function supportsTraditionalMbtiResultPagePdf(Attempt $attempt): bool
@@ -123,12 +125,14 @@ final class ReportPdfDocumentService
     {
         $scaleCode = strtoupper(trim((string) ($attempt->scale_code ?? '')));
         if (\App\Services\Report\ReportAccess::isIqScale($scaleCode)) {
+            $merged = (int) $attempt->question_count === 40;
+
             return [
                 'pdf_surface_version' => IqReportPdfRenderer::SURFACE_VERSION,
                 'scale_code' => $scaleCode,
-                'form_code' => IqReportPdfProjection::BANK,
-                'form_label' => $attempt->locale === 'zh-CN' ? '原创30题' : 'Original 30 items',
-                'filename_hint' => 'fermatmind-iq-original30-'.($attempt->locale === 'zh-CN' ? 'zh' : 'en').'.pdf',
+                'form_code' => $merged ? \App\Services\Iq\IqOwnerOriginal30BankService::MERGED_FORM_CODE : IqReportPdfProjection::BANK,
+                'form_label' => $merged ? ($attempt->locale === 'zh-CN' ? '40题版' : '40-item form') : ($attempt->locale === 'zh-CN' ? '原创30题' : 'Original 30 items'),
+                'filename_hint' => 'fermatmind-iq-'.($merged ? '40' : 'original30').'-'.($attempt->locale === 'zh-CN' ? 'zh' : 'en').'.pdf',
                 'report_schema_version' => 'iq.report.v1',
             ];
         }
@@ -423,6 +427,11 @@ final class ReportPdfDocumentService
         $locked = (bool) ($gate['locked'] ?? true);
         $manifestHash = $this->resolveManifestHash($attempt, $result);
         $report = is_array($gate['report'] ?? null) ? $gate['report'] : [];
+        $completeHtml = null;
+        if (CompleteAssessmentPdf::supports((string) $attempt->scale_code) && ! $locked && $variant === 'full') {
+            $completeHtml = app(CompleteAssessmentPdf::class)->html($attempt, $gate, $displayLocale);
+            $manifestHash = hash('sha256', $manifestHash.'|'.CompleteAssessmentPdf::VERSION.'|'.$completeHtml);
+        }
         if (strtoupper(trim((string) $attempt->scale_code)) === 'BIG5_OCEAN') {
             // Resolve approved reading copy before looking up an artifact. Gate-selected body and
             // its read revision are part of the cache identity, including partial/locked sections.
@@ -492,10 +501,10 @@ final class ReportPdfDocumentService
         $qualityPolicy = is_array($report['quality'] ?? null) ? $report['quality'] : [];
         $normEvidence = is_array($report['norms'] ?? null) ? $report['norms'] : [];
 
-        $pdfBinary = match ($scaleCode) {
-            'IQ_RAVEN', 'IQ_INTELLIGENCE_QUOTIENT' => app(IqReportPdfRenderer::class)->render($iqView, $displayLocale),
-            'BIG5_OCEAN' => app(BigFiveReportPdfRenderer::class)->render($report, $displayLocale ?? (string) $attempt->locale, $locked),
-            'MBTI' => $this->buildMbtiDocument($attempt, $result, $locked),
+        $pdfBinary = match (true) {
+            $completeHtml !== null => app(CompleteAssessmentPdf::class)->render($completeHtml),
+            ReportAccess::isIqScale($scaleCode) => app(IqReportPdfRenderer::class)->render($iqView, $displayLocale),
+            $scaleCode === 'BIG5_OCEAN' => app(BigFiveReportPdfRenderer::class)->render($report, $displayLocale ?? (string) $attempt->locale, $locked),
             default => $this->buildDocument(
                 (string) $attempt->id,
                 (string) ($attempt->scale_code ?? ''),

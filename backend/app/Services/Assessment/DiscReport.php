@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Assessment;
 
 use App\Models\Attempt;
+use App\Models\Result;
 use App\Services\Commerce\MainstreamReportPurchase;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -48,11 +49,18 @@ final class DiscReport
     public function present(Request $request, Attempt $attempt, array $purchase): array
     {
         $result = app(MainstreamReportPurchase::class)->result($attempt);
+        abort_unless($result instanceof Result, 503, 'Report is unavailable.');
+
+        return $this->report($attempt, $result) + ['report_purchase' => $purchase];
+    }
+
+    public function report(Attempt $attempt, Result $result): array
+    {
         $profile = collect($this->source()['profiles'])->firstWhere('id', $result->type_code);
         abort_unless(is_array($profile), 503, 'Report is unavailable.');
 
         return ['ok' => true, 'attempt_id' => $attempt->id, 'scale_code' => 'DISC_BEHAVIOR',
-            'meta' => ['scale_code' => 'DISC_BEHAVIOR'], 'report_purchase' => $purchase,
+            'meta' => ['scale_code' => 'DISC_BEHAVIOR'],
             'report' => ['schema_version' => 'disc.report.v1', 'disc' => ['counts' => $result->scores_pct, 'profile' => $profile]],
             'locked' => false, 'variant' => 'full', 'access_level' => 'full'];
     }

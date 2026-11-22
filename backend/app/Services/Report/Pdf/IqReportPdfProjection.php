@@ -8,6 +8,7 @@ use App\Exceptions\Api\ApiProblemException;
 use App\Models\Attempt;
 use App\Models\Result;
 use App\Services\Iq\IqBetaReferenceScore;
+use App\Services\Iq\IqOwnerOriginal30BankService;
 use App\Services\Report\ReportAccess;
 
 /** Display-only projection of the same atomic sources consumed by lib/iq/presentation.ts. */
@@ -17,6 +18,12 @@ final class IqReportPdfProjection
 
     public function project(Attempt $attempt, Result $result, array $gate): array
     {
+        $itemCount = (int) $attempt->question_count;
+        $bank = match ($itemCount) {
+            30 => self::BANK,
+            40 => IqOwnerOriginal30BankService::MERGED_FORM_CODE,
+            default => '',
+        };
         $report = (array) ($gate['report'] ?? []);
         if (($gate['ok'] ?? false) !== true || ($gate['locked'] ?? true) !== false
             || ($gate['variant'] ?? '') !== 'full' || ($gate['generating'] ?? false)
@@ -26,7 +33,7 @@ final class IqReportPdfProjection
             || ($report['schema_version'] ?? '') !== 'iq.report.v1'
             || ($report['access']['report_access_level'] ?? '') !== 'full'
             || ($report['access']['variant'] ?? '') !== 'full'
-            || (int) $attempt->question_count !== 30
+            || $bank === ''
             || ! in_array((string) $attempt->locale, ['en', 'zh-CN'], true)
             || ($report['locale'] ?? null) !== $attempt->locale) {
             $this->unavailable();
@@ -43,22 +50,23 @@ final class IqReportPdfProjection
         }
         $summary = (array) ($report['summary'] ?? []);
         $scoring = (array) ($report['scoring'] ?? []);
-        if (($scoring['bank_id'] ?? '') !== self::BANK || ($score['bank_id'] ?? '') !== self::BANK
+        if (($scoring['bank_id'] ?? '') !== $bank || ($score['bank_id'] ?? '') !== $bank
             || ($scoring['status'] ?? '') !== 'scored' || ($score['status'] ?? '') !== 'scored'
             || ($score['technical_failure'] ?? false) === true
-            || (isset($score['expected_item_count']) && $this->count($score['expected_item_count']) !== 30)) {
+            || (isset($score['expected_item_count']) && $this->count($score['expected_item_count']) !== $itemCount)) {
             $this->unavailable();
         }
         $correct = $this->count($summary['raw_score'] ?? null);
-        if ($correct === null || $correct > 30 || $this->count($score['raw_score'] ?? null) !== $correct) {
+        if ($correct === null || $correct > $itemCount || $this->count($score['raw_score'] ?? null) !== $correct) {
             $this->unavailable();
         }
         $dimensions = [];
+        $unmeasured = [];
         foreach (['VSPR' => 'visual_spatial_pattern_reasoning', 'VSI' => 'visual_spatial_insight', 'NPR' => 'numerical_pattern_reasoning'] as $code => $key) {
             $row = (array) ($report['dimensions'][$key] ?? []);
             $total = $this->count($row['item_count'] ?? null);
             $value = $this->count(array_key_exists('correct_count', $row) ? $row['correct_count'] : ($row['raw_score'] ?? null));
-            if ($total === null || $total < 1 || $value === null || $value > $total
+            if ($total === null || ($total === 0 && $itemCount === 30) || $value === null || $value > $total
                 || ! is_string($row['dimension_name'] ?? null) || trim($row['dimension_name']) === '') {
                 $this->unavailable();
             }
@@ -67,10 +75,15 @@ final class IqReportPdfProjection
                 || $this->count(array_key_exists('correct_count', $sourceRow) ? $sourceRow['correct_count'] : ($sourceRow['raw_score'] ?? null)) !== $value) {
                 $this->unavailable();
             }
+            if ($total === 0) {
+                $unmeasured[] = $row['dimension_name'];
+
+                continue;
+            }
             $dimensions[] = ['code' => $code, 'label' => $row['dimension_name'], 'correct' => $value,
                 'total' => $total, 'percent' => $value / $total * 100];
         }
-        if (array_sum(array_column($dimensions, 'total')) !== 30 || array_sum(array_column($dimensions, 'correct')) !== $correct) {
+        if (array_sum(array_column($dimensions, 'total')) !== $itemCount || array_sum(array_column($dimensions, 'correct')) !== $correct) {
             $this->unavailable();
         }
         $locale = (string) ($report['locale'] ?? $attempt->locale);
@@ -83,20 +96,21 @@ final class IqReportPdfProjection
             ['SPEEDING', 'STRAIGHTLINING', 'NO_VALID_ANSWERS', 'PARTIAL_COMPLETION'], true)));
 
         return [
-            'locale' => $locale, 'correct' => $correct, 'total' => 30, 'percent' => $correct / 30 * 100.0,
+            'locale' => $locale, 'correct' => $correct, 'total' => $itemCount, 'percent' => $correct / $itemCount * 100.0,
             'duration_ms' => $duration !== null && $duration > 0 && $duration < PHP_INT_MAX ? $duration : null,
             'dimensions' => $dimensions,
+            'unmeasured_dimensions' => $unmeasured,
             'quality' => in_array($quality['level'] ?? null, ['A', 'B', 'C', 'D'], true) ? $quality['level'] : null,
             'quality_flags' => $flags,
             'other_quality_flags' => count((array) ($quality['flags'] ?? [])) - count($flags),
             'stability' => in_array(data_get($report, 'stability.status'), ['stable', 'review_with_caution', 'unstable'], true)
                 ? data_get($report, 'stability.status') : null,
             'scoring_version' => $this->version($scoring['scoring_engine_version'] ?? null),
-            'reference' => $this->reference([$summary, $scoring, $report, $score], $locale),
+            'reference' => $this->reference([$summary, $scoring, $report, $score], $locale, $itemCount),
         ];
     }
 
-    private function reference(array $sources, string $locale): ?array
+    private function reference(array $sources, string $locale, int $itemCount): ?array
     {
         $atomic = static function (string $key) use ($sources): ?array {
             foreach ($sources as $source) {
@@ -111,14 +125,15 @@ final class IqReportPdfProjection
         $value = $this->number($beta['standard_score'] ?? null);
         $display = $this->count($beta['display_score'] ?? null);
         $percentile = $this->number($beta['percentile'] ?? null);
+        $model = $itemCount === 40 ? IqBetaReferenceScore::MERGED_MODEL_VERSION : IqBetaReferenceScore::MODEL_VERSION;
         if (($beta['status'] ?? '') === 'available' && ($beta['source_kind'] ?? '') === 'designed_reference'
-            && ($beta['model_version'] ?? '') === IqBetaReferenceScore::MODEL_VERSION
+            && ($beta['model_version'] ?? '') === $model
             && ($beta['production_normed'] ?? null) === false && ($beta['population_percentile_eligible'] ?? null) === false
             && $value !== null && $value >= 73 && $value <= 145 && $display === (int) floor($value + 0.5)
             && $percentile !== null && $percentile > 0 && $percentile < 100) {
             return ['kind' => 'beta_reference', 'score' => $display, 'percentile' => $percentile,
                 'minimum' => 73, 'maximum' => 145, 'source' => 'designed_reference',
-                'model_version' => IqBetaReferenceScore::MODEL_VERSION, 'norm_version' => null, 'population' => null];
+                'model_version' => $model, 'norm_version' => null, 'population' => null];
         }
         $norm = $atomic('normative_reasoning');
         $value = $this->number($norm['standard_score'] ?? null);
@@ -156,6 +171,6 @@ final class IqReportPdfProjection
 
     private function unavailable(): never
     {
-        throw new ApiProblemException(409, 'IQ_PDF_NOT_AVAILABLE', 'A complete original-30 report is not available. Keep using the result text.', headers: ['Cache-Control' => 'private, no-store']);
+        throw new ApiProblemException(409, 'IQ_PDF_NOT_AVAILABLE', 'A complete scored reasoning report is not available. Keep using the result text.', headers: ['Cache-Control' => 'private, no-store']);
     }
 }

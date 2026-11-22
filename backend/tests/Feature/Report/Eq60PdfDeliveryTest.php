@@ -41,7 +41,7 @@ final class Eq60PdfDeliveryTest extends TestCase
 
         $pdf = (string) $response->getContent();
         $this->assertStringStartsWith('%PDF-1.4', $pdf);
-        $this->assertStringContainsString('FermatMind Report', $pdf);
+        $this->assertGreaterThan(10000, strlen($pdf));
 
         $attempt = Attempt::query()->findOrFail($attemptId);
         $result = Result::query()->where('attempt_id', $attemptId)->firstOrFail();

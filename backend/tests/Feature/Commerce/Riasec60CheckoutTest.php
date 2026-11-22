@@ -132,6 +132,7 @@ final class Riasec60CheckoutTest extends TestCase
         $this->withToken($owner)->getJson(self::PATH.'/results/'.$id)->assertJsonPath('riasec_purchase.unlocked', false)->assertJsonMissingPath('riasec_public_projection_v2.deep_content_slots_v1');
         $this->assertDatabaseHas('orders', ['order_no' => $order, 'payment_state' => 'refunded']);
         $this->assertDatabaseHas('career_refund_requests', ['order_no' => $order, 'status' => 'succeeded']);
+        $this->withToken($owner)->get('/api/v0.3/attempts/'.$id.'/report.pdf')->assertForbidden();
         $this->app->instance('request', Request::create('/'));
         $this->app->call([$job, 'handle']);
         $this->assertSame(1, DB::table('events')->where('attempt_id', $id)->where('event_code', 'report_pdf_generated')->count());

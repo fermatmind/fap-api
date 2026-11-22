@@ -489,6 +489,10 @@ final class RiasecAssessmentFlowTest extends TestCase
         $this->assertContains('140q_role_card_copy:role_responsibility_card', $slotIds);
         $this->assertNotContains('140q_layer_agreement_copy:layer_agreement', $slotIds);
         $this->assertContains('structural_difference_copy:summary', $slotIds);
+        $pdf = $this->withHeaders(['X-Anon-Id' => $anonId, 'Authorization' => 'Bearer '.$token])
+            ->get("/api/v0.3/attempts/{$attemptId}/report.pdf");
+        $pdf->assertOk()->assertHeader('Content-Type', 'application/pdf')->assertHeader('X-Report-Variant', 'full');
+        $this->assertStringStartsWith('%PDF-', $pdf->getContent());
     }
 
     public function test_riasec_history_compare_guard_blocks_60_and_140_raw_delta(): void

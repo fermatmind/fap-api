@@ -8,6 +8,7 @@ use App\Models\Attempt;
 use App\Models\Result;
 use App\Repositories\Report\ReportAccessActor;
 use App\Repositories\Report\ReportSubjectRepository;
+use App\Services\Assessment\DiscReport;
 use App\Services\Assessment\Jung\JungBank;
 use App\Services\Commerce\BigFiveReportUnlockRolloutGate;
 use App\Services\Commerce\FreemiumLocalePolicy;
@@ -176,6 +177,9 @@ class ReportGatekeeper
         $scaleCode = strtoupper((string) ($attempt->scale_code ?? ''));
         if ($scaleCode === '') {
             return $this->badRequest('SCALE_REQUIRED', 'scale_code missing on attempt.');
+        }
+        if ($scaleCode === 'DISC_BEHAVIOR' && $managedWebPurchase) {
+            return app(DiscReport::class)->report($attempt, $result);
         }
         $requestedReportLocale = $this->normalizeReportLocale($reportLocale);
         $attemptReportLocale = $this->normalizeReportLocale((string) ($attempt->locale ?? config('content_packs.default_locale', 'zh-CN')));

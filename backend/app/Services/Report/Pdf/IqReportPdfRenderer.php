@@ -59,12 +59,29 @@ class IqReportPdfRenderer
             'autoScriptToLang' => true, 'autoLangToFont' => true,
             'default_font' => $view['locale'] === 'zh-CN' ? 'sun-exta' : 'dejavusans',
             'margin_left' => 18, 'margin_right' => 18, 'margin_top' => 18, 'margin_bottom' => 18]);
-        $pdf->SetTitle($view['locale'] === 'en' ? 'Original 30-item matrix reasoning report' : ($displayLocale === 'zh-TW' ? self::TAIWAN_COPY['原创30题矩阵推理报告'] : '原创30题矩阵推理报告'));
+        $pdf->SetTitle($this->title($view, $displayLocale));
         $pdf->SetAuthor('FermatMind');
         $pdf->SetHTMLFooter('<div style="text-align:right;color:#64748b;font-size:9pt">FermatMind · {PAGENO} / {nbpg}</div>');
         $pdf->WriteHTML($this->html($view, $displayLocale));
 
         return $pdf->Output('', Destination::STRING_RETURN);
+    }
+
+    private function title(array $view, ?string $displayLocale): string
+    {
+        if ($view['total'] === 40) {
+            return match ($displayLocale ?? $view['locale']) {
+                'zh-TW' => '40 題推理報告',
+                'zh-CN' => '40题推理报告',
+                default => '40-item reasoning report',
+            };
+        }
+
+        return match ($displayLocale ?? $view['locale']) {
+            'zh-TW' => self::TAIWAN_COPY['原创30题矩阵推理报告'],
+            'zh-CN' => '原创30题矩阵推理报告',
+            default => 'Original 30-item matrix reasoning report',
+        };
     }
 
     public function html(array $v, ?string $displayLocale = null): string
@@ -79,8 +96,8 @@ class IqReportPdfRenderer
         $unknown = $l('未提供', 'Not provided');
         $duration = $v['duration_ms'] === null ? $unknown : sprintf('%02d:%02d', (int) floor($v['duration_ms'] / 60000), (int) floor($v['duration_ms'] / 1000) % 60);
         $h = '<!doctype html><html lang="'.$locale.'"><head><meta charset="utf-8"><style>body{font-family:'.($zh ? 'sun-exta' : 'dejavusans').';color:#172b29;font-size:11pt;line-height:1.55}h1{font-size:25pt;color:#145344}h2{font-size:17pt;border-bottom:1px solid #bed8cf;padding-bottom:7px;page-break-after:avoid}h3{font-size:12pt;page-break-after:avoid}.note{background:#eff6f2;padding:12px}.metric{font-size:19pt;color:#145344}table{width:100%;border-collapse:collapse;margin:12px 0}td,th{padding:9px;border-bottom:1px solid #d5e3df;text-align:left}p{margin:8px 0}tr{page-break-inside:avoid}</style></head><body><p>FermatMind</p><h1>'
-            .$l('原创30题矩阵推理报告', 'Original 30-item matrix reasoning report').'</h1><h2>'.$l('本题本表现', 'Performance on this form').'</h2>'
-            .'<p class="metric">'.$v['correct'].' / 30 · '.$this->escape($this->percent($v['percent'])).'</p><p>'.$l('实际用时（分:秒）：', 'Elapsed time (mm:ss): ').$duration.'</p>'
+            .$this->escape($this->title($v, $displayLocale)).'</h1><h2>'.$l('本题本表现', 'Performance on this form').'</h2>'
+            .'<p class="metric">'.$v['correct'].' / '.$v['total'].' · '.$this->escape($this->percent($v['percent'])).'</p><p>'.$l('实际用时（分:秒）：', 'Elapsed time (mm:ss): ').$duration.'</p>'
             .'<p class="note">'.$l('正确率描述本次题目表现，不代表人群排名。逻辑与言语未独立测量；未测不等于0分。用时仅在返回时显示，不是强制时限。', 'Accuracy describes these items, not population rank. Logic and verbal ability were not separately measured; unmeasured is not zero. Elapsed time is shown only when supplied and is not a time limit.').'</p>'
             .'<h2>'.$l('已测类别的正确率', 'Accuracy in the measured categories').'</h2><p>'.$l('图表范围：0-100%；不是能力百分位。', 'Chart range: 0-100% accuracy; not ability percentiles.').'</p>';
         foreach ($v['dimensions'] as $row) {
@@ -91,6 +108,9 @@ class IqReportPdfRenderer
         $h .= '<table><thead><tr><th>'.$l('类别', 'Category').'</th><th>'.$l('正确题数 / 题数', 'Correct / items').'</th><th>'.$l('正确率', 'Accuracy').'</th></tr></thead><tbody>';
         foreach ($v['dimensions'] as $row) {
             $h .= '<tr><td>'.$this->escape($displayText($row['label'])).'</td><td>'.$row['correct'].' / '.$row['total'].'</td><td>'.$this->escape($this->percent($row['percent'])).'</td></tr>';
+        }
+        foreach ($v['unmeasured_dimensions'] ?? [] as $label) {
+            $h .= '<tr><td>'.$this->escape($displayText($label)).'</td><td colspan="2">'.$l('未独立测量', 'Not separately measured').'</td></tr>';
         }
         $h .= '<tr><td>'.$l('逻辑 / 言语', 'Logic / verbal').'</td><td colspan="2">'.$l('未独立测量', 'Not separately measured').'</td></tr></tbody></table><pagebreak /><h2>'.$l('参照与适用范围', 'Reference and scope').'</h2>';
         $r = $v['reference'];

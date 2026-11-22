@@ -7,6 +7,8 @@ namespace App\Services\Commerce;
 use App\Models\Attempt;
 use App\Models\Order;
 use App\Models\Result;
+use App\Services\Report\Pdf\CompleteAssessmentPdf;
+use App\Services\Report\Pdf\ReportPdfDocumentService;
 use Illuminate\Http\Request;
 
 /** Web-only, per-attempt purchases; old attempts keep their original access policy. */
@@ -194,6 +196,8 @@ final class MainstreamReportPurchase
         return ['ok' => true, 'attempt_id' => $attempt->id, 'scale_code' => $attempt->scale_code,
             'access_state' => $complete ? ($paid ? 'ready' : 'locked') : 'pending',
             'report_state' => $complete ? 'ready' : 'pending', 'pdf_state' => $paid ? 'ready' : 'missing',
+            'complete_pdf' => $complete && $paid && CompleteAssessmentPdf::supports((string) $attempt->scale_code),
+            ...(ReportPdfDocumentService::supportsTraditionalReportPdf($attempt) ? ['pdf_display_locales' => ['zh-TW']] : []),
             'projection_version' => 1, 'reason_code' => $paid ? 'payment_verified' : 'payment_required',
             'actions' => ['page_href' => '/result/'.$attempt->id, 'pdf_href' => $paid ? '/api/v0.3/attempts/'.$attempt->id.'/report.pdf' : null, 'wait_href' => $complete ? null : '/result/'.$attempt->id, 'history_href' => null, 'lookup_href' => '/orders/lookup'],
             'report_purchase' => $purchase,

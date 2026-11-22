@@ -1047,6 +1047,8 @@ class AttemptReadController extends Controller
                 'ok' => true, 'attempt_id' => $attempt->id,
                 'access_state' => $unlocked ? 'ready' : 'locked', 'report_state' => 'ready',
                 'pdf_state' => $unlocked ? 'ready' : 'missing', 'projection_version' => 1,
+                'complete_pdf' => $unlocked,
+                ...(ReportPdfDocumentService::supportsTraditionalReportPdf($attempt) ? ['pdf_display_locales' => ['zh-TW']] : []),
                 'reason_code' => $unlocked ? 'payment_verified' : 'payment_required',
                 'actions' => $this->reportAccessActions($attempt, $unlocked ? 'ready' : 'locked', 'ready', $unlocked ? 'ready' : 'missing'),
                 'payload' => ['locked' => ! $unlocked, 'paywall_suppressed' => false, 'free_full_report_mode' => false],
@@ -1199,6 +1201,12 @@ class AttemptReadController extends Controller
             ]);
         }
 
+        $completePdf = $accessState === 'ready' && $reportState === 'ready'
+            && \App\Services\Report\Pdf\CompleteAssessmentPdf::supports($scaleCode);
+        if ($completePdf) {
+            $pdfState = 'ready';
+        }
+
         if (ReportAccess::isIqScale($scaleCode)) {
             $pdfState = 'missing';
             if ($resultExists && $accessState === 'ready' && $reportState === 'ready') {
@@ -1270,9 +1278,9 @@ class AttemptReadController extends Controller
             'access_state' => $accessState,
             'report_state' => $reportState,
             'pdf_state' => $pdfState,
+            'complete_pdf' => $completePdf,
             ...(ReportPdfDocumentService::supportsTraditionalMbtiResultPagePdf($attempt)
-                || ReportPdfDocumentService::supportsTraditionalBigFivePdf($attempt)
-                || ($pdfState === 'ready' && ReportPdfDocumentService::supportsTraditionalIqPdf($attempt))
+                || ($pdfState === 'ready' && ReportPdfDocumentService::supportsTraditionalReportPdf($attempt))
                 ? ['pdf_display_locales' => ['zh-TW']] : []),
             'reason_code' => $reasonCode !== '' ? $reasonCode : null,
             'projection_version' => $projectionVersion,
@@ -3195,8 +3203,12 @@ class AttemptReadController extends Controller
             ], 422);
         }
         $fileName = $displayLocale === 'zh-TW'
-            ? (ReportPdfDocumentService::supportsTraditionalIqPdf($attempt) ? 'fermatmind-iq-zh-TW.pdf' : 'fermatmind-big-five-zh-TW.pdf')
-            : $this->reportPdfDocumentService->fileNameForAttempt($attempt, $gate, $result);
+            ? match (true) {
+                ReportPdfDocumentService::supportsTraditionalIqPdf($attempt) => 'fermatmind-iq-zh-TW.pdf',
+                ReportPdfDocumentService::supportsTraditionalBigFivePdf($attempt) => 'fermatmind-big-five-zh-TW.pdf',
+                default => 'fermatmind-'.strtolower($scaleCode).'-zh-TW.pdf',
+            }
+        : $this->reportPdfDocumentService->fileNameForAttempt($attempt, $gate, $result);
         if ($displayLocale === 'zh-TW') {
             $pdfMetadata['filename_hint'] = $fileName;
         }
@@ -3225,6 +3237,9 @@ class AttemptReadController extends Controller
                 ? $this->reportPdfDocumentService->getOrGenerate($attempt, $gate, $result)
                 : $this->reportPdfDocumentService->getOrGenerate($attempt, $gate, $result, $displayLocale);
         } catch (\Throwable $e) {
+            if ($e instanceof ApiProblemException && $e->errorCode() === 'COMPLETE_PDF_UNAVAILABLE') {
+                return $this->privateNoStoreJson(['ok' => false, 'error_code' => $e->errorCode(), 'message' => $e->getMessage()], $e->getStatusCode());
+            }
             if (ReportAccess::isIqScale($scaleCode)) {
                 return $this->privateNoStoreJson([
                     'ok' => false,

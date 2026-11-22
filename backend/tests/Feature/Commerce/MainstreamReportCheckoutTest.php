@@ -130,7 +130,11 @@ final class MainstreamReportCheckoutTest extends TestCase
         $this->assertTrue($outcome['ok']);
         DB::table('report_snapshots')->where('attempt_id', $id)->update([
             'status' => 'ready',
-            'report_full_json' => json_encode(['locale' => 'en', 'sections' => [['key' => 'overview']]], JSON_THROW_ON_ERROR),
+            'report_full_json' => json_encode(['locale' => 'en', '_meta' => ['enneagram_report_v2' => [
+                'candidates' => [['type_name' => 'Observer', 'score_display' => '71', 'sections' => [
+                    ['title' => 'Patterns at work', 'paragraphs' => ['Notice when pausing to ask a question clarifies the team’s next decision.']],
+                ]]],
+            ]]], JSON_THROW_ON_ERROR),
         ]);
         $this->app->call([$job, 'handle']);
 
@@ -153,6 +157,7 @@ final class MainstreamReportCheckoutTest extends TestCase
             $id = $this->withToken($token)->postJson('/api/v0.3/disc-assessment/results', $input)->assertOk()->assertJsonPath('report_purchase.unlocked', false)->json('attempt_id');
             $this->withToken($token)->postJson('/api/v0.3/disc-assessment/results', $input)->assertOk()->assertJsonPath('attempt_id', $id);
             $this->withToken($token)->getJson('/api/v0.3/attempts/'.$id.'/report')->assertOk()->assertJsonMissingPath('report.disc.profile');
+            $this->withToken($token)->get('/api/v0.3/attempts/'.$id.'/report.pdf')->assertForbidden();
             $number = $this->withToken($token)->postJson('/api/v0.3/orders', ['target_attempt_id' => $id, 'provider' => 'alipay', 'sku' => \App\Services\Commerce\MainstreamReportPurchase::skuMap()['DISC_BEHAVIOR']['CNY']])->assertOk()->json('order_no');
             $outcome = app(\App\Services\Commerce\PaymentWebhookProcessor::class)->process('alipay', ['out_trade_no' => $number, 'trade_no' => 'ali_'.$number,
                 'trade_status' => 'TRADE_SUCCESS', 'total_amount' => '2.99', 'notify_id' => 'paid_'.$number]);
@@ -160,6 +165,11 @@ final class MainstreamReportCheckoutTest extends TestCase
             $this->withToken($token)->getJson('/api/v0.3/attempts/'.$id.'/report')->assertOk()
                 ->assertJsonPath('report_purchase.unlocked', true)->assertJsonPath('report.disc.profile.id', $witness['profile_id'])
                 ->assertJsonPath('report.disc.counts', $witness['counts']);
+            $this->withToken($token)->getJson('/api/v0.3/attempts/'.$id.'/report-access')
+                ->assertOk()->assertJsonPath('complete_pdf', true);
+            $pdf = $this->withToken($token)->get('/api/v0.3/attempts/'.$id.'/report.pdf?display_locale=zh-TW')
+                ->assertOk()->assertHeader('Content-Type', 'application/pdf')->assertHeader('X-Report-Variant', 'full');
+            $this->assertStringStartsWith('%PDF-', $pdf->getContent());
         }
         $wrong = $witnesses[0]['answers'];
         unset($wrong[array_key_first($wrong)]);
@@ -252,6 +262,14 @@ final class MainstreamReportCheckoutTest extends TestCase
                 $this->assertTrue($snapshot['ok'] ?? false, json_encode($snapshot));
             }
             $report = $this->withToken($token)->getJson('/api/v0.3/attempts/'.$id.'/report')->assertOk()->assertJsonPath('report_purchase.unlocked', true)->assertJsonPath('locked', false);
+            $pdf = $this->withToken($token)->get('/api/v0.3/attempts/'.$id.'/report.pdf');
+            $this->assertSame(200, $pdf->status(), $form.' '.($pdf->status() === 200 ? '' : (string) $pdf->json('error_code')));
+            $pdf->assertHeader('Content-Type', 'application/pdf')->assertHeader('X-Report-Variant', 'full');
+            $this->assertStringStartsWith('%PDF-', $pdf->getContent());
+            $ownerKey = $this->guestKeys[$token];
+            $this->guestKeys[$token] = str_repeat($ownerKey[0] === 'a' ? 'b' : 'a', 64);
+            $this->withToken($token)->get('/api/v0.3/attempts/'.$id.'/report.pdf')->assertNotFound();
+            $this->guestKeys[$token] = $ownerKey;
             if (str_starts_with($scale, 'JUNG_')) {
                 $report->assertJsonStructure(['report' => ['jung' => ['scores', 'reading' => ['archetypes', 'functions']]]]);
             } else {
@@ -304,6 +322,11 @@ final class MainstreamReportCheckoutTest extends TestCase
                     'order_no' => $number, 'user_id' => null, 'anon_id' => $attempt->anon_id]);
                 $this->assertTrue($snapshot['ok'] ?? false, $scale.' '.$form.' '.json_encode($snapshot));
                 $this->withToken($token)->getJson('/api/v0.3/attempts/'.$id.'/report')->assertOk()->assertJsonPath('locked', false)->assertJsonPath('report_purchase.unlocked', true)->assertJsonMissingPath('meta.snapshot_error');
+                if ($scale === 'BIG5_OCEAN') {
+                    $pdf = $this->withToken($token)->get('/api/v0.3/attempts/'.$id.'/report.pdf')
+                        ->assertOk()->assertHeader('Content-Type', 'application/pdf')->assertHeader('X-Report-Variant', 'full');
+                    $this->assertStringStartsWith('%PDF-', $pdf->getContent());
+                }
             }
         }
     }
