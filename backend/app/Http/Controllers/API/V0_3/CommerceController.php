@@ -145,7 +145,8 @@ class CommerceController extends Controller
                 $targetAttemptId,
                 (string) $payload['sku'],
                 (int) ($payload['quantity'] ?? 1),
-                $idempotentVirtualOrder
+                $idempotentVirtualOrder,
+                purchaseActor: $purchaseActor,
             );
             if (($eligibility['ok'] ?? false) !== true) {
                 return response()->json($eligibility, (int) ($eligibility['status'] ?? 422));
@@ -223,7 +224,8 @@ class CommerceController extends Controller
                 $targetAttemptId,
                 (string) $payload['sku'],
                 (int) ($payload['quantity'] ?? 1),
-                $result['order']
+                $result['order'],
+                $purchaseActor,
             );
             if (($postCreateEligibility['ok'] ?? false) !== true) {
                 return response()->json(

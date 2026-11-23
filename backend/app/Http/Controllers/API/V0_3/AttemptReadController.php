@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\API\V0_3;
 
+use App\DTO\Commerce\PurchaseActor;
 use App\Exceptions\Api\ApiProblemException;
 use App\Http\Controllers\API\V0_3\Concerns\ResolvesAttemptOwnership;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PurchaseRequestActor;
 use App\Models\Attempt;
 use App\Models\AttemptInviteUnlock;
 use App\Models\Result;
@@ -218,6 +220,7 @@ class AttemptReadController extends Controller
                 $this->currentOrgContext()->role(),
                 false,
                 false,
+                purchaseActor: PurchaseRequestActor::from($request, $attempt),
             );
 
             if (! ($gate['ok'] ?? false)) {
@@ -319,7 +322,7 @@ class AttemptReadController extends Controller
 
         $hasBigFiveProjectionFullAccess = $scaleCode === 'BIG5_OCEAN'
             && $attempt instanceof Attempt
-            && $this->hasBigFiveFullAccess($request, $orgId, (string) $attempt->id, $readUserId, $readAnonId);
+            && $this->hasBigFiveFullAccess($request, $orgId, $attempt, $readUserId, $readAnonId);
         $big5Report = $scaleCode === 'BIG5_OCEAN' && $attempt instanceof Attempt
             ? $this->bigFiveReportComposer->composeVariant(
                 $attempt,
@@ -620,6 +623,7 @@ class AttemptReadController extends Controller
             $this->currentOrgContext()->role(),
             $this->shouldUsePublicArtifactFallback($request, $attempt),
             $forceRefresh,
+            PurchaseRequestActor::from($request, $attempt),
             $requestedReportLocale,
         );
 
@@ -977,6 +981,7 @@ class AttemptReadController extends Controller
             $this->currentOrgContext()->role(),
             $this->shouldUsePublicArtifactFallback($request, $attempt),
             false,
+            PurchaseRequestActor::from($request, $attempt),
             $requestedReportLocale,
         );
 
@@ -1160,13 +1165,14 @@ class AttemptReadController extends Controller
                 (string) $attempt->id,
                 $readUserId,
                 $readAnonId,
-                $this->currentOrgContext()->role()
+                $this->currentOrgContext()->role(),
+                PurchaseRequestActor::from($request, $attempt),
             )
             : ['ok' => false];
         $freeFullReportModeEnabled = ($freeFullReportModeGate['ok'] ?? false) === true
             && ! (bool) ($freeFullReportModeGate['locked'] ?? true)
             && (bool) ($freeFullReportModeGate['free_full_report_mode'] ?? false);
-        $hasBigFiveFullAccess = $isBigFive && $resultExists && $this->hasBigFiveFullAccess($request, $orgId, (string) $attempt->id, $readUserId, $readAnonId);
+        $hasBigFiveFullAccess = $isBigFive && $resultExists && $this->hasBigFiveFullAccess($request, $orgId, $attempt, $readUserId, $readAnonId);
         if (($hasBigFiveFullAccess || $isEq60 || $isEnneagram || $isRiasec) && $resultExists) {
             $accessState = 'ready';
             $reportState = 'ready';
@@ -1241,7 +1247,8 @@ class AttemptReadController extends Controller
                 $iqResult = Result::where('org_id', $orgId)->where('attempt_id', $attempt->id)->first();
                 if ($iqResult instanceof Result) {
                     $iqGate = $this->reportGatekeeper->resolve($orgId, (string) $attempt->id,
-                        $readUserId !== null ? (string) $readUserId : null, $readAnonId, $this->currentOrgContext()->role(), false, false);
+                        $readUserId !== null ? (string) $readUserId : null, $readAnonId, $this->currentOrgContext()->role(), false, false,
+                        purchaseActor: PurchaseRequestActor::from($request, $attempt));
                     try {
                         app(\App\Services\Report\Pdf\IqReportPdfProjection::class)->project($attempt, $iqResult, $iqGate);
                         $pdfState = 'ready';
@@ -1789,16 +1796,17 @@ class AttemptReadController extends Controller
     private function hasBigFiveFullAccess(
         Request $request,
         int $orgId,
-        string $attemptId,
+        Attempt $attempt,
         ?string $userId = null,
         ?string $anonId = null
     ): bool {
         $gate = $this->reportGatekeeper->ensureAccess(
             $orgId,
-            $attemptId,
+            (string) $attempt->id,
             $userId ?? $this->resolveUserId($request),
             $anonId ?? $this->resolveAnonId($request),
-            $this->currentOrgContext()->role()
+            $this->currentOrgContext()->role(),
+            PurchaseRequestActor::from($request, $attempt),
         );
 
         if (! ($gate['ok'] ?? false)) {
@@ -1993,6 +2001,7 @@ class AttemptReadController extends Controller
         ?string $role,
         bool $forceSystemAccess,
         bool $forceRefresh,
+        PurchaseActor $purchaseActor,
         ?string $reportLocale = null
     ): array {
         $gate = $this->reportGatekeeper->resolve(
@@ -2004,6 +2013,7 @@ class AttemptReadController extends Controller
             $forceSystemAccess,
             $forceRefresh,
             $reportLocale,
+            $purchaseActor,
         );
 
         if ($gate['ok'] ?? false) {
@@ -2118,6 +2128,7 @@ class AttemptReadController extends Controller
             $this->currentOrgContext()->role(),
             false,
             false,
+            purchaseActor: PurchaseRequestActor::from($request, $attempt),
         );
 
         if (! ($gate['ok'] ?? false)) {
@@ -3193,6 +3204,7 @@ class AttemptReadController extends Controller
             $this->currentOrgContext()->role(),
             false,
             false,
+            purchaseActor: PurchaseRequestActor::from($request, $attempt),
         );
 
         if (! ($gate['ok'] ?? false)) {
@@ -3383,6 +3395,7 @@ class AttemptReadController extends Controller
             $this->currentOrgContext()->role(),
             false,
             false,
+            purchaseActor: PurchaseRequestActor::from($request, $attempt),
         );
 
         if (! ($gate['ok'] ?? false)) {

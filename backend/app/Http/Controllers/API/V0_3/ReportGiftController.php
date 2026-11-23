@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\API\V0_3;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PurchaseRequestActor;
 use App\Services\Commerce\ReportGiftService;
 use App\Support\OrgContext;
 use Illuminate\Http\JsonResponse;
@@ -23,7 +24,8 @@ final class ReportGiftController extends Controller
             $this->orgContext->orgId(),
             $this->userId(),
             $this->anonId($request),
-            $id
+            $id,
+            PurchaseRequestActor::from($request),
         );
 
         return $this->respond($result, 201);
@@ -79,7 +81,8 @@ final class ReportGiftController extends Controller
             $this->userId(),
             $this->anonId($request),
             $idempotencyKey,
-            $this->requestId($request)
+            $this->requestId($request),
+            PurchaseRequestActor::from($request),
         );
         if (($reserved['ok'] ?? false) !== true || ! is_object($reserved['order'] ?? null)) {
             return $this->respond($reserved);

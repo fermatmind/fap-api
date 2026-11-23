@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Commerce;
 
+use App\DTO\Commerce\PurchaseActor;
 use App\Services\Commerce\PaymentGateway\AppleIapGateway;
 use Illuminate\Http\Request;
 
@@ -18,7 +19,8 @@ final class AppleIapPaymentService
         ?string $targetAttemptId,
         string $sku,
         int $quantity,
-        ?object $idempotentOrder = null
+        ?object $idempotentOrder = null,
+        ?PurchaseActor $purchaseActor = null,
     ): array {
         return $this->wechatVirtual->validateOrderEligibility(
             $orgId,
@@ -28,7 +30,8 @@ final class AppleIapPaymentService
             $sku,
             $quantity,
             $idempotentOrder,
-            AppleIapGateway::PROVIDER
+            AppleIapGateway::PROVIDER,
+            $purchaseActor,
         );
     }
 

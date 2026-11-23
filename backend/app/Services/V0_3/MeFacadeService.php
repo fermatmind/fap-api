@@ -2,6 +2,7 @@
 
 namespace App\Services\V0_3;
 
+use App\DTO\Commerce\PurchaseActor;
 use App\Exceptions\Api\ApiProblemException;
 use App\Mail\EmailBindingVerificationMail;
 use App\Services\Auth\IdentityService;
@@ -30,8 +31,13 @@ class MeFacadeService
         private readonly PiiCipher $piiCipher,
     ) {}
 
-    public function listAttempts(int $pageSize, int $page = 1, ?string $scaleCode = null, ?string $locale = null): array
-    {
+    public function listAttempts(
+        int $pageSize,
+        int $page = 1,
+        ?string $scaleCode = null,
+        ?string $locale = null,
+        ?PurchaseActor $purchaseActor = null,
+    ): array {
         $userId = $this->orgContext->userId();
 
         return $this->attemptsService->list(
@@ -41,7 +47,8 @@ class MeFacadeService
             $this->normalizePageSize($pageSize),
             max(1, $page),
             $scaleCode,
-            $locale
+            $locale,
+            $purchaseActor,
         );
     }
 

@@ -231,9 +231,12 @@ final class MainstreamReportCheckoutTest extends TestCase
         $this->flushHeaders();
         $this->getJson('/api/v0.3/attempts/'.$id.'/report-access?access_token='.urlencode($printToken))->assertOk()->assertJsonPath('report_purchase.unlocked', false);
         $request = \Illuminate\Http\Request::create('/api/v0.3/attempts/'.$id.'/report', 'GET', ['access_token' => $printToken]);
-        $this->assertSame('guest:'.$attempt->anon_id, app(\App\Services\Commerce\MainstreamReportPurchase::class)->trustedReadOwner($request, $attempt));
+        $readActor = PurchaseRequestActor::from($request, $attempt);
+        $purchase = app(\App\Services\Commerce\MainstreamReportPurchase::class);
+        $this->assertSame('guest:'.$attempt->anon_id, $purchase->ownerForReport($readActor, $attempt));
+        $this->assertSame($id, $readActor->trustedReadAttemptId);
         $request = \Illuminate\Http\Request::create('/api/v0.3/attempts/'.$id.'/report', 'POST', ['access_token' => $printToken]);
-        $this->assertNull(app(\App\Services\Commerce\MainstreamReportPurchase::class)->trustedReadOwner($request, $attempt));
+        $this->assertNull(PurchaseRequestActor::trustedReadOwner($request, $attempt));
     }
 
     public function test_submit_requires_the_private_header_for_a_managed_guest_attempt(): void
@@ -452,6 +455,12 @@ final class MainstreamReportCheckoutTest extends TestCase
         $this->assertStringNotContainsString('NEVER_TRANSPORT_THIS', $response->getContent());
         $this->assertStringContainsString($id, $response->getContent());
         $this->withToken($token)->withHeader('X-Career-Guest-Token', str_repeat('0', 64))->getJson('/api/v0.3/me/attempts')->assertOk()->assertJsonMissing(['attempt_id' => $id]);
+        $this->withHeader('X-Career-Guest-Token', '')->json('GET', '/api/v0.3/me/attempts?scale_code=MBTI', [
+            'guest_purchase_token' => $this->guestKeys[$token],
+        ])->assertOk()->assertJsonMissing(['attempt_id' => $id])->assertJsonPath('history_compare', null);
+        $this->json('GET', '/api/v0.3/attempts/'.$id.'/report', [
+            'guest_purchase_token' => $this->guestKeys[$token],
+        ])->assertNotFound();
         $attempt = \App\Models\Attempt::withoutGlobalScopes()->findOrFail($id);
         $result = \App\Models\Result::withoutGlobalScopes()->where('attempt_id', $id)->firstOrFail();
         $summary = app(\App\Services\V0_3\ShareService::class)->buildPublicSummaryPayload($attempt, $result);
@@ -460,6 +469,20 @@ final class MainstreamReportCheckoutTest extends TestCase
         $this->assertFalse($summary['compare_enabled']);
         $this->assertStringNotContainsString('NEVER_TRANSPORT_THIS', json_encode($summary));
         $this->withToken($token)->postJson('/api/v0.3/attempts/'.$id.'/share')->assertForbidden();
+    }
+
+    public function test_report_gate_uses_explicit_guest_context_when_an_http_request_is_bound(): void
+    {
+        $token = $this->token(true);
+        $id = $this->fixture($token, 'BIG5_OCEAN', 90, 'en');
+        $this->withToken($token)->getJson('/api/v0.3/attempts/'.$id.'/report')->assertOk();
+        $attempt = \App\Models\Attempt::withoutGlobalScopes()->findOrFail($id);
+        $actor = PurchaseRequestActor::from(request(), $attempt);
+        $gate = app(\App\Services\Report\ReportGatekeeper::class);
+        $this->assertTrue($gate->ensureAccess(0, $id, null, $attempt->anon_id, purchaseActor: $actor)['locked']);
+
+        $this->expectException(\Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class);
+        $gate->ensureAccess(0, $id, null, $attempt->anon_id);
     }
 
     private function fixture(string $token, string $scale, int $count, string $locale): string

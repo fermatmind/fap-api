@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Commerce;
 
+use App\DTO\Commerce\PurchaseActor;
 use App\Models\Order;
 use App\Models\PaymentAttempt;
 use App\Services\Commerce\PaymentGateway\AppleIapGateway;
@@ -42,7 +43,8 @@ final class WechatMiniVirtualPaymentService
         string $sku,
         int $quantity,
         ?object $idempotentOrder = null,
-        string $provider = WechatMiniVirtualGateway::PROVIDER
+        string $provider = WechatMiniVirtualGateway::PROVIDER,
+        ?PurchaseActor $purchaseActor = null,
     ): array {
         if ($targetAttemptId === null || trim($targetAttemptId) === '') {
             return $this->error('ATTEMPT_REQUIRED', 'target_attempt_id is required.', 422);
@@ -129,7 +131,8 @@ final class WechatMiniVirtualPaymentService
             $orgId,
             trim($targetAttemptId),
             $userId,
-            $anonId
+            $anonId,
+            purchaseActor: $purchaseActor,
         );
         if (($access['ok'] ?? false) !== true) {
             return $this->error(

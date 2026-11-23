@@ -60,11 +60,6 @@ final class MainstreamReportPurchase
             && data_get($attempt->answers_summary_json, 'meta.web_report_commerce') === 'v1';
     }
 
-    public function guestOwns(Request $request, Attempt $attempt): bool
-    {
-        return $this->matchesGuest(PurchaseRequestActor::guestAnonId($request), $attempt);
-    }
-
     public function matchesGuest(?string $actual, Attempt $attempt): bool
     {
         $expected = data_get($attempt->answers_summary_json, 'meta.web_report_guest_owner');
@@ -75,7 +70,7 @@ final class MainstreamReportPurchase
     public function owner(Request $request, Attempt $attempt): string
     {
         abort_unless((int) $request->attributes->get('fm_org_id', 0) === 0, 404);
-        if (($reader = $this->trustedReadOwner($request, $attempt)) !== null) {
+        if (($reader = PurchaseRequestActor::trustedReadOwner($request, $attempt)) !== null) {
             return $reader;
         }
 
@@ -96,26 +91,17 @@ final class MainstreamReportPurchase
         return 'guest:'.$anon;
     }
 
-    public function trustedReadOwner(Request $request, Attempt $attempt): ?string
+    public function ownerForReport(PurchaseActor $actor, Attempt $attempt): string
     {
-        if (! $request->isMethod('GET') || ! preg_match('~^api/v0\.3/attempts/'.preg_quote((string) $attempt->id, '~').'/(result|report|report-access)$~D', $request->path())) {
-            return null;
-        }
-        $actor = app(\App\Services\Results\ResultEmailReadAccessService::class)->tokenActorForRequest($request, 0, (string) $attempt->id);
-        if (is_array($actor) && (($attempt->user_id !== null && (string) $actor['user_id'] === (string) $attempt->user_id)
-            || ($attempt->user_id === null && is_string($actor['anon_id']) && hash_equals((string) $attempt->anon_id, $actor['anon_id'])))) {
-            return $attempt->user_id !== null ? (string) $attempt->user_id : 'guest:'.$attempt->anon_id;
-        }
-        $token = $request->header('X-Result-Access-Token') ?? $request->query('result_access_token') ?? $request->query('access_token');
-        if (! is_string($token) || $token === '') {
-            return null;
-        }
-        $grant = app(\App\Services\Report\Pdf\ResultPagePdfTokenService::class)->verifyMbtiResultPageExport($token, 0, (string) $attempt->id);
-        if (is_array($grant) && ($grant['entitlement'] ?? '') === 'unlocked') {
-            return $attempt->user_id !== null ? (string) $attempt->user_id : 'guest:'.$attempt->anon_id;
+        abort_unless($actor->orgId === 0, 404);
+        if ($actor->trustedReadOwner !== null && $actor->trustedReadAttemptId === (string) $attempt->id) {
+            $owner = $attempt->user_id !== null ? (string) $attempt->user_id : 'guest:'.$attempt->anon_id;
+            if (hash_equals($owner, $actor->trustedReadOwner)) {
+                return $owner;
+            }
         }
 
-        return null;
+        return $this->ownerForActor($actor, $attempt);
     }
 
     public function eligible(Attempt $attempt): bool
@@ -140,7 +126,16 @@ final class MainstreamReportPurchase
 
     public function purchase(Request $request, Attempt $attempt): array
     {
-        $owner = $this->owner($request, $attempt);
+        return $this->purchaseForOwner($attempt, $this->owner($request, $attempt));
+    }
+
+    public function purchaseForActor(PurchaseActor $actor, Attempt $attempt): array
+    {
+        return $this->purchaseForOwner($attempt, $this->ownerForActor($actor, $attempt));
+    }
+
+    private function purchaseForOwner(Attempt $attempt, string $owner): array
+    {
         $commerce = app(CareerAssessmentPurchase::class);
         $unlocked = $commerce->hasAccess((string) $attempt->id, $owner);
         $order = $commerce->latestOrder((string) $attempt->id);

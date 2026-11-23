@@ -2,6 +2,7 @@
 
 namespace App\Services\V0_3\Me;
 
+use App\DTO\Commerce\PurchaseActor;
 use App\Exceptions\Api\ApiProblemException;
 use App\Models\Attempt;
 use App\Models\ReportSnapshot;
@@ -91,12 +92,14 @@ class MeAttemptsService
         int $pageSize,
         int $page,
         ?string $scaleCode = null,
-        ?string $locale = null
+        ?string $locale = null,
+        ?PurchaseActor $purchaseActor = null,
     ): array {
         if ($userId === null && $anonId === null) {
             throw new ApiProblemException(401, 'UNAUTHORIZED', 'Missing or invalid fm_token.');
         }
 
+        $purchaseActor ??= new PurchaseActor($orgId, $userId, $anonId);
         $query = Attempt::query()->where('org_id', $orgId);
         $normalizedScaleCode = strtoupper(trim((string) $scaleCode));
         if ($normalizedScaleCode !== '') {
@@ -304,10 +307,10 @@ class MeAttemptsService
             }
             $webPurchase = app(\App\Services\Commerce\MainstreamReportPurchase::class);
             if ($webPurchase->managed($attempt)) {
-                if ($userId === null && ! $webPurchase->guestOwns(request(), $attempt)) {
+                if ($userId === null && ! $webPurchase->matchesGuest($purchaseActor->guestAnonId, $attempt)) {
                     continue;
                 }
-                $purchase = $webPurchase->purchase(request(), $attempt);
+                $purchase = $webPurchase->purchaseForActor($purchaseActor, $attempt);
                 $presented = array_intersect_key($presented, array_flip(['attempt_id', 'scale_code', 'scale_version', 'type_code', 'has_result', 'is_submitted', 'question_count', 'region', 'locale', 'submitted_at', 'mbti_form_v1', 'big5_form_v1', 'enneagram_form_v1']));
                 $presented['report_purchase'] = $purchase;
                 $presented['access_summary'] = ['access_state' => $purchase['unlocked'] ? 'ready' : 'locked',

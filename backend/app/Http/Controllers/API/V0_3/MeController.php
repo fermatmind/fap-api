@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\V0_3;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PurchaseRequestActor;
 use App\Http\Requests\V0_3\MeAttemptsIndexRequest;
 use App\Services\V0_3\MeFacadeService;
 use Illuminate\Http\JsonResponse;
@@ -17,7 +18,8 @@ class MeController extends Controller
             $request->pageSize(),
             $request->page(),
             $request->scaleCode(),
-            is_string($request->query('locale')) ? $request->query('locale') : null
+            is_string($request->query('locale')) ? $request->query('locale') : null,
+            PurchaseRequestActor::from($request),
         );
 
         return response()->json(array_merge(['ok' => true], $result), 200);

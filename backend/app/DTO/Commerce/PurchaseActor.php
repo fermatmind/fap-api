@@ -11,5 +11,7 @@ final readonly class PurchaseActor
         public ?string $userId = null,
         public ?string $anonId = null,
         public ?string $guestAnonId = null,
+        public ?string $trustedReadAttemptId = null,
+        public ?string $trustedReadOwner = null,
     ) {}
 }

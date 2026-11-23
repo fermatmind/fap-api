@@ -59,7 +59,8 @@ class ReportGatekeeper
         string $attemptId,
         ?string $userId,
         ?string $anonId,
-        ?string $role = null
+        ?string $role = null,
+        ?PurchaseActor $purchaseActor = null,
     ): array {
         $attemptId = trim($attemptId);
         if ($attemptId === '') {
@@ -76,10 +77,11 @@ class ReportGatekeeper
         /** @var Result $result */
         $result = $subject['result'];
         $effectiveOrgId = (int) ($subject['org_id'] ?? $orgId);
+        $purchaseActor ??= new PurchaseActor($orgId);
 
         $webPurchase = app(\App\Services\Commerce\MainstreamReportPurchase::class);
         if ($webPurchase->managed($attempt)) {
-            $owner = $webPurchase->owner(request(), $attempt);
+            $owner = $webPurchase->ownerForReport($purchaseActor, $attempt);
             $paid = app(\App\Services\Commerce\CareerAssessmentPurchase::class)->hasAccess((string) $attempt->id, $owner);
 
             return ['ok' => true, 'locked' => ! $paid, 'access_source' => 'payment',
@@ -88,7 +90,7 @@ class ReportGatekeeper
 
         $riasecPurchase = app(\App\Services\Commerce\RiasecReportPurchase::class);
         if ($riasecPurchase->managed($attempt)) {
-            $owner = $riasecPurchase->owner(request(), $attempt);
+            $owner = $riasecPurchase->ownerForActor($purchaseActor, $attempt);
             $paid = app(\App\Services\Commerce\CareerAssessmentPurchase::class)->hasAccess((string) $attempt->id, $owner);
 
             return ['ok' => true, 'locked' => ! $paid, 'access_source' => 'payment',
@@ -162,19 +164,18 @@ class ReportGatekeeper
         /** @var Result $result */
         $result = $subject['result'];
         $effectiveOrgId = (int) ($subject['org_id'] ?? $orgId);
+        $purchaseActor ??= new PurchaseActor($orgId);
 
         $webPurchase = app(\App\Services\Commerce\MainstreamReportPurchase::class);
         $managedWebPurchase = $webPurchase->managed($attempt);
         if (! $forceSystemAccess && $managedWebPurchase) {
-            $owner = $webPurchase->owner(request(), $attempt);
+            $owner = $webPurchase->ownerForReport($purchaseActor, $attempt);
             abort_unless(app(\App\Services\Commerce\CareerAssessmentPurchase::class)->hasAccess((string) $attempt->id, $owner), 403, 'Payment is required.');
         }
 
         $riasecPurchase = app(\App\Services\Commerce\RiasecReportPurchase::class);
         if (! $forceSystemAccess && $riasecPurchase->managed($attempt)) {
-            $owner = $purchaseActor !== null
-                ? $riasecPurchase->ownerForActor($purchaseActor, $attempt)
-                : $riasecPurchase->owner(request(), $attempt);
+            $owner = $riasecPurchase->ownerForActor($purchaseActor, $attempt);
             abort_unless(app(\App\Services\Commerce\CareerAssessmentPurchase::class)->hasAccess((string) $attempt->id, $owner), 403, 'Payment is required.');
         }
 

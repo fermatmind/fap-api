@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Commerce;
 
+use App\DTO\Commerce\PurchaseActor;
 use App\Models\Order;
 use App\Models\PaymentAttempt;
 use App\Services\Payments\PaymentProviderRegistry;
@@ -45,7 +46,8 @@ final class ReportGiftService
         int $orgId,
         ?string $userId,
         ?string $anonId,
-        string $attemptId
+        string $attemptId,
+        ?PurchaseActor $purchaseActor = null,
     ): array {
         if (! $this->giftAvailable() || ! $this->paymentProviders->isEnabled(self::PROVIDER)) {
             return $this->error('GIFT_UNAVAILABLE', 'report gifting is unavailable.', 403);
@@ -53,8 +55,8 @@ final class ReportGiftService
 
         $attemptId = trim($attemptId);
 
-        return DB::transaction(function () use ($orgId, $userId, $anonId, $attemptId): array {
-            return $this->createRequestLocked($orgId, $userId, $anonId, $attemptId);
+        return DB::transaction(function () use ($orgId, $userId, $anonId, $attemptId, $purchaseActor): array {
+            return $this->createRequestLocked($orgId, $userId, $anonId, $attemptId, $purchaseActor);
         });
     }
 
@@ -65,7 +67,8 @@ final class ReportGiftService
         int $orgId,
         ?string $userId,
         ?string $anonId,
-        string $attemptId
+        string $attemptId,
+        ?PurchaseActor $purchaseActor,
     ): array {
         $attempt = DB::table('attempts')
             ->where('org_id', $orgId)
@@ -102,7 +105,8 @@ final class ReportGiftService
             $this->normalizeActorId($attempt->anon_id ?? null),
             $attemptId,
             $sku,
-            1
+            1,
+            purchaseActor: $purchaseActor,
         );
         if (($eligibility['ok'] ?? false) !== true) {
             return $eligibility;
@@ -266,7 +270,8 @@ final class ReportGiftService
         ?string $payerUserId,
         ?string $payerAnonId,
         string $idempotencyKey,
-        ?string $requestId = null
+        ?string $requestId = null,
+        ?PurchaseActor $purchaseActor = null,
     ): array {
         if (! $this->giftAvailable() || ! $this->paymentProviders->isEnabled(self::PROVIDER)) {
             return $this->error('GIFT_PAYMENT_UNAVAILABLE', 'gift payment is unavailable.', 403);
@@ -285,7 +290,8 @@ final class ReportGiftService
             $payerUserId,
             $payerAnonId,
             $idempotencyKey,
-            $requestId
+            $requestId,
+            $purchaseActor,
         ): array {
             $gift = DB::table('report_gift_requests')
                 ->where('public_token_hash', $this->tokenHash($token))
@@ -330,7 +336,8 @@ final class ReportGiftService
                 $this->normalizeActorId($gift->recipient_anon_id ?? null),
                 (string) $gift->target_attempt_id,
                 (string) $gift->sku,
-                1
+                1,
+                purchaseActor: $purchaseActor,
             );
             if (($eligibility['ok'] ?? false) !== true) {
                 return $eligibility;

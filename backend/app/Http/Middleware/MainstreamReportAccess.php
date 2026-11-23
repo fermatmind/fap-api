@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
+use App\Http\Requests\PurchaseRequestActor;
 use App\Models\Attempt;
 use App\Services\Commerce\MainstreamReportPurchase;
 use Closure;
@@ -77,7 +78,7 @@ final class MainstreamReportAccess
 
             return $response;
         };
-        if ($commerce->trustedReadOwner($request, $attempt) !== null) {
+        if (PurchaseRequestActor::trustedReadOwner($request, $attempt) !== null) {
             return $guard($request);
         }
 
