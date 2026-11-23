@@ -7,6 +7,7 @@ namespace Tests\Feature\Ops;
 use App\Filament\Ops\Widgets\CommerceKpiWidget;
 use App\Support\OrgContext;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Carbon;
 use ReflectionMethod;
 use Tests\Feature\Ops\Support\InteractsWithCommerceOpsWorkbench;
 use Tests\TestCase;
@@ -15,6 +16,20 @@ final class CommerceKpiExceptionSummaryTest extends TestCase
 {
     use InteractsWithCommerceOpsWorkbench;
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->travelTo(Carbon::parse('2026-06-15 12:00:00', 'UTC'));
+    }
+
+    protected function tearDown(): void
+    {
+        $this->travelBack();
+
+        parent::tearDown();
+    }
 
     public function test_commerce_kpi_widget_uses_exception_oriented_summary(): void
     {
@@ -57,21 +72,8 @@ final class CommerceKpiExceptionSummaryTest extends TestCase
             'with_grant' => false,
         ]);
 
-        $context = app(OrgContext::class);
-        $context->set($orgId, null, null, null, OrgContext::KIND_TENANT);
-        app()->instance(OrgContext::class, $context);
-
-        $widget = app(CommerceKpiWidget::class);
-        $method = new ReflectionMethod($widget, 'getStats');
-        $method->setAccessible(true);
-        $stats = $method->invoke($widget);
-
-        $labels = array_map(fn ($stat): string => (string) $stat->getLabel(), $stats);
-        $valuesByLabel = [];
-        foreach ($stats as $stat) {
-            $valuesByLabel[(string) $stat->getLabel()] = (string) $stat->getValue();
-        }
-
+        $valuesByLabel = $this->statValuesForOrg($orgId);
+        $labels = array_keys($valuesByLabel);
         $this->assertContains('Pending unresolved', $labels);
         $this->assertContains('Paid without grant', $labels);
         $this->assertContains('Compensated today', $labels);
@@ -79,6 +81,27 @@ final class CommerceKpiExceptionSummaryTest extends TestCase
         $this->assertSame('2', $valuesByLabel['Pending unresolved'] ?? null);
         $this->assertSame('1', $valuesByLabel['Paid without grant'] ?? null);
         $this->assertSame('1', $valuesByLabel['Compensated today'] ?? null);
+    }
+
+    public function test_commerce_kpi_widget_switches_paid_order_dates_at_utc_midnight(): void
+    {
+        $orgId = 75;
+        $this->seedCommerceOpsChain($orgId, 'ord_before_utc_midnight', [
+            'paid_at' => Carbon::parse('2026-06-15 23:59:59', 'UTC'),
+        ]);
+        $this->seedCommerceOpsChain($orgId, 'ord_at_utc_midnight', [
+            'paid_at' => Carbon::parse('2026-06-16 00:00:00', 'UTC'),
+        ]);
+        $this->seedCommerceOpsChain($orgId, 'ord_after_utc_midnight', [
+            'paid_at' => Carbon::parse('2026-06-16 00:03:00', 'UTC'),
+        ]);
+
+        $label = __('ops.widgets.paid_orders_today');
+        $this->travelTo(Carbon::parse('2026-06-15 23:55:00', 'UTC'));
+        $this->assertSame('1', $this->statValuesForOrg($orgId)[$label] ?? null);
+
+        $this->travelTo(Carbon::parse('2026-06-16 00:05:00', 'UTC'));
+        $this->assertSame('2', $this->statValuesForOrg($orgId)[$label] ?? null);
     }
 
     public function test_commerce_kpi_widget_includes_public_realm_orders_in_selected_org_summary(): void
@@ -92,6 +115,8 @@ final class CommerceKpiExceptionSummaryTest extends TestCase
             'paid_at' => now()->subMinutes(12),
         ]);
 
+        $this->assertSame('1', $this->statValuesForOrg($orgId)[__('ops.widgets.paid_orders_today')] ?? null);
+
         $this->seedCommerceOpsChain(0, 'ord_public_paid_today_ops', [
             'payment_state' => 'paid',
             'grant_state' => 'granted',
@@ -102,22 +127,18 @@ final class CommerceKpiExceptionSummaryTest extends TestCase
             'signature_ok' => 0,
         ]);
 
-        $context = app(OrgContext::class);
-        $context->set($orgId, null, null, null, OrgContext::KIND_TENANT);
-        app()->instance(OrgContext::class, $context);
+        $valuesWithPublicOrders = $this->statValuesForOrg($orgId);
+        $this->assertSame('2', $valuesWithPublicOrders[__('ops.widgets.paid_orders_today')] ?? null);
+        $this->assertSame('1', $valuesWithPublicOrders[__('ops.widgets.webhook_failures')] ?? null);
 
-        $widget = app(CommerceKpiWidget::class);
-        $method = new ReflectionMethod($widget, 'getStats');
-        $method->setAccessible(true);
-        $stats = $method->invoke($widget);
+        $this->seedCommerceOpsChain(76, 'ord_other_tenant_paid_today_ops', [
+            'paid_at' => now()->subMinutes(6),
+            'payment_event_status' => 'failed',
+            'payment_event_handle_status' => 'failed',
+            'signature_ok' => 0,
+        ]);
 
-        $valuesByLabel = [];
-        foreach ($stats as $stat) {
-            $valuesByLabel[(string) $stat->getLabel()] = (string) $stat->getValue();
-        }
-
-        $this->assertSame('2', $valuesByLabel[__('ops.widgets.paid_orders_today')] ?? null);
-        $this->assertSame('1', $valuesByLabel[__('ops.widgets.webhook_failures')] ?? null);
+        $this->assertSame($valuesWithPublicOrders, $this->statValuesForOrg($orgId));
     }
 
     public function test_commerce_kpi_widget_uses_placeholder_when_no_org_is_selected(): void
@@ -141,5 +162,22 @@ final class CommerceKpiExceptionSummaryTest extends TestCase
         }
 
         $this->assertSame(__('ops.widgets.select_org_to_view_metrics'), (string) $stats[1]->getDescription());
+    }
+
+    /** @return array<string, string> */
+    private function statValuesForOrg(int $orgId): array
+    {
+        $context = app(OrgContext::class);
+        $context->set($orgId, null, null, null, OrgContext::KIND_TENANT);
+        app()->instance(OrgContext::class, $context);
+
+        $widget = app(CommerceKpiWidget::class);
+        $method = new ReflectionMethod($widget, 'getStats');
+        $valuesByLabel = [];
+        foreach ($method->invoke($widget) as $stat) {
+            $valuesByLabel[(string) $stat->getLabel()] = (string) $stat->getValue();
+        }
+
+        return $valuesByLabel;
     }
 }
