@@ -122,9 +122,12 @@ final class MainstreamReportCheckoutTest extends TestCase
                 ->assertJsonMissingPath('report')->json('result_visibility_receipt');
             $this->assertIsString($receipt);
             $body = ['receipt' => $receipt, 'consent_state' => 'granted'];
-            $this->withHeader('User-Agent', 'Mozilla/5.0 (Linux; Android 13; wv) Chrome/123.0')->postJson("$path/result-observation", $body)->assertAccepted();
+            $acknowledgment = ['ok' => true, 'persisted' => true];
+            $this->withHeader('User-Agent', 'Mozilla/5.0 (Linux; Android 13; wv) Chrome/123.0')
+                ->postJson("$path/result-observation", $body)->assertAccepted()->assertExactJson($acknowledgment);
             foreach (['entry_visible', 'entry_clicked', 'payment_visible', 'payment_clicked', 'payment_clicked'] as $interaction) {
-                $this->postJson("$path/result-observation", $body + ['interaction' => $interaction])->assertAccepted();
+                $this->postJson("$path/result-observation", $body + ['interaction' => $interaction])
+                    ->assertAccepted()->assertExactJson($acknowledgment);
             }
             $events = DB::table('events')->where('attempt_id', $id)->where('event_code', 'like', 'report_purchase_%')->get();
             $this->assertCount(4, $events);
