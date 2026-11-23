@@ -107,6 +107,34 @@ final class MainstreamReportCheckoutTest extends TestCase
         }
     }
 
+    public function test_locked_report_purchase_observations_cover_supported_scales_without_changing_mbti(): void
+    {
+        config(['payments.career94.enabled' => true, 'payments.providers.alipay.enabled' => true,
+            'pay.alipay.default.app_id' => 'fixture', 'pay.alipay.default.seller_id' => 'fixture']);
+        $token = $this->token(true);
+        $counts = ['BIG5_OCEAN' => 90, 'ENNEAGRAM' => 105, 'IQ_RAVEN' => 30, 'IQ_INTELLIGENCE_QUOTIENT' => 40,
+            'EQ_60' => 60, 'JUNG_ARCHETYPES' => 48, 'JUNG_COGNITIVE_FUNCTIONS' => 64, 'DISC_BEHAVIOR' => 24];
+        foreach ($counts as $scale => $count) {
+            $id = $this->fixture($token, $scale, $count, 'zh-CN');
+            DB::table('results')->where('attempt_id', $id)->update(['is_valid' => true]);
+            $path = "/api/v0.3/attempts/$id";
+            $receipt = $this->withToken($token)->getJson("$path/report")->assertOk()
+                ->assertJsonMissingPath('report')->json('result_visibility_receipt');
+            $this->assertIsString($receipt);
+            $body = ['receipt' => $receipt, 'consent_state' => 'granted'];
+            $this->withHeader('User-Agent', 'Mozilla/5.0 (Linux; Android 13; wv) Chrome/123.0')->postJson("$path/result-observation", $body)->assertAccepted();
+            foreach (['entry_visible', 'entry_clicked', 'payment_visible', 'payment_clicked', 'payment_clicked'] as $interaction) {
+                $this->postJson("$path/result-observation", $body + ['interaction' => $interaction])->assertAccepted();
+            }
+            $events = DB::table('events')->where('attempt_id', $id)->where('event_code', 'like', 'report_purchase_%')->get();
+            $this->assertCount(4, $events);
+            $this->assertSame('android_webview', data_get(json_decode($events->first()->meta_json, true), 'measurement_observation.browser_family'));
+        }
+        $id = $this->fixture($token, 'MBTI', 93, 'zh-CN');
+        $this->withToken($token)->getJson("/api/v0.3/attempts/$id/result")->assertOk()->assertJsonMissingPath('result_visibility_receipt');
+        $this->assertDatabaseCount('orders', 0);
+    }
+
     public function test_paid_web_report_pdf_job_runs_without_browser_identity(): void
     {
         $this->seed(\Database\Seeders\ScaleRegistrySeeder::class);

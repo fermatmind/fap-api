@@ -16,11 +16,19 @@ final class ResultVisibilityObservation
 
     public const EVENT = 'result_visible_observed';
 
-    public const SCALES = ['MBTI', 'BIG5_OCEAN', 'IQ_RAVEN', 'EQ_60', 'ENNEAGRAM', 'RIASEC'];
+    public const SCALES = [
+        'MBTI', 'BIG5_OCEAN', 'IQ_RAVEN', 'EQ_60', 'ENNEAGRAM', 'RIASEC',
+    ];
 
-    public function issue(Attempt $attempt, Result $result): ?string
+    public static function supportsScale(string $scale, bool $purchaseEligible): bool
     {
-        if (! in_array(strtoupper((string) $attempt->scale_code), self::SCALES, true)
+        return in_array(strtoupper($scale), self::SCALES, true)
+            || ($purchaseEligible && in_array($scale, ['IQ_INTELLIGENCE_QUOTIENT', 'JUNG_ARCHETYPES', 'JUNG_COGNITIVE_FUNCTIONS', 'DISC_BEHAVIOR'], true));
+    }
+
+    public function issue(Attempt $attempt, Result $result, bool $purchaseEligible = false): ?string
+    {
+        if (! self::supportsScale((string) $attempt->scale_code, $purchaseEligible)
             || ! $result->is_valid || ! $attempt->submitted_at || ! $result->computed_at) {
             return null;
         }
@@ -29,6 +37,7 @@ final class ResultVisibilityObservation
             'version' => self::VERSION, 'org_id' => (int) $attempt->org_id,
             'attempt_id' => (string) $attempt->id, 'result_version' => $this->resultVersion($result),
             'read_at' => CarbonImmutable::now('UTC')->toISOString(), 'nonce' => (string) Str::uuid(),
+            ...($purchaseEligible ? ['purchase_eligible' => true] : []),
         ], JSON_THROW_ON_ERROR));
     }
 
