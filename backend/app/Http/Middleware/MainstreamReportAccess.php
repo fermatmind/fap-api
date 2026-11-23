@@ -52,6 +52,10 @@ final class MainstreamReportAccess
                 abort(403, 'Payment is required.');
             }
             $response = $next($request);
+            if ($name === 'api.v0_3.attempts.result_observation') {
+                return $response;
+            }
+
             if ($response instanceof JsonResponse && $response->isSuccessful()) {
                 $payload = $response->getData(true);
                 if (is_array($payload)) {
