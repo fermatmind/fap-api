@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Services\Commerce;
 
+use App\DTO\Commerce\PurchaseActor;
 use App\Models\Attempt;
 use App\Models\Order;
 use App\Services\Payments\PaymentProviderRegistry;
 use Illuminate\Database\Query\Builder;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 final class CareerAssessmentPurchase
@@ -40,53 +40,49 @@ final class CareerAssessmentPurchase
         return null;
     }
 
-    public static function purchaseAnonId(Request $request, string $sku): ?string
+    public static function purchaseAnonId(?PurchaseActor $actor, string $sku): ?string
     {
-        if (in_array($sku, [...self::RIASEC_SKUS, ...MainstreamReportPurchase::skus()], true)) {
-            $anon = $request->attributes->get('fm_anon_id');
-
-            return is_string($anon) && $anon !== '' ? $anon : null;
-        }
-
-        return self::guestAnonId($request);
-    }
-
-    public static function ownerKey(Request $request): ?string
-    {
-        if ((int) $request->attributes->get('fm_org_id', 0) !== 0) {
+        if ($actor === null || $actor->orgId !== 0) {
             return null;
         }
-        $user = $request->attributes->get('fm_user_id');
-        if (is_string($user) && $user !== '') {
-            return $user;
+
+        if (in_array($sku, [...self::RIASEC_SKUS, ...MainstreamReportPurchase::skus()], true)) {
+            return $actor->anonId !== '' ? $actor->anonId : null;
         }
-        $anon = self::guestAnonId($request);
 
-        return $anon !== null ? 'guest:'.$anon : null;
+        return $actor->guestAnonId;
     }
 
-    public static function guestAnonId(Request $request): ?string
+    public static function ownerKey(PurchaseActor $actor): ?string
     {
-        $key = (string) $request->header('X-Career-Guest-Token', '');
+        if ($actor->orgId !== 0) {
+            return null;
+        }
+        if ($actor->userId !== null && $actor->userId !== '') {
+            return $actor->userId;
+        }
 
-        return preg_match('/^[a-f0-9]{64}$/D', $key) === 1 ? 'c94_'.substr(hash('sha256', $key), 0, 48) : null;
+        return $actor->guestAnonId !== null ? 'guest:'.$actor->guestAnonId : null;
     }
 
-    public static function ownerKeyForOrder(Request $request, object $order): ?string
+    public static function ownerKeyForOrder(PurchaseActor $actor, object $order): ?string
     {
+        if ($actor->orgId !== 0) {
+            return null;
+        }
         if (in_array($order->sku, MainstreamReportPurchase::skus(), true)) {
             $attempt = Attempt::withoutGlobalScopes()->where('org_id', 0)->whereKey($order->target_attempt_id)->firstOrFail();
 
-            return app(MainstreamReportPurchase::class)->owner($request, $attempt);
+            return app(MainstreamReportPurchase::class)->ownerForActor($actor, $attempt);
         }
         if (in_array($order->sku, self::RIASEC_SKUS, true)) {
             $attempt = Attempt::withoutGlobalScopes()->where('org_id', 0)->whereKey($order->target_attempt_id)->firstOrFail();
 
-            return app(RiasecReportPurchase::class)->owner($request, $attempt);
+            return app(RiasecReportPurchase::class)->ownerForActor($actor, $attempt);
         }
-        $anon = self::purchaseAnonId($request, (string) $order->sku);
+        $anon = self::purchaseAnonId($actor, (string) $order->sku);
 
-        return $order->user_id === null && $anon !== null ? 'guest:'.$anon : self::ownerKey($request);
+        return $order->user_id === null && $anon !== null ? 'guest:'.$anon : self::ownerKey($actor);
     }
 
     public static function scopeOwner($query, string $owner, string $userColumn = 'user_id', string $anonColumn = 'anon_id')
@@ -191,12 +187,21 @@ final class CareerAssessmentPurchase
             ->whereIn('sku', self::allSkus())->orderByDesc('created_at')->orderByDesc('id')->first();
     }
 
-    public function createOrder(?string $attemptId, int $orgId, ?string $userId, string $sku, string $provider, int $quantity, callable $createRow, ?string $anonId = null): array
-    {
+    public function createOrder(
+        ?string $attemptId,
+        int $orgId,
+        ?string $userId,
+        string $sku,
+        string $provider,
+        int $quantity,
+        callable $createRow,
+        ?PurchaseActor $purchaseActor = null,
+    ): array {
         $contract = self::contract($sku);
-        $anonId = $userId === null ? self::purchaseAnonId(request(), $sku) : $anonId;
+        $purchaseActor ??= new PurchaseActor($orgId);
+        $anonId = $userId === null ? self::purchaseAnonId($purchaseActor, $sku) : null;
 
-        return DB::transaction(function () use ($attemptId, $orgId, $userId, $sku, $provider, $quantity, $createRow, $anonId, $contract) {
+        return DB::transaction(function () use ($attemptId, $orgId, $userId, $sku, $provider, $quantity, $createRow, $anonId, $contract, $purchaseActor) {
             $owner = $userId ?? ($anonId ? 'guest:'.$anonId : null);
             $attempt = $owner !== null && $orgId === 0
                 ? self::scopeOwner(Attempt::withoutGlobalScopes()->whereKey($attemptId)->where('org_id', 0), $owner)
@@ -211,10 +216,10 @@ final class CareerAssessmentPurchase
             }
 
             if (MainstreamReportPurchase::supports($contract['scale'])) {
-                app(MainstreamReportPurchase::class)->owner(request(), $attempt);
+                app(MainstreamReportPurchase::class)->ownerForActor($purchaseActor, $attempt);
             }
             if ($contract['scale'] === 'RIASEC') {
-                app(RiasecReportPurchase::class)->owner(request(), $attempt);
+                app(RiasecReportPurchase::class)->ownerForActor($purchaseActor, $attempt);
             }
 
             $offer = collect($this->offers($attempt->region, $contract['scale']))->first(static fn (array $row): bool => $row['provider'] === $provider && $row['sku'] === $sku);

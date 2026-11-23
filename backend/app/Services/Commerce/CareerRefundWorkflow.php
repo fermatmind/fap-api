@@ -248,15 +248,11 @@ final class CareerRefundWorkflow
     {
         $context = app(OrgContext::class);
         $old = [$context->orgId(), $context->userId(), $context->role(), $context->anonId(), $context->contextKind()];
-        $request = request();
-        $attributes = $request->attributes->all();
         $context->set(0, null, 'public', null, OrgContext::KIND_PUBLIC);
-        $request->attributes->add(['org_context_resolved' => true, 'org_context_kind' => 'public', 'fm_org_id' => 0, 'org_id' => 0]);
         try {
             return $callback();
         } finally {
             $context->set(...$old);
-            $request->attributes->replace($attributes);
         }
     }
 }

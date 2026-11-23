@@ -387,9 +387,21 @@ final class Career94CheckoutTest extends TestCase
         DB::table('auth_tokens')->where('token_hash', hash('sha256', $other))->update(['anon_id' => $originalAnon]);
         $this->withToken($other)->getJson(self::PATH.'/results/'.$id)->assertNotFound();
         $payload = ['attempt_id' => $id, 'provider' => 'alipay', 'sku' => CareerAssessmentPurchase::SKUS['CNY']];
-        $this->withToken($other)->postJson('/api/v0.3/orders/checkout', $payload)->assertNotFound();
-        $number = $this->withToken($guest)->postJson('/api/v0.3/orders/checkout', $payload)->assertOk()->json('order_no');
+        $checkout = '/api/v0.3/orders/checkout';
+        $this->withToken($other)->postJson($checkout, $payload)->assertNotFound();
+        $this->withToken($guest)->withHeader('X-Career-Guest-Token', '')->postJson($checkout, $payload)->assertUnprocessable();
+        $this->withHeader('X-Career-Guest-Token', 'invalid')->postJson($checkout, $payload)->assertUnprocessable();
+        $this->withHeader('X-Career-Guest-Token', '')->postJson($checkout, $payload + [
+            'guest_purchase_token' => $this->guestKeys[$guest],
+        ])->assertUnprocessable();
+        $this->assertDatabaseMissing('orders', ['target_attempt_id' => $id]);
+
+        $number = $this->withToken($guest)->postJson($checkout, $payload)->assertOk()->json('order_no');
+        $this->withToken($guest)->postJson($checkout, $payload)->assertOk()->assertJsonPath('order_no', $number);
         $this->assertDatabaseHas('orders', ['order_no' => $number, 'user_id' => null]);
+        $anon = DB::table('orders')->where('order_no', $number)->value('anon_id');
+        $this->assertSame('ORDER_NOT_FOUND', app(\App\Services\Commerce\OrderManager::class)
+            ->getOrder(0, null, $anon, $number)['error']);
         $this->assertTrue(app(PaymentWebhookProcessor::class)->process('alipay', [
             'out_trade_no' => $number, 'trade_no' => 'guest_trade', 'trade_status' => 'TRADE_SUCCESS',
             'total_amount' => '2.99', 'notify_id' => 'guest_paid',
@@ -398,8 +410,15 @@ final class Career94CheckoutTest extends TestCase
         $this->withToken($guest)->getJson('/api/v0.3/orders/'.$number)->assertOk()
             ->assertJsonPath('exact_result_entry.access_state', 'ready');
         $url = self::PATH.'/orders/'.$number.'/refund';
-        $this->withToken($other)->postJson($url, ['reason_code' => 'other', 'acknowledged' => true])->assertNotFound();
-        $this->withToken($guest)->postJson($url, ['reason_code' => 'other', 'acknowledged' => true])->assertOk()->assertJsonPath('request.status', 'pending');
+        $refund = ['reason_code' => 'other', 'acknowledged' => true];
+        $this->withToken($other)->postJson($url, $refund)->assertNotFound();
+        $this->withToken($guest)->withHeader('X-Career-Guest-Token', 'invalid')->postJson($url, $refund)->assertNotFound();
+        $this->withHeader('X-Career-Guest-Token', '')->postJson($url, $refund + [
+            'guest_purchase_token' => $this->guestKeys[$guest],
+        ])->assertNotFound();
+        $this->getJson('/api/v0.3/orders/'.$number)->assertNotFound();
+        $this->assertDatabaseMissing('career_refund_requests', ['order_no' => $number]);
+        $this->withToken($guest)->postJson($url, $refund)->assertOk()->assertJsonPath('request.status', 'pending');
         $renewed = $this->token(true);
         $this->guestKeys[$renewed] = $this->guestKeys[$guest];
         $this->withToken($renewed)->getJson(self::PATH.'/results/'.$id)->assertOk()->assertJsonPath('unlocked', true);

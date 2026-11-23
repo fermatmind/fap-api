@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\API\V0_5\Career;
 
+use App\Http\Requests\PurchaseRequestActor;
 use App\Models\Attempt;
 use App\Models\Order;
 use App\Services\Assessment\CareerAssessmentDeepReport;
@@ -39,7 +40,7 @@ final class CareerAssessmentController
         $attempt = $userId !== null ? CareerAssessmentPurchase::scopeOwner(Attempt::withoutGlobalScopes()->whereKey($id), $userId)
             ->where('org_id', 0)->where('scale_code', CareerAssessmentPurchase::SCALE)
             ->whereNotNull('submitted_at')->first() : null;
-        if (! $attempt && ($anon = CareerAssessmentPurchase::guestAnonId($request)) !== null) {
+        if (! $attempt && ($anon = PurchaseRequestActor::guestAnonId($request)) !== null) {
             $userId = 'guest:'.$anon;
             $attempt = CareerAssessmentPurchase::scopeOwner(Attempt::withoutGlobalScopes()->whereKey($id), $userId)
                 ->where('org_id', 0)->where('scale_code', CareerAssessmentPurchase::SCALE)->whereNotNull('submitted_at')->first();
@@ -142,7 +143,7 @@ final class CareerAssessmentController
 
     private function ownerId(Request $request): ?string
     {
-        return CareerAssessmentPurchase::ownerKey($request);
+        return CareerAssessmentPurchase::ownerKey(PurchaseRequestActor::from($request));
     }
 
     private function publicResult(Attempt $attempt, CareerAssessmentPurchase $purchase, bool $unlocked): array

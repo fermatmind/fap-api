@@ -32,7 +32,7 @@ final class RiasecReportPurchase
 
     public function guestOwns(Request $request, Attempt $attempt): bool
     {
-        return $this->matchesGuest(CareerAssessmentPurchase::guestAnonId($request), $attempt);
+        return $this->matchesGuest(PurchaseRequestActor::guestAnonId($request), $attempt);
     }
 
     public function matchesGuest(?string $actual, Attempt $attempt): bool

@@ -2,6 +2,7 @@
 
 namespace App\Services\Commerce;
 
+use App\DTO\Commerce\PurchaseActor;
 use App\Models\Order;
 use App\Models\PaymentAttempt;
 use App\Services\Email\EmailOutboxService;
@@ -50,6 +51,7 @@ class OrderManager
         array $attribution = [],
         array $emailCapture = [],
         array $ledgerContext = [],
+        ?PurchaseActor $purchaseActor = null,
     ): array {
         $requestedSku = $this->skus->normalizeSku($sku);
         if ($requestedSku === '') {
@@ -225,7 +227,7 @@ class OrderManager
             }
 
             return app(CareerAssessmentPurchase::class)->createOrder(
-                $targetAttemptId, $orgId, $normalizedUserId, $skuToLookup, $provider, $quantity, $createRow, $normalizedAnonId
+                $targetAttemptId, $orgId, $normalizedUserId, $skuToLookup, $provider, $quantity, $createRow, $purchaseActor
             );
         }
 
@@ -350,7 +352,8 @@ class OrderManager
         ?string $anonId,
         string $orderNo,
         bool $allowAnonymousFallback = false,
-        ?string $paymentRecoveryToken = null
+        ?string $paymentRecoveryToken = null,
+        ?PurchaseActor $purchaseActor = null,
     ): array {
         $orderNo = trim($orderNo);
         if ($orderNo === '') {
@@ -370,7 +373,7 @@ class OrderManager
         $aid = $this->trimOrNull($anonId);
         if ($orgId === 0 && in_array($order->sku ?? '', CareerAssessmentPurchase::allSkus(), true)) {
             // Public analytics IDs are not purchase credentials.
-            $aid = CareerAssessmentPurchase::purchaseAnonId(request(), (string) $order->sku);
+            $aid = CareerAssessmentPurchase::purchaseAnonId($purchaseActor, (string) $order->sku);
         }
 
         $ownedByUser = $uid !== null && $uid === $this->trimOrNull($order->user_id ?? null);
@@ -378,8 +381,8 @@ class OrderManager
         if ($ownedByAnon && in_array($order->sku ?? '', [...CareerAssessmentPurchase::RIASEC_SKUS, ...MainstreamReportPurchase::skus()], true)) {
             $attempt = \App\Models\Attempt::withoutGlobalScopes()->where('org_id', 0)->whereKey($order->target_attempt_id)->first();
             $ownedByAnon = $attempt && (app(MainstreamReportPurchase::class)->managed($attempt)
-                ? app(MainstreamReportPurchase::class)->guestOwns(request(), $attempt)
-                : app(RiasecReportPurchase::class)->guestOwns(request(), $attempt));
+                ? app(MainstreamReportPurchase::class)->matchesGuest($purchaseActor?->guestAnonId, $attempt)
+                : app(RiasecReportPurchase::class)->matchesGuest($purchaseActor?->guestAnonId, $attempt));
         }
         $ownershipVerified = $ownedByUser || $ownedByAnon;
         $paymentRecoveryVerified = false;
@@ -586,9 +589,10 @@ class OrderManager
         int $orgId,
         ?string $userId,
         ?string $anonId,
-        string $orderNo
+        string $orderNo,
+        ?PurchaseActor $purchaseActor = null,
     ): array {
-        $found = $this->getOrder($orgId, $userId, $anonId, $orderNo);
+        $found = $this->getOrder($orgId, $userId, $anonId, $orderNo, purchaseActor: $purchaseActor);
         if (! ($found['ok'] ?? false)) {
             return $found;
         }

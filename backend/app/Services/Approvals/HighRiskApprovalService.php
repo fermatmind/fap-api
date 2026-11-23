@@ -6,6 +6,7 @@ namespace App\Services\Approvals;
 
 use App\Models\AdminApproval;
 use App\Models\AdminUser;
+use App\Models\Scopes\TenantScope;
 use App\Services\Auth\AdminTotpService;
 use App\Services\ReviewGovernance\ReviewAttestationCanonicalizer;
 use App\Support\Rbac\PermissionNames;
@@ -89,10 +90,10 @@ final readonly class HighRiskApprovalService
         return $this->approveVerified($approvalId, $actorAdminUserId);
     }
 
-    private function approveVerified(string $approvalId, int $actorAdminUserId): AdminApproval
+    private function approveVerified(string $approvalId, int $actorAdminUserId, bool $publicRefund = false): AdminApproval
     {
-        return DB::transaction(function () use ($approvalId, $actorAdminUserId): AdminApproval {
-            $approval = AdminApproval::query()->whereKey($approvalId)->lockForUpdate()->first();
+        return DB::transaction(function () use ($approvalId, $actorAdminUserId, $publicRefund): AdminApproval {
+            $approval = $this->lockApproval($approvalId, $publicRefund);
             if (! $approval) {
                 throw new HighRiskApprovalValidationException('Approval record was not found.');
             }
@@ -146,10 +147,10 @@ final readonly class HighRiskApprovalService
         return $this->rejectVerified($approvalId, $actorAdminUserId, $reasonAppend);
     }
 
-    private function rejectVerified(string $approvalId, int $actorAdminUserId, string $reasonAppend): AdminApproval
+    private function rejectVerified(string $approvalId, int $actorAdminUserId, string $reasonAppend, bool $publicRefund = false): AdminApproval
     {
-        return DB::transaction(function () use ($approvalId, $actorAdminUserId, $reasonAppend): AdminApproval {
-            $approval = AdminApproval::query()->whereKey($approvalId)->lockForUpdate()->first();
+        return DB::transaction(function () use ($approvalId, $actorAdminUserId, $reasonAppend, $publicRefund): AdminApproval {
+            $approval = $this->lockApproval($approvalId, $publicRefund);
             if (! $approval) {
                 throw new HighRiskApprovalValidationException('Approval record was not found.');
             }
@@ -265,10 +266,10 @@ final readonly class HighRiskApprovalService
         return $this->authorizeExecutionVerified($approvalId, $actorAdminUserId, $retryFailed);
     }
 
-    private function authorizeExecutionVerified(string $approvalId, int $actorAdminUserId, bool $retryFailed): AdminApproval
+    private function authorizeExecutionVerified(string $approvalId, int $actorAdminUserId, bool $retryFailed, bool $publicRefund = false): AdminApproval
     {
-        return DB::transaction(function () use ($approvalId, $actorAdminUserId, $retryFailed): AdminApproval {
-            $approval = AdminApproval::query()->whereKey($approvalId)->lockForUpdate()->first();
+        return DB::transaction(function () use ($approvalId, $actorAdminUserId, $retryFailed, $publicRefund): AdminApproval {
+            $approval = $this->lockApproval($approvalId, $publicRefund);
             if (! $approval) {
                 throw new HighRiskApprovalValidationException('Approval record was not found.');
             }
@@ -333,6 +334,16 @@ final readonly class HighRiskApprovalService
         }, 3);
     }
 
+    private function lockApproval(string $id, bool $publicRefund): ?AdminApproval
+    {
+        $query = $publicRefund
+            ? AdminApproval::withoutGlobalScope(TenantScope::class)
+                ->where('org_id', 0)->where('type', AdminApproval::TYPE_REFUND)
+            : AdminApproval::query();
+
+        return $query->whereKey($id)->lockForUpdate()->first();
+    }
+
     /** A single fresh step-up authorizes this exact, bounded set of refund targets. */
     public function reviewRefundBatch(array $approvalIds, int $actorId, string $code, string $decision = 'approve', string $note = ''): void
     {
@@ -345,16 +356,16 @@ final readonly class HighRiskApprovalService
         $this->assertFreshStepUp($actorId, $code, 'refund_batch');
         DB::transaction(function () use ($approvalIds, $actorId, $decision, $note): void {
             foreach ($approvalIds as $id) {
-                $approval = AdminApproval::query()->whereKey($id)->lockForUpdate()->first();
+                $approval = $this->lockApproval($id, publicRefund: true);
                 if (! $approval || $approval->type !== AdminApproval::TYPE_REFUND || (int) $approval->org_id !== 0) {
                     throw new HighRiskApprovalValidationException('Refund target is invalid.');
                 }
                 $this->assertExecutionActorPolicy($approval, $actorId);
                 if ($decision === 'reject') {
-                    $this->rejectVerified($id, $actorId, $note);
+                    $this->rejectVerified($id, $actorId, $note, publicRefund: true);
                 } else {
-                    $this->approveVerified($id, $actorId);
-                    $this->authorizeExecutionVerified($id, $actorId, false);
+                    $this->approveVerified($id, $actorId, publicRefund: true);
+                    $this->authorizeExecutionVerified($id, $actorId, false, publicRefund: true);
                 }
             }
         });

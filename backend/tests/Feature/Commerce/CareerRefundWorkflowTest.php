@@ -15,8 +15,10 @@ use App\Services\Approvals\ApprovalExecutor;
 use App\Services\Auth\AdminTotpService;
 use App\Services\Commerce\CareerRefundWorkflow;
 use App\Services\Commerce\Checkout\AlipayCheckoutService;
+use App\Support\OrgContext;
 use App\Support\Rbac\PermissionNames;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Str;
@@ -72,6 +74,13 @@ class CareerRefundWorkflowTest extends TestCase
         [$number] = $this->order();
         $row = $this->apply($number);
         $admin = $this->admin();
+        $request = Request::create('/ops/career-refunds', 'POST');
+        $attributes = ['fm_org_id' => 42, 'org_context_kind' => 'tenant', 'org_context_resolved' => true];
+        $request->attributes->add($attributes);
+        $this->app->instance('request', $request);
+        $this->app->instance(Request::class, $request);
+        $org = app(OrgContext::class);
+        $org->set(42, null, 'admin', null, OrgContext::KIND_TENANT);
         $service = app(CareerRefundWorkflow::class);
         try {
             $service->review([$row->id], $admin, 'wrong', 'approve');
@@ -84,6 +93,8 @@ class CareerRefundWorkflowTest extends TestCase
             $mock->shouldReceive('verify')->once()->andReturn(true);
         }));
         $service->review([$row->id], $admin, '123456', 'approve');
+        $this->assertSame($attributes, $request->attributes->all());
+        $this->assertSame(42, $org->orgId());
         $this->assertSame('approved', $row->fresh()->status);
         $approval = AdminApproval::withoutGlobalScopes()->findOrFail($row->fresh()->approval_id);
         $this->assertSame('APPROVED', $approval->status);

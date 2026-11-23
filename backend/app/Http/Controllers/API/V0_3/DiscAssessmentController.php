@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\API\V0_3;
 
+use App\Http\Requests\PurchaseRequestActor;
 use App\Models\Attempt;
 use App\Models\Result;
 use App\Services\Assessment\DiscReport;
-use App\Services\Commerce\CareerAssessmentPurchase;
 use App\Services\Commerce\MainstreamReportPurchase;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -23,7 +23,7 @@ final class DiscAssessmentController
         abort_unless((int) $request->attributes->get('fm_org_id', 0) === 0 && config('payments.career94.enabled'), 404);
         $user = $request->attributes->get('fm_user_id');
         $anon = $request->attributes->get('fm_anon_id');
-        $private = CareerAssessmentPurchase::guestAnonId($request);
+        $private = PurchaseRequestActor::guestAnonId($request);
         abort_unless($user !== null || (is_string($anon) && $anon !== '' && $private !== null), 422, 'A private browser credential is required.');
         $score = $reports->score($data['answers']);
         $digest = hash('sha256', 'disc|'.($user ?? $anon).'|'.($user !== null ? 'account' : $private).'|'.$data['client_ref']);

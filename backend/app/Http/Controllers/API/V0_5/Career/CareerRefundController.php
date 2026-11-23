@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\API\V0_5\Career;
 
+use App\Http\Requests\PurchaseRequestActor;
+use App\Services\Commerce\CareerAssessmentPurchase;
 use App\Services\Commerce\CareerRefundWorkflow;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -38,7 +40,7 @@ final class CareerRefundController
     {
         $order = \Illuminate\Support\Facades\DB::table('orders')->where('org_id', 0)->where('order_no', $orderNo)->first();
         abort_unless($order, 404);
-        $owner = \App\Services\Commerce\CareerAssessmentPurchase::ownerKeyForOrder($request, $order);
+        $owner = CareerAssessmentPurchase::ownerKeyForOrder(PurchaseRequestActor::from($request), $order);
         abort_unless((int) $request->attributes->get('fm_org_id', 0) === 0 && is_string($owner) && $owner !== '', 404);
 
         return $owner;

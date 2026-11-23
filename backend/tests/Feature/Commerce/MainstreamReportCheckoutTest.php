@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Commerce;
 
+use App\Http\Requests\PurchaseRequestActor;
 use App\Jobs\GenerateReportPdfJob;
 use App\Models\User;
 use App\Services\Commerce\CareerAssessmentPurchase;
@@ -467,7 +468,7 @@ final class MainstreamReportCheckoutTest extends TestCase
         $id = (string) Str::uuid();
         \App\Models\Attempt::withoutGlobalScopes()->create(['id' => $id, 'org_id' => 0, 'user_id' => null, 'anon_id' => $actor->anon_id, 'scale_code' => $scale,
             'scale_version' => 'v0.3', 'client_platform' => 'web', 'region' => 'CN_MAINLAND', 'locale' => $locale, 'question_count' => $count, 'started_at' => now(), 'submitted_at' => now(),
-            'answers_summary_json' => ['meta' => ['web_report_commerce' => 'v1', 'web_report_guest_owner' => CareerAssessmentPurchase::guestAnonId(new \Illuminate\Http\Request([], [], [], [], [], ['HTTP_X_CAREER_GUEST_TOKEN' => $this->guestKeys[$token]]))]]]);
+            'answers_summary_json' => ['meta' => ['web_report_commerce' => 'v1', 'web_report_guest_owner' => PurchaseRequestActor::guestAnonId(new \Illuminate\Http\Request([], [], [], [], [], ['HTTP_X_CAREER_GUEST_TOKEN' => $this->guestKeys[$token]]))]]]);
         \App\Models\Result::withoutGlobalScopes()->create(['id' => (string) Str::uuid(), 'attempt_id' => $id, 'org_id' => 0, 'scale_code' => $scale, 'scale_version' => 'v0.3',
             'scores_json' => [], 'scores_pct' => ['I' => 75, 'A' => 65], 'type_code' => 'fixture', 'result_json' => ['private_secret' => 'NEVER_TRANSPORT_THIS', 'status' => 'scored'], 'computed_at' => now()]);
 
