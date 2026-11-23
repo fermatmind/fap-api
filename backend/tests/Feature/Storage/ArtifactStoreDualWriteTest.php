@@ -225,12 +225,12 @@ final class ArtifactStoreDualWriteTest extends TestCase
         $attemptId = (string) Str::uuid();
         $manifestHash = 'legacyhash123';
         $legacyBytes = '%PDF-1.4 legacy backfill';
-        $legacyPath = $store->pdfLegacyPaths('BIG5_OCEAN', $attemptId, $manifestHash, 'free')[0];
+        $legacyPath = $store->pdfLegacyPaths('ENNEAGRAM', $attemptId, $manifestHash, 'free')[0];
         Storage::disk('local')->put($legacyPath, $legacyBytes);
 
         $attempt = new Attempt([
             'id' => $attemptId,
-            'scale_code' => 'BIG5_OCEAN',
+            'scale_code' => 'ENNEAGRAM',
             'answers_summary_json' => [
                 'meta' => [
                     'pack_release_manifest_hash' => $manifestHash,
@@ -239,7 +239,7 @@ final class ArtifactStoreDualWriteTest extends TestCase
         ]);
 
         $resolved = $service->readArtifact($attempt, 'free');
-        $canonicalPath = $store->pdfCanonicalPath('BIG5_OCEAN', $attemptId, $manifestHash, 'free');
+        $canonicalPath = $store->pdfCanonicalPath('ENNEAGRAM', $attemptId, $manifestHash, 'free');
         $pdfHash = hash('sha256', $legacyBytes);
 
         $this->assertSame($legacyBytes, $resolved);

@@ -356,6 +356,18 @@ final class UpdateArticlePublicReaderMetadataTest extends TestCase
         $this->assertSame($history, Updater::state($article->fresh())['history']);
     }
 
+    public function test_reserved_article_id_is_rejected_without_changing_metadata_or_history(): void
+    {
+        $article = $this->article(15);
+        $before = Updater::state($article);
+        $package = $this->package($article);
+        $package['candidate']['article_fields'] = ['cover_image_alt' => 'Updated alt'];
+
+        $this->assertSame(1, $this->runPackage($package, $this->actor()));
+        $this->assertSame('ordinary_existing_public_article_required', json_decode(Artisan::output(), true)['error']);
+        $this->assertSame($before, Updater::state($article->fresh()));
+    }
+
     public function test_audit_failure_rolls_back_both_metadata_models(): void
     {
         $article = $this->article();
@@ -641,9 +653,10 @@ final class UpdateArticlePublicReaderMetadataTest extends TestCase
         return [$article, $actor, $package];
     }
 
-    private function article(): Article
+    private function article(?int $id = null): Article
     {
-        $article = Article::query()->create(['org_id' => 0, 'slug' => 'native-reader-test', 'locale' => 'en',
+        $id ??= max(16, (int) Article::withoutGlobalScopes()->max('id') + 1);
+        $article = Article::query()->forceCreate(['id' => $id, 'org_id' => 0, 'slug' => 'native-reader-test', 'locale' => 'en',
             'title' => 'Reader test', 'content_md' => 'Existing public text', 'status' => 'published',
             'is_public' => true, 'is_indexable' => false, 'translation_group_id' => 'reader-fixture', 'translation_status' => 'source', 'source_locale' => 'en']);
         $revision = ArticleTranslationRevision::query()->create(['org_id' => 0, 'article_id' => $article->id,

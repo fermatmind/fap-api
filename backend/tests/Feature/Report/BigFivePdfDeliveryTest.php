@@ -9,10 +9,12 @@ use App\Models\Result;
 use App\Services\Assessment\Scorers\BigFiveScorerV3;
 use App\Services\Commerce\EntitlementManager;
 use App\Services\Content\BigFivePackLoader;
+use App\Services\Storage\ArtifactStore;
 use Database\Seeders\Pr19CommerceSeeder;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
@@ -143,10 +145,22 @@ final class BigFivePdfDeliveryTest extends TestCase
             'computed_at' => now(),
         ]);
 
+        Storage::fake('local');
+        $legacyPath = app(ArtifactStore::class)->pdfLegacyPaths('BIG5_OCEAN', $attemptId, 'nohash', 'full')[1];
+        $legacyBytes = '%PDF-1.4 synthetic unversioned Big Five report';
+        Storage::disk('local')->put($legacyPath, $legacyBytes);
+
+        $path = '/api/v0.3/attempts/'.$attemptId.'/report.pdf';
+        $otherAnonId = 'anon_big5_pdf_other';
+        $this->withHeaders([
+            'X-Anon-Id' => $otherAnonId,
+            'Authorization' => 'Bearer '.$this->issueAnonToken($otherAnonId),
+        ])->get($path)->assertNotFound();
+
         $response = $this->withHeaders([
             'X-Anon-Id' => $anonId,
             'Authorization' => 'Bearer '.$token,
-        ])->get('/api/v0.3/attempts/'.$attemptId.'/report.pdf');
+        ])->get($path);
 
         $response->assertStatus(200);
         $response->assertHeader('Content-Type', 'application/pdf');
@@ -161,13 +175,14 @@ final class BigFivePdfDeliveryTest extends TestCase
         );
 
         $pdf = (string) $response->getContent();
+        $this->assertNotSame($legacyBytes, $pdf);
+        $this->assertSame($legacyBytes, Storage::disk('local')->get($legacyPath));
         $this->assertStringStartsWith('%PDF-1.4', $pdf);
         $this->assertStringContainsString('/FontFile2', $pdf);
         $response->assertHeader('X-Pdf-Surface-Version', 'big5.private_result_pdf.v3');
 
         $this->getJson('/api/v0.3/attempts/'.$attemptId.'/report-access')->assertOk()
             ->assertJsonPath('pdf_display_locales.0', 'zh-TW');
-        $path = '/api/v0.3/attempts/'.$attemptId.'/report.pdf';
         $traditional = $this->get($path.'?display_locale=zh-TW')
             ->assertOk()
             ->assertHeader('Content-Type', 'application/pdf')

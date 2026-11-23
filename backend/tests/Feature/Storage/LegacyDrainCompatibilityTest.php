@@ -60,12 +60,12 @@ final class LegacyDrainCompatibilityTest extends TestCase
         $legacyBytes = '%PDF-1.4 legacy drain off';
         /** @var ArtifactStore $artifactStore */
         $artifactStore = app(ArtifactStore::class);
-        $legacyPath = $artifactStore->pdfLegacyPaths('BIG5_OCEAN', $attemptId, $manifestHash, 'free')[0];
+        $legacyPath = $artifactStore->pdfLegacyPaths('ENNEAGRAM', $attemptId, $manifestHash, 'free')[0];
         Storage::disk('local')->put($legacyPath, $legacyBytes);
 
         $attempt = new Attempt([
             'id' => $attemptId,
-            'scale_code' => 'BIG5_OCEAN',
+            'scale_code' => 'ENNEAGRAM',
             'answers_summary_json' => [
                 'meta' => [
                     'pack_release_manifest_hash' => $manifestHash,
@@ -91,12 +91,12 @@ final class LegacyDrainCompatibilityTest extends TestCase
         $legacyBytes = '%PDF-1.4 legacy drain on';
         /** @var ArtifactStore $artifactStore */
         $artifactStore = app(ArtifactStore::class);
-        $legacyPath = $artifactStore->pdfLegacyPaths('BIG5_OCEAN', $attemptId, $manifestHash, 'free')[0];
+        $legacyPath = $artifactStore->pdfLegacyPaths('ENNEAGRAM', $attemptId, $manifestHash, 'free')[0];
         Storage::disk('local')->put($legacyPath, $legacyBytes);
 
         $attempt = new Attempt([
             'id' => $attemptId,
-            'scale_code' => 'BIG5_OCEAN',
+            'scale_code' => 'ENNEAGRAM',
             'answers_summary_json' => [
                 'meta' => [
                     'pack_release_manifest_hash' => $manifestHash,

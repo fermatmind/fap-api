@@ -324,29 +324,37 @@ final class SeoPlatform12A08DailyWiringTest extends TestCase
 
     public function test_contended_control_lock_fails_closed_and_stale_generation_cannot_rebind(): void
     {
-        $this->startAtSlot();
-        $this->fixtureReader();
-        $runtime = app(Platform12RuntimeControl::class);
-        $before = $runtime->change(false, [Platform12DailyMissionSet::IDS[0]]);
-        $generation = $before['generation'];
         CarbonImmutable::setTestNow();
         \Carbon\Carbon::setTestNow();
+        $activation = now('UTC')->subMinute();
+        $runtime = app(Platform12RuntimeControl::class);
+        $missions = [Platform12DailyMissionSet::IDS[0], Platform12DailyMissionSet::IDS[1]];
+        CarbonImmutable::setTestNow($activation);
+        \Carbon\Carbon::setTestNow($activation);
+        try {
+            $before = $runtime->change(false, [$missions[0]]);
+        } finally {
+            CarbonImmutable::setTestNow();
+            \Carbon\Carbon::setTestNow();
+        }
+
+        $this->assertSame('ACTIVE_READ_ONLY', $before['state']);
+        $this->assertSame($activation->format('Y-m-d\TH:i:s\Z'), $before['activated_at']);
+        $generation = $before['generation'];
         $lock = Cache::store('array')->lock(Platform12RuntimeControl::CACHE_KEY.':lock', 60);
         $this->assertTrue($lock->get());
         try {
-            $this->assertSame('SHARED_CACHE_HOLD', $runtime->change(false,
-                [Platform12DailyMissionSet::IDS[0], Platform12DailyMissionSet::IDS[1]], $generation)['state']);
+            $this->assertSame('SHARED_CACHE_HOLD', $runtime->change(false, $missions, $generation)['state']);
             $this->assertSame($generation, $runtime->status()['generation']);
         } finally {
             $lock->release();
         }
-        $this->assertSame('CONTROL_WRITE_HOLD', $runtime->change(false,
-            [Platform12DailyMissionSet::IDS[0], Platform12DailyMissionSet::IDS[1]], str_repeat('0', 32))['state']);
-        $this->assertSame($generation, $runtime->status()['generation']);
-        $after = $runtime->change(false,
-            [Platform12DailyMissionSet::IDS[0], Platform12DailyMissionSet::IDS[1]], $generation);
+
+        $after = $runtime->change(false, $missions, $generation);
         $this->assertSame('ACTIVE_READ_ONLY', $after['state']);
         $this->assertNotSame($generation, $after['generation']);
+        $this->assertSame('CONTROL_WRITE_HOLD', $runtime->change(false, [$missions[0]], $generation)['state']);
+        $this->assertSame($after['generation'], $runtime->status()['generation']);
     }
 
     public function test_later_enabled_mission_uses_own_first_time_and_cursor_without_pre_enable_misses(): void
