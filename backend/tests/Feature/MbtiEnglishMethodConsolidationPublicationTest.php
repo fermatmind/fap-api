@@ -19,7 +19,7 @@ class MbtiEnglishMethodConsolidationPublicationTest extends TestCase
 
         $this->originalConnection = DB::getDefaultConnection();
         $connection = DB::connection()->getConfig();
-        $connection['prefix'] = 'mbti_english_method_consolidation_'.bin2hex(random_bytes(6)).'_';
+        $connection['prefix'] = 'mbti_method_en_'.bin2hex(random_bytes(6)).'_';
         config(['database.connections.'.self::FIXTURE_CONNECTION => $connection]);
         DB::setDefaultConnection(self::FIXTURE_CONNECTION);
         Schema::clearResolvedInstance('db.schema');
@@ -160,25 +160,32 @@ class MbtiEnglishMethodConsolidationPublicationTest extends TestCase
             $this->insert($table, $before);
         }
 
-        $prefix = DB::connection()->getTablePrefix();
-        DB::unprepared(sprintf(
-            "CREATE TRIGGER %smbti_english_update_failure BEFORE UPDATE ON %sscales_registry_v2 BEGIN SELECT RAISE(ABORT, 'forced update failure'); END",
-            $prefix,
-            $prefix,
-        ));
+        $connection = DB::connection();
+        $firstTable = 'scales_registry';
+        $secondTable = 'scales_registry_v2';
+        $originalFirst = $connection->table($firstTable)->value('content_i18n_json');
+        $originalSecond = $connection->table($secondTable)->value('content_i18n_json');
+        $secondUpdate = 'update '.$connection->getQueryGrammar()->wrapTable($secondTable).' set ';
+        $failure = new \RuntimeException('forced update failure');
+
+        $connection->beforeExecuting(function (string $query) use ($connection, $firstTable, $secondTable, $originalFirst, $originalSecond, $secondUpdate, $failure): void {
+            if (str_starts_with($query, $secondUpdate)) {
+                $this->assertNotSame($originalFirst, $connection->table($firstTable)->value('content_i18n_json'));
+                $this->assertSame($originalSecond, $connection->table($secondTable)->value('content_i18n_json'));
+
+                throw $failure;
+            }
+        });
 
         try {
             $this->publish();
             $this->fail('Expected the second registry update to fail.');
-        } catch (\Throwable $exception) {
-            $this->assertStringContainsString('forced update failure', $exception->getMessage());
+        } catch (\RuntimeException $exception) {
+            $this->assertSame($failure, $exception);
         }
 
-        foreach (['scales_registry', 'scales_registry_v2'] as $table) {
-            $actual = json_decode(DB::table($table)->value('content_i18n_json'), true, 512, JSON_THROW_ON_ERROR);
-            $this->assertSame($before['why_choose'], $actual['en']['why_choose']);
-            $this->assertSame($before['faq'], $actual['en']['faq']);
-        }
+        $this->assertSame($originalFirst, $connection->table($firstTable)->value('content_i18n_json'));
+        $this->assertSame($originalSecond, $connection->table($secondTable)->value('content_i18n_json'));
     }
 
     public function test_rejects_incomplete_registry_rows_and_seeder_uses_the_same_package(): void
