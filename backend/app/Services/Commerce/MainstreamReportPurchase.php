@@ -140,6 +140,11 @@ final class MainstreamReportPurchase
 
     public function overview(Request $request, Attempt $attempt, ?array $purchase = null): array
     {
+        return $this->overviewForPurchase($attempt, $purchase ?? $this->purchase($request, $attempt));
+    }
+
+    public function overviewForPurchase(Attempt $attempt, array $purchase): array
+    {
         $result = $this->result($attempt);
         $scores = $result?->scores_pct;
         $scores = is_array($scores) ? array_filter($scores, static fn ($value) => is_numeric($value)) : [];
@@ -178,7 +183,6 @@ final class MainstreamReportPurchase
         }
         $quality = data_get($source, 'quality.level', data_get($score, 'quality.level'));
         $type = $result?->type_code;
-        $purchase ??= $this->purchase($request, $attempt);
         $receipt = $attempt->scale_code !== 'MBTI' && $result && $purchase['offers'] !== []
             ? app(ResultVisibilityObservation::class)->issue($attempt, $result, purchaseEligible: true)
             : null;

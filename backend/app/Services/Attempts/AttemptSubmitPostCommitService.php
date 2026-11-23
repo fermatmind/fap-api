@@ -2,6 +2,7 @@
 
 namespace App\Services\Attempts;
 
+use App\DTO\Commerce\PurchaseActor;
 use App\Jobs\GenerateReportSnapshotJob;
 use App\Models\Attempt;
 use App\Services\Analytics\ResultReadyEventRecorder;
@@ -14,8 +15,13 @@ class AttemptSubmitPostCommitService
 {
     public function __construct(private AttemptSubmitService $core) {}
 
-    public function handle(OrgContext $ctx, array $canonicalized, array $scored, array $tx): array
-    {
+    public function handle(
+        OrgContext $ctx,
+        array $canonicalized,
+        array $scored,
+        array $tx,
+        ?PurchaseActor $purchaseActor,
+    ): array {
         /** @var Attempt $attempt */
         $attempt = $canonicalized['attempt'];
         $attemptId = (string) ($canonicalized['attempt_id'] ?? '');
@@ -66,7 +72,7 @@ class AttemptSubmitPostCommitService
             );
         }
 
-        $this->core->sideEffects()->appendReportPayload($ctx, $attemptId, $actorUserId, $actorAnonId, $responsePayload);
+        $this->core->sideEffects()->appendReportPayload($ctx, $attemptId, $actorUserId, $actorAnonId, $responsePayload, $purchaseActor);
 
         if (($responsePayload['ok'] ?? false) === true && $scaleCode === 'BIG5_OCEAN') {
             $reportPayload = is_array($responsePayload['report'] ?? null) ? $responsePayload['report'] : [];

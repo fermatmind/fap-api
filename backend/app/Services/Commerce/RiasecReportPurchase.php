@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services\Commerce;
 
+use App\DTO\Commerce\PurchaseActor;
+use App\Http\Requests\PurchaseRequestActor;
 use App\Models\Attempt;
 use App\Models\Order;
 use App\Models\Result;
@@ -30,21 +32,30 @@ final class RiasecReportPurchase
 
     public function guestOwns(Request $request, Attempt $attempt): bool
     {
+        return $this->matchesGuest(CareerAssessmentPurchase::guestAnonId($request), $attempt);
+    }
+
+    public function matchesGuest(?string $actual, Attempt $attempt): bool
+    {
         $expected = data_get($attempt->answers_summary_json, 'meta.riasec60_guest_owner');
-        $actual = CareerAssessmentPurchase::guestAnonId($request);
 
         return is_string($expected) && $expected !== '' && $actual !== null && hash_equals($expected, $actual);
     }
 
     public function owner(Request $request, Attempt $attempt): string
     {
-        abort_unless((int) $request->attributes->get('fm_org_id', 0) === 0, 404);
-        $user = $request->attributes->get('fm_user_id');
-        $anon = $request->attributes->get('fm_anon_id');
+        return $this->ownerForActor(PurchaseRequestActor::from($request), $attempt);
+    }
+
+    public function ownerForActor(PurchaseActor $actor, Attempt $attempt): string
+    {
+        abort_unless($actor->orgId === 0, 404);
+        $user = $actor->userId;
+        $anon = $actor->anonId;
         if ($user !== null && (string) $user === (string) $attempt->user_id) {
             return (string) $user;
         }
-        abort_unless($attempt->user_id === null && is_string($anon) && $anon !== '' && hash_equals((string) $attempt->anon_id, $anon) && $this->guestOwns($request, $attempt), 404);
+        abort_unless($attempt->user_id === null && is_string($anon) && $anon !== '' && hash_equals((string) $attempt->anon_id, $anon) && $this->matchesGuest($actor->guestAnonId, $attempt), 404);
 
         return 'guest:'.$anon;
     }

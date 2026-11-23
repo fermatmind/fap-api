@@ -3,6 +3,7 @@
 namespace App\Services\Attempts;
 
 use App\DTO\Attempts\SubmitAttemptDTO;
+use App\DTO\Commerce\PurchaseActor;
 use App\Exceptions\Api\ApiProblemException;
 use App\Models\Attempt;
 use App\Models\Result;
@@ -49,14 +50,19 @@ class AttemptSubmitService
         $this->postCommitStage = new AttemptSubmitPostCommitService($this);
     }
 
-    public function submit(OrgContext $ctx, string $attemptId, SubmitAttemptDTO $dto, ?CarbonInterface $receivedAt = null): array
-    {
+    public function submit(
+        OrgContext $ctx,
+        string $attemptId,
+        SubmitAttemptDTO $dto,
+        ?CarbonInterface $receivedAt = null,
+        ?PurchaseActor $purchaseActor = null,
+    ): array {
         $guarded = $this->guardStage->handle($ctx, $attemptId, $dto);
         $canonicalized = $this->canonicalizeStage->handle($guarded, $receivedAt);
         $scored = $this->scoreStage->handle($canonicalized);
         $tx = $this->txStage->handle($ctx, $canonicalized, $scored);
 
-        return $this->postCommitStage->handle($ctx, $canonicalized, $scored, $tx);
+        return $this->postCommitStage->handle($ctx, $canonicalized, $scored, $tx, $purchaseActor);
     }
 
     public function registry(): ScaleRegistry

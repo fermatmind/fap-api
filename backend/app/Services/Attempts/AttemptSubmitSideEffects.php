@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Attempts;
 
+use App\DTO\Commerce\PurchaseActor;
 use App\Exceptions\Api\ApiProblemException;
 use App\Models\Attempt;
 use App\Services\Analytics\EventRecorder;
@@ -291,12 +292,13 @@ final class AttemptSubmitSideEffects
         string $attemptId,
         ?string $actorUserId,
         ?string $actorAnonId,
-        array &$responsePayload
+        array &$responsePayload,
+        ?PurchaseActor $purchaseActor,
     ): void {
         $attempt = \App\Models\Attempt::withoutGlobalScopes()->where('org_id', $ctx->orgId())->whereKey($attemptId)->first();
         $webPurchase = app(\App\Services\Commerce\MainstreamReportPurchase::class);
         if ($webPurchase->managed($attempt)) {
-            $responsePayload = $webPurchase->overview(request(), $attempt, ['attempt_id' => $attempt->id, 'unlocked' => false,
+            $responsePayload = $webPurchase->overviewForPurchase($attempt, ['attempt_id' => $attempt->id, 'unlocked' => false,
                 'order_no' => null, 'payment_state' => null, 'offers' => []]);
 
             return;
@@ -311,6 +313,7 @@ final class AttemptSubmitSideEffects
                 $userId,
                 $anonId,
                 $ctx->role(),
+                purchaseActor: $purchaseActor ?? new PurchaseActor($ctx->scopedOrgId()),
             );
         } catch (\Throwable $e) {
             Log::warning('SUBMIT_REPORT_GATE_EXCEPTION', [

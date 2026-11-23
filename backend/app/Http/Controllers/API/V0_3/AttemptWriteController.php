@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\V0_3;
 use App\DTO\Attempts\StartAttemptDTO;
 use App\DTO\Attempts\SubmitAttemptDTO;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PurchaseRequestActor;
 use App\Http\Requests\V0_3\StartAttemptRequest;
 use App\Http\Requests\V0_3\SubmitAttemptRequest;
 use App\Services\Analytics\AccessTestIdentity;
@@ -63,7 +64,11 @@ class AttemptWriteController extends Controller
             $payload['resume_token'] = $resumeToken;
         }
 
-        $result = $this->startService->start($context, StartAttemptDTO::fromArray($payload));
+        $result = $this->startService->start(
+            $context,
+            StartAttemptDTO::fromArray($payload),
+            PurchaseRequestActor::from($request)->guestAnonId,
+        );
         $this->captureAttemptIdentity($request, (string) ($result['attempt_id'] ?? ''), 'start');
 
         return response()->json($result);
@@ -105,7 +110,8 @@ class AttemptWriteController extends Controller
             $context,
             $attemptId,
             SubmitAttemptDTO::fromArray($payload),
-            $preferAsync
+            $preferAsync,
+            PurchaseRequestActor::from($request),
         );
 
         $status = (int) ($outcome['http_status'] ?? 200);

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Attempts;
 
 use App\DTO\Attempts\SubmitAttemptDTO;
+use App\DTO\Commerce\PurchaseActor;
 use App\Exceptions\Api\ApiProblemException;
 use App\Jobs\ProcessAttemptSubmissionJob;
 use App\Models\Attempt;
@@ -29,8 +30,13 @@ final class AttemptSubmissionService
     /**
      * @return array{http_status:int,payload:array<string,mixed>}
      */
-    public function submit(OrgContext $ctx, string $attemptId, SubmitAttemptDTO $dto, bool $preferAsync): array
-    {
+    public function submit(
+        OrgContext $ctx,
+        string $attemptId,
+        SubmitAttemptDTO $dto,
+        bool $preferAsync,
+        ?PurchaseActor $purchaseActor = null,
+    ): array {
         $attemptId = trim($attemptId);
         $orgId = $ctx->scopedOrgId();
 
@@ -42,7 +48,7 @@ final class AttemptSubmissionService
         // sync: keep submit contract unchanged and mirror status into attempt_submissions for /submission.
         if (! $preferAsync || ! $hasTable) {
             try {
-                $resultPayload = $this->attemptSubmitService->submit($ctx, $attemptId, $dto);
+                $resultPayload = $this->attemptSubmitService->submit($ctx, $attemptId, $dto, purchaseActor: $purchaseActor);
             } catch (ApiProblemException $e) {
                 if ($hasTable) {
                     $this->recordSyncSubmissionFailure(

@@ -2,6 +2,7 @@
 
 namespace App\Services\Report;
 
+use App\DTO\Commerce\PurchaseActor;
 use App\DTO\ResolvedPack;
 use App\Jobs\GenerateReportSnapshotJob;
 use App\Models\Attempt;
@@ -143,7 +144,8 @@ class ReportGatekeeper
         ?string $role = null,
         bool $forceSystemAccess = false,
         bool $forceRefresh = false,
-        ?string $reportLocale = null
+        ?string $reportLocale = null,
+        ?PurchaseActor $purchaseActor = null,
     ): array {
         $attemptId = trim($attemptId);
         if ($attemptId === '') {
@@ -170,7 +172,9 @@ class ReportGatekeeper
 
         $riasecPurchase = app(\App\Services\Commerce\RiasecReportPurchase::class);
         if (! $forceSystemAccess && $riasecPurchase->managed($attempt)) {
-            $owner = $riasecPurchase->owner(request(), $attempt);
+            $owner = $purchaseActor !== null
+                ? $riasecPurchase->ownerForActor($purchaseActor, $attempt)
+                : $riasecPurchase->owner(request(), $attempt);
             abort_unless(app(\App\Services\Commerce\CareerAssessmentPurchase::class)->hasAccess((string) $attempt->id, $owner), 403, 'Payment is required.');
         }
 

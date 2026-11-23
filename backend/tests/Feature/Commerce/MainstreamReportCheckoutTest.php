@@ -235,6 +235,20 @@ final class MainstreamReportCheckoutTest extends TestCase
         $this->assertNull(app(\App\Services\Commerce\MainstreamReportPurchase::class)->trustedReadOwner($request, $attempt));
     }
 
+    public function test_submit_requires_the_private_header_for_a_managed_guest_attempt(): void
+    {
+        $token = $this->token(true);
+        $id = $this->fixture($token, 'EQ_60', 60, 'en');
+        $path = '/api/v0.3/attempts/submit?mode=sync_legacy';
+        $body = ['attempt_id' => $id, 'duration_ms' => 10000];
+
+        $this->withToken($token)->withHeader('X-Career-Guest-Token', '')->postJson($path, $body)->assertNotFound();
+        $this->withHeader('X-Career-Guest-Token', str_repeat('a', 64))->postJson($path, $body)->assertNotFound();
+        $this->withHeader('X-Career-Guest-Token', '')->postJson($path, $body + [
+            'guest_purchase_token' => $this->guestKeys[$token],
+        ])->assertNotFound();
+    }
+
     public function test_native_public_forms_receive_server_owned_enrollment(): void
     {
         $this->seed(\Database\Seeders\ScaleRegistrySeeder::class);

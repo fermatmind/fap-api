@@ -232,12 +232,44 @@ final class Riasec60CheckoutTest extends TestCase
         $anon = DB::table('auth_tokens')->where('token_hash', hash('sha256', $token))->value('anon_id');
         $body = ['scale_code' => 'RIASEC', 'form_code' => 'riasec_60', 'anon_id' => $anon,
             'locale' => 'zh-CN', 'region' => 'CN_MAINLAND'];
-        $blocked = $this->withToken($token)->withHeader('X-Anon-Id', $anon)->withHeader('X-Career-Guest-Token', '')->postJson('/api/v0.3/attempts/start', $body);
-        $this->assertSame(422, $blocked->status(), $blocked->getContent());
+        $path = '/api/v0.3/attempts/start';
+        $this->withToken($token)->withHeader('X-Anon-Id', $anon)->withHeader('X-Career-Guest-Token', '')
+            ->postJson($path, $body)->assertUnprocessable();
+        $this->withHeader('X-Career-Guest-Token', 'invalid')->postJson($path, $body)->assertUnprocessable();
+        $this->withHeader('X-Career-Guest-Token', '')->postJson($path, $body + [
+            'guest_purchase_token' => $this->guestKeys[$token],
+            'meta' => ['riasec60_guest_owner' => 'c94_'.substr(hash('sha256', $this->guestKeys[$token]), 0, 48)],
+        ])->assertUnprocessable();
         $id = $this->withToken($token)->postJson('/api/v0.3/attempts/start', $body)->assertOk()->json('attempt_id');
         $attempt = \App\Models\Attempt::withoutGlobalScopes()->findOrFail($id);
         $this->assertTrue(app(\App\Services\Commerce\RiasecReportPurchase::class)->managed($attempt));
         $this->assertTrue(app(\App\Services\Commerce\RiasecReportPurchase::class)->guestOwns(request(), $attempt));
+        $user = $this->token();
+        $ownedId = $this->withToken($user)->postJson($path, array_diff_key($body, ['anon_id' => true]))
+            ->assertOk()->json('attempt_id');
+        $owned = \App\Models\Attempt::withoutGlobalScopes()->findOrFail($ownedId);
+        $this->assertNotNull($owned->user_id);
+        $this->assertNull(data_get($owned->answers_summary_json, 'meta.riasec60_guest_owner'));
+    }
+
+    public function test_native_guest_can_submit_and_receives_a_locked_report(): void
+    {
+        config(['payments.career94.enabled' => true]);
+        $this->seed(\Database\Seeders\ScaleRegistrySeeder::class);
+        $token = $this->token(true);
+        $id = $this->withToken($token)->postJson('/api/v0.3/attempts/start', [
+            'scale_code' => 'RIASEC', 'form_code' => 'riasec_60', 'locale' => 'zh-CN', 'region' => 'CN_MAINLAND',
+        ])->assertOk()->json('attempt_id');
+
+        $this->withToken($token)->postJson('/api/v0.3/attempts/submit?mode=sync_legacy', [
+            'attempt_id' => $id,
+            'answers' => array_map(static fn (int $n): array => [
+                'question_id' => (string) $n,
+                'code' => $n <= 10 ? '5' : '1',
+            ], range(1, 60)),
+            'duration_ms' => 180000,
+        ])->assertOk()->assertJsonPath('attempt_id', $id)->assertJsonPath('report.locked', true);
+        $this->assertDatabaseHas('results', ['org_id' => 0, 'attempt_id' => $id]);
     }
 
     private function fixture(string $token, string $market): string

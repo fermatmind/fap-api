@@ -56,7 +56,7 @@ class AttemptStartService
         private AttemptProgressService $progressService,
     ) {}
 
-    public function start(OrgContext $ctx, StartAttemptDTO $dto): array
+    public function start(OrgContext $ctx, StartAttemptDTO $dto, ?string $purchaseGuest = null): array
     {
         $orgId = $ctx->orgId() ?? 0;
 
@@ -360,7 +360,6 @@ class AttemptStartService
         }
         // Server-owned enrollment: historical free reports retain their existing access.
         unset($answersMeta['riasec60_commerce'], $answersMeta['riasec60_guest_owner']);
-        $purchaseGuest = \App\Services\Commerce\CareerAssessmentPurchase::guestAnonId(request());
         if ($orgId === 0 && $scaleCode === 'RIASEC' && $questionCount === 60 && config('payments.career94.enabled')) {
             abort_unless($ctx->userId() !== null || $purchaseGuest !== null, 422, 'A private browser purchase credential is required.');
             $answersMeta['riasec60_commerce'] = 'v1';
