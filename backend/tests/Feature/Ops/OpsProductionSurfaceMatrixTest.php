@@ -14,10 +14,12 @@ final class OpsProductionSurfaceMatrixTest extends TestCase
         $resourceFiles = glob(app_path('Filament/Ops/Resources/*Resource.php')) ?: [];
         $pageFiles = glob(app_path('Filament/Ops/Pages/*.php')) ?: [];
 
-        $this->assertCount(33, $resourceFiles, 'The production Resource inventory changed.');
-        $this->assertCount(36, $pageFiles, 'The production Page inventory changed.');
+        $this->assertCount(34, $resourceFiles, 'The production Resource inventory changed.');
+        $this->assertCount(37, $pageFiles, 'The production Page inventory changed.');
 
+        $this->assertContains(app_path('Filament/Ops/Resources/CareerRefundRequestResource.php'), $resourceFiles);
         $this->assertContains(app_path('Filament/Ops/Pages/AccessTestStatisticsPage.php'), $pageFiles);
+        $this->assertContains(app_path('Filament/Ops/Pages/EntertainmentStatisticsPage.php'), $pageFiles);
 
         foreach ($resourceFiles as $resourceFile) {
             $source = (string) file_get_contents($resourceFile);

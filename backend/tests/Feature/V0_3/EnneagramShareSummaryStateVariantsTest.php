@@ -46,9 +46,9 @@ final class EnneagramShareSummaryStateVariantsTest extends TestCase
     public static function stateProvider(): iterable
     {
         yield 'clear' => ['clear', '当前结果更接近 4 号倾向', null];
-        yield 'close_call' => ['close_call', '可能在 4 号与 5 号之间摇摆', '4_5'];
+        yield 'close_call' => ['close_call', '4号与5号候选接近', '4_5'];
         yield 'diffuse' => ['diffuse', '呈现分散结构', null];
-        yield 'low_quality' => ['low_quality', '解释边界较宽', null];
+        yield 'low_quality' => ['low_quality', '本次作答支持的解释范围有限', null];
     }
 
     /**

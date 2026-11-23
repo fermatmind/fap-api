@@ -257,7 +257,7 @@ final class OpsShellPolishTest extends TestCase
         }
 
         $this->assertSame(1, substr_count($postRelease, 'post_release_observability.eyebrow'));
-        $this->assertStringContainsString(':show-hints="false"', $postRelease);
+        $this->assertStringContainsString('<x-filament-ops::ops-field-grid :fields="$headlineFields" />', $postRelease);
 
         foreach ([
             'article_publishing_ops.eyebrow',

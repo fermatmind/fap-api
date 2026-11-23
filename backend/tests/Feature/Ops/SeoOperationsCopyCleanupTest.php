@@ -28,7 +28,7 @@ final class SeoOperationsCopyCleanupTest extends TestCase
 
         foreach ([
             '.trend.description',
-            '.trend.hold',
+            ".trend.hold'",
             '.decisions.description',
             '.decisions.hold_description',
             '.health.description',
@@ -37,6 +37,8 @@ final class SeoOperationsCopyCleanupTest extends TestCase
         ] as $copyKey) {
             $this->assertStringNotContainsString($copyKey, $workbench);
         }
+
+        $this->assertStringContainsString(".trend.hold_description'", $workbench);
 
         foreach ([
             '.reliability.description',

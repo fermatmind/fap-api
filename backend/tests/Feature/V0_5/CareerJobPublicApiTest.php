@@ -590,25 +590,24 @@ final class CareerJobPublicApiTest extends TestCase
 
     public function test_seo_endpoint_uses_each_locale_file_without_database_metadata(): void
     {
-        foreach (['actors' => ['en' => true, 'zh-CN' => true], 'accountants-and-auditors' => ['en' => true, 'zh-CN' => true]] as $slug => $eligibility) {
-            foreach (['en', 'zh-CN'] as $locale) {
-                $indexable = $eligibility[$locale];
-                $alternates = [];
-                foreach ($eligibility as $alternateLocale => $qualified) {
-                    if ($indexable && $qualified) {
-                        $alternates[$alternateLocale] = '/'.($alternateLocale === 'en' ? 'en' : 'zh').'/career/jobs/'.$slug;
-                    }
-                }
+        foreach (['actors', 'accountants-and-auditors'] as $slug) {
+            $alternates = [
+                'en' => '/en/career/jobs/'.$slug,
+                'zh-CN' => '/zh/career/jobs/'.$slug,
+                'zh-TW' => '/zh-TW/career/jobs/'.$slug,
+            ];
+            foreach ($alternates as $locale => $canonical) {
                 $page = app(\App\Domain\Career\Display\CareerPageProjector::class)->read($slug, $locale);
-                $segment = $locale === 'en' ? 'en' : 'zh';
                 $this->getJson('/api/v0.5/career-jobs/'.$slug.'/seo?locale='.$locale)
                     ->assertOk()
                     ->assertJsonPath('meta.title', $page['subject']['name'])
                     ->assertJsonPath('meta.description', $page['seo']['description']['text'])
-                    ->assertJsonPath('meta.canonical', '/'.$segment.'/career/jobs/'.$slug)
+                    ->assertJsonPath('meta.canonical', $canonical)
                     ->assertJsonPath('meta.alternates', $alternates)
-                    ->assertJsonPath('meta.robots', $indexable ? 'index,follow' : 'noindex,follow')
-                    ->assertJsonPath('seo_surface_v1.indexability_state', $indexable ? 'indexable' : 'noindex')
+                    ->assertJsonPath('meta.hreflang', $alternates)
+                    ->assertJsonPath('meta.robots', 'index,follow')
+                    ->assertJsonPath('seo_surface_v1.canonical_url', $canonical)
+                    ->assertJsonPath('seo_surface_v1.indexability_state', 'indexable')
                     ->assertJsonPath('jsonld', null);
             }
         }

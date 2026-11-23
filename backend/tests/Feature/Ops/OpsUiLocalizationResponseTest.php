@@ -110,7 +110,9 @@ final class OpsUiLocalizationResponseTest extends TestCase
             $contents = (string) file_get_contents($path);
 
             preg_match_all('/\b(?:title|description|eyebrow|label|placeholder|empty-title|empty-description|empty-eyebrow)="([^"]*[A-Za-z][^"]*)"/', $contents, $attributeMatches);
-            preg_match_all('/>\s*([A-Z][A-Za-z0-9 &\/:.,;()\'’\-+]+?)\s*</', $contents, $textMatches);
+            // Language selectors display language names in their own language.
+            $localizedCopy = str_replace('<option value="en">English</option>', '<option value="en"></option>', $contents);
+            preg_match_all('/>\s*([A-Z][A-Za-z0-9 &\/:.,;()\'’\-+]+?)\s*</', $localizedCopy, $textMatches);
 
             foreach ([...$attributeMatches[1], ...$textMatches[1]] as $text) {
                 $text = trim((string) $text);

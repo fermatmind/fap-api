@@ -73,7 +73,8 @@ final class ArticlePublishingRuntimeTruthTest extends TestCase
                 ->assertJsonPath('jsonld.headline', $articleFixture['seo_title'])
                 ->assertJsonPath('jsonld.description', $articleFixture['meta_description'])
                 ->assertJsonPath('jsonld.image', $articleFixture['cover_image'])
-                ->assertJsonPath('jsonld.author.name', $articleFixture['author'])
+                ->assertJsonPath('jsonld.author.@type', 'Organization')
+                ->assertJsonPath('jsonld.author.name', '费马测试编辑部')
                 ->assertJsonPath('seo_surface_v1.structured_data_keys.0', 'Article');
 
             $this->assertStringContainsString('References', (string) $articleFixture['content_md']);
