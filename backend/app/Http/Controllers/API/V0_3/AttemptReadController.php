@@ -493,15 +493,17 @@ class AttemptReadController extends Controller
     /** Owner-authenticated acknowledgment, separate from public analytics ingress. */
     public function observeResult(Request $request, string $id): JsonResponse
     {
-        if (array_diff(array_keys($request->all()), ['receipt', 'consent_state']) !== []) {
+        if (array_diff(array_keys($request->all()), ['receipt', 'consent_state', 'interaction']) !== []) {
             throw \Illuminate\Validation\ValidationException::withMessages(['payload' => 'Unexpected observation fields.']);
         }
         $data = $request->validate([
             'receipt' => ['required', 'string', 'max:4096'],
             'consent_state' => ['required', 'in:granted'],
+            'interaction' => ['sometimes', 'required', 'string', 'in:entry_visible,entry_clicked,payment_visible,payment_clicked'],
         ]);
         $attempt = $this->ownedAttemptQuery($request, $id)->first();
-        if (! $attempt || ! in_array(strtoupper((string) $attempt->scale_code), ResultVisibilityObservation::SCALES, true)) {
+        $isMainstreamPurchase = $attempt?->scale_code !== 'MBTI' && app(\App\Services\Commerce\MainstreamReportPurchase::class)->managed($attempt);
+        if (! $attempt || ! ResultVisibilityObservation::supportsScale((string) $attempt->scale_code, $isMainstreamPurchase)) {
             throw new ApiProblemException(404, 'RESOURCE_NOT_FOUND', 'attempt not found.');
         }
         $orgId = (int) $attempt->org_id;
@@ -511,14 +513,40 @@ class AttemptReadController extends Controller
         if ($proof === null) {
             throw new ApiProblemException(422, 'INVALID_OBSERVATION_RECEIPT', 'invalid result observation receipt.');
         }
+        $interaction = $data['interaction'] ?? null;
+        $event = ResultVisibilityObservation::EVENT;
+        $deduplicationKey = 'result-visible:'.$orgId.':'.$proof['nonce'];
+        $purchaseEligible = ($proof['purchase_eligible'] ?? false) === true;
+        $purchaseObservation = [];
+        if ($purchaseEligible || $interaction !== null) {
+            $riasecPurchase = app(\App\Services\Commerce\RiasecReportPurchase::class);
+            $isRiasec = $riasecPurchase->managed($attempt) && data_get($result->result_json, 'form_code') === 'riasec_60';
+            abort_unless($purchaseEligible && ($isRiasec || $isMainstreamPurchase), 404);
+            if ($isRiasec) {
+                $riasecPurchase->owner($request, $attempt);
+            }
+
+            if ($interaction !== null) {
+                $event = ($isRiasec ? 'riasec_purchase_' : 'report_purchase_').$interaction;
+                $deduplicationKey .= ':'.$interaction;
+            }
+            $userAgent = (string) $request->userAgent();
+            $purchaseObservation['purchase_eligible'] = true;
+            $purchaseObservation['browser_family'] = match (true) {
+                stripos($userAgent, 'MicroMessenger/') !== false => 'wechat',
+                preg_match('/Android.+(?:; wv\)|Version\/4\.0.+Chrome\/)/i', $userAgent) === 1 => 'android_webview',
+                default => 'other',
+            };
+        }
         $received = now()->utc();
-        $persisted = $this->eventRecorder->recordConfirmed(ResultVisibilityObservation::EVENT, null, [
+        $persisted = $this->eventRecorder->recordConfirmed($event, null, [
             'measurement_observation' => [
                 'version' => ResultVisibilityObservation::VERSION, 'consent_state' => 'granted',
                 'server_read_at' => $proof['read_at'], 'server_received_at' => $received->toISOString(),
+                ...$purchaseObservation,
             ],
         ], [
-            '_event_id' => (string) \Ramsey\Uuid\Uuid::uuid5(\Ramsey\Uuid\Uuid::NAMESPACE_URL, 'result-visible:'.$orgId.':'.$proof['nonce']),
+            '_event_id' => (string) \Ramsey\Uuid\Uuid::uuid5(\Ramsey\Uuid\Uuid::NAMESPACE_URL, $deduplicationKey),
             'org_id' => $orgId, 'attempt_id' => $id, 'anon_id' => $attempt->anon_id,
             'scale_code' => $attempt->scale_code, 'locale' => $attempt->locale, 'occurred_at' => $received,
         ]);

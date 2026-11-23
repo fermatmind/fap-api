@@ -7,6 +7,7 @@ namespace App\Services\Commerce;
 use App\Models\Attempt;
 use App\Models\Order;
 use App\Models\Result;
+use App\Services\Analytics\ResultVisibilityObservation;
 use App\Services\Iq\IqBetaReferenceScore;
 use App\Services\Report\Pdf\CompleteAssessmentPdf;
 use App\Services\Report\Pdf\ReportPdfDocumentService;
@@ -177,12 +178,17 @@ final class MainstreamReportPurchase
         }
         $quality = data_get($source, 'quality.level', data_get($score, 'quality.level'));
         $type = $result?->type_code;
+        $purchase ??= $this->purchase($request, $attempt);
+        $receipt = $attempt->scale_code !== 'MBTI' && $result && $purchase['offers'] !== []
+            ? app(ResultVisibilityObservation::class)->issue($attempt, $result, purchaseEligible: true)
+            : null;
 
         $overview = ['ok' => true, 'attempt_id' => $attempt->id, 'scale_code' => $attempt->scale_code,
             'meta' => ['scale_code' => $attempt->scale_code, 'form_code' => data_get($attempt->answers_summary_json, 'meta.form_code')],
             'result' => ['scale_code' => $attempt->scale_code, 'type_code' => $type, 'scores_pct' => $scores, 'summary' => $summary,
                 'quality' => is_string($quality) ? ['level' => $quality] : null],
-            'report_purchase' => $purchase ?? $this->purchase($request, $attempt),
+            'report_purchase' => $purchase,
+            ...($receipt === null ? [] : ['result_visibility_receipt' => $receipt]),
             'locked' => true, 'access_level' => 'free', 'variant' => 'free',
             'free_full_report_mode' => false, 'paywall_suppressed' => false];
         if ($attempt->scale_code === 'EQ_60') {

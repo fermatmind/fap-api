@@ -202,6 +202,28 @@ final class Riasec60CheckoutTest extends TestCase
             'sku' => CareerAssessmentPurchase::RIASEC_SKUS['CNY'], 'provider' => 'alipay'])->assertNotFound();
     }
 
+    public function test_locked_result_purchase_observations_are_owner_bound_and_deduplicated(): void
+    {
+        config(['payments.career94.enabled' => true, 'payments.providers.alipay.enabled' => true, 'pay.alipay.default.app_id' => 'app_fixture', 'pay.alipay.default.seller_id' => 'seller_fixture']);
+        $owner = $this->token(true);
+        $id = $this->fixture($owner, 'CN_MAINLAND');
+        DB::table('results')->where('attempt_id', $id)->update(['is_valid' => true]);
+        $receipt = $this->withToken($owner)->getJson("/api/v0.3/attempts/$id/result")->assertOk()->json('result_visibility_receipt');
+        $this->assertIsString($receipt);
+        $path = "/api/v0.3/attempts/$id/result-observation";
+        $body = ['receipt' => $receipt, 'consent_state' => 'granted'];
+        $this->withHeader('User-Agent', 'Mozilla Android; wv) Chrome/123 MicroMessenger/8.0')->postJson($path, $body)->assertAccepted();
+        foreach (['entry_visible', 'entry_clicked', 'payment_visible', 'payment_clicked', 'payment_clicked'] as $event) {
+            $this->postJson($path, $body + ['interaction' => $event])->assertAccepted();
+        }
+        $this->postJson($path, $body + ['interaction' => 'other'])->assertUnprocessable();
+        $this->withHeader('X-Career-Guest-Token', '')->postJson($path, $body + ['interaction' => 'payment_visible'])->assertNotFound();
+        $events = DB::table('events')->where('attempt_id', $id)->where('event_code', 'like', 'riasec_purchase_%')->get();
+        $this->assertCount(4, $events);
+        $this->assertSame('wechat', json_decode($events[0]->meta_json, true)['measurement_observation']['browser_family']);
+        $this->assertDatabaseCount('orders', 0);
+    }
+
     public function test_new_native_60_attempts_require_a_purchase_key_and_enroll_on_the_server(): void
     {
         config(['payments.career94.enabled' => true]);

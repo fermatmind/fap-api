@@ -7,6 +7,7 @@ namespace App\Services\Commerce;
 use App\Models\Attempt;
 use App\Models\Order;
 use App\Models\Result;
+use App\Services\Analytics\ResultVisibilityObservation;
 use App\Services\Riasec\RiasecPublicProjectionService;
 use Illuminate\Http\Request;
 
@@ -67,6 +68,7 @@ final class RiasecReportPurchase
 
         return [
             'ok' => true, 'scale_code' => 'RIASEC', 'meta' => ['scale_code' => 'RIASEC'], 'type_code' => $result->type_code,
+            'result_visibility_receipt' => app(ResultVisibilityObservation::class)->issue($attempt, $result, $offers !== []),
             'attempt_id' => $attempt->id, 'result' => ['scale_code' => 'RIASEC', 'type_code' => $result->type_code, 'scores_pct' => $result->scores_pct],
             'riasec_public_projection_v2' => $projection,
             'riasec_purchase' => ['attempt_id' => $attempt->id, 'unlocked' => $unlocked,
