@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Commerce;
 
+use App\DTO\Commerce\PurchaseActor;
 use App\Http\Requests\PurchaseRequestActor;
 use App\Jobs\GenerateReportPdfJob;
 use App\Models\User;
@@ -483,6 +484,27 @@ final class MainstreamReportCheckoutTest extends TestCase
 
         $this->expectException(\Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class);
         $gate->ensureAccess(0, $id, null, $attempt->anon_id);
+    }
+
+    public function test_report_gate_accepts_explicit_guest_context_without_a_bound_request(): void
+    {
+        $id = $this->fixture($this->token(true), 'BIG5_OCEAN', 90, 'en');
+        $attempt = \App\Models\Attempt::withoutGlobalScopes()->findOrFail($id);
+        $actor = new PurchaseActor(0, anonId: $attempt->anon_id, guestAnonId: data_get($attempt->answers_summary_json, 'meta.web_report_guest_owner'));
+        $gate = app(\App\Services\Report\ReportGatekeeper::class);
+
+        $request = $this->app->make('request');
+        $this->app->forgetInstance('request');
+        try {
+            $this->assertFalse($this->app->bound('request'));
+            $access = $gate->ensureAccess(0, $id, null, $attempt->anon_id, purchaseActor: $actor);
+
+            $this->assertTrue($access['ok']);
+            $this->assertTrue($access['locked']);
+            $this->assertSame('payment', $access['access_source']);
+        } finally {
+            $this->app->instance('request', $request);
+        }
     }
 
     private function fixture(string $token, string $scale, int $count, string $locale): string
