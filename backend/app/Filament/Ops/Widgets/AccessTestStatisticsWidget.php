@@ -77,7 +77,17 @@ final class AccessTestStatisticsWidget extends BaseWidget
                 'time' => CarbonImmutable::createFromTimestamp($snapshot['through'], 'Asia/Shanghai')->format('H:i:s'),
             ]);
 
+        $uniqueBrowsers = $snapshot['uniqueBrowsers'] ?? null;
+        $browserDescription = $uniqueBrowsers === null
+            ? __('ops.widgets.site_traffic_browsers_unavailable')
+            : __('ops.widgets.site_traffic_browsers_coverage', [
+                'covered' => number_format($snapshot['identifiedPageRequests']),
+                'total' => number_format($snapshot['pageRequests']),
+            ]).' · '.$description;
+
         return [
+            Stat::make(__('ops.widgets.site_traffic_browsers'), $uniqueBrowsers === null ? '—' : number_format($uniqueBrowsers))
+                ->description($browserDescription),
             Stat::make(__('ops.widgets.site_traffic_requests'), $snapshot === null ? '—' : number_format($snapshot['pageRequests']))
                 ->description($description),
             Stat::make(__('ops.widgets.site_traffic_ips'), $snapshot === null ? '—' : number_format($snapshot['uniqueIps']))

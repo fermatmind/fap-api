@@ -47,16 +47,27 @@ final class AccessTestStatisticsWidgetTest extends TestCase
         Http::fake([
             'https://fermatmind.com/api/internal/site-traffic' => Http::sequence()
                 ->push(['date' => '2026-10-24', 'through' => $timestamp, 'pageRequests' => 1250, 'uniqueIps' => 740])
+                ->push(['date' => '2026-10-24', 'through' => $timestamp, 'pageRequests' => 1250, 'uniqueIps' => 740,
+                    'uniqueBrowsers' => 45, 'identifiedPageRequests' => 150])
+                ->push(['date' => '2026-10-24', 'through' => $timestamp, 'pageRequests' => 1250, 'uniqueIps' => 740,
+                    'uniqueBrowsers' => 46, 'identifiedPageRequests' => 45])
                 ->push(['date' => '2026-10-24', 'through' => $timestamp, 'pageRequests' => 5, 'uniqueIps' => 11])
                 ->push([], 503),
         ]);
 
         $this->assertTrue($collector->refresh());
+        $this->assertSame('—', $method->invoke($widget)[1]->getValue());
+        $this->assertTrue($collector->refresh());
+        $this->assertFalse($collector->refresh());
         $this->assertFalse($collector->refresh());
         $this->assertFalse($collector->refresh());
         $stats = $method->invoke($widget);
-        $this->assertSame('1,250', $stats[1]->getValue());
-        $this->assertSame('740', $stats[2]->getValue());
+        $this->assertSame('45', $stats[1]->getValue());
+        $this->assertStringContainsString(__('ops.widgets.site_traffic_browsers_coverage', [
+            'covered' => '150', 'total' => '1,250',
+        ]), $stats[1]->getDescription());
+        $this->assertSame('1,250', $stats[2]->getValue());
+        $this->assertSame('740', $stats[3]->getValue());
         Http::assertSent(fn ($request) => $request->hasHeader('X-Fm-Site-Traffic-Time', (string) $timestamp)
             && $request->hasHeader('X-Fm-Site-Traffic-Signature', hash_hmac('sha256', 'fermatmind.site-traffic.v1:'.$timestamp, 'test-ingest-token'))
             && ! $request->hasHeader('X-Track-Ingest-Token'));

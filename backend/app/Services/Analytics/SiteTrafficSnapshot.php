@@ -42,13 +42,15 @@ final class SiteTrafficSnapshot
                 'through' => $snapshot['through'],
                 'pageRequests' => $snapshot['pageRequests'],
                 'uniqueIps' => $snapshot['uniqueIps'],
+                'uniqueBrowsers' => $snapshot['uniqueBrowsers'] ?? null,
+                'identifiedPageRequests' => $snapshot['identifiedPageRequests'] ?? null,
             ], now()->addDay());
         } catch (Throwable) {
             return false;
         }
     }
 
-    /** @return array{through:int,pageRequests:int,uniqueIps:int}|null */
+    /** @return array{through:int,pageRequests:int,uniqueIps:int,uniqueBrowsers?:int|null,identifiedPageRequests?:int|null}|null */
     public function today(): ?array
     {
         $snapshot = Cache::get($this->key(CarbonImmutable::now(AccessTestIdentity::TIMEZONE)));
@@ -72,6 +74,19 @@ final class SiteTrafficSnapshot
             && $snapshot['pageRequests'] >= 0
             && is_int($snapshot['uniqueIps'] ?? null)
             && $snapshot['uniqueIps'] >= 0
-            && $snapshot['uniqueIps'] <= $snapshot['pageRequests'];
+            && $snapshot['uniqueIps'] <= $snapshot['pageRequests']
+            && $this->validBrowserCoverage(
+                $snapshot['uniqueBrowsers'] ?? null,
+                $snapshot['identifiedPageRequests'] ?? null,
+                $snapshot['pageRequests'],
+            );
+    }
+
+    private function validBrowserCoverage(mixed $browsers, mixed $identifiedRequests, int $pageRequests): bool
+    {
+        return ($browsers === null && $identifiedRequests === null)
+            || (is_int($browsers) && is_int($identifiedRequests)
+                && $browsers >= 0 && $browsers <= $identifiedRequests && $identifiedRequests <= $pageRequests
+                && ($browsers > 0 || $identifiedRequests === 0));
     }
 }
