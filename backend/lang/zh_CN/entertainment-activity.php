@@ -26,6 +26,7 @@ return [
         'fun_result_view' => '结果查看次数',
         'fun_share' => '分享动作次数',
     ],
+    'result_cta_clicks' => '测后核心测评入口点击次数',
     'columns' => [
         'test' => '测试',
         'language' => '语言',

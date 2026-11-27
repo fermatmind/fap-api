@@ -222,6 +222,63 @@ final class EntertainmentActivityTest extends TestCase
         }
     }
 
+    public function test_result_cta_ingest_and_ops_aggregate_keep_clicks_separate_from_starts(): void
+    {
+        $this->authenticateOps();
+        CarbonImmutable::setTestNow(CarbonImmutable::parse('2026-11-26T04:00:00Z'));
+        try {
+            foreach (['en', 'zh', 'zh-TW'] as $locale) {
+                $path = "/$locale/tests/explore/what-dog-breed-am-i";
+                $event = [
+                    'eventName' => 'article_to_test_click',
+                    'path' => $path,
+                    'timestamp' => '2026-11-25T16:00:00Z',
+                    'payload' => [
+                        'locale' => $locale,
+                        'lang' => $locale,
+                        'landing_path' => $path,
+                        'source_url' => $path,
+                        'target_action' => $locale === 'en' ? 'entertainment_result_mbti' : 'questionnaire_result_mbti',
+                        'target_test' => 'mbti-personality-test-16-personality-types',
+                        'environment' => 'production',
+                    ],
+                ];
+                $this->send($event)->assertStatus(202)->assertJsonPath('event_code', 'article_to_test_click');
+                $events = DB::table('events')->where('event_code', 'article_to_test_click')->where('locale', $locale);
+                $this->assertSame(1, $events->count());
+                $meta = json_decode($events->value('meta_json'), true, 512, JSON_THROW_ON_ERROR);
+                $this->assertSame($path, $meta['landing_path']);
+                $this->assertSame($event['payload']['target_action'], $meta['target_action']);
+            }
+
+            $this->send([...$event, 'path' => '/zh-TW/results/private-attempt'])->assertStatus(422);
+            $this->send([...$event, 'eventName' => 'start_test'])->assertStatus(422);
+            $this->send([...$event, 'payload' => [...$event['payload'], 'target_action' => 'questionnaireXresultXmbti']])->assertStatus(422);
+            $this->send([...$event, 'payload' => [...$event['payload'], 'target_action' => 'seo_cta_mbti']])->assertStatus(202);
+            $this->send([...$event, 'payload' => [...$event['payload'], 'is_qa' => true]])->assertStatus(202);
+            $this->send([...$event, 'timestamp' => '2026-11-26T16:00:00Z'])->assertStatus(202);
+            $this->assertSame(0, DB::table('events')->whereIn('event_code', ['start_test', 'start_click', 'fun_start'])->count());
+
+            $page = app(EntertainmentStatisticsPage::class);
+            $page->fromDate = $page->toDate = '2026-11-26';
+            $page->applyFilters();
+            $this->assertSame(3, $page->resultCtaClicks);
+            $this->assertSame(0, $page->summary['fun_start']);
+            $page->test = 'what-dog-breed-am-i';
+            $page->locale = 'zh';
+            $page->applyFilters();
+            $this->assertSame(2, $page->resultCtaClicks);
+            $page->test = 'friendship-quiz';
+            $page->applyFilters();
+            $this->assertSame(0, $page->resultCtaClicks);
+            $page->role = 'creator';
+            $page->applyFilters();
+            $this->assertNull($page->resultCtaClicks);
+        } finally {
+            CarbonImmutable::setTestNow();
+        }
+    }
+
     public function test_dashboard_widget_defaults_to_beijing_today_and_keeps_every_registered_test_accessible(): void
     {
         $this->authenticateOps();

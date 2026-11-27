@@ -35,6 +35,8 @@ trait InteractsWithEntertainmentStatistics
 
     public array $summary = [];
 
+    public ?int $resultCtaClicks = null;
+
     public ?string $warning = null;
 
     protected function defaultLookbackDays(): int
@@ -79,6 +81,7 @@ trait InteractsWithEntertainmentStatistics
         $this->warning = null;
         $this->rows = [];
         $this->totalRows = 0;
+        $this->resultCtaClicks = null;
         $this->summary = array_fill_keys(EntertainmentActivity::EVENTS, 0);
         if ($start->diffInDays($end) > 90) {
             $this->warning = __('entertainment-activity.range_limit');
@@ -141,7 +144,43 @@ trait InteractsWithEntertainmentStatistics
                 }
             }
         }
+        if ($this->role === '*') {
+            $this->resultCtaClicks = $this->countResultCtaClicks($start, $end);
+        }
         $this->totalRows = count($all);
         $this->rows = array_slice($all, $this->offset, 50);
+    }
+
+    private function countResultCtaClicks(CarbonImmutable $start, CarbonImmutable $end): int
+    {
+        $action = "json_extract(meta_json, '$.target_action')";
+        $source = "json_extract(meta_json, '$.landing_path')";
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            $action = "JSON_UNQUOTE($action)";
+            $source = "JSON_UNQUOTE($source)";
+        }
+
+        $query = DB::table('events')->where('org_id', 0)->where('event_code', 'article_to_test_click')
+            ->where('analytics_eligible', true)
+            ->where('occurred_at', '>=', $start->utc())->where('occurred_at', '<', $end->utc())
+            ->whereRaw("($action LIKE ? ESCAPE '!' OR $action LIKE ? ESCAPE '!')", [
+                'entertainment!_result!_%', 'questionnaire!_result!_%',
+            ]);
+        $locales = match ($this->locale) {
+            'en' => ['en'],
+            'zh' => ['zh', 'zh-TW'],
+            default => ['en', 'zh', 'zh-TW'],
+        };
+        $query->whereIn('locale', $locales);
+        if ($this->test !== '*') {
+            $paths = [];
+            foreach ($locales as $locale) {
+                $paths[] = "/$locale/tests/explore/{$this->test}";
+                $paths[] = "/$locale/tests/play/{$this->test}";
+            }
+            $query->whereIn(DB::raw($source), $paths);
+        }
+
+        return $query->count();
     }
 }

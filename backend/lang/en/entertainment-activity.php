@@ -26,6 +26,7 @@ return [
         'fun_result_view' => 'Result views',
         'fun_share' => 'Share actions',
     ],
+    'result_cta_clicks' => 'Post-result clicks to core assessments',
     'columns' => [
         'test' => 'Test',
         'language' => 'Language',

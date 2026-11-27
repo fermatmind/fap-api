@@ -183,6 +183,10 @@ final class MbtiAttributionEventController extends Controller
             $this->rejectUnexpectedKeys($payloadInput, self::PAYLOAD_KEYS, 'payload');
         }
 
+        $localeRule = $this->isSeoPrivacyIngest($request) && $request->input('eventName') === 'article_to_test_click'
+            ? 'in:en,zh,zh-cn,zh-CN,zh-TW'
+            : 'in:en,zh,zh-cn,zh-CN';
+
         $data = $request->validate([
             'requestId' => ['nullable', 'string', 'max:128', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
             'eventName' => ['required', 'string', 'max:64'],
@@ -197,7 +201,7 @@ final class MbtiAttributionEventController extends Controller
             'payload.form_code' => ['nullable', 'string', 'max:64', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
             'payload.landing_path' => ['nullable', 'string', 'max:512', 'regex:/\A\/[^\r\n]*\z/'],
             'payload.current_path' => ['nullable', 'string', 'max:512', 'regex:/\A\/[^\r\n]*\z/'],
-            'payload.locale' => ['nullable', 'string', 'max:16', 'in:en,zh,zh-cn,zh-CN'],
+            'payload.locale' => ['nullable', 'string', 'max:16', $localeRule],
             'payload.attempt_id' => ['nullable', 'string', 'max:64', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
             'payload.attemptIdMasked' => ['nullable', 'string', 'max:64', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
             'payload.target_attempt_id' => ['nullable', 'string', 'max:64', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
@@ -233,7 +237,7 @@ final class MbtiAttributionEventController extends Controller
             'payload.referrer' => ['nullable', 'string', 'max:512', 'regex:/\A[^\r\n]*\z/'],
             'payload.session_id' => ['nullable', 'string', 'max:128', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
             'payload.url' => ['nullable', 'string', 'max:512', 'regex:/\A[^\r\n]*\z/'],
-            'payload.lang' => ['nullable', 'string', 'max:16', 'in:en,zh,zh-cn,zh-CN'],
+            'payload.lang' => ['nullable', 'string', 'max:16', $localeRule],
             'payload.page_type' => ['nullable', 'string', 'max:64', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
             'payload.source_url' => ['nullable', 'string', 'max:512', 'regex:/\A[^\r\n]*\z/'],
             'payload.source_article' => ['nullable', 'string', 'max:128', 'regex:/\A[A-Za-z0-9._:\/-]+\z/'],
