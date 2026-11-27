@@ -293,6 +293,11 @@ final class EntertainmentActivityTest extends TestCase
                 ->assertSet('totalRows', $totalRows)->assertCount('rows', 50)
                 ->assertSet('summary.fun_start', 1)
                 ->call('movePage', 1)->assertSet('offset', 50)->assertCount('rows', 50);
+            $component->call('sortByMetric', 'start')->assertSet('offset', 0)
+                ->assertSet('sortDirection', 'desc')->assertSet('rows.0.slug', 'friendship-quiz')
+                ->assertSet('rows.0.counts.fun_start', 1)->assertSeeHtml('aria-sort="descending"')
+                ->call('sortByMetric', 'start')->assertSet('sortDirection', 'asc')
+                ->assertSet('rows.0.counts.fun_start', 0)->assertSeeHtml('aria-sort="ascending"');
             $component->set('offset', intdiv($totalRows - 1, 50) * 50)->call('movePage', 1)
                 ->assertSee($catalog[array_key_last($catalog)]['slug'])
                 ->set('test', 'friendship-quiz')->set('locale', 'en')->set('role', 'solo')

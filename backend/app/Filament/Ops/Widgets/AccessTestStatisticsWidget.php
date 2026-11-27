@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Ops\Widgets;
 
 use App\Filament\Ops\Support\OpsMetricsAccess;
+use App\Services\Analytics\SiteTrafficSnapshot;
 use App\Support\SchemaBaseline;
 use Carbon\CarbonImmutable;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
@@ -28,7 +29,10 @@ final class AccessTestStatisticsWidget extends BaseWidget
     protected function getStats(): array
     {
         if (! SchemaBaseline::hasTable('analytics_access_test_daily')) {
-            return [Stat::make(__('ops.widgets.access_test_statistics'), __('ops.widgets.no_data'))->color('gray')];
+            return [
+                Stat::make(__('ops.widgets.access_test_statistics'), __('ops.widgets.no_data'))->color('gray'),
+                ...$this->siteTrafficStats(),
+            ];
         }
 
         $row = DB::table('analytics_access_test_daily')
@@ -40,7 +44,10 @@ final class AccessTestStatisticsWidget extends BaseWidget
             ->first();
 
         if ($row === null) {
-            return [Stat::make(__('ops.widgets.access_test_statistics'), __('ops.widgets.no_data'))->color('gray')];
+            return [
+                Stat::make(__('ops.widgets.access_test_statistics'), __('ops.widgets.no_data'))->color('gray'),
+                ...$this->siteTrafficStats(),
+            ];
         }
 
         $description = __('ops.widgets.access_test_status', [
@@ -56,6 +63,25 @@ final class AccessTestStatisticsWidget extends BaseWidget
             Stat::make(__('ops.pages.access_test_statistics.metrics.completed_test_ips'), (string) $row->completed_test_ips),
             Stat::make(__('ops.pages.access_test_statistics.metrics.successful_attempts'), (string) $row->successful_attempts),
             Stat::make(__('ops.pages.access_test_statistics.metrics.valid_page_views'), (string) $row->valid_page_views),
+            ...$this->siteTrafficStats(),
+        ];
+    }
+
+    /** @return list<Stat> */
+    private function siteTrafficStats(): array
+    {
+        $snapshot = app(SiteTrafficSnapshot::class)->today();
+        $description = $snapshot === null
+            ? __('ops.widgets.site_traffic_unavailable')
+            : __('ops.widgets.site_traffic_through', [
+                'time' => CarbonImmutable::createFromTimestamp($snapshot['through'], 'Asia/Shanghai')->format('H:i:s'),
+            ]);
+
+        return [
+            Stat::make(__('ops.widgets.site_traffic_requests'), $snapshot === null ? '—' : number_format($snapshot['pageRequests']))
+                ->description($description),
+            Stat::make(__('ops.widgets.site_traffic_ips'), $snapshot === null ? '—' : number_format($snapshot['uniqueIps']))
+                ->description($description),
         ];
     }
 }

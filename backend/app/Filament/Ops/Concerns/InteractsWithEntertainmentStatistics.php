@@ -10,9 +10,23 @@ use App\Support\SchemaBaseline;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
+use Livewire\Attributes\Locked;
 
 trait InteractsWithEntertainmentStatistics
 {
+    protected const SORT_COLUMNS = [
+        'start' => 'fun_start',
+        'complete' => 'fun_complete',
+        'view' => 'fun_result_view',
+        'share' => 'fun_share',
+    ];
+
+    #[Locked]
+    public ?string $sortColumn = null;
+
+    #[Locked]
+    public string $sortDirection = 'desc';
+
     public string $fromDate = '';
 
     public string $toDate = '';
@@ -57,9 +71,19 @@ trait InteractsWithEntertainmentStatistics
         $this->refreshRows();
     }
 
+    public function sortByMetric(string $column): void
+    {
+        abort_unless(OpsMetricsAccess::canViewTestMetrics(), 403);
+        abort_unless(isset(self::SORT_COLUMNS[$column]), 422);
+
+        $this->sortDirection = $this->sortColumn === $column && $this->sortDirection === 'desc' ? 'asc' : 'desc';
+        $this->sortColumn = $column;
+        $this->applyFilters();
+    }
+
     public function movePage(int $direction): void
     {
-        $this->offset = max(0, min(max(0, $this->totalRows - 1), $this->offset + ($direction > 0 ? 50 : -50)));
+        $this->offset = max(0, min(intdiv(max(0, $this->totalRows - 1), 50) * 50, $this->offset + ($direction > 0 ? 50 : -50)));
         $this->refreshRows();
     }
 
@@ -146,6 +170,12 @@ trait InteractsWithEntertainmentStatistics
         }
         if ($this->role === '*') {
             $this->resultCtaClicks = $this->countResultCtaClicks($start, $end);
+        }
+        $metric = self::SORT_COLUMNS[$this->sortColumn] ?? null;
+        if ($metric !== null) {
+            $direction = $this->sortDirection === 'asc' ? 1 : -1;
+            // PHP's stable sort preserves the catalog order for equal counts.
+            usort($all, static fn (array $a, array $b): int => $direction * ($a['counts'][$metric] <=> $b['counts'][$metric]));
         }
         $this->totalRows = count($all);
         $this->rows = array_slice($all, $this->offset, 50);

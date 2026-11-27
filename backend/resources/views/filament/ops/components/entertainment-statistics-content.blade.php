@@ -20,7 +20,16 @@
             </div>
         @endif
         <p class="text-sm">{{ __('entertainment-activity.coverage', ['tests' => count($catalog), 'rows' => $totalRows]) }}</p>
-        <div class="overflow-x-auto rounded-xl border bg-white" @if($inline ?? false) style="max-height: 32rem; overflow: auto;" @endif><table class="w-full text-left text-sm"><thead><tr>@foreach(['test','language','role','start','complete','view','share','methods','version','privacy'] as $key)<th class="px-3 py-3">{{ __('entertainment-activity.columns.'.$key) }}</th>@endforeach</tr></thead><tbody>
+        <div class="overflow-x-auto rounded-xl border bg-white" @if($inline ?? false) style="max-height: 32rem; overflow: auto;" @endif><table class="w-full text-left text-sm"><thead><tr>@foreach(['test','language','role','start','complete','view','share','methods','version','privacy'] as $key)<th scope="col" class="px-3 py-3" @if($sortColumn === $key) aria-sort="{{ $sortDirection === 'asc' ? 'ascending' : 'descending' }}" @endif>
+            @if(in_array($key, ['start', 'complete', 'view', 'share'], true))
+                <button type="button" wire:click="sortByMetric('{{ $key }}')" class="inline-flex items-center gap-1 text-left">
+                    {{ __('entertainment-activity.columns.'.$key) }}
+                    <span aria-hidden="true">{{ $sortColumn !== $key ? '↕' : ($sortDirection === 'asc' ? '↑' : '↓') }}</span>
+                </button>
+            @else
+                {{ __('entertainment-activity.columns.'.$key) }}
+            @endif
+        </th>@endforeach</tr></thead><tbody>
         @forelse($rows as $row)<tr class="border-t"><td class="px-3 py-3">{{ $row['title'] }}<br/><span class="text-xs text-slate-500">{{ $row['slug'] }}</span></td><td class="px-3">{{ $row['locale'] }}</td><td class="px-3">{{ __('entertainment-activity.roles.'.$row['role']) }}</td>@foreach($row['counts'] as $value)<td class="px-3">{{ $value }}</td>@endforeach<td class="px-3">@foreach($row['methods'] as $method => $count)<div>{{ __('entertainment-activity.methods.'.$method) }}: {{ $count }}</div>@endforeach</td><td class="px-3">{{ $row['versions'] ?: '—' }}</td><td class="px-3">{{ __('entertainment-activity.privacy.'.$row['privacy']) }}</td></tr>@empty<tr><td colspan="10" class="p-5">{{ __('entertainment-activity.no_rows') }}</td></tr>@endforelse
         </tbody></table></div>
         <div class="flex gap-4"><x-filament::button wire:click="movePage(-1)" :disabled="$offset === 0">{{ __('entertainment-activity.previous') }}</x-filament::button><span>{{ $totalRows ? $offset + 1 : 0 }}–{{ min($offset + 50, $totalRows) }} / {{ $totalRows }}</span><x-filament::button wire:click="movePage(1)" :disabled="$offset + 50 >= $totalRows">{{ __('entertainment-activity.next') }}</x-filament::button></div>

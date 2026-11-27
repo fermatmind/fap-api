@@ -294,6 +294,10 @@ return [
 
     'widgets' => [
         'access_test_statistics' => 'Access & Test Statistics',
+        'site_traffic_requests' => 'Sitewide page requests',
+        'site_traffic_ips' => 'Sitewide unique IPs',
+        'site_traffic_through' => 'Web ingress · through :time Beijing time',
+        'site_traffic_unavailable' => 'Today’s Web ingress summary is unavailable',
         'access_test_status' => ':status · refreshed :time',
         'action_queue' => [
             'title' => 'Action Queue',

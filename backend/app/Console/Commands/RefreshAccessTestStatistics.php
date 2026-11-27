@@ -6,6 +6,7 @@ namespace App\Console\Commands;
 
 use App\Services\Analytics\AccessTestDailyBuilder;
 use App\Services\Analytics\AccessTestIdentity;
+use App\Services\Analytics\SiteTrafficSnapshot;
 use Carbon\CarbonImmutable;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -76,6 +77,10 @@ final class RefreshAccessTestStatistics extends Command
         $this->line('to='.$result['to']);
         $this->line('org_scope='.implode(',', $result['org_scope']));
         $this->line('rows='.$result['rows']);
+
+        if ($recent && app()->environment('production') && ! app(SiteTrafficSnapshot::class)->refresh()) {
+            $this->warn('Web traffic snapshot unavailable. Retaining the latest snapshot for today.');
+        }
 
         if ($history) {
             $this->pruneExpiredDigests($today);

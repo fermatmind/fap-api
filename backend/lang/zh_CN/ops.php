@@ -294,6 +294,10 @@ return [
 
     'widgets' => [
         'access_test_statistics' => '访问与测试统计',
+        'site_traffic_requests' => '全站页面访问量',
+        'site_traffic_ips' => '全站独立访问 IP',
+        'site_traffic_through' => 'Web 入口统计 · 截至北京时间 :time',
+        'site_traffic_unavailable' => '暂无当日 Web 入口汇总',
         'access_test_status' => ':status · 上次汇总 :time',
         'action_queue' => [
             'title' => '待办队列',

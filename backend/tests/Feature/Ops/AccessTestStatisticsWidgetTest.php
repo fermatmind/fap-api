@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Tests\Feature\Ops;
 
 use App\Filament\Ops\Widgets\AccessTestStatisticsWidget;
+use App\Services\Analytics\SiteTrafficSnapshot;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use ReflectionMethod;
 use Tests\TestCase;
 
@@ -31,5 +33,34 @@ final class AccessTestStatisticsWidgetTest extends TestCase
         $this->assertSame(__('ops.widgets.access_test_status', [
             'status' => 'partial_today', 'time' => '2026-10-24 00:00:08 (UTC+08:00)',
         ]), $stats[0]->getDescription());
+    }
+
+    public function test_ingress_counts_are_separate_and_failures_keep_only_todays_snapshot(): void
+    {
+        $this->travelTo(now('UTC')->setDate(2026, 10, 23)->setTime(16, 5));
+        config(['fap.events.ingest_token' => 'test-ingest-token']);
+        $collector = app(SiteTrafficSnapshot::class);
+        $method = new ReflectionMethod(AccessTestStatisticsWidget::class, 'getStats');
+        $widget = app(AccessTestStatisticsWidget::class);
+        $this->assertSame('—', $method->invoke($widget)[1]->getValue());
+        $timestamp = now()->timestamp;
+        Http::fake([
+            'https://fermatmind.com/api/internal/site-traffic' => Http::sequence()
+                ->push(['date' => '2026-10-24', 'through' => $timestamp, 'pageRequests' => 1250, 'uniqueIps' => 740])
+                ->push(['date' => '2026-10-24', 'through' => $timestamp, 'pageRequests' => 5, 'uniqueIps' => 11])
+                ->push([], 503),
+        ]);
+
+        $this->assertTrue($collector->refresh());
+        $this->assertFalse($collector->refresh());
+        $this->assertFalse($collector->refresh());
+        $stats = $method->invoke($widget);
+        $this->assertSame('1,250', $stats[1]->getValue());
+        $this->assertSame('740', $stats[2]->getValue());
+        Http::assertSent(fn ($request) => $request->hasHeader('X-Fm-Site-Traffic-Time', (string) $timestamp)
+            && $request->hasHeader('X-Fm-Site-Traffic-Signature', hash_hmac('sha256', 'fermatmind.site-traffic.v1:'.$timestamp, 'test-ingest-token'))
+            && ! $request->hasHeader('X-Track-Ingest-Token'));
+        $this->travel(1)->day();
+        $this->assertNull($collector->today());
     }
 }
