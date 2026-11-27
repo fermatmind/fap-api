@@ -1593,6 +1593,7 @@ return [
                 'search_type_all' => '全部搜索类型',
                 'failure_code' => '同步失败码',
                 'last_success' => '最后成功同步',
+                'nightly_sync_retired' => 'Nightly 的 GSC 自动同步已停用，已导入的历史数据仍保留。',
                 'states' => [
                     'disconnected' => 'GSC 尚未配置，不展示零值或模拟指标。',
                     'sync_failed' => '最近一次 GSC 同步失败；成功刷新前不展示旧值。',

@@ -142,26 +142,33 @@ final class SeoOperationsPageTest extends TestCase
         $this->withSession($this->opsSession($admin, $org));
         app(OrgContext::class)->set((int) $org->id, (int) $admin->id, 'admin');
 
-        Livewire::withQueryParams(['workspace' => 'performance'])->test(SeoOperationsPage::class)
-            ->set('platformReadModels', [
-                'performance' => [
-                    'gsc' => [
-                        'connected' => true,
-                        'totals' => ['clicks' => 123, 'impressions' => 456, 'ctr_percent' => 26.97, 'average_position' => 4.2],
-                        'query_page_rows' => [[
-                            'query' => 'synthetic query',
-                            'canonical_path' => '/en/articles/test',
-                            'clicks' => 123,
-                            'impressions' => 456,
-                        ]],
-                    ],
-                ],
-            ])
+        $gsc = [
+            'connected' => true,
+            'last_success_at' => '2026-11-24T04:08:43+00:00',
+            'totals' => ['clicks' => 123, 'impressions' => 456, 'ctr_percent' => 26.97, 'average_position' => 4.2],
+            'query_page_rows' => [[
+                'query' => 'synthetic query',
+                'canonical_path' => '/en/articles/test',
+                'clicks' => 123,
+                'impressions' => 456,
+            ]],
+        ];
+        $page = Livewire::withQueryParams(['workspace' => 'performance'])->test(SeoOperationsPage::class);
+        $page->set('platformReadModels', ['performance' => ['gsc' => $gsc]])
             ->assertSuccessful()
             ->assertSee('123')
             ->assertSee('456')
             ->assertSee('synthetic query')
-            ->assertSee('/en/articles/test');
+            ->assertSee('/en/articles/test')
+            ->assertSee(__('ops.custom_pages.seo_operations.performance.nightly_sync_retired'))
+            ->assertSee('2026-11-24T04:08:43+00:00');
+
+        $gsc['connected'] = false;
+        $gsc['state'] = 'stale';
+        $page->set('platformReadModels', ['performance' => ['gsc' => $gsc]])
+            ->assertSee(__('ops.custom_pages.seo_operations.performance.last_success'))
+            ->assertSee('2026-11-24T04:08:43+00:00')
+            ->assertDontSee('synthetic query');
     }
 
     public function test_council_workspace_is_not_accessible_without_content_permission(): void

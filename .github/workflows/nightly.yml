@@ -460,217 +460,6 @@ jobs:
           languages: javascript-typescript
       - uses: github/codeql-action/analyze@1ad29ea4a422cce9a242a9fae469541dcd08addc # v4
 
-  gsc-read-model-sync:
-    name: Production GSC readonly sync through restricted egress
-    if: github.event_name == 'schedule' && github.event.schedule == '17 18 * * *'
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    environment: production
-    env:
-      DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
-      DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
-      DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
-      RETIRED_DEPLOY_HOST: ${{ secrets.PRODUCTION_RETIRED_DEPLOY_HOST }}
-      DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
-      PROXY_PORT: "18443"
-    steps:
-      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
-        with:
-          persist-credentials: false
-      - name: Start SSH agent without key metadata output
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        run: |
-          set -euo pipefail
-          eval "$(ssh-agent -s)" >/dev/null
-          echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> "$GITHUB_ENV"
-          echo "SSH_AGENT_PID=$SSH_AGENT_PID" >> "$GITHUB_ENV"
-          printf '%s\n' "$SSH_PRIVATE_KEY" | ssh-add - >/dev/null 2>&1
-      - name: Install pinned known_hosts
-        env:
-          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
-        run: |
-          set -euo pipefail
-          test "$DEPLOY_HOST" != "$RETIRED_DEPLOY_HOST"
-          install -d -m 700 ~/.ssh
-          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
-          chmod 600 ~/.ssh/known_hosts
-      - name: Sync the active production GSC read model
-        id: gsc_sync
-        shell: bash
-        run: |
-          set -euo pipefail
-          mkdir -p artifacts/gsc-read-model-sync
-          state_file="$RUNNER_TEMP/gsc-sync-state.json"
-          active_sha_file="$RUNNER_TEMP/gsc-active-sha"
-          sync_json="$RUNNER_TEMP/gsc-sync.json"
-          record_state() {
-            jq -n --arg phase "$1" --arg reason_code "$2" \
-              '{phase: $phase, reason_code: $reason_code}' > "$state_file"
-          }
-          record_state "setup" "setup_failed"
-          : > "$active_sha_file"
-          : > "$sync_json"
-
-          proxy_pid=""
-          tunnel_pid=""
-          cleanup() {
-            if [ -n "$tunnel_pid" ]; then kill "$tunnel_pid" 2>/dev/null || true; fi
-            if [ -n "$proxy_pid" ]; then kill "$proxy_pid" 2>/dev/null || true; fi
-          }
-          trap cleanup EXIT HUP INT TERM
-
-          record_state "restricted_proxy_start" "restricted_proxy_start_failed"
-          node backend/scripts/seo/gsc_restricted_connect_proxy.mjs --port="$PROXY_PORT" \
-            >"$RUNNER_TEMP/gsc-proxy.log" 2>&1 &
-          proxy_pid=$!
-          for _ in {1..20}; do
-            nc -z 127.0.0.1 "$PROXY_PORT" && break
-            sleep 1
-          done
-          nc -z 127.0.0.1 "$PROXY_PORT"
-
-          record_state "restricted_tunnel_start" "restricted_tunnel_start_failed"
-          ssh_base=(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
-            -o ServerAliveInterval=15 -o ServerAliveCountMax=8 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST")
-          ssh -N -o BatchMode=yes -o StrictHostKeyChecking=yes -o ExitOnForwardFailure=yes \
-            -o ServerAliveInterval=15 -o ServerAliveCountMax=8 -p "$DEPLOY_PORT" \
-            -R "127.0.0.1:$PROXY_PORT:127.0.0.1:$PROXY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-            >"$RUNNER_TEMP/gsc-tunnel.log" 2>&1 &
-          tunnel_pid=$!
-          sleep 2
-          kill -0 "$tunnel_pid"
-
-          record_state "proxy_policy_probe" "proxy_policy_probe_failed"
-          "${ssh_base[@]}" "HTTPS_PROXY=http://127.0.0.1:$PROXY_PORT curl -sS -o /dev/null --fail-with-body --connect-timeout 5 --max-time 15 https://oauth2.googleapis.com/token || test \$? -eq 22"
-          if "${ssh_base[@]}" "HTTPS_PROXY=http://127.0.0.1:$PROXY_PORT curl -fsS -o /dev/null --connect-timeout 5 --max-time 15 https://example.com/"; then
-            echo "restricted proxy allowed a forbidden target" >&2
-            exit 1
-          fi
-
-          printf -v q_path '%q' "$DEPLOY_PATH"
-          printf -v q_proxy '%q' "http://127.0.0.1:$PROXY_PORT"
-          cache_path="/tmp/fermatmind-gsc-nightly-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}.php"
-          printf -v q_cache '%q' "$cache_path"
-          remote_prefix="set -euo pipefail; current=\$(readlink -f $q_path/current); releases=\$(readlink -f $q_path/releases); test -n \"\$current\"; test -n \"\$releases\"; case \"\$current\" in \"\$releases\"/*) ;; *) exit 1 ;; esac; cd \"\$current/backend\";"
-          record_state "active_revision" "active_revision_unavailable"
-          active_sha="$("${ssh_base[@]}" "$remote_prefix tr -d '\\r\\n' < ../REVISION")"
-          [[ "$active_sha" =~ ^[0-9a-f]{40}$ ]]
-          printf '%s' "$active_sha" > "$active_sha_file"
-
-          remote_command="$remote_prefix sudo -n -u www-data -- env HTTPS_PROXY=$q_proxy HTTP_PROXY=$q_proxy NO_PROXY=127.0.0.1,localhost APP_CONFIG_CACHE=$q_cache SEO_INTEL_ENABLED=true SEO_INTEL_WRITE_ENABLED=true SEO_INTEL_ALLOW_EXTERNAL_API_CALLS=true php artisan seo-intel:gsc-sync --window=90 --search-types=web --full-window --trigger=scheduled --json"
-          record_state "sync" "sync_command_failed"
-          "${ssh_base[@]}" "$remote_command" > "$sync_json"
-          record_state "receipt_validation" "sync_receipt_contract_failed"
-          jq -e '
-            .status == "success"
-            and .window_days == 90
-            and .fetch_mode == "full_window"
-            and .search_types == ["web"]
-            and .pages_fetched > 0
-            and .rows_seen > 0
-            and .rows_upserted > 0
-            and .quality_gate.status == "pass"
-            and .read_only_gsc == true
-            and .search_submission_allowed == false
-          ' "$sync_json" >/dev/null
-          record_state "complete" "none"
-      - name: Build sanitized GSC sync receipt
-        if: always()
-        shell: bash
-        env:
-          SYNC_OUTCOME: ${{ steps.gsc_sync.outcome }}
-        run: |
-          set -euo pipefail
-          mkdir -p artifacts/gsc-read-model-sync
-          state_file="$RUNNER_TEMP/gsc-sync-state.json"
-          active_sha_file="$RUNNER_TEMP/gsc-active-sha"
-          sync_json="$RUNNER_TEMP/gsc-sync.json"
-          phase="setup"
-          reason_code="setup_failed"
-          if jq -e '.phase | type == "string"' "$state_file" >/dev/null 2>&1; then
-            phase="$(jq -r '.phase' "$state_file")"
-            reason_code="$(jq -r '.reason_code' "$state_file")"
-          fi
-          active_sha="$(tr -d '\\r\\n' < "$active_sha_file" 2>/dev/null || true)"
-          if [[ ! "$active_sha" =~ ^[0-9a-f]{40}$ ]]; then
-            active_sha=""
-          fi
-
-          if [ "$SYNC_OUTCOME" = "success" ] && jq -e '.status == "success"' "$sync_json" >/dev/null 2>&1; then
-            jq -n --arg workflow_sha "$GITHUB_SHA" --arg active_sha "$active_sha" --slurpfile sync "$sync_json" '
-            {
-              schema_version: "gsc-read-model-nightly-sync.v2",
-              workflow_sha: $workflow_sha,
-              active_production_sha: $active_sha,
-              status: "success",
-              phase: "complete",
-              reason_code: "none",
-              window_days: $sync[0].window_days,
-              fetch_mode: $sync[0].fetch_mode,
-              requested_start_date: $sync[0].requested_start_date,
-              start_date: $sync[0].start_date,
-              end_date: $sync[0].end_date,
-              search_types: $sync[0].search_types,
-              pages_fetched: $sync[0].pages_fetched,
-              rows_seen: $sync[0].rows_seen,
-              rows_upserted: $sync[0].rows_upserted,
-              unmapped_rows: $sync[0].unmapped_rows,
-              quality_gate: $sync[0].quality_gate.status,
-              gsc_data_quality: $sync[0].gsc_data_quality,
-              unmapped_classification: $sync[0].unmapped_classification,
-              issue_clusters: $sync[0].issue_clusters,
-              read_only_gsc: true,
-              search_submission_allowed: false,
-              cms_write_allowed: false,
-              credential_copied_to_runner: false,
-              external_api_scope: "nightly_restricted_proxy_only",
-              proxy_allowlist: ["oauth2.googleapis.com:443", "searchconsole.googleapis.com:443"]
-            }
-            ' > artifacts/gsc-read-model-sync/receipt.json
-          else
-            source_reason_code=""
-            if jq -e '.issue | type == "string"' "$sync_json" >/dev/null 2>&1; then
-              candidate="$(jq -r '.issue' "$sync_json")"
-              if [[ "$candidate" =~ ^[a-z0-9_]{1,80}$ ]]; then
-                source_reason_code="$candidate"
-              fi
-            fi
-            jq -n \
-              --arg workflow_sha "$GITHUB_SHA" \
-              --arg active_sha "$active_sha" \
-              --arg phase "$phase" \
-              --arg reason_code "$reason_code" \
-              --arg source_reason_code "$source_reason_code" '
-              {
-                schema_version: "gsc-read-model-nightly-sync.v2",
-                workflow_sha: $workflow_sha,
-                active_production_sha: $active_sha,
-                status: "fail",
-                phase: $phase,
-                reason_code: $reason_code,
-                source_reason_code: (if $source_reason_code == "" then null else $source_reason_code end),
-                window_days: 90,
-                fetch_mode: "full_window",
-                search_types: ["web"],
-                read_only_gsc: true,
-                search_submission_allowed: false,
-                cms_write_allowed: false,
-                credential_copied_to_runner: false,
-                external_api_scope: "nightly_restricted_proxy_only",
-                proxy_allowlist: ["oauth2.googleapis.com:443", "searchconsole.googleapis.com:443"]
-              }
-            ' > artifacts/gsc-read-model-sync/receipt.json
-          fi
-      - name: Upload sanitized GSC sync receipt
-        if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
-        with:
-          name: gsc-read-model-sync-${{ github.run_id }}-${{ github.run_attempt }}
-          path: artifacts/gsc-read-model-sync/receipt.json
-          if-no-files-found: error
-          retention-days: 90
-
   nightly-summary:
     name: Final failure-domain receipt
     needs:
@@ -681,7 +470,6 @@ jobs:
       - workflow-contracts
       - codeql
       - scheduler-evidence-monitor
-      - gsc-read-model-sync
     if: always() && (github.event_name == 'push' || (github.event_name == 'schedule' && (github.event.schedule == '17 18 * * *' || github.event.schedule == '37 18 * * 0')))
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -695,7 +483,6 @@ jobs:
       WORKFLOW_RESULT: ${{ needs.workflow-contracts.result }}
       SECURITY_RESULT: ${{ needs.codeql.result }}
       SCHEDULER_RESULT: ${{ needs.scheduler-evidence-monitor.result }}
-      GSC_RESULT: ${{ needs.gsc-read-model-sync.result }}
     steps:
       - name: Build sanitized failure-domain receipt
         shell: bash
@@ -712,12 +499,11 @@ jobs:
             --arg dependency "$DEPENDENCY_RESULT" \
             --arg workflow "$WORKFLOW_RESULT" \
             --arg security "$SECURITY_RESULT" \
-            --arg scheduler "$SCHEDULER_RESULT" \
-            --arg gsc "$GSC_RESULT" '
+            --arg scheduler "$SCHEDULER_RESULT" '
             ($schedule == "17 18 * * *") as $daily |
             ($schedule == "37 18 * * 0") as $weekly |
             {
-              schema_version: "nightly-failure-domain-summary.v2",
+              schema_version: "nightly-failure-domain-summary.v3",
               workflow_sha: $sha,
               schedule: $schedule,
               event: $event,
@@ -729,8 +515,7 @@ jobs:
                 dependency_audit: {result: $dependency, required: ($weekly or ($event == "push" and $repair.dependency == "true"))},
                 workflow_contracts: {result: $workflow, required: ($weekly or ($event == "push" and $repair.workflow == "true"))},
                 security_scan: {result: $security, required: ($weekly or ($event == "push" and $repair.security == "true"))},
-                scheduler_evidence: {result: $scheduler, required: $daily},
-                gsc_readonly_sync: {result: $gsc, required: $daily}
+                scheduler_evidence: {result: $scheduler, required: $daily}
               }
             } |
             .status = (if (($daily or $weekly or $event == "push") and

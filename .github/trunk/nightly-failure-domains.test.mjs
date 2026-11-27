@@ -60,12 +60,12 @@ test('focused PHPUnit executes every selected file once across nonempty shards',
   }
 });
 
-test('nightly keeps dependency, workflow, security, scheduler, and GSC evidence separate', () => {
+test('nightly keeps dependency, workflow, security, and scheduler evidence separate', () => {
   assert.match(jobSection('dependency-audit', 'workflow-contracts'), /composer audit --locked/);
   assert.match(jobSection('workflow-contracts', 'authority-contract'), /node --test \.github\/trunk\/\*\.test\.mjs/);
-  assert.match(jobSection('codeql', 'gsc-read-model-sync'), /Blocking Semgrep scan/);
+  assert.match(jobSection('codeql', 'nightly-summary'), /Blocking Semgrep scan/);
   assert.match(jobSection('scheduler-evidence-monitor', 'dependency-audit'), /ops:scheduler-evidence-monitor --json/);
-  assert.match(jobSection('gsc-read-model-sync', 'nightly-summary'), /gsc-read-model-nightly-sync\.v2/);
+  assert.doesNotMatch(workflow, /gsc-read-model-sync|seo-intel:gsc-sync|gsc_readonly_sync|GSC_RESULT/);
 });
 
 test('final receipt reports every domain and fails closed without rolling back production', () => {
@@ -77,11 +77,10 @@ test('final receipt reports every domain and fails closed without rolling back p
     'workflow_contracts',
     'security_scan',
     'scheduler_evidence',
-    'gsc_readonly_sync',
   ]) {
     assert.match(summary, new RegExp(`${domain}: \\{result:`));
   }
-  assert.match(summary, /schema_version: "nightly-failure-domain-summary\.v2"/);
+  assert.match(summary, /schema_version: "nightly-failure-domain-summary\.v3"/);
   assert.match(summary, /production_rollback_requested: false/);
   assert.match(summary, /jq -e '\.status == "pass"'/);
 });
@@ -89,7 +88,7 @@ test('final receipt reports every domain and fails closed without rolling back p
 const dailySchedule = '17 18 * * *';
 const weeklySchedule = '37 18 * * 0';
 const weeklyResults = ['AUTHORITY_RESULT', 'FULL_PHPUNIT_RESULT', 'DEPENDENCY_RESULT', 'WORKFLOW_RESULT', 'SECURITY_RESULT'];
-const dailyResults = ['SCHEDULER_RESULT', 'GSC_RESULT'];
+const dailyResults = ['SCHEDULER_RESULT'];
 
 test('daily operations and weekly complete checks have independent schedules and concurrency', () => {
   assert.deepEqual([...workflow.matchAll(/- cron: "([^"]+)"/g)].map((match) => match[1]), [dailySchedule, weeklySchedule]);
@@ -100,14 +99,12 @@ test('daily operations and weekly complete checks have independent schedules and
     ['workflow-contracts', 'authority-contract'],
     ['authority-contract', 'full-phpunit'],
     ['full-phpunit', 'codeql'],
-    ['codeql', 'gsc-read-model-sync'],
+    ['codeql', 'nightly-summary'],
   ]) {
     assert.match(jobSection(job,next), /needs: repair-scope/);
     assert.ok(jobSection(job,next).includes(`github.event.schedule == '${weeklySchedule}'`));
   }
-  for (const [job, next] of [['scheduler-evidence-monitor', 'dependency-audit'], ['gsc-read-model-sync', 'nightly-summary']]) {
-    assert.ok(jobSection(job, next).includes(`if: github.event_name == 'schedule' && github.event.schedule == '${dailySchedule}'`));
-  }
+  assert.ok(jobSection('scheduler-evidence-monitor', 'dependency-audit').includes(`if: github.event_name == 'schedule' && github.event.schedule == '${dailySchedule}'`));
   assert.ok(jobSection('nightly-summary').includes(`if: always() && (github.event_name == 'push' || (github.event_name == 'schedule' && (github.event.schedule == '${dailySchedule}' || github.event.schedule == '${weeklySchedule}')))`));
   assert.doesNotMatch(workflow, /workflow_dispatch:/);
   assert.equal((workflow.match(/continue-on-error: true/g) ?? []).length, 1);
@@ -159,7 +156,7 @@ test('weekly receipt requires all five complete-check domains', () => {
   assert.equal(receipt.check_scope, 'weekly_full_checks');
   assert.equal(Object.values(receipt.domains).filter((domain) => domain.required).length, 5);
   assert.deepEqual(receipt.domains.full_phpunit, { result: 'success', required: true });
-  assert.deepEqual(receipt.domains.gsc_readonly_sync, { result: 'skipped', required: false });
+  assert.deepEqual(receipt.domains.scheduler_evidence, { result: 'skipped', required: false });
 });
 
 test('required failures, cancellations, missing results and skips fail both schedules closed', () => {
@@ -175,7 +172,7 @@ test('required failures, cancellations, missing results and skips fail both sche
 test('unknown schedules and unexpected out-of-schedule execution fail closed', () => {
   assert.equal(runSummary('unknown').status, 'fail');
   assert.equal(runSummary(dailySchedule, { FULL_PHPUNIT_RESULT: 'success' }).status, 'fail');
-  assert.equal(runSummary(weeklySchedule, { GSC_RESULT: 'failure' }).status, 'fail');
+  assert.equal(runSummary(weeklySchedule, { SCHEDULER_RESULT: 'failure' }).status, 'fail');
 });
 
 
@@ -278,7 +275,7 @@ test('Nightly preserves the main disposable database and binds topology consumer
 
 
 test('JS push scans retain the existing CodeQL category and avoid unrelated Semgrep',()=>{
- const security=jobSection('codeql','gsc-read-model-sync');
+ const security=jobSection('codeql','nightly-summary');
  assert.match(jobSection('repair-scope','scheduler-evidence-monitor'),/semgrep: \$\{\{ steps.scope.outputs.semgrep \}\}/);
  assert.match(security,/name: Blocking Semgrep scan\s+if: github.event_name == 'schedule' \|\| needs.repair-scope.outputs.semgrep == 'true'/);
  assert.match(security,/languages: javascript-typescript/);

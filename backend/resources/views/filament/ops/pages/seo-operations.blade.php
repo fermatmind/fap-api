@@ -255,6 +255,16 @@
                     </div>
                 </x-filament-ops::ops-toolbar>
 
+                <p class="ops-muted">
+                    {{ __('ops.custom_pages.seo_operations.performance.last_success') }}:
+                    @if (!empty($searchPerformance['last_success_at']))
+                        <time datetime="{{ $searchPerformance['last_success_at'] }}">{{ $searchPerformance['last_success_at'] }}</time>
+                    @else
+                        {{ __('ops.custom_pages.seo_operations.platform.not_available') }}
+                    @endif
+                </p>
+                <p class="ops-muted">{{ __('ops.custom_pages.seo_operations.performance.nightly_sync_retired') }}</p>
+
                 @if (!empty($searchPerformance['connected']))
                     <div class="ops-data-strip">
                         @foreach ([
@@ -300,9 +310,6 @@
                     />
                     @if (!empty($searchPerformance['failure_code']))
                         <p class="ops-muted">{{ __('ops.custom_pages.seo_operations.performance.failure_code') }}: {{ $searchPerformance['failure_code'] }}</p>
-                    @endif
-                    @if (!empty($searchPerformance['last_success_at']))
-                        <p class="ops-muted">{{ __('ops.custom_pages.seo_operations.performance.last_success') }}: {{ $searchPerformance['last_success_at'] }}</p>
                     @endif
                 @endif
             </x-filament-ops::ops-section>

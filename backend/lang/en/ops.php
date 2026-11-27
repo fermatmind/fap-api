@@ -1593,6 +1593,7 @@ return [
                 'search_type_all' => 'All search types',
                 'failure_code' => 'Sync failure',
                 'last_success' => 'Last successful sync',
+                'nightly_sync_retired' => 'Nightly GSC sync is off. Previously imported data is retained.',
                 'states' => [
                     'disconnected' => 'GSC is not configured. No zero or simulated metrics are shown.',
                     'sync_failed' => 'The latest GSC sync failed. Existing values are withheld until a successful refresh.',
