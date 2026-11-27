@@ -37,7 +37,7 @@ final class EntertainmentActivity
                     'items.*.title' => ['required', 'array:en,zh'],
                     'items.*.title.en' => ['required', 'string', 'max:300'],
                     'items.*.title.zh' => ['required', 'string', 'max:300'],
-                    'items.*.path' => ['required', 'string', 'max:200', 'regex:~\A/tests/(?:explore|play)/[a-z0-9-]+\z~'],
+                    'items.*.path' => ['required', 'string', 'max:200', 'regex:~\A(?:/tests/(?:explore|play)/[a-z0-9-]+|/career/match)\z~'],
                     'items.*.privacy' => ['required', 'in:analytics_consent,explicit_opt_in'],
                     'items.*.roles' => ['required', 'array', 'min:1', 'max:3'],
                     'items.*.roles.*' => ['required', 'in:single,creator,friend,solo'],
@@ -47,7 +47,11 @@ final class EntertainmentActivity
                 }
                 foreach ($data['items'] as $item) {
                     $roles = $item['slug'] === 'friendship-quiz' ? ['creator', 'friend', 'solo'] : ['single'];
-                    if ($item['roles'] !== $roles || ! str_ends_with($item['path'], '/'.$item['slug'])) {
+                    $careerMatchPath = $item['path'] === '/career/match';
+                    $validIdentity = $item['slug'] === 'career-match'
+                        ? $careerMatchPath && $item['privacy'] === 'explicit_opt_in'
+                        : ! $careerMatchPath && str_ends_with($item['path'], '/'.$item['slug']);
+                    if ($item['roles'] !== $roles || ! $validIdentity) {
                         throw new \UnexpectedValueException('Invalid public entertainment identity');
                     }
                 }

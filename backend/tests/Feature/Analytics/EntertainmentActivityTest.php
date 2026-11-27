@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
+use PHPUnit\Framework\Attributes\TestWith;
 use Tests\TestCase;
 
 final class EntertainmentActivityTest extends TestCase
@@ -51,6 +52,57 @@ final class EntertainmentActivityTest extends TestCase
         $state = app(EntertainmentActivity::class)->catalogState();
         $this->assertSame('last_known', $state['source']);
         $this->assertSame('new-published-quiz', end($state['items'])['slug']);
+    }
+
+    public function test_career_match_uses_its_public_path_and_still_requires_explicit_opt_in(): void
+    {
+        $item = $this->careerMatchCatalogItem();
+        $items = [...app(EntertainmentActivity::class)->catalog(), $item];
+        $this->fakeLiveCatalog($items);
+
+        $this->assertSame(['items' => $items, 'source' => 'live'], app(EntertainmentActivity::class)->catalogState());
+        $data = $this->envelope(slug: 'career-match');
+        $this->send($data)->assertUnprocessable();
+        $data['payload']['consent_state'] = 'activity_opt_in';
+        $this->send($data)->assertStatus(202);
+        $this->assertSame(1, DB::table('events')->where('event_code', 'fun_start')->count());
+    }
+
+    #[TestWith([['slug' => 'match']], 'another slug poses as the career path')]
+    #[TestWith([['slug' => 'another-quiz', 'path' => '/tests/explore/wrong-suffix']], 'ordinary path has the wrong slug')]
+    #[TestWith([['path' => '/tests/explore/career-match']], 'career slug has a different path')]
+    #[TestWith([['path' => '/career/match/']], 'career path has an extra slash')]
+    #[TestWith([['privacy' => 'analytics_consent']], 'career consent is downgraded')]
+    #[TestWith([['roles' => ['friend']]], 'career role is changed')]
+    #[TestWith([[], true], 'career slug is duplicated')]
+    public function test_registry_rejects_invalid_career_match_and_preserves_its_path_and_identity_rules(array $changes, bool $duplicate = false): void
+    {
+        $item = array_replace($this->careerMatchCatalogItem(), $changes);
+        $this->fakeLiveCatalog($duplicate ? [$item, $item] : [$item]);
+
+        $this->assertSame('baseline', app(EntertainmentActivity::class)->catalogState()['source']);
+        $this->assertNull(Cache::get(EntertainmentActivity::CATALOG_CACHE.':last-known'));
+    }
+
+    private function careerMatchCatalogItem(): array
+    {
+        return [
+            'slug' => 'career-match',
+            'title' => ['en' => 'Career Match: Compare Interests and Roles', 'zh' => '职业匹配测试：比较兴趣与真实职业'],
+            'path' => '/career/match',
+            'privacy' => 'explicit_opt_in',
+            'roles' => ['single'],
+        ];
+    }
+
+    private function fakeLiveCatalog(array $items): void
+    {
+        Cache::forget(EntertainmentActivity::CATALOG_CACHE);
+        Http::swap(new \Illuminate\Http\Client\Factory);
+        Http::fake(['https://fermatmind.com/api/entertainment-catalog' => Http::response([
+            'schema' => 'entertainment.catalog.v1',
+            'items' => $items,
+        ])]);
     }
 
     private function envelope(string $event = 'fun_start', string $role = 'single', string $slug = 'what-dog-breed-am-i', string $locale = 'en'): array
