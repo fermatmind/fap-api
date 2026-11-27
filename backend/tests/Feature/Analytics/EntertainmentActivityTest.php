@@ -84,6 +84,19 @@ final class EntertainmentActivityTest extends TestCase
         $this->assertNull(Cache::get(EntertainmentActivity::CATALOG_CACHE.':last-known'));
     }
 
+    public function test_registry_keeps_last_known_career_match_when_a_refresh_has_the_wrong_slug(): void
+    {
+        $item = $this->careerMatchCatalogItem();
+        $this->fakeLiveCatalog([$item]);
+        $activity = app(EntertainmentActivity::class);
+        $this->assertSame('live', $activity->catalogState()['source']);
+
+        $this->fakeLiveCatalog([array_replace($item, ['slug' => 'match'])]);
+
+        $this->assertSame(['items' => [$item], 'source' => 'last_known'], $activity->catalogState());
+        $this->assertSame([$item], Cache::get(EntertainmentActivity::CATALOG_CACHE.':last-known'));
+    }
+
     private function careerMatchCatalogItem(): array
     {
         return [
