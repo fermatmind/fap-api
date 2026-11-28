@@ -88,6 +88,25 @@ final class CareerFilePageReader
         // Older immutable caches use the same public schema; apply the same
         // idempotent link projection on hits without rewriting source or cache.
         $page = $this->pages->normalizeLinks($page);
+
+        // Omit a salary component the file explicitly marks as unavailable.
+        // Preserve the authority, cached projection and stable hero metric slots.
+        if ($locale === 'en' && ($page['display']['components']['career_snapshot_primary_locale'] ?? null) === [
+            'availability' => 'unavailable',
+            'reason_code' => 'source_locale_unavailable',
+        ]) {
+            $metric = array_column($page['hero']['metrics'], null, 'key')['china_pay'] ?? null;
+            $block = array_column($page['content']['blocks'], null, 'id')['china-salary'] ?? null;
+            if (($metric['availability'] ?? null) === 'missing'
+                && ($block['availability'] ?? null) === 'missing'
+                && ($block['items'] ?? null) === []) {
+                unset($page['display']['components']['career_snapshot_primary_locale']);
+                $page['display']['component_order'] = array_values(array_diff(
+                    $page['display']['component_order'],
+                    ['career_snapshot_primary_locale'],
+                ));
+            }
+        }
         $occupation = Occupation::query()->with(['aliases', 'crosswalks'])->where('canonical_slug', $slug)->first();
         $currentCrosswalks = CareerPageOccupationCrosswalks::resolve($page['content']);
         $compatibilityCrosswalks = $occupation?->crosswalks?->map(fn ($crosswalk) => [

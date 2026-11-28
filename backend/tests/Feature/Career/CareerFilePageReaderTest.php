@@ -72,6 +72,36 @@ final class CareerFilePageReaderTest extends TestCase
         self::assertSame('/en/career/jobs/health-educators', $seo['meta']['canonical']);
     }
 
+    public function test_english_detail_omits_the_unavailable_local_salary_component_on_cold_and_warm_reads(): void
+    {
+        $this->publication(true);
+        $slug = 'electrical-engineers';
+        $source = app(CareerPageProjector::class)->read($slug, 'en');
+        $primary = 'career_snapshot_primary_locale';
+        self::assertSame([
+            'availability' => 'unavailable',
+            'reason_code' => 'source_locale_unavailable',
+        ], $source['display']['components'][$primary]);
+
+        for ($i = 0; $i < 2; $i++) {
+            $page = $this->getJson('/api/v0.5/career/jobs/'.$slug.'?locale=en&projection_contract=career.detail.page.v1')
+                ->assertOk()
+                ->assertJsonPath('career_page.source_content_sha256', $source['source_content_sha256'])
+                ->assertJsonMissingPath('career_page.display.components.'.$primary)
+                ->json('career_page');
+            self::assertSame(array_values(array_diff($source['display']['component_order'], [$primary])), $page['display']['component_order']);
+            self::assertSame($source['hero'], $page['hero']);
+            self::assertSame($source['content'], $page['content']);
+            self::assertArrayHasKey('career_snapshot_secondary_locale', $page['display']['components']);
+        }
+
+        $cache = PublicProjectionCache::get(CareerFilePageReader::cacheKey($source));
+        self::assertSame($source, app(CareerJobDetailCanonicalCacheReader::class)->decode($cache));
+        $this->getJson('/api/v0.5/career/jobs/'.$slug.'?locale=zh-CN')
+            ->assertOk()
+            ->assertJsonStructure(['career_page' => ['display' => ['components' => [$primary]]]]);
+    }
+
     public function test_current_bilingual_occupation_classification_overrides_stale_crosswalks_and_labels_combinations(): void
     {
         $this->publication(true);
