@@ -375,7 +375,15 @@ jobs:
         if: needs.classify.outputs.tests_changed == 'true'
         env:
           TRUNK_TESTS_VERIFIED_SHA: ${{ github.sha }}
-        run: node .github/trunk/run-changed-tests.mjs '${{ needs.classify.outputs.base_sha }}' '${{ github.sha }}' '${{ matrix.mode }}'
+        run: |
+          set -euo pipefail
+          if [ '${{ matrix.mode }}' = legacy ] && [ -n "$(git diff --name-only '${{ needs.classify.outputs.base_sha }}' '${{ github.sha }}' -- backend/scripts/career/test_career_detail_pipeline.py)" ]; then
+            python3 -m venv "$RUNNER_TEMP/career-python"
+            source "$RUNNER_TEMP/career-python/bin/activate"
+            printf '%s\n' 'opencc-python-reimplemented==0.1.7 --hash=sha256:41b3b92943c7bed291f448e9c7fad4b577c8c2eae30fcfe5a74edf8818493aa6' \
+              | python3 -m pip install --only-binary=:all: --require-hashes --requirement /dev/stdin
+          fi
+          node .github/trunk/run-changed-tests.mjs '${{ needs.classify.outputs.base_sha }}' '${{ github.sha }}' '${{ matrix.mode }}'
       - if: needs.classify.outputs.deploy != 'true'
         run: echo "Docs/rules/tests-only scope does not deploy."
 

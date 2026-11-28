@@ -10,6 +10,9 @@ import tempfile
 from threading import Thread
 import unittest
 
+# The changed-test runner loads this file directly without its directory on sys.path.
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
 import career_detail_patcher as patcher
 import lint_career_v3 as lint
 import preflight_detail_gate as gate
