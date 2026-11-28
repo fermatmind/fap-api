@@ -38,6 +38,9 @@
       "fact:openings": {
         "status": "mapped"
       },
+      "fact:wave1-cn-sector-2025": {
+        "status": "pending_mapping"
+      },
       "item:actors.ai-impact.ai-impact-table.1": {
         "status": "mapped"
       },
@@ -1590,19 +1593,13 @@
         "status": "mapped"
       },
       "item:actors.path.entry-work-sample-data.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.path.interview-probation.1": {
         "status": "mapped"
       },
       "item:actors.path.recruitment-sample.1": {
         "status": "pending_mapping"
-      },
-      "item:actors.path.seven-day-decision.1": {
-        "status": "mapped"
-      },
-      "item:actors.path.seven-day-trial.1": {
-        "status": "mapped"
       },
       "item:actors.profile.work-context-block.1": {
         "status": "mapped"
@@ -1681,6 +1678,9 @@
       },
       "item:actors.us-salary.career-snapshot-secondary-locale.6": {
         "status": "mapped"
+      },
+      "item:electricians.entry-work-sample-data.2": {
+        "status": "pending_mapping"
       }
     },
     "module_order": [
@@ -13247,180 +13247,48 @@
         "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.01": {
-        "ref": {
-          "id": "actors.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "actors-practice-materials"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.02": {
-        "ref": {
-          "id": "actors.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "actors-practice-materials"
-            },
-            "values",
-            2
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.01.title": {
-        "ref": {
-          "id": "actors.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "actors-practice-materials"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.01": {
-        "ref": {
-          "id": "actors.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "actors-practice-task"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.02": {
-        "ref": {
-          "id": "actors.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "actors-practice-task"
-            },
-            "values",
-            2
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.02.title": {
-        "ref": {
-          "id": "actors.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "actors-practice-task"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.01": {
-        "ref": {
-          "id": "actors.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "actors-practice-reference"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.02": {
-        "ref": {
-          "id": "actors.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "actors-practice-reference"
-            },
-            "values",
-            2
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.03.title": {
-        "ref": {
-          "id": "actors.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "actors-practice-reference"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.04.description.01": {
-        "ref": {
-          "id": "actors.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "actors-practice-boundary"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.04.title": {
-        "ref": {
-          "id": "actors.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "actors-practice-boundary"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.title": {
         "ref": {
@@ -13699,332 +13567,96 @@
         "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.01": {
-        "ref": {
-          "id": "actors.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.02": {
-        "ref": {
-          "id": "actors.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.03": {
-        "ref": {
-          "id": "actors.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            2
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.04": {
-        "ref": {
-          "id": "actors.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            3
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.05": {
-        "ref": {
-          "id": "actors.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            4
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.06": {
-        "ref": {
-          "id": "actors.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            5
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.07": {
-        "ref": {
-          "id": "actors.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            6
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.title": {
-        "ref": {
-          "id": "actors.path.seven-day-decision.1",
-          "path": [
-            "title"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.01.description.01": {
-        "ref": {
-          "id": "actors.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "day-1"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.01.title": {
-        "ref": {
-          "id": "actors.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "day-1"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.02.description.01": {
-        "ref": {
-          "id": "actors.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "day-2"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.02.title": {
-        "ref": {
-          "id": "actors.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "day-2"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.03.description.01": {
-        "ref": {
-          "id": "actors.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "day-3"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.03.title": {
-        "ref": {
-          "id": "actors.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "day-3"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.04.description.01": {
-        "ref": {
-          "id": "actors.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "day-4"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.04.title": {
-        "ref": {
-          "id": "actors.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "day-4"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.05.description.01": {
-        "ref": {
-          "id": "actors.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "day-5"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.05.title": {
-        "ref": {
-          "id": "actors.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "day-5"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.06.description.01": {
-        "ref": {
-          "id": "actors.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "day-6"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.06.title": {
-        "ref": {
-          "id": "actors.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "day-6"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.07.description.01": {
-        "ref": {
-          "id": "actors.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "day-7"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.07.title": {
-        "ref": {
-          "id": "actors.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "day-7"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.title": {
-        "ref": {
-          "id": "actors.path.seven-day-trial.1",
-          "path": [
-            "title"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "faq_block.items.01.answer": {
         "ref": {
@@ -22555,7 +22187,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "这只验证工作方式偏好，"
+              "工厂临时停线、工序交叉和旧标签看不清，常把半小时的计划变成几轮等待和核对。若反复登高、夜间轮值或在赶工时坚持留待复核，会让你长期耗竭，先比较固定班次的岗位。"
             ]
           },
           "id": "actors.quick-decision.fit-decision-checklist.2",
@@ -22569,7 +22201,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "再用本页的纸面练习与七天体验验证，而不是只看是否喜欢动手摆弄电器。"
+              "复核交接。"
             ]
           },
           "id": "actors.quick-decision.fit-decision-checklist.3",
@@ -22583,7 +22215,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "用一次纸面作业任务验证："
+              "先完成入行区的纸面工单，再对照问答中的样答。"
             ]
           },
           "id": "actors.quick-decision.fit-decision-checklist.4",
@@ -22611,7 +22243,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "先判断自己是否愿意按规范与工序作业、能耐心记录测量与检查结果，"
+              "先完成入行区的纸面工单，再对照问答中的样答。"
             ]
           },
           "id": "actors.display.fermat_decision_card.summary",
@@ -22669,7 +22301,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "自选公开入门教学案例，标注工作对象、资料缺项及需向合格培训机构或雇主核实的问题；本页不附图纸、不要求制定操作方案。"
+              "复核交接。"
             ]
           },
           "id": "actors.display.fit_decision_checklist.how-detail",
@@ -23625,7 +23257,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "电工以电气布线、设备器具安装维护维修为主；设备安装维修组合另分商业工业设备、电机电动工具、运输设备、机动车电子设备、发电站变电站继电保护等方向。工程师侧重设计开发测试与监督；技术员也可能装配、测试、安装维护控制系统，不能用“是否亲自安装”作绝对界线。签署权限另核地区与资质。"
+              "建筑安装先对照 单线图、配电箱 回路表和线管走向，交隐蔽工程验收记录。工厂检修常核端子编号、控制柜图纸和 点检表。万用表、兆欧表 和 弯管器 用于经授权的不同工序；交接留下绝缘测试记录、竣工图修订和整改闭环。GB 50303 是建筑电气施工质量验收口径。"
             ]
           },
           "id": "actors.display.definition_block.definition",
@@ -24250,7 +23882,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI影响指数17%为编辑模型估计：图纸版本／清单准备和故障记录只按辅助档计分，现场安装不计替代。三个代表任务等权编辑估计：图纸版本与位置清单准备辅助25分、现场安装0分、故障记录辅助25分；floor((25+0+25)/3+0.5)=17。fermatmind-ai-impact-v1，2026-11-08；非实测工时、采用率或失业概率。 实际安全确认和作业责任仍按适用规程由合格人员承担。"
+              "表格工具适合筛出回路表缺号和版本不一致。图纸写了什么、现场标签是什么以及谁有权批准施工，要在工单里分开记。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -26014,7 +25646,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "江门人社局2025年报告的整体分职业表列“电工”2024全年企业样本工资：第10、25、50、75、90百分位为4.32、5.04、5.46、7.09、9.70万元/年。此为江门地区参考，不代表全国或美国47-2111的精确等价；电工样本量未单列。"
+              "国家统计局 2025 年表 7 规模以上企业就业人员年平均工资：建筑业 79,161 元，电力、热力、燃气及水生产和供应业 164,371 元。这是行业及企业规模口径，不能当作该职业工资或当地报价。比较同城录用条件时，先拆基本工资、计件或夜班补贴、停工时段和出差食宿。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.4",
@@ -26898,7 +26530,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用虚构任务观察是否先确认现行规范与受控图纸版本。"
+              "用任务观察是否先确认现行规范与受控图纸版本。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.big-five.answer",
@@ -28689,14 +28321,14 @@
                 "id": "rework",
                 "values": [
                   "作品二：测量与测试记录",
-                  "仅使用自选公开教学案例中的虚构读数，注明来源、条件、仪器名称及缺失信息，不自行测量。"
+                  "仅使用自选公开教学案例中的读数，注明来源、条件、仪器名称及缺失信息，不自行测量。"
                 ]
               },
               {
                 "id": "materials",
                 "values": [
                   "作品三：故障排查记录",
-                  "按「现象—假设—验证—结论」写清一次虚构故障的排查过程。"
+                  "按「现象—假设—验证—结论」写清一次故障的排查过程。"
                 ]
               },
               {
@@ -28864,9 +28496,9 @@
           "data": {
             "paragraphs": [
               "招聘公告中的学历、培训、证书与作业范围要求必须逐条读取；一项可放宽不代表其他条件可替代。",
-              "本页作品与七天体验只用于纸面职业探索：仅用虚构或公开教学材料，不接触真实设备，不自行接线、测量或送电。",
+              "本页作品与七天体验只用于纸面职业探索：仅用或公开教学材料，不接触真实设备，不自行接线、测量或送电。",
               "本页不构成作业指导或资格认定。实际作业须分别满足适用的法定资格、培训和单位授权要求；单位授权不能替代依法要求的持证条件，持证也不等于具备全部现场作业权限。",
-              "本页练习使用虚构材料，不代表任何真实项目、设备与作业结论。"
+              "本页练习使用材料，不代表任何真实项目、设备与作业结论。"
             ]
           },
           "id": "actors.path.credential-boundary.1",
@@ -28932,34 +28564,24 @@
           "data": {
             "entries": [
               {
-                "id": "actors-practice-materials",
+                "id": "wave1-trial-1",
                 "values": [
-                  "资料一：案例图示与出处",
-                  "在自选公开教学案例中查找图示版本、来源及标明的适用条件；本页未附图纸。",
-                  "整理工作对象、已给信息和待核问题，不编操作方案。"
+                  "题设",
+                  "已批准的 A3 版回路表记 C1＝照明、C2＝风机、C3＝备用。纸面标签清单为 C1＝照明、C2＝插座、C3 缺失。A4 是未审批草稿。"
                 ]
               },
               {
-                "id": "actors-practice-task",
+                "id": "wave1-trial-2",
                 "values": [
-                  "资料二：已有说明与条件",
-                  "查找案例已有的条件说明及出处，不自行制定量程、测量方法或验收判据。",
-                  "记录说明的适用范围和缺项；不完整就标未知。"
+                  "任务",
+                  "按回路写出匹配、冲突或缺失，统计可直接对上的行。说明先查哪份记录，写下交接人的下一步。"
                 ]
               },
               {
-                "id": "actors-practice-reference",
+                "id": "wave1-trial-3",
                 "values": [
-                  "资料三：案例虚构读数",
-                  "如案例附虚构读数，摘录其单位、条件及已有解释；本页未附连续读数或超限值。",
-                  "保留原数据和未知项，不推定现场状态或安排实测。"
-                ]
-              },
-              {
-                "id": "actors-practice-boundary",
-                "values": [
-                  "资料四：学习与权限边界",
-                  "记录需要向合格培训机构或雇主核实的问题，不安排接触设备、布线、登高、搬抬或送电。"
+                  "交接",
+                  "只用上面文字，提交三行表。无需现场、仪表、拆盖或送电。"
                 ]
               }
             ]
@@ -28970,96 +28592,21 @@
             "bls",
             "cn-rule"
           ],
-          "title": "选择公开教学案例时查找哪些资料",
+          "title": "纸面试做：回路交接单复核",
           "type": "cards"
         },
         {
           "availability": "available",
-          "copy_key": "career.item.seven-day-trial",
+          "copy_key": "career.item.entry-work-sample-data",
           "data": {
-            "entries": [
-              {
-                "id": "day-1",
-                "values": [
-                  "第1天：选择案例并记出处",
-                  "自选公开入门教学案例和规范说明，记录来源、日期、适用范围与不懂之处；本页未附图纸或读数材料。"
-                ]
-              },
-              {
-                "id": "day-2",
-                "values": [
-                  "第2天：标注任务和待核问题",
-                  "只在自选教学案例纸面图示上标注任务、所需资格和待核问题，不编操作顺序。"
-                ]
-              },
-              {
-                "id": "day-3",
-                "values": [
-                  "第3天：摘录给定条件和虚构读数",
-                  "从自选教学案例摘录虚构读数及条件，缺少条件就标未知，不自行测量。"
-                ]
-              },
-              {
-                "id": "day-4",
-                "values": [
-                  "第4天：记录故障解释及缺证",
-                  "只在纸面列虚构故障的可能解释与需要什么证据，不进行现场验证。"
-                ]
-              },
-              {
-                "id": "day-5",
-                "values": [
-                  "第5天：整理案例记录",
-                  "整理虚构案例记录，明确哪些信息已给出、哪些缺失以及应向谁核实。"
-                ]
-              },
-              {
-                "id": "day-6",
-                "values": [
-                  "第6天：改变一项纸面假设",
-                  "仅改纸面图示的一项假设，列出需要重新核实的问题，不改变设备或回路。"
-                ]
-              },
-              {
-                "id": "day-7",
-                "values": [
-                  "第7天：复盘下一步",
-                  "复盘你是否愿意继续查资料、接受合格培训并遵守权限；这不是能力考核或资格结论。"
-                ]
-              }
+            "paragraphs": [
+              "三行里一行相符：C1。C2 两份记录所指负载不一致，C3 缺标签，两行暂挂。以 A3 为本题受控版本，将 A4 留作待核材料；请负责施工的人调取正式变更单及标签补记，核对前不在交接单填写已验收。"
             ]
           },
-          "id": "actors.path.seven-day-trial.1",
-          "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
-          ],
-          "title": "七天纸面职业探索",
-          "type": "timeline"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.seven-day-decision",
-          "data": {
-            "entries": [
-              "能否说明资料来源、适用范围和未知项？",
-              "能否分清职业任务、纸面探索与实际操作权限？",
-              "是否愿意继续了解合格培训，并向培训机构或雇主核实具体条件？",
-              "对体力、环境、日程和安全责任仍有哪些问题？不以这次探索判定体能、能力或录用资格。",
-              "若资料不足，先补资料或咨询合格机构；是否继续由你的兴趣、现实约束和已核信息共同决定。",
-              "哪些问题可以通过继续阅读解决，哪些必须由合格培训机构或雇主解释？",
-              "你想进一步了解哪个具体工作方向，下一步准备核实哪一项申请或学习条件？"
-            ]
-          },
-          "id": "actors.path.seven-day-decision.1",
-          "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
-          ],
-          "title": "第七天如何决定下一步",
-          "type": "list"
+          "id": "electricians.entry-work-sample-data.2",
+          "title": "纸面样答：回路交接单复核",
+          "type": "notice",
+          "visibility": "public"
         },
         {
           "availability": "available",
@@ -29146,7 +28693,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "学徒经历、执照与单位内部授权是不同层次：完成学徒不等于自动取得执照，执照也不等于在本单位承担送电或验收的授权。"
+              "先按实际作业确认发证体系。自 2026 年 6 月 1 日起施行的《特种作业目录》区分应急管理类高压电工作业与 低压电工作业，有效高压电工作业证书可从事 低压电工作业。房屋市政工程的 建筑电工 按住建施工特种作业规则取证。职业技能等级可证明培训积累，作业授权仍按工种和现场制度核对。"
             ]
           },
           "id": "actors.display.career_path_block.locale.credentials",
@@ -30956,7 +30503,7 @@
                 ]
               },
               {
-                "answer": "2025年美国电工年薪第10、25、50、75、90百分位分别为42,640、49,430、63,190、83,940、108,510美元；中位时薪30.38美元。这是全国工资分布，不是学徒、初级或高级薪级。",
+                "answer": "美国电工 2025 年 5 月全国年薪中位数为 63,190 美元，时薪中位数为 30.38 美元。比较同城岗位还应核对工时和是否按学徒费率起薪。",
                 "id": "actors.faq.4",
                 "question": "美国工资是多少？",
                 "question_key": "career.faq.electricians.4",
@@ -30965,7 +30512,7 @@
                 ]
               },
               {
-                "answer": "BLS职业展望手册列出：美国电工2025年就业约821,000人，2025—2035年预计增长9%，平均每年约72,700个岗位空缺，包含增长与人员替代需求。年均空缺不是十年净新增，也不等于个人录用概率。",
+                "answer": "BLS职业展望手册列出：美国电工2025年就业约821,000个岗位，2025—2035年预计增长9%，平均每年约72,700个岗位空缺，包含增长与人员替代需求。年均空缺不是十年净新增，也不等于个人录用概率。",
                 "id": "actors.faq.5",
                 "question": "美国就业前景如何？",
                 "question_key": "career.faq.electricians.5",
@@ -31856,6 +31403,24 @@
                 "publisher": "美国劳工部就业与培训管理局",
                 "scope": "exact",
                 "url": "https://creativecommons.org/licenses/by/4.0/"
+              },
+              {
+                "details": [],
+                "id": "wave1-source-1",
+                "name": "国家统计局《2025 年城镇单位就业人员年平均工资情况》表 7",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [],
+                "id": "wave1-source-2",
+                "name": "应急管理部等部门《特种作业目录》",
+                "url": "https://www.mem.gov.cn/gk/zfxxgkpt/fdzdgknr/202605/t20260526_604988.shtml"
+              },
+              {
+                "details": [],
+                "id": "wave1-source-3",
+                "name": "住房城乡建设部《建筑施工特种作业人员管理规定》",
+                "url": "https://www.mohurd.gov.cn/gongkai/zhengce/gzk/art/2025/art_f3913c15c84e4bbc8d4fb21af3370fb8.html"
               }
             ]
           },
@@ -35009,7 +34574,7 @@
           {
             "fact_ref": "employment",
             "指标": "2025就业·职业人数",
-            "数值": "821,000人",
+            "数值": "821,000个岗位",
             "说明": "总体预测非AI归因，存量和年均空缺不等于净增或当前招聘。"
           },
           {
@@ -35434,7 +34999,7 @@
             "metric": "就业规模",
             "occupation_scope": "O*NET-SOC 47-2111.00（电工）",
             "source_id": "bls",
-            "value": "821,000人"
+            "value": "821,000个岗位"
           },
           {
             "geography": "美国",
@@ -36751,8 +36316,8 @@
             "label": "了解我的人格类型"
           },
           {
-            "href": "/zh/tests/career-anchor-schein-test",
-            "label": "了解我的职业锚"
+            "href": "/zh/tests/career-planning-and-work-style-test",
+            "label": "职业规划与工作风格测评"
           }
         ]
       },
@@ -36990,17 +36555,10 @@
       },
       {
         "block": "path",
-        "copy_key": "career.item.seven-day-trial",
-        "id": "actors.path.seven-day-trial.1",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "electricians.entry-work-sample-data.2",
         "location": "entry_decisions",
-        "type": "timeline"
-      },
-      {
-        "block": "path",
-        "copy_key": "career.item.seven-day-decision",
-        "id": "actors.path.seven-day-decision.1",
-        "location": "entry_decisions",
-        "type": "list"
+        "type": "notice"
       },
       {
         "block": "source-register",
@@ -37158,7 +36716,7 @@
       },
       {
         "derivation": null,
-        "display_value": "约821,000人（2025年）",
+        "display_value": "约821,000个岗位（2025年）",
         "fact_id": "employment",
         "market": "美国",
         "measure": "就业规模",
@@ -37251,6 +36809,18 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "建筑业 79,161 元，电力、热力、燃气及水生产和供应业 164,371 元",
+        "fact_id": "wave1-cn-sector-2025",
+        "market": "中国大陆",
+        "measure": "行业就业人员年平均工资",
+        "occupation_scope": "规模以上企业行业门类，非本职业",
+        "period": "2025",
+        "source_refs": [
+          "wave1-source-1"
+        ]
       }
     ]
   },
@@ -37264,7 +36834,7 @@
     "badges": [
       "建筑与设施的电气安装、维护与检修 · O*NET-SOC 47-2111.00",
       "2025 年美国工资数据 · 中位年薪 63,190 美元（中位时薪 30.38 美元）",
-      "2025年就业约821,000人 · 2025—2035年预计增长9% · 兴趣代码RC"
+      "2025年就业约821,000个岗位 · 2025—2035年预计增长9% · 兴趣代码RC"
     ],
     "metrics": [
       {
@@ -37283,7 +36853,7 @@
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "美国在岗人数"
+        "label": "美国电工就业岗位数（2025年）"
       },
       {
         "availability": "available",
@@ -37303,17 +36873,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "了解电工的安装、维护与检修任务、学徒和执照路径，以及中国大陆特种作业证书的适用范围。美国2025年中位年薪63,190美元、就业约821,000人，2025—2035年预计增长9%；美国统计不能代替大陆工资或资格要求。"
+      "text": "电工要把施工图和现场标识对上，再交出复核人能追溯的安装、检修或验收记录。配电安装和工厂检修的任务节奏不同，接手前要弄清停电窗口和工种授权。"
     },
     "title": {
       "availability": "available",
-      "text": "电工：职责、工资与入行路径"
+      "text": "电工做什么｜工作场景、工资口径与持证路径"
     }
   },
-  "source_content_sha256": "3f0e067dd6cc8f8b1445281aa2942a19ee1381a1d50b9c32e35fee7e9c339636",
+  "source_content_sha256": "e06ad4592b8c907f4badcf6c445a47197b44f59faa692f5e8f0b414bc92b9cf9",
   "subject": {
     "canonical_slug": "electricians",
     "name": "电工",
-    "summary": "按美国 O*NET-SOC 47-2111.00，安装、维护与检修电气布线、设备与器具：按图纸与规范完成布管、穿线、接线与设备固定，执行停电验电与绝缘、接地及回路测试，排查故障，按程序送电并交付作业记录。"
+    "summary": "电工要把施工图和现场标识对上，再交出复核人能追溯的安装、检修或验收记录。配电安装和工厂检修的任务节奏不同，接手前要弄清停电窗口和工种授权。"
   }
 }

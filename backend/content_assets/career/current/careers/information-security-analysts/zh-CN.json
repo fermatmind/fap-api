@@ -2,12 +2,6 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
-      "fact:cn-wage-nonprivate": {
-        "status": "pending_mapping"
-      },
-      "fact:cn-wage-private": {
-        "status": "pending_mapping"
-      },
       "fact:credential-boundary": {
         "status": "pending_mapping"
       },
@@ -41,19 +35,28 @@
       "fact:us-wage-p90-2025": {
         "status": "pending_mapping"
       },
+      "fact:wave1-b2-cn-industry": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b2-wage-p10": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b2-wage-p25": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b2-wage-p50": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b2-wage-p75": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b2-wage-p90": {
+        "status": "pending_mapping"
+      },
       "item:information-security-analysts.ai-impact.ai-impact-table.1": {
         "status": "pending_mapping"
       },
-      "item:information-security-analysts.china-salary.career-snapshot-primary-locale.1": {
-        "status": "pending_mapping"
-      },
-      "item:information-security-analysts.china-salary.career-snapshot-primary-locale.2": {
-        "status": "pending_mapping"
-      },
-      "item:information-security-analysts.china-salary.career-snapshot-primary-locale.3": {
-        "status": "pending_mapping"
-      },
-      "item:information-security-analysts.china-salary.career-snapshot-primary-locale.4": {
+      "item:information-security-analysts.china-salary.wave1-b2-context.1": {
         "status": "pending_mapping"
       },
       "item:information-security-analysts.direction-comparison.adjacent-career-comparison-table.1": {
@@ -71,6 +74,9 @@
       "item:information-security-analysts.direction-comparison.adjacent-career-comparison-table.5": {
         "status": "pending_mapping"
       },
+      "item:information-security-analysts.entry-work-sample-data.2": {
+        "status": "pending_mapping"
+      },
       "item:information-security-analysts.fit.riasec-fit-block.1": {
         "status": "pending_mapping"
       },
@@ -84,9 +90,6 @@
         "status": "pending_mapping"
       },
       "item:information-security-analysts.fit.riasec-fit-block.5": {
-        "status": "pending_mapping"
-      },
-      "item:information-security-analysts.fit.riasec-fit-block.6": {
         "status": "pending_mapping"
       },
       "item:information-security-analysts.fit.riasec-fit-block.7": {
@@ -320,13 +323,7 @@
       "item:information-security-analysts.path.display.career_path_block.tracks.03.title": {
         "status": "mapped"
       },
-      "item:information-security-analysts.path.employer-evidence.1": {
-        "status": "mapped"
-      },
       "item:information-security-analysts.path.entry-heading": {
-        "status": "mapped"
-      },
-      "item:information-security-analysts.path.entry-portfolio.1": {
         "status": "mapped"
       },
       "item:information-security-analysts.path.entry-role-comparison.1": {
@@ -334,15 +331,6 @@
       },
       "item:information-security-analysts.path.entry-work-sample-data.1": {
         "status": "pending_mapping"
-      },
-      "item:information-security-analysts.path.interview-probation.1": {
-        "status": "mapped"
-      },
-      "item:information-security-analysts.path.seven-day-decision.1": {
-        "status": "pending_mapping"
-      },
-      "item:information-security-analysts.path.seven-day-trial.1": {
-        "status": "mapped"
       },
       "item:information-security-analysts.profile.career-quick-answers-block.8": {
         "status": "pending_mapping"
@@ -405,9 +393,6 @@
         "status": "pending_mapping"
       },
       "item:information-security-analysts.us-salary.career-snapshot-secondary-locale.1": {
-        "status": "pending_mapping"
-      },
-      "item:information-security-analysts.us-salary.career-snapshot-secondary-locale.2": {
         "status": "pending_mapping"
       },
       "item:information-security-analysts.us-salary.career-snapshot-secondary-locale.3": {
@@ -5045,280 +5030,76 @@
         "status": "mapped"
       },
       "entry_decisions.employer-evidence.entries.01.description.01": {
-        "ref": {
-          "id": "information-security-analysts.path.employer-evidence.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-0"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.employer-evidence.entries.01.title": {
-        "ref": {
-          "id": "information-security-analysts.path.employer-evidence.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-0"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.employer-evidence.entries.02.description.01": {
-        "ref": {
-          "id": "information-security-analysts.path.employer-evidence.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-1"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.employer-evidence.entries.02.title": {
-        "ref": {
-          "id": "information-security-analysts.path.employer-evidence.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-1"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.employer-evidence.entries.03.description.01": {
-        "ref": {
-          "id": "information-security-analysts.path.employer-evidence.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-2"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.employer-evidence.entries.03.title": {
-        "ref": {
-          "id": "information-security-analysts.path.employer-evidence.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-2"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.employer-evidence.entries.04.description.01": {
-        "ref": {
-          "id": "information-security-analysts.path.employer-evidence.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-3"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.employer-evidence.entries.04.title": {
-        "ref": {
-          "id": "information-security-analysts.path.employer-evidence.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-3"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.employer-evidence.title": {
-        "ref": {
-          "id": "information-security-analysts.path.employer-evidence.1",
-          "path": [
-            "title"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-portfolio.entries.01.description.01": {
-        "ref": {
-          "id": "information-security-analysts.path.entry-portfolio.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-0"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-portfolio.entries.01.title": {
-        "ref": {
-          "id": "information-security-analysts.path.entry-portfolio.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-0"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-portfolio.entries.02.description.01": {
-        "ref": {
-          "id": "information-security-analysts.path.entry-portfolio.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-1"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-portfolio.entries.02.title": {
-        "ref": {
-          "id": "information-security-analysts.path.entry-portfolio.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-1"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-portfolio.entries.03.description.01": {
-        "ref": {
-          "id": "information-security-analysts.path.entry-portfolio.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-2"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-portfolio.entries.03.title": {
-        "ref": {
-          "id": "information-security-analysts.path.entry-portfolio.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-2"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-portfolio.entries.04.description.01": {
-        "ref": {
-          "id": "information-security-analysts.path.entry-portfolio.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-3"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-portfolio.entries.04.title": {
-        "ref": {
-          "id": "information-security-analysts.path.entry-portfolio.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-3"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-portfolio.title": {
-        "ref": {
-          "id": "information-security-analysts.path.entry-portfolio.1",
-          "path": [
-            "title"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-role-comparison.headers.distinction": {
         "ref": {
@@ -5716,144 +5497,48 @@
         "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.01": {
-        "ref": {
-          "id": "information-security-analysts.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "sample-1"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.02": {
         "ref": null,
         "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.01.title": {
-        "ref": {
-          "id": "information-security-analysts.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "sample-1"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.01": {
-        "ref": {
-          "id": "information-security-analysts.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "sample-2"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.02": {
         "ref": null,
         "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.02.title": {
-        "ref": {
-          "id": "information-security-analysts.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "sample-2"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.01": {
-        "ref": {
-          "id": "information-security-analysts.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "sample-3"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.02": {
         "ref": null,
         "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.03.title": {
-        "ref": {
-          "id": "information-security-analysts.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "sample-3"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.04.description.01": {
-        "ref": {
-          "id": "information-security-analysts.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "sample-4"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.04.title": {
-        "ref": {
-          "id": "information-security-analysts.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "sample-4"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.title": {
         "ref": {
@@ -5866,270 +5551,88 @@
         "status": "mapped"
       },
       "entry_decisions.interview-probation.headers.boundary": {
-        "ref": {
-          "id": "information-security-analysts.path.interview-probation.1",
-          "path": [
-            "data",
-            "column_labels",
-            3
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.interview-probation.headers.observed_evidence": {
-        "ref": {
-          "id": "information-security-analysts.path.interview-probation.1",
-          "path": [
-            "data",
-            "column_labels",
-            2
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.interview-probation.headers.possible_check": {
-        "ref": {
-          "id": "information-security-analysts.path.interview-probation.1",
-          "path": [
-            "data",
-            "column_labels",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.interview-probation.headers.stage": {
-        "ref": {
-          "id": "information-security-analysts.path.interview-probation.1",
-          "path": [
-            "data",
-            "column_labels",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.interview-probation.rows.01.boundary": {
-        "ref": {
-          "id": "information-security-analysts.path.interview-probation.1",
-          "path": [
-            "data",
-            "rows",
-            0,
-            3
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.interview-probation.rows.01.observed_evidence": {
-        "ref": {
-          "id": "information-security-analysts.path.interview-probation.1",
-          "path": [
-            "data",
-            "rows",
-            0,
-            2
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.interview-probation.rows.01.possible_check": {
-        "ref": {
-          "id": "information-security-analysts.path.interview-probation.1",
-          "path": [
-            "data",
-            "rows",
-            0,
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.interview-probation.rows.01.stage": {
-        "ref": {
-          "id": "information-security-analysts.path.interview-probation.1",
-          "path": [
-            "data",
-            "rows",
-            0,
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.interview-probation.rows.02.boundary": {
-        "ref": {
-          "id": "information-security-analysts.path.interview-probation.1",
-          "path": [
-            "data",
-            "rows",
-            1,
-            3
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.interview-probation.rows.02.observed_evidence": {
-        "ref": {
-          "id": "information-security-analysts.path.interview-probation.1",
-          "path": [
-            "data",
-            "rows",
-            1,
-            2
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.interview-probation.rows.02.possible_check": {
-        "ref": {
-          "id": "information-security-analysts.path.interview-probation.1",
-          "path": [
-            "data",
-            "rows",
-            1,
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.interview-probation.rows.02.stage": {
-        "ref": {
-          "id": "information-security-analysts.path.interview-probation.1",
-          "path": [
-            "data",
-            "rows",
-            1,
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.interview-probation.rows.03.boundary": {
-        "ref": {
-          "id": "information-security-analysts.path.interview-probation.1",
-          "path": [
-            "data",
-            "rows",
-            2,
-            3
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.interview-probation.rows.03.observed_evidence": {
-        "ref": {
-          "id": "information-security-analysts.path.interview-probation.1",
-          "path": [
-            "data",
-            "rows",
-            2,
-            2
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.interview-probation.rows.03.possible_check": {
-        "ref": {
-          "id": "information-security-analysts.path.interview-probation.1",
-          "path": [
-            "data",
-            "rows",
-            2,
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.interview-probation.rows.03.stage": {
-        "ref": {
-          "id": "information-security-analysts.path.interview-probation.1",
-          "path": [
-            "data",
-            "rows",
-            2,
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.interview-probation.rows.04.boundary": {
-        "ref": {
-          "id": "information-security-analysts.path.interview-probation.1",
-          "path": [
-            "data",
-            "rows",
-            3,
-            3
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.interview-probation.rows.04.observed_evidence": {
-        "ref": {
-          "id": "information-security-analysts.path.interview-probation.1",
-          "path": [
-            "data",
-            "rows",
-            3,
-            2
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.interview-probation.rows.04.possible_check": {
-        "ref": {
-          "id": "information-security-analysts.path.interview-probation.1",
-          "path": [
-            "data",
-            "rows",
-            3,
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.interview-probation.rows.04.stage": {
-        "ref": {
-          "id": "information-security-analysts.path.interview-probation.1",
-          "path": [
-            "data",
-            "rows",
-            3,
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.interview-probation.title": {
-        "ref": {
-          "id": "information-security-analysts.path.interview-probation.1",
-          "path": [
-            "title"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.01": {
         "ref": null,
@@ -6160,248 +5663,68 @@
         "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.title": {
-        "ref": {
-          "id": "information-security-analysts.path.seven-day-decision.1",
-          "path": [
-            "title"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.01.description.01": {
-        "ref": {
-          "id": "information-security-analysts.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "day-1"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.01.title": {
-        "ref": {
-          "id": "information-security-analysts.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "day-1"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.02.description.01": {
-        "ref": {
-          "id": "information-security-analysts.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "day-2"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.02.title": {
-        "ref": {
-          "id": "information-security-analysts.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "day-2"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.03.description.01": {
-        "ref": {
-          "id": "information-security-analysts.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "day-3"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.03.title": {
-        "ref": {
-          "id": "information-security-analysts.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "day-3"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.04.description.01": {
-        "ref": {
-          "id": "information-security-analysts.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "day-4"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.04.title": {
-        "ref": {
-          "id": "information-security-analysts.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "day-4"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.05.description.01": {
-        "ref": {
-          "id": "information-security-analysts.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "day-5"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.05.title": {
-        "ref": {
-          "id": "information-security-analysts.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "day-5"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.06.description.01": {
-        "ref": {
-          "id": "information-security-analysts.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "day-6"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.06.title": {
-        "ref": {
-          "id": "information-security-analysts.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "day-6"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.07.description.01": {
-        "ref": {
-          "id": "information-security-analysts.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "day-7"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.07.title": {
-        "ref": {
-          "id": "information-security-analysts.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "day-7"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.title": {
-        "ref": {
-          "id": "information-security-analysts.path.seven-day-trial.1",
-          "path": [
-            "title"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "faq_block.items.01.answer": {
         "ref": null,
@@ -9361,7 +8684,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "直接判断：如果你愿意监测安全事件、检查漏洞、维护防护措施，并在证据不足时暂停、复核和升级，信息安全分析师值得进一步试验。"
+              "按交接责任和工作环境比较岗位。"
             ]
           },
           "id": "information-security-analysts.quick-decision.fermat-decision-card.1",
@@ -9376,7 +8699,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "可观察信号：能把日志、资产、权限和异常分开记录；能向技术与非技术协作者解释风险；不把工具提示或证书当作授权结论。"
+              "信息安全分析师处理告警、核查证据和升级事件，用可复核的交接记录让后续处置接得上。"
             ]
           },
           "id": "information-security-analysts.quick-decision.fermat-decision-card.2",
@@ -9390,7 +8713,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "安全工作样本：使用完全虚构的日志、资产清单、权限矩阵和异常记录，在60分钟内形成事件分级、复核点和升级记录；不得连接真实网络、扫描真实主机、修改真实配置或使用真实敏感信息。"
+              "先填写入行区工单，再核对样答。"
             ]
           },
           "id": "information-security-analysts.quick-decision.fermat-decision-card.3",
@@ -9426,7 +8749,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "信息安全分析师关注组织系统、网络和数据的保护，监测异常，分析告警证据，记录风险，并与工程、运营和合规团队协调处置。工作内容随安全运营、风险评估等方向而不同。"
+              "信息安全分析师处理告警、核查证据和升级事件，用可复核的交接记录让后续处置接得上。"
             ]
           },
           "id": "information-security-analysts.profile.definition-block.1",
@@ -9442,7 +8765,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "制定计划，保护计算机档案不受意外或未经授权的修改、销毁或披露，并满足紧急数据处理的需要。",
+              "在 SOC 用 SIEM 的 Splunk 或 Sentinel 检索告警，结合 EDR 证据补 告警时间线，按 应急响应 流程确认升级人。 等保 2.0 可作为对应系统建设和运行证据的要求背景。",
               "监测计算机病毒的当前报告，以确定什么时候更新病毒保护系统。",
               "加密数据传输，并建立防火墙，以隐藏在传输时的机密信息，并保持隐藏的数字传输。",
               "对数据处理系统进行风险评估和测试，以确保数据处理活动和安全措施的运作。"
@@ -9450,7 +8773,10 @@
           },
           "id": "information-security-analysts.profile.responsibilities-block.2",
           "source_refs": [
-            "batch52-onet-core"
+            "wave1-b2-3",
+            "wave1-b2-4",
+            "wave1-b2-5",
+            "wave1-b2-6"
           ],
           "type": "list"
         },
@@ -9503,7 +8829,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "用虚构告警记录，写时间线、已知事实、待查证据、影响和需要升级给谁。上证所信息网络公司的安全方向样本列告警分析处置；练习只用授权环境或合成数据。"
+              "用告警记录，写时间线、已知事实、待查证据、影响和需要升级给谁。上证所信息网络公司的安全方向样本列告警分析处置；练习只用授权环境或合成数据。"
             ]
           },
           "id": "information-security-analysts.profile.career-quick-answers-block.8",
@@ -9688,66 +9014,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：经有界检索（国家统计局行业门类工资发布、公开企业薪酬调查与职业分类目录），仍没有与 O*NET 15-1212.00（Information Security Analysts 信息安全分析师）对应的中国大陆全国公开职业工资分布可核验；国家统计局按行业门类公布城镇单位就业人员平均工资，不区分职业。本页不把行业平均、招聘报价或美国数据写成信息安全分析师薪资，也不把 O*NET 或美国统计当作中国大陆工资证据。"
+              "国家统计局 2025 年就业人员年平均工资，表 7 信息传输、软件和信息技术服务业 242,019 元。这是行业背景。本页未取得可复核的中国大陆职业级全国工资分位。"
             ]
           },
           "fact_refs": [
-            "cn-wage-nonprivate"
+            "wave1-b2-cn-industry"
           ],
-          "id": "information-security-analysts.china-salary.career-snapshot-primary-locale.1",
+          "id": "information-security-analysts.china-salary.wave1-b2-context.1",
           "source_refs": [
-            "nbs-wages"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "中国大陆职业映射：经有界检索未取得可核验的 O*NET 15-1212.00 对应关系（国家统计局按行业门类公布、不区分职业）；具体职业分类对应须按当地职业目录、城市、雇主和岗位层级另行核验。"
-            ]
-          },
-          "fact_refs": [
-            "cn-wage-private"
-          ],
-          "id": "information-security-analysts.china-salary.career-snapshot-primary-locale.2",
-          "source_refs": [
-            "nbs-wages"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "中国大陆教育与入门：本页未取得可对外引用的全国统一学历、训练、证书与授权要求；国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业，无法据此核验本职业的学历与入门门槛，具体按目标岗位招聘条件与当地主管部门规则逐项确认。"
-            ]
-          },
-          "fact_refs": [
-            "cn-wage-nonprivate"
-          ],
-          "id": "information-security-analysts.china-salary.career-snapshot-primary-locale.3",
-          "source_refs": [
-            "nbs-wages"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "AI 与中国薪资：AI 任务辅助不能填补中国大陆职业工资证据缺口；该缺口按证据政策保留为「证据不足：」，不以美国数据或行业均值替代。"
-            ]
-          },
-          "fact_refs": [
-            "cn-wage-private"
-          ],
-          "id": "information-security-analysts.china-salary.career-snapshot-primary-locale.4",
-          "source_refs": [
-            "nbs-wages"
+            "wave1-b2-7"
           ],
           "type": "prose"
         }
@@ -9771,23 +9046,6 @@
             "us-wage-median-2025"
           ],
           "id": "information-security-analysts.us-salary.career-snapshot-secondary-locale.1",
-          "source_refs": [
-            "bls-ooh-2025-information-security-analysts"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "data": {
-            "paragraphs": [
-              "2025全国年薪10/25/50/75/90分位75,090/97,810/129,180/163,500/199,850美元，时薪中位62.11美元；BLS2025—2035精确SOC15-1212：就业192,900至233,400人，增长21%，年均空缺14,100个；空缺含增长与替换，非净新增、实际招聘或个人保证。"
-            ]
-          },
-          "fact_refs": [
-            "us-wage-median-2025"
-          ],
-          "id": "information-security-analysts.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
             "bls-ooh-2025-information-security-analysts"
           ],
@@ -9930,24 +9188,10 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "试验动作：只用虚构日志和资产，在隔离环境完成分级、证据表和升级说明，不连接真实网络。"
+              "试验动作：只用日志和资产，在隔离环境完成分级、证据表和升级说明，不连接真实网络。"
             ]
           },
           "id": "information-security-analysts.fit.riasec-fit-block.5",
-          "source_refs": [
-            "source-pack-onet-details"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.riasec-fit-block",
-          "data": {
-            "paragraphs": [
-              "O*NET兴趣CI（常规型、研究型），支持程序与分析活动偏好；非个人录用判断。"
-            ]
-          },
-          "id": "information-security-analysts.fit.riasec-fit-block.6",
           "source_refs": [
             "source-pack-onet-details"
           ],
@@ -10087,7 +9331,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在美国职业资料与目标雇主制度范围内，先用静态样本验证记录、核查、复核和升级，再进入授权环境。"
+              "选择培训前，先比较岗位职责和带教安排。"
             ]
           },
           "id": "information-security-analysts.path.career-path-block.2",
@@ -10117,13 +9361,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "证书、值班权限、生产变更与合规签字必须回到目标组织和适用法域。"
+              "可从网络运维、日志分析和值班交接入行。软考信息安全工程师和 CISP 是不同体系的能力证明；账号操作、事件升级和处置权限按雇主制度划分。"
             ]
           },
           "id": "information-security-analysts.path.career-path-block.4",
           "source_refs": [
-            "bls-ooh-2025-information-security-analysts",
-            "source-pack-onet-details"
+            "wave1-b2-4",
+            "wave1-b2-5",
+            "wave1-b2-6"
           ],
           "type": "prose"
         },
@@ -10157,7 +9402,7 @@
                 "漏洞与安全工程",
                 "在授权范围内复核漏洞、配置或检测规则，输出修复验证记录。",
                 "编辑核对项：能说明范围、前置条件、回滚和验证证据；不把课程实验当生产授权。",
-                "用虚构资产的配置差异写一份修复前后核对表，标出尚未验证项。",
+                "用资产的配置差异写一份修复前后核对表，标出尚未验证项。",
                 "以控制措施、配置和修复闭环为中心，不替代事件响应指挥。"
               ],
               [
@@ -10195,287 +9440,6 @@
         },
         {
           "availability": "available",
-          "copy_key": "career.item.employer-evidence",
-          "data": {
-            "entries": [
-              {
-                "id": "entry-0",
-                "values": [
-                  "雇主要求｜先核对授权范围",
-                  "具体监控、检测、响应和变更权限由雇主、资产负责人和班次制度确定；本页没有统一招聘门槛，不把岗位标题当授权。"
-                ]
-              },
-              {
-                "id": "entry-1",
-                "values": [
-                  "编辑建议｜展示可追溯交付",
-                  "用 R-17 交付时间线、事实/未知清单、升级草稿和复核问题；它是原创练习，不是雇主考核或项目经历。"
-                ]
-              },
-              {
-                "id": "entry-2",
-                "values": [
-                  "编辑建议｜展示安全边界",
-                  "明确未扫描、未登录、未隔离，写出何时停止、向谁升级以及需要什么证据；不要提交真实日志或凭据。"
-                ]
-              },
-              {
-                "id": "entry-3",
-                "values": [
-                  "编辑建议｜说明不能证明什么",
-                  "一次纸面样本只能展示记录和判断习惯，不能证明生产权限、事故处置能力、录用结果或安全认证。"
-                ]
-              }
-            ]
-          },
-          "id": "information-security-analysts.path.employer-evidence.1",
-          "source_refs": [
-            "source-pack-onet-details",
-            "source-pack-onet-hot_tech",
-            "source-pack-onet-industry",
-            "bls-ooh-2025-information-security-analysts"
-          ],
-          "title": "雇主或责任人会核对什么",
-          "type": "cards"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.entry-work-sample-data",
-          "data": {
-            "entries": [
-              {
-                "id": "sample-1",
-                "values": [
-                  "练习材料｜隔离告警 R-17",
-                  "这是原创、虚构、静态的 2026-09-12 UTC 样本，只能纸面分析。范围：资产 A-DB-02（测试数据库）；责任人：资产负责人 L. Zhou；监控分析师只有查看和建议升级权限，NOC 负责人才能执行隔离。",
-                  "时间线：09:04 svc-backup 从 10.0.2.10 对 A-DB-02 读取 18GB；09:07 analyst-test 从 10.0.9.44 登录失败一次；09:08 m.chen 从 10.0.9.44 成功导出 2GB；09:12 EDR 标记“非允许网段访问”。"
-                ]
-              },
-              {
-                "id": "sample-2",
-                "values": [
-                  "你的任务｜20 分钟内形成初步交付",
-                  "把记录分成已知事实、未知项和需要核查的冲突；指出至少两项需要核对的字段，并说明先查什么。",
-                  "写一段给 NOC 负责人的升级草稿：包含资产、时间、触发信号、当前权限限制和请求的下一步；不要把“已泄露”写成事实，不运行扫描、登录或隔离。"
-                ]
-              },
-              {
-                "id": "sample-3",
-                "values": [
-                  "参考思路｜只使用题面事实",
-                  "已知：09:08 的主体、来源 IP、目标资产和 2GB 导出；未知：IP 归属、m.chen 是否获授权、导出是否完成、数据分类、09:04 批处理是否正常。不能把一次失败登录直接归因给同一主体。",
-                  "先核对资产负责人和访问授权、导出审计是否完整、IP 与账号对应关系及数据分类；在分析师无隔离权限的前提下，向 NOC/资产负责人升级并请求保全日志。"
-                ]
-              },
-              {
-                "id": "sample-4",
-                "values": [
-                  "练习边界｜不接触真实系统",
-                  "只用本页静态材料；不扫描真实网络、不尝试登录、不复制真实日志、不执行隔离或删除。答案中的严重性只写“待核验的可疑访问”，不凭纸面样本作生产处置或归责结论。"
-                ]
-              }
-            ]
-          },
-          "id": "information-security-analysts.path.entry-work-sample-data.1",
-          "source_refs": [
-            "source-pack-onet-details",
-            "source-pack-onet-hot_tech",
-            "source-pack-onet-industry",
-            "bls-ooh-2025-information-security-analysts"
-          ],
-          "title": "入门案例材料：只用本页虚构材料",
-          "type": "cards"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.entry-portfolio",
-          "data": {
-            "entries": [
-              {
-                "id": "entry-0",
-                "values": [
-                  "R-17 事件时间线",
-                  "复用 sample-1，把每条记录按时间、主体、来源、资产、动作和证据状态列出，保留未知，不增加日志。"
-                ]
-              },
-              {
-                "id": "entry-1",
-                "values": [
-                  "事实/未知/核查清单",
-                  "复用 sample-2 和 sample-3，分开已知事实、未知项、核查顺序、停止条件和升级对象。"
-                ]
-              },
-              {
-                "id": "entry-2",
-                "values": [
-                  "最小升级交付",
-                  "写给 NOC 负责人的一页升级草稿，包含权限限制、请求的日志保全和待确认问题；不写生产处置已完成。"
-                ]
-              },
-              {
-                "id": "entry-3",
-                "values": [
-                  "复盘与版本记录",
-                  "记录你改动的两处、依据的题面字段、仍不确定的项和下一步；标注“原创虚构材料/纸面练习/未接触系统”。"
-                ]
-              }
-            ]
-          },
-          "id": "information-security-analysts.path.entry-portfolio.1",
-          "source_refs": [
-            "source-pack-onet-details",
-            "source-pack-onet-hot_tech",
-            "source-pack-onet-industry",
-            "bls-ooh-2025-information-security-analysts"
-          ],
-          "title": "没有项目经验，可以准备什么作品",
-          "type": "cards"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.interview-probation",
-          "data": {
-            "column_keys": [
-              "stage",
-              "possible_check",
-              "observed_evidence",
-              "boundary"
-            ],
-            "column_labels": [
-              "情境",
-              "核对什么",
-              "怎样观察",
-              "不能据此推断"
-            ],
-            "rows": [
-              [
-                "样本开始前",
-                "确认这是静态虚构数据，核对资产、时间、权限和不得操作的范围。",
-                "能复述输入边界并指出至少一个未知项。",
-                "不能据此推断生产系统授权或真实事故经验。"
-              ],
-              [
-                "初步分析",
-                "要求事实/未知/核查顺序和异常升级对象，而不是猜测攻击者。",
-                "时间线与题面一致；每个判断能指回记录。",
-                "不同合理核查顺序不等于唯一标准答案。"
-              ],
-              [
-                "收到反馈",
-                "让练习者修订一处含糊表述并解释为什么不能写成“已泄露”。",
-                "能保留不确定性，补充权限和证据缺口。",
-                "一次修订不证明能独立值班或处置真实事件。"
-              ],
-              [
-                "交付复盘",
-                "核对日志保全请求、接收人、版本和未完成项。",
-                "他人能按记录复核下一步，不包含真实凭据。",
-                "编辑设计的复盘不是所有雇主统一考试。"
-              ]
-            ]
-          },
-          "id": "information-security-analysts.path.interview-probation.1",
-          "source_refs": [
-            "source-pack-onet-details",
-            "source-pack-onet-hot_tech",
-            "source-pack-onet-industry",
-            "bls-ooh-2025-information-security-analysts"
-          ],
-          "title": "试做、试用与交付前可能核对什么",
-          "type": "table"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.seven-day-trial",
-          "data": {
-            "entries": [
-              {
-                "id": "day-1",
-                "values": [
-                  "第1天｜读材料",
-                  "只读 sample-1，产出资产、角色、时间线和权限卡；不自编事件。"
-                ]
-              },
-              {
-                "id": "day-2",
-                "values": [
-                  "第2天｜列事实",
-                  "按主体、来源、资产、动作和时间重排记录，单列未知项。"
-                ]
-              },
-              {
-                "id": "day-3",
-                "values": [
-                  "第3天｜排核查",
-                  "从 sample-2 选择核查顺序，写出为什么先核对授权和审计，不执行任何系统操作。"
-                ]
-              },
-              {
-                "id": "day-4",
-                "values": [
-                  "第4天｜写升级",
-                  "完成给 NOC 的初稿，明确当前权限、日志保全请求和停止条件。"
-                ]
-              },
-              {
-                "id": "day-5",
-                "values": [
-                  "第5天｜对照参考",
-                  "只在完成初稿后阅读 sample-3，标出一处新增或删去的主张及其题面依据。"
-                ]
-              },
-              {
-                "id": "day-6",
-                "values": [
-                  "第6天｜做作品",
-                  "整理时间线、事实/未知清单、升级稿和版本说明，标注原创虚构、纸面、未接触系统。"
-                ]
-              },
-              {
-                "id": "day-7",
-                "values": [
-                  "第7天｜复盘决定",
-                  "用下方判断清单判断自己是否愿意持续做证据核对、异常升级和重复记录；不评天赋分。"
-                ]
-              }
-            ]
-          },
-          "id": "information-security-analysts.path.seven-day-trial.1",
-          "source_refs": [
-            "source-pack-onet-details",
-            "source-pack-onet-hot_tech",
-            "source-pack-onet-industry",
-            "bls-ooh-2025-information-security-analysts"
-          ],
-          "title": "七天低成本体验：复用同一套材料",
-          "type": "timeline"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.seven-day-decision",
-          "data": {
-            "entries": [
-              "逐条检查时间线是否只使用 sample-1 的四条记录；如果补了 IP 归属、授权或数据分类，标为未知而不是事实。",
-              "检查是否区分分析师可查看/建议与 NOC 可隔离的权限；把高影响动作留给授权责任人。",
-              "复盘核查顺序是否覆盖账号、资产、IP、导出审计和数据分类，并写出仍未确认的字段。",
-              "检查升级稿是否包含触发信号、资产、时间、当前限制、日志保全请求和接收人，而不是归责或定性。",
-              "记录阅读不完整证据时的反应：是否能停下来保留未知，还是急于给出严重性或攻击者结论。",
-              "区分喜欢整理证据与喜欢“破案”叙事；本职业还要求重复记录、权限控制和复盘。",
-              "下一步只选择隔离、授权的公开实验或监督练习；不把一次纸面样本当成生产安全许可。"
-            ]
-          },
-          "id": "information-security-analysts.path.seven-day-decision.1",
-          "source_refs": [
-            "source-pack-onet-details",
-            "source-pack-onet-hot_tech",
-            "source-pack-onet-industry",
-            "bls-ooh-2025-information-security-analysts"
-          ],
-          "title": "第七天如何判断是否继续",
-          "type": "list"
-        },
-        {
-          "availability": "available",
           "copy_key": "career.item.credential-decision",
           "data": {
             "column_keys": [
@@ -10502,7 +9466,7 @@
                 "需要结构化反馈的人",
                 "提供练习和复核，不自动证明生产能力。",
                 "不是普遍统一门槛；按岗位核对。",
-                "确认实验是否隔离、数据是否虚构、是否有反馈和回滚。",
+                "确认实验是否隔离、数据是否、是否有反馈和回滚。",
                 "先完成本页样本，再判断时间与费用。",
                 "不能替代雇主授权、真实经验或安全许可。"
               ],
@@ -10511,7 +9475,7 @@
                 "无生产经验但能展示记录能力的人",
                 "展示时间线、核查清单、升级记录和限制。",
                 "不是法定资格。",
-                "只用原创或获准材料，清楚标注虚构和未操作。",
+                "只用原创或获准材料，清楚标注和未操作。",
                 "优先做一份可复核作品，不购买无关证书。",
                 "不证明真实事故经验或录用。"
               ],
@@ -10568,7 +9532,7 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "本练习材料完全虚构且静态，不能替代真实安全事件流程；不扫描、登录、隔离、删除或接触真实系统。",
+              "本练习材料完全且静态，不能替代真实安全事件流程；不扫描、登录、隔离、删除或接触真实系统。",
               "职业任务依据 O*NET 的信息安全分析师资料；具体值班、权限、工具和升级链由雇主与资产负责人确定。",
               "课程、证书、作品和一次纸面样本分别代表训练、材料或编辑建议，不自动产生生产授权、签字权或录用结果。",
               "如果真实工作条件不清，暂停高影响动作，保留证据和未知项，向正式责任人核对；不要用生成式摘要代替授权判断。"
@@ -11671,6 +10635,51 @@
             "bls-ooh-2025-information-security-analysts"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "wave1-trial-1",
+                "values": [
+                  "题设",
+                  "纸面规则：仅当新告警同时为高危并带重点资产标签时才进事件队列。A 两项都有，B 只有高危，C 是重点资产的低危告警。"
+                ]
+              },
+              {
+                "id": "wave1-trial-2",
+                "values": [
+                  "任务",
+                  "逐项写去向和依据，统计升级数。"
+                ]
+              },
+              {
+                "id": "wave1-trial-3",
+                "values": [
+                  "交接",
+                  "仅做记录判断，不访问系统、不执行处置。"
+                ]
+              }
+            ]
+          },
+          "id": "information-security-analysts.path.entry-work-sample-data.1",
+          "title": "分流三条告警",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "A 进事件队列。B 缺重点资产标签，C 缺高危条件，两条保留常规复核。共升级 1 条。"
+            ]
+          },
+          "id": "information-security-analysts.entry-work-sample-data.2",
+          "title": "纸面样答：分流三条告警",
+          "type": "notice",
+          "visibility": "public"
         }
       ]
     },
@@ -11764,110 +10773,31 @@
           "data": {
             "entries": [
               {
-                "answer": "监测网络与系统、检查漏洞、维护防护措施、记录事件与指标，并与 IT 和业务团队协作；部分岗位需要应急值守。",
-                "id": "information-security-analysts.faq.1",
-                "question": "日常工作和工时如何？",
-                "question_key": "career.faq.information-security-analysts.1",
+                "answer": "2025 年 5 月美国全国中位数为 129,180 美元/年。比较同城报价时，把保底薪资和浮动收入分列。",
+                "id": "information-security-analysts.faq.batch2-pay-us",
+                "question": "美国工资中位数是多少？",
+                "question_key": "career.faq.information-security-analysts.batch2-pay-us",
                 "source_refs": [
-                  "bls-ooh-2025-information-security-analysts"
+                  "wave1-b2-1"
                 ]
               },
               {
-                "answer": "安全分析师以技术监测、漏洞核查和风险缓解为核心；安全经理或 IT 经理承担治理、资源和组织级协调。",
-                "id": "information-security-analysts.faq.2",
-                "question": "这个职业与相邻职业如何区分？",
-                "question_key": "career.faq.information-security-analysts.2",
+                "answer": "可参考国家统计局 2025 年表 7 信息传输、软件和信息技术服务业 242,019 元。该数据是行业均值。本职业报价按同城、同职级核对固定年收、补贴与兑现条件。",
+                "id": "information-security-analysts.faq.batch2-pay-cn",
+                "question": "中国大陆可用哪些薪资数据比较岗位？",
+                "question_key": "career.faq.information-security-analysts.batch2-pay-cn",
                 "source_refs": [
-                  "source-pack-onet-details"
+                  "wave1-b2-7"
                 ]
               },
               {
-                "answer": "愿意细致核对日志、资产和权限，能解释不确定性并及时升级。",
-                "id": "information-security-analysts.faq.3",
-                "question": "什么信号说明我可能适合？",
-                "question_key": "career.faq.information-security-analysts.3",
+                "answer": "分析师写清这一次告警为什么升级、证据在哪、谁接手；工程岗位更常负责控制规则的设计与变更。",
+                "id": "information-security-analysts.faq.batch2-fit",
+                "question": "分析师和安全工程师的交付有什么区别？",
+                "question_key": "career.faq.information-security-analysts.batch2-fit",
                 "source_refs": [
-                  "source-pack-onet-details"
+                  "wave1-b2-3"
                 ]
-              },
-              {
-                "answer": "AI 可整理告警和日志候选，但不能替代原始证据核验、授权判断、异常升级和最终交付。",
-                "id": "information-security-analysts.faq.4",
-                "question": "AI 会如何影响这个职业？",
-                "question_key": "career.faq.information-security-analysts.4",
-                "source_refs": [
-                  "source-pack-onet-hot_tech"
-                ]
-              },
-              {
-                "answer": "高影响处置、控制变更、范围判断和事件升级必须由授权责任人复核。",
-                "id": "information-security-analysts.faq.5",
-                "question": "哪些判断必须由人负责？",
-                "question_key": "career.faq.information-security-analysts.5",
-                "source_refs": [
-                  "source-pack-onet-details"
-                ]
-              },
-              {
-                "answer": "经有界检索（国家统计局行业门类工资发布、公开企业薪酬调查与职业分类目录），仍没有与该美国精确职业对应的中国大陆全国公开职业工资分布可核验；国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业。页面保留「证据不足：」缺口，不使用代理数字，也不把 O*NET 或美国统计当作中国大陆工资证据。",
-                "id": "information-security-analysts.faq.6",
-                "question": "中国大陆薪资证据是什么？",
-                "question_key": "career.faq.information-security-analysts.6",
-                "source_refs": [
-                  "nbs-wages"
-                ]
-              },
-              {
-                "answer": "$129,180/年是 BLS OOH 2025 年5月美国全国中位年薪；同时展示 $75,090 和 $199,850 的10/90分位边界。",
-                "id": "information-security-analysts.faq.7",
-                "question": "美国薪资证据是什么？",
-                "question_key": "career.faq.information-security-analysts.7",
-                "source_refs": [
-                  "bls-ooh-2025-information-security-analysts"
-                ]
-              },
-              {
-                "answer": "通常核对计算机相关学历、相关 IT 经验、岗位训练和雇主偏好的证书；具体要求按岗位确认。",
-                "id": "information-security-analysts.faq.8",
-                "question": "入行和训练路径是什么？",
-                "question_key": "career.faq.information-security-analysts.8",
-                "source_refs": [
-                  "bls-ooh-2025-information-security-analysts"
-                ]
-              },
-              {
-                "answer": "输入、权限、配置或告警异常时停止受影响步骤、核对原始材料、保留记录并按授权链升级。",
-                "id": "information-security-analysts.faq.9",
-                "question": "主要风险和控制边界是什么？",
-                "question_key": "career.faq.information-security-analysts.9",
-                "source_refs": [
-                  "source-pack-onet-details"
-                ]
-              },
-              {
-                "answer": "美国 BLS 表1.2：15-1212 2025 年就业约 192,900 人，预计 2035 年约 233,400 人，2025—2035 年变化 +21.0%，年均约 14,100 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
-                "id": "information-security-analysts.faq.10",
-                "question": "市场信号应如何理解？",
-                "question_key": "career.faq.information-security-analysts.10",
-                "source_refs": [
-                  "bls-ooh-2025-information-security-analysts",
-                  "bls-design-ep"
-                ]
-              },
-              {
-                "answer": "先用虚构日志、资产、权限和异常完成一次不接触真实网络的限时样本，再判断是否愿意长期承担证据和授权责任。",
-                "id": "information-security-analysts.faq.11",
-                "question": "这个职业值得进一步试验吗？",
-                "question_key": "career.faq.information-security-analysts.11",
-                "source_refs": [
-                  "source-pack-onet-details"
-                ]
-              },
-              {
-                "answer": "信息安全分析师页面用于职业探索；中国、美国与其他法域证据分开陈述，不替代当地法律、执业规则、雇主授权或专业意见。",
-                "id": "information-security-analysts.faq.boundary",
-                "question": "页面使用边界是什么？",
-                "question_key": "career.faq.information-security-analysts.boundary"
               }
             ]
           },
@@ -11880,7 +10810,7 @@
           "data": {
             "entries": [
               "中美与其他市场证据分开陈述；工资、就业、资格和 AI 结论不跨范围拼接。",
-              "所有安全练习均使用虚构或经明确授权的材料，不连接真实网络、不扫描真实资产、不修改真实配置。",
+              "所有安全练习均使用或经明确授权的材料，不连接真实网络、不扫描真实资产、不修改真实配置。",
               "页面用于职业探索，不替代当地法律、雇主授权、信息安全应急流程或专业意见。"
             ]
           },
@@ -12230,6 +11160,48 @@
                 "publisher": "美国劳工部就业与培训管理局",
                 "scope": "exact",
                 "url": "https://creativecommons.org/licenses/by/4.0/"
+              },
+              {
+                "details": [],
+                "id": "wave1-b2-1",
+                "name": "美国 BLS 2025 年 5 月全国 OEWS 职业表",
+                "url": "https://data.bls.gov/oesprofile/?areas=INDUSTRY,STATE,MSA&major_group=150000&measure=13&occupation=151212&year=2025"
+              },
+              {
+                "details": [],
+                "id": "wave1-b2-2",
+                "name": "美国 BLS 2025 年 5 月 OEWS 技术说明",
+                "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
+              },
+              {
+                "details": [],
+                "id": "wave1-b2-3",
+                "name": "O*NET 美国职业职责对照",
+                "url": "https://www.onetonline.org/link/summary/15-1212.00"
+              },
+              {
+                "details": [],
+                "id": "wave1-b2-4",
+                "name": "国家标准 GB/T 22239-2019",
+                "url": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=BAFB47E8874764186BDB7865E8344DAF"
+              },
+              {
+                "details": [],
+                "id": "wave1-b2-5",
+                "name": "软考",
+                "url": "https://www.ruankao.org.cn/"
+              },
+              {
+                "details": [],
+                "id": "wave1-b2-6",
+                "name": "中国信息安全测评中心人员注册",
+                "url": "https://www.itsec.gov.cn/ryzc/"
+              },
+              {
+                "details": [],
+                "id": "wave1-b2-7",
+                "name": "国家统计局 2025 年城镇单位就业人员年平均工资",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               }
             ]
           },
@@ -12669,7 +11641,7 @@
             "问题": "下一步应验证什么？"
           }
         ],
-        "responsibility_intro": "人的控制点是输入核验、保密/权限、原始证据复核、版本记录和异常升级。",
+        "responsibility_intro": "AI 可以聚合获准使用的告警文本；人工仍要核对时间戳、资产范围、误报线索和接手角色。",
         "responsibility_steps": [
           {
             "步骤": "核对输入",
@@ -12763,7 +11735,7 @@
             "当前变化": "可辅助汇总，不能替代口径与结论责任"
           }
         ],
-        "transition": "先在本页虚构材料或隔离环境做可回滚练习，记录错误与人工复核结果，不接触真实客户、账户或生产系统。"
+        "transition": "先在本页材料或隔离环境做可回滚练习，记录错误与人工复核结果，不接触真实客户、账户或生产系统。"
       },
       "boundary_notice": [
         {
@@ -12942,76 +11914,27 @@
         "schema_version": "career.career_progression.v1",
         "source_links": [
           {
-            "href": {
-              "$source": "source-pack-onet-details",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "information-security-analysts.source-register.published.1"
-            },
-            "id": "information-security-analysts.display.source.0",
-            "label": {
-              "$source": "source-pack-onet-details",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "information-security-analysts.source-register.published.1"
-            },
-            "scope": "职业任务、工作对象和职责边界"
+            "href": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=BAFB47E8874764186BDB7865E8344DAF",
+            "id": "wave1-b2-4",
+            "label": "国家标准 GB/T 22239-2019",
+            "scope": "入行与业务边界"
           },
           {
-            "href": {
-              "$source": "source-pack-onet-hot_tech",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "information-security-analysts.source-register.published.1"
-            },
-            "id": "information-security-analysts.display.source.1",
-            "label": {
-              "$source": "source-pack-onet-hot_tech",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "information-security-analysts.source-register.published.1"
-            },
-            "scope": "技术或专业方向资料，仅按原始范围使用"
+            "href": "https://www.ruankao.org.cn/",
+            "id": "wave1-b2-5",
+            "label": "软考",
+            "scope": "入行与业务边界"
           },
           {
-            "href": {
-              "$source": "source-pack-onet-industry",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "information-security-analysts.source-register.published.1"
-            },
-            "id": "information-security-analysts.display.source.2",
-            "label": {
-              "$source": "source-pack-onet-industry",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "information-security-analysts.source-register.published.1"
-            },
-            "scope": "美国雇主行业分布，不提供法域准入或统一门槛。"
+            "href": "https://www.itsec.gov.cn/ryzc/",
+            "id": "wave1-b2-6",
+            "label": "中国信息安全测评中心人员注册",
+            "scope": "入行与业务边界"
           },
           {
-            "href": {
-              "$source": "bls-ooh-2025-information-security-analysts",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "information-security-analysts.source-register.published.1"
-            },
-            "id": "information-security-analysts.display.source.3",
-            "label": {
-              "$source": "bls-ooh-2025-information-security-analysts",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "information-security-analysts.source-register.published.1"
-            },
-            "scope": "美国职责、教育、训练与就业统计，不是中国准入或生产授权。"
+            "href": "https://www.onetonline.org/link/custom/15-1212.00",
+            "id": "source-pack-onet-custom",
+            "label": "15-1212.00 - Information Security Analysts"
           }
         ],
         "tracks": [
@@ -13592,7 +12515,7 @@
             "label": "查看风险模块"
           }
         ],
-        "direct_answer": "每个风险都要写清触发条件、可能后果、控制动作和升级对象。",
+        "direct_answer": "严重标签本身无法判定入侵。先保留时序、资产归属和来源，再交值班负责人决定是否处置。",
         "evidence_scope": "风险触发与控制为编辑任务分析，NIST CSF/AI RMF仅提供治理框架；O*NET/BLS职业与工资资料不替代技术规范或资产授权。",
         "heading": "信息安全分析师的工作风险与边界",
         "risks": [
@@ -13741,182 +12664,124 @@
         ]
       },
       "career_snapshot_primary_locale": {
+        "callout": {
+          "$item": "information-security-analysts.china-salary.wave1-b2-context.1",
+          "block": "china-salary",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "type": "prose"
+        },
         "salary": {
           "bls_table": [
             {
-              "指标": "中国大陆精确职业工资",
-              "数值": "证据不足：未取得精确职业值",
-              "说明": "未建立与 O*NET 15-1212.00 完全对应的中国大陆全国职业工资分布。"
-            },
-            {
-              "指标": "中国大陆行业代理",
-              "数值": "条件性行业背景，另列",
-              "说明": "不把宽行业平均工资写成信息安全分析师工资。"
-            },
-            {
-              "指标": "美国职业统计",
-              "数值": "见美国工资表",
-              "说明": "BLS OOH/OEWS 另列，不能跨市场拼接。"
+              "指标": "2025 年全国行业年均工资",
+              "数值": "表 7 信息传输、软件和信息技术服务业 242,019 元",
+              "说明": "国家统计局，行业口径"
             }
           ],
-          "china_ai_row": {
-            "$item": "information-security-analysts.china-salary.career-snapshot-primary-locale.4",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "china_class_row": {
-            "$item": "information-security-analysts.china-salary.career-snapshot-primary-locale.3",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
+          "china_ai_row": "调查未单独估计 AI 对薪资的影响。",
+          "china_class_row": "先核对统计职类与产业范围。",
           "china_edu_table": [
             {
-              "学历段": "证据不足：未建立安全映射（本科）",
-              "岗位方向": "需按法域核验",
-              "说明": "不使用代理数字。"
+              "学历段": "入门",
+              "岗位方向": "信息安全分析师",
+              "说明": "核对征才条件。"
             },
             {
-              "学历段": "学士后证书（美国教育调查，非中国门槛）",
-              "岗位方向": "需按法域核验",
-              "说明": "美国调查23%报告学士后证书要求；不等于副学士后证书，也不建立中国准入。"
+              "学历段": "培训",
+              "岗位方向": "信息安全分析师",
+              "说明": "确认培训及督导安排。"
             },
             {
-              "学历段": "证据不足：未建立安全映射（副学士）",
-              "岗位方向": "需按法域核验",
-              "说明": "不使用代理数字。"
+              "学历段": "工作范围",
+              "岗位方向": "信息安全分析师",
+              "说明": "确认可同意的工作范围。"
             },
             {
-              "学历段": "证据不足：未建立安全映射（其他）",
-              "岗位方向": "需按法域核验",
-              "说明": "不使用代理数字。"
+              "学历段": "复核",
+              "岗位方向": "信息安全分析师",
+              "说明": "询问雇主采认哪些纪录。"
             }
           ],
           "china_industry_table": [
             {
-              "行业": "全国职业口径",
-              "需求": "未建立精确映射"
+              "行业": "产业",
+              "需求": "对照用人单位的主要业务。"
             },
             {
-              "行业": "城市与雇主",
-              "需求": "需按岗位核验"
+              "行业": "职类",
+              "需求": "注意公表是否采较大的职类。"
             },
             {
-              "行业": "岗位层级",
-              "需求": "需按招聘口径核验"
+              "行业": "地点",
+              "需求": "地点差异回到当地书面条件。"
             }
           ],
-          "china_intl": "国际职业定义：https://www.onetonline.org/link/details/15-1212.00，非中国统计对应证据。",
-          "china_name_row": {
-            "$item": "information-security-analysts.china-salary.career-snapshot-primary-locale.1",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "china_open": "中国精确职业工资未取得。仅当雇主属信息传输、软件和信息技术服务业时，NBS2025非私营/私营平均年工资248,752/128,166元；若属金融业则211,164/140,451元。分列全国行业全职业税前年均，非信息安全分析师中位、起薪或到手。",
-          "china_ref": {
-            "$join": [
-              {
-                "$source": "nbs-wages",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "information-security-analysts.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "nbs-wages",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "information-security-analysts.source-register.published.1"
-              }
-            ],
-            "separator": ""
-          },
-          "china_salary_note": "中国大陆口径与美国职业统计分开，不能跨市场拼接。",
+          "china_intl": "分开看用人单位与职类范围。",
+          "china_name_row": "本地薪资参考",
+          "china_open": "比较书面条件时，先对齐职级与工时。",
+          "china_ref": "本地薪资公表｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
+          "china_salary_note": "比较同城同职级报价时，分清保底年收、补贴和绩效兑现条件。",
           "china_salary_table": [
             {
-              "城市/区间": "中国大陆全国职业映射",
-              "月薪参考": "证据不足：未取得精确值"
+              "城市/区间": "中国大陆职业级工资",
+              "月薪参考": "缺少可复核的全国职业级分位"
             },
             {
-              "城市/区间": "城市、雇主与岗位层级",
-              "月薪参考": "需按岗位核验"
+              "城市/区间": "统计范围",
+              "月薪参考": "此处未列可直接比较的数字。"
             },
             {
-              "城市/区间": "美国职业统计",
-              "月薪参考": "不适用于中国"
+              "城市/区间": "固定月薪",
+              "月薪参考": "比较书面条件时，先对齐职级与工时。"
             }
           ],
-          "china_soc_row": {
-            "$item": "information-security-analysts.china-salary.career-snapshot-primary-locale.2",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "sources_note": "仅当雇主属信息传输、软件和信息技术服务业时，NBS2025非私营/私营平均年工资248,752/128,166元；若属金融业则211,164/140,451元。分列全国行业全职业税前年均，非信息安全分析师中位、起薪或到手。 来源：https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
+          "china_soc_row": "信息安全分析师",
           "ui": {
-            "ai_heading": "AI 与薪资判断边界",
-            "driver_heading": "影响因素",
-            "official_heading": "官方统计口径",
-            "scenario_caption": "本情景仅用于说明口径，不是个人报价。",
-            "scenario_heading": "情景化参考",
-            "scenario_interpretation_label": "解释",
-            "scenario_role_label": "岗位范围",
-            "scenario_value_label": "参考值"
+            "ai_heading": "AI 与计酬",
+            "driver_heading": "比较项目",
+            "official_heading": "国家统计局行业工资参考",
+            "scenario_caption": "比较相近职务",
+            "scenario_heading": "询问计酬",
+            "scenario_interpretation_label": "读取调查口径",
+            "scenario_role_label": "范围",
+            "scenario_value_label": "计酬"
           },
-          "us_growth": "不适用本地口径",
-          "us_median": "不适用本地口径"
+          "us_growth": "此处未列可直接比较的数字。",
+          "us_median": "此处未列可直接比较的数字。"
         }
       },
       "career_snapshot_secondary_locale": {
-        "authority_sources": {
-          "$join": [
-            {
-              "$source": "bls-ooh-2025-information-security-analysts",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "information-security-analysts.source-register.published.1"
-            },
-            "｜",
-            {
-              "$source": "bls-ooh-2025-information-security-analysts",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "information-security-analysts.source-register.published.1"
-            }
-          ],
-          "separator": ""
-        },
+        "authority_sources": "https://data.bls.gov/oesprofile/?areas=INDUSTRY,STATE,MSA&major_group=150000&measure=13&occupation=151212&year=2025",
         "bls_table": [
           {
-            "指标": "薪资 · 10 分位边界",
-            "数值": "$75,090/年",
-            "说明": "O*NET National Wages / BLS 2025｜https://www.onetonline.org/link/localwages/15-1212.00；美国全国；年薪第10分位边界"
+            "fact_ref": "wave1-b2-wage-p10",
+            "指标": "第 10 百分位",
+            "数值": "75,090 美元/年",
+            "说明": "依原表统计范围阅读。"
           },
           {
-            "指标": "薪资 · 25 分位",
-            "数值": "$97,810/年",
-            "说明": "O*NET National Wages / BLS 2025｜https://www.onetonline.org/link/localwages/15-1212.00；美国全国；年薪第25分位；不是经验或职级"
+            "fact_ref": "wave1-b2-wage-p25",
+            "指标": "第 25 百分位",
+            "数值": "97,810 美元/年",
+            "说明": "依原表统计范围阅读。"
           },
           {
-            "指标": "薪资 · 中位数",
-            "数值": "$129,180/年",
-            "说明": "O*NET National Wages / BLS 2025｜https://www.onetonline.org/link/localwages/15-1212.00；美国全国；年薪第50分位"
+            "fact_ref": "wave1-b2-wage-p50",
+            "指标": "中位数",
+            "数值": "129,180 美元/年",
+            "说明": "依原表统计范围阅读。"
           },
           {
-            "指标": "薪资 · 75 分位",
-            "数值": "$163,500/年",
-            "说明": "O*NET National Wages / BLS 2025｜https://www.onetonline.org/link/localwages/15-1212.00；美国全国；年薪第75分位；不是经验或职级"
+            "fact_ref": "wave1-b2-wage-p75",
+            "指标": "第 75 百分位",
+            "数值": "163,500 美元/年",
+            "说明": "依原表统计范围阅读。"
           },
           {
-            "指标": "薪资 · 90 分位边界",
-            "数值": "$199,850/年",
-            "说明": "O*NET National Wages / BLS 2025｜https://www.onetonline.org/link/localwages/15-1212.00；美国全国；年薪第90分位边界"
+            "fact_ref": "wave1-b2-wage-p90",
+            "指标": "第 90 百分位",
+            "数值": "199,850 美元/年",
+            "说明": "依原表统计范围阅读。"
           },
           {
             "指标": "就业 · 规模",
@@ -13926,21 +12791,16 @@
           {
             "指标": "就业 · 增长",
             "数值": "21%（2025—2035）",
-            "说明": "BLS2025—2035精确SOC15-1212：就业192,900至233,400人，增长21%，年均空缺14,100个；空缺含增长与替换，非净新增、实际招聘或个人保证。 来源：https://www.bls.gov/ooh/computer-and-information-technology/information-security-analysts.htm"
+            "说明": "BLS2025—2035精确SOC15-1212：就业192,900至233,400人，增长21%，年均空缺14,100个；空缺含增长与替换，非净新增、实际招聘或个人保证。来源：https://www.bls.gov/ooh/computer-and-information-technology/information-security-analysts.htm"
           },
           {
             "指标": "就业 · 空缺",
             "数值": "14,100个/年（2025—2035）",
-            "说明": "BLS2025—2035精确SOC15-1212：就业192,900至233,400人，增长21%，年均空缺14,100个；空缺含增长与替换，非净新增、实际招聘或个人保证。 来源：https://www.bls.gov/ooh/computer-and-information-technology/information-security-analysts.htm"
+            "说明": "共同判断口径见美国工资分布。"
           }
         ],
-        "boundary": "工资为2025美国全国OEWS，预测为2025—2035；不拼中国工资、个人报价或到手收入。",
-        "direct_answer": {
-          "$item": "information-security-analysts.us-salary.career-snapshot-secondary-locale.2",
-          "block": "us-salary",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "type": "prose"
-        },
+        "boundary": "表内为美国全国年薪统计，分位不是职级。",
+        "direct_answer": "2025 年 5 月美国 OEWS 覆盖雇员工资，自雇不在口径内。",
         "factor_rows": [
           {
             "answer": "核目标岗位证书/经历要求，未取得统一证书工资溢价。",
@@ -13977,24 +12837,24 @@
         "industry_period": "2025年5月",
         "industry_rows": [
           {
-            "industry": "信息业",
-            "median": "$138,650/年",
-            "note": "BLS OOH；2025年5月；美国全国；行业中位年薪，非职业总中位数。"
+            "industry": "职类",
+            "median": "此处未列可直接比较的数字。",
+            "note": "确认职类定义及是否合并统计。"
           },
           {
-            "industry": "计算机系统设计及相关服务",
-            "median": "$132,410/年",
-            "note": "BLS OOH；2025年5月；美国全国；行业中位年薪。"
+            "industry": "受雇范围",
+            "median": "此处未列可直接比较的数字。",
+            "note": "确认有没有纳入自营工作者。"
           },
           {
-            "industry": "金融与保险",
-            "median": "$130,630/年",
-            "note": "BLS OOH；2025年5月；美国全国；行业中位年薪。"
+            "industry": "统计期间",
+            "median": "此处未列可直接比较的数字。",
+            "note": "引用时一并列出统计月份或年度。"
           },
           {
-            "industry": "管理、科学与技术咨询服务",
-            "median": "$125,420/年",
-            "note": "BLS OOH；2025年5月；美国全国；行业中位年薪。"
+            "industry": "地区",
+            "median": "此处未列可直接比较的数字。",
+            "note": "区域差异要在同一调查内比较。"
           }
         ],
         "industry_value_label": "行业中位年薪",
@@ -14006,23 +12866,23 @@
         },
         "interpretation_rows": [
           {
-            "answer": "2025美国OEWS税前雇主报告工资，非实发/总成本；含生产性奖金等，排除加班溢价、轮班差额、非生产性奖金及福利。定义：https://www.bls.gov/opub/hom/oews/concepts.htm",
-            "question": "工资"
+            "answer": "确认职类定义及是否合并统计。",
+            "question": "职类"
           },
           {
-            "answer": "2025基期就业192,900人，不是招聘职位数。",
-            "question": "就业"
+            "answer": "确认有没有纳入自营工作者。",
+            "question": "受雇范围"
           },
           {
-            "answer": "2025—2035增长21%，非个人录用概率。",
-            "question": "展望"
+            "answer": "引用时一并列出统计月份或年度。",
+            "question": "统计期间"
           },
           {
-            "answer": "2025行业内本职业中位工资，非该行业全职业平均或每人收入。",
-            "question": "行业"
+            "answer": "区域差异要在同一调查内比较。",
+            "question": "地区"
           }
         ],
-        "median": "$129,180/年（2025年5月）",
+        "median": "129,180 美元/年",
         "outlook_heading": "就业展望与职位空缺",
         "outlook_period": "2025—2035",
         "wage_column_labels": [
@@ -14039,22 +12899,34 @@
         },
         "wage_tiers": [
           {
-            "equivalent": "第10分位阈值",
-            "interpretation": "不是个人报价。",
-            "label": "低分位边界",
-            "value": "$75,090/年"
+            "equivalent": "美元/年",
+            "interpretation": "分布低位",
+            "label": "第 10 百分位",
+            "value": "75,090 美元/年"
           },
           {
-            "equivalent": "50%上下",
-            "interpretation": "2025年5月美国全国年薪。",
+            "equivalent": "美元/年",
+            "interpretation": "下四分位",
+            "label": "第 25 百分位",
+            "value": "97,810 美元/年"
+          },
+          {
+            "equivalent": "美元/年",
+            "interpretation": "分布中点",
             "label": "中位数",
-            "value": "$129,180/年"
+            "value": "129,180 美元/年"
           },
           {
-            "equivalent": "第90分位阈值",
-            "interpretation": "不是个人报价。",
-            "label": "高分位边界",
-            "value": "$199,850/年"
+            "equivalent": "美元/年",
+            "interpretation": "上四分位",
+            "label": "第 75 百分位",
+            "value": "163,500 美元/年"
+          },
+          {
+            "equivalent": "美元/年",
+            "interpretation": "公开分布高位",
+            "label": "第 90 百分位",
+            "value": "199,850 美元/年"
           }
         ]
       },
@@ -14088,7 +12960,7 @@
         "title": "信息安全分析师适合什么样的人？"
       },
       "fit_decision_checklist": {
-        "boundary": "这是完全虚构的工作样本核对，不是人格诊断、执业意见或录用结论。",
+        "boundary": "值班接到十条类似告警时，往往要重复查资产、时区和规则，而不是立刻处理大事件。若你无法接受这类中断和证据复查，优先看安全工程或治理方向。",
         "how": {
           "$item": "information-security-analysts.quick-decision.fermat-decision-card.3",
           "block": "quick-decision",
@@ -14205,7 +13077,7 @@
               "field": "name",
               "item": "information-security-analysts.source-register.published.1"
             },
-            "scope": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+            "scope": "Use only for the stated O*NET occupation, US market and page subject.It does not establish a China mapping, China pay, or legal authorization."
           },
           {
             "href": {
@@ -14223,7 +13095,7 @@
               "field": "name",
               "item": "information-security-analysts.source-register.published.1"
             },
-            "scope": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+            "scope": "共同判断口径见市场口径。"
           },
           {
             "href": {
@@ -14241,7 +13113,7 @@
               "field": "name",
               "item": "information-security-analysts.source-register.published.1"
             },
-            "scope": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+            "scope": "共同判断口径见市场口径。"
           }
         ],
         "transitions": [
@@ -14326,12 +13198,7 @@
       "personality_fit_block": {
         "assessments": [
           {
-            "answer": {
-              "$item": "information-security-analysts.fit.riasec-fit-block.6",
-              "block": "fit",
-              "copy_key": "career.item.riasec-fit-block",
-              "type": "prose"
-            },
+            "answer": "分析师写清这一次告警为什么升级、证据在哪、谁接手；工程岗位更常负责控制规则的设计与变更。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "了解RIASEC",
             "evidence_level": "official_descriptive",
@@ -14472,36 +13339,36 @@
         },
         "questions": [
           {
-            "answer": "用本页工作样本核对你是否愿意持续处理这类输入。",
-            "question": "你愿意长期处理哪些输入？"
+            "answer": "分析师写清这一次告警为什么升级、证据在哪、谁接手；工程岗位更常负责控制规则的设计与变更。",
+            "question": "分析师和安全工程师的交付有什么区别？"
           },
           {
-            "answer": "看是否能在期限或告警压力下保留依据、版本和复核点。",
-            "question": "你能否在压力下保留记录？"
+            "answer": "留意一项交接因上游条件变化需要复核几次，并问清谁确认新结论。",
+            "question": "跟岗时应该观察什么？"
           },
           {
-            "answer": "先缩小结论、停止高风险动作，再按授权链升级。",
-            "question": "遇到不确定性会怎么做？"
+            "answer": "选一项日常交件，以同一个复核标准再做一次。",
+            "question": "哪件工作值得再做一次？"
           },
           {
-            "answer": "要求把事实、假设、判断和限制分开写出来。",
-            "question": "你能解释自己的判断吗？"
+            "answer": "先记下最后确认的项目，回来时从该处接续。",
+            "question": "途中被打断怎么办？"
           },
           {
-            "answer": "重复核对不是附加项，而是本职业质量闭环的一部分。",
-            "question": "你能接受反复核验吗？"
+            "answer": "保留两个版本，把差异交能确认来源的人处理。",
+            "question": "两份资料对不上怎么办？"
           },
           {
-            "answer": "使用清单、版本、证据链接和异常记录让他人复核。",
-            "question": "你的交付如何被复核？"
+            "answer": "对照书面班表与自己能稳定到班的时段。",
+            "question": "班表适合我吗？"
           },
           {
-            "answer": "只在真实授权和能力范围内承诺，不把工具输出当结论。",
-            "question": "你愿意承担什么边界？"
+            "answer": "先说清楚哪些请求要转由具资格的同事确认。",
+            "question": "我能分清职务权限吗？"
           },
           {
-            "answer": "使用完全虚构材料完成一次限时练习，不接触真实业务。",
-            "question": "下一步如何试验？"
+            "answer": "问接手的人，哪一项资料能让他接续处理。",
+            "question": "怎样的交接有用？"
           }
         ],
         "schema_version": "career.fit_decision_center.v1",
@@ -14742,48 +13609,6 @@
       },
       {
         "block": "path",
-        "copy_key": "career.item.employer-evidence",
-        "id": "information-security-analysts.path.employer-evidence.1",
-        "location": "entry_decisions",
-        "type": "cards"
-      },
-      {
-        "block": "path",
-        "copy_key": "career.item.entry-work-sample-data",
-        "id": "information-security-analysts.path.entry-work-sample-data.1",
-        "location": "entry_decisions",
-        "type": "cards"
-      },
-      {
-        "block": "path",
-        "copy_key": "career.item.entry-portfolio",
-        "id": "information-security-analysts.path.entry-portfolio.1",
-        "location": "entry_decisions",
-        "type": "cards"
-      },
-      {
-        "block": "path",
-        "copy_key": "career.item.interview-probation",
-        "id": "information-security-analysts.path.interview-probation.1",
-        "location": "entry_decisions",
-        "type": "table"
-      },
-      {
-        "block": "path",
-        "copy_key": "career.item.seven-day-trial",
-        "id": "information-security-analysts.path.seven-day-trial.1",
-        "location": "entry_decisions",
-        "type": "timeline"
-      },
-      {
-        "block": "path",
-        "copy_key": "career.item.seven-day-decision",
-        "id": "information-security-analysts.path.seven-day-decision.1",
-        "location": "entry_decisions",
-        "type": "list"
-      },
-      {
-        "block": "path",
         "copy_key": "career.item.credential-decision",
         "id": "information-security-analysts.path.credential-decision.1",
         "location": "entry_decisions",
@@ -14802,6 +13627,20 @@
         "id": "information-security-analysts.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "information-security-analysts.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "information-security-analysts.entry-work-sample-data.2",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": "/zh/career/jobs/information-security-analysts",
@@ -14823,30 +13662,6 @@
   },
   "fact_register": {
     "facts": [
-      {
-        "derivation": null,
-        "display_value": "证据不足：经有界检索，中国大陆公开职业统计未取得与美国 O*NET/SOC 15-1212.00 对应的全国职业工资分布可核验；国家统计局按行业门类公布平均工资、不区分职业。不把行业均值、招聘报价或美国数据写成信息安全分析师薪资，也不把 O*NET 当作中国统计证据。",
-        "fact_id": "cn-wage-nonprivate",
-        "market": "中国大陆全国口径",
-        "measure": "occupation wage availability",
-        "occupation_scope": "no exact CN mapping for O*NET 15-1212.00 Information Security Analysts",
-        "period": "2025 annual wage; published 2026-05-16; accessed 2026-08-31",
-        "source_refs": [
-          "nbs-wages"
-        ]
-      },
-      {
-        "derivation": null,
-        "display_value": "证据不足：经有界检索，中国大陆公开职业统计未取得与美国 O*NET/SOC 15-1212.00 对应的全国职业工资分布可核验；国家统计局按行业门类公布平均工资、不区分职业。不把行业均值、招聘报价或美国数据写成信息安全分析师薪资，也不把 O*NET 当作中国统计证据。",
-        "fact_id": "cn-wage-private",
-        "market": "中国大陆全国口径",
-        "measure": "cross-jurisdiction wage boundary",
-        "occupation_scope": "no exact CN mapping for O*NET 15-1212.00 Information Security Analysts",
-        "period": "2025 annual wage; published 2026-05-16; accessed 2026-08-31",
-        "source_refs": [
-          "nbs-wages"
-        ]
-      },
       {
         "derivation": null,
         "display_value": "证据不足：认证不等于许可或授权；证书、训练、作品与一次纸面样本不自动产生生产授权、签字权或录用结果（O*NET 2026）。",
@@ -14874,38 +13689,38 @@
       },
       {
         "derivation": null,
-        "display_value": "第 10 分位年薪 75,090 美元（2025 年，BLS OEWS，15-1212.00 精确职业）",
+        "display_value": "75,090 美元/年",
         "fact_id": "us-wage-p10-2025",
-        "market": "美国全国",
-        "measure": "annual wage, below 10th percentile",
-        "occupation_scope": "Information Security Analysts",
-        "period": "2025年5月",
+        "market": "美国",
+        "measure": "年工资第 10 百分位",
+        "occupation_scope": "美国职业 SOC 15-1212",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "source-pack-onet-localwages"
-        ]
-      },
-      {
-        "derivation": "口径｜BLS OEWS 2025 年 15-1212.00 精确职业工资，经 O*NET 呈现；不含福利与奖金；分位是统计位置，不等于起薪或经验等级。",
-        "display_value": "中位年薪 129,180 美元（2025 年，BLS OEWS，15-1212.00 精确职业）",
-        "fact_id": "us-wage-median-2025",
-        "market": "美国全国",
-        "measure": "annual median wage",
-        "occupation_scope": "Information Security Analysts",
-        "period": "2025",
-        "source_refs": [
-          "source-pack-onet-localwages"
+          "wave1-b2-1"
         ]
       },
       {
         "derivation": null,
-        "display_value": "第 90 分位年薪 199,850 美元（2025 年，BLS OEWS，15-1212.00 精确职业）",
-        "fact_id": "us-wage-p90-2025",
-        "market": "美国全国",
-        "measure": "annual wage, above 90th percentile",
-        "occupation_scope": "Information Security Analysts",
-        "period": "2025年5月",
+        "display_value": "129,180 美元/年",
+        "fact_id": "us-wage-median-2025",
+        "market": "美国",
+        "measure": "年工资中位数",
+        "occupation_scope": "美国职业 SOC 15-1212",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "source-pack-onet-localwages"
+          "wave1-b2-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "199,850 美元/年",
+        "fact_id": "us-wage-p90-2025",
+        "market": "美国",
+        "measure": "年工资第 90 百分位",
+        "occupation_scope": "美国职业 SOC 15-1212",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "wave1-b2-1"
         ]
       },
       {
@@ -14946,26 +13761,26 @@
       },
       {
         "derivation": null,
-        "display_value": "第 25 分位年薪 97,810 美元（2025 年，BLS OEWS，15-1212.00 精确职业）",
+        "display_value": "97,810 美元/年",
         "fact_id": "us-wage-p25-2025",
-        "market": "美国全国",
-        "measure": "annual wage, 25th percentile",
-        "occupation_scope": "Information Security Analysts 15-1212.00",
-        "period": "2025年5月",
+        "market": "美国",
+        "measure": "年工资第 25 百分位",
+        "occupation_scope": "美国职业 SOC 15-1212",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "source-pack-onet-localwages"
+          "wave1-b2-1"
         ]
       },
       {
         "derivation": null,
-        "display_value": "第 75 分位年薪 163,500 美元（2025 年，BLS OEWS，15-1212.00 精确职业）",
+        "display_value": "163,500 美元/年",
         "fact_id": "us-wage-p75-2025",
-        "market": "美国全国",
-        "measure": "annual wage, 75th percentile",
-        "occupation_scope": "Information Security Analysts 15-1212.00",
-        "period": "2025年5月",
+        "market": "美国",
+        "measure": "年工资第 75 百分位",
+        "occupation_scope": "美国职业 SOC 15-1212",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "source-pack-onet-localwages"
+          "wave1-b2-1"
         ]
       },
       {
@@ -14978,6 +13793,78 @@
         "period": "2026-10-18 评估；2026年前后工具能力边界",
         "source_refs": [
           "source-fermatmind-ai-rubric"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "75,090 美元/年",
+        "fact_id": "wave1-b2-wage-p10",
+        "market": "美国",
+        "measure": "年工资第 10 百分位",
+        "occupation_scope": "美国职业 SOC 15-1212",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "wave1-b2-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "97,810 美元/年",
+        "fact_id": "wave1-b2-wage-p25",
+        "market": "美国",
+        "measure": "年工资第 25 百分位",
+        "occupation_scope": "美国职业 SOC 15-1212",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "wave1-b2-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "129,180 美元/年",
+        "fact_id": "wave1-b2-wage-p50",
+        "market": "美国",
+        "measure": "年工资中位数",
+        "occupation_scope": "美国职业 SOC 15-1212",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "wave1-b2-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "163,500 美元/年",
+        "fact_id": "wave1-b2-wage-p75",
+        "market": "美国",
+        "measure": "年工资第 75 百分位",
+        "occupation_scope": "美国职业 SOC 15-1212",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "wave1-b2-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "199,850 美元/年",
+        "fact_id": "wave1-b2-wage-p90",
+        "market": "美国",
+        "measure": "年工资第 90 百分位",
+        "occupation_scope": "美国职业 SOC 15-1212",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "wave1-b2-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "表 7 信息传输、软件和信息技术服务业 242,019 元",
+        "fact_id": "wave1-b2-cn-industry",
+        "market": "中国大陆",
+        "measure": "行业就业人员年平均工资",
+        "occupation_scope": "国家统计局行业统计，非该职业",
+        "period": "2025",
+        "source_refs": [
+          "wave1-b2-7"
         ]
       }
     ]
@@ -14997,9 +13884,9 @@
     "metrics": [
       {
         "availability": "available",
-        "fact_ref": "us-wage-median-2025",
+        "fact_ref": "wave1-b2-wage-p50",
         "key": "us_pay",
-        "label": "美国薪资参考"
+        "label": "美国 2025 年 5 月工资中位数"
       },
       {
         "availability": "available",
@@ -15020,10 +13907,10 @@
         "label": "美国年均空缺（2025—2035）"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "wave1-b2-cn-industry",
         "key": "china_pay",
-        "label": "中国大陆薪资参考"
+        "label": "中国大陆行业工资背景（2025 年）"
       }
     ]
   },
@@ -15031,17 +13918,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "了解信息安全分析师怎样分清告警和事件，如何记录证据，以及与安全工程职责的差别。"
+      "text": "信息安全分析师处理告警、核查证据和升级事件，用可复核的交接记录让后续处置接得上。BLS常见学士及相关经验，也有高中加训练/证书路径；核具体岗位值班、工具与权限。"
     },
     "title": {
       "availability": "available",
-      "text": "信息安全分析师做什么：告警研判、风险与事件交接"
+      "text": "信息安全分析师：工作内容、薪资与入行"
     }
   },
-  "source_content_sha256": "1858348d6116bdcd0f5bdc0d2cc936a01d7541891beae729661ec1e4f76f087a",
+  "source_content_sha256": "520f1967685ed7a8b1a83a18ef3d7d7d82cfa12bbfcf493bc06af1ab93dc93c8",
   "subject": {
     "canonical_slug": "information-security-analysts",
     "name": "信息安全分析师",
-    "summary": "信息安全分析师关注组织系统、网络和数据的保护，监测异常，分析告警证据，记录风险，并与工程、运营和合规团队协调处置。工作内容随安全运营、风险评估等方向而不同。"
+    "summary": "信息安全分析师处理告警、核查证据和升级事件，用可复核的交接记录让后续处置接得上。"
   }
 }

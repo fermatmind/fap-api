@@ -26,6 +26,24 @@
       "fact:us-wage-p90-2025": {
         "status": "pending_mapping"
       },
+      "fact:wave1-b3-cn-industry": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b3-wage-p10": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b3-wage-p25": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b3-wage-p50": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b3-wage-p75": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b3-wage-p90": {
+        "status": "pending_mapping"
+      },
       "item:interior-designers.ai-impact.ai-impact-table.1": {
         "status": "pending_mapping"
       },
@@ -38,9 +56,6 @@
       "item:interior-designers.ai-impact.ai-impact-table.4": {
         "status": "pending_mapping"
       },
-      "item:interior-designers.ai-impact.ai-impact-table.5": {
-        "status": "pending_mapping"
-      },
       "item:interior-designers.ai-impact.ai-impact-table.6": {
         "status": "pending_mapping"
       },
@@ -50,16 +65,7 @@
       "item:interior-designers.ai-impact.ai-impact-table.8": {
         "status": "pending_mapping"
       },
-      "item:interior-designers.china-salary.career-snapshot-primary-locale.1": {
-        "status": "pending_mapping"
-      },
-      "item:interior-designers.china-salary.career-snapshot-primary-locale.2": {
-        "status": "pending_mapping"
-      },
-      "item:interior-designers.china-salary.career-snapshot-primary-locale.3": {
-        "status": "pending_mapping"
-      },
-      "item:interior-designers.china-salary.career-snapshot-primary-locale.4": {
+      "item:interior-designers.china-salary.wave1-b3-context.1": {
         "status": "pending_mapping"
       },
       "item:interior-designers.direction-comparison.adjacent-career-comparison-table.1": {
@@ -77,6 +83,9 @@
       "item:interior-designers.direction-comparison.adjacent-career-comparison-table.5": {
         "status": "pending_mapping"
       },
+      "item:interior-designers.entry-work-sample-data.2": {
+        "status": "pending_mapping"
+      },
       "item:interior-designers.fit.riasec-fit-block.1": {
         "status": "pending_mapping"
       },
@@ -90,9 +99,6 @@
         "status": "pending_mapping"
       },
       "item:interior-designers.fit.riasec-fit-block.5": {
-        "status": "pending_mapping"
-      },
-      "item:interior-designers.fit.riasec-fit-block.6": {
         "status": "pending_mapping"
       },
       "item:interior-designers.fit.riasec-fit-block.7": {
@@ -141,6 +147,9 @@
         "status": "pending_mapping"
       },
       "item:interior-designers.path.career-path-block.8": {
+        "status": "pending_mapping"
+      },
+      "item:interior-designers.path.entry-work-sample-data.1": {
         "status": "pending_mapping"
       },
       "item:interior-designers.profile.career-quick-answers-block.8": {
@@ -204,9 +213,6 @@
         "status": "pending_mapping"
       },
       "item:interior-designers.us-salary.career-snapshot-secondary-locale.1": {
-        "status": "pending_mapping"
-      },
-      "item:interior-designers.us-salary.career-snapshot-secondary-locale.2": {
         "status": "pending_mapping"
       },
       "item:interior-designers.us-salary.career-snapshot-secondary-locale.3": {
@@ -7231,7 +7237,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "谨慎信号｜本页对应 O*NET-SOC 27-1025.00「Interior Designers」。官方范围为：规划、设计并布置房间或建筑的内部空间；设计符合实用、美观与预定用途的室内环境或物理布局；可能专注于某一领域、风格或设计阶段。核心交付是可落地、可施工、可验收的空间方案与文件，而不是「效果图好看」。风险来自消防与安全规范、无障碍与人身安全要求、结构与机电接口、材料与采购责任、以及预算与工期偏差。美国工资与就业为 O*NET/BLS 27-1025.00 精确职业口径（中位年薪 67,190 美元；2025 年就业约 97,100 人、2025—2035 增长 3%、年均空缺约 7,700 个）。中国大陆精确职业工资未取得，按可见缺口登记。若你难以承受多方协调、反复改稿与预算压力，应把这些作为需要认真权衡的现实成本。"
+              "按交接责任和工作环境比较岗位。"
             ]
           },
           "id": "interior-designers.quick-decision.fermat-decision-card.1",
@@ -7245,7 +7251,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "承担判断｜真正的适配来自能不能在同一项工作中同时完成三件事：把方案与文件做实（与客户确认需求预算与用途、进行空间规划与布局、选材与配色、绘制施工图与节点、与施工方交底与验收，产出可复核的设计文件）；把规范与安全管住（消防与疏散、无障碍与安全防护、结构与机电接口、材料性能与环保要求，按标准与法规执行）；并承担可界定的岗位责任（对本人方案与依据负责，对超出授权的结构改动、承重与机电系统变更、法定签章事项请示或转交）。建议用一次可核验的体验（用完全虚构的空间与限制条件完成一套平面方案与材料说明）来检验，而不是仅依据兴趣问卷的结论。"
+              "室内设计师把空间、材料和照明要求落实到图纸、样板、清单与施工交接。"
             ]
           },
           "id": "interior-designers.quick-decision.fermat-decision-card.2",
@@ -7259,7 +7265,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "判断是否适合室内设计师，先用公开或模拟材料做一次可核验的演练：设定一个完全虚构的室内空间与使用需求，写出从确认客户需求与预算、核对消防与安全及无障碍要求、进行空间规划与家具布置、选材与配色、绘制平面与立面及节点、到与施工方交底与验收要点的流程，标注每一步的核对点与可能出现的问题（需求与预算冲突、消防或无障碍要求未满足、结构与机电接口未协调、材料规格与版本不一致、超授权承诺工期或造价）。完成后核对：是否把规范依据、接口协调、材料版本与验收要点作为不可省略项；是否把超出个人权限的结构或系统变更写成请示或转交；是否把过程留成可复核记录。全部材料须为虚构，不使用真实项目、客户或图纸。"
+              "先填写入行区工单，再核对样答。"
             ]
           },
           "id": "interior-designers.quick-decision.fermat-decision-card.3",
@@ -7295,7 +7301,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "室内设计师按使用需求组织室内空间、材料、照明及图纸，并与施工和相关专业沟通。作品需要说明尺寸、动线与实施约束；涉及工程或图纸签署的权限应按项目与当地规则核对。"
+              "室内设计师把空间、材料和照明要求落实到图纸、样板、清单与施工交接。"
             ]
           },
           "id": "interior-designers.profile.definition-block.1",
@@ -7311,7 +7317,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "设计方案应确保安全，并符合美国残疾人法（ADA）。",
+              "用 CAD 做 施工图深化，SketchUp 核空间方案，交叉检查 灯具表、饰面表、材料样板 和 FF&E 清单。按 GB 50222 审视项目适用的装修防火要求，并把消防待办写进图纸会审记录。",
               "利用计算机辅助的起草(CAD)和相关软件编制施工文件。",
               "研究健康和安全守则要求，以便为设计提供信息。",
               "与客户协商，以确定影响内部环境规划的因素，如预算、建筑偏好、目的和功能。"
@@ -7319,7 +7325,9 @@
           },
           "id": "interior-designers.profile.responsibilities-block.2",
           "source_refs": [
-            "batch52-onet-core"
+            "wave1-b3-3",
+            "wave1-b3-4",
+            "wave1-b3-5"
           ],
           "type": "list"
         },
@@ -7371,7 +7379,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "用虚构空间比较两种平面方案，标注动线、尺寸、材料与需要工程复核的地方。中建东方装饰一则样本列设计交底、图纸答疑及施工配合。"
+              "用空间比较两种平面方案，标注动线、尺寸、材料与需要工程复核的地方。中建东方装饰一则样本列设计交底、图纸答疑及施工配合。"
             ]
           },
           "id": "interior-designers.profile.career-quick-answers-block.8",
@@ -7592,20 +7600,6 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "责任链｜从需求与规范确认、工具辅助、人工复核、方案与文件签署到交底与验收，每一步都要明确由谁负责，并保留可追溯证据；规范符合性与造价承诺不得仅依赖模型。"
-            ]
-          },
-          "id": "interior-designers.ai-impact.ai-impact-table.5",
-          "source_refs": [
-            "onet-profile"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.ai-impact-table",
-          "data": {
-            "paragraphs": [
               "转折｜编辑判断：工具可能辅助概念与图纸草稿的生成效率，不改变规范符合性、接口协调、材料与造价真实性与现场判断的归属；务实的做法是先把规范理解、图纸深化与沟通能力练扎实，再在可复核、可追溯的低风险环节引入工具。"
             ]
           },
@@ -7656,54 +7650,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业名称对照｜室内设计师（美国 O*NET-SOC 27-1025.00 Interior Designers）。中国公开统计没有与该精确职业对应的单职业工资；行业或招聘平台口径不能冒充中位数，中文页面语言也不构成中国等价职业或工资映射。"
+              "国家统计局 2025 年就业人员年平均工资，表 7 科学研究和技术服务业 173,855 元。这是行业背景。本页未取得可复核的中国大陆职业级全国工资分位。"
             ]
           },
-          "id": "interior-designers.china-salary.career-snapshot-primary-locale.1",
-          "source_refs": [
-            "mohrss-draft"
+          "fact_refs": [
+            "wave1-b3-cn-industry"
           ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "宽口径参考｜空间规划、CAD文件与专业协调职责与科学研究和技术服务业相关。国家统计局表2/5：2025中国城镇科学研究和技术服务业单位就业人员平均年工资，非私营单位182,064元、私营单位83,560元。二者不是本职业工资区间、中位数或到手收入。依据：https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html。"
-            ]
-          },
-          "id": "interior-designers.china-salary.career-snapshot-primary-locale.2",
+          "id": "interior-designers.china-salary.wave1-b3-context.1",
           "source_refs": [
-            "mohrss-draft"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "证据不足：本轮未建立中国大陆室内设计师单职业的全国工资分布，不提供全国月薪、起薪或行业平均数替代值；本页不以招聘平台数据、行业平均工资或美国数据代填。"
-            ]
-          },
-          "id": "interior-designers.china-salary.career-snapshot-primary-locale.3",
-          "source_refs": [
-            "mohrss-draft"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "AI与薪资边界｜工具可在授权下作为信息整理的试用候选。证据不足：未取得本职业AI采用、实际效率及薪酬因果效果数据，不据任务暴露推断工资。"
-            ]
-          },
-          "id": "interior-designers.china-salary.career-snapshot-primary-locale.4",
-          "source_refs": [
-            "mohrss-draft"
+            "wave1-b3-6"
           ],
           "type": "prose"
         }
@@ -7727,20 +7682,6 @@
           "source_refs": [
             "bls-ooh",
             "onet-wages"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "data": {
-            "paragraphs": [
-              "美国2025年工资｜第10/25/50/75/90百分位年工资分别为 41,420 / 51,840 / 67,190 / 85,740 / 114,140 美元，中位数为67,190美元/年。百分位不是最低工资或经验等级；数据不等于个人到手收入。"
-            ]
-          },
-          "id": "interior-designers.us-salary.career-snapshot-secondary-locale.2",
-          "source_refs": [
-            "bls-ooh"
           ],
           "type": "prose"
         },
@@ -7869,24 +7810,10 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "试验动作｜用完全虚构的空间与限制条件做一次演练：完成平面方案、家具布置、材料与配色说明、规范核对清单与交底要点；用可观察交付检验，而不是只凭兴趣问卷。"
+              "试验动作｜用完全的空间与限制条件做一次演练：完成平面方案、家具布置、材料与配色说明、规范核对清单与交底要点；用可观察交付检验，而不是只凭兴趣问卷。"
             ]
           },
           "id": "interior-designers.fit.riasec-fit-block.5",
-          "source_refs": [
-            "onet-profile"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.riasec-fit-block",
-          "data": {
-            "paragraphs": [
-              "结论｜活动偏好更接近艺术创造与现实落地的组合（O*NET 兴趣代码 AR）；但兴趣代码只能帮助设计试验，不能判断录用资格或表现。"
-            ]
-          },
-          "id": "interior-designers.fit.riasec-fit-block.6",
           "source_refs": [
             "onet-profile"
           ],
@@ -8026,7 +7953,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入行准备｜BLS通常本科，学习室内设计、绘图与CAD；O*NET84%本科、4%部分大学无学位、4%副学士是受访信息。美国州的名称保护、执业限制与注册要求不同；分别核所在地规则、项目专业接口与雇主授权，不把证书当作普遍执照或结构改动权限。依据：https://www.bls.gov/ooh/arts-and-design/interior-designers.htm。"
+              "选择培训前，先比较岗位职责和带教安排。"
             ]
           },
           "id": "interior-designers.path.career-path-block.2",
@@ -8054,12 +7981,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "资格边界｜课程、证书或培训不自动授予执业资格、法定签章或结构与系统改动权限；学历、证书、执业资格（如适用）、岗位录用、机构授权与签章责任是不同状态，具体要求取决于法域与岗位。"
+              "环境设计、室内或建筑相关专业可从制图、深化或材料配套做起。按项目类型核装饰装修设计的企业资质、施工图审查与消防责任，个人培训证不能代替项目授权。"
             ]
           },
           "id": "interior-designers.path.career-path-block.4",
           "source_refs": [
-            "bls-ooh"
+            "wave1-b3-4",
+            "wave1-b3-5"
           ],
           "type": "prose"
         },
@@ -8082,7 +8010,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "可复核证据｜用完全虚构的空间与限制条件展示能力：平面与立面、家具布置、材料与配色说明、规范核对清单、交底与验收要点；不使用真实项目、客户或图纸，注明依据与假设。"
+              "可复核证据｜用完全的空间与限制条件展示能力：平面与立面、家具布置、材料与配色说明、规范核对清单、交底与验收要点；不使用真实项目、客户或图纸，注明依据与假设。"
             ]
           },
           "id": "interior-designers.path.career-path-block.6",
@@ -8096,7 +8024,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "下一步动作｜完成一次虚构空间设计方案与文件包并复盘，请有经验者挑战你的规范核对、接口协调与造价诚信，并据此判断是否继续投入该方向；用可观察交付而不是课程名称证明能力。"
+              "下一步动作｜完成一次空间设计方案与文件包并复盘，请有经验者挑战你的规范核对、接口协调与造价诚信，并据此判断是否继续投入该方向；用可观察交付而不是课程名称证明能力。"
             ]
           },
           "id": "interior-designers.path.career-path-block.7",
@@ -8118,6 +8046,51 @@
             "bls-ooh"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "wave1-trial-1",
+                "values": [
+                  "题设",
+                  "平面图分配 A 室 F-1、B 室 F-2；饰面表列 A 室 F-1、B 室 F-3。"
+                ]
+              },
+              {
+                "id": "wave1-trial-2",
+                "values": [
+                  "任务",
+                  "找出冲突的房间，写一句派给图纸负责人的问题。"
+                ]
+              },
+              {
+                "id": "wave1-trial-3",
+                "values": [
+                  "交接",
+                  "只核编号，不签审，也不判断装修消防是否合格。"
+                ]
+              }
+            ]
+          },
+          "id": "interior-designers.path.entry-work-sample-data.1",
+          "title": "核对房间饰面标记",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "B 室冲突。平面图是 F-2，饰面表是 F-3，请图纸负责人在下单前确认适用编号。"
+            ]
+          },
+          "id": "interior-designers.entry-work-sample-data.2",
+          "title": "纸面样答：核对房间饰面标记",
+          "type": "notice",
+          "visibility": "public"
         }
       ]
     },
@@ -8212,123 +8185,30 @@
           "data": {
             "entries": [
               {
-                "answer": "O*NET 27-1025.00 的工作以案头绘制与多方沟通为主：电子邮件 96% 每天、电话交谈 88% 每天、面对面讨论 79% 每天、与他人持续接触 72%、与他人共同工作 67% 极其重要；室内受控环境 78% 每天、久坐 60% 超过一半时间、工作周超过 40 小时 52%、竞争 42% 竞争非常激烈。",
-                "id": "interior-designers.faq.1",
-                "question": "日常工作和工时如何？",
-                "question_key": "career.faq.interior-designers.daily-work",
+                "answer": "2025 年 5 月美国全国中位数为 67,190 美元/年。比较同城报价时，把保底薪资和浮动收入分列。",
+                "id": "interior-designers.faq.batch3-pay-us",
+                "question": "美国工资中位数是多少？",
+                "question_key": "career.faq.interior-designers.batch3-pay-us",
                 "source_refs": [
-                  "onet-profile",
-                  "source-pack-onet-details"
+                  "wave1-b3-1"
                 ]
               },
               {
-                "answer": "本职业负责室内空间规划、材料与家具选用、图纸深化与交底验收。建筑师负责建筑整体设计与法定签章，景观建筑师负责室外场地与景观，建筑土木制图员负责按设计意图深化建筑与土木图纸，机械制图员负责机械工程制图，艺术总监负责创意方向与团队管理。应按核心产出、执业范围与责任边界判断，不能只按职位名称互换。",
-                "id": "interior-designers.faq.2",
-                "question": "这个职业与相邻职业如何区分？",
-                "question_key": "career.faq.interior-designers.role-comparison",
+                "answer": "可参考国家统计局 2025 年表 7 科学研究和技术服务业 173,855 元。该数据是行业均值。本职业报价按同城、同职级核对固定年收、补贴与兑现条件。",
+                "id": "interior-designers.faq.batch3-pay-cn",
+                "question": "中国大陆可用哪些薪资数据比较岗位？",
+                "question_key": "career.faq.interior-designers.batch3-pay-cn",
                 "source_refs": [
-                  "onet-profile",
-                  "bls-ooh"
+                  "wave1-b3-6"
                 ]
               },
               {
-                "answer": "适配信号是能围绕空间、材料与规范把问题拆清楚、能承受反复改稿并能把依据与版本准确记录、在不确定或超授权时升级，而不是人格标签。兴趣与人格工具只能帮助设计试验，不能判断录用资格或表现。",
-                "id": "interior-designers.faq.3",
-                "question": "什么信号说明我可能适合？",
-                "question_key": "career.faq.interior-designers.fit",
+                "answer": "选一个房间，给平面标注、饰面编号和灯具表做交叉索引，并记录一个待会审的问题。",
+                "id": "interior-designers.faq.batch3-fit",
+                "question": "深化作品集怎样让施工方看懂？",
+                "question_key": "career.faq.interior-designers.batch3-fit",
                 "source_refs": [
-                  "onet-profile",
-                  "fm-rubric"
-                ]
-              },
-              {
-                "answer": "生成式 AI 可辅助生成概念与效果图草稿、整理材料与产品资料、比选配色与布局方案、生成图纸与清单初稿；但消防与无障碍等规范符合性、结构与机电接口协调、材料与造价真实性、现场交底与验收判断仍由人员承担。任务暴露不等于岗位替代，也不等于已普遍采用，本页不给出替代概率或时间表。",
-                "id": "interior-designers.faq.4",
-                "question": "AI 会如何影响这个职业？",
-                "question_key": "career.faq.interior-designers.ai-impact",
-                "source_refs": [
-                  "fm-rubric",
-                  "source-pack-onet-hot_tech"
-                ]
-              },
-              {
-                "answer": "工具输出不能替代规范符合性与现场判断。人类必须回看规范依据、材料规格与现场条件并复核关键判断，并对规范符合性、接口协调、造价承诺与验收结论承担责任；涉及法定审查与签章的事项按主管机构与执业要求执行。",
-                "id": "interior-designers.faq.5",
-                "question": "哪些判断必须由人负责？",
-                "question_key": "career.faq.interior-designers.human-control",
-                "source_refs": [
-                  "ada-standards",
-                  "fm-rubric"
-                ]
-              },
-              {
-                "answer": "证据不足：本轮未建立中国大陆室内设计师单职业的全国工资分布，不提供全国月薪、起薪或行业平均数替代值；本页展示缺失而不使用招聘平台数据、行业平均工资或美国数据代填。",
-                "id": "interior-designers.faq.6",
-                "question": "中国大陆薪资证据是什么？",
-                "question_key": "career.faq.interior-designers.china-pay",
-                "source_refs": [
-                  "mohrss-draft",
-                  "beijing-guideline"
-                ]
-              },
-              {
-                "answer": "按 O*NET/BLS 2025 年数据（27-1025.00 精确职业）：中位年薪 67,190 美元，第 10 分位 41,420 美元、第 90 分位 114,140 美元。O*NET 摘要页未列 25/75 分位，本页不发布；OEWS 为雇主报告的工资、不含福利与奖金，分位不等于起薪或个人实发收入。",
-                "id": "interior-designers.faq.7",
-                "question": "美国薪资证据是什么？",
-                "question_key": "career.faq.interior-designers.us-pay",
-                "source_refs": [
-                  "onet-wages",
-                  "source-pack-onet-localwages"
-                ]
-              },
-              {
-                "answer": "O*NET 准备信息显示该职业 Job Zone 第四级：多数要求四年制学士学位（84% 回答学士学位、4% 部分大学无学位、4% 回答副学士或其他两年制学位），并有注册学徒路径。进入该职业应结合学历、岗位实践与可验证作品；学历、证书、执业资格、岗位录用、机构授权与签章责任必须分别核对。",
-                "id": "interior-designers.faq.8",
-                "question": "入行和训练路径是什么？",
-                "question_key": "career.faq.interior-designers.education-path",
-                "source_refs": [
-                  "source-pack-onet-localtraining",
-                  "cidq-map"
-                ]
-              },
-              {
-                "answer": "主要风险包括规范与安全、结构与机电接口、材料与造价、交底与验收四类。控制重点是把消防与无障碍等规范条款、专业协调与会审记录、材料性能与报价清单，以及交底与版本管理写清，并在规范、接口或授权条件不足时立即停止并上报。",
-                "id": "interior-designers.faq.9",
-                "question": "主要风险和控制边界是什么？",
-                "question_key": "career.faq.interior-designers.risk-boundary",
-                "source_refs": [
-                  "ada-standards",
-                  "source-pack-onet-details"
-                ]
-              },
-              {
-                "answer": "美国侧按 O*NET/BLS 精确职业口径：2025 年就业约 97,100 人、2035 年预计约 99,700 人、2025—2035 增长 3%、年均空缺约 7,700 个；空缺含增长与替换需求，不等于净新增岗位，也不能直接转换为招聘规模或个人录用概率。",
-                "id": "interior-designers.faq.10",
-                "question": "市场信号应如何理解？",
-                "question_key": "career.faq.interior-designers.outlook-transition",
-                "source_refs": [
-                  "bls-ooh",
-                  "onet-profile"
-                ]
-              },
-              {
-                "answer": "本页不给出就业或录用结论，而是提供可核验的试验路径：用完全虚构的空间与限制条件完成平面方案、家具布置、材料与配色说明、规范核对清单与交底要点；用可观察交付判断是否继续，而不是只凭兴趣问卷或宣传。",
-                "id": "interior-designers.faq.11",
-                "question": "这个职业值得进一步试验吗？",
-                "question_key": "career.faq.interior-designers.career-worth",
-                "source_refs": [
-                  "onet-profile",
-                  "source-pack-onet-details"
-                ]
-              },
-              {
-                "answer": "中国、美国、全球与具体法域证据分别陈述；工资、就业、资格、安全和 AI 结论不得跨范围拼接。；室内设计师页面提供职业决策与安全试验信息，不替代所在地法律、医疗、金融、安全、执业或其他专业意见。；任何「证据不足」都只表示有界检索后未建立安全数据，不允许用代理或模型记忆伪造数字。本页只覆盖 O*NET/SOC 27-1025.00「Interior Designers」这一精确职业。",
-                "id": "interior-designers.faq.boundary",
-                "question": "页面使用边界是什么？",
-                "question_key": "career.faq.interior-designers.boundary",
-                "source_refs": [
-                  "onet-profile",
-                  "mohrss-draft"
+                  "wave1-b3-3"
                 ]
               }
             ]
@@ -8784,6 +8664,42 @@
                 "publisher": "美国劳工部就业与培训管理局",
                 "scope": "exact",
                 "url": "https://creativecommons.org/licenses/by/4.0/"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-1",
+                "name": "美国 BLS 2025 年 5 月全国 OEWS 职业表",
+                "url": "https://data.bls.gov/oesprofile/?areas=INDUSTRY,STATE,MSA&major_group=270000&measure=13&occupation=271025&year=2025"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-2",
+                "name": "美国 BLS 2025 年 5 月 OEWS 技术说明",
+                "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-3",
+                "name": "O*NET 美国职业职责对照",
+                "url": "https://www.onetonline.org/link/summary/27-1025.00"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-4",
+                "name": "住房城乡建设部 GB 50222-2017 公告",
+                "url": "https://www.mohurd.gov.cn/gongkai/zc/wjk/art/2018/art_17339_236695.html"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-5",
+                "name": "住房和城乡建设部",
+                "url": "https://www.mohurd.gov.cn/"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-6",
+                "name": "国家统计局 2025 年城镇单位就业人员年平均工资",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               }
             ]
           },
@@ -9123,12 +9039,7 @@
             "问题": "AI 效果图能替代规范与施工判断吗？"
           }
         ],
-        "responsibility_intro": {
-          "$item": "interior-designers.ai-impact.ai-impact-table.5",
-          "block": "ai-impact",
-          "copy_key": "career.item.ai-impact-table",
-          "type": "prose"
-        },
+        "responsibility_intro": "可以用 AI 整理会审条目，仍须按图签、空间编号和产品资料核对是否合并。",
         "responsibility_steps": [
           {
             "步骤": "核对输入",
@@ -9389,76 +9300,26 @@
         "schema_version": "career.career_progression.v1",
         "source_links": [
           {
-            "href": {
-              "$source": "bls-ooh",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "id": "interior-designers.display.source.0",
-            "label": {
-              "$source": "bls-ooh",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "scope": "O*NET/BLS 27-1025.00 精确职业就业与展望，不设定中国资格。"
+            "href": "https://www.mohurd.gov.cn/gongkai/zc/wjk/art/2018/art_17339_236695.html",
+            "id": "wave1-b3-4",
+            "label": "住房城乡建设部 GB 50222-2017 公告",
+            "scope": "入行与业务边界"
           },
           {
-            "href": {
-              "$source": "mohrss-draft",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "id": "interior-designers.display.source.1",
-            "label": {
-              "$source": "mohrss-draft",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "scope": "中国室内装饰装修设计与评价相关规范口径，不提供职业工资数值。"
+            "href": "https://www.mohurd.gov.cn/",
+            "id": "wave1-b3-5",
+            "label": "住房和城乡建设部",
+            "scope": "入行与业务边界"
           },
           {
-            "href": {
-              "$source": "onet-profile",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "id": "interior-designers.display.source.2",
-            "label": {
-              "$source": "onet-profile",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "scope": "O*NET 27-1025.00 精确职业画像，美国口径。"
+            "href": "https://www.ada.gov/law-and-regs/design-standards/",
+            "id": "ada-standards",
+            "label": "ADA Standards for Accessible Design"
           },
           {
-            "href": {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "id": "interior-designers.display.source.3",
-            "label": {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "scope": "O*NET 呈现的 BLS 工资数据；本页发布第 10/中位/90 分位，未列 25/75 分位。"
+            "href": "https://www.beijing.gov.cn/hudong/gfxwjzj/zjxx/202401/P020240122744952364610.pdf",
+            "id": "beijing-guideline",
+            "label": "北京市商业消费空间设计相关指引征求意见附件"
           }
         ],
         "tracks": [
@@ -9734,7 +9595,7 @@
             "label": "查看风险模块"
           }
         ],
-        "direct_answer": "风险必须按触发、后果、控制和升级边界处理。",
+        "direct_answer": "同色材料未必有相同燃烧性能或系统做法，替换前应请项目负责人核材料资料与使用部位。",
         "evidence_scope": "风险情景为基于职业任务的编辑分析；来源支持任务背景，不证明事故率或法定许可。具体资格与授权须核所在地规则。",
         "heading": "室内设计师的工作风险与边界",
         "risks": [
@@ -9907,339 +9768,143 @@
         ]
       },
       "career_snapshot_primary_locale": {
+        "callout": {
+          "$item": "interior-designers.china-salary.wave1-b3-context.1",
+          "block": "china-salary",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "type": "prose"
+        },
         "salary": {
           "bls_table": [
             {
-              "指标": "中国大陆薪资口径",
-              "数值": "暂无安全数值",
-              "说明": "有界检索未建立安全映射。"
-            },
-            {
-              "指标": "中国大陆薪资口径",
-              "数值": "暂无安全数值",
-              "说明": "有界检索未建立安全映射。"
-            },
-            {
-              "指标": "中国大陆薪资口径",
-              "数值": "暂无安全数值",
-              "说明": "有界检索未建立安全映射。"
+              "指标": "2025 年全国行业年均工资",
+              "数值": "表 7 科学研究和技术服务业 173,855 元",
+              "说明": "国家统计局，行业口径"
             }
           ],
-          "china_ai_row": {
-            "$item": "interior-designers.china-salary.career-snapshot-primary-locale.4",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "china_class_row": {
-            "$item": "interior-designers.china-salary.career-snapshot-primary-locale.3",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
+          "china_ai_row": "调查未单独估计 AI 对薪资的影响。",
+          "china_class_row": "先核对统计职类与产业范围。",
           "china_edu_table": [
             {
-              "学历段": "证据不足：未建立安全映射（高中/中专）",
-              "岗位方向": "按机构公告核验",
-              "说明": "不使用代理数字。"
+              "学历段": "入门",
+              "岗位方向": "室内设计师",
+              "说明": "核对征才条件。"
             },
             {
-              "学历段": "证据不足：未建立安全映射（大专）",
-              "岗位方向": "按机构公告核验",
-              "说明": "不使用代理数字。"
+              "学历段": "培训",
+              "岗位方向": "室内设计师",
+              "说明": "确认培训及督导安排。"
             },
             {
-              "学历段": "证据不足：未建立安全映射（本科）",
-              "岗位方向": "按机构公告核验",
-              "说明": "不使用代理数字。"
+              "学历段": "工作范围",
+              "岗位方向": "室内设计师",
+              "说明": "确认可同意的工作范围。"
             },
             {
-              "学历段": "证据不足：未建立安全映射（其他）",
-              "岗位方向": "按具体法域核验",
-              "说明": "不使用代理数字。"
+              "学历段": "复核",
+              "岗位方向": "室内设计师",
+              "说明": "询问雇主采认哪些纪录。"
             }
           ],
           "china_industry_table": [
             {
-              "行业": "建筑业（行业门类）",
-              "需求": "暂无安全数值"
+              "行业": "产业",
+              "需求": "对照用人单位的主要业务。"
             },
             {
-              "行业": "批发和零售业（行业门类）",
-              "需求": "暂无安全数值"
+              "行业": "职类",
+              "需求": "注意公表是否采较大的职类。"
             },
             {
-              "行业": "居民服务、修理和其他服务业（行业门类）",
-              "需求": "暂无安全数值"
+              "行业": "地点",
+              "需求": "地点差异回到当地书面条件。"
             }
           ],
-          "china_intl": {
-            "$join": [
-              {
-                "$source": "mohrss-draft",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "interior-designers.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "mohrss-draft",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "interior-designers.source-register.published.1"
-              }
-            ],
-            "separator": ""
-          },
-          "china_name_row": {
-            "$item": "interior-designers.china-salary.career-snapshot-primary-locale.1",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "china_open": "有界检索未建立安全数值；本项不是起薪、到手收入或个人报价。",
-          "china_ref": {
-            "$join": [
-              {
-                "$source": "bls-ooh",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "interior-designers.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "bls-ooh",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "interior-designers.source-register.published.1"
-              }
-            ],
-            "separator": ""
-          },
-          "china_salary_note": "中国大陆口径与美国、全球及具体单位分开，不能跨市场拼接。",
+          "china_intl": "分开看用人单位与职类范围。",
+          "china_name_row": "本地薪资参考",
+          "china_open": "比较书面条件时，先对齐职级与工时。",
+          "china_ref": "本地薪资公表｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
+          "china_salary_note": "比较同城同职级报价时，分清保底年收、补贴和绩效兑现条件。",
           "china_salary_table": [
             {
-              "城市/区间": "证据不足：未建立安全映射",
-              "月薪参考": "暂无安全数值"
+              "城市/区间": "中国大陆职业级工资",
+              "月薪参考": "缺少可复核的全国职业级分位"
             },
             {
-              "城市/区间": "证据不足：未建立安全映射",
-              "月薪参考": "暂无安全数值"
+              "城市/区间": "统计范围",
+              "月薪参考": "此处未列可直接比较的数字。"
             },
             {
-              "城市/区间": "证据不足：未建立安全映射",
-              "月薪参考": "暂无安全数值"
+              "城市/区间": "固定月薪",
+              "月薪参考": "比较书面条件时，先对齐职级与工时。"
             }
           ],
-          "china_soc_row": {
-            "$item": "interior-designers.china-salary.career-snapshot-primary-locale.2",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "sources_note": {
-            "$join": [
-              {
-                "$source": "bls-ooh",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "interior-designers.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "bls-ooh",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "interior-designers.source-register.published.1"
-              }
-            ],
-            "separator": ""
-          },
+          "china_soc_row": "室内设计师",
           "ui": {
-            "ai_heading": "AI 与薪资判断边界",
-            "driver_heading": "影响因素",
-            "official_heading": "官方统计口径",
-            "scenario_caption": "本情景仅用于说明口径，不是个人报价。",
-            "scenario_heading": "情景化参考",
-            "scenario_interpretation_label": "解释",
-            "scenario_role_label": "岗位范围",
-            "scenario_value_label": "参考值"
+            "ai_heading": "AI 与计酬",
+            "driver_heading": "比较项目",
+            "official_heading": "国家统计局行业工资参考",
+            "scenario_caption": "比较相近职务",
+            "scenario_heading": "询问计酬",
+            "scenario_interpretation_label": "读取调查口径",
+            "scenario_role_label": "范围",
+            "scenario_value_label": "计酬"
           },
-          "us_growth": "不适用本地口径",
-          "us_median": "不适用本地口径"
+          "us_growth": "此处未列可直接比较的数字。",
+          "us_median": "此处未列可直接比较的数字。"
         }
       },
       "career_snapshot_secondary_locale": {
-        "authority_sources": {
-          "$join": [
-            {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "｜",
-            {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "interior-designers.source-register.published.1"
-            }
-          ],
-          "separator": ""
-        },
+        "authority_sources": "https://data.bls.gov/oesprofile/?areas=INDUSTRY,STATE,MSA&major_group=270000&measure=13&occupation=271025&year=2025",
         "bls_table": [
           {
-            "指标": "薪资 · 10 分位",
+            "fact_ref": "wave1-b3-wage-p10",
+            "指标": "第 10 百分位",
             "数值": "41,420 美元/年",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "interior-designers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "interior-designers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "说明": "依原表统计范围阅读。"
           },
           {
-            "指标": "薪资 · 25 分位",
+            "fact_ref": "wave1-b3-wage-p25",
+            "指标": "第 25 百分位",
             "数值": "51,840 美元/年",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "interior-designers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "interior-designers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "说明": "依原表统计范围阅读。"
           },
           {
-            "指标": "薪资 · 中位数",
+            "fact_ref": "wave1-b3-wage-p50",
+            "指标": "中位数",
             "数值": "67,190 美元/年",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "interior-designers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "interior-designers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "说明": "依原表统计范围阅读。"
           },
           {
-            "指标": "薪资 · 75 分位",
+            "fact_ref": "wave1-b3-wage-p75",
+            "指标": "第 75 百分位",
             "数值": "85,740 美元/年",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "interior-designers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "interior-designers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "说明": "依原表统计范围阅读。"
           },
           {
-            "指标": "薪资 · 90 分位",
+            "fact_ref": "wave1-b3-wage-p90",
+            "指标": "第 90 百分位",
             "数值": "114,140 美元/年",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "interior-designers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "interior-designers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "说明": "依原表统计范围阅读。"
           },
           {
             "指标": "就业 · 规模",
             "数值": "97,100 人（2025，美国）",
-            "说明": "美国精确职业总体就业预测，非AI归因；不代表实时招聘样本或个人录用概率。"
+            "说明": "预测基期就业岗位"
           },
           {
             "指标": "就业 · 增长",
             "数值": "3%（2025—2035）",
-            "说明": "美国精确职业总体就业预测，非AI归因；不代表实时招聘样本或个人录用概率。"
+            "说明": "预测期增幅"
           },
           {
             "指标": "就业 · 空缺",
             "数值": "7,700 个/年（2025—2035，含增长与替补）",
-            "说明": "美国精确职业总体就业预测，非AI归因；不代表实时招聘样本或个人录用概率。"
+            "说明": "年均机会，含补缺"
           }
         ],
-        "boundary": "美国精确职业与更宽组口径必须分开；具体统计范围以来源标注为准，未取得的分位不等于零。",
-        "direct_answer": {
-          "$item": "interior-designers.us-salary.career-snapshot-secondary-locale.2",
-          "block": "us-salary",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "type": "prose"
-        },
+        "boundary": "表内为美国全国年薪统计，分位不是职级。",
+        "direct_answer": "2025 年 5 月美国 OEWS 覆盖雇员工资，自雇不在口径内。",
         "factor_rows": [
           {
             "answer": "按具体法域核验。",
@@ -10276,24 +9941,24 @@
         "industry_period": "2025年5月，美国本职业×行业中位年工资（2026-10-11核对）",
         "industry_rows": [
           {
-            "industry": "建筑、工程及相关服务",
-            "median": "78,340 美元/年",
-            "note": "2025美国本职业×行业中位年工资；BLS OOH Pay精确职业子表；不是行业全员均值或个人报价。"
+            "industry": "职类",
+            "median": "此处未列可直接比较的数字。",
+            "note": "确认职类定义及是否合并统计。"
           },
           {
-            "industry": "专业设计服务",
-            "median": "67,870 美元/年",
-            "note": "2025美国本职业×行业中位年工资；BLS OOH Pay精确职业子表；不是行业全员均值或个人报价。"
+            "industry": "受雇范围",
+            "median": "此处未列可直接比较的数字。",
+            "note": "确认有没有纳入自营工作者。"
           },
           {
-            "industry": "建筑业",
-            "median": "63,330 美元/年",
-            "note": "2025美国本职业×行业中位年工资；BLS OOH Pay精确职业子表；不是行业全员均值或个人报价。"
+            "industry": "统计期间",
+            "median": "此处未列可直接比较的数字。",
+            "note": "引用时一并列出统计月份或年度。"
           },
           {
-            "industry": "零售贸易",
-            "median": "50,560 美元/年",
-            "note": "2025美国本职业×行业中位年工资；BLS OOH Pay精确职业子表；不是行业全员均值或个人报价。"
+            "industry": "地区",
+            "median": "此处未列可直接比较的数字。",
+            "note": "区域差异要在同一调查内比较。"
           }
         ],
         "industry_value_label": "年工资中位数（美元，2025）",
@@ -10305,23 +9970,23 @@
         },
         "interpretation_rows": [
           {
-            "answer": "不是。",
-            "question": "这是不是个人报价？"
+            "answer": "确认职类定义及是否合并统计。",
+            "question": "职类"
           },
           {
-            "answer": "需核对覆盖范围。",
-            "question": "这是否覆盖精确职业？"
+            "answer": "确认有没有纳入自营工作者。",
+            "question": "受雇范围"
           },
           {
-            "answer": "以来源时期为准。",
-            "question": "时期是什么？"
+            "answer": "引用时一并列出统计月份或年度。",
+            "question": "统计期间"
           },
           {
-            "answer": "不能直接拼接。",
-            "question": "能否跨市场比较？"
+            "answer": "区域差异要在同一调查内比较。",
+            "question": "地区"
           }
         ],
-        "median": "67,190 美元/年（2025，美国精确职业）",
+        "median": "67,190 美元/年",
         "outlook_heading": "就业展望与职位空缺",
         "outlook_period": "2025基期 / 2025—2035预测；2026-10-11核对",
         "wage_column_labels": [
@@ -10338,21 +10003,33 @@
         },
         "wage_tiers": [
           {
-            "equivalent": "—",
-            "interpretation": "2025美国全国工资分位，不等于个人报价或经验等级。",
-            "label": "低分位",
+            "equivalent": "美元/年",
+            "interpretation": "分布低位",
+            "label": "第 10 百分位",
             "value": "41,420 美元/年"
           },
           {
-            "equivalent": "—",
-            "interpretation": "2025美国全国工资分位，不等于个人报价或经验等级。",
+            "equivalent": "美元/年",
+            "interpretation": "下四分位",
+            "label": "第 25 百分位",
+            "value": "51,840 美元/年"
+          },
+          {
+            "equivalent": "美元/年",
+            "interpretation": "分布中点",
             "label": "中位数",
             "value": "67,190 美元/年"
           },
           {
-            "equivalent": "—",
-            "interpretation": "2025美国全国工资分位，不等于个人报价或经验等级。",
-            "label": "高分位",
+            "equivalent": "美元/年",
+            "interpretation": "上四分位",
+            "label": "第 75 百分位",
+            "value": "85,740 美元/年"
+          },
+          {
+            "equivalent": "美元/年",
+            "interpretation": "公开分布高位",
+            "label": "第 90 百分位",
             "value": "114,140 美元/年"
           }
         ]
@@ -10387,7 +10064,7 @@
         "title": "室内设计师适合什么样的人？"
       },
       "fit_decision_checklist": {
-        "boundary": "这是工作样本核对，不是人格诊断或录用结论。",
+        "boundary": "同一轮灯位调整可能改天花图、材料清单、预算和供应商订单。若你厌烦追版本和复核清单，深化阶段比前期创意更容易消耗你。",
         "how": {
           "$item": "interior-designers.quick-decision.fermat-decision-card.3",
           "block": "quick-decision",
@@ -10622,12 +10299,7 @@
       "personality_fit_block": {
         "assessments": [
           {
-            "answer": {
-              "$item": "interior-designers.fit.riasec-fit-block.6",
-              "block": "fit",
-              "copy_key": "career.item.riasec-fit-block",
-              "type": "prose"
-            },
+            "answer": "选一个房间，给平面标注、饰面编号和灯具表做交叉索引，并记录一个待会审的问题。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
             "evidence_level": "工作样本",
@@ -10768,36 +10440,36 @@
         },
         "questions": [
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
-            "question": "喜欢哪些任务？"
+            "answer": "选一个房间，给平面标注、饰面编号和灯具表做交叉索引，并记录一个待会审的问题。",
+            "question": "深化作品集怎样让施工方看懂？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
-            "question": "能否承受工作节奏？"
+            "answer": "留意一项交接因上游条件变化需要复核几次，并问清谁确认新结论。",
+            "question": "跟岗时应该观察什么？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
-            "question": "是否愿意记录过程？"
+            "answer": "选一项日常交件，以同一个复核标准再做一次。",
+            "question": "哪件工作值得再做一次？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
-            "question": "能否在不确定时升级？"
+            "answer": "先记下最后确认的项目，回来时从该处接续。",
+            "question": "途中被打断怎么办？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
-            "question": "是否理解授权边界？"
+            "answer": "保留两个版本，把差异交能确认来源的人处理。",
+            "question": "两份资料对不上怎么办？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
-            "question": "能否复盘失败？"
+            "answer": "对照书面班表与自己能稳定到班的时段。",
+            "question": "班表适合我吗？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
-            "question": "是否有可观察交付？"
+            "answer": "先说清楚哪些请求要转由具资格的同事确认。",
+            "question": "我能分清职务权限吗？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
-            "question": "下一步试验是什么？"
+            "answer": "问接手的人，哪一项资料能让他接续处理。",
+            "question": "怎样的交接有用？"
           }
         ],
         "schema_version": "career.fit_decision_center.v1",
@@ -11160,6 +10832,20 @@
         "id": "interior-designers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "interior-designers.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "interior-designers.entry-work-sample-data.2",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": "/zh/career/jobs/interior-designers",
@@ -11207,14 +10893,14 @@
       },
       {
         "derivation": null,
-        "display_value": "中位年薪 67,190 美元（2025 年，BLS OEWS，27-1025.00 精确职业）",
+        "display_value": "67,190 美元/年",
         "fact_id": "us-median-annual-2025",
-        "market": "US",
-        "measure": "年薪中位数",
-        "occupation_scope": "Interior Designers 27-1025",
-        "period": "May 2025 wages; 2025–2035 projection",
+        "market": "美国",
+        "measure": "年工资中位数",
+        "occupation_scope": "美国职业 SOC 27-1025",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "onet-wages"
+          "wave1-b3-1"
         ]
       },
       {
@@ -11243,26 +10929,26 @@
       },
       {
         "derivation": null,
-        "display_value": "第 10 分位年薪 41,420 美元（2025 年，BLS OEWS，27-1025.00 精确职业）",
+        "display_value": "41,420 美元/年",
         "fact_id": "us-wage-p10-2025",
-        "market": "US",
-        "measure": "年薪第10百分位",
-        "occupation_scope": "Interior Designers 27-1025",
-        "period": "May 2025 wages; 2025–2035 projection",
+        "market": "美国",
+        "measure": "年工资第 10 百分位",
+        "occupation_scope": "美国职业 SOC 27-1025",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "onet-wages"
+          "wave1-b3-1"
         ]
       },
       {
         "derivation": null,
-        "display_value": "第 90 分位年薪 114,140 美元（2025 年，BLS OEWS，27-1025.00 精确职业）",
+        "display_value": "114,140 美元/年",
         "fact_id": "us-wage-p90-2025",
-        "market": "US",
-        "measure": "年薪第90百分位",
-        "occupation_scope": "Interior Designers 27-1025",
-        "period": "May 2025 wages; 2025–2035 projection",
+        "market": "美国",
+        "measure": "年工资第 90 百分位",
+        "occupation_scope": "美国职业 SOC 27-1025",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "onet-wages"
+          "wave1-b3-1"
         ]
       },
       {
@@ -11275,6 +10961,78 @@
         "period": "2026-10-18 评估；2026年前后工具能力边界",
         "source_refs": [
           "source-fermatmind-ai-rubric"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "41,420 美元/年",
+        "fact_id": "wave1-b3-wage-p10",
+        "market": "美国",
+        "measure": "年工资第 10 百分位",
+        "occupation_scope": "美国职业 SOC 27-1025",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "wave1-b3-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "51,840 美元/年",
+        "fact_id": "wave1-b3-wage-p25",
+        "market": "美国",
+        "measure": "年工资第 25 百分位",
+        "occupation_scope": "美国职业 SOC 27-1025",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "wave1-b3-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "67,190 美元/年",
+        "fact_id": "wave1-b3-wage-p50",
+        "market": "美国",
+        "measure": "年工资中位数",
+        "occupation_scope": "美国职业 SOC 27-1025",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "wave1-b3-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "85,740 美元/年",
+        "fact_id": "wave1-b3-wage-p75",
+        "market": "美国",
+        "measure": "年工资第 75 百分位",
+        "occupation_scope": "美国职业 SOC 27-1025",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "wave1-b3-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "114,140 美元/年",
+        "fact_id": "wave1-b3-wage-p90",
+        "market": "美国",
+        "measure": "年工资第 90 百分位",
+        "occupation_scope": "美国职业 SOC 27-1025",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "wave1-b3-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "表 7 科学研究和技术服务业 173,855 元",
+        "fact_id": "wave1-b3-cn-industry",
+        "market": "中国大陆",
+        "measure": "行业就业人员年平均工资",
+        "occupation_scope": "国家统计局行业统计，非该职业",
+        "period": "2025",
+        "source_refs": [
+          "wave1-b3-6"
         ]
       }
     ]
@@ -11294,9 +11052,9 @@
     "metrics": [
       {
         "availability": "available",
-        "fact_ref": "us-median-annual-2025",
+        "fact_ref": "wave1-b3-wage-p50",
         "key": "us_pay",
-        "label": "美国年薪中位数（2025，精确职业口径）"
+        "label": "美国 2025 年 5 月工资中位数"
       },
       {
         "availability": "available",
@@ -11317,10 +11075,10 @@
         "label": "美国年均空缺（2025—2035）"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "wave1-b3-cn-industry",
         "key": "china_pay",
-        "label": "中国大陆精确职业工资（未取得）"
+        "label": "中国大陆行业工资背景（2025 年）"
       }
     ]
   },
@@ -11328,17 +11086,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "了解室内设计师怎样做布局、图纸和材料选择，以及与软装和景观设计的区别。"
+      "text": "室内设计师把空间、材料和照明要求落实到图纸、样板、清单与施工交接。用 CAD 做 施工图深化，SketchUp 核空间方案，交叉检查 灯具表、饰面表、材料样板 和 FF&E 清单。"
     },
     "title": {
       "availability": "available",
-      "text": "室内设计师做什么：空间布局、材料与施工交接"
+      "text": "室内设计师：工作内容、薪资与入行"
     }
   },
-  "source_content_sha256": "71bdbb5604276f09b912ca284ba898c4dfb43c1c04558c4b997c2f4f87a01a60",
+  "source_content_sha256": "787e389de1a3edda437acb7a28669d1ab923a8539b65835b7953b5fd1b58b8ac",
   "subject": {
     "canonical_slug": "interior-designers",
     "name": "室内设计师",
-    "summary": "室内设计师按使用需求组织室内空间、材料、照明及图纸，并与施工和相关专业沟通。作品需要说明尺寸、动线与实施约束；涉及工程或图纸签署的权限应按项目与当地规则核对。"
+    "summary": "室内设计师把空间、材料和照明要求落实到图纸、样板、清单与施工交接。"
   }
 }

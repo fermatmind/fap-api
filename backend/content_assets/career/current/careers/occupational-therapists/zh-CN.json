@@ -26,6 +26,9 @@
       "fact:us-ot-wage-p90-2025": {
         "status": "pending_mapping"
       },
+      "fact:wave1-cn-sector-2025": {
+        "status": "pending_mapping"
+      },
       "item:occupational-therapists.ai-impact.ai-impact-table.1": {
         "status": "mapped"
       },
@@ -62,6 +65,9 @@
       "item:occupational-therapists.china-salary.career-snapshot-primary-locale.4": {
         "status": "pending_mapping"
       },
+      "item:occupational-therapists.china-salary.wave1-national-sector.1": {
+        "status": "pending_mapping"
+      },
       "item:occupational-therapists.direction-comparison.adjacent-career-comparison-table.1": {
         "status": "mapped"
       },
@@ -75,6 +81,9 @@
         "status": "pending_mapping"
       },
       "item:occupational-therapists.direction-comparison.adjacent-career-comparison-table.5": {
+        "status": "pending_mapping"
+      },
+      "item:occupational-therapists.entry-work-sample-data.2": {
         "status": "pending_mapping"
       },
       "item:occupational-therapists.fit.personality-fit-block.5": {
@@ -128,25 +137,13 @@
       "item:occupational-therapists.path.entry-role-comparison.10": {
         "status": "pending_mapping"
       },
+      "item:occupational-therapists.path.entry-work-sample-data.1": {
+        "status": "pending_mapping"
+      },
       "item:occupational-therapists.path.interview-probation.11": {
         "status": "pending_mapping"
       },
       "item:occupational-therapists.path.recruitment-sample.1": {
-        "status": "pending_mapping"
-      },
-      "item:occupational-therapists.path.recruitment-sample.2": {
-        "status": "pending_mapping"
-      },
-      "item:occupational-therapists.path.recruitment-sample.3": {
-        "status": "pending_mapping"
-      },
-      "item:occupational-therapists.path.recruitment-sample.4": {
-        "status": "pending_mapping"
-      },
-      "item:occupational-therapists.path.recruitment-sample.5": {
-        "status": "pending_mapping"
-      },
-      "item:occupational-therapists.path.recruitment-sample.6": {
         "status": "pending_mapping"
       },
       "item:occupational-therapists.path.recruitment-sample.7": {
@@ -11956,7 +11953,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "如果你更想专注肌力或步态，或不愿追问当事人在生活场景中的具体目标，可以比较物理治疗与作业治疗。"
+              "同一套穿衣训练在治疗室能完成，回家却可能因为椅子太低或没有照护者而卡住。若家属沟通、重复记录提示等级和进展波动持续消耗你，先观察机构里实际有多少评估和文书时间。"
             ]
           },
           "id": "occupational-therapists.quick-decision.fermat-decision-card.1",
@@ -11970,7 +11967,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "打开目录「入行、资格与职业发展」，找到「OT-07｜洗漱活动分析」。用两次虚构观察写一条可测目标，并说明还有哪些条件要核。"
+              "先完成入行区的纸面工单，再对照问答中的样答。"
             ]
           },
           "id": "occupational-therapists.quick-decision.fermat-decision-card.2",
@@ -11998,7 +11995,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "OT-07 只做纸面观察、目标与交接；不让真实人员演示动作，也不使用设备或病历。"
+              "用入行区的日常活动观察表核对提示与未观察项。"
             ]
           },
           "id": "occupational-therapists.quick-decision.fit-decision-checklist.4",
@@ -12020,7 +12017,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "作业治疗师对应O*NET-SOC 29-1122.00，关注当事人能否安全、有意义地完成日常生活、学习、工作和社会参与。"
+              "评估从 ADL 和 IADL 的具体任务入手，使用 作业活动分析 区分环境、动作和提示障碍。巴氏指数 或 改良 Barthel 可记录基础日常活动的协助程度，握力计、关节活动度和 手功能 评估可补充个案信息。环境改造评估 交付记录桌椅高度、动线、辅具和复评任务。"
             ]
           },
           "id": "occupational-therapists.profile.definition-block.1",
@@ -12036,7 +12033,7 @@
             "entries": [
               "测试并评估患者的身体和精神能力，并分析医疗数据，以确定患者的现实康复目标。",
               "完成并保持必要的记录。",
-              "计划、组织和在医院、机构或社区设施开展职业治疗计划，以帮助因疾病、伤害或心理或发展问题而残疾人康复。",
+              "计划、组织和在医院、机构或社区设施开展作业治疗计划，以帮助因疾病、伤害或心理或发展问题而残疾人康复。",
               "计划并实施各种方案和社会活动，帮助病人学习工作或学习技能，适应残疾。"
             ]
           },
@@ -12193,7 +12190,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "准备探索者"
+              "记录工具能把口述整理成草稿。治疗师必须核对观察到的任务、协助等级及未观察项目，再决定如何在机构内记录。"
             ]
           },
           "id": "occupational-therapists.ai-impact.ai-impact-table.1",
@@ -12207,7 +12204,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用虚构洗漱任务练观察、目标与安全边界；真实治疗须合规训练。"
+              "用洗漱任务练观察、目标与安全边界；真实治疗须合规训练。"
             ]
           },
           "id": "occupational-therapists.ai-impact.ai-impact-table.2",
@@ -12364,6 +12361,17 @@
           "source_refs": [
             "nhc-rehab-training-2023"
           ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "国家统计局 2025 年表 7 规模以上企业就业人员年平均工资：卫生和社会工作 108,309 元。这是行业及企业规模口径，不能当作该职业工资或当地报价。比较两份岗位时，应核对机构性质、固定收入、绩效计法与病房轮岗。"
+            ]
+          },
+          "id": "occupational-therapists.china-salary.wave1-national-sector.1",
           "type": "prose"
         }
       ]
@@ -12561,7 +12569,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "试做后分别记录：是否看到了具体障碍，建议是否可执行，是否考虑跌倒与过度扶助，以及你是否愿意收集反馈后重做一版。"
+              "适配线索包括耐心追问当事人想恢复的活动、看出困难出现在哪一步，以及把协助程度写成团队可复核的记录。若你只喜欢设计活动，也可以通过合规见习观察自己能否接受重复评估和跨专业交接。"
             ]
           },
           "id": "occupational-therapists.fit.personality-fit-block.7",
@@ -12693,81 +12701,6 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "费马测试编辑部虚构案例：当事人的目标是少用口头提示完成洗漱。纸面顺序是准备牙刷与杯子、取水、收好用品。A：物品分散，6 分钟，3 次提示；B：物品按顺序摆放，5 分钟，1 次提示。两次都没有记录台面高度或站立安全；题设只给虚构记录。"
-            ]
-          },
-          "id": "occupational-therapists.path.recruitment-sample.2",
-          "source_refs": [
-            "ot-editorial-case"
-          ],
-          "title": "OT-07｜洗漱活动分析",
-          "type": "notice"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.recruitment-sample",
-          "data": {
-            "paragraphs": [
-              "任务：用一页记录区分已观察的变化、尚未核的安全条件和下一次可测目标。"
-            ]
-          },
-          "id": "occupational-therapists.path.recruitment-sample.3",
-          "source_refs": [
-            "ot-editorial-case"
-          ],
-          "title": "你的任务：写一页观察记录",
-          "type": "notice"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.recruitment-sample",
-          "data": {
-            "paragraphs": [
-              "参考交付：B 少 2 次提示、少 1 分钟；两次观察不能单凭摆放解释变化，也不能证明可以独立站立。可写虚构复查目标：在有权人员核实安全条件后，记录两次同场景观察能否每次不多于 1 次提示。不要提出诊断或真实训练处方。"
-            ]
-          },
-          "id": "occupational-therapists.path.recruitment-sample.4",
-          "source_refs": [
-            "ot-editorial-case"
-          ],
-          "title": "写完再看：参考交付",
-          "type": "notice"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.recruitment-sample",
-          "data": {
-            "paragraphs": [
-              "复核要点：观察差、目标与责任分开。"
-            ]
-          },
-          "id": "occupational-therapists.path.recruitment-sample.5",
-          "source_refs": [
-            "ot-editorial-case"
-          ],
-          "title": "自核：观察、目标与责任",
-          "type": "notice"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.recruitment-sample",
-          "data": {
-            "paragraphs": [
-              "七天纸面体验：①画步骤，②圈已知，③计算差值，④写目标，⑤列安全待核，⑥独立对参考、同伴反馈可选，⑦判断更愿反复做活动观察、环境适配，还是记录和沟通，再选择后续了解方向。"
-            ]
-          },
-          "id": "occupational-therapists.path.recruitment-sample.6",
-          "source_refs": [
-            "ot-editorial-case"
-          ],
-          "title": "七天纸面体验",
-          "type": "notice"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.recruitment-sample",
-          "data": {
-            "paragraphs": [
               "大陆两个岗位：按职责、学历与资质逐项核对。"
             ]
           },
@@ -12830,7 +12763,7 @@
             "rows": [
               [
                 "职业观察",
-                "读BLS/O*NET职责，拆解虚构洗漱任务。",
+                "读BLS/O*NET职责，拆解洗漱任务。",
                 "不接触真实患者或病历。",
                 "一页任务步骤与未知条件。",
                 "是否把观察与猜测分开。"
@@ -13006,6 +12939,51 @@
             "source-pack-onet-localtraining"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "wave1-trial-1",
+                "values": [
+                  "题设",
+                  "训练记录给出三项：穿衣需一次口头提示，收书包无需提示或帮助，备餐未观察。按题设，把已观察项标成独立或提示两类。"
+                ]
+              },
+              {
+                "id": "wave1-trial-2",
+                "values": [
+                  "任务",
+                  "逐项标记，同时算出已观察项目中标为独立的比例；列一项交主管治疗师核对的问题。"
+                ]
+              },
+              {
+                "id": "wave1-trial-3",
+                "values": [
+                  "交接",
+                  "全程只读题设文字。不接触服务对象，不做诊断、不制定治疗或居家训练方案。"
+                ]
+              }
+            ]
+          },
+          "id": "occupational-therapists.path.entry-work-sample-data.1",
+          "title": "纸面试做：整理日常活动观察表",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "穿衣标提示，收书包标独立，备餐标未观察。分母为两项已观察活动，分子为一项，题内比例是 50%。未观察不是零分，单列并注明缺少记录；请主管治疗师核实口头提示的内容和发生条件。"
+            ]
+          },
+          "id": "occupational-therapists.entry-work-sample-data.2",
+          "title": "纸面样答：整理日常活动观察表",
+          "type": "notice",
+          "visibility": "public"
         }
       ]
     },
@@ -13656,12 +13634,12 @@
               {
                 "accessed_at": "2026-11-09",
                 "details": [
-                  "纸面虚构记录；供职业体验。"
+                  "纸面记录；供职业体验。"
                 ],
-                "evidence_type": "虚构纸面练习",
+                "evidence_type": "纸面练习",
                 "id": "ot-editorial-case",
                 "limitation": "无真实个案，不作临床决定。",
-                "name": "费马测试编辑部：OT-07 虚构练习",
+                "name": "用入行区的日常活动观察表核对提示与未观察项。",
                 "publisher": "费马测试编辑部",
                 "scope": "editorial_synthesis",
                 "url": null
@@ -13691,6 +13669,25 @@
                 "publisher": "美国劳工部就业与培训管理局",
                 "scope": "exact",
                 "url": "https://creativecommons.org/licenses/by/4.0/"
+              },
+              {
+                "details": [],
+                "id": "wave1-source-1",
+                "name": "国家统计局《2025 年城镇单位就业人员年平均工资情况》表 7",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [],
+                "id": "wave1-source-2",
+                "name": "福建省卫生健康委员会、福建省人力资源和社会保障厅｜福建考区卫生专业技术资格考试通知及目录",
+                "publisher": "福建省卫生健康委员会、福建省人力资源和社会保障厅",
+                "url": "https://wjw.fujian.gov.cn/jggk/csxx/rsc/gzdt/202512/t20251212_7045745.htm"
+              },
+              {
+                "details": [],
+                "id": "wave1-source-3",
+                "name": "NIH 日常生活活动术语资料",
+                "url": "https://www.commondataelements.ninds.nih.gov/sites/nindscde/files/Doc/NeuroRehab/F2928_Activities_of_Daily_Living_Subgroup_Summary.pdf"
               }
             ]
           },
@@ -13878,7 +13875,7 @@
             }
           }
         ],
-        "answer": "可先用虚构资料试做观察表和记录草稿，核对遗漏和误写。真实活动观察、目标协商、风险判断和签署由有权限的人员按机构流程完成。不得将真实病历上传至未经机构批准的工具。",
+        "answer": "可先用资料试做观察表和记录草稿，核对遗漏和误写。真实活动观察、目标协商、风险判断和签署由有权限的人员按机构流程完成。不得将真实病历上传至未经机构批准的工具。",
         "authority_links": [
           {
             "来源": "O*NET作业治疗师",
@@ -14009,10 +14006,10 @@
             "问题": "能把真实病历交给通用AI吗？"
           },
           {
-            "回答": "不能。它只是虚构职业探索材料，缺个体评估与授权。",
+            "回答": "不能。它只是职业探索材料，缺个体评估与授权。",
             "来源": "O*NET职责",
             "链接": "https://www.onetonline.org/link/details/29-1122.00",
-            "问题": "洗漱案例能给出治疗处方吗？"
+            "问题": "入行区的日常活动观察表能用于制定治疗方案吗？"
           },
           {
             "回答": "可在许可范围内辅助结构化记录与材料检索；必须核准确性。",
@@ -14039,11 +14036,11 @@
             "问题": "如何核工具输出？"
           }
         ],
-        "responsibility_intro": "以完全虚构的洗漱活动做纸面演练；任何真实患者数据、治疗和器具建议需按机构规则与专业许可处理。",
+        "responsibility_intro": "用入行区的观察表练习区分观察结果、提示和未知项。真实病历按机构权限处理，治疗与辅具决定交由负责的专业人员。",
         "responsibility_steps": [
           {
             "步骤": "限定输入",
-            "说明": "只用虚构或已获授权的最少必要资料。"
+            "说明": "只用或已获授权的最少必要资料。"
           },
           {
             "步骤": "标出未知",
@@ -14092,7 +14089,7 @@
         "task_rows": [
           {
             "人的控制点": "治疗师核真实动作和环境",
-            "任务": "列虚构洗漱步骤",
+            "任务": "列洗漱步骤",
             "工作方向": "活动观察",
             "当前变化": "工具可草拟观察表"
           },
@@ -14168,7 +14165,7 @@
         "entry_heading": "从职业探索到合规实践",
         "heading": "入行、能力进阶与资格边界",
         "locale_requirements": {
-          "credential_boundary": "教育、NBCOT考试认证、州执照与机构授权是不同环节；海外学历另核。",
+          "credential_boundary": "查所在地卫生专业技术资格考试通知，按学历、相关岗位工作年限及报考类别核对康复医学治疗技术初级（士、师）或中级条件。入岗后确认机构聘任、科室督导、文书职责和转介流程。考试资格与当地机构岗位授权分别核对。",
           "jurisdiction": "美国各州许可规则分别核；中国按所在地、机构及岗位核。",
           "summary": "美国通常需作业治疗硕士学位和州执照；NBCOT认证考试资格与州执照不同。中国招聘条件不能从美国路径推断。"
         },
@@ -14628,6 +14625,12 @@
         ]
       },
       "career_snapshot_primary_locale": {
+        "callout": {
+          "$item": "occupational-therapists.china-salary.wave1-national-sector.1",
+          "block": "china-salary",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "type": "prose"
+        },
         "salary": {
           "bls_table": [
             {
@@ -14970,7 +14973,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
-        "summary": "如果愿意把穿衣、洗漱等真实生活任务拆成可评估目标，耐心训练与复评，并接受临床责任和资格要求，可继续探索作业治疗。",
+        "summary": "先完成入行区的纸面工单，再对照问答中的样答。",
         "title": "作业治疗师"
       },
       "fit_decision_checklist": {
@@ -15375,43 +15378,43 @@
         "heading": "谁适合作业治疗：兴趣、能力与边界",
         "questions": [
           {
-            "answer": "用虚构洗漱案例或合规见习找证据；单次自评不能证明适配。",
+            "answer": "留意自己是否愿意记住当事人上次遇到的困难，下次见面再问实际做得怎样。居家和儿科服务常需要与照护者反复沟通。",
             "question": "我喜欢与人长期互动吗？"
           },
           {
-            "answer": "用虚构洗漱案例或合规见习找证据；单次自评不能证明适配。",
+            "answer": "选一项熟悉的日常活动，写出完成顺序，标出在哪一步需要提示，以及哪一步实际上没有观察到。",
             "question": "我能拆解一项生活活动吗？"
           },
           {
-            "answer": "用虚构洗漱案例或合规见习找证据；单次自评不能证明适配。",
+            "answer": "同一项目复测时要写清任务条件和协助程度。试着把上次和本次的记录交给同事，看对方能否分辨真正的变化。",
             "question": "我愿意记录和复评吗？"
           },
           {
-            "answer": "用虚构洗漱案例或合规见习找证据；单次自评不能证明适配。",
+            "answer": "遇到任务未完成，先问目标、环境或当天状态有何变化。看自己能否调整沟通方式，同时保留对方拒绝的空间。",
             "question": "我能处理差异与挫折吗？"
           },
           {
-            "answer": "用虚构洗漱案例或合规见习找证据；单次自评不能证明适配。",
+            "answer": "把关节活动、感觉和认知的知识联系到穿衣或备餐等任务。遇到知识缺口时列出问题，请带教者解释判断依据。",
             "question": "我愿意学习医学与康复知识吗？"
           },
           {
-            "answer": "用虚构洗漱案例或合规见习找证据；单次自评不能证明适配。",
+            "answer": "遇到疼痛、失衡或协助超出权限时停下并请带教人员接手。检查自己在赶进度时能否照样报告异常。",
             "question": "我能识别风险并停手吗？"
           },
           {
-            "answer": "用虚构洗漱案例或合规见习找证据；单次自评不能证明适配。",
+            "answer": "择岗前比较医院的交接节奏、学校的课堂安排与居家服务的出行量，判断哪类日程更适合自己。",
             "question": "我接受多场景工作吗？"
           },
           {
-            "answer": "用虚构洗漱案例或合规见习找证据；单次自评不能证明适配。",
+            "answer": "写学习笔记时移除可识别线索，正式病历留在有权限的机构系统内。分享前逐项核对对象和权限。",
             "question": "我能保护病历隐私吗？"
           },
           {
-            "answer": "用虚构洗漱案例或合规见习找证据；单次自评不能证明适配。",
+            "answer": "与护士、医师或其他治疗师交接时，说清自己观察到的任务表现、协助记录和下一步由谁核对。",
             "question": "我愿与跨专业团队协作吗？"
           },
           {
-            "answer": "用虚构洗漱案例或合规见习找证据；单次自评不能证明适配。",
+            "answer": "先查所在地报考条件和目标单位的资格要求，再估算课程、实习与备考挤占的时间。把带教安排纳入择校或求职比较。",
             "question": "我能投入相应教育和资格路径吗？"
           }
         ],
@@ -15612,41 +15615,6 @@
       {
         "block": "path",
         "copy_key": "career.item.recruitment-sample",
-        "id": "occupational-therapists.path.recruitment-sample.2",
-        "location": "entry_decisions",
-        "type": "notice"
-      },
-      {
-        "block": "path",
-        "copy_key": "career.item.recruitment-sample",
-        "id": "occupational-therapists.path.recruitment-sample.3",
-        "location": "entry_decisions",
-        "type": "notice"
-      },
-      {
-        "block": "path",
-        "copy_key": "career.item.recruitment-sample",
-        "id": "occupational-therapists.path.recruitment-sample.4",
-        "location": "entry_decisions",
-        "type": "notice"
-      },
-      {
-        "block": "path",
-        "copy_key": "career.item.recruitment-sample",
-        "id": "occupational-therapists.path.recruitment-sample.5",
-        "location": "entry_decisions",
-        "type": "notice"
-      },
-      {
-        "block": "path",
-        "copy_key": "career.item.recruitment-sample",
-        "id": "occupational-therapists.path.recruitment-sample.6",
-        "location": "entry_decisions",
-        "type": "notice"
-      },
-      {
-        "block": "path",
-        "copy_key": "career.item.recruitment-sample",
         "id": "occupational-therapists.path.recruitment-sample.7",
         "location": "entry_decisions",
         "type": "notice"
@@ -15655,6 +15623,20 @@
         "block": "path",
         "copy_key": "career.item.recruitment-sample",
         "id": "occupational-therapists.path.recruitment-sample.8",
+        "location": "entry_decisions",
+        "type": "notice"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "occupational-therapists.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "occupational-therapists.entry-work-sample-data.2",
         "location": "entry_decisions",
         "type": "notice"
       }
@@ -15779,6 +15761,18 @@
         "source_refs": [
           "bls-ep-2025"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "卫生和社会工作 108,309 元",
+        "fact_id": "wave1-cn-sector-2025",
+        "market": "中国大陆",
+        "measure": "行业就业人员年平均工资",
+        "occupation_scope": "规模以上企业行业门类，非本职业",
+        "period": "2025",
+        "source_refs": [
+          "wave1-source-1"
+        ]
       }
     ]
   },
@@ -15831,17 +15825,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "作业治疗师怎样观察日常活动、设目标和记录变化？比较中国康复岗位、美国执照和工资，并用 OT-07 试做一次纸面活动分析。"
+      "text": "作业治疗师关注穿衣、进食、料理家务等日常活动。评估要记录任务在哪里、由谁完成、需要多少帮助，交接时说明复评观察点。40 人为多个康复岗位合计，不是 OT 人数。"
     },
     "title": {
       "availability": "available",
-      "text": "作业治疗师：职责、执照、工资与入门路径"
+      "text": "作业治疗师｜日常活动评估、薪资与资格"
     }
   },
-  "source_content_sha256": "8c4d1ad52c025d35e48cd80971ea2e7b07168a9ac2305b0b797124e9c0246dbd",
+  "source_content_sha256": "53933e58ecd14237c7384822139d7de108d5496e894c7c0f084661ef6dacb336",
   "subject": {
     "canonical_slug": "occupational-therapists",
     "name": "作业治疗师",
-    "summary": "作业治疗师和当事人一起确定想恢复的日常活动，例如洗漱、穿衣或返校。工作是观察哪些步骤卡住、提出适合的训练或环境调整，并复核是否更能安全参与。大陆招聘条件和美国州许可分别查。"
+    "summary": "作业治疗师关注穿衣、进食、料理家务等日常活动。评估要记录任务在哪里、由谁完成、需要多少帮助，交接时说明复评观察点。"
   }
 }

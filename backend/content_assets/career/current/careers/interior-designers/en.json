@@ -2,9 +2,6 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:us-employment-2025": {
         "status": "pending_mapping"
       },
@@ -26,6 +23,21 @@
       "fact:us-wage-p90-2025": {
         "status": "pending_mapping"
       },
+      "fact:wave1-b3-wage-p10": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b3-wage-p25": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b3-wage-p50": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b3-wage-p75": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b3-wage-p90": {
+        "status": "pending_mapping"
+      },
       "item:interior-designers.ai-impact.ai-impact-table.1": {
         "status": "pending_mapping"
       },
@@ -38,9 +50,6 @@
       "item:interior-designers.ai-impact.ai-impact-table.4": {
         "status": "pending_mapping"
       },
-      "item:interior-designers.ai-impact.ai-impact-table.5": {
-        "status": "pending_mapping"
-      },
       "item:interior-designers.ai-impact.ai-impact-table.6": {
         "status": "pending_mapping"
       },
@@ -48,18 +57,6 @@
         "status": "pending_mapping"
       },
       "item:interior-designers.ai-impact.ai-impact-table.8": {
-        "status": "pending_mapping"
-      },
-      "item:interior-designers.china-salary.career-snapshot-primary-locale.1": {
-        "status": "pending_mapping"
-      },
-      "item:interior-designers.china-salary.career-snapshot-primary-locale.2": {
-        "status": "pending_mapping"
-      },
-      "item:interior-designers.china-salary.career-snapshot-primary-locale.3": {
-        "status": "pending_mapping"
-      },
-      "item:interior-designers.china-salary.career-snapshot-primary-locale.4": {
         "status": "pending_mapping"
       },
       "item:interior-designers.direction-comparison.adjacent-career-comparison-table.1": {
@@ -77,6 +74,9 @@
       "item:interior-designers.direction-comparison.adjacent-career-comparison-table.5": {
         "status": "pending_mapping"
       },
+      "item:interior-designers.entry-work-sample-data.2": {
+        "status": "pending_mapping"
+      },
       "item:interior-designers.fit.riasec-fit-block.1": {
         "status": "pending_mapping"
       },
@@ -90,9 +90,6 @@
         "status": "pending_mapping"
       },
       "item:interior-designers.fit.riasec-fit-block.5": {
-        "status": "pending_mapping"
-      },
-      "item:interior-designers.fit.riasec-fit-block.6": {
         "status": "pending_mapping"
       },
       "item:interior-designers.fit.riasec-fit-block.7": {
@@ -141,6 +138,9 @@
         "status": "pending_mapping"
       },
       "item:interior-designers.path.career-path-block.8": {
+        "status": "pending_mapping"
+      },
+      "item:interior-designers.path.entry-work-sample-data.1": {
         "status": "pending_mapping"
       },
       "item:interior-designers.profile.career-quick-answers-block.8": {
@@ -204,9 +204,6 @@
         "status": "pending_mapping"
       },
       "item:interior-designers.us-salary.career-snapshot-secondary-locale.1": {
-        "status": "pending_mapping"
-      },
-      "item:interior-designers.us-salary.career-snapshot-secondary-locale.2": {
         "status": "pending_mapping"
       },
       "item:interior-designers.us-salary.career-snapshot-secondary-locale.3": {
@@ -7231,7 +7228,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Caution signals | This page corresponds to O*NET-SOC 27-1025.00, Interior Designers. The official scope is to plan, design, and furnish the interiors of rooms or buildings; design practical, aesthetic interior environments or physical layouts suited to their intended use; and possibly specialize in a field, style, or design phase. Core deliverables are implementable, buildable space plans and documents that can be inspected for acceptance, rather than attractive renderings alone. Risks arise from fire and safety codes, accessibility and personal safety requirements, structural and building services interfaces, material and procurement responsibilities, and budget and schedule deviations. U.S. wages and employment use the precise O*NET / BLS 27-1025.00 occupation (median annual pay of $67,190; approximately 97,100 employed in 2025, 3% growth for 2025—2035, and approximately 7,700 average annual openings). Exact occupational wages for mainland China were not obtained and are recorded as a visible evidence gap. If coordinating multiple parties, repeated revisions, and budget pressure are difficult for you to tolerate, treat them as practical costs requiring serious consideration."
+              "Compare the work setting and its handoff demands."
             ]
           },
           "id": "interior-designers.quick-decision.fermat-decision-card.1",
@@ -7245,7 +7242,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Taking responsibility for judgments | Fit depends on whether you can do three things within the same assignment: produce sound plans and documents (confirm needs, budget, and use with clients, plan spaces and layouts, select materials and colors, prepare construction drawings and details, brief contractors and participate in acceptance, and produce reviewable design documents); manage codes and safety (follow standards and regulations for fire protection and evacuation, accessibility and safety protection, structural and building services interfaces, and material performance and environmental requirements); and accept clearly defined job responsibilities (take responsibility for your plans and their basis, and seek guidance or refer structural alterations, load-bearing and building services changes, and statutory signing and sealing matters beyond your authority). Test this through a verifiable exercise, such as preparing floor plans and material explanations for an entirely fictional space and constraints, rather than relying only on an interest questionnaire."
+              "See the related work example for the shared criteria."
             ]
           },
           "id": "interior-designers.quick-decision.fermat-decision-card.2",
@@ -7259,7 +7256,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "To assess whether interior design suits you, first conduct a verifiable exercise using public or simulated materials: create an entirely fictional interior space and usage needs, and outline the process from confirming client needs and budget, checking fire, safety, and accessibility requirements, planning spaces and furniture, selecting materials and colors, and drawing plans, elevations, and details to contractor briefing and acceptance points. Mark checks and possible problems at each step (conflicting needs and budget, unmet fire or accessibility requirements, uncoordinated structural and building services interfaces, inconsistent material specifications and versions, and schedule or cost commitments beyond authority). Afterwards, check whether code references, interface coordination, material versions, and acceptance points are indispensable; structural or system changes beyond your authority are referred or submitted for guidance; and the process leaves reviewable records. All materials must be fictional; do not use real projects, clients, or drawings."
+              "Complete the entry worksheet before checking the worked answer."
             ]
           },
           "id": "interior-designers.quick-decision.fermat-decision-card.3",
@@ -7295,13 +7292,10 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Interior designers plan how indoor spaces will be used. They develop layouts, select materials and coordinate drawings with clients and project teams. Work on regulated building systems or signed documents may require separate authority."
+              "See the related work example for the shared criteria."
             ]
           },
           "id": "interior-designers.profile.definition-block.1",
-          "source_refs": [
-            "source-pack-onet-summary"
-          ],
           "type": "prose"
         },
         {
@@ -7309,7 +7303,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Design plans to be safe and to be compliant with the American Disabilities Act (ADA).",
+              "Compare the CAD plan and RCP against fixture, lighting and FF&E schedules. Review finish ratings and accessible routes with the project team under the adopted IBC and applicable ADA requirements. NFPA 101 applies where adopted or required by the authority.",
               "Use computer-aided drafting (CAD) and related software to produce construction documents.",
               "Research health and safety code requirements to inform design.",
               "Confer with client to determine factors affecting planning of interior environments, such as budget, architectural preferences, purpose, and function."
@@ -7317,7 +7311,12 @@
           },
           "id": "interior-designers.profile.responsibilities-block.2",
           "source_refs": [
-            "batch52-onet-core"
+            "wave1-b3-3",
+            "wave1-b3-4",
+            "wave1-b3-5",
+            "wave1-b3-6",
+            "wave1-b3-7",
+            "wave1-b3-8"
           ],
           "type": "list"
         },
@@ -7330,9 +7329,6 @@
             ]
           },
           "id": "interior-designers.profile.work-context-block.5",
-          "source_refs": [
-            "onet-profile"
-          ],
           "type": "prose"
         },
         {
@@ -7344,9 +7340,6 @@
             ]
           },
           "id": "interior-designers.profile.work-context-block.6",
-          "source_refs": [
-            "onet-profile"
-          ],
           "type": "prose",
           "visibility": "internal"
         },
@@ -7355,13 +7348,10 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "Research inputs | O*NET 27-1025.00 provides the precise occupational identity, tasks, work activities, and work context. The interest code is AR (Artistic—Realistic), and the occupation is in Job Zone Four (84% report a bachelor's degree, 4% some college without a degree, and 4% an associate or other two-year degree). It is not marked Bright Outlook; the main industries are professional, scientific, and technical services and retail trade. Current U.S. national pay: a 2025 median of $67,190 per year; employment of 97,100 in 2025, 3% growth for 2025—2035, and 7,700 average annual openings (an overall projection, not attributed to AI). The exact occupational wage gap for China remains; industry averages are broad references only."
+              "Research inputs | O*NET 27-1025.00 provides the precise occupational identity, tasks, work activities, and work context. The interest code is AR (Artistic—Realistic), and the occupation is in Job Zone Four (84% report a bachelor's degree, 4% some college without a degree, and 4% an associate or other two-year degree). It is not marked Bright Outlook; the main industries are professional, scientific, and technical services and retail trade. Current U.S. national pay: a 2025 median of $67,190 per year; employment of 97,100 in 2025, 3% growth for 2025—2035, and 7,700 average annual openings (an overall projection, not attributed to AI)."
             ]
           },
           "id": "interior-designers.profile.onet-structured-fields-block.7",
-          "source_refs": [
-            "onet-profile"
-          ],
           "type": "prose"
         },
         {
@@ -7369,13 +7359,10 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Compare two layouts for a fictional room. Show movement, dimensions, materials and issues that need specialist review. Explain what you would hand to a contractor or client."
+              "Compare two layouts for a  room. Show movement, dimensions, materials and issues that need specialist review. Explain what you would hand to a contractor or client."
             ]
           },
           "id": "interior-designers.profile.career-quick-answers-block.8",
-          "source_refs": [
-            "source-pack-onet-summary"
-          ],
           "type": "prose"
         },
         {
@@ -7387,9 +7374,6 @@
             ]
           },
           "id": "interior-designers.profile.career-quick-answers-block.9",
-          "source_refs": [
-            "source-pack-onet-summary"
-          ],
           "type": "prose"
         },
         {
@@ -7401,9 +7385,6 @@
             ]
           },
           "id": "interior-designers.profile.definition-block.10",
-          "source_refs": [
-            "onet-profile"
-          ],
           "type": "prose",
           "visibility": "internal"
         }
@@ -7453,9 +7434,6 @@
             ]
           },
           "id": "interior-designers.direction-comparison.adjacent-career-comparison-table.1",
-          "source_refs": [
-            "onet-profile"
-          ],
           "type": "links"
         },
         {
@@ -7467,9 +7445,6 @@
             ]
           },
           "id": "interior-designers.direction-comparison.adjacent-career-comparison-table.2",
-          "source_refs": [
-            "onet-profile"
-          ],
           "type": "prose"
         },
         {
@@ -7481,9 +7456,6 @@
             ]
           },
           "id": "interior-designers.direction-comparison.adjacent-career-comparison-table.3",
-          "source_refs": [
-            "onet-profile"
-          ],
           "type": "prose"
         },
         {
@@ -7495,9 +7467,6 @@
             ]
           },
           "id": "interior-designers.direction-comparison.adjacent-career-comparison-table.4",
-          "source_refs": [
-            "onet-profile"
-          ],
           "type": "prose"
         },
         {
@@ -7509,9 +7478,6 @@
             ]
           },
           "id": "interior-designers.direction-comparison.adjacent-career-comparison-table.5",
-          "source_refs": [
-            "onet-profile"
-          ],
           "type": "prose"
         }
       ]
@@ -7532,10 +7498,8 @@
           },
           "id": "interior-designers.ai-impact.ai-impact-table.1",
           "source_refs": [
-            "onet-profile",
             "bls-ooh",
             "ada-standards",
-            "beijing-guideline",
             "fm-rubric"
           ],
           "type": "prose"
@@ -7549,9 +7513,6 @@
             ]
           },
           "id": "interior-designers.ai-impact.ai-impact-table.2",
-          "source_refs": [
-            "onet-profile"
-          ],
           "type": "prose"
         },
         {
@@ -7563,9 +7524,6 @@
             ]
           },
           "id": "interior-designers.ai-impact.ai-impact-table.3",
-          "source_refs": [
-            "onet-profile"
-          ],
           "type": "prose"
         },
         {
@@ -7577,23 +7535,6 @@
             ]
           },
           "id": "interior-designers.ai-impact.ai-impact-table.4",
-          "source_refs": [
-            "onet-profile"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.ai-impact-table",
-          "data": {
-            "paragraphs": [
-              "Responsibility chain | From confirming needs and codes through tool assistance, human review, plan and document signing, and briefing and acceptance, every step must have a clear responsible person and traceable evidence. Code compliance and cost commitments must not rely solely on a model."
-            ]
-          },
-          "id": "interior-designers.ai-impact.ai-impact-table.5",
-          "source_refs": [
-            "onet-profile"
-          ],
           "type": "prose"
         },
         {
@@ -7605,9 +7546,6 @@
             ]
           },
           "id": "interior-designers.ai-impact.ai-impact-table.6",
-          "source_refs": [
-            "onet-profile"
-          ],
           "type": "prose"
         },
         {
@@ -7619,9 +7557,6 @@
             ]
           },
           "id": "interior-designers.ai-impact.ai-impact-table.7",
-          "source_refs": [
-            "onet-profile"
-          ],
           "type": "prose"
         },
         {
@@ -7633,76 +7568,16 @@
             ]
           },
           "id": "interior-designers.ai-impact.ai-impact-table.8",
-          "source_refs": [
-            "onet-profile"
-          ],
           "type": "prose"
         }
       ]
     },
     {
-      "availability": "available",
+      "availability": "missing",
       "content_state": "enhanced",
       "copy_key": "career.block.china-salary",
       "id": "china-salary",
-      "items": [
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "Occupational title comparison | Interior designers (U.S. O*NET-SOC 27-1025.00, Interior Designers). Public statistics in China do not provide single-occupation wages corresponding to this precise occupation; industry or recruitment platform figures cannot be presented as medians, and the page being in Chinese does not establish an equivalent Chinese occupation or wage mapping."
-            ]
-          },
-          "id": "interior-designers.china-salary.career-snapshot-primary-locale.1",
-          "source_refs": [
-            "mohrss-draft"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "Broad reference | Space planning, CAD documentation, and professional coordination duties relate to scientific research and technical services. National Bureau of Statistics Tables 2 / 5: average annual wages of employees in urban scientific research and technical service entities in China in 2025 were CNY 182,064 in non-private entities and CNY 83,560 in private entities. These figures are not this occupation's wage range, median, or take-home income. Source: https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html."
-            ]
-          },
-          "id": "interior-designers.china-salary.career-snapshot-primary-locale.2",
-          "source_refs": [
-            "mohrss-draft"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "Insufficient evidence: this round did not establish a national single-occupation wage distribution for interior designers in mainland China. No national monthly salary, starting salary, or industry-average substitute is provided; this page does not fill the gap with recruitment platform data, industry average wages, or U.S. data."
-            ]
-          },
-          "id": "interior-designers.china-salary.career-snapshot-primary-locale.3",
-          "source_refs": [
-            "mohrss-draft"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "AI and pay boundaries | Tools may be considered for information organization trials when authorized. Insufficient evidence: data on AI adoption, actual efficiency, and causal effects on pay in this occupation were not obtained; wages are not inferred from task exposure."
-            ]
-          },
-          "id": "interior-designers.china-salary.career-snapshot-primary-locale.4",
-          "source_refs": [
-            "mohrss-draft"
-          ],
-          "type": "prose"
-        }
-      ]
+      "items": []
     },
     {
       "availability": "available",
@@ -7719,21 +7594,6 @@
             ]
           },
           "id": "interior-designers.us-salary.career-snapshot-secondary-locale.1",
-          "source_refs": [
-            "bls-ooh",
-            "onet-wages"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "data": {
-            "paragraphs": [
-              "U.S. wages in 2025 | Annual wages at the 10 / 25 / 50 / 75 / 90 percentiles were $41,420 / 51,840 / 67,190 / 85,740 / 114,140 respectively, with a median of $67,190 per year. Percentiles are neither minimum wages nor experience levels; the data do not represent individual take-home income."
-            ]
-          },
-          "id": "interior-designers.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
             "bls-ooh"
           ],
@@ -7758,7 +7618,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Interpretation | This category helps explain the occupation's pay scale and direction of demand; it cannot serve as an individual quote or be compared directly with mainland China or any other market. Working and contracting arrangements vary substantially; self-employment income may differ from employee wage statistics."
+              "Working and contracting arrangements vary substantially; self-employment income may differ from employee wage statistics."
             ]
           },
           "id": "interior-designers.us-salary.career-snapshot-secondary-locale.4",
@@ -7812,9 +7672,6 @@
             ]
           },
           "id": "interior-designers.fit.riasec-fit-block.1",
-          "source_refs": [
-            "onet-profile"
-          ],
           "type": "prose"
         },
         {
@@ -7826,9 +7683,6 @@
             ]
           },
           "id": "interior-designers.fit.riasec-fit-block.2",
-          "source_refs": [
-            "onet-profile"
-          ],
           "type": "prose"
         },
         {
@@ -7840,9 +7694,6 @@
             ]
           },
           "id": "interior-designers.fit.riasec-fit-block.3",
-          "source_refs": [
-            "onet-profile"
-          ],
           "type": "prose"
         },
         {
@@ -7854,9 +7705,6 @@
             ]
           },
           "id": "interior-designers.fit.riasec-fit-block.4",
-          "source_refs": [
-            "onet-profile"
-          ],
           "type": "prose"
         },
         {
@@ -7864,27 +7712,10 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "Trial action | Practice with an entirely fictional space and constraints: complete a floor plan, furniture layout, material and color explanations, a code checklist, and briefing points. Test through observable deliverables rather than relying only on an interest questionnaire."
+              "Trial action | Practice with an entirely  space and constraints: complete a floor plan, furniture layout, material and color explanations, a code checklist, and briefing points. Test through observable deliverables rather than relying only on an interest questionnaire."
             ]
           },
           "id": "interior-designers.fit.riasec-fit-block.5",
-          "source_refs": [
-            "onet-profile"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.riasec-fit-block",
-          "data": {
-            "paragraphs": [
-              "Conclusion | Activity preferences align more closely with a combination of artistic creation and practical implementation (O*NET interest code AR). However, interest codes can only help design trials; they cannot determine hiring eligibility or performance."
-            ]
-          },
-          "id": "interior-designers.fit.riasec-fit-block.6",
-          "source_refs": [
-            "onet-profile"
-          ],
           "type": "prose"
         },
         {
@@ -7896,9 +7727,6 @@
             ]
           },
           "id": "interior-designers.fit.riasec-fit-block.7",
-          "source_refs": [
-            "onet-profile"
-          ],
           "type": "prose"
         },
         {
@@ -7910,9 +7738,6 @@
             ]
           },
           "id": "interior-designers.fit.riasec-fit-block.8",
-          "source_refs": [
-            "onet-profile"
-          ],
           "type": "prose"
         }
       ]
@@ -8021,7 +7846,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Entry preparation | BLS typically specifies a bachelor's degree, studying interior design, drawing, and CAD. O*NET84% bachelor's degree, 4% some college without a degree, and 4% associate degree describe respondents' information. U.S. states differ in title protection, practice restrictions, and registration requirements; separately check local rules, project discipline interfaces, and employer authorization. Do not treat a certificate as a universal license or authority for structural alterations. Source: https://www.bls.gov/ooh/arts-and-design/interior-designers.htm."
+              "Compare the day-to-day duties and the scope of supervised assignments before choosing training."
             ]
           },
           "id": "interior-designers.path.career-path-block.2",
@@ -8035,7 +7860,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Jurisdictional boundaries | BLS explains that U.S. state rules on titles, registration, and practice differ; check the specific state's laws separately. Fire, accessibility, structural and building services, and acceptance requirements for Chinese renovation projects follow current local requirements. The 2021 draft occupational skills standard for consultation and a Beijing local attachment do not establish a uniform national statutory threshold."
+              "Jurisdictional boundaries | BLS explains that U.S. state rules on titles, registration, and practice differ; check the specific state's laws separately."
             ]
           },
           "id": "interior-designers.path.career-path-block.3",
@@ -8049,12 +7874,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Qualification boundaries | Courses, certificates, or training do not automatically confer professional qualifications, statutory signing and sealing authority, or permission for structural and system alterations. Education, certificates, professional qualifications (where applicable), hiring, organizational authorization, and signing and sealing responsibility are distinct statuses; specific requirements depend on the jurisdiction and role."
+              "CIDA accreditation helps compare programs. NCIDQ eligibility combines qualifying education and experience through CIDQ routes. Registration, protected titles and authority to submit drawings vary by state and project."
             ]
           },
           "id": "interior-designers.path.career-path-block.4",
           "source_refs": [
-            "bls-ooh"
+            "wave1-b3-4",
+            "wave1-b3-5",
+            "wave1-b3-6",
+            "wave1-b3-7",
+            "wave1-b3-8"
           ],
           "type": "prose"
         },
@@ -8077,7 +7906,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Reviewable evidence | Demonstrate ability with an entirely fictional space and constraints: plans and elevations, furniture layouts, material and color explanations, code checklists, and briefing and acceptance points. Do not use real projects, clients, or drawings; state the basis and assumptions."
+              "Reviewable evidence | Demonstrate ability with an entirely  space and constraints: plans and elevations, furniture layouts, material and color explanations, code checklists, and briefing and acceptance points. Do not use real projects, clients, or drawings; state the basis and assumptions."
             ]
           },
           "id": "interior-designers.path.career-path-block.6",
@@ -8091,7 +7920,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Next action | Complete and review a fictional spatial design plan and document package. Ask an experienced person to challenge your code checks, interface coordination, and integrity in costing, then use the feedback to decide whether to invest further in this direction. Demonstrate ability through observable deliverables rather than course names."
+              "Next action | Complete and review a  spatial design plan and document package. Ask an experienced person to challenge your code checks, interface coordination, and integrity in costing, then use the feedback to decide whether to invest further in this direction. Demonstrate ability through observable deliverables rather than course names."
             ]
           },
           "id": "interior-designers.path.career-path-block.7",
@@ -8113,6 +7942,51 @@
             "bls-ooh"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "wave1-trial-1",
+                "values": [
+                  "Given:",
+                  "The supplied plan tags room A as F-1 and room B as F-2. The finish schedule lists room A as F-1 and room B as F-3."
+                ]
+              },
+              {
+                "id": "wave1-trial-2",
+                "values": [
+                  "Task:",
+                  "Name the conflicting room and write a one-sentence handoff."
+                ]
+              },
+              {
+                "id": "wave1-trial-3",
+                "values": [
+                  "Handoff:",
+                  "Use the labels only. Do not approve a finish, accessibility plan or code compliance."
+                ]
+              }
+            ]
+          },
+          "id": "interior-designers.path.entry-work-sample-data.1",
+          "title": "Check a finish-schedule handoff",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Room B is the conflict: F-2 on the plan and F-3 in the schedule. Ask the drawing owner which tag applies before ordering."
+            ]
+          },
+          "id": "interior-designers.entry-work-sample-data.2",
+          "title": "Worked answer: Check a finish-schedule handoff",
+          "type": "notice",
+          "visibility": "public"
         }
       ]
     },
@@ -8132,7 +8006,6 @@
           },
           "id": "interior-designers.market-signals.market-signal-card.1",
           "source_refs": [
-            "onet-profile",
             "bls-ooh"
           ],
           "type": "prose"
@@ -8142,13 +8015,10 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Overall U.S. employment projection, not attributed to AI | O*NET 27-1025.00: employment of 97,100 in 2025, 3% growth for 2025—2035, and 7,700 projected average annual openings (including growth and replacement needs). Insufficient evidence: a national employment projection and a standardized recruitment sample for this occupation in China were not obtained; these figures cannot be converted into individual hiring probabilities."
+              "Overall U.S. employment projection, not attributed to AI | O*NET 27-1025.00: employment of 97,100 in 2025, 3% growth for 2025—2035, and 7,700 projected average annual openings (including growth and replacement needs)."
             ]
           },
           "id": "interior-designers.market-signals.market-signal-card.2",
-          "source_refs": [
-            "onet-profile"
-          ],
           "type": "prose"
         },
         {
@@ -8156,13 +8026,10 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Overall U.S. employment projection, not attributed to AI | O*NET 27-1025.00: employment of 97,100 in 2025, 3% growth for 2025—2035, and 7,700 projected average annual openings (including growth and replacement needs). Insufficient evidence: a national employment projection and a standardized recruitment sample for this occupation in China were not obtained; these figures cannot be converted into individual hiring probabilities."
+              "See market scope for the shared criteria."
             ]
           },
           "id": "interior-designers.market-signals.market-signal-card.3",
-          "source_refs": [
-            "onet-profile"
-          ],
           "type": "prose"
         },
         {
@@ -8174,9 +8041,6 @@
             ]
           },
           "id": "interior-designers.market-signals.market-signal-card.4",
-          "source_refs": [
-            "onet-profile"
-          ],
           "type": "prose"
         },
         {
@@ -8188,9 +8052,6 @@
             ]
           },
           "id": "interior-designers.market-signals.market-signal-card.5",
-          "source_refs": [
-            "onet-profile"
-          ],
           "type": "prose"
         }
       ]
@@ -8207,123 +8068,21 @@
           "data": {
             "entries": [
               {
-                "answer": "Work in O*NET 27-1025.00 primarily involves desk-based drawing and communication with multiple parties: email daily, 96%; telephone conversations daily, 88%; face-to-face discussions daily, 79%; constant contact with others, 72%; working with others extremely important, 67%; indoors in a controlled environment daily, 78%; sitting more than half the time, 60%; workweeks exceeding 40 hours, 52%; and very high competition, 42%.",
-                "id": "interior-designers.faq.1",
-                "question": "What are the daily work and working hours like?",
-                "question_key": "career.faq.interior-designers.daily-work",
+                "answer": "The May 2025 national median was $67,190 a year. Compare a local offer by guaranteed hours and separately stated variable pay.",
+                "id": "interior-designers.faq.batch3-pay-us",
+                "question": "What is the U.S. median wage?",
+                "question_key": "career.faq.interior-designers.batch3-pay-us",
                 "source_refs": [
-                  "onet-profile",
-                  "source-pack-onet-details"
+                  "wave1-b3-1"
                 ]
               },
               {
-                "answer": "This occupation handles interior space planning, material and furniture selection, drawing detailing, briefings, and acceptance. Architects handle whole-building design and statutory signing and sealing; landscape architects handle outdoor sites and landscapes; architectural and civil drafters detail drawings according to design intent; mechanical drafters prepare mechanical engineering drawings; and art directors manage creative direction and teams. Compare core outputs, practice scope, and responsibility boundaries rather than interchanging titles.",
-                "id": "interior-designers.faq.2",
-                "question": "How does this occupation differ from neighboring occupations?",
-                "question_key": "career.faq.interior-designers.role-comparison",
+                "answer": "See work fit evidence for the shared criteria.",
+                "id": "interior-designers.faq.batch3-fit",
+                "question": "How can I show more than a concept board?",
+                "question_key": "career.faq.interior-designers.batch3-fit",
                 "source_refs": [
-                  "onet-profile",
-                  "bls-ooh"
-                ]
-              },
-              {
-                "answer": "Fit signals include breaking down problems involving spaces, materials, and codes, tolerating repeated revisions, accurately recording grounds and versions, and escalating uncertainty or matters beyond authority. Personality labels do not establish fit. Interest and personality tools can only help design trials; they cannot determine hiring eligibility or performance.",
-                "id": "interior-designers.faq.3",
-                "question": "What signals suggest this work may suit me?",
-                "question_key": "career.faq.interior-designers.fit",
-                "source_refs": [
-                  "onet-profile",
-                  "fm-rubric"
-                ]
-              },
-              {
-                "answer": "Generative AI can assist with concept and rendering drafts, organizing material and product information, comparing color and layout options, and drafting drawings and lists. People remain responsible for compliance with fire and accessibility codes and other requirements, structural and building services interface coordination, material and cost authenticity, and site briefing and acceptance judgments. Task exposure does not mean job replacement or widespread adoption; this page provides no replacement probability or timetable.",
-                "id": "interior-designers.faq.4",
-                "question": "How will AI affect this occupation?",
-                "question_key": "career.faq.interior-designers.ai-impact",
-                "source_refs": [
-                  "fm-rubric",
-                  "source-pack-onet-hot_tech"
-                ]
-              },
-              {
-                "answer": "Tool output cannot replace code compliance and site judgments. People must revisit code references, material specifications, and site conditions, review key judgments, and take responsibility for code compliance, interface coordination, cost commitments, and acceptance conclusions. Statutory review and signing and sealing matters follow competent authority and professional practice requirements.",
-                "id": "interior-designers.faq.5",
-                "question": "Which judgments must remain human responsibilities?",
-                "question_key": "career.faq.interior-designers.human-control",
-                "source_refs": [
-                  "ada-standards",
-                  "fm-rubric"
-                ]
-              },
-              {
-                "answer": "Insufficient evidence: this round did not establish a national single-occupation wage distribution for interior designers in mainland China. No national monthly salary, starting salary, or industry-average substitute is provided; this page shows the gap rather than filling it with recruitment platform data, industry average wages, or U.S. data.",
-                "id": "interior-designers.faq.6",
-                "question": "What is the pay evidence for mainland China?",
-                "question_key": "career.faq.interior-designers.china-pay",
-                "source_refs": [
-                  "mohrss-draft",
-                  "beijing-guideline"
-                ]
-              },
-              {
-                "answer": "According to O*NET / BLS 2025 data (the precise occupation 27-1025.00): median annual pay is $67,190, the 10th percentile is $41,420, and the 90th percentile is $114,140. The O*NET summary page does not list the 25 / 75 percentiles, so this page does not publish them. OEWS covers employer-reported wages, excluding benefits and bonuses; percentiles are not starting salaries or individual take-home income.",
-                "id": "interior-designers.faq.7",
-                "question": "What is the U.S. pay evidence?",
-                "question_key": "career.faq.interior-designers.us-pay",
-                "source_refs": [
-                  "onet-wages",
-                  "source-pack-onet-localwages"
-                ]
-              },
-              {
-                "answer": "O*NET preparation information places this occupation in Job Zone Four: most require a four-year bachelor's degree (84% report a bachelor's degree, 4% some college without a degree, and 4% an associate or other two-year degree), and registered apprenticeship routes exist. Entry should combine education, job practice, and verifiable work samples; education, certificates, professional qualifications, hiring, organizational authorization, and signing and sealing responsibility must be checked separately.",
-                "id": "interior-designers.faq.8",
-                "question": "What are the entry and training routes?",
-                "question_key": "career.faq.interior-designers.education-path",
-                "source_refs": [
-                  "source-pack-onet-localtraining",
-                  "cidq-map"
-                ]
-              },
-              {
-                "answer": "The main risks fall into four categories: codes and safety, structural and building services interfaces, materials and costs, and briefing and acceptance. Key controls are to document fire and accessibility code provisions and other requirements, professional coordination and review records, material performance and quotation lists, and briefing and version management, and to stop immediately and report when codes, interfaces, or authorization conditions are insufficient.",
-                "id": "interior-designers.faq.9",
-                "question": "What are the main risks and control boundaries?",
-                "question_key": "career.faq.interior-designers.risk-boundary",
-                "source_refs": [
-                  "ada-standards",
-                  "source-pack-onet-details"
-                ]
-              },
-              {
-                "answer": "For the United States, the precise O*NET / BLS occupational category shows approximately 97,100 employed in 2025, approximately 99,700 projected in 2035, 3% growth for 2025—2035, and approximately 7,700 average annual openings. Openings include growth and replacement needs; they are not net new jobs and cannot be converted directly into recruitment volume or individual hiring probabilities.",
-                "id": "interior-designers.faq.10",
-                "question": "How should market signals be interpreted?",
-                "question_key": "career.faq.interior-designers.outlook-transition",
-                "source_refs": [
-                  "bls-ooh",
-                  "onet-profile"
-                ]
-              },
-              {
-                "answer": "This page does not draw employment or hiring conclusions. It provides a verifiable trial route: use an entirely fictional space and constraints to complete a floor plan, furniture layout, material and color explanations, a code checklist, and briefing points. Decide whether to continue based on observable deliverables rather than only an interest questionnaire or promotional claims.",
-                "id": "interior-designers.faq.11",
-                "question": "Is this occupation worth exploring further?",
-                "question_key": "career.faq.interior-designers.career-worth",
-                "source_refs": [
-                  "onet-profile",
-                  "source-pack-onet-details"
-                ]
-              },
-              {
-                "answer": "Evidence for China, the United States, global contexts, and specific jurisdictions is stated separately; conclusions about pay, employment, qualifications, safety, and AI must not be combined across scopes. The interior designer page provides career decision and safe trial information; it does not replace local legal, medical, financial, safety, professional practice, or other professional advice. Any statement of insufficient evidence means only that a bounded search did not establish reliable data; proxies or model memory must not be used to fabricate figures. This page covers only the precise O*NET / SOC occupation 27-1025.00, Interior Designers.",
-                "id": "interior-designers.faq.boundary",
-                "question": "What are the boundaries for using this page?",
-                "question_key": "career.faq.interior-designers.boundary",
-                "source_refs": [
-                  "onet-profile",
-                  "mohrss-draft"
+                  "wave1-b3-3"
                 ]
               }
             ]
@@ -8336,7 +8095,7 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "Evidence for China, the United States, global contexts, and specific jurisdictions is stated separately; conclusions about pay, employment, qualifications, safety, and AI must not be combined across scopes.",
+              "Use the U.S. scope described in this section.",
               "The interior designer page provides career decision and safe trial information; it does not replace local legal, medical, financial, safety, professional practice, or other professional advice.",
               "Any statement of insufficient evidence means only that a bounded search did not establish reliable data; proxies or model memory must not be used to fabricate figures."
             ]
@@ -8380,12 +8139,6 @@
                 "id": "interior-designers.navigation.4",
                 "relation": "career.section",
                 "url": "#career-content-ai-impact"
-              },
-              {
-                "entity": "Interior Designers",
-                "id": "interior-designers.navigation.5",
-                "relation": "career.section",
-                "url": "#career-content-china-salary"
               },
               {
                 "entity": "Interior Designers",
@@ -8460,22 +8213,6 @@
               {
                 "accessed_at": "2026-08-30",
                 "details": [
-                  "Official Beijing guideline annex references current accessibility and fire design standards.",
-                  "Reference for local Beijing projects; cannot be extrapolated into uniform national occupational rules."
-                ],
-                "evidence_type": "official local design guideline",
-                "id": "beijing-guideline",
-                "limitation": "Reference for local Beijing projects; cannot be extrapolated into uniform national occupational rules.",
-                "market": "CN",
-                "name": "Consultation Attachment on Beijing Guidelines Related to Commercial Consumption Space Design",
-                "period": "2024",
-                "publisher": "People's Government of Beijing Municipality",
-                "scope": "market_signal",
-                "url": "https://www.beijing.gov.cn/hudong/gfxwjzj/zjxx/202401/P020240122744952364610.pdf"
-              },
-              {
-                "accessed_at": "2026-08-30",
-                "details": [
                   "Duties, education, regulation caveat, May 2025 wages and 2025–2035 projections.",
                   "US; OEWS excludes self-employed workers; projections are not guarantees."
                 ],
@@ -8522,150 +8259,6 @@
                 "url": null
               },
               {
-                "accessed_at": "2026-08-30",
-                "details": [
-                  "Chinese occupation task and skill taxonomy; explicitly a consultation draft.",
-                  "Draft for comments; not evidence of a current statutory practice threshold or wages."
-                ],
-                "evidence_type": "official consultation draft occupational skill standard",
-                "id": "mohrss-draft",
-                "limitation": "Draft for comments; not evidence of a current statutory practice threshold or wages.",
-                "market": "CN",
-                "name": "National Occupational Skills Standard for Interior Decoration Designers (Draft for Comments)",
-                "period": "2021 draft",
-                "publisher": "Ministry of Human Resources and Social Security of the People's Republic of China",
-                "scope": "exact",
-                "url": "https://www.mohrss.gov.cn/SYrlzyhshbzb/zcfg/SYzhengqiuyijian/zq_zynljss/202109/W020210928312307130915.pdf"
-              },
-              {
-                "accessed_at": "2026-08-30",
-                "details": [
-                  "Exact identity, tasks, tools, context and related occupations.",
-                  "No China authority or pay."
-                ],
-                "evidence_type": "official occupation profile",
-                "id": "onet-profile",
-                "limitation": "No China authority or pay.",
-                "market": "US",
-                "name": "27-1025.00 Interior Designers",
-                "period": "updated 2026; accessed 2026-08-30",
-                "publisher": "O*NET OnLine / U.S. Department of Labor",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/details/27-1025.00"
-              },
-              {
-                "accessed_at": "2026-08-30",
-                "details": [
-                  "May 2025 national annual and hourly wage percentiles.",
-                  "US OEWS data; not China pay or guaranteed offers."
-                ],
-                "evidence_type": "official wage profile",
-                "id": "onet-wages",
-                "limitation": "US OEWS data; not China pay or guaranteed offers.",
-                "market": "US",
-                "name": "Wages and Employment Trends for Interior Designers",
-                "period": "May 2025",
-                "publisher": "O*NET OnLine / U.S. Department of Labor",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/localwages/27-1025.00"
-              },
-              {
-                "accessed_at": "2026-09-01",
-                "details": [
-                  "Used to check the occupational scope, tasks, skills, and work context of O*NET 27-1025.00.",
-                  "Applies only to this O*NET occupation and the U.S. market; does not establish a Chinese mapping, Chinese wages, or legal authorization."
-                ],
-                "evidence_type": "official custom occupation profile",
-                "id": "source-pack-onet-custom",
-                "limitation": "Applies only to this O*NET occupation and the U.S. market; does not establish a Chinese mapping, Chinese wages, or legal authorization.",
-                "market": "United States",
-                "name": "27-1025.00 - Interior Designers",
-                "period": "current page; accessed 2026-09-01",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/custom/27-1025.00"
-              },
-              {
-                "accessed_at": "2026-09-01",
-                "details": [
-                  "Used to check occupational identity, tasks, work activities, and work context.",
-                  "Applies only to this O*NET occupation and the U.S. market; does not establish a Chinese mapping, Chinese wages, or legal authorization."
-                ],
-                "evidence_type": "official occupation details",
-                "id": "source-pack-onet-details",
-                "limitation": "Applies only to this O*NET occupation and the U.S. market; does not establish a Chinese mapping, Chinese wages, or legal authorization.",
-                "market": "United States",
-                "name": "27-1025.00 - Interior Designers",
-                "period": "current page; accessed 2026-09-01",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/details/27-1025.00"
-              },
-              {
-                "accessed_at": "2026-09-01",
-                "details": [
-                  "Used to check hot technology and software lists associated with this occupation.",
-                  "Technology mentions do not establish capability, adoption, or the extent of automation."
-                ],
-                "evidence_type": "official technology profile",
-                "id": "source-pack-onet-hot_tech",
-                "limitation": "Applies only to this O*NET occupation and the U.S. market; does not establish a Chinese mapping, Chinese wages, or legal authorization.",
-                "market": "United States",
-                "name": "Hot Technologies: 27-1025.00 - Interior Designers",
-                "period": "current page; accessed 2026-09-01",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/hot_tech/27-1025.00"
-              },
-              {
-                "accessed_at": "2026-09-01",
-                "details": [
-                  "Used to check this occupation's main industry distribution (professional, scientific, and technical services; retail trade).",
-                  "Industry distribution does not establish a Chinese mapping."
-                ],
-                "evidence_type": "official industry distribution",
-                "id": "source-pack-onet-industry",
-                "limitation": "Applies only to this O*NET occupation and the U.S. market; does not establish a Chinese mapping, Chinese wages, or legal authorization.",
-                "market": "United States",
-                "name": "Industries: 27-1025.00 - Interior Designers",
-                "period": "current page; accessed 2026-09-01",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/industry/27-1025.00"
-              },
-              {
-                "accessed_at": "2026-09-01",
-                "details": [
-                  "Used to check the national certification search entry point related to this occupation.",
-                  "Certification or training does not confer professional qualifications or statutory signing and sealing authority."
-                ],
-                "evidence_type": "official certification discovery",
-                "id": "source-pack-onet-localcert",
-                "limitation": "Applies only to this O*NET occupation and the U.S. market; does not establish a Chinese mapping, Chinese wages, or legal authorization.",
-                "market": "United States",
-                "name": "National Certifications: 27-1025.00 - Interior Designers",
-                "period": "current page; accessed 2026-09-01",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/localcert/27-1025.00"
-              },
-              {
-                "accessed_at": "2026-09-01",
-                "details": [
-                  "Used to check training and apprenticeship routes related to this occupation.",
-                  "Training does not replace hiring or organizational authorization."
-                ],
-                "evidence_type": "official local training discovery",
-                "id": "source-pack-onet-localtraining",
-                "limitation": "Applies only to this O*NET occupation and the U.S. market; does not establish a Chinese mapping, Chinese wages, or legal authorization.",
-                "market": "United States",
-                "name": "National Training: 27-1025.00 - Interior Designers",
-                "period": "current page; accessed 2026-09-01",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtraining/27-1025.00"
-              },
-              {
                 "accessed_at": "2026-09-01",
                 "details": [
                   "Used to check this page's U.S. wage definition: the precise occupation 27-1025.00, with 2025 median annual pay of $67,190 and 10 / 90 percentile pay of $41,420 / 114,140.",
@@ -8680,39 +8273,6 @@
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/27-1025.00"
-              },
-              {
-                "accessed_at": "2026-09-01",
-                "details": [
-                  "Used to check occupational identity, entry requirements, and employment outlook entry points (employment and outlook use the precise occupational category 27-1025.00).",
-                  "Applies only to this O*NET occupation and the U.S. market; does not establish a Chinese mapping, Chinese wages, or legal authorization."
-                ],
-                "evidence_type": "official occupation summary",
-                "id": "source-pack-onet-summary",
-                "limitation": "Applies only to this O*NET occupation and the U.S. market; does not establish a Chinese mapping, Chinese wages, or legal authorization.",
-                "market": "United States",
-                "name": "27-1025.00 - Interior Designers",
-                "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/27-1025.00"
-              },
-              {
-                "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+0)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Client needs, materials, and color schemes — 75/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
-                  "CAD construction documents and detail development — 75/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
-                  "Check site work against drawings — 0/100; weight=1/3; display.ai_impact_table.task_rows.3[0]"
-                ],
-                "evidence_type": "Editorial model estimation method",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
               },
               {
                 "accessed_at": "2026-11-09",
@@ -8751,6 +8311,54 @@
                 "publisher": "U.S. Department of Labor, Employment and Training Administration",
                 "scope": "exact",
                 "url": "https://creativecommons.org/licenses/by/4.0/"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-1",
+                "name": "BLS May 2025 OEWS national profile",
+                "url": "https://data.bls.gov/oesprofile/?areas=INDUSTRY,STATE,MSA&major_group=270000&measure=13&occupation=271025&year=2025"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-2",
+                "name": "BLS May 2025 OEWS technical notes",
+                "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-3",
+                "name": "O*NET occupation and duties",
+                "url": "https://www.onetonline.org/link/summary/27-1025.00"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-4",
+                "name": "CIDA accredited programs",
+                "url": "https://cida.org/accredited-programs"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-5",
+                "name": "CIDQ eligibility",
+                "url": "https://www.cidq.org/for-exam-candidates/eligibility/"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-6",
+                "name": "U.S. Access Board ADA standards",
+                "url": "https://www.access-board.gov/ada/"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-7",
+                "name": "ICC International Building Code",
+                "url": "https://codes.iccsafe.org/"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-8",
+                "name": "NFPA 101 Life Safety Code",
+                "url": "https://www.nfpa.org/codes-and-standards/all-codes-and-standards/101"
               }
             ]
           },
@@ -8895,40 +8503,16 @@
             }
           },
           {
-            "来源": {
-              "$source": "onet-profile",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "interior-designers.source-register.published.1"
-            },
+            "来源": "Source detail not stated.",
             "类型": "Official or research sources",
             "适用范围": "Use only under the source's original definitions",
-            "链接": {
-              "$source": "onet-profile",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "interior-designers.source-register.published.1"
-            }
+            "链接": null
           },
           {
-            "来源": {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "interior-designers.source-register.published.1"
-            },
+            "来源": "Source detail not stated.",
             "类型": "Official or research sources",
             "适用范围": "Use only under the source's original definitions",
-            "链接": {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "interior-designers.source-register.published.1"
-            }
+            "链接": null
           }
         ],
         "difference_intro": {
@@ -8976,42 +8560,18 @@
             }
           },
           {
-            "使用限制": "No China authority or pay.",
-            "来源": {
-              "$source": "onet-profile",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "interior-designers.source-register.published.1"
-            },
+            "使用限制": "Use the U.S. scope described in this section.",
+            "来源": "Source detail not stated.",
             "研究对象": "Source coverage",
             "结论": "Supports bounded judgments only",
-            "链接": {
-              "$source": "onet-profile",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "interior-designers.source-register.published.1"
-            }
+            "链接": null
           },
           {
-            "使用限制": "US OEWS data; not China pay or guaranteed offers.",
-            "来源": {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "interior-designers.source-register.published.1"
-            },
+            "使用限制": "Use the U.S. scope described in this section.",
+            "来源": "Source detail not stated.",
             "研究对象": "Source coverage",
             "结论": "Supports bounded judgments only",
-            "链接": {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "interior-designers.source-register.published.1"
-            }
+            "链接": null
           }
         ],
         "heading": {
@@ -9055,47 +8615,18 @@
           },
           {
             "回答": "No. Task exposure, organizational adoption, productivity changes, and job numbers are four distinct measurement objects; none can be inferred from another.",
-            "来源": {
-              "$source": "onet-profile",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "链接": {
-              "$source": "onet-profile",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "interior-designers.source-register.published.1"
-            },
+            "来源": "Source detail not stated.",
+            "链接": null,
             "问题": "Can task exposure establish when jobs will be eliminated?"
           },
           {
             "回答": "No. People must take responsibility for code compliance, interface coordination, costs, and acceptance under authorization and contracts.",
-            "来源": {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "链接": {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "interior-designers.source-register.published.1"
-            },
+            "来源": "Source detail not stated.",
+            "链接": null,
             "问题": "Can AI renderings replace code and construction judgments?"
           }
         ],
-        "responsibility_intro": {
-          "$item": "interior-designers.ai-impact.ai-impact-table.5",
-          "block": "ai-impact",
-          "copy_key": "career.item.ai-impact-table",
-          "type": "prose"
-        },
+        "responsibility_intro": "Use AI to group design comments by room. Compare each requested change with the issued drawing and finish schedule.",
         "responsibility_steps": [
           {
             "步骤": "Check inputs",
@@ -9205,13 +8736,6 @@
           "block": "navigation",
           "copy_key": "career.item.navigation-links",
           "entry": "interior-designers.navigation.4",
-          "field": "url"
-        },
-        {
-          "$link": "interior-designers.navigation.links.1",
-          "block": "navigation",
-          "copy_key": "career.item.navigation-links",
-          "entry": "interior-designers.navigation.5",
           "field": "url"
         },
         {
@@ -9345,7 +8869,7 @@
             "copy_key": "career.item.career-path-block",
             "type": "prose"
           },
-          "jurisdiction": "Mainland China / United States",
+          "jurisdiction": "Use the U.S. scope described in this section.",
           "summary": {
             "$item": "interior-designers.path.career-path-block.3",
             "block": "path",
@@ -9356,76 +8880,34 @@
         "schema_version": "career.career_progression.v1",
         "source_links": [
           {
-            "href": {
-              "$source": "bls-ooh",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "id": "interior-designers.display.source.0",
-            "label": {
-              "$source": "bls-ooh",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "scope": "Employment and outlook for the precise O*NET / BLS 27-1025.00 occupation; does not establish Chinese qualifications."
+            "href": "https://cida.org/accredited-programs",
+            "id": "wave1-b3-4",
+            "label": "CIDA accredited programs",
+            "scope": "Entry and practice"
           },
           {
-            "href": {
-              "$source": "mohrss-draft",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "id": "interior-designers.display.source.1",
-            "label": {
-              "$source": "mohrss-draft",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "scope": "Chinese standards related to interior decoration design and evaluation; provides no occupational wage figures."
+            "href": "https://www.cidq.org/for-exam-candidates/eligibility/",
+            "id": "wave1-b3-5",
+            "label": "CIDQ eligibility",
+            "scope": "Entry and practice"
           },
           {
-            "href": {
-              "$source": "onet-profile",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "id": "interior-designers.display.source.2",
-            "label": {
-              "$source": "onet-profile",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "scope": "Precise O*NET 27-1025.00 occupational profile, U.S. scope."
+            "href": "https://www.access-board.gov/ada/",
+            "id": "wave1-b3-6",
+            "label": "U.S. Access Board ADA standards",
+            "scope": "Entry and practice"
           },
           {
-            "href": {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "id": "interior-designers.display.source.3",
-            "label": {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "scope": "BLS wage data presented by O*NET; this page publishes the 10 / median / 90 percentiles and does not list the 25 / 75 percentiles."
+            "href": "https://codes.iccsafe.org/",
+            "id": "wave1-b3-7",
+            "label": "ICC International Building Code",
+            "scope": "Entry and practice"
+          },
+          {
+            "href": "https://www.nfpa.org/codes-and-standards/all-codes-and-standards/101",
+            "id": "wave1-b3-8",
+            "label": "NFPA 101 Life Safety Code",
+            "scope": "Entry and practice"
           }
         ],
         "tracks": [
@@ -9701,7 +9183,7 @@
             "label": "View the risk module"
           }
         ],
-        "direct_answer": "Risks must be handled through their triggers, consequences, controls, and escalation boundaries.",
+        "direct_answer": "A visually matching finish can differ in rating or installation system. Verify the actual listing and version before recommending a substitution.",
         "evidence_scope": "Risk scenarios are editorial analyses based on occupational tasks; sources support task context, not accident rates or statutory permission. Check local rules for specific qualifications and authorization.",
         "heading": "Work risks and boundaries for interior designers",
         "risks": [
@@ -9815,398 +9297,80 @@
               "field": "name",
               "item": "interior-designers.source-register.published.1"
             },
-            "scope": "Sources support occupational task or work context background; risk cards are editorial scenario analyses and do not establish accident rates, statutory qualifications in China, or AI adoption effects."
+            "scope": "Use the U.S. scope described in this section."
           },
           {
-            "href": {
-              "$source": "mohrss-draft",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "id": "interior-designers.display.source.1",
-            "label": {
-              "$source": "mohrss-draft",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "scope": "Chinese standards related to interior decoration design and evaluation; provides no occupational wage figures."
+            "href": "https://www.ada.gov/law-and-regs/design-standards/",
+            "id": "ada-standards",
+            "label": "ADA Standards for Accessible Design"
           },
           {
-            "href": {
-              "$source": "onet-profile",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "id": "interior-designers.display.source.2",
-            "label": {
-              "$source": "onet-profile",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "scope": "Precise O*NET 27-1025.00 occupational profile, U.S. scope."
+            "href": "https://www.bls.gov/ooh/arts-and-design/interior-designers.htm",
+            "id": "bls-ooh",
+            "label": "Interior Designers, Occupational Outlook Handbook"
           },
           {
-            "href": {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "id": "interior-designers.display.source.3",
-            "label": {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "scope": "BLS wage data presented by O*NET; this page publishes the 10 / median / 90 percentiles and does not list the 25 / 75 percentiles."
+            "href": "https://www.cidq.org/for-advocates/legislative-map/",
+            "id": "cidq-map",
+            "label": "Interior Design Legislative Map"
           }
         ]
       },
       "career_snapshot_primary_locale": {
-        "salary": {
-          "bls_table": [
-            {
-              "指标": "Mainland China pay definitions",
-              "数值": "No reliable figure currently available",
-              "说明": "A bounded search did not establish a reliable mapping."
-            },
-            {
-              "指标": "Mainland China pay definitions",
-              "数值": "No reliable figure currently available",
-              "说明": "A bounded search did not establish a reliable mapping."
-            },
-            {
-              "指标": "Mainland China pay definitions",
-              "数值": "No reliable figure currently available",
-              "说明": "A bounded search did not establish a reliable mapping."
-            }
-          ],
-          "china_ai_row": {
-            "$item": "interior-designers.china-salary.career-snapshot-primary-locale.4",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "china_class_row": {
-            "$item": "interior-designers.china-salary.career-snapshot-primary-locale.3",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "china_edu_table": [
-            {
-              "学历段": "Insufficient evidence: no reliable mapping established (high school / secondary vocational school)",
-              "岗位方向": "Verify against organizational announcements",
-              "说明": "Do not use proxy figures."
-            },
-            {
-              "学历段": "Insufficient evidence: no reliable mapping established (junior college)",
-              "岗位方向": "Verify against organizational announcements",
-              "说明": "Do not use proxy figures."
-            },
-            {
-              "学历段": "Insufficient evidence: no reliable mapping established (bachelor's degree)",
-              "岗位方向": "Verify against organizational announcements",
-              "说明": "Do not use proxy figures."
-            },
-            {
-              "学历段": "Insufficient evidence: no reliable mapping established (other)",
-              "岗位方向": "Verify for the specific jurisdiction",
-              "说明": "Do not use proxy figures."
-            }
-          ],
-          "china_industry_table": [
-            {
-              "行业": "Construction (industry section)",
-              "需求": "No reliable figure currently available"
-            },
-            {
-              "行业": "Wholesale and retail trade (industry section)",
-              "需求": "No reliable figure currently available"
-            },
-            {
-              "行业": "Resident services, repairs, and other services (industry section)",
-              "需求": "No reliable figure currently available"
-            }
-          ],
-          "china_intl": {
-            "$join": [
-              {
-                "$source": "mohrss-draft",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "interior-designers.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "mohrss-draft",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "interior-designers.source-register.published.1"
-              }
-            ],
-            "separator": ""
-          },
-          "china_name_row": {
-            "$item": "interior-designers.china-salary.career-snapshot-primary-locale.1",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "china_open": "A bounded search did not establish a reliable figure; this item is not a starting salary, take-home income, or individual quote.",
-          "china_ref": {
-            "$join": [
-              {
-                "$source": "bls-ooh",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "interior-designers.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "bls-ooh",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "interior-designers.source-register.published.1"
-              }
-            ],
-            "separator": ""
-          },
-          "china_salary_note": "Mainland China definitions are separate from those for the United States, global contexts, and specific employers; do not combine markets.",
-          "china_salary_table": [
-            {
-              "城市/区间": "Insufficient evidence: no reliable mapping established",
-              "月薪参考": "No reliable figure currently available"
-            },
-            {
-              "城市/区间": "Insufficient evidence: no reliable mapping established",
-              "月薪参考": "No reliable figure currently available"
-            },
-            {
-              "城市/区间": "Insufficient evidence: no reliable mapping established",
-              "月薪参考": "No reliable figure currently available"
-            }
-          ],
-          "china_soc_row": {
-            "$item": "interior-designers.china-salary.career-snapshot-primary-locale.2",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "sources_note": {
-            "$join": [
-              {
-                "$source": "bls-ooh",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "interior-designers.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "bls-ooh",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "interior-designers.source-register.published.1"
-              }
-            ],
-            "separator": ""
-          },
-          "ui": {
-            "ai_heading": "Boundaries for AI and pay judgments",
-            "driver_heading": "Influencing factors",
-            "official_heading": "Official statistical definitions",
-            "scenario_caption": "This scenario illustrates definitions only; it is not an individual quote.",
-            "scenario_heading": "Scenario reference",
-            "scenario_interpretation_label": "Explanation",
-            "scenario_role_label": "Job scope",
-            "scenario_value_label": "Reference value"
-          },
-          "us_growth": "Local definitions do not apply",
-          "us_median": "Local definitions do not apply"
-        }
+        "availability": "unavailable",
+        "reason_code": "source_locale_unavailable"
       },
       "career_snapshot_secondary_locale": {
-        "authority_sources": {
-          "$join": [
-            {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "｜",
-            {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "interior-designers.source-register.published.1"
-            }
-          ],
-          "separator": ""
-        },
+        "authority_sources": "https://data.bls.gov/oesprofile/?areas=INDUSTRY,STATE,MSA&major_group=270000&measure=13&occupation=271025&year=2025",
         "bls_table": [
           {
-            "指标": "Pay · 10th percentile",
-            "数值": "$41,420 per year",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "interior-designers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "interior-designers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "fact_ref": "wave1-b3-wage-p10",
+            "指标": "10th percentile",
+            "数值": "$41,420/year",
+            "说明": "Read within the original statistical scope."
           },
           {
-            "指标": "Pay · 25th percentile",
-            "数值": "$51,840 per year",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "interior-designers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "interior-designers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "fact_ref": "wave1-b3-wage-p25",
+            "指标": "25th percentile",
+            "数值": "$51,840/year",
+            "说明": "Read within the original statistical scope."
           },
           {
-            "指标": "Pay · Median",
-            "数值": "$67,190 per year",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "interior-designers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "interior-designers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "fact_ref": "wave1-b3-wage-p50",
+            "指标": "Median",
+            "数值": "$67,190/year",
+            "说明": "Read within the original statistical scope."
           },
           {
-            "指标": "Pay · 75th percentile",
-            "数值": "$85,740 per year",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "interior-designers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "interior-designers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "fact_ref": "wave1-b3-wage-p75",
+            "指标": "75th percentile",
+            "数值": "$85,740/year",
+            "说明": "Read within the original statistical scope."
           },
           {
-            "指标": "Pay · 90th percentile",
-            "数值": "$114,140 per year",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "interior-designers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "interior-designers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "fact_ref": "wave1-b3-wage-p90",
+            "指标": "90th percentile",
+            "数值": "$114,140/year",
+            "说明": "Read within the original statistical scope."
           },
           {
             "指标": "Employment · Size",
             "数值": "97,100 people (2025, United States)",
-            "说明": "Overall employment projection for the precise U.S. occupation, not attributed to AI; does not represent a real-time recruitment sample or individual hiring probability."
+            "说明": "Projection base-year employment"
           },
           {
             "指标": "Employment · Growth",
             "数值": "3%（2025—2035）",
-            "说明": "Overall employment projection for the precise U.S. occupation, not attributed to AI; does not represent a real-time recruitment sample or individual hiring probability."
+            "说明": "Projected percentage change"
           },
           {
             "指标": "Employment · Openings",
             "数值": "7,700 per year (2025—2035, including growth and replacement needs)",
-            "说明": "Overall employment projection for the precise U.S. occupation, not attributed to AI; does not represent a real-time recruitment sample or individual hiring probability."
+            "说明": "Average annual openings, including replacement"
           }
         ],
-        "boundary": "The precise U.S. occupation and broader groups must be kept separate; statistical coverage follows source labels, and unavailable percentiles are not zero.",
-        "direct_answer": {
-          "$item": "interior-designers.us-salary.career-snapshot-secondary-locale.2",
-          "block": "us-salary",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "type": "prose"
-        },
+        "boundary": "Percentiles describe national wage distribution points. Compare a local offer by setting, responsibilities, and guaranteed pay.",
+        "direct_answer": "May 2025 OEWS covers U.S. wage and salary workers and excludes the self-employed.",
         "factor_rows": [
           {
             "answer": "Verify for the specific jurisdiction.",
@@ -10243,24 +9407,24 @@
         "industry_period": "May 2025, U.S. median annual wages for this occupation by industry (checked on 2026-10-11)",
         "industry_rows": [
           {
-            "industry": "Architectural, engineering, and related services",
-            "median": "$78,340 per year",
-            "note": "2025 U.S. median annual wages for this occupation by industry; BLS OOH Pay subtable for the precise occupation; not an industry-wide employee average or individual quote."
+            "industry": "Occupation",
+            "median": "No comparable figure is cited here.",
+            "note": "Confirm the definition and any broader grouping."
           },
           {
-            "industry": "Specialized design services",
-            "median": "$67,870 per year",
-            "note": "2025 U.S. median annual wages for this occupation by industry; BLS OOH Pay subtable for the precise occupation; not an industry-wide employee average or individual quote."
+            "industry": "Employment",
+            "median": "No comparable figure is cited here.",
+            "note": "Check whether self-employment is included."
           },
           {
-            "industry": "Construction",
-            "median": "$63,330 per year",
-            "note": "2025 U.S. median annual wages for this occupation by industry; BLS OOH Pay subtable for the precise occupation; not an industry-wide employee average or individual quote."
+            "industry": "Survey period",
+            "median": "No comparable figure is cited here.",
+            "note": "Keep the month or year with the quoted figure."
           },
           {
-            "industry": "Retail trade",
-            "median": "$50,560 per year",
-            "note": "2025 U.S. median annual wages for this occupation by industry; BLS OOH Pay subtable for the precise occupation; not an industry-wide employee average or individual quote."
+            "industry": "Geography",
+            "median": "No comparable figure is cited here.",
+            "note": "Compare local figures within the same survey."
           }
         ],
         "industry_value_label": "Median annual wages (USD, 2025)",
@@ -10272,23 +9436,23 @@
         },
         "interpretation_rows": [
           {
-            "answer": "No.",
-            "question": "Is this an individual quote?"
+            "answer": "Confirm the definition and any broader grouping.",
+            "question": "Occupation"
           },
           {
-            "answer": "The coverage must be checked.",
-            "question": "Does this cover the precise occupation?"
+            "answer": "Check whether self-employment is included.",
+            "question": "Employment"
           },
           {
-            "answer": "Follow the source period.",
-            "question": "What is the period?"
+            "answer": "Keep the month or year with the quoted figure.",
+            "question": "Survey period"
           },
           {
-            "answer": "They cannot be combined directly.",
-            "question": "Can markets be compared?"
+            "answer": "Compare local figures within the same survey.",
+            "question": "Geography"
           }
         ],
-        "median": "$67,190 per year (2025, precise U.S. occupation)",
+        "median": "$67,190/year",
         "outlook_heading": "Employment outlook and openings",
         "outlook_period": "2025 base year / 2025—2035 projection; checked on 2026-10-11",
         "wage_column_labels": [
@@ -10305,22 +9469,34 @@
         },
         "wage_tiers": [
           {
-            "equivalent": "—",
-            "interpretation": "2025 U.S. national wage percentiles; not individual quotes or experience levels.",
-            "label": "Lower percentiles",
-            "value": "$41,420 per year"
+            "equivalent": "USD/year",
+            "interpretation": "Lower end of the distribution",
+            "label": "10th percentile",
+            "value": "$41,420/year"
           },
           {
-            "equivalent": "—",
-            "interpretation": "2025 U.S. national wage percentiles; not individual quotes or experience levels.",
+            "equivalent": "USD/year",
+            "interpretation": "First quartile",
+            "label": "25th percentile",
+            "value": "$51,840/year"
+          },
+          {
+            "equivalent": "USD/year",
+            "interpretation": "Middle of the distribution",
             "label": "Median",
-            "value": "$67,190 per year"
+            "value": "$67,190/year"
           },
           {
-            "equivalent": "—",
-            "interpretation": "2025 U.S. national wage percentiles; not individual quotes or experience levels.",
-            "label": "Higher percentiles",
-            "value": "$114,140 per year"
+            "equivalent": "USD/year",
+            "interpretation": "Third quartile",
+            "label": "75th percentile",
+            "value": "$85,740/year"
+          },
+          {
+            "equivalent": "USD/year",
+            "interpretation": "Upper end of the published range",
+            "label": "90th percentile",
+            "value": "$114,140/year"
           }
         ]
       },
@@ -10354,7 +9530,7 @@
         "title": "Who might suit interior design?"
       },
       "fit_decision_checklist": {
-        "boundary": "This is a work sample check, not a personality diagnosis or hiring conclusion.",
+        "boundary": "A ceiling or furniture change can force revisions across drawings, costs and vendor orders. If you only enjoy the first concept board and dread checking those revisions, the documentation phase will be a strain.",
         "how": {
           "$item": "interior-designers.quick-decision.fermat-decision-card.3",
           "block": "quick-decision",
@@ -10450,61 +9626,22 @@
               "field": "name",
               "item": "interior-designers.source-register.published.1"
             },
-            "scope": "Employment and outlook for the precise O*NET / BLS 27-1025.00 occupation; does not establish Chinese qualifications."
+            "scope": "Use the U.S. scope described in this section."
           },
           {
-            "href": {
-              "$source": "mohrss-draft",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "id": "interior-designers.display.source.1",
-            "label": {
-              "$source": "mohrss-draft",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "scope": "Chinese standards related to interior decoration design and evaluation; provides no occupational wage figures."
+            "href": "https://www.ada.gov/law-and-regs/design-standards/",
+            "id": "ada-standards",
+            "label": "ADA Standards for Accessible Design"
           },
           {
-            "href": {
-              "$source": "onet-profile",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "id": "interior-designers.display.source.2",
-            "label": {
-              "$source": "onet-profile",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "scope": "Precise O*NET 27-1025.00 occupational profile, U.S. scope."
+            "href": "https://www.bls.gov/ooh/arts-and-design/interior-designers.htm",
+            "id": "bls-ooh",
+            "label": "Interior Designers, Occupational Outlook Handbook"
           },
           {
-            "href": {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "id": "interior-designers.display.source.3",
-            "label": {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "scope": "BLS wage data presented by O*NET; this page publishes the 10 / median / 90 percentiles and does not list the 25 / 75 percentiles."
+            "href": "https://www.cidq.org/for-advocates/legislative-map/",
+            "id": "cidq-map",
+            "label": "Interior Design Legislative Map"
           }
         ],
         "transitions": [
@@ -10521,7 +9658,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/architects-except-landscape-and-naval",
+            "target_href": "/en/career/jobs/architects-except-landscape-and-naval",
             "target_slug": "architects-except-landscape-and-naval",
             "target_title": "Architects",
             "transition_distance": "Additional evidence needed"
@@ -10529,7 +9666,7 @@
           {
             "capability_gaps": "Outdoor site, landscape, and ecological design",
             "shared_capabilities": "Spatial and design fundamentals and drafting ability",
-            "target_href": "/zh/career/jobs/landscape-architects",
+            "target_href": "/en/career/jobs/landscape-architects",
             "target_slug": "landscape-architects",
             "target_title": "Landscape Architects",
             "transition_distance": "Greater distance; landscape and practice evidence needed"
@@ -10537,7 +9674,7 @@
           {
             "capability_gaps": "Architectural and civil drafting standards and collaboration",
             "shared_capabilities": "Drafting and drawing detailing",
-            "target_href": "/zh/career/jobs/architectural-and-civil-drafters",
+            "target_href": "/en/career/jobs/architectural-and-civil-drafters",
             "target_slug": "architectural-and-civil-drafters",
             "target_title": "Architectural and Civil Drafters",
             "transition_distance": "Closer direction; drafting standards evidence needed"
@@ -10545,7 +9682,7 @@
           {
             "capability_gaps": "Mechanical engineering drawing and tolerance standards",
             "shared_capabilities": "Engineering drawing and software",
-            "target_href": "/zh/career/jobs/mechanical-drafters",
+            "target_href": "/en/career/jobs/mechanical-drafters",
             "target_slug": "mechanical-drafters",
             "target_title": "Mechanical Drafters",
             "transition_distance": "Greater distance; mechanical drafting standards needed"
@@ -10553,7 +9690,7 @@
           {
             "capability_gaps": "Creative direction and team management",
             "shared_capabilities": "Aesthetic and visual expression ability",
-            "target_href": "/zh/career/jobs/art-directors",
+            "target_href": "/en/career/jobs/art-directors",
             "target_slug": "art-directors",
             "target_title": "Art Directors",
             "transition_distance": "Moderate distance; creative management evidence needed"
@@ -10561,7 +9698,7 @@
           {
             "capability_gaps": "Whole-building design and statutory signing and sealing",
             "shared_capabilities": "Building space and code fundamentals",
-            "target_href": "/zh/career/jobs/architects-except-landscape-and-naval",
+            "target_href": "/en/career/jobs/architects-except-landscape-and-naval",
             "target_slug": "architects-except-landscape-and-naval",
             "target_title": "Architects",
             "transition_distance": "Greater distance; professional qualifications and signing and sealing authority needed"
@@ -10589,13 +9726,8 @@
       "personality_fit_block": {
         "assessments": [
           {
-            "answer": {
-              "$item": "interior-designers.fit.riasec-fit-block.6",
-              "block": "fit",
-              "copy_key": "career.item.riasec-fit-block",
-              "type": "prose"
-            },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "answer": "Pair a room layout with two tagged finishes, a lighting coordination note and a question for the permit team.",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start a career interest trial",
             "evidence_level": "Work samples",
             "id": "riasec",
@@ -10614,7 +9746,7 @@
               "copy_key": "career.item.riasec-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start a career interest trial",
             "evidence_level": "Work samples",
             "id": "big-five",
@@ -10633,7 +9765,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start a career interest trial",
             "evidence_level": "Work samples",
             "id": "mbti",
@@ -10647,7 +9779,7 @@
           },
           {
             "answer": "Continue checking against real tasks, responsibility boundaries, and reviewable deliverables.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start a career interest trial",
             "evidence_level": "Work samples",
             "id": "enneagram",
@@ -10661,7 +9793,7 @@
           },
           {
             "answer": "Continue checking against real tasks, responsibility boundaries, and reviewable deliverables.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start a career interest trial",
             "evidence_level": "Work samples",
             "id": "iq",
@@ -10675,7 +9807,7 @@
           },
           {
             "answer": "Continue checking against real tasks, responsibility boundaries, and reviewable deliverables.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start a career interest trial",
             "evidence_level": "Work samples",
             "id": "eq",
@@ -10735,36 +9867,36 @@
         },
         "questions": [
           {
-            "answer": "Continue checking with safe work samples and responsibility boundaries.",
-            "question": "Which tasks do you enjoy?"
+            "answer": "See work fit evidence for the shared criteria.",
+            "question": "How can I show more than a concept board?"
           },
           {
-            "answer": "Continue checking with safe work samples and responsibility boundaries.",
-            "question": "Can you tolerate the work pace?"
+            "answer": "Notice how often the team reopens a handoff when an earlier assumption changes. Ask who confirms the new decision.",
+            "question": "What should I notice in a job shadow?"
           },
           {
-            "answer": "Continue checking with safe work samples and responsibility boundaries.",
-            "question": "Are you willing to document the process?"
+            "answer": "Pick a regular deliverable and repeat it with the same review standard.",
+            "question": "Which assignment would I repeat?"
           },
           {
-            "answer": "Continue checking with safe work samples and responsibility boundaries.",
-            "question": "Can you escalate uncertainty?"
+            "answer": "Note your last confirmed detail before responding to the interruption.",
+            "question": "How do I handle an interruption?"
           },
           {
-            "answer": "Continue checking with safe work samples and responsibility boundaries.",
-            "question": "Do you understand authorization boundaries?"
+            "answer": "Keep both versions and identify the person who can settle the discrepancy.",
+            "question": "How do I respond to conflicting inputs?"
           },
           {
-            "answer": "Continue checking with safe work samples and responsibility boundaries.",
-            "question": "Can you review failures?"
+            "answer": "Compare the written shift terms with when you can work reliably.",
+            "question": "Would the work schedule suit me?"
           },
           {
-            "answer": "Continue checking with safe work samples and responsibility boundaries.",
-            "question": "Do you have observable deliverables?"
+            "answer": "Describe what you would route to a qualified reviewer.",
+            "question": "Can I set a boundary on requests?"
           },
           {
-            "answer": "Continue checking with safe work samples and responsibility boundaries.",
-            "question": "What is the next trial?"
+            "answer": "Ask a receiver which detail lets them continue without guessing.",
+            "question": "What makes a handoff useful?"
           }
         ],
         "schema_version": "career.fit_decision_center.v1",
@@ -10823,23 +9955,6 @@
           },
           {
             "href": {
-              "$source": "beijing-guideline",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "label": {
-              "$source": "beijing-guideline",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "usage": "Source scope and limitations"
-          },
-          {
-            "href": {
               "$source": "bls-ooh",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
@@ -10874,159 +9989,6 @@
           },
           {
             "href": {
-              "$source": "mohrss-draft",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "label": {
-              "$source": "mohrss-draft",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "usage": "Source scope and limitations"
-          },
-          {
-            "href": {
-              "$source": "onet-profile",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-profile",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "usage": "Source scope and limitations"
-          },
-          {
-            "href": {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "usage": "Source scope and limitations"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-custom",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-custom",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "usage": "Source scope and limitations"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-details",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-details",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "usage": "Source scope and limitations"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-hot_tech",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-hot_tech",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "usage": "Source scope and limitations"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-industry",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-industry",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "usage": "Source scope and limitations"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-localcert",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-localcert",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "usage": "Source scope and limitations"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-localtraining",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-localtraining",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "usage": "Source scope and limitations"
-          },
-          {
-            "href": {
               "$source": "source-pack-onet-localwages",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
@@ -11035,23 +9997,6 @@
             },
             "label": {
               "$source": "source-pack-onet-localwages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "usage": "Source scope and limitations"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "interior-designers.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-summary",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -11109,7 +10054,7 @@
             "item": "interior-designers.source-register.published.1"
           }
         },
-        "note": "Author check on 2026-10-11 | O*NET 27-1025.00 provides occupational task and preparation context. The national wage page's 2025 percentiles are $41,420 / 51,840 / 67,190 / 85,740 / 114,140 per year; employment uses a 2025 base year and 2025—2035 projections. NBS Tables 2 / 5 support only average annual wages for China's scientific research and technical services industry, not this occupation. AI analysis is task-level editorial judgment. The shared registry, Hero, and FAQ retain their original definitions; no claim of page-wide consistency is made. The BLS OOH Pay industry subtable for the precise occupation was checked before handover: https://www.bls.gov/ooh/arts-and-design/interior-designers.htm; the U.S. pay industry rows have been updated."
+        "note": "Author check on 2026-10-11 | O*NET 27-1025.00 provides occupational task and preparation context. The national wage page's 2025 percentiles are $41,420 / 51,840 / 67,190 / 85,740 / 114,140 per year; employment uses a 2025 base year and 2025—2035 projections. AI analysis is task-level editorial judgment. The shared registry, Hero, and FAQ retain their original definitions; no claim of page-wide consistency is made. The BLS OOH Pay industry subtable for the precise occupation was checked before handover: https://www.bls.gov/ooh/arts-and-design/interior-designers.htm; the U.S. pay industry rows have been updated."
       },
       "work_context_block": {
         "$item": "interior-designers.profile.work-context-block.5",
@@ -11119,7 +10064,7 @@
       }
     },
     "contract_version": "career.detail.display.v1",
-    "locale": "zh-CN",
+    "locale": "en",
     "native_items": [
       {
         "block": "source-register",
@@ -11127,12 +10072,26 @@
         "id": "interior-designers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "interior-designers.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "interior-designers.entry-work-sample-data.2",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": "/en/career/jobs/interior-designers",
     "section_titles": {
       "ai-impact": "AI Impact Score",
-      "china-salary": "Mainland China pay",
+      "china-salary": "Additional wage reference",
       "direction-comparison": "Comparison with neighboring occupations",
       "fit": "Fit signals",
       "market-signals": "Market signals",
@@ -11174,14 +10133,14 @@
       },
       {
         "derivation": null,
-        "display_value": "Median annual pay of $67,190 (2025, BLS OEWS, precise occupation 27-1025.00)",
+        "display_value": "$67,190/year",
         "fact_id": "us-median-annual-2025",
-        "market": "US",
-        "measure": "Median annual pay",
-        "occupation_scope": "Interior Designers 27-1025",
-        "period": "May 2025 wages; 2025–2035 projection",
+        "market": "United States",
+        "measure": "Annual wage — Median",
+        "occupation_scope": "U.S. occupation SOC 27-1025",
+        "period": "May 2025",
         "source_refs": [
-          "onet-wages"
+          "wave1-b3-1"
         ]
       },
       {
@@ -11210,60 +10169,108 @@
       },
       {
         "derivation": null,
-        "display_value": "10th percentile annual pay of $41,420 (2025, BLS OEWS, precise occupation 27-1025.00)",
+        "display_value": "$41,420/year",
         "fact_id": "us-wage-p10-2025",
-        "market": "US",
-        "measure": "Annual pay · 10th percentile",
-        "occupation_scope": "Interior Designers 27-1025",
-        "period": "May 2025 wages; 2025–2035 projection",
+        "market": "United States",
+        "measure": "Annual wage — 10th percentile",
+        "occupation_scope": "U.S. occupation SOC 27-1025",
+        "period": "May 2025",
         "source_refs": [
-          "onet-wages"
+          "wave1-b3-1"
         ]
       },
       {
         "derivation": null,
-        "display_value": "90th percentile annual pay of $114,140 (2025, BLS OEWS, precise occupation 27-1025.00)",
+        "display_value": "$114,140/year",
         "fact_id": "us-wage-p90-2025",
-        "market": "US",
-        "measure": "Annual pay · 90th percentile",
-        "occupation_scope": "Interior Designers 27-1025",
-        "period": "May 2025 wages; 2025–2035 projection",
+        "market": "United States",
+        "measure": "Annual wage — 90th percentile",
+        "occupation_scope": "U.S. occupation SOC 27-1025",
+        "period": "May 2025",
         "source_refs": [
-          "onet-wages"
+          "wave1-b3-1"
         ]
       },
       {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+0)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "50%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Interior Designers",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "derivation": null,
+        "display_value": "$41,420/year",
+        "fact_id": "wave1-b3-wage-p10",
+        "market": "United States",
+        "measure": "Annual wage — 10th percentile",
+        "occupation_scope": "U.S. occupation SOC 27-1025",
+        "period": "May 2025",
         "source_refs": [
-          "source-fermatmind-ai-rubric"
+          "wave1-b3-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "$51,840/year",
+        "fact_id": "wave1-b3-wage-p25",
+        "market": "United States",
+        "measure": "Annual wage — 25th percentile",
+        "occupation_scope": "U.S. occupation SOC 27-1025",
+        "period": "May 2025",
+        "source_refs": [
+          "wave1-b3-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "$67,190/year",
+        "fact_id": "wave1-b3-wage-p50",
+        "market": "United States",
+        "measure": "Annual wage — Median",
+        "occupation_scope": "U.S. occupation SOC 27-1025",
+        "period": "May 2025",
+        "source_refs": [
+          "wave1-b3-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "$85,740/year",
+        "fact_id": "wave1-b3-wage-p75",
+        "market": "United States",
+        "measure": "Annual wage — 75th percentile",
+        "occupation_scope": "U.S. occupation SOC 27-1025",
+        "period": "May 2025",
+        "source_refs": [
+          "wave1-b3-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "$114,140/year",
+        "fact_id": "wave1-b3-wage-p90",
+        "market": "United States",
+        "measure": "Annual wage — 90th percentile",
+        "occupation_scope": "U.S. occupation SOC 27-1025",
+        "period": "May 2025",
+        "source_refs": [
+          "wave1-b3-1"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
       "label": "AI Impact Score"
     },
     "badges": [
       "Interior Designers · Codes, Interfaces, and Acceptance Boundaries",
       "Source scope · Statistical definitions · Human review",
-      "Exact occupational wage gaps for mainland China retained according to the evidence"
+      "Use the U.S. scope described in this section."
     ],
     "metrics": [
       {
         "availability": "available",
-        "fact_ref": "us-median-annual-2025",
+        "fact_ref": "wave1-b3-wage-p50",
         "key": "us_pay",
-        "label": "U.S. median annual pay (2025, precise occupational category)"
+        "label": "U.S. May 2025 median wage"
       },
       {
         "availability": "available",
@@ -11287,7 +10294,7 @@
         "availability": "missing",
         "fact_ref": null,
         "key": "china_pay",
-        "label": "Exact occupational wages for mainland China (not obtained)"
+        "label": "Additional wage benchmark"
       }
     ]
   },
@@ -11295,17 +10302,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "See what interior designers deliver, how to build a space planning portfolio and how the job differs from decoration."
+      "text": "Interior designers turn space and material requirements into coordinated drawings, schedules and decisions a project team can build from."
     },
     "title": {
       "availability": "available",
-      "text": "Interior Designer: Space Planning, Materials and Project Handoffs"
+      "text": "Interior Designers: Codes, Credentials and U.S. Pay"
     }
   },
-  "source_content_sha256": "7c02c3fe24bc27eb57125d95764f8eea7f1ce9589856e8c00f9684fba2195182",
+  "source_content_sha256": "c9fc7b0786502d5a9b60eb8d3dc9a114d21d6606f8122074d7b32417bd6e22e8",
   "subject": {
     "canonical_slug": "interior-designers",
-    "name": "Interior Designer",
-    "summary": "Interior designers plan how indoor spaces will be used. They develop layouts, select materials and coordinate drawings with clients and project teams. Work on regulated building systems or signed documents may require separate authority."
+    "name": "Interior Designers",
+    "summary": "Interior designers turn space and material requirements into coordinated drawings, schedules and decisions a project team can build from."
   }
 }

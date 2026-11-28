@@ -446,7 +446,7 @@ final class CareerContentV3Contract
     private static function safeUrl(mixed $value): bool
     {
         return is_string($value) && (preg_match('/\Ahttps:\/\/[^\s|]+\z/', $value) === 1
-            || preg_match('/\A\/(?:en|zh)\/[^\s|]+\z/', $value) === 1
+            || preg_match('/\A\/(?:en|zh|zh-TW)\/[^\s|]+\z/', $value) === 1
             || preg_match('/\A#[a-z0-9][a-z0-9_-]*\z/', $value) === 1);
     }
 

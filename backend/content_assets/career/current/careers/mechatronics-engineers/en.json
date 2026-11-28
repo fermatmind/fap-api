@@ -2,18 +2,6 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
-      "fact:cn-manufacturing-nonprivate-wage": {
-        "status": "pending_mapping"
-      },
-      "fact:cn-manufacturing-private-wage": {
-        "status": "pending_mapping"
-      },
-      "fact:cn-national-nonprivate-wage": {
-        "status": "pending_mapping"
-      },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
@@ -24,6 +12,21 @@
         "status": "pending_mapping"
       },
       "fact:us-wage-median": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b3-wage-p10": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b3-wage-p25": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b3-wage-p50": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b3-wage-p75": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b3-wage-p90": {
         "status": "pending_mapping"
       },
       "item:mechatronics-engineers.ai-impact.ai-impact-table.1": {
@@ -38,9 +41,6 @@
       "item:mechatronics-engineers.ai-impact.ai-impact-table.4": {
         "status": "pending_mapping"
       },
-      "item:mechatronics-engineers.ai-impact.ai-impact-table.5": {
-        "status": "pending_mapping"
-      },
       "item:mechatronics-engineers.ai-impact.ai-impact-table.6": {
         "status": "pending_mapping"
       },
@@ -48,18 +48,6 @@
         "status": "pending_mapping"
       },
       "item:mechatronics-engineers.ai-impact.ai-impact-table.8": {
-        "status": "pending_mapping"
-      },
-      "item:mechatronics-engineers.china-salary.career-snapshot-primary-locale.1": {
-        "status": "pending_mapping"
-      },
-      "item:mechatronics-engineers.china-salary.career-snapshot-primary-locale.2": {
-        "status": "pending_mapping"
-      },
-      "item:mechatronics-engineers.china-salary.career-snapshot-primary-locale.3": {
-        "status": "pending_mapping"
-      },
-      "item:mechatronics-engineers.china-salary.career-snapshot-primary-locale.4": {
         "status": "pending_mapping"
       },
       "item:mechatronics-engineers.direction-comparison.adjacent-career-comparison-table.1": {
@@ -77,6 +65,9 @@
       "item:mechatronics-engineers.direction-comparison.adjacent-career-comparison-table.5": {
         "status": "pending_mapping"
       },
+      "item:mechatronics-engineers.entry-work-sample-data.2": {
+        "status": "pending_mapping"
+      },
       "item:mechatronics-engineers.fit.riasec-fit-block.1": {
         "status": "pending_mapping"
       },
@@ -90,9 +81,6 @@
         "status": "pending_mapping"
       },
       "item:mechatronics-engineers.fit.riasec-fit-block.5": {
-        "status": "pending_mapping"
-      },
-      "item:mechatronics-engineers.fit.riasec-fit-block.6": {
         "status": "pending_mapping"
       },
       "item:mechatronics-engineers.fit.riasec-fit-block.7": {
@@ -119,18 +107,6 @@
       "item:mechatronics-engineers.navigation.links.1": {
         "status": "pending_mapping"
       },
-      "item:mechatronics-engineers.path.career-path-block.1": {
-        "status": "pending_mapping"
-      },
-      "item:mechatronics-engineers.path.career-path-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:mechatronics-engineers.path.career-path-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:mechatronics-engineers.path.career-path-block.4": {
-        "status": "pending_mapping"
-      },
       "item:mechatronics-engineers.path.career-path-block.5": {
         "status": "pending_mapping"
       },
@@ -141,6 +117,9 @@
         "status": "pending_mapping"
       },
       "item:mechatronics-engineers.path.career-path-block.8": {
+        "status": "pending_mapping"
+      },
+      "item:mechatronics-engineers.path.entry-work-sample-data.1": {
         "status": "pending_mapping"
       },
       "item:mechatronics-engineers.profile.career-quick-answers-block.8": {
@@ -173,12 +152,6 @@
       "item:mechatronics-engineers.quick-decision.fermat-decision-card.2": {
         "status": "pending_mapping"
       },
-      "item:mechatronics-engineers.quick-decision.fermat-decision-card.3": {
-        "status": "pending_mapping"
-      },
-      "item:mechatronics-engineers.quick-decision.fermat-decision-card.4": {
-        "status": "pending_mapping"
-      },
       "item:mechatronics-engineers.risk.career-risk-cards.1": {
         "status": "pending_mapping"
       },
@@ -204,21 +177,6 @@
         "status": "pending_mapping"
       },
       "item:mechatronics-engineers.us-salary.career-snapshot-secondary-locale.1": {
-        "status": "pending_mapping"
-      },
-      "item:mechatronics-engineers.us-salary.career-snapshot-secondary-locale.2": {
-        "status": "pending_mapping"
-      },
-      "item:mechatronics-engineers.us-salary.career-snapshot-secondary-locale.3": {
-        "status": "pending_mapping"
-      },
-      "item:mechatronics-engineers.us-salary.career-snapshot-secondary-locale.4": {
-        "status": "pending_mapping"
-      },
-      "item:mechatronics-engineers.us-salary.career-snapshot-secondary-locale.5": {
-        "status": "pending_mapping"
-      },
-      "item:mechatronics-engineers.us-salary.career-snapshot-secondary-locale.6": {
         "status": "pending_mapping"
       }
     },
@@ -7231,7 +7189,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Use a work sample to decide whether you want to learn more about integrating mechanical, electrical, and control systems."
+              "Compare the work setting and its handoff demands."
             ]
           },
           "id": "mechatronics-engineers.quick-decision.fermat-decision-card.1",
@@ -7246,42 +7204,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Mechatronics engineers integrate mechanical, electrical, and control systems. When two signals disagree, they trace the interface, reproduce the problem, and document what the test shows. Ask what you would own in year one: a system design, a commissioning record, or a maintenance log."
+              "Mechatronics engineers integrate mechanisms, sensing and controls into equipment with a documented acceptance boundary."
             ]
           },
           "id": "mechatronics-engineers.quick-decision.fermat-decision-card.2",
           "source_refs": [
-            "onet-summary",
-            "onet-tasks",
-            "onet-context"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.fit-decision-checklist",
-          "data": {
-            "paragraphs": [
-              "60-minute paper exercise: classify readings from two fictional sensors, A and B. A 0 means no detection, 1 means detection, and ? means missing. Read each independent group left to right. If it contains 10, 01, or a missing value, mark it “Review.” Otherwise, two consecutive 11 readings mean “Proceed” (enter a pass in the paper log only). Mark all other groups “Wait.” The four groups are ① 00 → 00 → 11; ② 00 → 11 → 11; ③ 10 → 11 → 11; ④ 00 → 1? → 11. Make a table with each result, the reading that decided it, and your reason. Use paper only, with no wiring, equipment commands, or real machine control."
-            ]
-          },
-          "id": "mechatronics-engineers.quick-decision.fermat-decision-card.3",
-          "source_refs": [
-            "mecha-editorial"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.fit-decision-checklist",
-          "data": {
-            "paragraphs": [
-              "Answer key: ① Wait: only the last reading is 11. ② Proceed: both final readings are 11. ③ Review: the first reading is a mismatch (10), which the later readings do not override. ④ Review: the second reading has a missing value (1?). Change the first reading in ③ to 00 and run the rules again: the new result should be Proceed. Record why it changed. Keep the rules, four cases, counterexample, and correction log. This exercise does not establish a machine control, safety circuit, or site acceptance procedure."
-            ]
-          },
-          "id": "mechatronics-engineers.quick-decision.fermat-decision-card.4",
-          "source_refs": [
-            "mecha-editorial"
+            "onet-tasks"
           ],
           "type": "prose"
         }
@@ -7298,13 +7226,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "O*NET 17-2199.05 covers designing and testing automation and industrial control systems. In mainland China, compare the work with automatic control (2-02-07-07), intelligent manufacturing (2-02-38-05), and equipment engineering (2-02-07-04). The first two emphasize device or production-line design and integration; equipment engineering also covers lifecycle management and maintenance. Commissioning can occur in any of these roles."
+              "Mechatronics engineers integrate mechanisms, sensing and controls into equipment with a documented acceptance boundary."
             ]
           },
           "id": "mechatronics-engineers.profile.definition-block.1",
           "source_refs": [
-            "onet-tasks",
-            "mecha-cn-class"
+            "onet-tasks"
           ],
           "type": "prose"
         },
@@ -7313,7 +7240,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Create mechanical design documents for parts, assemblies, or finished products.",
+              "Use SolidWorks for mechanism constraints and MATLAB for model checks. Map I/O and EtherCAT signals to PLC logic under IEC 61131-3, using ladder diagram or structured text as appropriate. Capture servo test evidence before integration sign-off.",
               "Design advanced precision equipment for accurate or controlled applications.",
               "Design engineering systems for the automation of industrial tasks.",
               "Implement or test design solutions."
@@ -7321,7 +7248,10 @@
           },
           "id": "mechatronics-engineers.profile.responsibilities-block.2",
           "source_refs": [
-            "batch52-onet-core"
+            "wave1-b3-3",
+            "wave1-b3-4",
+            "wave1-b3-5",
+            "wave1-b3-6"
           ],
           "type": "list"
         },
@@ -7335,8 +7265,7 @@
           },
           "id": "mechatronics-engineers.profile.work-context-block.5",
           "source_refs": [
-            "onet-tasks",
-            "onet-context"
+            "onet-tasks"
           ],
           "type": "prose"
         },
@@ -7349,9 +7278,6 @@
             ]
           },
           "id": "mechatronics-engineers.profile.work-context-block.6",
-          "source_refs": [
-            "onet-context"
-          ],
           "type": "prose",
           "visibility": "internal"
         },
@@ -7412,8 +7338,7 @@
             "onet-tasks",
             "mecha-us-tech",
             "mecha-us-robot",
-            "mecha-us-elec",
-            "mecha-cn-class"
+            "mecha-us-elec"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -7464,9 +7389,6 @@
             ]
           },
           "id": "mechatronics-engineers.direction-comparison.adjacent-career-comparison-table.1",
-          "source_refs": [
-            "onet-summary"
-          ],
           "type": "links"
         },
         {
@@ -7478,9 +7400,6 @@
             ]
           },
           "id": "mechatronics-engineers.direction-comparison.adjacent-career-comparison-table.2",
-          "source_refs": [
-            "onet-summary"
-          ],
           "type": "prose"
         },
         {
@@ -7492,9 +7411,6 @@
             ]
           },
           "id": "mechatronics-engineers.direction-comparison.adjacent-career-comparison-table.3",
-          "source_refs": [
-            "onet-summary"
-          ],
           "type": "prose"
         },
         {
@@ -7506,9 +7422,6 @@
             ]
           },
           "id": "mechatronics-engineers.direction-comparison.adjacent-career-comparison-table.4",
-          "source_refs": [
-            "onet-summary"
-          ],
           "type": "prose"
         },
         {
@@ -7520,9 +7433,6 @@
             ]
           },
           "id": "mechatronics-engineers.direction-comparison.adjacent-career-comparison-table.5",
-          "source_refs": [
-            "onet-summary"
-          ],
           "type": "prose"
         }
       ]
@@ -7553,7 +7463,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "With fictional data, try organizing exception logs, drafting a test checklist or comparing requirement versions. Check each result against the original record. Available sources do not quantify adoption, field performance or job effects in this occupation. Project staff with the appropriate authority review control programs and safety judgments."
+              "With  data, try organizing exception logs, drafting a test checklist or comparing requirement versions. Check each result against the original record. Available sources do not quantify adoption, field performance or job effects in this occupation. Project staff with the appropriate authority review control programs and safety judgments."
             ]
           },
           "id": "mechatronics-engineers.ai-impact.ai-impact-table.2",
@@ -7588,20 +7498,6 @@
           "id": "mechatronics-engineers.ai-impact.ai-impact-table.4",
           "source_refs": [
             "onet-tasks"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.ai-impact-table",
-          "data": {
-            "paragraphs": [
-              "Responsibility process: from checking inputs and limiting tasks to engineering review, documentation, and escalation."
-            ]
-          },
-          "id": "mechatronics-engineers.ai-impact.ai-impact-table.5",
-          "source_refs": [
-            "ilo-genai"
           ],
           "type": "prose"
         },
@@ -7650,80 +7546,11 @@
       ]
     },
     {
-      "availability": "available",
+      "availability": "missing",
       "content_state": "enhanced",
       "copy_key": "career.block.china-salary",
       "id": "china-salary",
-      "items": [
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "Mainland China salary boundary: this page has not obtained a national occupational median wage precisely corresponding to O*NET 17-2199.05. National Bureau of Statistics manufacturing industry averages provide broad context only. US industry distributions are not used to infer Chinese employer structures."
-            ]
-          },
-          "fact_refs": [
-            "cn-manufacturing-nonprivate-wage"
-          ],
-          "id": "mechatronics-engineers.china-salary.career-snapshot-primary-locale.1",
-          "source_refs": [
-            "nbs-wages"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "In 2025, annual average manufacturing wages in China’s urban non-private units were {{fact:cn-manufacturing-nonprivate-wage}}, and in private units {{fact:cn-manufacturing-private-wage}}. The all-industry average for urban non-private units was {{fact:cn-national-nonprivate-wage}}. These are not medians or starting wages for mechatronics engineers."
-            ]
-          },
-          "fact_refs": [
-            "cn-manufacturing-private-wage"
-          ],
-          "id": "mechatronics-engineers.china-salary.career-snapshot-primary-locale.2",
-          "source_refs": [
-            "nbs-wages"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "Category boundary: the Ministry of Human Resources and Social Security publishes enterprise remuneration survey information by occupation or position, which can help locate pay for automation and control roles. However, this page has not obtained an entry precisely corresponding to O*NET 17-2199.05 and does not use it as this occupation's national median. Consult the competent authority's actual publications."
-            ]
-          },
-          "fact_refs": [
-            "cn-national-nonprivate-wage"
-          ],
-          "id": "mechatronics-engineers.china-salary.career-snapshot-primary-locale.3",
-          "source_refs": [
-            "mohrss-wage"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "Insufficient evidence: a national occupational median wage for mechatronics engineers in mainland China was not obtained under the 2025 official public reporting scope. This page displays only manufacturing industry proxies, labeled as industry-level, and does not fill the gap with proxy figures or US figures."
-            ]
-          },
-          "fact_refs": [
-            "cn-manufacturing-private-wage"
-          ],
-          "id": "mechatronics-engineers.china-salary.career-snapshot-primary-locale.4",
-          "source_refs": [
-            "nbs-wages"
-          ],
-          "type": "prose"
-        }
-      ]
+      "items": []
     },
     {
       "availability": "available",
@@ -7736,83 +7563,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "US Wages and Employment: 2025 Wages and 2025—2035 Projections; Parent Occupation Engineers, All Other (17-2199)"
+              "US Wages and Employment: 2025 Wages and 2025—2035 Projections; Parent Occupation Engineers,  (17-2199)"
             ]
           },
           "id": "mechatronics-engineers.us-salary.career-snapshot-secondary-locale.1",
           "source_refs": [
             "onet-wages"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "data": {
-            "paragraphs": [
-              "US parent occupation 17-2199: 2025 annual wages at P10/P25/P50/P75/P90 are USD 66,810 / 90,970 / 122,930 / 158,090 / 189,950; hourly wages are USD 32.12 / 43.73 / 59.10 / 76.01 / 91.32. Employment is 166,700 in 2025 and projected at 173,000 in 2035, growth of 3.7% (rounded by O*NET to 4%), a net increase of 6,200, and 8,800 average annual openings including replacements. Columns are rounded independently; these are not separate figures for 17-2199.05 or personal quotes."
-            ]
-          },
-          "id": "mechatronics-engineers.us-salary.career-snapshot-secondary-locale.2",
-          "source_refs": [
-            "onet-wages",
-            "bls-projections-2025"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "data": {
-            "paragraphs": [
-              "Wage distribution positions: these figures describe a US combined statistical distribution. Percentiles do not represent seniority or experience levels. Average annual openings include replacement demand and do not equal currently advertised jobs or an individual's hiring probability."
-            ]
-          },
-          "id": "mechatronics-engineers.us-salary.career-snapshot-secondary-locale.3",
-          "source_refs": [
-            "onet-wages"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "data": {
-            "paragraphs": [
-              "Keep parent-occupation wage percentiles, growth of 3.7%, and 8,800 average annual openings separate. Percentiles are not seniority; openings are not net growth or current vacancies. The parent occupation does not provide a separate distribution for mechatronics engineers and must not be extrapolated to China."
-            ]
-          },
-          "id": "mechatronics-engineers.us-salary.career-snapshot-secondary-locale.4",
-          "source_refs": [
-            "onet-wages"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "data": {
-            "paragraphs": [
-              "O*NET reports U.S. parent-group employment by industry: professional, scientific and technical services 26%, government 25%, manufacturing 21% and other industries 28%. We did not verify industry wages for mechatronics engineers alone."
-            ]
-          },
-          "id": "mechatronics-engineers.us-salary.career-snapshot-secondary-locale.5",
-          "source_refs": [
-            "onet-industry"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "data": {
-            "paragraphs": [
-              "Parent occupation 17-2199, 2025—2035: 166,700 to 173,000, growth of 3.7%, net increase of 6,200, and annual average openings of 8,800. Columns are rounded independently; do not replace the official net increase with the endpoint difference of 6,300. These are not separate mechatronics engineer demand figures or evidence of AI causation."
-            ]
-          },
-          "id": "mechatronics-engineers.us-salary.career-snapshot-secondary-locale.6",
-          "source_refs": [
-            "onet-trends"
           ],
           "type": "prose"
         }
@@ -7833,9 +7589,6 @@
             ]
           },
           "id": "mechatronics-engineers.fit.riasec-fit-block.1",
-          "source_refs": [
-            "onet-context"
-          ],
           "type": "prose"
         },
         {
@@ -7847,9 +7600,6 @@
             ]
           },
           "id": "mechatronics-engineers.fit.riasec-fit-block.2",
-          "source_refs": [
-            "onet-context"
-          ],
           "type": "prose"
         },
         {
@@ -7861,9 +7611,6 @@
             ]
           },
           "id": "mechatronics-engineers.fit.riasec-fit-block.3",
-          "source_refs": [
-            "onet-context"
-          ],
           "type": "prose"
         },
         {
@@ -7875,9 +7622,6 @@
             ]
           },
           "id": "mechatronics-engineers.fit.riasec-fit-block.4",
-          "source_refs": [
-            "onet-context"
-          ],
           "type": "prose"
         },
         {
@@ -7889,23 +7633,6 @@
             ]
           },
           "id": "mechatronics-engineers.fit.riasec-fit-block.5",
-          "source_refs": [
-            "onet-context"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.riasec-fit-block",
-          "data": {
-            "paragraphs": [
-              "RIC describes Realistic, Investigative, and Conventional activity preferences. Equipment, logical reasoning, and procedural recording can prompt exploratory questions. Interest assessments do not determine competence, qualifications, or learning costs; actual tasks and environments still require checking."
-            ]
-          },
-          "id": "mechatronics-engineers.fit.riasec-fit-block.6",
-          "source_refs": [
-            "onet-context"
-          ],
           "type": "prose"
         },
         {
@@ -7917,9 +7644,6 @@
             ]
           },
           "id": "mechatronics-engineers.fit.riasec-fit-block.7",
-          "source_refs": [
-            "onet-summary"
-          ],
           "type": "prose"
         },
         {
@@ -7931,9 +7655,6 @@
             ]
           },
           "id": "mechatronics-engineers.fit.riasec-fit-block.8",
-          "source_refs": [
-            "onet-context"
-          ],
           "type": "prose"
         }
       ]
@@ -7953,9 +7674,6 @@
             ]
           },
           "id": "mechatronics-engineers.risk.career-risk-cards.1",
-          "source_refs": [
-            "onet-context"
-          ],
           "type": "prose"
         },
         {
@@ -7967,11 +7685,6 @@
             ]
           },
           "id": "mechatronics-engineers.risk.career-risk-cards.2",
-          "source_refs": [
-            "onet-context",
-            "mecha-cn-safety",
-            "mecha-us-osha"
-          ],
           "type": "prose"
         },
         {
@@ -7983,9 +7696,6 @@
             ]
           },
           "id": "mechatronics-engineers.risk.career-risk-cards.3",
-          "source_refs": [
-            "onet-context"
-          ],
           "type": "prose"
         },
         {
@@ -7997,11 +7707,6 @@
             ]
           },
           "id": "mechatronics-engineers.risk.career-risk-cards.4",
-          "source_refs": [
-            "mecha-cn-special",
-            "mecha-cn-directory",
-            "mecha-us-osha"
-          ],
           "type": "prose"
         },
         {
@@ -8013,11 +7718,6 @@
             ]
           },
           "id": "mechatronics-engineers.risk.career-risk-cards.5",
-          "source_refs": [
-            "mecha-cn-work-law",
-            "mecha-cn-safety",
-            "mecha-us-osha"
-          ],
           "type": "prose"
         }
       ]
@@ -8033,68 +7733,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "When reading postings, identify the first-year deliverable: a machine design and drawings, commissioning and handover records, or maintenance and fault logs. Design may include site work. Ask who reviews your work and how often you travel."
-            ]
-          },
-          "id": "mechatronics-engineers.path.career-path-block.1",
-          "source_refs": [
-            "mecha-cn-design",
-            "mecha-cn-commission",
-            "mecha-cn-class"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-path-block",
-          "data": {
-            "paragraphs": [
-              "O*NET education feedback for this US suboccupation reports 66% bachelor's degrees, 21% some college without a degree, and 10% two-year degrees. These are respondents' reported requirements, not shares of jobs. JobZone4 generally describes several years of preparation, not a timeline for every entry-level role. In China, verify the target role and rules for specific electrical or engineering activities."
-            ]
-          },
-          "id": "mechatronics-engineers.path.career-path-block.2",
-          "source_refs": [
-            "onet-education"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-path-block",
-          "data": {
-            "paragraphs": [
-              "Portfolio with no prior experience: submit the classification table, cite the decisive readings for each case, and add one before-and-after variation. Use the provided or your own fictional data."
-            ]
-          },
-          "id": "mechatronics-engineers.path.career-path-block.3",
-          "source_refs": [
-            "mecha-editorial"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-path-block",
-          "data": {
-            "paragraphs": [
-              "Use a fictional case to explain your checks and corrections in an interview. For real installation, commissioning or maintenance, check site procedures and authorization. In mainland China, people who directly perform listed special operations need the required training, assessment and certificate. A worker’s right to stop their own work or leave in an emergency is separate from authority to restart equipment."
-            ]
-          },
-          "id": "mechatronics-engineers.path.career-path-block.4",
-          "source_refs": [
-            "mecha-cn-directory",
-            "mecha-cn-special",
-            "mecha-cn-work-law",
-            "mecha-us-osha"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-path-block",
-          "data": {
-            "paragraphs": [
-              "Seven days (30–60 minutes a day): copy the exercise; make a rule-priority table; solve the four cases; create one mismatch and one missing-value case; check the answers and keep your corrections; ask a peer to repeat the calculation or redo it yourself without the key; then turn the work into one page and choose the next task you want to practise."
+              "Compare the test condition, limit and recorded response; keep unresolved evidence visible."
             ]
           },
           "id": "mechatronics-engineers.path.career-path-block.5",
@@ -8108,15 +7747,10 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Check education, job requirements, employer authorization and any required special operations credential separately. In mainland China, installing, servicing or commissioning low-voltage electrical equipment can fall within the current directory; check actual tasks and credential scope. For U.S. servicing and maintenance, check OSHA’s separate scope."
+              "Check education, job requirements, employer authorization and any required special operations credential separately. For U.S. servicing and maintenance, check OSHA’s separate scope."
             ]
           },
           "id": "mechatronics-engineers.path.career-path-block.6",
-          "source_refs": [
-            "mecha-cn-directory",
-            "mecha-cn-special",
-            "mecha-us-osha"
-          ],
           "type": "prose"
         },
         {
@@ -8146,6 +7780,51 @@
             "onet-education"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "wave1-trial-1",
+                "values": [
+                  "Given:",
+                  "The simulated signal response limit is at most 120 ms. Records E and G show 105 ms and 138 ms under the same condition."
+                ]
+              },
+              {
+                "id": "wave1-trial-2",
+                "values": [
+                  "Task:",
+                  "Identify the out-of-limit record and calculate its deviation."
+                ]
+              },
+              {
+                "id": "wave1-trial-3",
+                "values": [
+                  "Handoff:",
+                  "Only compare the supplied records. No PLC commands, energized testing or equipment adjustment."
+                ]
+              }
+            ]
+          },
+          "id": "mechatronics-engineers.path.entry-work-sample-data.1",
+          "title": "Review two equipment response records",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "E meets the limit. G exceeds it by 18 ms; flag G for the integration owner."
+            ]
+          },
+          "id": "mechatronics-engineers.entry-work-sample-data.2",
+          "title": "Worked answer: Review two equipment response records",
+          "type": "notice",
+          "visibility": "public"
         }
       ]
     },
@@ -8241,124 +7920,22 @@
           "data": {
             "entries": [
               {
-                "answer": "About 87% of O*NET respondents reported daily work indoors in controlled conditions, and about 58% usually worked more than 40 hours a week. Check prototype work, commissioning and travel for the actual role.",
-                "id": "mechatronics-engineers.faq.1",
-                "question": "What are the daily work and hours like?",
-                "question_key": "career.faq.mechatronics-engineers.daily-work",
+                "answer": "The May 2025 national median was $122,930 a year. This is for SOC 17-2199, the broader occupational group.",
+                "id": "mechatronics-engineers.faq.batch3-pay-us",
+                "question": "What is the U.S. median wage?",
+                "question_key": "career.faq.mechatronics-engineers.batch3-pay-us",
                 "source_refs": [
-                  "onet-context"
+                  "wave1-b3-1"
                 ]
               },
               {
-                "answer": "Mechatronics engineering integrates and validates mechanical, electrical and control systems. Robotics focuses on robot applications; mechatronics technologists and technicians may operate, test or maintain equipment. Compare deliverables and who reviews them.",
-                "id": "mechatronics-engineers.faq.2",
-                "question": "How does this occupation differ from adjacent occupations?",
-                "question_key": "career.faq.mechatronics-engineers.role-comparison",
+                "answer": "See work fit evidence for the shared criteria.",
+                "id": "mechatronics-engineers.faq.batch3-fit",
+                "question": "What distinguishes a commissioning portfolio from a CAD sample?",
+                "question_key": "career.faq.mechatronics-engineers.batch3-fit",
                 "source_refs": [
-                  "onet-tasks",
-                  "mecha-us-robot",
-                  "mecha-us-tech"
+                  "wave1-b3-3"
                 ]
-              },
-              {
-                "answer": "Use the paper sample to see whether you enjoy recording exceptions, tracing decisions and checking corrections. Report real equipment anomalies under site rules; emergency withdrawal and authority to operate equipment are separate. RIC describes activity preferences.",
-                "id": "mechatronics-engineers.faq.3",
-                "question": "What signals suggest I might be suited to this work?",
-                "question_key": "career.faq.mechatronics-engineers.fit",
-                "source_refs": [
-                  "onet-context",
-                  "onet-details",
-                  "mecha-editorial",
-                  "mecha-cn-work-law",
-                  "mecha-us-osha"
-                ]
-              },
-              {
-                "answer": "Try organizing fictional fault logs, drafting checklists or comparing versions, then check the original records. ILO research measures potential task exposure. It does not quantify adoption, field reliability or displacement in this occupation.",
-                "id": "mechatronics-engineers.faq.4",
-                "question": "How will AI affect this occupation?",
-                "question_key": "career.faq.mechatronics-engineers.ai-impact",
-                "source_refs": [
-                  "ilo-genai",
-                  "source-fermatmind-ai-rubric"
-                ]
-              },
-              {
-                "answer": "Requirements conflicts, safety functions and risk judgments, commissioning conclusions, and fault handling should be reviewed by appropriately responsible and authorized personnel. Whether specific signing qualifications are required depends on local rules and job authorization and cannot be inferred from the occupational title.",
-                "id": "mechatronics-engineers.faq.5",
-                "question": "Which judgments must remain human responsibilities?",
-                "question_key": "career.faq.mechatronics-engineers.human-control",
-                "source_refs": [
-                  "onet-context",
-                  "onet-tasks"
-                ]
-              },
-              {
-                "answer": "China’s NBS reports 2025 manufacturing averages of CNY 113,594 in urban non-private units and CNY 76,055 in private units. CNY 129,441 is the all-industry average for urban non-private units. We did not verify a mainland national median for mechatronics engineers.",
-                "id": "mechatronics-engineers.faq.6",
-                "question": "What is the salary evidence for mainland China?",
-                "question_key": "career.faq.mechatronics-engineers.china-pay",
-                "source_refs": [
-                  "nbs-wages"
-                ]
-              },
-              {
-                "answer": "BLS 2025 combined-scope wage data: median USD 122,930 per year (USD 59.10 per hour); 10th percentile USD 66,810, 25th percentile USD 90,970, 75th percentile USD 158,090, and 90th percentile USD 189,950 per year. These cover Engineers, All Other (17-2199), not this occupation separately. Percentiles do not describe individual take-home income.",
-                "id": "mechatronics-engineers.faq.7",
-                "question": "What is the US salary evidence?",
-                "question_key": "career.faq.mechatronics-engineers.us-pay",
-                "source_refs": [
-                  "onet-wages"
-                ]
-              },
-              {
-                "answer": "A bachelor’s degree is the most common response in O*NET’s U.S. education survey. Job Zone 4 describes general preparation. Two mainland postings ask for relevant degrees; education, site authorization and any special operations credentials are separate questions.",
-                "id": "mechatronics-engineers.faq.8",
-                "question": "What are the entry and training paths?",
-                "question_key": "career.faq.mechatronics-engineers.education-path",
-                "source_refs": [
-                  "onet-education",
-                  "onet-jobzone",
-                  "mecha-cn-design",
-                  "mecha-cn-commission",
-                  "mecha-cn-special"
-                ]
-              },
-              {
-                "answer": "Risks include mismatches between test and site conditions, unexpected movement and acting outside your authority. Record and report anomalies. Emergency withdrawal, restart, maintenance and release each follow applicable site rules and responsibilities.",
-                "id": "mechatronics-engineers.faq.9",
-                "question": "What are the main risks and control boundaries?",
-                "question_key": "career.faq.mechatronics-engineers.risk-boundary",
-                "source_refs": [
-                  "mecha-cn-work-law",
-                  "mecha-cn-safety",
-                  "mecha-us-osha"
-                ]
-              },
-              {
-                "answer": "For the U.S. parent group 17-2199, BLS projects 166,700 jobs in 2025 and 173,000 in 2035, up 3.7%. Its published net gain is 6,200; figures are rounded independently. About 8,800 annual openings include replacements and are neither active vacancies nor a separate estimate for mechatronics engineers.",
-                "id": "mechatronics-engineers.faq.10",
-                "question": "How should market signals be interpreted?",
-                "question_key": "career.faq.mechatronics-engineers.outlook-transition",
-                "source_refs": [
-                  "bls-projections-2025",
-                  "onet-trends"
-                ]
-              },
-              {
-                "answer": "Hide the key, classify the four fictional groups, and explain the reading that decides each result. Then check the actual role, preparation, and site authorization. The paper sample does not qualify you to operate equipment or sign off on safety.",
-                "id": "mechatronics-engineers.faq.11",
-                "question": "Is this occupation worth exploring further?",
-                "question_key": "career.faq.mechatronics-engineers.career-worth",
-                "source_refs": [
-                  "onet-summary"
-                ]
-              },
-              {
-                "answer": "Evidence for China, the US, and specific institutions is presented separately: wage, employment, qualification or credential, standards, and AI conclusions must not be combined across scopes. This page's US statistics cover Engineers, All Other (17-2199), not this occupation separately or adjacent roles. Mechatronics involves engineering and safety standards and practice requirements. This page provides occupational decision-making and research exercise information; it does not replace local law, employer requirements, safety standards, or other professional advice. Any statement of insufficient evidence means only that a bounded search did not establish safely matching data; proxies or memory are not used to fabricate figures.",
-                "id": "mechatronics-engineers.faq.12",
-                "question": "What are the boundaries for using this page?",
-                "question_key": "career.faq.mechatronics-engineers.boundary"
               }
             ]
           },
@@ -8370,7 +7947,7 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "Evidence for China, the US, and specific institutions is presented separately: wage, employment, qualification or credential, standards, and AI conclusions must not be combined across scopes. This page's US statistics cover Engineers, All Other (17-2199), not this occupation separately or adjacent roles.",
+              "This page's US statistics cover Engineers,  (17-2199), not this occupation separately or adjacent roles.",
               "Mechatronics involves engineering and safety standards and practice requirements. This page provides occupational decision-making and research exercise information; it does not replace local law, employer requirements, safety standards, or other professional advice.",
               "Any statement of insufficient evidence means only that a bounded search did not establish safely matching data; proxies or memory are not used to fabricate figures."
             ]
@@ -8414,12 +7991,6 @@
                 "id": "mechatronics-engineers.navigation.4",
                 "relation": "career.section",
                 "url": "#career-content-ai-impact"
-              },
-              {
-                "entity": "Mechatronics Engineers",
-                "id": "mechatronics-engineers.navigation.5",
-                "relation": "career.section",
-                "url": "#career-content-china-salary"
               },
               {
                 "entity": "Mechatronics Engineers",
@@ -8478,22 +8049,6 @@
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "Official occupational description, reported job titles, interest code, and Job Zone.",
-                  "US occupational scope; no mapping to mainland China is presumed."
-                ],
-                "evidence_type": "official occupation summary",
-                "id": "onet-summary",
-                "limitation": "US occupational scope; no exact equivalent mapping in mainland China is presumed.",
-                "market": "United States",
-                "name": "O*NET 17-2199.05 Summary (Occupational Identity and Description)",
-                "period": "O*NET 2026 occupational profile; accessed 2026-09-25",
-                "publisher": "O*NET OnLine, U.S. Department of Labor",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/17-2199.05"
-              },
-              {
-                "accessed_at": "2026-09-25",
-                "details": [
                   "Task list for researching, designing, developing, and testing automation and intelligent system controls.",
                   "Task samples do not mean every role performs all tasks."
                 ],
@@ -8506,22 +8061,6 @@
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/17-2199.05#Tasks"
-              },
-              {
-                "accessed_at": "2026-09-25",
-                "details": [
-                  "Percentage distributions for indoor environments, working hours, communication, accuracy, and teamwork.",
-                  "US work context does not replace Chinese law or employer requirements."
-                ],
-                "evidence_type": "official occupation profile",
-                "id": "onet-context",
-                "limitation": "US work context does not replace Chinese law or employer requirements.",
-                "market": "United States",
-                "name": "O*NET 17-2199.05 Work Context",
-                "period": "O*NET 2026 occupational profile; accessed 2026-09-25",
-                "publisher": "O*NET OnLine, U.S. Department of Labor",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/details/17-2199.05#WorkContext"
               },
               {
                 "accessed_at": "2026-09-25",
@@ -8559,11 +8098,11 @@
                 "accessed_at": "2026-11-09",
                 "details": [
                   "BLS 2025 wage data: 10 / 25 / median / 75 / 90 percentiles and hourly values.",
-                  "The O*NET page labels these as Engineers, All Other (17-2199) combined-scope figures, not this occupation separately."
+                  "The O*NET page labels these as Engineers,  (17-2199) combined-scope figures, not this occupation separately."
                 ],
                 "evidence_type": "official wage data",
                 "id": "onet-wages",
-                "limitation": "Combined scope: Engineers, All Other (17-2199) data, not 17-2199.05 separately; percentiles do not describe individual take-home income.",
+                "limitation": "Combined scope: Engineers,  (17-2199) data, not 17-2199.05 separately; percentiles do not describe individual take-home income.",
                 "market": "United States",
                 "name": "O*NET 17-2199.05 National Wages (Engineers, All Other Combined Scope; BLS 2025 Wage Data)",
                 "period": "2025 wage data; accessed 2026-09-25",
@@ -8578,7 +8117,7 @@
                 ],
                 "evidence_type": "official employment projection",
                 "id": "onet-trends",
-                "limitation": "U.S. BLS parent group 17-2199, Engineers, All Other; not separately reported for 17-2199.05",
+                "limitation": "U.S. BLS parent group 17-2199, Engineers, ; not separately reported for 17-2199.05",
                 "market": "United States",
                 "name": "O*NET U.S. parent-group employment trends, 2025–2035",
                 "period": "2025–2035",
@@ -8593,7 +8132,7 @@
                 ],
                 "evidence_type": "official industry distribution",
                 "id": "onet-industry",
-                "limitation": "U.S. BLS parent group 17-2199, Engineers, All Other; not separately reported for 17-2199.05",
+                "limitation": "U.S. BLS parent group 17-2199, Engineers, ; not separately reported for 17-2199.05",
                 "market": "United States",
                 "name": "O*NET U.S. parent-group employment by industry, 2025",
                 "period": "2025",
@@ -8616,38 +8155,6 @@
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/17-2199.05"
-              },
-              {
-                "accessed_at": "2026-11-09",
-                "details": [
-                  "Provides average annual wages by industry category for urban non-private and private units, including manufacturing.",
-                  "Industry averages are not occupational medians and exclude individual businesses and freelancers."
-                ],
-                "evidence_type": "official industry wage statistics",
-                "id": "nbs-wages",
-                "limitation": "Industry averages are not occupational medians and exclude individual businesses and freelancers.",
-                "market": "Mainland China national scope",
-                "name": "2025 Average Annual Wages of Employees in Urban Units",
-                "period": "2025 annual wages; published 2026-05-15; accessed 2026-09-25",
-                "publisher": "National Bureau of Statistics",
-                "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
-              },
-              {
-                "accessed_at": "2026-09-25",
-                "details": [
-                  "Publishes enterprise remuneration survey information by occupation or position.",
-                  "No entry precisely corresponding to O*NET 17-2199.05 was obtained."
-                ],
-                "evidence_type": "official wage survey entry",
-                "id": "mohrss-wage",
-                "limitation": "No entry precisely corresponding to O*NET 17-2199.05 was obtained.",
-                "market": "Mainland China national scope",
-                "name": "Enterprise Remuneration Survey Information (2024)",
-                "period": "2024 survey; published 2025-06-27; accessed 2026-09-25",
-                "publisher": "Ministry of Human Resources and Social Security of the People's Republic of China",
-                "scope": "industry_proxy",
-                "url": "https://www.mohrss.gov.cn/SYrlzyhshbzb/laodongguanxi_/fwyd/202506/t20250627_544623.html"
               },
               {
                 "accessed_at": "2026-09-25",
@@ -8695,142 +8202,6 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent_proxy",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
-              },
-              {
-                "accessed_at": "2026-11-09",
-                "details": [
-                  "No reliable adoption, job effect or end-to-end task measure was verified; no score is reported."
-                ],
-                "evidence_type": "editorial_design",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "An editorial note, not an occupation-level measurement.",
-                "market": "Region-neutral",
-                "name": "FermatMind evidence note on AI in mechatronics",
-                "period": "2026-11-09",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": null
-              },
-              {
-                "accessed_at": "2026-11-09",
-                "details": [
-                  "Automatic control 2-02-07-07, intelligent manufacturing 2-02-38-05 and equipment engineering 2-02-07-04.",
-                  "Industrial robot operators (6-31-07-03) operate, program and commission systems. Maintenance technicians (6-31-07-01) focus on monitoring, diagnosis and upkeep."
-                ],
-                "evidence_type": "primary_source",
-                "id": "mecha-cn-class",
-                "limitation": "A comparison of duties, not a code crosswalk.",
-                "market": "Mainland China",
-                "name": "China occupational classification (2022 edition)",
-                "period": "2022",
-                "publisher": "MOHRSS and other issuing agencies",
-                "scope": "exact",
-                "url": "https://rsj.xlgl.gov.cn/rsj/zwgk/gsgg/2025042911363847198/2025042911360419576.pdf"
-              },
-              {
-                "accessed_at": "2026-11-09",
-                "details": [
-                  "Electrical design, schematics, component selection, PLC work and prototype commissioning at factory and client sites; relevant bachelor’s degree or higher."
-                ],
-                "evidence_type": "primary_source",
-                "id": "mecha-cn-design",
-                "limitation": "One notice only. Current availability and actual earnings were not verified.",
-                "market": "Mainland China",
-                "name": "Jingsheng electrical engineer posting",
-                "period": "2026-11-05",
-                "publisher": "Hebei University of Technology / Jingsheng",
-                "scope": "exact",
-                "url": "https://career.hebut.edu.cn/home/correcruit/content/id/79816.html"
-              },
-              {
-                "accessed_at": "2026-11-09",
-                "details": [
-                  "2027 graduate sample: PLC programs, site commissioning, troubleshooting and records; relevant bachelor’s degree or higher and travel."
-                ],
-                "evidence_type": "primary_source",
-                "id": "mecha-cn-commission",
-                "limitation": "One notice only. Current availability and actual earnings were not verified.",
-                "market": "Mainland China",
-                "name": "Hymson Shenzhen battery equipment PLC posting",
-                "period": "2026-09-19",
-                "publisher": "Wuyi University / Hymson",
-                "scope": "exact",
-                "url": "https://career.wyu.edu.cn/detail/job?career_id=646552&id=2709526"
-              },
-              {
-                "accessed_at": "2026-11-09",
-                "details": [
-                  "Checks for safeguards and energy isolation and lockout/tagout in maintenance."
-                ],
-                "evidence_type": "primary_source",
-                "id": "mecha-cn-safety",
-                "limitation": "Industrial safety context; not a procedure for operating equipment.",
-                "market": "Mainland China",
-                "name": "China work safety advisory for industrial and trade firms",
-                "period": "2026-08-10",
-                "publisher": "Ministry of Emergency Management",
-                "scope": "exact",
-                "url": "https://www.mem.gov.cn/xw/yjglbgzdt/202608/t20260810_680113.shtml"
-              },
-              {
-                "accessed_at": "2026-11-09",
-                "details": [
-                  "Articles 3–4 require training, assessment and certification for people performing listed special operations."
-                ],
-                "evidence_type": "primary_source",
-                "id": "mecha-cn-special",
-                "limitation": "Applies to the work performed, not to an engineer’s title.",
-                "market": "Mainland China",
-                "name": "China special operations training and assessment rules (Order 19)",
-                "period": "2026-06-01",
-                "publisher": "Ministry of Emergency Management",
-                "scope": "exact",
-                "url": "https://www.mem.gov.cn/gk/zfxxgkpt/fdzdgknr/gz11/202512/t20251219_589223.shtml"
-              },
-              {
-                "accessed_at": "2026-11-09",
-                "details": [
-                  "Section 1.2 covers installation, commissioning and servicing of listed low-voltage electrical equipment. Check the directory’s provisions for valid high-voltage credentials."
-                ],
-                "evidence_type": "primary_source",
-                "id": "mecha-cn-directory",
-                "limitation": "Check the directory and the actual work to determine which credential applies.",
-                "market": "Mainland China",
-                "name": "China special operations directory (2026)",
-                "period": "2026-06-01",
-                "publisher": "Ministry of Emergency Management and other agencies",
-                "scope": "exact",
-                "url": "https://www.mem.gov.cn/gk/zfxxgkpt/fdzdgknr/202605/t20260526_604988.shtml"
-              },
-              {
-                "accessed_at": "2026-11-09",
-                "details": [
-                  "Articles 28–30 cover training and special operations; article 55 covers stopping work or leaving in an emergency."
-                ],
-                "evidence_type": "primary_source",
-                "id": "mecha-cn-work-law",
-                "limitation": "Emergency withdrawal and authority to restart equipment or release a project are separate.",
-                "market": "Mainland China",
-                "name": "China Work Safety Law",
-                "period": "2021",
-                "publisher": "Ministry of Emergency Management reproduction",
-                "scope": "exact",
-                "url": "https://www.mem.gov.cn/fw/flfgbz/fg/202107/t20210716_416558.shtml"
-              },
-              {
-                "accessed_at": "2026-11-09",
-                "details": [
-                  "Addresses unexpected start-up or release of stored energy in covered servicing and maintenance and distinguishes authorized and affected employees."
-                ],
-                "evidence_type": "primary_source",
-                "id": "mecha-us-osha",
-                "limitation": "Check scope and exceptions. It is not a mainland China regulation.",
-                "market": "United States",
-                "name": "U.S. OSHA control of hazardous energy",
-                "period": "29 CFR 1910.147",
-                "publisher": "OSHA",
-                "scope": "exact",
-                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147"
               },
               {
                 "accessed_at": "2026-11-09",
@@ -8901,7 +8272,7 @@
                 "id": "mecha-editorial",
                 "limitation": "Paper only.",
                 "market": "Region-neutral",
-                "name": "FermatMind fictional sensor readings exercise",
+                "name": "FermatMind  sensor readings exercise",
                 "period": "2026-11-09",
                 "publisher": "FermatMind",
                 "scope": "exact",
@@ -8932,6 +8303,42 @@
                 "publisher": "U.S. Department of Labor, Employment and Training Administration",
                 "scope": "exact",
                 "url": "https://creativecommons.org/licenses/by/4.0/"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-1",
+                "name": "BLS May 2025 OEWS national profile",
+                "url": "https://data.bls.gov/oesprofile/?areas=INDUSTRY,STATE,MSA&major_group=170000&measure=13&occupation=172199&year=2025"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-2",
+                "name": "BLS May 2025 OEWS technical notes",
+                "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-3",
+                "name": "O*NET occupation and duties",
+                "url": "https://www.onetonline.org/link/summary/17-2199.05"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-4",
+                "name": "IEC 61131-3",
+                "url": "https://webstore.iec.ch/en/publication/68533"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-5",
+                "name": "Siemens Mechatronic Systems Certification Program",
+                "url": "https://www.sitrain-learning.siemens.com/en/rw29772/Mechatronic-Systems"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-6",
+                "name": "EtherCAT Technology Group",
+                "url": "https://www.ethercat.org/en/technology.html"
               }
             ]
           },
@@ -8971,18 +8378,8 @@
     ],
     "components": {
       "adjacent_career_comparison_table": {
-        "conclusion": "Compare deliverables and review responsibilities on one production line, then check first-year duties in a real posting. In China’s classification, industrial robot operators also operate, program and commission systems. Maintenance technicians focus on monitoring, diagnosis and maintenance records. For integration design, ask who owns interfaces, the system design and end-to-end validation.",
+        "conclusion": "Compare deliverables and review responsibilities on one production line, then check first-year duties in a real posting. Maintenance technicians focus on monitoring, diagnosis and maintenance records. For integration design, ask who owns interfaces, the system design and end-to-end validation.",
         "evidence_links": [
-          {
-            "href": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "label": "Tasks and Boundaries for This Occupation"
-          },
           {
             "href": "https://www.onetonline.org/link/summary/17-2141.00",
             "label": "Mechanical Engineers: O*NET 17-2141.00"
@@ -9150,22 +8547,10 @@
             }
           },
           {
-            "来源": {
-              "$source": "onet-context",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
+            "来源": "Source detail not stated.",
             "类型": "Official or Research Sources",
             "适用范围": "Use only within each source's original scope",
-            "链接": {
-              "$source": "onet-context",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            }
+            "链接": null
           },
           {
             "来源": {
@@ -9232,22 +8617,10 @@
           },
           {
             "使用限制": "Work context consists of survey findings; it does not replace employer requirements or local regulations.",
-            "来源": {
-              "$source": "onet-context",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
+            "来源": "Source detail not stated.",
             "研究对象": "Work Context (O*NET 17-2199.05)",
             "结论": "Mainly indoors; hours and collaboration intensity vary by project",
-            "链接": {
-              "$source": "onet-context",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            }
+            "链接": null
           },
           {
             "使用限制": "These do not constitute uniform hiring or assessment standards.",
@@ -9345,12 +8718,7 @@
             "问题": "What Evidence Should Be Used to Assess the Impact?"
           }
         ],
-        "responsibility_intro": {
-          "$item": "mechatronics-engineers.ai-impact.ai-impact-table.5",
-          "block": "ai-impact",
-          "copy_key": "career.item.ai-impact-table",
-          "type": "prose"
-        },
+        "responsibility_intro": "AI can draft an event timeline. The engineer checks signal semantics, timing and revision lineage against the recorded test.",
         "responsibility_steps": [
           {
             "步骤": "Check Inputs",
@@ -9466,13 +8834,6 @@
           "$link": "mechatronics-engineers.navigation.links.1",
           "block": "navigation",
           "copy_key": "career.item.navigation-links",
-          "entry": "mechatronics-engineers.navigation.5",
-          "field": "url"
-        },
-        {
-          "$link": "mechatronics-engineers.navigation.links.1",
-          "block": "navigation",
-          "copy_key": "career.item.navigation-links",
           "entry": "mechatronics-engineers.navigation.6",
           "field": "url"
         },
@@ -9581,204 +8942,37 @@
             "stage": "Expanded Responsibility"
           }
         ],
-        "direct_answer": {
-          "$join": [
-            {
-              "$item": "mechatronics-engineers.path.career-path-block.1",
-              "block": "path",
-              "copy_key": "career.item.career-path-block",
-              "type": "prose"
-            },
-            {
-              "$item": "mechatronics-engineers.path.career-path-block.2",
-              "block": "path",
-              "copy_key": "career.item.career-path-block",
-              "type": "prose"
-            },
-            {
-              "$item": "mechatronics-engineers.path.career-path-block.3",
-              "block": "path",
-              "copy_key": "career.item.career-path-block",
-              "type": "prose"
-            },
-            {
-              "$item": "mechatronics-engineers.path.career-path-block.4",
-              "block": "path",
-              "copy_key": "career.item.career-path-block",
-              "type": "prose"
-            }
-          ],
-          "separator": "\n"
-        },
+        "direct_answer": "Compare the day-to-day duties and the scope of supervised assignments before choosing training.",
         "heading": "Mechatronics Engineers' Entry and Capability Paths",
         "locale_requirements": {
-          "credential_boundary": "Education and hiring do not themselves authorize equipment work, listed special operations or project release.",
-          "jurisdiction": "Separate respondents' education for this US suboccupation from JobZone group preparation; in China, verify the role and specific engineering or field activities.",
-          "summary": "For the U.S., check the occupation’s education survey; for mainland China, compare actual jobs, site duties and the current directory."
+          "credential_boundary": "Mechanical, electrical or automation programs can lead to integration work. Siemens SMSCP is a training and certification pathway. Changes to safety functions and energized tests go through the designated project authority.",
+          "jurisdiction": "Use the U.S. scope described in this section.",
+          "summary": "Use the U.S. scope described in this section."
         },
         "schema_version": "career.career_progression.v1",
         "source_links": [
           {
-            "href": {
-              "$source": "onet-education",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "id": "mechatronics-engineers.review.source.0",
-            "label": {
-              "$source": "onet-education",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "scope": "Preparation level is not a uniform hiring threshold."
+            "href": "https://webstore.iec.ch/en/publication/68533",
+            "id": "wave1-b3-4",
+            "label": "IEC 61131-3",
+            "scope": "Entry and practice"
           },
           {
-            "href": {
-              "$source": "onet-jobzone",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "id": "mechatronics-engineers.review.source.1",
-            "label": {
-              "$source": "onet-jobzone",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "scope": "Preparation level is not a uniform hiring threshold."
+            "href": "https://www.sitrain-learning.siemens.com/en/rw29772/Mechatronic-Systems",
+            "id": "wave1-b3-5",
+            "label": "Siemens Mechatronic Systems Certification Program",
+            "scope": "Entry and practice"
           },
           {
-            "href": {
-              "$source": "onet-tasks",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "id": "mechatronics-engineers.review.source.2",
-            "label": {
-              "$source": "onet-tasks",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "scope": "Task samples do not mean every role performs all tasks."
+            "href": "https://www.ethercat.org/en/technology.html",
+            "id": "wave1-b3-6",
+            "label": "EtherCAT Technology Group",
+            "scope": "Entry and practice"
           },
           {
-            "href": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "id": "mechatronics-engineers.review.source.3",
-            "label": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "scope": "US occupational scope; no exact equivalent mapping in mainland China is presumed."
-          },
-          {
-            "href": {
-              "$source": "mecha-cn-design",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "id": "mecha.path.mecha-cn-design",
-            "label": {
-              "$source": "mecha-cn-design",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "scope": "Applies to the source’s jurisdiction, posting or activity."
-          },
-          {
-            "href": {
-              "$source": "mecha-cn-commission",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "id": "mecha.path.mecha-cn-commission",
-            "label": {
-              "$source": "mecha-cn-commission",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "scope": "Applies to the source’s jurisdiction, posting or activity."
-          },
-          {
-            "href": {
-              "$source": "mecha-cn-special",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "id": "mecha.path.mecha-cn-special",
-            "label": {
-              "$source": "mecha-cn-special",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "scope": "Applies to the source’s jurisdiction, posting or activity."
-          },
-          {
-            "href": {
-              "$source": "mecha-cn-directory",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "id": "mecha.path.mecha-cn-directory",
-            "label": {
-              "$source": "mecha-cn-directory",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "scope": "Applies to the source’s jurisdiction, posting or activity."
-          },
-          {
-            "href": {
-              "$source": "mecha-us-osha",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "id": "mecha.path.mecha-us-osha",
-            "label": {
-              "$source": "mecha-us-osha",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "scope": "Applies to the source’s jurisdiction, posting or activity."
+            "href": "https://www.onetonline.org/link/details/17-2199.05#Education",
+            "id": "onet-education",
+            "label": "O*NET 17-2199.05 Education and Occupational Preparation"
           }
         ],
         "tracks": [
@@ -10065,7 +9259,7 @@
             "label": "View the Risk Module"
           }
         ],
-        "direct_answer": "Handle risks in terms of triggers, consequences, controls, and escalation boundaries; editorial synthesis does not replace engineering and safety standards.",
+        "direct_answer": "A passing dry cycle does not establish safe startup. Ask the responsible reviewers which acceptance and safety checks remain open.",
         "evidence_scope": "Editorial risk and control analysis based on this suboccupation's tasks, not accident rates or statutory safety standards. Work context does not establish signing authority; verify by jurisdiction and organization.",
         "heading": "Mechatronics Engineers' Work Risks and Boundaries",
         "risks": [
@@ -10195,24 +9389,6 @@
           },
           {
             "href": {
-              "$source": "onet-context",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "id": "mechatronics-engineers.review.source.1",
-            "label": {
-              "$source": "onet-context",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "scope": "US work context does not replace Chinese law or employer requirements."
-          },
-          {
-            "href": {
               "$source": "onet-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
@@ -10230,543 +9406,72 @@
             "scope": "These do not constitute uniform hiring or assessment standards."
           },
           {
-            "href": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "id": "mechatronics-engineers.review.source.3",
-            "label": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "scope": "US occupational scope; no exact equivalent mapping in mainland China is presumed."
+            "href": "https://www.onetonline.org/link/details/17-2199.05#Education",
+            "id": "onet-education",
+            "label": "O*NET 17-2199.05 Education and Occupational Preparation"
           },
           {
-            "href": {
-              "$source": "mecha-cn-safety",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "id": "mecha.risk.0",
-            "label": {
-              "$source": "mecha-cn-safety",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "scope": "Check jurisdiction, activity and scope."
-          },
-          {
-            "href": {
-              "$source": "mecha-cn-directory",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "id": "mecha.risk.1",
-            "label": {
-              "$source": "mecha-cn-directory",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "scope": "Check jurisdiction, activity and scope."
-          },
-          {
-            "href": {
-              "$source": "mecha-cn-work-law",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "id": "mecha.risk.2",
-            "label": {
-              "$source": "mecha-cn-work-law",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "scope": "Check jurisdiction, activity and scope."
-          },
-          {
-            "href": {
-              "$source": "mecha-us-osha",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "id": "mecha.risk.3",
-            "label": {
-              "$source": "mecha-us-osha",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "scope": "Check jurisdiction, activity and scope."
+            "href": "https://www.onetonline.org/link/details/17-2199.05#JobZone",
+            "id": "onet-jobzone",
+            "label": "O*NET 17-2199.05 Job Zone"
           }
         ]
       },
       "career_snapshot_primary_locale": {
-        "salary": {
-          "bls_table": [
-            {
-              "指标": "Mainland China Salary Scope",
-              "数值": "Non-private manufacturing: RMB 113,594 per year (industry proxy)",
-              "说明": "Not this occupation's median."
-            },
-            {
-              "指标": "Mainland China Salary Scope",
-              "数值": "Private manufacturing: RMB 76,055 per year (industry proxy)",
-              "说明": "Not this occupation's median."
-            },
-            {
-              "指标": "Mainland China Salary Scope",
-              "数值": "CNY 129,441 annual average across all industries in urban non-private units",
-              "说明": "Not this occupation's median."
-            }
-          ],
-          "china_ai_row": {
-            "$item": "mechatronics-engineers.china-salary.career-snapshot-primary-locale.4",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "china_class_row": {
-            "$item": "mechatronics-engineers.china-salary.career-snapshot-primary-locale.3",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "china_edu_table": [
-            {
-              "学历段": "Bachelor's Degree",
-              "岗位方向": "Mechatronics and automation roles",
-              "说明": "Common preparation information from US O*NET; check job announcements for specific Chinese hiring requirements."
-            },
-            {
-              "学历段": "Graduate Education",
-              "岗位方向": "Exploring control or algorithm R&D",
-              "说明": "Editorial suggestion: check specific job announcements first; no uniform degree threshold is claimed."
-            },
-            {
-              "学历段": "Engineering Practice",
-              "岗位方向": "System integration and fieldwork",
-              "说明": "Demonstrate ability with program, commissioning, and validation records; this is not an academic level."
-            },
-            {
-              "学历段": "Training or Certification",
-              "岗位方向": "Control-related training",
-              "说明": "Whether it is required depends on local rules and employer requirements, not this page's determination."
-            }
-          ],
-          "china_industry_table": [
-            {
-              "行业": "Manufacturing",
-              "需求": "Editorially selected job-search setting; Chinese occupational industry distribution was not obtained."
-            },
-            {
-              "行业": "Technical Services",
-              "需求": "Search for system integration roles; this does not indicate national demand shares."
-            },
-            {
-              "行业": "Other Organizations",
-              "需求": "Check tasks and responsibilities in specific announcements; no government industry share is presumed."
-            }
-          ],
-          "china_intl": {
-            "$join": [
-              {
-                "$source": "mohrss-wage",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "mechatronics-engineers.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "mohrss-wage",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "mechatronics-engineers.source-register.published.1"
-              }
-            ],
-            "separator": ""
-          },
-          "china_name_row": {
-            "$item": "mechatronics-engineers.china-salary.career-snapshot-primary-locale.1",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "china_open": "No national occupational wage was obtained for this occupation. This item is not starting pay, take-home income, or a personal quote.",
-          "china_ref": {
-            "$join": [
-              {
-                "$source": "nbs-wages",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "mechatronics-engineers.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "nbs-wages",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "mechatronics-engineers.source-register.published.1"
-              }
-            ],
-            "separator": ""
-          },
-          "china_salary_note": "Mainland China figures are separate from US, global, and specific-organization scopes and cannot be combined across markets.",
-          "china_salary_table": [
-            {
-              "城市/区间": "National Industry Scope",
-              "月薪参考": "See official industry statistics"
-            },
-            {
-              "城市/区间": "Regional Differences",
-              "月薪参考": "Data for this occupation not obtained"
-            },
-            {
-              "城市/区间": "Per-Project Quote",
-              "月薪参考": "Data for this occupation not obtained"
-            }
-          ],
-          "china_soc_row": {
-            "$item": "mechatronics-engineers.china-salary.career-snapshot-primary-locale.2",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "sources_note": {
-            "$join": [
-              {
-                "$source": "nbs-wages",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "mechatronics-engineers.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "nbs-wages",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "mechatronics-engineers.source-register.published.1"
-              }
-            ],
-            "separator": ""
-          },
-          "ui": {
-            "ai_heading": "Boundaries for AI and Salary Judgments",
-            "driver_heading": "Influencing Factors",
-            "official_heading": "Official Statistical Scope",
-            "scenario_caption": "This scenario only illustrates statistical scope; it is not a personal quote.",
-            "scenario_heading": "Scenario Reference",
-            "scenario_interpretation_label": "Explanation",
-            "scenario_role_label": "Role Scope",
-            "scenario_value_label": "Reference Value"
-          },
-          "us_growth": "Not applicable to the local scope",
-          "us_median": "Not applicable to the local scope"
-        }
+        "availability": "unavailable",
+        "reason_code": "source_locale_unavailable"
       },
       "career_snapshot_secondary_locale": {
-        "authority_sources": {
-          "$join": [
-            {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "mechatronics-engineers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "mechatronics-engineers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            },
-            "；",
-            {
-              "$join": [
-                {
-                  "$source": "bls-projections-2025",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "mechatronics-engineers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "bls-projections-2025",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "mechatronics-engineers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
-          ],
-          "separator": ""
-        },
+        "authority_sources": "https://data.bls.gov/oesprofile/?areas=INDUSTRY,STATE,MSA&major_group=170000&measure=13&occupation=172199&year=2025",
         "bls_table": [
           {
-            "指标": "Wages · 10th Percentile",
-            "数值": "USD 66,810 per year",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "mechatronics-engineers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "mechatronics-engineers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "fact_ref": "wave1-b3-wage-p10",
+            "指标": "10th percentile",
+            "数值": "$66,810/year",
+            "说明": "Read within the original statistical scope."
           },
           {
-            "指标": "Wages · 25th Percentile",
-            "数值": "USD 90,970 per year",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "mechatronics-engineers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "mechatronics-engineers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "fact_ref": "wave1-b3-wage-p25",
+            "指标": "25th percentile",
+            "数值": "$90,970/year",
+            "说明": "Read within the original statistical scope."
           },
           {
-            "指标": "Wages · Median",
-            "数值": "USD 122,930 per year",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "mechatronics-engineers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "mechatronics-engineers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "fact_ref": "wave1-b3-wage-p50",
+            "指标": "Median",
+            "数值": "$122,930/year",
+            "说明": "Read within the original statistical scope."
           },
           {
-            "指标": "Wages · 75th Percentile",
-            "数值": "USD 158,090 per year",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "mechatronics-engineers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "mechatronics-engineers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "fact_ref": "wave1-b3-wage-p75",
+            "指标": "75th percentile",
+            "数值": "$158,090/year",
+            "说明": "Read within the original statistical scope."
           },
           {
-            "指标": "Wages · 90th Percentile",
-            "数值": "USD 189,950 per year",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "mechatronics-engineers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "mechatronics-engineers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "fact_ref": "wave1-b3-wage-p90",
+            "指标": "90th percentile",
+            "数值": "$189,950/year",
+            "说明": "Read within the original statistical scope."
           },
           {
             "指标": "Employment · Level",
             "数值": "166,700 jobs in 2025; 173,000 projected in 2035 (parent group 17-2199).",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "bls-projections-2025",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "mechatronics-engineers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "bls-projections-2025",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "mechatronics-engineers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "说明": "Projection base-year employment"
           },
           {
             "指标": "Employment · Growth",
             "数值": "Parent-occupation growth of 3.7%; net increase of 6,200 (2025—2035)",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "bls-projections-2025",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "mechatronics-engineers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "bls-projections-2025",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "mechatronics-engineers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "说明": "Projected percentage change"
           },
           {
             "指标": "Employment · Openings",
             "数值": "Parent occupation: 8,800 openings per year (2025—2035)",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "bls-projections-2025",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "mechatronics-engineers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "bls-projections-2025",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "mechatronics-engineers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "说明": "Average annual openings, including replacement"
           }
         ],
-        "boundary": "US data cover Engineers, All Other (O*NET 17-2199) on a combined basis and cannot be treated as this occupation separately. Percentiles are statistical positions, not individual take-home income.",
-        "direct_answer": {
-          "$join": [
-            {
-              "$item": "mechatronics-engineers.us-salary.career-snapshot-secondary-locale.2",
-              "block": "us-salary",
-              "copy_key": "career.item.career-snapshot-secondary-locale",
-              "type": "prose"
-            },
-            {
-              "$item": "mechatronics-engineers.us-salary.career-snapshot-secondary-locale.3",
-              "block": "us-salary",
-              "copy_key": "career.item.career-snapshot-secondary-locale",
-              "type": "prose"
-            },
-            {
-              "$item": "mechatronics-engineers.us-salary.career-snapshot-secondary-locale.4",
-              "block": "us-salary",
-              "copy_key": "career.item.career-snapshot-secondary-locale",
-              "type": "prose"
-            },
-            {
-              "$item": "mechatronics-engineers.us-salary.career-snapshot-secondary-locale.5",
-              "block": "us-salary",
-              "copy_key": "career.item.career-snapshot-secondary-locale",
-              "type": "prose"
-            },
-            {
-              "$item": "mechatronics-engineers.us-salary.career-snapshot-secondary-locale.6",
-              "block": "us-salary",
-              "copy_key": "career.item.career-snapshot-secondary-locale",
-              "type": "prose"
-            }
-          ],
-          "separator": "\n"
-        },
+        "boundary": "Percentiles describe national wage distribution points. Compare a local offer by setting, responsibilities, and guaranteed pay.",
+        "direct_answer": "May 2025 OEWS covers U.S. wage and salary workers and excludes the self-employed. 17-2199 covers broader Engineers residual group as a proxy for this title.",
         "factor_rows": [
           {
             "answer": "US Job Zone 4; verify safety and practice requirements by jurisdiction.",
@@ -10793,47 +9498,47 @@
         "industry_period": "Current O*NET industries page (17-2199 parent occupation); accessed 2026-10-11",
         "industry_rows": [
           {
-            "industry": "Professional, Scientific, and Technical Services (26%)",
-            "median": "Insufficient evidence: industry wages for this parent occupation were not obtained",
-            "note": "Employment share for parent group 17-2199, with no separate estimate for mechatronics engineers."
+            "industry": "Occupation",
+            "median": "No comparable figure is cited here.",
+            "note": "Confirm the definition and any broader grouping."
           },
           {
-            "industry": "Government (25%)",
-            "median": "Insufficient evidence: industry wages for this parent occupation were not obtained",
-            "note": "Employment share for parent group 17-2199, with no separate estimate for mechatronics engineers."
+            "industry": "Employment",
+            "median": "No comparable figure is cited here.",
+            "note": "Check whether self-employment is included."
           },
           {
-            "industry": "Manufacturing (21%)",
-            "median": "Insufficient evidence: industry wages for this parent occupation were not obtained",
-            "note": "Employment share for parent group 17-2199, with no separate estimate for mechatronics engineers."
+            "industry": "Survey period",
+            "median": "No comparable figure is cited here.",
+            "note": "Keep the month or year with the quoted figure."
           },
           {
-            "industry": "Other Industries (28%)",
-            "median": "Insufficient evidence: industry wages for this parent occupation were not obtained",
-            "note": "The parent group’s employment share for other industries, as reported by O*NET."
+            "industry": "Geography",
+            "median": "No comparable figure is cited here.",
+            "note": "Compare local figures within the same survey."
           }
         ],
         "industry_value_label": "Industry Wage Information",
         "interpretation_heading": "How to Read Statistical Percentiles and Projections",
         "interpretation_rows": [
           {
-            "answer": "No. Percentiles are statistical positions.",
-            "question": "Is This a Personal Quote?"
+            "answer": "Confirm the definition and any broader grouping.",
+            "question": "Occupation"
           },
           {
-            "answer": "It covers Engineers, All Other (17-2199) on a combined basis, not this occupation separately.",
-            "question": "Does This Cover the Precise Occupation?"
+            "answer": "Check whether self-employment is included.",
+            "question": "Employment"
           },
           {
-            "answer": "2025 wages; 2025—2035 projections, both for parent occupation 17-2199, not separate figures.",
-            "question": "What Is the Time Period?"
+            "answer": "Keep the month or year with the quoted figure.",
+            "question": "Survey period"
           },
           {
-            "answer": "They cannot be directly combined.",
-            "question": "Can Markets Be Compared?"
+            "answer": "Compare local figures within the same survey.",
+            "question": "Geography"
           }
         ],
-        "median": "USD 122,930 per year (combined scope)",
+        "median": "$122,930/year",
         "outlook_heading": "Employment Outlook and Openings",
         "outlook_period": "2025—2035 (parent occupation)",
         "wage_column_labels": [
@@ -10845,22 +9550,34 @@
         "wage_heading": "US Parent-Occupation Wage Percentiles (2025)",
         "wage_tiers": [
           {
-            "equivalent": "Approximately USD 32.12 per hour",
-            "interpretation": "The 10th-percentile statistical position (combined scope).",
-            "label": "Lower Percentile",
-            "value": "USD 66,810 per year"
+            "equivalent": "USD/year",
+            "interpretation": "Lower end of the distribution",
+            "label": "10th percentile",
+            "value": "$66,810/year"
           },
           {
-            "equivalent": "Approximately USD 59.10 per hour",
-            "interpretation": "The median in 2025 combined-scope wage data.",
+            "equivalent": "USD/year",
+            "interpretation": "First quartile",
+            "label": "25th percentile",
+            "value": "$90,970/year"
+          },
+          {
+            "equivalent": "USD/year",
+            "interpretation": "Middle of the distribution",
             "label": "Median",
-            "value": "USD 122,930 per year"
+            "value": "$122,930/year"
           },
           {
-            "equivalent": "Approximately USD 91.32 per hour",
-            "interpretation": "The 90th-percentile statistical position (combined scope).",
-            "label": "Upper Percentile",
-            "value": "USD 189,950 per year"
+            "equivalent": "USD/year",
+            "interpretation": "Third quartile",
+            "label": "75th percentile",
+            "value": "$158,090/year"
+          },
+          {
+            "equivalent": "USD/year",
+            "interpretation": "Upper end of the published range",
+            "label": "90th percentile",
+            "value": "$189,950/year"
           }
         ]
       },
@@ -10894,24 +9611,8 @@
         "title": "Who Might Be Suited to Mechatronics Engineering?"
       },
       "fit_decision_checklist": {
-        "boundary": "Use paper data only and record mismatches or missing values. This work sample can guide learning; it cannot decide hiring or qualify anyone to operate equipment.",
-        "how": {
-          "$join": [
-            {
-              "$item": "mechatronics-engineers.quick-decision.fermat-decision-card.3",
-              "block": "quick-decision",
-              "copy_key": "career.item.fit-decision-checklist",
-              "type": "prose"
-            },
-            {
-              "$item": "mechatronics-engineers.quick-decision.fermat-decision-card.4",
-              "block": "quick-decision",
-              "copy_key": "career.item.fit-decision-checklist",
-              "type": "prose"
-            }
-          ],
-          "separator": "\n"
-        },
+        "boundary": "A sensor fix can move the problem into sequence logic or mechanics. If you dislike switching layers while logging every test condition, integration work will be taxing.",
+        "how": "Complete the entry worksheet before checking the worked answer.",
         "suit": "Notice whether you enjoy checking each reading, preserving conflicts, and making your work reproducible."
       },
       "hero": {
@@ -10975,29 +9676,29 @@
             "interpretation": "Combined-scope employment level, change, and openings must be explained separately.",
             "limitation": "These are combined-scope statistical projections, not separate figures for this occupation or an individual employment guarantee.",
             "metric": "Employment Level and Change",
-            "occupation_scope": "Display scope: Engineers, All Other (O*NET 17-2199 combined scope)",
+            "occupation_scope": "Display scope: Engineers,  (O*NET 17-2199 combined scope)",
             "source_ref": "bls-projections-2025",
             "value": "Parent group 17-2199: 166,700 jobs in 2025 and 173,000 projected in 2035, up 3.7%, with an official net gain of 6,200. Figures are rounded independently. About 8,800 annual openings include replacements. The 2025 median wage was $122,930; see the U.S. pay section."
           },
           {
-            "geography": "Mainland China",
+            "geography": "Use the U.S. scope described in this section.",
             "horizon": "2026",
             "interpretation": "Compare deliverables and entry requirements.",
             "limitation": "One posting; current availability was not verified.",
             "metric": "Jingsheng electrical engineer sample",
             "occupation_scope": "Specific job posting",
             "source_ref": "mecha-cn-design",
-            "value": "November 5, 2026, Zhejiang: electrical design, schematics, selection, PLC work and prototype commissioning; relevant bachelor’s or higher."
+            "value": "Use the U.S. scope described in this section."
           },
           {
-            "geography": "Mainland China",
+            "geography": "Use the U.S. scope described in this section.",
             "horizon": "2026",
             "interpretation": "Compare deliverables and entry requirements.",
             "limitation": "One posting; current availability was not verified.",
-            "metric": "Hymson Shenzhen 2027 graduate PLC engineer sample",
+            "metric": "Use the U.S. scope described in this section.",
             "occupation_scope": "Specific job posting",
             "source_ref": "mecha-cn-commission",
-            "value": "September 19, 2026, Shenzhen: PLC programs, site commissioning and fault records; relevant bachelor’s or higher and travel."
+            "value": "Use the U.S. scope described in this section."
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -11018,7 +9719,7 @@
               "field": "name",
               "item": "mechatronics-engineers.source-register.published.1"
             },
-            "scope": "Combined scope: Engineers, All Other (17-2199) data, not this occupation separately; includes replacement demand."
+            "scope": "Combined scope: Engineers,  (17-2199) data, not this occupation separately; includes replacement demand."
           },
           {
             "href": {
@@ -11029,14 +9730,8 @@
               "item": "mechatronics-engineers.source-register.published.1"
             },
             "id": "mechatronics-engineers.review.source.1",
-            "label": {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "scope": "Combined scope: Engineers, All Other (17-2199) data, not 17-2199.05 separately; percentiles do not describe individual take-home income."
+            "label": "O*NET 17-2199.05 National Wages (Engineers (broad occupational group) Combined Scope; BLS 2025 Wage Data)",
+            "scope": "Combined scope: Engineers,  (17-2199) data, not 17-2199.05 separately; percentiles do not describe individual take-home income."
           },
           {
             "href": {
@@ -11054,25 +9749,7 @@
               "field": "name",
               "item": "mechatronics-engineers.source-register.published.1"
             },
-            "scope": "U.S. BLS parent group 17-2199, Engineers, All Other; not separately reported for 17-2199.05"
-          },
-          {
-            "href": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "id": "mechatronics-engineers.review.source.3",
-            "label": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "scope": "US occupational scope; no exact equivalent mapping in mainland China is presumed."
+            "scope": "U.S. BLS parent group 17-2199, Engineers, ; not separately reported for 17-2199.05"
           },
           {
             "href": {
@@ -11083,57 +9760,15 @@
               "item": "mechatronics-engineers.source-register.published.1"
             },
             "id": "bls-projections-2025",
-            "label": {
-              "$source": "bls-projections-2025",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
+            "label": "BLS 2025—2035 Occupational Projections: Engineers (broad occupational group)",
             "scope": "Precise parent-occupation projection columns, independently rounded; not separate mechatronics figures."
-          },
-          {
-            "href": {
-              "$source": "mecha-cn-design",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "id": "mecha-cn-design",
-            "label": {
-              "$source": "mecha-cn-design",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "scope": "One posting."
-          },
-          {
-            "href": {
-              "$source": "mecha-cn-commission",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "id": "mecha-cn-commission",
-            "label": {
-              "$source": "mecha-cn-commission",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "scope": "One posting."
           }
         ],
         "transitions": [
           {
             "capability_gaps": "Check the target role's mechanical analysis, design validation, and specific authorization requirements. This page cannot establish mutual recognition of qualifications.",
             "shared_capabilities": "Mechanical design documentation, modeling, testing, and cross-disciplinary collaboration.",
-            "target_href": "/zh/career/jobs/mechanical-engineers",
+            "target_href": "/en/career/jobs/mechanical-engineers",
             "target_slug": "mechanical-engineers",
             "target_title": "Mechanical Engineers",
             "transition_distance": "Evidence to Add"
@@ -11141,7 +9776,7 @@
           {
             "capability_gaps": "Check the target technician role's assembly, instrument testing, documentation, and supervised responsibilities. Do not assume that transferring roles confers engineering design sign-off authority.",
             "shared_capabilities": "Foundations in mechanical assembly and testing.",
-            "target_href": "/zh/career/jobs/mechanical-engineering-technicians",
+            "target_href": "/en/career/jobs/mechanical-engineering-technicians",
             "target_slug": "mechanical-engineering-technicians",
             "target_title": "Mechanical Engineering Technologists and Technicians",
             "transition_distance": "Evidence to Add"
@@ -11149,7 +9784,7 @@
           {
             "capability_gaps": "Develop production-system and efficiency analysis skills.",
             "shared_capabilities": "Process understanding, data, and improvement methods.",
-            "target_href": "/zh/career/jobs/industrial-engineers",
+            "target_href": "/en/career/jobs/industrial-engineers",
             "target_slug": "industrial-engineers",
             "target_title": "Industrial Engineers",
             "transition_distance": "Evidence to Add"
@@ -11157,7 +9792,7 @@
           {
             "capability_gaps": "Develop manufacturing process and production-line design skills.",
             "shared_capabilities": "Process understanding and production-line collaboration.",
-            "target_href": "/zh/career/jobs/manufacturing-engineers",
+            "target_href": "/en/career/jobs/manufacturing-engineers",
             "target_slug": "manufacturing-engineers",
             "target_title": "Manufacturing Engineers",
             "transition_distance": "Evidence to Add"
@@ -11165,7 +9800,7 @@
           {
             "capability_gaps": "Develop drafting standards, dimensional tolerances, drawing version management, and target CAD delivery requirements.",
             "shared_capabilities": "Drawing interpretation and modeling.",
-            "target_href": "/zh/career/jobs/mechanical-drafters",
+            "target_href": "/en/career/jobs/mechanical-drafters",
             "target_slug": "mechanical-drafters",
             "target_title": "Mechanical Drafters",
             "transition_distance": "Evidence to Add"
@@ -11173,7 +9808,7 @@
           {
             "capability_gaps": "Develop knowledge of aerospace standards and structures.",
             "shared_capabilities": "Foundations in system design and validation.",
-            "target_href": "/zh/career/jobs/aerospace-engineers",
+            "target_href": "/en/career/jobs/aerospace-engineers",
             "target_slug": "aerospace-engineers",
             "target_title": "Aerospace Engineers",
             "transition_distance": "Evidence to Add"
@@ -11201,12 +9836,7 @@
       "personality_fit_block": {
         "assessments": [
           {
-            "answer": {
-              "$item": "mechatronics-engineers.fit.riasec-fit-block.6",
-              "block": "fit",
-              "copy_key": "career.item.riasec-fit-block",
-              "type": "prose"
-            },
+            "answer": "Pair a mechanical requirement with a signal list, acceptance response and an open item you would hand to the controls owner.",
             "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Explore career interests (RIASEC)",
             "evidence_level": "Editorial self-check; not validity evidence for this occupation",
@@ -11347,44 +9977,36 @@
         },
         "questions": [
           {
-            "answer": "Design teams produce mechanical drawings for parts, assemblies, and controlled equipment. Integration teams check interactions between sensors, actuators, and controls and document faults. Compare design deliverables with commissioning and acceptance work.",
-            "question": "How can I identify the work focus in a job posting?"
+            "answer": "See work fit evidence for the shared criteria.",
+            "question": "What distinguishes a commissioning portfolio from a CAD sample?"
           },
           {
-            "answer": "If an integration test exposes a conflict between hardware and controls, what can I change and who approves the interface update?",
-            "question": "What should I ask in an interview?"
+            "answer": "Notice how often the team reopens a handoff when an earlier assumption changes. Ask who confirms the new decision.",
+            "question": "What should I notice in a job shadow?"
           },
           {
-            "answer": "Check through the work-sample experience on this page.",
-            "question": "Are You Willing to Turn Requirements into Verifiable Control Proposals?"
+            "answer": "Pick a regular deliverable and repeat it with the same review standard.",
+            "question": "Which assignment would I repeat?"
           },
           {
-            "answer": "Check with a fictional control task.",
-            "question": "Can You Design and Validate to Safety Standards?"
+            "answer": "Note your last confirmed detail before responding to the interruption.",
+            "question": "How do I handle an interruption?"
           },
           {
-            "answer": "Check against format and traceability requirements.",
-            "question": "Can You Organize Reviewable Commissioning and Validation Records?"
+            "answer": "Keep both versions and identify the person who can settle the discrepancy.",
+            "question": "How do I respond to conflicting inputs?"
           },
           {
-            "answer": "Record and report the anomaly under site rules. If there is an immediate threat to personal safety, stop your own work or withdraw. Authorized staff handle equipment shutdown or restart under site procedures.",
-            "question": "What Would You Do if a System Operated Unintentionally?"
+            "answer": "Compare the written shift terms with when you can work reliably.",
+            "question": "Would the work schedule suit me?"
           },
           {
-            "answer": "Check against a standards checklist.",
-            "question": "Can You Observe Safety and Regulatory Boundaries?"
+            "answer": "Describe what you would route to a qualified reviewer.",
+            "question": "Can I set a boundary on requests?"
           },
           {
-            "answer": "Assess awareness of documentation and traceability.",
-            "question": "Can You Retain Program Change and Commissioning Records?"
-          },
-          {
-            "answer": "Reviewed and issued by the responsible engineer.",
-            "question": "How Are Your Conclusions Reviewed and Signed Off?"
-          },
-          {
-            "answer": "Classify the four fictional groups on paper, cite the decisive readings, and check your results against the key.",
-            "question": "How Can You Test This Next?"
+            "answer": "Ask a receiver which detail lets them continue without guessing.",
+            "question": "What makes a handoff useful?"
           }
         ],
         "schema_version": "career.fit_decision_center.v1",
@@ -11426,40 +10048,6 @@
         "source_links": [
           {
             "href": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "usage": "US occupational scope; no exact equivalent mapping in mainland China is presumed."
-          },
-          {
-            "href": {
-              "$source": "onet-context",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-context",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "usage": "US work context does not replace Chinese law or employer requirements."
-          },
-          {
-            "href": {
               "$source": "onet-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
@@ -11491,6 +10079,14 @@
               "item": "mechatronics-engineers.source-register.published.1"
             },
             "usage": "Preparation level is not a uniform hiring threshold."
+          },
+          {
+            "href": "https://www.onetonline.org/link/details/17-2199.05#Education",
+            "label": "O*NET 17-2199.05 Education and Occupational Preparation"
+          },
+          {
+            "href": "https://www.onetonline.org/link/details/17-2199.05#JobZone",
+            "label": "O*NET 17-2199.05 Job Zone"
           }
         ]
       },
@@ -11527,31 +10123,19 @@
       "source_card": {
         "eeat_signals": {
           "author": "FermatMind research workflow",
-          "source": {
-            "$source": "onet-summary",
-            "block": "source-register",
-            "copy_key": "career.item.published-sources",
-            "field": "name",
-            "item": "mechatronics-engineers.source-register.published.1"
-          },
-          "updated_at": {
-            "$source": "onet-summary",
-            "block": "source-register",
-            "copy_key": "career.item.published-sources",
-            "field": "period",
-            "item": "mechatronics-engineers.source-register.published.1"
-          }
+          "source": "See the dated source register for market and evidence scope.",
+          "updated_at": "2026-11-12"
         },
-        "note": "O*NET’s detailed occupation covers tasks, context, interests and education. U.S. 2025 wages and 2025–2035 projections use parent group 17-2199. China’s industry averages come from NBS, and the entry examples are two individual postings. FermatMind wrote the paper exercise."
+        "note": "Use the entry work sample to practice one handoff."
       },
-      "work_context_block": "US O*NET survey: 87% work in controlled indoor environments daily, 90% use email daily, 81% have face-to-face discussions daily, and 58% usually work more than 40 hours a week. Accuracy is extremely important to 63%, and teamwork to 59%. Field commissioning may involve equipment; verify the specific environment and hours for the role. These percentages cannot be directly extrapolated to China."
+      "work_context_block": "US O*NET survey: 87% work in controlled indoor environments daily, 90% use email daily, 81% have face-to-face discussions daily, and 58% usually work more than 40 hours a week. Accuracy is extremely important to 63%, and teamwork to 59%. Field commissioning may involve equipment; verify the specific environment and hours for the role."
     },
     "contract_version": "career.detail.display.v1",
     "interface": {
       "interface.fit.directions_heading": "Which Mechatronics Tasks Might Suit You Better?",
       "interface.fit.interest_code_heading": "How to Understand RIC"
     },
-    "locale": "zh-CN",
+    "locale": "en",
     "native_items": [
       {
         "block": "source-register",
@@ -11559,12 +10143,26 @@
         "id": "mechatronics-engineers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "mechatronics-engineers.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "mechatronics-engineers.entry-work-sample-data.2",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": "/en/career/jobs/mechatronics-engineers",
     "section_titles": {
       "ai-impact": "AI assistance and human review",
-      "china-salary": "Mainland China Salaries",
+      "china-salary": "Additional wage reference",
       "direction-comparison": "Adjacent Occupation Comparison",
       "fit": "Work sample and career interests",
       "market-signals": "Market Signals",
@@ -11581,24 +10179,24 @@
   "fact_register": {
     "facts": [
       {
-        "derivation": "Median from BLS 2025 combined-scope wage data displayed on O*NET's national wages page.",
-        "display_value": "USD 122,930 per year (approximately USD 59.10 per hour; combined scope)",
+        "derivation": null,
+        "display_value": "$122,930/year",
         "fact_id": "us-wage-median",
-        "market": "United States (Engineers, All Other Combined Scope)",
-        "measure": "2025 median annual wage (combined scope)",
-        "occupation_scope": "Engineers, All Other (O*NET 17-2199 combined scope, not 17-2199.05 separately)",
-        "period": "2025 wage data; accessed 2026-09-25",
+        "market": "United States",
+        "measure": "Annual wage — Median",
+        "occupation_scope": "Broader engineers residual group (parent proxy), SOC 17-2199",
+        "period": "May 2025",
         "source_refs": [
-          "onet-wages"
+          "wave1-b3-1"
         ]
       },
       {
         "derivation": null,
         "display_value": "166,700 jobs",
         "fact_id": "us-employment-2024",
-        "market": "United States (Engineers, All Other Combined Scope)",
+        "market": "United States (Engineers,  Combined Scope)",
         "measure": "2025 employment (jobs)",
-        "occupation_scope": "U.S. BLS parent group 17-2199, Engineers, All Other; not separately reported for 17-2199.05",
+        "occupation_scope": "U.S. BLS parent group 17-2199, Engineers, ; not separately reported for 17-2199.05",
         "period": "2025",
         "source_refs": [
           "bls-projections-2025",
@@ -11609,9 +10207,9 @@
         "derivation": "BLS reports 3.7%; O*NET shows 4% rounded.",
         "display_value": "3.7%",
         "fact_id": "us-growth",
-        "market": "United States (Engineers, All Other Combined Scope)",
+        "market": "United States (Engineers,  Combined Scope)",
         "measure": "Projected employment growth, 2025–2035",
-        "occupation_scope": "U.S. BLS parent group 17-2199, Engineers, All Other; not separately reported for 17-2199.05",
+        "occupation_scope": "U.S. BLS parent group 17-2199, Engineers, ; not separately reported for 17-2199.05",
         "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025",
@@ -11622,9 +10220,9 @@
         "derivation": "Includes replacements for people who transfer or leave the occupation.",
         "display_value": "About 8,800 per year",
         "fact_id": "us-openings",
-        "market": "United States (Engineers, All Other Combined Scope)",
+        "market": "United States (Engineers,  Combined Scope)",
         "measure": "Projected average annual openings, 2025–2035",
-        "occupation_scope": "U.S. BLS parent group 17-2199, Engineers, All Other; not separately reported for 17-2199.05",
+        "occupation_scope": "U.S. BLS parent group 17-2199, Engineers, ; not separately reported for 17-2199.05",
         "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025",
@@ -11632,51 +10230,63 @@
         ]
       },
       {
-        "derivation": "National Bureau of Statistics 2025 table by industry category.",
-        "display_value": "RMB 113,594 per year",
-        "fact_id": "cn-manufacturing-nonprivate-wage",
-        "market": "Mainland China national urban-unit scope (manufacturing industry category, not this occupation)",
-        "measure": "Average annual wage of employees in urban non-private manufacturing units",
-        "occupation_scope": "Industry-category proxy, not this occupation's median",
-        "period": "2025 annual wages; published 2026-05-15; accessed 2026-09-25",
+        "derivation": null,
+        "display_value": "$66,810/year",
+        "fact_id": "wave1-b3-wage-p10",
+        "market": "United States",
+        "measure": "Annual wage — 10th percentile",
+        "occupation_scope": "Broader engineers residual group (parent proxy), SOC 17-2199",
+        "period": "May 2025",
         "source_refs": [
-          "nbs-wages"
+          "wave1-b3-1"
         ]
       },
       {
-        "derivation": "National Bureau of Statistics 2025 table by industry category.",
-        "display_value": "RMB 76,055 per year",
-        "fact_id": "cn-manufacturing-private-wage",
-        "market": "Mainland China national urban-unit scope (manufacturing industry category, not this occupation)",
-        "measure": "Average annual wage of employees in urban private manufacturing units",
-        "occupation_scope": "Industry-category proxy, not this occupation's median",
-        "period": "2025 annual wages; published 2026-05-15; accessed 2026-09-25",
+        "derivation": null,
+        "display_value": "$90,970/year",
+        "fact_id": "wave1-b3-wage-p25",
+        "market": "United States",
+        "measure": "Annual wage — 25th percentile",
+        "occupation_scope": "Broader engineers residual group (parent proxy), SOC 17-2199",
+        "period": "May 2025",
         "source_refs": [
-          "nbs-wages"
+          "wave1-b3-1"
         ]
       },
       {
-        "derivation": "National Bureau of Statistics 2025 total across industry categories for urban non-private units.",
-        "display_value": "RMB 129,441 per year",
-        "fact_id": "cn-national-nonprivate-wage",
-        "market": "Mainland China national urban-unit scope (national total, not this occupation)",
-        "measure": "National average annual wage of employees in urban non-private units",
-        "occupation_scope": "National-total proxy, not this occupation's median",
-        "period": "2025 annual wages; published 2026-05-15; accessed 2026-09-25",
+        "derivation": null,
+        "display_value": "$122,930/year",
+        "fact_id": "wave1-b3-wage-p50",
+        "market": "United States",
+        "measure": "Annual wage — Median",
+        "occupation_scope": "Broader engineers residual group (parent proxy), SOC 17-2199",
+        "period": "May 2025",
         "source_refs": [
-          "nbs-wages"
+          "wave1-b3-1"
         ]
       },
       {
-        "derivation": "The former editorial estimate was withdrawn because verifiable evidence about performance on these tasks was unavailable.",
-        "display_value": "No verified quantitative estimate",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "Evidence status for AI in mechatronics tasks",
-        "occupation_scope": "Mechatronics Engineers",
-        "period": "2026-11-09",
+        "derivation": null,
+        "display_value": "$158,090/year",
+        "fact_id": "wave1-b3-wage-p75",
+        "market": "United States",
+        "measure": "Annual wage — 75th percentile",
+        "occupation_scope": "Broader engineers residual group (parent proxy), SOC 17-2199",
+        "period": "May 2025",
         "source_refs": [
-          "source-fermatmind-ai-rubric"
+          "wave1-b3-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "$189,950/year",
+        "fact_id": "wave1-b3-wage-p90",
+        "market": "United States",
+        "measure": "Annual wage — 90th percentile",
+        "occupation_scope": "Broader engineers residual group (parent proxy), SOC 17-2199",
+        "period": "May 2025",
+        "source_refs": [
+          "wave1-b3-1"
         ]
       }
     ]
@@ -11696,9 +10306,9 @@
     "metrics": [
       {
         "availability": "available",
-        "fact_ref": "us-wage-median",
+        "fact_ref": "wave1-b3-wage-p50",
         "key": "us_pay",
-        "label": "U.S. parent-group median pay"
+        "label": "U.S. May 2025 median wage"
       },
       {
         "availability": "available",
@@ -11722,7 +10332,7 @@
         "availability": "missing",
         "fact_ref": null,
         "key": "china_pay",
-        "label": "Mainland China Salary Reference"
+        "label": "Additional wage benchmark"
       }
     ]
   },
@@ -11730,17 +10340,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Explore what mechatronics engineers do, compare system design with commissioning and maintenance, read U.S. pay in context, and try a paper work sample."
+      "text": "Mechatronics engineers integrate motion, sensors and controls. Compare PLC and CAD skills, U.S. wage proxies and equipment acceptance work."
     },
     "title": {
       "availability": "available",
-      "text": "Mechatronics Engineers: Work, US Wages, and Entry Paths"
+      "text": "Mechatronics Engineers | Duties, Pay and Entry"
     }
   },
-  "source_content_sha256": "a0ccea5f802e9a90ee6b12d734b0803b7311a64592be0bd48b457a5bdae38c30",
+  "source_content_sha256": "31c24c480dd1d671ec05fb1ba574e92c93efc04e84a990cbd4b09b47624b20c0",
   "subject": {
     "canonical_slug": "mechatronics-engineers",
     "name": "Mechatronics Engineers",
-    "summary": "Mechatronics engineers combine mechanical parts, sensors, actuators and controls into testable systems. They deliver interface specifications, control designs or validation records."
+    "summary": "Mechatronics engineers integrate mechanisms, sensing and controls into equipment with a documented acceptance boundary."
   }
 }

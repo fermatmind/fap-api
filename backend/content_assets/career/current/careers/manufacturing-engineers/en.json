@@ -2,21 +2,6 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
-      "fact:cn-manufacturing-nonprivate-wage": {
-        "status": "pending_mapping"
-      },
-      "fact:cn-manufacturing-private-wage": {
-        "status": "pending_mapping"
-      },
-      "fact:cn-national-nonprivate-wage": {
-        "status": "pending_mapping"
-      },
-      "fact:cn-wage-gap": {
-        "status": "pending_mapping"
-      },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
@@ -27,6 +12,21 @@
         "status": "pending_mapping"
       },
       "fact:us-wage-median": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b3-wage-p10": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b3-wage-p25": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b3-wage-p50": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b3-wage-p75": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b3-wage-p90": {
         "status": "pending_mapping"
       },
       "item:manufacturing-engineers.ai-impact.ai-impact-table.1": {
@@ -41,9 +41,6 @@
       "item:manufacturing-engineers.ai-impact.ai-impact-table.4": {
         "status": "pending_mapping"
       },
-      "item:manufacturing-engineers.ai-impact.ai-impact-table.5": {
-        "status": "pending_mapping"
-      },
       "item:manufacturing-engineers.ai-impact.ai-impact-table.6": {
         "status": "pending_mapping"
       },
@@ -51,18 +48,6 @@
         "status": "pending_mapping"
       },
       "item:manufacturing-engineers.ai-impact.ai-impact-table.8": {
-        "status": "pending_mapping"
-      },
-      "item:manufacturing-engineers.china-salary.career-snapshot-primary-locale.1": {
-        "status": "pending_mapping"
-      },
-      "item:manufacturing-engineers.china-salary.career-snapshot-primary-locale.2": {
-        "status": "pending_mapping"
-      },
-      "item:manufacturing-engineers.china-salary.career-snapshot-primary-locale.3": {
-        "status": "pending_mapping"
-      },
-      "item:manufacturing-engineers.china-salary.career-snapshot-primary-locale.4": {
         "status": "pending_mapping"
       },
       "item:manufacturing-engineers.direction-comparison.adjacent-career-comparison-table.1": {
@@ -80,6 +65,9 @@
       "item:manufacturing-engineers.direction-comparison.adjacent-career-comparison-table.5": {
         "status": "pending_mapping"
       },
+      "item:manufacturing-engineers.entry-work-sample-data.2": {
+        "status": "pending_mapping"
+      },
       "item:manufacturing-engineers.fit.riasec-fit-block.1": {
         "status": "pending_mapping"
       },
@@ -93,9 +81,6 @@
         "status": "pending_mapping"
       },
       "item:manufacturing-engineers.fit.riasec-fit-block.5": {
-        "status": "pending_mapping"
-      },
-      "item:manufacturing-engineers.fit.riasec-fit-block.6": {
         "status": "pending_mapping"
       },
       "item:manufacturing-engineers.fit.riasec-fit-block.7": {
@@ -144,6 +129,9 @@
         "status": "pending_mapping"
       },
       "item:manufacturing-engineers.path.career-path-block.8": {
+        "status": "pending_mapping"
+      },
+      "item:manufacturing-engineers.path.entry-work-sample-data.1": {
         "status": "pending_mapping"
       },
       "item:manufacturing-engineers.profile.career-quick-answers-block.8": {
@@ -207,9 +195,6 @@
         "status": "pending_mapping"
       },
       "item:manufacturing-engineers.us-salary.career-snapshot-secondary-locale.1": {
-        "status": "pending_mapping"
-      },
-      "item:manufacturing-engineers.us-salary.career-snapshot-secondary-locale.2": {
         "status": "pending_mapping"
       },
       "item:manufacturing-engineers.us-salary.career-snapshot-secondary-locale.3": {
@@ -7234,13 +7219,10 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "The following judgments concern manufacturing engineers' engineering and improvement practices. They do not predict hiring, registration, qualification, or contract outcomes."
+              "Compare the work setting and its handoff demands."
             ]
           },
           "id": "manufacturing-engineers.quick-decision.fermat-decision-card.1",
-          "source_refs": [
-            "onet-summary"
-          ],
           "type": "prose"
         },
         {
@@ -7248,13 +7230,10 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "The core work of manufacturing engineers is to make manufacturing systems stable, efficient, and sustainable: troubleshoot product design, material, or process problems; investigate and resolve material-use discrepancies and bottlenecks; identify and implement process or product improvements to reduce costs; apply lean and other methods to improve quality and reliability; review product designs for manufacturability; use statistical methods to determine failure root causes; design equipment and workstation layouts; prepare process and engineering documentation; estimate costs, working hours, and staffing needs; and assess environmental sustainability."
+              "See the related work example for the shared criteria."
             ]
           },
           "id": "manufacturing-engineers.quick-decision.fermat-decision-card.2",
-          "source_refs": [
-            "onet-tasks"
-          ],
           "type": "prose"
         },
         {
@@ -7262,13 +7241,10 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Entirely fictional task package: provide fictional production-line process and quality data, including 1 current-state process, 1 set of key indicators, and 1 bottleneck to resolve. Within 60 minutes, write a problem definition, data-analysis framework, two improvement options with trade-off rationales, cost and risk estimates, and a validation approach. Do not use real company, production-line, or product data."
+              "Complete the entry worksheet before checking the worked answer."
             ]
           },
           "id": "manufacturing-engineers.quick-decision.fermat-decision-card.3",
-          "source_refs": [
-            "onet-tasks"
-          ],
           "type": "prose"
         },
         {
@@ -7280,9 +7256,6 @@
             ]
           },
           "id": "manufacturing-engineers.quick-decision.fermat-decision-card.4",
-          "source_refs": [
-            "onet-tasks"
-          ],
           "type": "prose"
         }
       ]
@@ -7298,13 +7271,10 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Manufacturing engineers design, integrate and improve production processes. They coordinate fixtures, work instructions and quality needs and use pilot runs to verify that a process can operate consistently."
+              "See the related work example for the shared criteria."
             ]
           },
           "id": "manufacturing-engineers.profile.definition-block.1",
-          "source_refs": [
-            "onet-summary"
-          ],
           "type": "prose"
         },
         {
@@ -7312,7 +7282,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Troubleshoot new or existing product problems involving designs, materials, or processes.",
+              "Use Lean and Six Sigma tools to track variation, VSM to locate flow losses, and OEE to separate downtime, speed and quality effects. Update PFMEA and the control plan for changes. IATF 16949 is relevant in covered automotive quality systems. SME CMfgE and ASQ CSSBB are professional credentials.",
               "Investigate or resolve operational problems, such as material use variances or bottlenecks.",
               "Identify opportunities or implement changes to improve manufacturing processes or products or to reduce costs, using knowledge of fabrication processes, tooling and production equipment, assembly methods, quality control standards, or product design, materials and parts.",
               "Apply continuous improvement methods, such as lean manufacturing, to enhance manufacturing quality, reliability, or cost-effectiveness."
@@ -7320,7 +7290,10 @@
           },
           "id": "manufacturing-engineers.profile.responsibilities-block.2",
           "source_refs": [
-            "batch52-onet-core"
+            "wave1-b3-3",
+            "wave1-b3-4",
+            "wave1-b3-5",
+            "wave1-b3-6"
           ],
           "type": "list"
         },
@@ -7333,9 +7306,6 @@
             ]
           },
           "id": "manufacturing-engineers.profile.work-context-block.5",
-          "source_refs": [
-            "onet-context"
-          ],
           "type": "prose"
         },
         {
@@ -7347,9 +7317,6 @@
             ]
           },
           "id": "manufacturing-engineers.profile.work-context-block.6",
-          "source_refs": [
-            "onet-context"
-          ],
           "type": "prose",
           "visibility": "internal"
         },
@@ -7358,12 +7325,11 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "Research inputs: occupational identity, tasks, work activities, work context, skills and knowledge, interest code, education, and Job Zone for O*NET 17-2112.03. Among the wage, employment, and industry data on that page, wages and employment use the parent occupation Industrial Engineers. Research conclusions do not establish mainland China's qualification, wage, or employment scope."
+              "Research inputs: occupational identity, tasks, work activities, work context, skills and knowledge, interest code, education, and Job Zone for O*NET 17-2112.03. Among the wage, employment, and industry data on that page, wages and employment use the parent occupation Industrial Engineers."
             ]
           },
           "id": "manufacturing-engineers.profile.onet-structured-fields-block.7",
           "source_refs": [
-            "onet-summary",
             "onet-trends"
           ],
           "type": "prose"
@@ -7373,13 +7339,10 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Use a fictional operation. Record the baseline, proposed change, verification measures, exceptions and fallback conditions. Name who would review the evidence."
+              "Use a  operation. Record the baseline, proposed change, verification measures, exceptions and fallback conditions. Name who would review the evidence."
             ]
           },
           "id": "manufacturing-engineers.profile.career-quick-answers-block.8",
-          "source_refs": [
-            "onet-summary"
-          ],
           "type": "prose"
         },
         {
@@ -7391,9 +7354,6 @@
             ]
           },
           "id": "manufacturing-engineers.profile.career-quick-answers-block.9",
-          "source_refs": [
-            "onet-summary"
-          ],
           "type": "prose"
         },
         {
@@ -7405,9 +7365,6 @@
             ]
           },
           "id": "manufacturing-engineers.profile.definition-block.10",
-          "source_refs": [
-            "onet-summary"
-          ],
           "type": "prose",
           "visibility": "internal"
         }
@@ -7451,9 +7408,6 @@
             ]
           },
           "id": "manufacturing-engineers.direction-comparison.adjacent-career-comparison-table.1",
-          "source_refs": [
-            "onet-summary"
-          ],
           "type": "links"
         },
         {
@@ -7465,9 +7419,6 @@
             ]
           },
           "id": "manufacturing-engineers.direction-comparison.adjacent-career-comparison-table.2",
-          "source_refs": [
-            "onet-summary"
-          ],
           "type": "prose"
         },
         {
@@ -7479,9 +7430,6 @@
             ]
           },
           "id": "manufacturing-engineers.direction-comparison.adjacent-career-comparison-table.3",
-          "source_refs": [
-            "onet-summary"
-          ],
           "type": "prose"
         },
         {
@@ -7493,9 +7441,6 @@
             ]
           },
           "id": "manufacturing-engineers.direction-comparison.adjacent-career-comparison-table.4",
-          "source_refs": [
-            "onet-summary"
-          ],
           "type": "prose"
         },
         {
@@ -7507,9 +7452,6 @@
             ]
           },
           "id": "manufacturing-engineers.direction-comparison.adjacent-career-comparison-table.5",
-          "source_refs": [
-            "onet-summary"
-          ],
           "type": "prose"
         }
       ]
@@ -7530,7 +7472,6 @@
           },
           "id": "manufacturing-engineers.ai-impact.ai-impact-table.1",
           "source_refs": [
-            "onet-summary",
             "internal-rubric"
           ],
           "type": "prose"
@@ -7540,7 +7481,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial task hypothesis: validated analysis or simulation tools may assist with production-line data processing and option comparisons, while generative AI may draft documents using fictional material. Traditional simulation / CAD / statistical software is not equivalent to generative AI. No occupational adoption rates or job outcomes were obtained. Root causes require verification with data and experiments; authorized personnel remain responsible for implementation, quality, and safety approvals. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Analytics can flag an OEE decline after a changeover or group repeated defects. On a U.S. manufacturing line, an engineer still checks the measurement system and validates the revised process before the responsible team approves release."
             ]
           },
           "id": "manufacturing-engineers.ai-impact.ai-impact-table.2",
@@ -7582,21 +7523,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Human control points: define problems and goals, judge data scope and statistical conclusions, balance quality, cost, and safety, take responsibility for changes and consequences, and follow engineering ethics and authorization boundaries."
-            ]
-          },
-          "id": "manufacturing-engineers.ai-impact.ai-impact-table.5",
-          "source_refs": [
-            "internal-rubric"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.ai-impact-table",
-          "data": {
-            "paragraphs": [
-              "First conduct an offline exercise using entirely fictional production-line and quality data. Write the problem definition, analysis framework, improvement options, and validation approach without relying on unverified automated analysis to replace engineering judgment."
+              "Use the entry work sample to practice one handoff."
             ]
           },
           "id": "manufacturing-engineers.ai-impact.ai-impact-table.6",
@@ -7636,68 +7563,11 @@
       ]
     },
     {
-      "availability": "available",
+      "availability": "missing",
       "content_state": "enhanced",
       "copy_key": "career.block.china-salary",
       "id": "china-salary",
-      "items": [
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "Insufficient evidence: this research did not establish an exact occupational wage distribution for manufacturing engineers in China. Average annual manufacturing wages in urban units provide only corresponding employer-industry context. This does not imply all public sources lack occupational data or prove that most nationwide practitioners belong to this industry category."
-            ]
-          },
-          "id": "manufacturing-engineers.china-salary.career-snapshot-primary-locale.1",
-          "source_refs": [
-            "nbs-wages"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "Scope: National Bureau of Statistics 2025 average annual wages for manufacturing employees are {{fact:cn-manufacturing-nonprivate-wage}} in urban non-private units and {{fact:cn-manufacturing-private-wage}} in urban private units; the nationwide total for urban non-private units is {{fact:cn-national-nonprivate-wage}}. All are industry measures, not this occupation's median or starting pay."
-            ]
-          },
-          "id": "manufacturing-engineers.china-salary.career-snapshot-primary-locale.2",
-          "source_refs": [
-            "nbs-wages"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "Category boundary: the Ministry of Human Resources and Social Security publishes enterprise compensation survey information by occupation / position, which can be used to look up manufacturing-related pay. This page did not obtain an entry matching O*NET 17-2112.03 exactly, so it is not used as a nationwide occupational median. Refer to competent authority publications for specifics."
-            ]
-          },
-          "id": "manufacturing-engineers.china-salary.career-snapshot-primary-locale.3",
-          "source_refs": [
-            "mohrss-wage"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "Insufficient evidence: no nationwide occupational median wage, reference period, or statistical scope was obtained for manufacturing engineers in mainland China. This page displays only an industry proxy labeled as such; neither proxy figures nor US figures fill the gap."
-            ]
-          },
-          "id": "manufacturing-engineers.china-salary.career-snapshot-primary-locale.4",
-          "source_refs": [
-            "nbs-wages"
-          ],
-          "type": "prose"
-        }
-      ]
+      "items": []
     },
     {
       "availability": "available",
@@ -7719,27 +7589,6 @@
           "id": "manufacturing-engineers.us-salary.career-snapshot-secondary-locale.1",
           "source_refs": [
             "onet-wages"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "data": {
-            "paragraphs": [
-              "The 2025 US wage reference is the parent occupation Industrial Engineers (17-2112), not exact figures for manufacturing engineers, 17-2112.03: median annual wages of 102,440 dollars and hourly wages of 49.25 dollars; see the original table for parent-occupation P10/25/50/75/90. BLS Table 1.2: U.S. parent occupation Industrial Engineers 17-2112 had about 365,100 jobs in 2025 and is projected to have about 410,600 in 2035 (+12.4%), with about 23,100 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring. The latest parent-occupation figures are 365,100 employed in 2025, 12% growth in 2025—2035, and 23,100 average annual openings. Different versions are not combined."
-            ]
-          },
-          "fact_refs": [
-            "us-wage-median",
-            "us-employment-2024",
-            "us-growth",
-            "us-openings"
-          ],
-          "id": "manufacturing-engineers.us-salary.career-snapshot-secondary-locale.2",
-          "source_refs": [
-            "onet-wages",
-            "bls-design-ep"
           ],
           "type": "prose"
         },
@@ -7789,9 +7638,6 @@
             "us-wage-median"
           ],
           "id": "manufacturing-engineers.us-salary.career-snapshot-secondary-locale.5",
-          "source_refs": [
-            "bls-ooh-industrial"
-          ],
           "type": "prose"
         },
         {
@@ -7830,9 +7676,6 @@
             ]
           },
           "id": "manufacturing-engineers.fit.riasec-fit-block.1",
-          "source_refs": [
-            "onet-summary"
-          ],
           "type": "prose"
         },
         {
@@ -7844,9 +7687,6 @@
             ]
           },
           "id": "manufacturing-engineers.fit.riasec-fit-block.2",
-          "source_refs": [
-            "onet-summary"
-          ],
           "type": "prose"
         },
         {
@@ -7858,9 +7698,6 @@
             ]
           },
           "id": "manufacturing-engineers.fit.riasec-fit-block.3",
-          "source_refs": [
-            "onet-context"
-          ],
           "type": "prose"
         },
         {
@@ -7872,9 +7709,6 @@
             ]
           },
           "id": "manufacturing-engineers.fit.riasec-fit-block.4",
-          "source_refs": [
-            "onet-context"
-          ],
           "type": "prose"
         },
         {
@@ -7882,27 +7716,10 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "Trial activity: using entirely fictional production-line and quality data, rehearse problem definition, root-cause analysis, improvement options, and validation approaches, and ask someone else to review them against the records."
+              "Trial activity: using entirely  production-line and quality data, rehearse problem definition, root-cause analysis, improvement options, and validation approaches, and ask someone else to review them against the records."
             ]
           },
           "id": "manufacturing-engineers.fit.riasec-fit-block.5",
-          "source_refs": [
-            "onet-tasks"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.riasec-fit-block",
-          "data": {
-            "paragraphs": [
-              "The O*NET interest code is RIC (Realistic–Investigative–Conventional), emphasizing hands-on practice, research and analysis, and organizing information according to procedures. These labels describe activity preferences only and cannot determine competence or qualifications."
-            ]
-          },
-          "id": "manufacturing-engineers.fit.riasec-fit-block.6",
-          "source_refs": [
-            "onet-summary"
-          ],
           "type": "prose"
         },
         {
@@ -7914,9 +7731,6 @@
             ]
           },
           "id": "manufacturing-engineers.fit.riasec-fit-block.7",
-          "source_refs": [
-            "onet-summary"
-          ],
           "type": "prose"
         },
         {
@@ -7928,9 +7742,6 @@
             ]
           },
           "id": "manufacturing-engineers.fit.riasec-fit-block.8",
-          "source_refs": [
-            "onet-summary"
-          ],
           "type": "prose"
         }
       ]
@@ -7950,9 +7761,6 @@
             ]
           },
           "id": "manufacturing-engineers.risk.career-risk-cards.1",
-          "source_refs": [
-            "onet-tasks"
-          ],
           "type": "prose"
         },
         {
@@ -7964,9 +7772,6 @@
             ]
           },
           "id": "manufacturing-engineers.risk.career-risk-cards.2",
-          "source_refs": [
-            "onet-tasks"
-          ],
           "type": "prose"
         },
         {
@@ -7978,9 +7783,6 @@
             ]
           },
           "id": "manufacturing-engineers.risk.career-risk-cards.3",
-          "source_refs": [
-            "onet-context"
-          ],
           "type": "prose"
         },
         {
@@ -7992,9 +7794,6 @@
             ]
           },
           "id": "manufacturing-engineers.risk.career-risk-cards.4",
-          "source_refs": [
-            "onet-summary"
-          ],
           "type": "prose"
         },
         {
@@ -8006,9 +7805,6 @@
             ]
           },
           "id": "manufacturing-engineers.risk.career-risk-cards.5",
-          "source_refs": [
-            "onet-context"
-          ],
           "type": "prose"
         }
       ]
@@ -8028,10 +7824,6 @@
             ]
           },
           "id": "manufacturing-engineers.path.career-path-block.1",
-          "source_refs": [
-            "onet-education",
-            "onet-summary"
-          ],
           "type": "prose"
         },
         {
@@ -8039,13 +7831,10 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "ONet's new-hire education survey for this occupation reports 76% bachelor's degree, 16% two-year degree, and 4% some college without a degree. These are survey responses, not a uniform legal threshold. Job Zone4 describes preparation for an occupational group and does not prove every entry-level role requires years of experience. Check actual requirements against the target process and employer."
+              "Compare the day-to-day duties and the scope of supervised assignments before choosing training."
             ]
           },
           "id": "manufacturing-engineers.path.career-path-block.2",
-          "source_refs": [
-            "onet-education"
-          ],
           "type": "prose"
         },
         {
@@ -8053,14 +7842,10 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "US pathways may include industrial, manufacturing, mechanical, or related engineering study and project practice. BLS says the parent occupation typically requires a bachelor's degree, with no PE license required for entry. Professional services offered to the public or statutory sign-off require separate checks by state and task; do not state all manufacturing roles require registration. No master's-preference proportion was obtained for this detailed occupation. This research did not establish an exact Chinese qualification mapping; check safety, special equipment, and sign-off authority for actual activities under applicable regimes."
+              "US pathways may include industrial, manufacturing, mechanical, or related engineering study and project practice. BLS says the parent occupation typically requires a bachelor's degree, with no PE license required for entry. Professional services offered to the public or statutory sign-off require separate checks by state and task; do not state all manufacturing roles require registration. No master's-preference proportion was obtained for this detailed occupation."
             ]
           },
           "id": "manufacturing-engineers.path.career-path-block.3",
-          "source_refs": [
-            "onet-education",
-            "bls-ooh-industrial"
-          ],
           "type": "prose"
         },
         {
@@ -8068,13 +7853,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Education, professional certification, and practice qualifications, such as registered engineer or special-equipment qualifications, are different statuses. A degree or certification does not automatically grant practice qualifications. Statutory sign-offs and safety conclusions must be issued by appropriately qualified personnel or organizations."
+              "Manufacturing, industrial or mechanical engineering training is common. Start with supervised process studies and change records. Credentials support professional development; engineering sign-off and production changes follow local and employer authority."
             ]
           },
           "id": "manufacturing-engineers.path.career-path-block.4",
           "source_refs": [
-            "onet-cert",
-            "onet-education"
+            "wave1-b3-4",
+            "wave1-b3-5",
+            "wave1-b3-6"
           ],
           "type": "prose"
         },
@@ -8087,9 +7873,6 @@
             ]
           },
           "id": "manufacturing-engineers.path.career-path-block.5",
-          "source_refs": [
-            "onet-education"
-          ],
           "type": "prose"
         },
         {
@@ -8101,9 +7884,6 @@
             ]
           },
           "id": "manufacturing-engineers.path.career-path-block.6",
-          "source_refs": [
-            "onet-education"
-          ],
           "type": "prose"
         },
         {
@@ -8115,9 +7895,6 @@
             ]
           },
           "id": "manufacturing-engineers.path.career-path-block.7",
-          "source_refs": [
-            "onet-education"
-          ],
           "type": "prose"
         },
         {
@@ -8129,10 +7906,52 @@
             ]
           },
           "id": "manufacturing-engineers.path.career-path-block.8",
-          "source_refs": [
-            "onet-summary"
-          ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "wave1-trial-1",
+                "values": [
+                  "Given:",
+                  "Three serial stations take 22, 41 and 29 seconds per unit, one unit per station at a time. Compare each with a 35-second target."
+                ]
+              },
+              {
+                "id": "wave1-trial-2",
+                "values": [
+                  "Task:",
+                  "Identify the bottleneck and calculate how far it exceeds the target."
+                ]
+              },
+              {
+                "id": "wave1-trial-3",
+                "values": [
+                  "Handoff:",
+                  "Use the provided station times. Do not change machinery or override process checks."
+                ]
+              }
+            ]
+          },
+          "id": "manufacturing-engineers.path.entry-work-sample-data.1",
+          "title": "Find a line bottleneck",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "The second station is limiting at 41 seconds, exceeding the target by 6 seconds."
+            ]
+          },
+          "id": "manufacturing-engineers.entry-work-sample-data.2",
+          "title": "Worked answer: Find a line bottleneck",
+          "type": "notice",
+          "visibility": "public"
         }
       ]
     },
@@ -8161,7 +7980,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "This page references the parent occupation Industrial Engineers. BLS Table 1.2: U.S. parent occupation Industrial Engineers 17-2112 had about 365,100 jobs in 2025 and is projected to have about 410,600 in 2035 (+12.4%), with about 23,100 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring. Latest BLS parent-occupation figures are 365,100 employed in 2025, 12% growth in 2025—2035, and 23,100 average annual openings. These are not exact manufacturing engineer employment counts, hiring samples, or individual hiring probabilities."
+              "This page references the parent occupation Industrial Engineers. Counts are rounded independently; projected openings include replacements and do not measure current hiring. Latest BLS parent-occupation figures are 365,100 employed in 2025, 12% growth in 2025—2035, and 23,100 average annual openings. These are not exact manufacturing engineer employment counts, hiring samples, or individual hiring probabilities."
             ]
           },
           "id": "manufacturing-engineers.market-signals.market-signal-card.2",
@@ -8194,9 +8013,6 @@
             ]
           },
           "id": "manufacturing-engineers.market-signals.market-signal-card.4",
-          "source_refs": [
-            "onet-tasks"
-          ],
           "type": "prose"
         },
         {
@@ -8208,9 +8024,6 @@
             ]
           },
           "id": "manufacturing-engineers.market-signals.market-signal-card.5",
-          "source_refs": [
-            "onet-summary"
-          ],
           "type": "prose"
         }
       ]
@@ -8227,116 +8040,22 @@
           "data": {
             "entries": [
               {
-                "answer": "On this page, manufacturing engineers refers to O*NET 17-2112.03: workers who design, integrate, or improve manufacturing systems or related processes and may collaborate with designers to improve product manufacturability and reduce costs. Tasks include troubleshooting product and process problems, resolving material-use discrepancies and bottlenecks, applying lean and other methods, reviewing manufacturability, using statistics to determine failure root causes, designing equipment layouts, writing process documentation, and assessing environmental sustainability. Work mainly takes place in factories and offices. This occupation is distinct from automotive engineers, human factors engineers, industrial engineers, or materials engineers.",
-                "id": "manufacturing-engineers.faq.1",
-                "question": "What are everyday work and working hours like?",
-                "question_key": "career.faq.manufacturing-engineers.daily-work",
+                "answer": "The May 2025 national median was $102,440 a year. This is for SOC 17-2112, the broader occupational group.",
+                "id": "manufacturing-engineers.faq.batch3-pay-us",
+                "question": "What is the U.S. median wage?",
+                "question_key": "career.faq.manufacturing-engineers.batch3-pay-us",
                 "source_refs": [
-                  "onet-summary",
-                  "onet-tasks"
+                  "wave1-b3-1"
                 ]
               },
               {
-                "answer": "Automotive engineers focus on vehicles and components; human factors engineers study human-system interaction; industrial engineers address overall production-system and efficiency design; materials engineers handle material selection and process development. Manufacturing engineers focus on manufacturability and efficiency in specific manufacturing processes, equipment, and product quality. Compare problem domains, deliverables, and professional boundaries to distinguish them.",
-                "id": "manufacturing-engineers.faq.2",
-                "question": "How does this occupation differ from adjacent occupations?",
-                "question_key": "career.faq.manufacturing-engineers.role-comparison",
+                "answer": "See work fit evidence for the shared criteria.",
+                "id": "manufacturing-engineers.faq.batch3-fit",
+                "question": "What process sample is worth showing a hiring manager?",
+                "question_key": "career.faq.manufacturing-engineers.batch3-fit",
                 "source_refs": [
-                  "onet-summary",
-                  "onet-tasks"
+                  "wave1-b3-3"
                 ]
-              },
-              {
-                "answer": "Observable signals: structured analysis of production-line problems, data- and statistics-based judgment, balancing quality, cost, and safety, cross-functional communication to advance improvements, and responsibility for change consequences. O*NET interest code RIC describes activity preferences only and cannot determine competence or qualifications.",
-                "id": "manufacturing-engineers.faq.3",
-                "question": "What signals suggest this occupation may suit me?",
-                "question_key": "career.faq.manufacturing-engineers.fit",
-                "source_refs": [
-                  "onet-summary",
-                  "onet-context"
-                ]
-              },
-              {
-                "answer": "Tools for process simulation and optimization, data analysis and root-cause assistance, document and report generation, and drawing and process-parameter retrieval may assist with analyzing production-line data, identifying bottlenecks, and drafting documents. People remain responsible for problem definition, on-site judgment, option trade-offs, change approval, and safety and compliance judgments. This page presents tool uses only as task hypotheses, not evidence of widespread organizational adoption.",
-                "id": "manufacturing-engineers.faq.4",
-                "question": "How will AI affect this occupation?",
-                "question_key": "career.faq.manufacturing-engineers.ai-impact",
-                "source_refs": [
-                  "ilo-genai"
-                ]
-              },
-              {
-                "answer": "Human responsibilities include defining problems and goals, judging data scope and statistical conclusions, balancing quality, cost, and safety, taking responsibility for changes and consequences, and following engineering ethics and authorization boundaries.",
-                "id": "manufacturing-engineers.faq.5",
-                "question": "Which judgments must remain a human responsibility?",
-                "question_key": "career.faq.manufacturing-engineers.human-control",
-                "source_refs": [
-                  "internal-rubric"
-                ]
-              },
-              {
-                "answer": "The National Bureau of Statistics publishes average annual wages for urban-unit employees by industry category without separately listing this occupation, so a safely matched nationwide occupational median cannot be established. This page displays only industry proxies labeled as such: in 2025, manufacturing paid 113,594 yuan / year in urban non-private units and 76,055 yuan / year in urban private units, while the nationwide total for urban non-private units was 129,441 yuan / year. None equals this occupation's median or starting pay. The Ministry of Human Resources and Social Security's enterprise compensation survey information is provided as a lookup entry point.",
-                "id": "manufacturing-engineers.faq.6",
-                "question": "What wage evidence is available for mainland China?",
-                "question_key": "career.faq.manufacturing-engineers.china-pay",
-                "source_refs": [
-                  "nbs-wages",
-                  "mohrss-wage"
-                ]
-              },
-              {
-                "answer": "The O*NET occupation page displays wages for the parent occupation Industrial Engineers (17-2112.00): a 2025 BLS OEWS median annual wage of 102,440 dollars, approximately 49.25 dollars / hour. That page does not display exact figures or percentile wages for occupation 17-2112.03. These are US nationwide parent-occupation statistics, not individual take-home income or starting pay.",
-                "id": "manufacturing-engineers.faq.7",
-                "question": "What wage evidence is available for the United States?",
-                "question_key": "career.faq.manufacturing-engineers.us-pay",
-                "source_refs": [
-                  "onet-wages"
-                ]
-              },
-              {
-                "answer": "In the United States, this occupation is in Job Zone 4. Most positions require a four-year bachelor's degree, some require a two-year degree, and several years of related experience are typically needed. Conclusions involving registration or special equipment must be issued by qualified personnel. Mainland China: there is no unified occupational qualification exactly corresponding to this O*NET occupation; check employer and industry requirements.",
-                "id": "manufacturing-engineers.faq.8",
-                "question": "What are the entry and training pathways?",
-                "question_key": "career.faq.manufacturing-engineers.education-path",
-                "source_refs": [
-                  "onet-education",
-                  "onet-cert"
-                ]
-              },
-              {
-                "answer": "Main risks include statistical conclusions and data scope, change impacts on quality and safety, cost and capacity constraints, cross-functional implementation and change management, and engineering authorization and compliance boundaries. Controls include defining data scope and statistical methods, assessing change impacts and obtaining procedural approval, calculating costs and capacity, communicating to advance implementation, and handing matters beyond scope to qualified personnel. Check specific rules against employer procedures and applicable regulations.",
-                "id": "manufacturing-engineers.faq.9",
-                "question": "What are the main risks and control boundaries?",
-                "question_key": "career.faq.manufacturing-engineers.risk-boundary",
-                "source_refs": [
-                  "onet-tasks",
-                  "onet-context"
-                ]
-              },
-              {
-                "answer": "BLS Table 1.2: U.S. parent occupation Industrial Engineers 17-2112 had about 365,100 jobs in 2025 and is projected to have about 410,600 in 2035 (+12.4%), with about 23,100 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring. These are occupational statistics, not an individual's probability of being hired.",
-                "id": "manufacturing-engineers.faq.10",
-                "question": "How should market signals be interpreted?",
-                "question_key": "career.faq.manufacturing-engineers.outlook-transition",
-                "source_refs": [
-                  "onet-trends",
-                  "bls-design-ep"
-                ]
-              },
-              {
-                "answer": "If you can structure production-line problems and validate them with data, a low-cost exercise using entirely fictional production-line and quality data is worthwhile. Moving into industrial engineering, quality, or operations requires additional evidence of the corresponding methods and responsibilities.",
-                "id": "manufacturing-engineers.faq.11",
-                "question": "Is this occupation worth exploring further?",
-                "question_key": "career.faq.manufacturing-engineers.career-worth",
-                "source_refs": [
-                  "onet-summary"
-                ]
-              },
-              {
-                "answer": "Evidence for China, the United States, and individual organizations is presented separately. Conclusions on wages, employment, qualifications / credentials, safety, and AI must not be combined across scopes; wages and employment on this O*NET page use the parent-occupation display scope. The manufacturing engineers page provides occupational judgment and improvement exercise information and does not replace local laws, engineering standards, or other professional advice. Any statement of insufficient evidence means only that safely matched data was not established within a bounded search; proxies or memory are not used to fabricate figures.",
-                "id": "manufacturing-engineers.faq.boundary",
-                "question": "What are the limits of using this page?",
-                "question_key": "career.faq.manufacturing-engineers.boundary"
               }
             ]
           },
@@ -8348,7 +8067,7 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "Evidence for China, the United States, and individual organizations is presented separately. Conclusions on wages, employment, qualifications / credentials, safety, and AI must not be combined across scopes; wages and employment on this O*NET page use the parent-occupation display scope.",
+              "Conclusions on wages, employment, qualifications / credentials, safety, and AI must not be combined across scopes; wages and employment on this O*NET page use the parent-occupation display scope.",
               "The manufacturing engineers page provides occupational judgment and improvement exercise information and does not replace local laws, engineering standards, or other professional advice.",
               "Any statement of insufficient evidence means only that safely matched data was not established within a bounded search; proxies or memory are not used to fabricate figures."
             ]
@@ -8392,12 +8111,6 @@
                 "id": "manufacturing-engineers.navigation.4",
                 "relation": "career.section",
                 "url": "#career-content-ai-impact"
-              },
-              {
-                "entity": "Manufacturing Engineers",
-                "id": "manufacturing-engineers.navigation.5",
-                "relation": "career.section",
-                "url": "#career-content-china-salary"
               },
               {
                 "entity": "Manufacturing Engineers",
@@ -8456,54 +8169,6 @@
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "Provides occupational identity, the official description, interest code, Job Zone, skills, and knowledge for 17-2112.03.",
-                  "Wage and employment data on that page use the parent occupation Industrial Engineers (17-2112.00)."
-                ],
-                "evidence_type": "official occupation summary",
-                "id": "onet-summary",
-                "limitation": "Applies only to 17-2112.03 and the US market; wages and employment use the parent-occupation display scope. Does not establish a mapping to China.",
-                "market": "United States",
-                "name": "O*NET 17-2112.03 Manufacturing Engineers (Summary)",
-                "period": "O*NET 2026 occupational profile; accessed 2026-09-25",
-                "publisher": "O*NET OnLine, U.S. Department of Labor",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/17-2112.03"
-              },
-              {
-                "accessed_at": "2026-09-25",
-                "details": [
-                  "Provides tasks including troubleshooting product and process problems, improving manufacturing processes and products, applying lean and other continuous improvement methods, assessing manufacturability, using statistics to determine failure root causes, designing equipment layouts, writing process documentation, and assessing manufacturing costs and sustainability.",
-                  "Task examples do not mean every position performs every task."
-                ],
-                "evidence_type": "official occupation task list",
-                "id": "onet-tasks",
-                "limitation": "Task examples do not mean every position performs every task; they do not establish a mapping to China.",
-                "market": "United States",
-                "name": "O*NET 17-2112.03 Tasks",
-                "period": "O*NET 2026 occupational profile; accessed 2026-09-25",
-                "publisher": "O*NET OnLine, U.S. Department of Labor",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/details/17-2112.03#Tasks"
-              },
-              {
-                "accessed_at": "2026-09-25",
-                "details": [
-                  "Describes contexts including primarily controlled indoor work, email and meeting communication, precision requirements, responsibility for others' health and safety, workweeks exceeding 40 hours for most respondents, and exposure to equipment and contaminants.",
-                  "US work context does not replace Chinese law or employer procedures."
-                ],
-                "evidence_type": "official occupation profile",
-                "id": "onet-context",
-                "limitation": "US work context does not replace Chinese law or employer procedures.",
-                "market": "United States",
-                "name": "O*NET 17-2112.03 Work Context",
-                "period": "O*NET 2026 occupational profile; accessed 2026-09-25",
-                "publisher": "O*NET OnLine, U.S. Department of Labor",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/details/17-2112.03#WorkContext"
-              },
-              {
-                "accessed_at": "2026-09-25",
-                "details": [
                   "2025 BLS OEWS median wages; the page displays the parent occupation Industrial Engineers (17-2112.00), not exact values for occupation 17-2112.03.",
                   "This page does not display percentile wages; inferred values are not substituted."
                 ],
@@ -8552,22 +8217,6 @@
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "Job Zone 4, considerable preparation needed: most positions require a four-year bachelor's degree, approximately 76%, while some require a two-year degree. Several years of related work, on-the-job, or vocational training are typically needed.",
-                  "Education distribution does not establish a mandatory requirement for every employer."
-                ],
-                "evidence_type": "official occupation profile",
-                "id": "onet-education",
-                "limitation": "Education distribution does not establish a mandatory requirement for every employer; it does not establish a mapping to China.",
-                "market": "United States",
-                "name": "O*NET 17-2112.03 Education and Occupational Preparation",
-                "period": "O*NET 2026 occupational profile; accessed 2026-09-25",
-                "publisher": "O*NET OnLine, U.S. Department of Labor",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/details/17-2112.03#Education"
-              },
-              {
-                "accessed_at": "2026-09-25",
-                "details": [
                   "O*NET provides US state licensing and national certification lookup entry points, such as manufacturing, quality, and lean-related certifications.",
                   "Certificates and training do not equal authorization to practice or employer hiring requirements."
                 ],
@@ -8600,38 +8249,6 @@
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "Provides average annual wages by industry category for urban non-private and private units, including manufacturing, to check the scope of publicly available Chinese wage data.",
-                  "Industry averages are not occupational medians and exclude individually owned businesses and freelancers."
-                ],
-                "evidence_type": "official industry wage statistics",
-                "id": "nbs-wages",
-                "limitation": "Industry averages are not occupational medians and exclude individually owned businesses and freelancers; no nationwide wage distribution matching the exact occupation was established.",
-                "market": "Nationwide mainland China scope",
-                "name": "Average Annual Wages of Employees in Urban Units in 2025",
-                "period": "2025 wages; published 2026-05-15; accessed 2026-09-25",
-                "publisher": "National Bureau of Statistics",
-                "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
-              },
-              {
-                "accessed_at": "2026-09-25",
-                "details": [
-                  "The Ministry of Human Resources and Social Security's enterprise compensation survey information provides a pay lookup entry point by occupation / position.",
-                  "Covers urban enterprises, excluding government agencies and public institutions; this page did not obtain an entry matching 17-2112.03 exactly."
-                ],
-                "evidence_type": "official enterprise wage survey",
-                "id": "mohrss-wage",
-                "limitation": "Covers urban enterprises, excluding government agencies and public institutions; this page did not obtain an exact occupational match and does not use it as a nationwide median.",
-                "market": "Urban enterprises in mainland China",
-                "name": "Enterprise Compensation Survey Information (2024)",
-                "period": "2024 reference year; published 2025-06; accessed 2026-09-25",
-                "publisher": "Ministry of Human Resources and Social Security",
-                "scope": "parent_occupation_proxy",
-                "url": "https://www.mohrss.gov.cn/SYrlzyhshbzb/laodongguanxi_/fwyd/202506/t20250627_544623.html"
-              },
-              {
-                "accessed_at": "2026-09-25",
-                "details": [
                   "Organizes potentially assisted tasks and human control points for task-level AI and fit discussions.",
                   "An editorial scale is not evidence of adoption rates, layoffs, regulations, or licensing."
                 ],
@@ -8644,53 +8261,6 @@
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": null
-              },
-              {
-                "accessed_at": "2026-10-11",
-                "details": [
-                  "2025 parent-occupation wages, industry breakdowns, and employment; education and PE rules are used within the industrial engineer scope."
-                ],
-                "evidence_type": "official occupation or safety guidance",
-                "id": "bls-ooh-industrial",
-                "limitation": "Use within the parent-occupation or triggered-work scope; does not establish manufacturing engineer statistics, tasks for every position, or Chinese permits.",
-                "market": "United States",
-                "name": "BLS Occupational Outlook Handbook: Industrial Engineers (Parent-Occupation Reference)",
-                "period": "2025 statistics / current webpage; accessed 2026-10-11",
-                "publisher": "BLS",
-                "scope": "parent_occupation_proxy",
-                "url": "https://www.bls.gov/ooh/architecture-and-engineering/industrial-engineers.htm"
-              },
-              {
-                "accessed_at": "2026-10-11",
-                "details": [
-                  "When equipment maintenance or modification triggers hazardous-energy controls, follow trained and authorized procedures; not an everyday task of every manufacturing engineer."
-                ],
-                "evidence_type": "official occupation or safety guidance",
-                "id": "osha-energy",
-                "limitation": "Use within the parent-occupation or triggered-work scope; does not establish manufacturing engineer statistics, tasks for every position, or Chinese permits.",
-                "market": "United States",
-                "name": "OSHA Control of Hazardous Energy",
-                "period": "2025 statistics / current webpage; accessed 2026-10-11",
-                "publisher": "OSHA",
-                "scope": "market_signal",
-                "url": "https://www.osha.gov/control-hazardous-energy"
-              },
-              {
-                "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Analyze production-line data and determine root causes — 75/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
-                  "Develop improvement options and write documents — 75/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
-                  "Implement improvements and validate through trial production — 25/100; weight=1/3; display.ai_impact_table.task_rows.2[0]"
-                ],
-                "evidence_type": "Editorial model estimation method",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
               },
               {
                 "accessed_at": "2026-11-09",
@@ -8729,6 +8299,42 @@
                 "publisher": "U.S. Department of Labor, Employment and Training Administration",
                 "scope": "exact",
                 "url": "https://creativecommons.org/licenses/by/4.0/"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-1",
+                "name": "BLS May 2025 OEWS national profile",
+                "url": "https://data.bls.gov/oesprofile/?areas=INDUSTRY,STATE,MSA&major_group=170000&measure=13&occupation=172112&year=2025"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-2",
+                "name": "BLS May 2025 OEWS technical notes",
+                "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-3",
+                "name": "O*NET occupation and duties",
+                "url": "https://www.onetonline.org/link/summary/17-2112.03"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-4",
+                "name": "SME CMfgE",
+                "url": "https://www.sme.org/training/technical-certification/certified-manufacturing-engineer-cmfge/"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-5",
+                "name": "ASQ CSSBB",
+                "url": "https://www.asq.org/cert/six-sigma-black-belt"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-6",
+                "name": "IATF Global Oversight",
+                "url": "https://www.iatfglobaloversight.org/"
               }
             ]
           },
@@ -8771,14 +8377,8 @@
         "conclusion": "First use a reviewable improvement deliverable to validate problem definition, data scope, and option boundaries, then assess your direction. Do not assign a single ranking based on income or personality.",
         "evidence_links": [
           {
-            "href": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
-            "label": "Sources for this occupation"
+            "href": "https://www.onetonline.org/link/localwages/17-2112.03",
+            "label": "O*NET 17-2112.03 National Wages (BLS OEWS Display, Parent Occupation Industrial Engineers)"
           }
         ],
         "evidence_note": "Adjacent relationships support directional comparison only, not automatic job transfers or qualification reciprocity.",
@@ -8855,40 +8455,16 @@
         },
         "authority_links": [
           {
-            "来源": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
+            "来源": "Source detail not stated.",
             "类型": "Official or research sources",
             "适用范围": "Use only within the source's original scope",
-            "链接": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "manufacturing-engineers.source-register.published.1"
-            }
+            "链接": null
           },
           {
-            "来源": {
-              "$source": "onet-tasks",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
+            "来源": "Source detail not stated.",
             "类型": "Official or research sources",
             "适用范围": "Use only within the source's original scope",
-            "链接": {
-              "$source": "onet-tasks",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "manufacturing-engineers.source-register.published.1"
-            }
+            "链接": null
           },
           {
             "来源": {
@@ -8936,60 +8512,24 @@
         "evidence_rows": [
           {
             "使用限制": "US scope for this occupation; wages and employment display the parent occupation.",
-            "来源": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
+            "来源": "Source detail not stated.",
             "研究对象": "Identity and scope of 17-2112.03",
             "结论": "Supports identity and task boundaries",
-            "链接": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "manufacturing-engineers.source-register.published.1"
-            }
+            "链接": null
           },
           {
             "使用限制": "Does not replace local law or engineering standards.",
-            "来源": {
-              "$source": "onet-tasks",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
+            "来源": "Source detail not stated.",
             "研究对象": "Tasks for 17-2112.03",
             "结论": "Supports task breakdown, not AI adoption rates",
-            "链接": {
-              "$source": "onet-tasks",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "manufacturing-engineers.source-register.published.1"
-            }
+            "链接": null
           },
           {
             "使用限制": "Does not replace safety and compliance requirements.",
-            "来源": {
-              "$source": "onet-context",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
+            "来源": "Source detail not stated.",
             "研究对象": "Work context for 17-2112.03",
             "结论": "Supports assessment of environment and pace",
-            "链接": {
-              "$source": "onet-context",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "manufacturing-engineers.source-register.published.1"
-            }
+            "链接": null
           }
         ],
         "heading": {
@@ -9015,65 +8555,24 @@
         "questions": [
           {
             "回答": "Task exposure, adoption, and job outcomes measure different things and cannot establish a date for job cuts.",
-            "来源": {
-              "$source": "onet-tasks",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
-            "链接": {
-              "$source": "onet-tasks",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
+            "来源": "Source detail not stated.",
+            "链接": null,
             "问题": "Will AI replace manufacturing engineers?"
           },
           {
             "回答": "Only task hypotheses are listed; no occupational adoption or sequencing research was obtained. Responsible engineering personnel must still handle problem definition, experimental validation, approval, and implementation.",
-            "来源": {
-              "$source": "onet-tasks",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
-            "链接": {
-              "$source": "onet-tasks",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
+            "来源": "Source detail not stated.",
+            "链接": null,
             "问题": "Which stage will automation affect first?"
           },
           {
             "回答": "There is no occupational adoption-rate source, so this page provides no such figures.",
-            "来源": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
-            "链接": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
+            "来源": "Source detail not stated.",
+            "链接": null,
             "问题": "Does this page have adoption-rate data?"
           }
         ],
-        "responsibility_intro": {
-          "$item": "manufacturing-engineers.ai-impact.ai-impact-table.5",
-          "block": "ai-impact",
-          "copy_key": "career.item.ai-impact-table",
-          "type": "prose"
-        },
+        "responsibility_intro": "Use AI to group downtime codes and compare versions. Trace each claimed loss back to a machine log or operator record.",
         "responsibility_steps": [
           {
             "步骤": "Check inputs",
@@ -9189,13 +8688,6 @@
           "$link": "manufacturing-engineers.navigation.links.1",
           "block": "navigation",
           "copy_key": "career.item.navigation-links",
-          "entry": "manufacturing-engineers.navigation.5",
-          "field": "url"
-        },
-        {
-          "$link": "manufacturing-engineers.navigation.links.1",
-          "block": "navigation",
-          "copy_key": "career.item.navigation-links",
           "entry": "manufacturing-engineers.navigation.6",
           "field": "url"
         },
@@ -9273,7 +8765,7 @@
       },
       "career_ai_description_block": {
         "body": [
-          "Editorial task hypothesis: validated analysis or simulation tools may assist with production-line data processing and option comparisons, while generative AI may draft documents using fictional material. Traditional simulation / CAD / statistical software is not equivalent to generative AI. No occupational adoption rates or job outcomes were obtained. Root causes require verification with data and experiments; authorized personnel remain responsible for implementation, quality, and safety approvals."
+          "Editorial task hypothesis: validated analysis or simulation tools may assist with production-line data processing and option comparisons, while generative AI may draft documents using  material. Traditional simulation / CAD / statistical software is not equivalent to generative AI. No occupational adoption rates or job outcomes were obtained. Root causes require verification with data and experiments; authorized personnel remain responsible for implementation, quality, and safety approvals."
         ],
         "heading": "Work subjects and AI boundaries for manufacturing engineers"
       },
@@ -9316,7 +8808,7 @@
             "copy_key": "career.item.career-path-block",
             "type": "prose"
           },
-          "jurisdiction": "United States: engineering bachelor's education and project practice, with registration qualifications checked by state; mainland China: check employer and industry requirements",
+          "jurisdiction": "Use the U.S. scope described in this section.",
           "summary": {
             "$item": "manufacturing-engineers.path.career-path-block.3",
             "block": "path",
@@ -9327,94 +8819,27 @@
         "schema_version": "career.career_progression.v1",
         "source_links": [
           {
-            "href": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
-            "id": "manufacturing-engineers.display.source.onet-summary",
-            "label": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
-            "scope": "Identity and scope; wages and employment use the parent-occupation display scope."
+            "href": "https://www.sme.org/training/technical-certification/certified-manufacturing-engineer-cmfge/",
+            "id": "wave1-b3-4",
+            "label": "SME CMfgE",
+            "scope": "Entry and practice"
           },
           {
-            "href": {
-              "$source": "onet-education",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
-            "id": "manufacturing-engineers.display.source.onet-education",
-            "label": {
-              "$source": "onet-education",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
-            "scope": "Education and occupational preparation; not a uniform education threshold."
+            "href": "https://www.asq.org/cert/six-sigma-black-belt",
+            "id": "wave1-b3-5",
+            "label": "ASQ CSSBB",
+            "scope": "Entry and practice"
           },
           {
-            "href": {
-              "$source": "onet-cert",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
-            "id": "manufacturing-engineers.display.source.onet-cert",
-            "label": {
-              "$source": "onet-cert",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
-            "scope": "Licensing and certification entry points; not authorization to practice."
+            "href": "https://www.iatfglobaloversight.org/",
+            "id": "wave1-b3-6",
+            "label": "IATF Global Oversight",
+            "scope": "Entry and practice"
           },
           {
-            "href": {
-              "$source": "onet-trends",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
-            "id": "manufacturing-engineers.display.source.onet-trends",
-            "label": {
-              "$source": "onet-trends",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
-            "scope": "Employment size and projections, parent occupation; excludes individual hiring probabilities."
-          },
-          {
-            "href": {
-              "$source": "nbs-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
-            "id": "manufacturing-engineers.display.source.nbs-wages",
-            "label": {
-              "$source": "nbs-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
-            "scope": "Chinese industry wage scope; not exact wages for this occupation."
+            "href": "https://www.onetonline.org/link/localwages/17-2112.03",
+            "id": "onet-wages",
+            "label": "O*NET 17-2112.03 National Wages (BLS OEWS Display, Parent Occupation Industrial Engineers)"
           }
         ],
         "tracks": [
@@ -9690,7 +9115,7 @@
             "label": "View the risk module"
           }
         ],
-        "direct_answer": "Handle risks by their triggers, consequences, controls, and escalation boundaries.",
+        "direct_answer": "Faster cycle time may hide a loss in inspection quality. Track defects and downstream impact before claiming improvement.",
         "evidence_scope": "Based on O*NET 17-2112.03 tasks and work context and specific requirements concerning data scope, change impacts, cost and capacity, cross-functional implementation, and engineering boundaries. Check specific rules against employer procedures and applicable regulations without extrapolating across scopes.",
         "heading": "Work risks and boundaries for manufacturing engineers",
         "risks": [
@@ -9790,60 +9215,6 @@
         "source_links": [
           {
             "href": {
-              "$source": "onet-tasks",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
-            "id": "manufacturing-engineers.display.source.onet-tasks",
-            "label": {
-              "$source": "onet-tasks",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
-            "scope": "Task list; used only to propose risk hypotheses."
-          },
-          {
-            "href": {
-              "$source": "onet-context",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
-            "id": "manufacturing-engineers.display.source.onet-context",
-            "label": {
-              "$source": "onet-context",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
-            "scope": "Work context; used only to propose risk hypotheses."
-          },
-          {
-            "href": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
-            "id": "manufacturing-engineers.display.source.onet-summary",
-            "label": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
-            "scope": "Identity and scope; does not replace engineering standards."
-          },
-          {
-            "href": {
               "$source": "onet-cert",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
@@ -9871,406 +9242,69 @@
             "id": "manufacturing-engineers.display.source.osha-energy",
             "label": "OSHA Control of Hazardous Energy",
             "scope": "When equipment maintenance or modification triggers hazardous-energy controls, follow trained and authorized procedures; not an everyday task of every manufacturing engineer."
+          },
+          {
+            "href": "https://www.onetonline.org/link/localwages/17-2112.03",
+            "id": "onet-wages",
+            "label": "O*NET 17-2112.03 National Wages (BLS OEWS Display, Parent Occupation Industrial Engineers)"
           }
         ]
       },
       "career_snapshot_primary_locale": {
-        "salary": {
-          "bls_table": [
-            {
-              "指标": "Mainland China occupational wages",
-              "数值": "Insufficient evidence: not separately listed",
-              "说明": "This research did not obtain a safely matched occupational distribution; it does not prove none of the public sources published one."
-            },
-            {
-              "指标": "Mainland China industry proxy",
-              "数值": "See industry table",
-              "说明": "Manufacturing is a broad industry proxy, not wages for this occupation."
-            },
-            {
-              "指标": "US occupational statistics",
-              "数值": "See US wage table",
-              "说明": "Uses the parent occupation Industrial Engineers display scope; data cannot be combined across markets."
-            }
-          ],
-          "china_ai_row": {
-            "$item": "manufacturing-engineers.china-salary.career-snapshot-primary-locale.4",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "china_class_row": {
-            "$item": "manufacturing-engineers.china-salary.career-snapshot-primary-locale.3",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "china_edu_table": [
-            {
-              "学历段": "Not separately tabulated",
-              "岗位方向": "Hiring depends on the employer and position",
-              "说明": "National Bureau of Statistics wage statistics are organized by industry and registration type, not by education levels within this occupation."
-            },
-            {
-              "学历段": "Not separately tabulated",
-              "岗位方向": "Hiring depends on the employer and position",
-              "说明": "National Bureau of Statistics wage statistics are organized by industry and registration type, not by education levels within this occupation."
-            },
-            {
-              "学历段": "Not separately tabulated",
-              "岗位方向": "Hiring depends on the employer and position",
-              "说明": "National Bureau of Statistics wage statistics are organized by industry and registration type, not by education levels within this occupation."
-            },
-            {
-              "学历段": "Not separately tabulated",
-              "岗位方向": "Hiring depends on the employer and position",
-              "说明": "National Bureau of Statistics wage statistics are organized by industry and registration type, not by education levels within this occupation."
-            }
-          ],
-          "china_industry_table": [
-            {
-              "行业": "Manufacturing (non-private)",
-              "需求": "113,594 yuan / year"
-            },
-            {
-              "行业": "Manufacturing (private)",
-              "需求": "76,055 yuan / year"
-            },
-            {
-              "行业": "Nationwide total for urban non-private units",
-              "需求": "129,441 yuan / year"
-            }
-          ],
-          "china_intl": {
-            "$join": [
-              {
-                "$source": "mohrss-wage",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "manufacturing-engineers.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "mohrss-wage",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "manufacturing-engineers.source-register.published.1"
-              }
-            ],
-            "separator": ""
-          },
-          "china_name_row": {
-            "$item": "manufacturing-engineers.china-salary.career-snapshot-primary-locale.1",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "china_open": "No exact Chinese occupational distribution was obtained. Manufacturing-unit averages provide only corresponding employer context, exclude individually owned businesses and freelancers, and do not replace starting pay or occupational medians.",
-          "china_ref": {
-            "$join": [
-              {
-                "$source": "nbs-wages",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "manufacturing-engineers.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "nbs-wages",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "manufacturing-engineers.source-register.published.1"
-              }
-            ],
-            "separator": ""
-          },
-          "china_salary_note": "Mainland China industry measures and US occupational statistics are separate and cannot be combined across markets.",
-          "china_salary_table": [
-            {
-              "城市/区间": "Nationwide · Manufacturing (non-private)",
-              "月薪参考": "Only average annual wages are published"
-            },
-            {
-              "城市/区间": "Nationwide · Manufacturing (private)",
-              "月薪参考": "Only average annual wages are published"
-            },
-            {
-              "城市/区间": "Exact occupational wages",
-              "月薪参考": "Insufficient evidence: no safely matched distribution obtained"
-            }
-          ],
-          "china_soc_row": {
-            "$item": "manufacturing-engineers.china-salary.career-snapshot-primary-locale.2",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "sources_note": {
-            "$join": [
-              {
-                "$source": "nbs-wages",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "manufacturing-engineers.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "nbs-wages",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "manufacturing-engineers.source-register.published.1"
-              }
-            ],
-            "separator": ""
-          },
-          "ui": {
-            "ai_heading": "Boundaries for AI and wage judgments",
-            "driver_heading": "Influencing factors",
-            "official_heading": "Official statistical scope",
-            "scenario_caption": "This scenario illustrates statistical scope only; it is not an individual price quote.",
-            "scenario_heading": "Scenario-based reference",
-            "scenario_interpretation_label": "Explanation",
-            "scenario_role_label": "Role scope",
-            "scenario_value_label": "Reference value"
-          },
-          "us_growth": "Local scope not applicable",
-          "us_median": "Local scope not applicable"
-        }
+        "availability": "unavailable",
+        "reason_code": "source_locale_unavailable"
       },
       "career_snapshot_secondary_locale": {
-        "authority_sources": {
-          "$join": [
-            {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "manufacturing-engineers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "manufacturing-engineers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            },
-            "; BLS parent-occupation handbook | https://www.bls.gov/ooh/architecture-and-engineering/industrial-engineers.htm"
-          ],
-          "separator": ""
-        },
+        "authority_sources": "https://data.bls.gov/oesprofile/?areas=INDUSTRY,STATE,MSA&major_group=170000&measure=13&occupation=172112&year=2025",
         "bls_table": [
           {
-            "指标": "Wages · Median",
-            "数值": "$102,440 / year (2025, parent occupation)",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "manufacturing-engineers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "manufacturing-engineers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "fact_ref": "wave1-b3-wage-p10",
+            "指标": "10th percentile",
+            "数值": "$74,370/year",
+            "说明": "Read within the original statistical scope."
           },
           {
-            "指标": "Wages · Hourly median",
-            "数值": "$49.25 / hour (2025, parent occupation)",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "manufacturing-engineers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "manufacturing-engineers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "fact_ref": "wave1-b3-wage-p25",
+            "指标": "25th percentile",
+            "数值": "$83,600/year",
+            "说明": "Read within the original statistical scope."
           },
           {
-            "指标": "Wages · Lowest 10%",
-            "数值": "$74,370 / year (P10, parent occupation)",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "manufacturing-engineers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "manufacturing-engineers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "fact_ref": "wave1-b3-wage-p50",
+            "指标": "Median",
+            "数值": "$102,440/year",
+            "说明": "Read within the original statistical scope."
           },
           {
-            "指标": "Wages · P90 percentile (parent occupation)",
-            "数值": "$159,860 / year (P90, parent occupation)",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "manufacturing-engineers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "manufacturing-engineers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "fact_ref": "wave1-b3-wage-p75",
+            "指标": "75th percentile",
+            "数值": "$129,250/year",
+            "说明": "Read within the original statistical scope."
           },
           {
-            "指标": "Wages · Statistical scope",
-            "数值": "Industrial Engineers (17-2112.00 parent-occupation display)",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "manufacturing-engineers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "manufacturing-engineers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "fact_ref": "wave1-b3-wage-p90",
+            "指标": "90th percentile",
+            "数值": "$159,860/year",
+            "说明": "Read within the original statistical scope."
           },
           {
             "指标": "Employment · Size",
             "数值": "About 365,100 jobs (2025)",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "manufacturing-engineers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "manufacturing-engineers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "说明": "Projection base-year employment"
           },
           {
             "指标": "Employment · Change",
             "数值": "+12.4%; about 410,600 jobs in 2035",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "manufacturing-engineers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "manufacturing-engineers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "说明": "Projection base-year employment"
           },
           {
             "指标": "Employment · Openings",
             "数值": "About 23,100 per year",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "manufacturing-engineers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "manufacturing-engineers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "说明": "Average annual openings, including replacement"
           }
         ],
-        "boundary": "U.S. pay and projections cover the broader Industrial Engineers occupation (17-2112), not manufacturing engineers separately. Projections do not measure current hiring.",
-        "direct_answer": {
-          "$item": "manufacturing-engineers.us-salary.career-snapshot-secondary-locale.2",
-          "block": "us-salary",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "type": "prose"
-        },
+        "boundary": "Percentiles describe national wage distribution points. Compare a local offer by setting, responsibilities, and guaranteed pay.",
+        "direct_answer": "May 2025 OEWS covers U.S. wage and salary workers and excludes the self-employed. 17-2112 covers industrial engineers as a proxy for this title.",
         "factor_rows": [
           {
             "answer": "ONet's occupational education survey reports 76% bachelor's degree, 16% two-year degree, and 4% some college without a degree. The Job Zone4 group description does not mean everyone needs years of prior experience. Check statutory sign-off by specific task and state.",
@@ -10307,24 +9341,24 @@
         "industry_period": "May 2025 (parent occupation 17-2112)",
         "industry_rows": [
           {
-            "industry": "Professional, scientific, and technical services",
-            "median": "$107,610 / year",
-            "note": "May 2025, parent occupation Industrial Engineers; not detailed manufacturing engineer wages."
+            "industry": "Occupation",
+            "median": "No comparable figure is cited here.",
+            "note": "Confirm the definition and any broader grouping."
           },
           {
-            "industry": "Computer and electronic product manufacturing",
-            "median": "$105,370 / year",
-            "note": "May 2025, parent occupation Industrial Engineers; not detailed manufacturing engineer wages."
+            "industry": "Employment",
+            "median": "No comparable figure is cited here.",
+            "note": "Check whether self-employment is included."
           },
           {
-            "industry": "Transportation equipment manufacturing",
-            "median": "$102,390 / year",
-            "note": "May 2025, parent occupation Industrial Engineers; not detailed manufacturing engineer wages."
+            "industry": "Survey period",
+            "median": "No comparable figure is cited here.",
+            "note": "Keep the month or year with the quoted figure."
           },
           {
-            "industry": "Machinery manufacturing",
-            "median": "$99,070 / year",
-            "note": "May 2025, parent occupation Industrial Engineers; not detailed manufacturing engineer wages."
+            "industry": "Geography",
+            "median": "No comparable figure is cited here.",
+            "note": "Compare local figures within the same survey."
           }
         ],
         "industry_value_label": "Parent-occupation median annual wage (dollars / year)",
@@ -10336,23 +9370,23 @@
         },
         "interpretation_rows": [
           {
-            "answer": "2025 US nationwide parent-occupation percentile table, not exact manufacturing engineer wages or individual income.",
-            "question": "Wages"
+            "answer": "Confirm the definition and any broader grouping.",
+            "question": "Occupation"
           },
           {
-            "answer": "2025 U.S. employment for the broader occupation.",
+            "answer": "Check whether self-employment is included.",
             "question": "Employment"
           },
           {
-            "answer": "BLS Table 1.2 for the broader Industrial Engineers occupation (17-2112): about 365,100 U.S. jobs in 2025 and about 410,600 projected for 2035 (+12.4%), with about 23,100 annual openings including replacements.",
-            "question": "Outlook"
+            "answer": "Keep the month or year with the quoted figure.",
+            "question": "Survey period"
           },
           {
-            "answer": "Listed as manufacturing and professional, scientific, and technical services under O*NET / BLS industry scope; does not equal income for all practitioners.",
-            "question": "Industry"
+            "answer": "Compare local figures within the same survey.",
+            "question": "Geography"
           }
         ],
-        "median": "$102,440 / year (2025, parent occupation)",
+        "median": "$102,440/year",
         "outlook_heading": "Employment outlook and job openings",
         "outlook_period": "2025–2035",
         "wage_column_labels": [
@@ -10369,34 +9403,34 @@
         },
         "wage_tiers": [
           {
-            "equivalent": "$35.76 / hour",
-            "interpretation": "2025 US nationwide Industrial Engineers percentiles; not exact manufacturing engineer values or a conversion of individual working hours.",
-            "label": "P10 (parent occupation)",
-            "value": "$74,370 / year"
+            "equivalent": "USD/year",
+            "interpretation": "Lower end of the distribution",
+            "label": "10th percentile",
+            "value": "$74,370/year"
           },
           {
-            "equivalent": "$40.19 / hour",
-            "interpretation": "2025 US nationwide Industrial Engineers percentiles; not exact manufacturing engineer values or a conversion of individual working hours.",
-            "label": "P25 (parent occupation)",
-            "value": "$83,600 / year"
+            "equivalent": "USD/year",
+            "interpretation": "First quartile",
+            "label": "25th percentile",
+            "value": "$83,600/year"
           },
           {
-            "equivalent": "$49.25 / hour",
-            "interpretation": "2025 US nationwide Industrial Engineers percentiles; not exact manufacturing engineer values or a conversion of individual working hours.",
-            "label": "P50 (parent occupation)",
-            "value": "$102,440 / year"
+            "equivalent": "USD/year",
+            "interpretation": "Middle of the distribution",
+            "label": "Median",
+            "value": "$102,440/year"
           },
           {
-            "equivalent": "$62.14 / hour",
-            "interpretation": "2025 US nationwide Industrial Engineers percentiles; not exact manufacturing engineer values or a conversion of individual working hours.",
-            "label": "P75 (parent occupation)",
-            "value": "$129,250 / year"
+            "equivalent": "USD/year",
+            "interpretation": "Third quartile",
+            "label": "75th percentile",
+            "value": "$129,250/year"
           },
           {
-            "equivalent": "$76.85 / hour",
-            "interpretation": "2025 US nationwide Industrial Engineers percentiles; not exact manufacturing engineer values or a conversion of individual working hours.",
-            "label": "P90 (parent occupation)",
-            "value": "$159,860 / year"
+            "equivalent": "USD/year",
+            "interpretation": "Upper end of the published range",
+            "label": "90th percentile",
+            "value": "$159,860/year"
           }
         ]
       },
@@ -10430,7 +9464,7 @@
         "title": "Who might suit manufacturing engineering?"
       },
       "fit_decision_checklist": {
-        "boundary": "This is an entirely fictional production-line improvement scenario check, not a personality diagnosis, hiring conclusion, or qualification assessment.",
+        "boundary": "You can spend a week chasing a few seconds of delay and still need operators, quality and maintenance to agree on the change. If that negotiation feels like wasted time, this work can wear you down.",
         "how": {
           "$item": "manufacturing-engineers.quick-decision.fermat-decision-card.3",
           "block": "quick-decision",
@@ -10493,7 +9527,7 @@
             "geography": "US nationwide",
             "horizon": "2025–2035",
             "interpretation": "Openings include replacements.",
-            "limitation": "U.S. pay and projections cover the broader Industrial Engineers occupation (17-2112), not manufacturing engineers separately. Projections do not measure current hiring.",
+            "limitation": "See market scope for the shared criteria.",
             "metric": "Projected average annual job openings (parent occupation)",
             "occupation_scope": "Display scope: Industrial Engineers (17-2112.00 parent occupation)",
             "value": "About 23,100 per year (parent occupation)"
@@ -10547,40 +9581,14 @@
             "scope": "Industry distribution; not a demand forecast."
           },
           {
-            "href": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
-            "id": "manufacturing-engineers.display.source.onet-summary",
-            "label": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
-            "scope": "Identity and scope; does not provide individual hiring probabilities."
+            "href": "https://www.onetonline.org/link/localwages/17-2112.03",
+            "id": "onet-wages",
+            "label": "O*NET 17-2112.03 National Wages (BLS OEWS Display, Parent Occupation Industrial Engineers)"
           },
           {
-            "href": {
-              "$source": "onet-tasks",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
-            "id": "manufacturing-engineers.display.source.onet-tasks",
-            "label": {
-              "$source": "onet-tasks",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
-            "scope": "Tasks and work context; used only to propose transition hypotheses."
+            "href": "https://www.onetonline.org/link/industry/17-2112.03",
+            "id": "onet-industry",
+            "label": "Industries: 17-2112.03"
           }
         ],
         "transitions": [
@@ -10597,7 +9605,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/automotive-engineers",
+            "target_href": "/en/career/jobs/automotive-engineers",
             "target_slug": "automotive-engineers",
             "target_title": "Automotive Engineers",
             "transition_distance": "Evidence to add"
@@ -10605,7 +9613,7 @@
           {
             "capability_gaps": "Add human factors and ergonomics methods.",
             "shared_capabilities": "Process observation, data analysis, and cross-functional communication; do not assume existing competence in human cognition / anthropometric research.",
-            "target_href": "/zh/career/jobs/human-factors-engineers-and-ergonomists",
+            "target_href": "/en/career/jobs/human-factors-engineers-and-ergonomists",
             "target_slug": "human-factors-engineers-and-ergonomists",
             "target_title": "Human Factors Engineers and Ergonomists",
             "transition_distance": "Evidence to add"
@@ -10613,7 +9621,7 @@
           {
             "capability_gaps": "Add system design and optimization methods.",
             "shared_capabilities": "Foundation in production systems and efficiency.",
-            "target_href": "/zh/career/jobs/industrial-engineers",
+            "target_href": "/en/career/jobs/industrial-engineers",
             "target_slug": "industrial-engineers",
             "target_title": "Industrial Engineers",
             "transition_distance": "Evidence to add"
@@ -10621,7 +9629,7 @@
           {
             "capability_gaps": "Add material-property and research and development skills.",
             "shared_capabilities": "Foundation in materials and processes.",
-            "target_href": "/zh/career/jobs/materials-engineers",
+            "target_href": "/en/career/jobs/materials-engineers",
             "target_slug": "materials-engineers",
             "target_title": "Materials Engineers",
             "transition_distance": "Evidence to add"
@@ -10629,7 +9637,7 @@
           {
             "capability_gaps": "Develop deeper mechanical design skills.",
             "shared_capabilities": "Foundation in mechanical design and manufacturing.",
-            "target_href": "/zh/career/jobs/mechanical-engineers",
+            "target_href": "/en/career/jobs/mechanical-engineers",
             "target_slug": "mechanical-engineers",
             "target_title": "Mechanical Engineers",
             "transition_distance": "Evidence to add"
@@ -10637,7 +9645,7 @@
           {
             "capability_gaps": "Add sensing, actuators, electrical / control, and hardware-software integration validation. Production-line improvement experience does not directly confer mechatronic system design ability.",
             "shared_capabilities": "Equipment and process requirements analysis; do not assume all roles already involve automation control design experience.",
-            "target_href": "/zh/career/jobs/mechatronics-engineers",
+            "target_href": "/en/career/jobs/mechatronics-engineers",
             "target_slug": "mechatronics-engineers",
             "target_title": "Mechatronics Engineers",
             "transition_distance": "Evidence to add"
@@ -10665,13 +9673,8 @@
       "personality_fit_block": {
         "assessments": [
           {
-            "answer": {
-              "$item": "manufacturing-engineers.fit.riasec-fit-block.6",
-              "block": "fit",
-              "copy_key": "career.item.riasec-fit-block",
-              "type": "prose"
-            },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "answer": "Show a baseline, how the station times were captured, why one bottleneck matters and which specialist must validate a proposed change.",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start a career-interest trial",
             "evidence_level": "Editorial guidance; no occupation-specific validity study provided",
             "id": "riasec",
@@ -10690,7 +9693,7 @@
               "copy_key": "career.item.riasec-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start a career-interest trial",
             "evidence_level": "Editorial guidance; no occupation-specific validity study provided",
             "id": "big-five",
@@ -10709,7 +9712,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start a career-interest trial",
             "evidence_level": "Editorial guidance; no occupation-specific validity study provided",
             "id": "mbti",
@@ -10723,7 +9726,7 @@
           },
           {
             "answer": "Continue checking against real tasks, boundaries, and reviewable deliverables.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start a career-interest trial",
             "evidence_level": "Editorial guidance; no occupation-specific validity study provided",
             "id": "enneagram",
@@ -10737,7 +9740,7 @@
           },
           {
             "answer": "Continue checking against real tasks, boundaries, and reviewable deliverables.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start a career-interest trial",
             "evidence_level": "Editorial guidance; no occupation-specific validity study provided",
             "id": "iq",
@@ -10751,7 +9754,7 @@
           },
           {
             "answer": "Continue checking against real tasks, boundaries, and reviewable deliverables.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start a career-interest trial",
             "evidence_level": "Editorial guidance; no occupation-specific validity study provided",
             "id": "eq",
@@ -10811,44 +9814,36 @@
         },
         "questions": [
           {
-            "answer": "Line support investigates stoppages or material variances and coordinates recovery. Process improvement analyses the existing workflow, trials a change, and measures the result. Compare line coverage with continuous improvement and trial ownership.",
-            "question": "How can I identify the work focus in a job posting?"
+            "answer": "See work fit evidence for the shared criteria.",
+            "question": "What process sample is worth showing a hiring manager?"
           },
           {
-            "answer": "If a setting change could relieve a bottleneck, can I plan a limited trial, and who approves it?",
-            "question": "What should I ask in an interview?"
+            "answer": "Notice how often the team reopens a handoff when an earlier assumption changes. Ask who confirms the new decision.",
+            "question": "What should I notice in a job shadow?"
           },
           {
-            "answer": "Use this page's work sample to check problem-breakdown skills.",
-            "question": "Can you structure production-line problems?"
+            "answer": "Pick a regular deliverable and repeat it with the same review standard.",
+            "question": "Which assignment would I repeat?"
           },
           {
-            "answer": "Check assumptions and evidence against methodological requirements.",
-            "question": "Can you make judgments using data and statistics?"
+            "answer": "Note your last confirmed detail before responding to the interruption.",
+            "question": "How do I handle an interruption?"
           },
           {
-            "answer": "Assess trade-off and judgment skills.",
-            "question": "Can you balance quality, cost, and safety?"
+            "answer": "Keep both versions and identify the person who can settle the discrepancy.",
+            "question": "How do I respond to conflicting inputs?"
           },
           {
-            "answer": "Check sources first and mark uncertainty.",
-            "question": "What would you do if the data scope seemed questionable?"
+            "answer": "Compare the written shift terms with when you can work reliably.",
+            "question": "Would the work schedule suit me?"
           },
           {
-            "answer": "Assess your ability to advance work across departments.",
-            "question": "Can you implement changes?"
+            "answer": "Describe what you would route to a qualified reviewer.",
+            "question": "Can I set a boundary on requests?"
           },
           {
-            "answer": "Assess responsibility and engineering ethics awareness.",
-            "question": "Can you take responsibility for change consequences?"
-          },
-          {
-            "answer": "Use data and improvement records to enable review by others.",
-            "question": "How can your work be reviewed?"
-          },
-          {
-            "answer": "Complete an exercise using entirely fictional production-line and quality data.",
-            "question": "How can I try this next?"
+            "answer": "Ask a receiver which detail lets them continue without guessing.",
+            "question": "What makes a handoff useful?"
           }
         ],
         "schema_version": "career.fit_decision_center.v1",
@@ -10890,57 +9885,6 @@
         "source_links": [
           {
             "href": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
-            "usage": "Identity and scope; wages and employment use the parent-occupation display scope."
-          },
-          {
-            "href": {
-              "$source": "onet-tasks",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-tasks",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
-            "usage": "Task list."
-          },
-          {
-            "href": {
-              "$source": "onet-context",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-context",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
-            "usage": "Work context; used only to propose fit hypotheses."
-          },
-          {
-            "href": {
               "$source": "onet-wages",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
@@ -10975,23 +9919,6 @@
           },
           {
             "href": {
-              "$source": "onet-education",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-education",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
-            "usage": "Education and occupational preparation."
-          },
-          {
-            "href": {
               "$source": "onet-industry",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
@@ -11023,40 +9950,6 @@
               "item": "manufacturing-engineers.source-register.published.1"
             },
             "usage": "Licensing and certification lookup entry points; not authorization to practice."
-          },
-          {
-            "href": {
-              "$source": "nbs-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
-            "label": {
-              "$source": "nbs-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
-            "usage": "Chinese industry wage scope."
-          },
-          {
-            "href": {
-              "$source": "mohrss-wage",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
-            "label": {
-              "$source": "mohrss-wage",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "manufacturing-engineers.source-register.published.1"
-            },
-            "usage": "Chinese position-pay lookup entry point."
           }
         ]
       },
@@ -11108,7 +10001,7 @@
             "item": "manufacturing-engineers.source-register.published.1"
           }
         },
-        "note": "U.S. pay and projections cover the broader Industrial Engineers occupation (17-2112), not manufacturing engineers separately. Projections do not measure current hiring."
+        "note": "See market scope for the shared criteria."
       },
       "work_context_block": {
         "$item": "manufacturing-engineers.profile.work-context-block.5",
@@ -11122,7 +10015,7 @@
       "interface.fit.directions_heading": "Which engineering and improvement direction might suit you best?",
       "interface.fit.interest_code_heading": "How to understand the RIC interest code"
     },
-    "locale": "zh-CN",
+    "locale": "en",
     "native_items": [
       {
         "block": "source-register",
@@ -11130,12 +10023,26 @@
         "id": "manufacturing-engineers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "manufacturing-engineers.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "manufacturing-engineers.entry-work-sample-data.2",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": "/en/career/jobs/manufacturing-engineers",
     "section_titles": {
       "ai-impact": "AI Impact Score",
-      "china-salary": "Mainland China wages",
+      "china-salary": "Additional wage reference",
       "direction-comparison": "Comparison with adjacent occupations",
       "fit": "Fit signals",
       "market-signals": "Market signals",
@@ -11153,14 +10060,14 @@
     "facts": [
       {
         "derivation": null,
-        "display_value": "102,440 dollars / year",
+        "display_value": "$49.25/hour",
         "fact_id": "us-wage-median",
-        "market": "United States (parent-occupation display scope)",
-        "measure": "2025 median annual wage, approximately 49.25 dollars / hour",
-        "occupation_scope": "U.S. parent occupation: Industrial Engineers (17-2112)",
-        "period": "2025 BLS OEWS; accessed 2026-09-25",
+        "market": "United States",
+        "measure": "Median hourly wage",
+        "occupation_scope": "Industrial engineers (parent proxy), SOC 17-2112",
+        "period": "May 2025",
         "source_refs": [
-          "onet-wages"
+          "wave1-b3-1"
         ]
       },
       {
@@ -11201,70 +10108,70 @@
       },
       {
         "derivation": null,
-        "display_value": "113,594 yuan / year",
-        "fact_id": "cn-manufacturing-nonprivate-wage",
-        "market": "Nationwide urban-unit scope in mainland China: manufacturing industry category, not this occupation",
-        "measure": "Average annual wages of employees in urban non-private units by industry category",
-        "occupation_scope": "Manufacturing (industry scope, not this occupation)",
-        "period": "2025 wages; published 2026-05-15; accessed 2026-09-25",
+        "display_value": "$74,370/year",
+        "fact_id": "wave1-b3-wage-p10",
+        "market": "United States",
+        "measure": "Annual wage — 10th percentile",
+        "occupation_scope": "Industrial engineers (parent proxy), SOC 17-2112",
+        "period": "May 2025",
         "source_refs": [
-          "nbs-wages"
+          "wave1-b3-1"
         ]
       },
       {
         "derivation": null,
-        "display_value": "76,055 yuan / year",
-        "fact_id": "cn-manufacturing-private-wage",
-        "market": "Nationwide urban-unit scope in mainland China: manufacturing industry category, not this occupation",
-        "measure": "Average annual wages of employees in urban private units by industry category",
-        "occupation_scope": "Manufacturing (industry scope, not this occupation)",
-        "period": "2025 wages; published 2026-05-15; accessed 2026-09-25",
+        "display_value": "$83,600/year",
+        "fact_id": "wave1-b3-wage-p25",
+        "market": "United States",
+        "measure": "Annual wage — 25th percentile",
+        "occupation_scope": "Industrial engineers (parent proxy), SOC 17-2112",
+        "period": "May 2025",
         "source_refs": [
-          "nbs-wages"
+          "wave1-b3-1"
         ]
       },
       {
         "derivation": null,
-        "display_value": "129,441 yuan / year",
-        "fact_id": "cn-national-nonprivate-wage",
-        "market": "Nationwide mainland China scope",
-        "measure": "Average annual wages of employees in urban non-private units, all industries combined",
-        "occupation_scope": "Nationwide total for urban non-private units, not this occupation",
-        "period": "2025 wages; published 2026-05-15; accessed 2026-09-25",
+        "display_value": "$102,440/year",
+        "fact_id": "wave1-b3-wage-p50",
+        "market": "United States",
+        "measure": "Annual wage — Median",
+        "occupation_scope": "Industrial engineers (parent proxy), SOC 17-2112",
+        "period": "May 2025",
         "source_refs": [
-          "nbs-wages"
+          "wave1-b3-1"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Insufficient evidence: no nationwide occupational median wage was obtained for manufacturing engineers in mainland China under the 2025 official public statistical scope",
-        "fact_id": "cn-wage-gap",
-        "market": "Nationwide mainland China scope",
-        "measure": "occupation wage availability",
-        "occupation_scope": "no exact CN mapping for O*NET 17-2112.03",
-        "period": "2025 annual wage; published 2026-05-15; accessed 2026-09-25",
+        "display_value": "$129,250/year",
+        "fact_id": "wave1-b3-wage-p75",
+        "market": "United States",
+        "measure": "Annual wage — 75th percentile",
+        "occupation_scope": "Industrial engineers (parent proxy), SOC 17-2112",
+        "period": "May 2025",
         "source_refs": [
-          "nbs-wages"
+          "wave1-b3-1"
         ]
       },
       {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "58%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Manufacturing Engineers",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "derivation": null,
+        "display_value": "$159,860/year",
+        "fact_id": "wave1-b3-wage-p90",
+        "market": "United States",
+        "measure": "Annual wage — 90th percentile",
+        "occupation_scope": "Industrial engineers (parent proxy), SOC 17-2112",
+        "period": "May 2025",
         "source_refs": [
-          "source-fermatmind-ai-rubric"
+          "wave1-b3-1"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
       "label": "AI Impact Score"
     },
@@ -11276,9 +10183,9 @@
     "metrics": [
       {
         "availability": "available",
-        "fact_ref": "us-wage-median",
+        "fact_ref": "wave1-b3-wage-p50",
         "key": "us_pay",
-        "label": "U.S. parent occupation median pay (2025)"
+        "label": "U.S. May 2025 median wage"
       },
       {
         "availability": "available",
@@ -11302,7 +10209,7 @@
         "availability": "missing",
         "fact_ref": null,
         "key": "china_pay",
-        "label": "Mainland China wage reference"
+        "label": "Additional wage benchmark"
       }
     ]
   },
@@ -11310,17 +10217,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Learn how manufacturing engineers turn a process idea into a trial and hand off evidence to production and quality teams."
+      "text": "Manufacturing engineers turn product designs into stable processes and preserve the evidence that a line change met its targets."
     },
     "title": {
       "availability": "available",
-      "text": "Manufacturing Engineer: Process Design, Pilot Runs and Validation"
+      "text": "Manufacturing Engineers | Duties, Pay and Entry"
     }
   },
-  "source_content_sha256": "e8d9d421634b20296aef4c59831ad56b516bcded59d5064847dba897bd8134b7",
+  "source_content_sha256": "2fb5c7630cc81445b28f15b302aef1c62e38827a0b9f075ae0267a914f4132e8",
   "subject": {
     "canonical_slug": "manufacturing-engineers",
-    "name": "Manufacturing Engineer",
-    "summary": "Manufacturing engineers design, integrate and improve production processes. They coordinate fixtures, work instructions and quality needs and use pilot runs to verify that a process can operate consistently."
+    "name": "Manufacturing Engineers",
+    "summary": "Manufacturing engineers turn product designs into stable processes and preserve the evidence that a line change met its targets."
   }
 }

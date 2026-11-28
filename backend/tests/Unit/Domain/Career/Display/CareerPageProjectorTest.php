@@ -29,7 +29,7 @@ final class CareerPageProjectorTest extends TestCase
         foreach ($manifest['files'] as $entry) {
             $source = json_decode(file_get_contents($root.'/'.$entry['path']), true, 512, JSON_THROW_ON_ERROR);
             $page = $projector->project($source);
-            self::assertSame($entry['source_content_sha256'], $page['source_content_sha256']);
+            self::assertSame($entry['source_content_sha256'], $page['source_content_sha256'], $entry['path']);
             self::assertSame(array_column($source['blocks'], 'id'), array_column($page['content']['blocks'], 'id'));
             self::assertCount(5, $page['hero']['metrics']);
             self::assertArrayNotHasKey('presentation_v2', $page);
@@ -177,12 +177,13 @@ final class CareerPageProjectorTest extends TestCase
         self::assertStringContainsString('2025—2035', $aircraft);
         self::assertStringContainsString('年均约 13,100', $aircraft);
         self::assertStringNotContainsString('十年约 11,300', $aircraft);
-        $baker = CareerCurrentAuthorityPackage::encodeCanonical($projector->read('bakers', 'zh-CN'));
-        self::assertStringContainsString('第10分位（P10）', $baker);
-        self::assertStringContainsString('并非工资分布的最小值', $baker);
-        self::assertStringContainsString('不是入门起薪的承诺', $baker);
-        self::assertStringContainsString('年均约 36,500', $baker);
-        self::assertStringNotContainsString('为分布的下限', $baker);
+        $baker = $projector->read('bakers', 'zh-CN');
+        $metrics = array_column($baker['hero']['metrics'], null, 'key');
+        self::assertSame('missing', $metrics['us_pay']['availability']);
+        self::assertNull($metrics['us_pay']['fact']);
+        self::assertSame('36,500', $metrics['us_openings']['fact']['display_value']);
+        self::assertSame('2025–2035', $metrics['us_openings']['fact']['period']);
+        self::assertStringNotContainsString('第10分位（P10）', CareerCurrentAuthorityPackage::encodeCanonical($baker));
     }
 
     public function test_reviewed_hero_metrics_use_their_own_statistic_and_keep_china_missing(): void
@@ -271,7 +272,15 @@ final class CareerPageProjectorTest extends TestCase
             self::assertNotSame('', trim($fit['boundary']), $slug);
             self::assertNotSame('', trim($page['display']['interface']['interface.quick_decision.experiment_heading']), $slug);
             foreach (['suit' => '2', 'boundary' => '3', 'how' => '1'] as $key => $suffix) {
-                self::assertSame($slug.'.quick-decision.fit-decision-checklist.'.$suffix, $source['authoring_structure']['slots']['fit_decision_checklist.'.$key]['ref']['id'], $slug);
+                $slot = $source['authoring_structure']['slots']['fit_decision_checklist.'.$key];
+                $binding = $source['display']['components']['fit_decision_checklist'][$key];
+                if (is_string($binding)) {
+                    self::assertSame(['ref' => null, 'status' => 'unfilled'], $slot, $slug);
+                    self::assertSame($binding, $fit[$key], $slug);
+
+                    continue;
+                }
+                self::assertSame($slug.'.quick-decision.fit-decision-checklist.'.$suffix, $slot['ref']['id'], $slug);
             }
         }
     }

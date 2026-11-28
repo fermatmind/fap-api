@@ -2,12 +2,6 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
-      "fact:cn-health-nonprivate-2025": {
-        "status": "pending_mapping"
-      },
-      "fact:cn-health-private-2025": {
-        "status": "pending_mapping"
-      },
       "fact:us-ot-employment-2025": {
         "status": "pending_mapping"
       },
@@ -50,18 +44,6 @@
       "item:occupational-therapists.ai-impact.ai-impact-table.8": {
         "status": "pending_mapping"
       },
-      "item:occupational-therapists.china-salary.career-snapshot-primary-locale.1": {
-        "status": "mapped"
-      },
-      "item:occupational-therapists.china-salary.career-snapshot-primary-locale.2": {
-        "status": "pending_mapping"
-      },
-      "item:occupational-therapists.china-salary.career-snapshot-primary-locale.3": {
-        "status": "pending_mapping"
-      },
-      "item:occupational-therapists.china-salary.career-snapshot-primary-locale.4": {
-        "status": "pending_mapping"
-      },
       "item:occupational-therapists.direction-comparison.adjacent-career-comparison-table.1": {
         "status": "mapped"
       },
@@ -75,6 +57,9 @@
         "status": "pending_mapping"
       },
       "item:occupational-therapists.direction-comparison.adjacent-career-comparison-table.5": {
+        "status": "pending_mapping"
+      },
+      "item:occupational-therapists.entry-work-sample-data.2": {
         "status": "pending_mapping"
       },
       "item:occupational-therapists.fit.personality-fit-block.5": {
@@ -128,25 +113,13 @@
       "item:occupational-therapists.path.entry-role-comparison.10": {
         "status": "pending_mapping"
       },
+      "item:occupational-therapists.path.entry-work-sample-data.1": {
+        "status": "pending_mapping"
+      },
       "item:occupational-therapists.path.interview-probation.11": {
         "status": "pending_mapping"
       },
       "item:occupational-therapists.path.recruitment-sample.1": {
-        "status": "pending_mapping"
-      },
-      "item:occupational-therapists.path.recruitment-sample.2": {
-        "status": "pending_mapping"
-      },
-      "item:occupational-therapists.path.recruitment-sample.3": {
-        "status": "pending_mapping"
-      },
-      "item:occupational-therapists.path.recruitment-sample.4": {
-        "status": "pending_mapping"
-      },
-      "item:occupational-therapists.path.recruitment-sample.5": {
-        "status": "pending_mapping"
-      },
-      "item:occupational-therapists.path.recruitment-sample.6": {
         "status": "pending_mapping"
       },
       "item:occupational-therapists.path.recruitment-sample.7": {
@@ -3545,16 +3518,8 @@
         "status": "unfilled"
       },
       "career_snapshot_primary_locale.salary.bls_table.01.explanation": {
-        "ref": {
-          "id": "occupational-therapists.china-salary.career-snapshot-primary-locale.1",
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_primary_locale.salary.bls_table.01.headers.explanation": {
         "ref": null,
@@ -3569,18 +3534,8 @@
         "status": "unfilled"
       },
       "career_snapshot_primary_locale.salary.bls_table.01.metric": {
-        "ref": {
-          "path": [
-            "components",
-            "career_snapshot_primary_locale",
-            "salary",
-            "bls_table",
-            0,
-            "指标"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_primary_locale.salary.bls_table.01.value": {
         "ref": null,
@@ -3603,18 +3558,8 @@
         "status": "unfilled"
       },
       "career_snapshot_primary_locale.salary.bls_table.02.metric": {
-        "ref": {
-          "path": [
-            "components",
-            "career_snapshot_primary_locale",
-            "salary",
-            "bls_table",
-            1,
-            "指标"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_primary_locale.salary.bls_table.02.value": {
         "ref": null,
@@ -3637,18 +3582,8 @@
         "status": "unfilled"
       },
       "career_snapshot_primary_locale.salary.bls_table.03.metric": {
-        "ref": {
-          "path": [
-            "components",
-            "career_snapshot_primary_locale",
-            "salary",
-            "bls_table",
-            2,
-            "指标"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_primary_locale.salary.bls_table.03.value": {
         "ref": null,
@@ -10612,69 +10547,24 @@
         "status": "mapped"
       },
       "sources.published-sources.entries.09.accessed_at": {
-        "ref": {
-          "id": "occupational-therapists.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "shanghai-recruitment"
-            },
-            "accessed_at"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.09.details.01": {
-        "ref": {
-          "id": "occupational-therapists.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "shanghai-recruitment"
-            },
-            "details",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.09.details.02": {
         "ref": null,
         "status": "unfilled"
       },
       "sources.published-sources.entries.09.evidence_type": {
-        "ref": {
-          "id": "occupational-therapists.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "shanghai-recruitment"
-            },
-            "evidence_type"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.09.limitation": {
-        "ref": {
-          "id": "occupational-therapists.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "shanghai-recruitment"
-            },
-            "limitation"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.09.market": {
         "ref": {
@@ -10690,79 +10580,24 @@
         "status": "mapped"
       },
       "sources.published-sources.entries.09.name": {
-        "ref": {
-          "id": "occupational-therapists.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "shanghai-recruitment"
-            },
-            "name"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.09.period": {
-        "ref": {
-          "id": "occupational-therapists.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "shanghai-recruitment"
-            },
-            "period"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.09.publisher": {
-        "ref": {
-          "id": "occupational-therapists.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "shanghai-recruitment"
-            },
-            "publisher"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.09.scope": {
-        "ref": {
-          "id": "occupational-therapists.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "shanghai-recruitment"
-            },
-            "scope"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.09.url": {
-        "ref": {
-          "id": "occupational-therapists.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "shanghai-recruitment"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.10.accessed_at": {
         "ref": {
@@ -11956,7 +11791,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "If you prefer working mainly on strength or gait, or dislike discussing specific daily goals with clients, compare physical and occupational therapy."
+              "You can spend half a session adjusting a dressing routine that still fails in a cramped bathroom. Frequent coordination with families, time spent documenting cueing and progress that varies from visit to visit can be draining if you need clear, fast wins."
             ]
           },
           "id": "occupational-therapists.quick-decision.fermat-decision-card.1",
@@ -11970,7 +11805,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Open “Entry, qualifications, and career development” and find “OT-07 | Grooming activity analysis.” Use two fictional observations to write a measurable goal and flag what still needs checking."
+              "Use the short worksheet in the entry section to test your handoff."
             ]
           },
           "id": "occupational-therapists.quick-decision.fermat-decision-card.2",
@@ -11998,7 +11833,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "OT-07 is a paper exercise in observation, goals and handover. Do not ask a real person to demonstrate a movement or use equipment or records."
+              "Before investing in training, compare the amount of repeat documentation and supervised handoff time across the settings you are considering."
             ]
           },
           "id": "occupational-therapists.quick-decision.fit-decision-checklist.4",
@@ -12020,7 +11855,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Occupational therapists correspond to O*NET-SOC 29-1122.00, focusing on whether the client can safely and meaningfully complete activities of daily living, learning, work, and social participation."
+              "An OT evaluation can separate basic ADL such as dressing from IADL such as organizing household tasks. The COPM interview helps identify personally meaningful goals. Task analysis and the Barthel Index provide different views of assistance needs. A reacher, dressing stick or built-up handle can be considered within the plan, and the handoff records cue type, setup and reassessment."
             ]
           },
           "id": "occupational-therapists.profile.definition-block.1",
@@ -12129,7 +11964,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The comparison is based on BLS/O*NET occupational duties; U.S. licensure and Chinese post conditions must both be verified separately, and the name rehabilitation cannot be used interchangeably."
+              "Use the U.S. references on this page."
             ]
           },
           "id": "occupational-therapists.direction-comparison.adjacent-career-comparison-table.2",
@@ -12193,7 +12028,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Preparing explorers"
+              "Documentation tools can organize visit notes. The therapist reviews how much help was needed, whether the home setup changes the result, and what the patient says matters before signing."
             ]
           },
           "id": "occupational-therapists.ai-impact.ai-impact-table.1",
@@ -12207,7 +12042,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Use a fictional washing task to practice observation, goals, and safety boundaries; real treatment requires compliant training."
+              "Practice turning an observation note into structured fields. Preserve the distinction between recorded assistance and a missing detail."
             ]
           },
           "id": "occupational-therapists.ai-impact.ai-impact-table.2",
@@ -12303,70 +12138,11 @@
       ]
     },
     {
-      "availability": "available",
+      "availability": "missing",
       "content_state": "enhanced",
       "copy_key": "career.block.china-salary",
       "id": "china-salary",
-      "items": [
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "Evidence insufficient: the national occupational wage median for Chinese occupational therapists is still not obtained. A separate 2025 pre-tax annual average for the health and social work industry is listed: urban non-private 146,266 yuan and private 75,631 yuan, as broad background for the medical rehabilitation employer direction only, covering other posts and not the occupational therapy wage, a starting salary, or a personal range; schools and other employers must be verified separately."
-            ]
-          },
-          "id": "occupational-therapists.china-salary.career-snapshot-primary-locale.1",
-          "source_refs": [
-            "nbs-2025-wages",
-            "source-pack-onet-details"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "Yangzhi gives a combined rehabilitation headcount; LIH lists a senior OT role. Neither gives a pay amount. Check the actual employer and position."
-            ]
-          },
-          "id": "occupational-therapists.china-salary.career-snapshot-primary-locale.2",
-          "source_refs": [
-            "ot-yangzhi",
-            "ot-lih"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "Evidence insufficient: no same-measure Chinese wage distribution, national starting salary, or paid hours for occupational therapists were obtained; a U.S. annual wage cannot be converted into a Chinese monthly salary."
-            ]
-          },
-          "id": "occupational-therapists.china-salary.career-snapshot-primary-locale.3",
-          "source_refs": [
-            "nbs-2025-wages"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "The training, professional title, treatment scope, and signing responsibility of rehabilitation therapy professionals in Chinese medical institutions must be verified against local rules and the specific institutional post, and the U.S. OT license cannot be copied."
-            ]
-          },
-          "id": "occupational-therapists.china-salary.career-snapshot-primary-locale.4",
-          "source_refs": [
-            "nhc-rehab-training-2023"
-          ],
-          "type": "prose"
-        }
-      ]
+      "items": []
     },
     {
       "availability": "available",
@@ -12379,7 +12155,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "May 2025 OEWS median pay for U.S. occupational therapists (29-1122) was $100,330 annually or $48.24 hourly. These are not starting rates."
+              "U.S. BLS May 2025 OEWS, SOC 29-1122. Annual wage P10 / P25 / median / P75 / P90: $71,690 / $82,510 / $100,330 / $116,670 / $131,950. The survey covers wage and salary employment and excludes self-employed workers."
             ]
           },
           "id": "occupational-therapists.us-salary.career-snapshot-secondary-locale.1",
@@ -12421,12 +12197,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "U.S. employment was 169,600 in 2025 and is projected at 194,800 in 2035. These national figures do not establish current openings at a particular employer."
+              "BLS Employment Projections counted 169,600 OT jobs in its 2025 base year and projects 194,800 in 2035. The modeled series is separate from the OEWS wage survey and does not report live job openings."
             ]
           },
           "id": "occupational-therapists.us-salary.career-snapshot-secondary-locale.4",
           "source_refs": [
-            "bls-ep-2025"
+            "r3-bls-ep"
           ],
           "type": "prose"
         },
@@ -12449,7 +12225,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "U.S. occupational wage statistics do not represent Chinese posts. For a personal offer, still verify the state, employer, license, full- or part-time status, hours, benefits, and scope of responsibility."
+              "For a personal offer, still verify the state, employer, license, full- or part-time status, hours, benefits, and scope of responsibility."
             ]
           },
           "id": "occupational-therapists.us-salary.career-snapshot-secondary-locale.6",
@@ -12561,7 +12337,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "After the trial, record separately: whether you saw a concrete barrier, whether the suggestion is executable, whether you considered falls and over-assistance, and whether you are willing to collect feedback and redo a version."
+              "This work combines attentive interviewing, task observation and clear handoffs. In fieldwork, notice whether you can track the help a client actually needed and still write a usable note when the schedule is tight."
             ]
           },
           "id": "occupational-therapists.fit.personality-fit-block.7",
@@ -12693,90 +12469,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Fictional case by FermatMind Editorial: the person wants to complete grooming with fewer spoken prompts. The paper sequence is gather toothbrush and cup, get water, then put items away. A: supplies scattered, 6 minutes, 3 prompts. B: supplies in order, 5 minutes, 1 prompt. Neither records counter height or standing safety."
-            ]
-          },
-          "id": "occupational-therapists.path.recruitment-sample.2",
-          "source_refs": [
-            "ot-editorial-case"
-          ],
-          "title": "OT-07 | Grooming activity analysis",
-          "type": "notice"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.recruitment-sample",
-          "data": {
-            "paragraphs": [
-              "Task: write one page separating observed changes, unverified safety conditions and a measurable next goal."
-            ]
-          },
-          "id": "occupational-therapists.path.recruitment-sample.3",
-          "source_refs": [
-            "ot-editorial-case"
-          ],
-          "title": "Your task: write a one-page observation note",
-          "type": "notice"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.recruitment-sample",
-          "data": {
-            "paragraphs": [
-              "Reference: B used two fewer prompts and one fewer minute. Two observations do not show that setup caused the change or that independent standing is safe. A fictional follow-up goal: after authorized staff verify safety, record whether each of two same-setting observations needs no more than one prompt. Do not prescribe treatment or diagnose."
-            ]
-          },
-          "id": "occupational-therapists.path.recruitment-sample.4",
-          "source_refs": [
-            "ot-editorial-case"
-          ],
-          "title": "After you write: compare with the sample",
-          "type": "notice"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.recruitment-sample",
-          "data": {
-            "paragraphs": [
-              "Self-check: separate observation, goal and responsibility."
-            ]
-          },
-          "id": "occupational-therapists.path.recruitment-sample.5",
-          "source_refs": [
-            "ot-editorial-case"
-          ],
-          "title": "Check your observations, goal and responsibility",
-          "type": "notice"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.recruitment-sample",
-          "data": {
-            "paragraphs": [
-              "Seven-day paper trial: 1 map the steps; 2 mark observations; 3 calculate differences; 4 write a goal; 5 list safety questions; 6 self-check, with peer feedback optional; 7 choose whether to explore activity observation, environmental changes, or documentation and communication."
-            ]
-          },
-          "id": "occupational-therapists.path.recruitment-sample.6",
-          "source_refs": [
-            "ot-editorial-case"
-          ],
-          "title": "Seven days of paper-based exploration",
-          "type": "notice"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.recruitment-sample",
-          "data": {
-            "paragraphs": [
-              "Two mainland job examples: compare duties, education and credentials."
+              "For a U.S. posting, ask who supervises new clinicians and which documentation system the team uses."
             ]
           },
           "id": "occupational-therapists.path.recruitment-sample.7",
           "source_refs": [
-            "ot-yangzhi",
-            "ot-lih"
+            "bls-ot-2025"
           ],
-          "title": "How to read the mainland employer samples",
+          "title": "Verify the local qualification and the scope of supervised work.",
           "type": "notice"
         },
         {
@@ -12784,15 +12484,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Shanghai Yangzhi Rehabilitation Hospital’s 2026 notice lists 40 rehabilitation therapy posts across physical, occupational and speech-language therapy and rehabilitation engineering. It asks for a relevant master’s degree or higher and gives no OT-only headcount or pay amount. LIH Healthcare lists a senior occupational therapist role in Beijing, Shenzhen and Kunming. Duties include daily activity assessment, assistive devices and progress records. The employer asks for relevant undergraduate education or above, its stated licence or professional credential, and at least three years in child rehabilitation. It gives no headcount, pay or publication date."
+              "U.S. roles span hospitals, outpatient clinics, schools and home health. Compare the caseload and service setting, the clients served and who reviews records during onboarding."
             ]
           },
           "id": "occupational-therapists.path.recruitment-sample.8",
           "source_refs": [
-            "ot-yangzhi",
-            "ot-lih"
+            "bls-ot-2025"
           ],
-          "title": "Two original mainland employer notices",
+          "title": "Verify the local qualification and the scope of supervised work.",
           "type": "notice"
         },
         {
@@ -12800,12 +12499,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "NHC recommended standard WS/T 893–2026 applies to home-bed rehabilitation delivered by primary healthcare institutions. Section 6.4.2 covers daily activities, cognitive training and assistive-device training. Sections 4.1.2 and 7.5 distinguish physicians’ planning responsibilities from treatment and documentation roles."
+              "For home or outpatient work, ask how the employer records functional goals and who reviews changes to the plan of care."
             ]
           },
           "id": "occupational-therapists.path.career-path-block.9",
           "source_refs": [
-            "ot-homebed"
+            "wave1-source-7"
           ],
           "type": "prose"
         },
@@ -12830,7 +12529,7 @@
             "rows": [
               [
                 "Occupational observation",
-                "Read the BLS/O*NET duties and break down the fictional washing task.",
+                "Read the BLS and O*NET duties. For the entry worksheet, record which daily activities were observed and what assistance was documented.",
                 "Do not touch real patients or medical records.",
                 "One page of task steps and unknown conditions.",
                 "Whether observation and guessing are kept separate."
@@ -12916,8 +12615,8 @@
           },
           "id": "occupational-therapists.path.interview-probation.11",
           "source_refs": [
-            "ot-yangzhi",
-            "ot-lih"
+            "bls-ot-2025",
+            "r3-ny-ot"
           ],
           "title": "What should you ask an employer?",
           "type": "table"
@@ -12946,12 +12645,12 @@
             ],
             "rows": [
               [
-                "Chinese posts",
+                "Verify the local qualification and the scope of supervised work.",
                 "Verify the original recruitment text of the specific hospital or institution.",
                 "According to the post and local rules.",
                 "Verify education, specialty, and job requirements item by item.",
                 "A single notice does not represent a national threshold.",
-                "Job seekers in China.",
+                "Verify the local qualification and the scope of supervised work.",
                 "Keep the job requirements and official basis."
               ],
               [
@@ -13006,6 +12705,57 @@
             "source-pack-onet-localtraining"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "wave1-trial-1",
+                "values": [
+                  "Given:",
+                  "This teaching record adapts the published CMS IRF-PAI Section GG self-care activity labels. The observations are created for the exercise and contain no real records. Here is the complete handoff: upper-body dressing, completed with one verbal cue; oral hygiene, completed without helper assistance; eating, not observed during the observation window. One record is missing observation evidence, not a reason for nonperformance. Keep those separate. The counting labels in this exercise are independent, prompted and not observed; they are not entries for a CMS submission. Assume the three tasks belong to one training worksheet and that no other observations are available."
+                ]
+              },
+              {
+                "id": "wave1-trial-2",
+                "values": [
+                  "Task:",
+                  "Make an observation-only three-row handoff. For each row enter the task name, whether it was seen, the help recorded, and its worksheet category. Calculate the proportion of observed items completed independently. Show the numerator and denominator so the reviewer can tell whether missing information was included. Then write one question a supervisor could answer by consulting the underlying note. Record the type and count of any assistance supplied in the handoff. Mark the exact words of a cue as unrecorded when the note gives only the count and type. If a field is unknown, carry it forward as unknown."
+                ]
+              },
+              {
+                "id": "wave1-trial-3",
+                "values": [
+                  "Handoff:",
+                  "Use the text only. Score your response on three checks: each activity has an evidence-based category, the count includes only observed rows, and the handoff distinguishes an unanswered question from an observed finding. Do not contact a patient, interpret functioning beyond the record, change a clinical score or choose a treatment. The exercise tests careful documentation before a qualified clinician reviews the record."
+                ]
+              }
+            ]
+          },
+          "id": "occupational-therapists.path.entry-work-sample-data.1",
+          "source_refs": [
+            "r3-cms-gg"
+          ],
+          "title": "Paper exercise: reconcile a daily-task record",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Upper-body dressing: observed, one verbal cue, prompted; exact words unrecorded. Oral hygiene: observed, no helper assistance, independent. Eating: not observed, help unknown, not observed. One independent row divided by two observed rows equals 50% for this worksheet. Keep the eating row and ask the supervisor whether a contemporaneous observation exists. The worksheet count does not determine a clinical score."
+            ]
+          },
+          "id": "occupational-therapists.entry-work-sample-data.2",
+          "source_refs": [
+            "r3-cms-gg"
+          ],
+          "title": "Worked answer: reconcile a daily-task record",
+          "type": "notice",
+          "visibility": "public"
         }
       ]
     },
@@ -13020,7 +12770,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS2025 occupational therapist employment 169,600; overall growth of 14.8% is projected for 2025—2035, with average annual 10,000 openings including replacement, not current hiring or AI causation."
+              "Compare in-person documentation demands at hospitals, outpatient practices and home-health employers."
             ]
           },
           "id": "occupational-therapists.market-signals.market-signal-card.1",
@@ -13076,13 +12826,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The notices illustrate different employers. Yangzhi’s 40 posts cover several fields; LIH’s listing is senior. Ask the employer about current availability."
+              "Ask which setting the position serves and whether travel, documentation and team meetings are counted in scheduled hours."
             ]
           },
           "id": "occupational-therapists.market-signals.market-signal-card.5",
           "source_refs": [
-            "ot-yangzhi",
-            "ot-lih"
+            "bls-ot-2025"
           ],
           "type": "prose"
         }
@@ -13127,12 +12876,12 @@
                 ]
               },
               {
-                "answer": "AI may first assist with organizing materials, drafting records, and information retrieval, but data permissions, privacy, accuracy, and explainability need checking, and demonstrated capability must not be taken as clinically usable.",
+                "answer": "Draft a blank task-observation template or summarize teaching notes that contain no patient data. Only use tools approved by the institution for real records. A vendor processing ePHI on behalf of a covered organization generally needs a HIPAA-compliant business associate agreement.",
                 "id": "occupational-therapists.faq.4",
                 "question": "Which auxiliary work can AI be used for?",
                 "question_key": "career.faq.occupational-therapists.4",
                 "source_refs": [
-                  "source-pack-onet-details"
+                  "r3-hhs-hipaa"
                 ]
               },
               {
@@ -13145,34 +12894,31 @@
                 ]
               },
               {
-                "answer": "Evidence insufficient: the national occupational wage for Chinese occupational therapists is still not obtained; the 2025 pre-tax annual average for the health and social work industry is 146,266 yuan for non-private units and 75,631 yuan for private units, which is broad background for the medical rehabilitation employer direction only, not this occupation's wage or a personal range. Neither the Yangzhi hospital notice nor the LIH Healthcare listing gives a pay amount.",
+                "answer": "Compare the offer's paid treatment and charting hours, whether per-visit work includes travel time, and which benefits are included. Use the national wage series as a benchmark alongside local rates.",
                 "id": "occupational-therapists.faq.6",
-                "question": "What is the salary of occupational therapists in China?",
+                "question": "How should I compare the nationwide OT wages with an offer?",
                 "question_key": "career.faq.occupational-therapists.6",
                 "source_refs": [
-                  "nbs-2025-wages",
-                  "shanghai-recruitment",
-                  "ot-lih"
+                  "wave1-source-1",
+                  "wave1-source-2"
                 ]
               },
               {
-                "answer": "The 2025 U.S. median annual wage of 100,330 USD is not a starting salary; overall growth of 14.8% is projected for 2025—2035 with average annual 10,000 openings including replacement, not AI causation or an individual hiring probability, and it cannot be treated as a Chinese wage.",
+                "answer": "The May 2025 national median was $100,330 per year for occupational therapists (SOC 29-1122). Compare local offers by setting, guaranteed paid hours and benefits.",
                 "id": "occupational-therapists.faq.7",
                 "question": "What is the salary of occupational therapists in the United States?",
                 "question_key": "career.faq.occupational-therapists.7",
                 "source_refs": [
-                  "bls-ot-2025",
-                  "bls-ep-2025"
+                  "wave1-source-1"
                 ]
               },
               {
-                "answer": "If your entry-level OT degree was earned in the U.S., verify ACOTE program accreditation. If you earned it outside the U.S., get NBCOT’s OTED approval before applying for the OTR exam. Check the exam, certification and target-state license separately.",
+                "answer": "Confirm the program's accreditation, NBCOT exam eligibility and the state's requirements for full licensure. In New York, an eligible applicant can file for a supervised limited permit with or after the license application while waiting for exam results. Check the permit before assuming you may practice.",
                 "id": "occupational-therapists.faq.8",
                 "question": "How can education, examinations, and state licensure be verified in the United States?",
                 "question_key": "career.faq.occupational-therapists.8",
                 "source_refs": [
-                  "nbcot-eligibility",
-                  "ot-nbcot-scope"
+                  "r3-ny-ot"
                 ]
               }
             ]
@@ -13188,7 +12934,7 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "paragraphs": [
-              "China and U.S. data are presented in separate columns and cannot be rewritten into each other；AI extrapolation is not real adoption evidence；a paper exercise does not constitute real practice or safety authorization."
+              "Read the original source and record its coverage."
             ]
           },
           "id": "occupational-therapists.sources.boundary-notice.2",
@@ -13342,11 +13088,11 @@
               {
                 "accessed_at": "2026-08-30",
                 "details": [
-                  "U.S. occupational classification; does not support Chinese wages or practice authority."
+                  "Outside the scope of this edition."
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet-ot",
-                "limitation": "U.S. occupational classification; does not support Chinese wages or practice authority.",
+                "limitation": "Outside the scope of this edition.",
                 "market": "US",
                 "name": "29-1122.00 Occupational Therapists details",
                 "period": "O*NET current profile; accessed 2026-08-30",
@@ -13383,21 +13129,6 @@
                 "publisher": "Occupational Safety and Health Administration",
                 "scope": "industry_proxy",
                 "url": "https://www.osha.gov/hospitals/patient-handling/"
-              },
-              {
-                "accessed_at": "2026-08-30",
-                "details": [
-                  "A single employer and single region proxy, not a national threshold or wage distribution."
-                ],
-                "evidence_type": "public employer recruitment notice",
-                "id": "shanghai-recruitment",
-                "limitation": "A single employer and single region proxy, not a national threshold or wage distribution.",
-                "market": "CN",
-                "name": "2026 recruitment notice of the Shanghai Special Children's Rehabilitation Center",
-                "period": "2026 recruitment; accessed 2026-08-30",
-                "publisher": "Shanghai Municipal Human Resources and Social Security Bureau",
-                "scope": "recruitment_proxy",
-                "url": "https://rsj.sh.gov.cn/tzpgg_17408/20260130/t0035_1438412.html"
               },
               {
                 "accessed_at": "2026-09-01",
@@ -13522,48 +13253,17 @@
               {
                 "accessed_at": "2026-09-26",
                 "details": [
-                  "May 2025 median annual wage 100,330 USD; 2025 employment 169,600; growth of 15% over 2025—2035, with average annual openings of about 10,000."
+                  "May 2025 OEWS median annual wage 100,330 USD. The BLS EP 2025 baseline counted 169,600 jobs; growth of 15% over 2025—2035, with average annual openings of about 10,000."
                 ],
                 "evidence_type": "official primary source",
                 "id": "bls-ot-2025",
-                "limitation": "U.S. occupation 29-1122; the statistical median is not a personal offer or Chinese income.",
+                "limitation": "Outside the scope of this edition.",
                 "market": "US",
                 "name": "Occupational Therapists",
-                "period": "May 2025 wages and employment; 2025–2035 projection",
+                "period": "May 2025 OEWS wages; 2025 EP base employment; 2025–2035 EP projections",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/ooh/healthcare/occupational-therapists.htm"
-              },
-              {
-                "accessed_at": "2026-10-02",
-                "details": [
-                  "2025 Tables 2/5 health and social work industry: urban non-private 146266 and private 75631 yuan pre-tax annual average, with populations listed separately.",
-                  "The author matched only the medical rehabilitation employer direction, which includes other posts; schools and other employers must be verified separately, and no national wage for occupational therapists is broken out."
-                ],
-                "evidence_type": "official statistics",
-                "id": "nbs-2025-wages",
-                "limitation": "Urban legal entities exclude self-employed individuals and freelancers; this is not this occupation's wage, a starting salary, or a personal range, and the occupational gap is not filled in.",
-                "market": "Mainland China",
-                "name": "Average annual wages of urban unit employees, 2025",
-                "period": "2025 wages; published 2026-05-15",
-                "publisher": "National Bureau of Statistics",
-                "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
-              },
-              {
-                "accessed_at": "2026-09-26",
-                "details": [
-                  "Provides theory, assessment, and treatment technique training for newly hired, reassigned, and junior rehabilitation therapy professionals in medical institutions."
-                ],
-                "evidence_type": "official training guidance",
-                "id": "nhc-rehab-training-2023",
-                "limitation": "The training scope for Chinese rehabilitation therapy staff; not a U.S. OT license or a uniform Chinese occupational therapist qualification.",
-                "market": "Mainland China",
-                "name": "Training Outline for Rehabilitation Therapy Professionals (2023 edition)",
-                "period": "Issued in 2023; consulted 2026-09-26",
-                "publisher": "National Health Commission",
-                "scope": "contextual",
-                "url": "https://www.nhc.gov.cn/wjw/c100378/202311/1fe6ceebafb14cddaf139be21d27cddf.shtml"
               },
               {
                 "accessed_at": "2026-10-02",
@@ -13572,7 +13272,7 @@
                 ],
                 "evidence_type": "official employment projection",
                 "id": "bls-ep-2025",
-                "limitation": "Overall projections, not AI causation, personal unemployment, or Chinese demand; average annual openings include replacement and are not net new jobs.",
+                "limitation": "Outside the scope of this edition.",
                 "market": "US",
                 "name": "BLS Table 1.2: overall employment projection for 29-1122 occupational therapists",
                 "period": "2025 base period; 2025—2035 projections",
@@ -13593,51 +13293,9 @@
                 "limitation": "Does not estimate adoption or treatment outcomes.",
                 "name": "FermatMind: AI task analysis method",
                 "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
+                "publisher": "FermatMind",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
-              },
-              {
-                "accessed_at": "2026-11-09",
-                "details": [
-                  "Shanghai Yangzhi Rehabilitation Hospital’s 2026 notice lists 40 rehabilitation therapy posts across physical, occupational and speech-language therapy and rehabilitation engineering. It asks for a relevant master’s degree or higher and gives no OT-only headcount or pay amount."
-                ],
-                "evidence_type": "Primary public evidence",
-                "id": "ot-yangzhi",
-                "limitation": "The 40 positions cover several roles and are not an OT count.",
-                "name": "Yangzhi Rehabilitation Hospital: 2026 recruitment",
-                "period": "2026",
-                "publisher": "Shanghai Yangzhi Rehabilitation Hospital",
-                "scope": "recruitment_proxy",
-                "url": "https://www.shygkf.org.cn/lxwm/index_35.aspx"
-              },
-              {
-                "accessed_at": "2026-11-09",
-                "details": [
-                  "LIH Healthcare lists a senior occupational therapist role in Beijing, Shenzhen and Kunming. Duties include daily activity assessment, assistive devices and progress records. The employer asks for relevant undergraduate education or above, its stated licence or professional credential, and at least three years in child rehabilitation. It gives no headcount, pay or publication date."
-                ],
-                "evidence_type": "Primary public evidence",
-                "id": "ot-lih",
-                "limitation": "Employer terms do not establish nationwide eligibility.",
-                "name": "LIH Healthcare: Senior Occupational Therapist",
-                "period": "Undated posting",
-                "publisher": "LIH Healthcare",
-                "scope": "recruitment_proxy",
-                "url": "https://www.lih-invest.com/joinus/"
-              },
-              {
-                "accessed_at": "2026-11-09",
-                "details": [
-                  "NHC recommended standard WS/T 893–2026 applies to home-bed rehabilitation delivered by primary healthcare institutions. Section 6.4.2 covers daily activities, cognitive training and assistive-device training. Sections 4.1.2 and 7.5 distinguish physicians’ planning responsibilities from treatment and documentation roles."
-                ],
-                "evidence_type": "Primary public evidence",
-                "id": "ot-homebed",
-                "limitation": "Primary healthcare institution home-bed services only.",
-                "name": "NHC: Home-bed Rehabilitation Standard WS/T 893–2026",
-                "period": "2026-09-01",
-                "publisher": "National Health Commission",
-                "scope": "exact",
-                "url": "https://www.nhc.gov.cn/fzs/c100048/202603/a7d6e2615e9e474fba624d2e0e5bfc83/files/WST%20893%E2%80%942026.pdf"
               },
               {
                 "accessed_at": "2026-11-09",
@@ -13652,19 +13310,6 @@
                 "publisher": "NBCOT",
                 "scope": "exact",
                 "url": "https://www.nbcot.org/occupational-therapy/what-is-an-otr-or-cota"
-              },
-              {
-                "accessed_at": "2026-11-09",
-                "details": [
-                  "Fictional paper record for career exploration."
-                ],
-                "evidence_type": "Fictional paper exercise",
-                "id": "ot-editorial-case",
-                "limitation": "No real case or clinical decision.",
-                "name": "FermatMind Editorial: fictional OT-07 exercise",
-                "publisher": "FermatMind Editorial",
-                "scope": "editorial_synthesis",
-                "url": null
               },
               {
                 "accessed_at": "2026-11-12",
@@ -13691,6 +13336,96 @@
                 "publisher": "U.S. Department of Labor, Employment and Training Administration",
                 "scope": "exact",
                 "url": "https://creativecommons.org/licenses/by/4.0/"
+              },
+              {
+                "details": [],
+                "id": "wave1-source-1",
+                "name": "BLS May 2025 OEWS data via O*NET",
+                "url": "https://www.onetonline.org/link/localwages/29-1122.00"
+              },
+              {
+                "details": [],
+                "id": "wave1-source-2",
+                "name": "BLS May 2025 OEWS technical notes",
+                "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
+              },
+              {
+                "details": [],
+                "id": "wave1-source-3",
+                "name": "ACOTE program directory",
+                "url": "https://acoteonline.org/all-schools/"
+              },
+              {
+                "details": [],
+                "id": "wave1-source-4",
+                "name": "NBCOT OTR eligibility",
+                "url": "https://www.nbcot.org/get-certified/eligibility"
+              },
+              {
+                "details": [],
+                "id": "wave1-source-5",
+                "name": "California OT Board application FAQ",
+                "url": "https://bot.ca.gov/applicants/app_faq.shtml"
+              },
+              {
+                "details": [],
+                "id": "wave1-source-6",
+                "name": "Medicare inpatient rehabilitation",
+                "url": "https://www.medicare.gov/coverage/inpatient-rehabilitation-care"
+              },
+              {
+                "details": [],
+                "id": "wave1-source-7",
+                "name": "Medicare outpatient therapies",
+                "url": "https://www.medicare.gov/publications/10988-medicare-coverage-of-outpatient-occupational-therapy-physical-therapy-and-speech-language"
+              },
+              {
+                "details": [],
+                "id": "wave1-source-8",
+                "name": "Canadian Occupational Performance Measure",
+                "url": "https://www.thecopm.ca/"
+              },
+              {
+                "details": [],
+                "id": "wave1-source-9",
+                "name": "New York occupational therapy license requirements",
+                "url": "https://www.op.nysed.gov/professions/occupational-therapists/license-requirements"
+              },
+              {
+                "details": [],
+                "id": "wave1-source-10",
+                "name": "NIH Activities of Daily Living subgroup",
+                "url": "https://www.commondataelements.ninds.nih.gov/sites/nindscde/files/Doc/NeuroRehab/F2928_Activities_of_Daily_Living_Subgroup_Summary.pdf"
+              },
+              {
+                "details": [],
+                "id": "wave1-source-11",
+                "name": "California occupational therapy fingerprint requirements",
+                "url": "https://www.bot.ca.gov/applicants/fingerprints.shtml"
+              },
+              {
+                "details": [],
+                "id": "r3-ny-ot",
+                "name": "NYSED occupational therapy licensure and limited permits",
+                "url": "https://www.op.nysed.gov/professions/occupational-therapists/license-requirements"
+              },
+              {
+                "details": [],
+                "id": "r3-hhs-hipaa",
+                "name": "HHS guidance on HIPAA and cloud services",
+                "url": "https://www.hhs.gov/hipaa/for-professionals/special-topics/health-information-technology/cloud-computing/index.html"
+              },
+              {
+                "details": [],
+                "id": "r3-cms-gg",
+                "name": "CMS IRF-PAI and Section GG self-care documentation",
+                "url": "https://www.cms.gov/medicare/quality/inpatient-rehabilitation-facility/irf-pai-and-irf-qrp-manual"
+              },
+              {
+                "details": [],
+                "id": "r3-bls-ep",
+                "name": "BLS Employment Projections Table 1.2",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               }
             ]
           },
@@ -13878,7 +13613,7 @@
             }
           }
         ],
-        "answer": "Try drafting observation forms or notes from fictional material first, then check for omissions and errors. Authorized staff remain responsible for observing activities, agreeing on goals, assessing risks, and signing records. Keep real medical records out of tools your institution has not approved.",
+        "answer": "Try drafting observation forms or notes from material first, then check for omissions and errors. Authorized staff remain responsible for observing activities, agreeing on goals, assessing risks, and signing records. Keep real medical records out of tools your institution has not approved.",
         "authority_links": [
           {
             "来源": "O*NET occupational therapists",
@@ -13959,7 +13694,7 @@
           },
           {
             "source_ref": "bls-ep-2025",
-            "使用限制": "Not net new jobs, an AI adoption rate, a replacement rate, personal unemployment probability, or Chinese demand.",
+            "使用限制": "Use the U.S. references on this page.",
             "来源": "BLS overall employment projection for occupational therapists",
             "研究对象": "U.S. 29-1122; 2025—2035",
             "结论": "Overall growth of 14.8%; average annual 10,000 openings including replacement.",
@@ -14003,16 +13738,16 @@
             "问题": "Can AI assess clients for occupational therapists?"
           },
           {
-            "回答": "Only when institutionally approved, lawful, and meeting privacy requirements, and then processed on a minimum-necessary basis.",
-            "来源": "O*NET duties and editorial judgment",
-            "链接": "https://www.onetonline.org/link/details/29-1122.00",
-            "问题": "Can real medical records be given to general AI?"
+            "回答": "Use the institution's approved tool and workflow for real patient records. When a cloud vendor handles ePHI on behalf of a HIPAA-covered organization, a HIPAA-compliant business associate agreement is generally required. For this exercise, use records containing no patient information.",
+            "来源": "HHS guidance on HIPAA and cloud services",
+            "链接": null,
+            "问题": "What rules apply if AI handles real patient records?"
           },
           {
-            "回答": "No. It is only fictional career exploration material, lacking individual assessment and authorization.",
+            "回答": "No. The worksheet supports a documentation handoff; the treating team makes care decisions using its approved process.",
             "来源": "O*NET duties",
             "链接": "https://www.onetonline.org/link/details/29-1122.00",
-            "问题": "Can the washing case produce a treatment prescription?"
+            "问题": "Can the observation exercise support a treatment recommendation?"
           },
           {
             "回答": "Within the licensed scope it can assist with structured records and material retrieval; accuracy must be verified.",
@@ -14039,11 +13774,11 @@
             "问题": "How should tool output be verified?"
           }
         ],
-        "responsibility_intro": "Do a paper exercise with a fully fictional washing activity; any real patient data, treatment, and device recommendations must be handled per institutional rules and professional licensure.",
+        "responsibility_intro": "Try organizing the three observation records in the entry worksheet. Use the institution's approved workflow for patient data, and leave treatment and equipment decisions to the responsible clinician.",
         "responsibility_steps": [
           {
             "步骤": "Define inputs",
-            "说明": "Use only fictional or authorized minimum-necessary materials."
+            "说明": "Keep practice examples free of patient data. In clinical work, share only the information the approved workflow requires."
           },
           {
             "步骤": "Mark the unknowns",
@@ -14092,13 +13827,13 @@
         "task_rows": [
           {
             "人的控制点": "The therapist verifies real movement and the environment",
-            "任务": "List fictional washing steps",
+            "任务": "Structure three self-care observation records",
             "工作方向": "Activity observation",
             "当前变化": "Tools can draft observation forms"
           },
           {
             "人的控制点": "Negotiate with the client and verify indications",
-            "任务": "Write a specific, observable washing goal",
+            "任务": "Flag an assistance field for review",
             "工作方向": "Goal setting",
             "当前变化": "Can suggest wording"
           },
@@ -14168,9 +13903,9 @@
         "entry_heading": "From career exploration to compliant practice",
         "heading": "Entry, competence progression, and qualification boundaries",
         "locale_requirements": {
-          "credential_boundary": "Education, the NBCOT examination and certification, state licensure, and institutional authorization are different steps; overseas qualifications are verified separately.",
-          "jurisdiction": "U.S. state licensure rules are verified separately; China is verified by locality, institution, and post.",
-          "summary": "The United States usually requires a master's degree in occupational therapy and a state license; NBCOT certification examination eligibility differs from a state license. Chinese recruitment conditions cannot be inferred from the U.S. path."
+          "credential_boundary": "U.S. graduates generally complete an ACOTE-accredited entry-level master's or OTD with fieldwork and qualify for NBCOT's OTR examination. Full licensure requires meeting state education, experience and exam rules. California CBOT requires fingerprints; New York NYSED requires at least six months of supervised experience and permits eligible applicants to request a supervised limited permit with or after filing while exam results are pending. Internationally educated applicants should ask NBCOT about OTED and the applicable state board about equivalency. Medicare coverage depends on setting, eligibility and plan requirements.",
+          "jurisdiction": "Use the U.S. references on this page.",
+          "summary": "The United States usually requires a master's degree in occupational therapy and a state license; NBCOT certification examination eligibility differs from a state license."
         },
         "schema_version": "career.career_progression.v1",
         "source_links": [
@@ -14197,24 +13932,6 @@
             "id": "faa",
             "label": "O*NET work activities",
             "scope": "U.S. duties and qualification measures"
-          },
-          {
-            "href": "https://www.shygkf.org.cn/lxwm/index_35.aspx",
-            "id": "ot-yangzhi",
-            "label": "Yangzhi Rehabilitation Hospital: 2026 recruitment",
-            "scope": "The 40 positions cover several roles and are not an OT count."
-          },
-          {
-            "href": "https://www.lih-invest.com/joinus/",
-            "id": "ot-lih",
-            "label": "LIH Healthcare: Senior Occupational Therapist",
-            "scope": "Employer terms do not establish nationwide eligibility."
-          },
-          {
-            "href": "https://www.nhc.gov.cn/fzs/c100048/202603/a7d6e2615e9e474fba624d2e0e5bfc83/files/WST%20893%E2%80%942026.pdf",
-            "id": "ot-homebed",
-            "label": "NHC: Home-bed Rehabilitation Standard WS/T 893–2026",
-            "scope": "Primary healthcare institution home-bed services only."
           },
           {
             "href": "https://www.nbcot.org/occupational-therapy/what-is-an-otr-or-cota",
@@ -14400,43 +14117,43 @@
                   "alternate_value": null,
                   "label": "Ability signals",
                   "secondary_value": "Real patient services require professional assessment and institutional procedures.",
-                  "value": "Requires activity observation, communication, anatomy and rehabilitation knowledge, risk identification, and record re-evaluation; real practice must meet local qualifications and institutional authorization."
+                  "value": "See the occupational profile for the shared criteria."
                 },
                 {
                   "alternate_value": null,
                   "label": "Ability signals",
                   "secondary_value": "Real patient services require professional assessment and institutional procedures.",
-                  "value": "Requires activity observation, communication, anatomy and rehabilitation knowledge, risk identification, and record re-evaluation; real practice must meet local qualifications and institutional authorization."
+                  "value": "See the occupational profile for the shared criteria."
                 },
                 {
                   "alternate_value": null,
                   "label": "Ability signals",
                   "secondary_value": "Real patient services require professional assessment and institutional procedures.",
-                  "value": "Requires activity observation, communication, anatomy and rehabilitation knowledge, risk identification, and record re-evaluation; real practice must meet local qualifications and institutional authorization."
+                  "value": "See the occupational profile for the shared criteria."
                 },
                 {
                   "alternate_value": null,
                   "label": "Ability signals",
                   "secondary_value": "Real patient services require professional assessment and institutional procedures.",
-                  "value": "Requires activity observation, communication, anatomy and rehabilitation knowledge, risk identification, and record re-evaluation; real practice must meet local qualifications and institutional authorization."
+                  "value": "See the occupational profile for the shared criteria."
                 },
                 {
                   "alternate_value": null,
                   "label": "Ability signals",
                   "secondary_value": "Real patient services require professional assessment and institutional procedures.",
-                  "value": "Requires activity observation, communication, anatomy and rehabilitation knowledge, risk identification, and record re-evaluation; real practice must meet local qualifications and institutional authorization."
+                  "value": "See the occupational profile for the shared criteria."
                 },
                 {
                   "alternate_value": null,
                   "label": "Ability signals",
                   "secondary_value": "Real patient services require professional assessment and institutional procedures.",
-                  "value": "Requires activity observation, communication, anatomy and rehabilitation knowledge, risk identification, and record re-evaluation; real practice must meet local qualifications and institutional authorization."
+                  "value": "See the occupational profile for the shared criteria."
                 }
               ]
             }
           },
           {
-            "answer": "Occupational therapists may use tools to assist with organizing information, but actual adoption, authority, release of results, and abnormality escalation still require verification by a responsible person.",
+            "answer": "See the occupational profile for the shared criteria.",
             "key": "qa1",
             "question": "How do you enter the field, and is a license required?",
             "table": {
@@ -14445,37 +14162,37 @@
                   "alternate_value": null,
                   "label": "Qualification boundaries",
                   "secondary_value": "Real patient services require professional assessment and institutional procedures.",
-                  "value": "The United States usually requires a relevant master's degree and a state license; education, specialty, and job requirements for Chinese rehabilitation therapy posts are verified against recruitment and local rules."
+                  "value": "Use the U.S. references on this page."
                 },
                 {
                   "alternate_value": null,
                   "label": "Qualification boundaries",
                   "secondary_value": "Real patient services require professional assessment and institutional procedures.",
-                  "value": "The United States usually requires a relevant master's degree and a state license; education, specialty, and job requirements for Chinese rehabilitation therapy posts are verified against recruitment and local rules."
+                  "value": "Use the U.S. references on this page."
                 },
                 {
                   "alternate_value": null,
                   "label": "Qualification boundaries",
                   "secondary_value": "Real patient services require professional assessment and institutional procedures.",
-                  "value": "The United States usually requires a relevant master's degree and a state license; education, specialty, and job requirements for Chinese rehabilitation therapy posts are verified against recruitment and local rules."
+                  "value": "Use the U.S. references on this page."
                 },
                 {
                   "alternate_value": null,
                   "label": "Qualification boundaries",
                   "secondary_value": "Real patient services require professional assessment and institutional procedures.",
-                  "value": "The United States usually requires a relevant master's degree and a state license; education, specialty, and job requirements for Chinese rehabilitation therapy posts are verified against recruitment and local rules."
+                  "value": "Use the U.S. references on this page."
                 },
                 {
                   "alternate_value": null,
                   "label": "Qualification boundaries",
                   "secondary_value": "Real patient services require professional assessment and institutional procedures.",
-                  "value": "The United States usually requires a relevant master's degree and a state license; education, specialty, and job requirements for Chinese rehabilitation therapy posts are verified against recruitment and local rules."
+                  "value": "Use the U.S. references on this page."
                 },
                 {
                   "alternate_value": null,
                   "label": "Qualification boundaries",
                   "secondary_value": "Real patient services require professional assessment and institutional procedures.",
-                  "value": "The United States usually requires a relevant master's degree and a state license; education, specialty, and job requirements for Chinese rehabilitation therapy posts are verified against recruitment and local rules."
+                  "value": "Use the U.S. references on this page."
                 }
               ]
             }
@@ -14628,127 +14345,8 @@
         ]
       },
       "career_snapshot_primary_locale": {
-        "salary": {
-          "bls_table": [
-            {
-              "指标": "Chinese occupational wage data",
-              "数值": "Not provided",
-              "说明": "No national wage distribution precisely corresponding to this occupation was obtained."
-            },
-            {
-              "指标": "Industry average wage",
-              "数值": "Does not replace the occupational wage",
-              "说明": "An industry average cannot be directly treated as an occupational median."
-            },
-            {
-              "指标": "Uniform starting salary",
-              "数值": "Not provided",
-              "说明": "There are no comparable data with the same scope, region, and post."
-            },
-            {
-              "指标": "2025 health and social work: urban non-private",
-              "数值": "146,266 yuan/year (pre-tax)",
-              "说明": "Broad industry background for the medical rehabilitation employer direction only, including other posts, not this occupation's wage."
-            },
-            {
-              "指标": "2025 health and social work: urban private",
-              "数值": "75,631 yuan/year (pre-tax)",
-              "说明": "Listed separately from the non-private population and not combined into a personal income range; schools and other employers must be verified separately."
-            }
-          ],
-          "china_ai_row": {
-            "$item": "occupational-therapists.china-salary.career-snapshot-primary-locale.4",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "china_class_row": {
-            "$item": "occupational-therapists.china-salary.career-snapshot-primary-locale.3",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "china_edu_table": [
-            {
-              "学历段": "Relevant professional study",
-              "岗位方向": "Occupational therapy and rehabilitation therapy",
-              "说明": "Verify the actual curriculum and clinical training; Chinese posts confirm education against the notice."
-            },
-            {
-              "学历段": "Institutional induction training",
-              "岗位方向": "Activity assessment and safe practice",
-              "说明": "Verify separately within the applicable scope of the NHC rehabilitation therapy staff training outline."
-            },
-            {
-              "学历段": "Post professional title requirements",
-              "岗位方向": "Rehabilitation medicine treatment technology",
-              "说明": "Requirements in the Shanghai sample do not represent a uniform national threshold."
-            },
-            {
-              "学历段": "Continuous professional training",
-              "岗位方向": "Records, goals, and effectiveness review",
-              "说明": "Real treatment follows institutional procedures, supervision, and local rules."
-            }
-          ],
-          "china_industry_table": [
-            {
-              "行业": "Hospital rehabilitation departments",
-              "需求": "Verify the division of work between physicians and the therapy team, medical record documentation, and patient transfer safety."
-            },
-            {
-              "行业": "Children's rehabilitation institutions",
-              "需求": "Verify parent communication, activity goals, training plans, and supervision responsibility."
-            },
-            {
-              "行业": "Community and home rehabilitation",
-              "需求": "Verify environmental adaptation, referral, and actual access conditions."
-            }
-          ],
-          "china_intl": "U.S. O*NET occupational task reference (not Chinese wages)｜https://www.onetonline.org/link/details/29-1122.00",
-          "china_name_row": "Health and social work: broad industry average wages",
-          "china_open": "Chinese posts can be verified against the real duties at rehabilitation institutions, schools, or communities; pay must be checked against the specific city, employer, professional title, and contract.",
-          "china_open_note": "The Yangzhi hospital and LIH Healthcare listings illustrate different employers. Neither gives a pay amount.",
-          "china_ref": "Average annual wages of urban unit employees, 2025｜https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html",
-          "china_salary_note": "The NBS2025 industry pre-tax annual average and the occupational therapist wage gap are presented separately; the urban legal entity measure excludes self-employed individuals and freelancers, and the non-private and private figures cannot be combined into a personal range. Schools and other employers must be verified separately, and the industry average does not fill in this occupation's wage or a starting salary.",
-          "china_salary_table": [
-            {
-              "城市/区间": "China data status",
-              "月薪参考": {
-                "$item": "occupational-therapists.china-salary.career-snapshot-primary-locale.1",
-                "block": "china-salary",
-                "copy_key": "career.item.career-snapshot-primary-locale",
-                "type": "prose"
-              }
-            },
-            {
-              "城市/区间": "Public source coverage",
-              "月薪参考": "Insufficient to support a precise wage for this occupation"
-            },
-            {
-              "城市/区间": "Use boundaries",
-              "月薪参考": "Other occupations or generic post figures must not be substituted"
-            }
-          ],
-          "china_soc_row": {
-            "$item": "occupational-therapists.china-salary.career-snapshot-primary-locale.2",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "sources_note": "Average annual wages of urban unit employees, 2025｜https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html",
-          "ui": {
-            "ai_heading": "Tools and scope-of-responsibility boundaries",
-            "driver_heading": "Influencing factors",
-            "official_heading": "Status of China wage data",
-            "scenario_caption": "Do not substitute unavailable precise numbers for evidence.",
-            "scenario_heading": "Contextual judgment",
-            "scenario_interpretation_label": "Explanation",
-            "scenario_role_label": "Role direction",
-            "scenario_value_label": "Data status"
-          },
-          "us_growth": "14.8%",
-          "us_median": "Not provided"
-        }
+        "availability": "unavailable",
+        "reason_code": "source_locale_unavailable"
       },
       "career_snapshot_secondary_locale": {
         "authority_sources": "BLS OOH｜https://www.bls.gov/ooh/healthcare/occupational-therapists.htm; O*NET national wage percentiles｜https://www.onetonline.org/link/localwages/29-1122.00; BLS Table 1.2 single-occupation overall projection｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
@@ -14794,10 +14392,10 @@
             "说明": "BLS projections include replacement needs, not net new jobs."
           }
         ],
-        "boundary": "Pre-tax annual wage distribution for U.S. occupation 29-1122; percentiles are not seniority grades and do not infer personal monthly salary, Chinese wages, or clinical competence.",
+        "boundary": "Use the U.S. references on this page.",
         "direct_answer": {
           "$join": [
-            "May 2025 median annual wage 100,330 USD and employment 169,600; overall growth of 14.8% is projected for 2025—2035, with average annual 10,000 openings including replacement, not AI causation.",
+            "BLS Employment Projections counted 169,600 occupational therapist jobs in its 2025 base year. The May 2025 OEWS wage distribution below is a separate survey.",
             {
               "$item": "occupational-therapists.us-salary.career-snapshot-secondary-locale.1",
               "block": "us-salary",
@@ -14805,7 +14403,7 @@
               "type": "prose"
             }
           ],
-          "separator": "；"
+          "separator": "\n"
         },
         "factor_rows": [
           {
@@ -14869,7 +14467,7 @@
           {
             "answer": {
               "$join": [
-                "P10, P25, P75, P90 are U.S. wage distribution positions; they cannot be applied to Chinese posts.",
+                "The percentiles show points in the national wage distribution for covered workers.",
                 {
                   "$item": "occupational-therapists.us-salary.career-snapshot-secondary-locale.6",
                   "block": "us-salary",
@@ -14970,7 +14568,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
-        "summary": "If you are willing to break real life tasks such as dressing and washing into assessable goals, train and re-evaluate patiently, and accept clinical responsibility and qualification requirements, you can continue exploring occupational therapy.",
+        "summary": "Use the short worksheet in the entry section to test your handoff.",
         "title": "Occupational therapists"
       },
       "fit_decision_checklist": {
@@ -15048,24 +14646,24 @@
             "value": "14.8%"
           },
           {
-            "geography": "BLS projects demand growth in the United States; judging Chinese posts requires looking at the specific institution and region.",
-            "horizon": "BLS projects demand growth in the United States; judging Chinese posts requires looking at the specific institution and region.",
+            "geography": "Use the U.S. references on this page.",
+            "horizon": "Use the U.S. references on this page.",
             "interpretation": "Average annual 10,000 including new jobs and replacement, not the net increase of 25,200 or an AI replacement number.",
-            "limitation": "BLS projects demand growth in the United States; judging Chinese posts requires looking at the specific institution and region.",
+            "limitation": "Use the U.S. references on this page.",
             "metric": "Average annual openings",
             "occupation_scope": "United States 2025—2035; BLS projections",
             "source_id": "ep",
             "value": "About 10,000"
           },
           {
-            "geography": "Mainland China; sample postings from a hospital and a private rehabilitation provider",
-            "horizon": "BLS projects demand growth in the United States; judging Chinese posts requires looking at the specific institution and region.",
-            "interpretation": "BLS projects demand growth in the United States; judging Chinese posts requires looking at the specific institution and region.",
-            "limitation": "BLS projects demand growth in the United States; judging Chinese posts requires looking at the specific institution and region.",
-            "metric": "Chinese posts",
+            "geography": "Use the U.S. references on this page.",
+            "horizon": "Use the U.S. references on this page.",
+            "interpretation": "Use the U.S. references on this page.",
+            "limitation": "Use the U.S. references on this page.",
+            "metric": "Use the U.S. references on this page.",
             "occupation_scope": "Verify the specific recruitment, institution, and region separately",
             "source_id": "nbs",
-            "value": "Evidence insufficient: the materials verified this time did not obtain a same-measure Chinese occupational projection"
+            "value": "Use the U.S. references on this page."
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -15083,16 +14681,15 @@
             "scope": "U.S. 29-1122; 2025 base period and 2025—2035, not attributed to AI"
           },
           {
-            "href": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html",
-            "id": "nbs",
-            "label": "Average annual wages of urban unit employees, 2025",
-            "scope": "Chinese wage industry background; provides no national occupational demand projection"
-          },
-          {
             "href": "https://www.onetonline.org/link/details/29-1122.00",
             "id": "onet",
             "label": "O*NET occupational profile",
             "scope": "U.S. occupational duties and employment measure"
+          },
+          {
+            "href": "https://www.aota.org/-/media/corporate/files/aboutaota/officialdocs/policies/e19-ethical-use-of-artificial-intelligence-ai-2025.pdf",
+            "id": "aota-ai",
+            "label": "Ethical Use of AI Policy E.19"
           }
         ],
         "transitions": [
@@ -15375,43 +14972,43 @@
         "heading": "Who is suited to occupational therapy: interests, abilities, and boundaries",
         "questions": [
           {
-            "answer": "Find evidence through a fictional washing case or a compliant internship; a single self-rating cannot prove fit.",
+            "answer": "Notice whether you enjoy following up on a goal that matters to the same client over several visits. In pediatrics and home health, much of that relationship includes caregivers.",
             "question": "Do I like long-term interaction with people?"
           },
           {
-            "answer": "Find evidence through a fictional washing case or a compliant internship; a single self-rating cannot prove fit.",
+            "answer": "Pick a daily activity such as getting dressed. List its steps and identify the point where a cue was needed. Leave any unseen step unscored.",
             "question": "Can I break down a life activity?"
           },
           {
-            "answer": "Find evidence through a fictional washing case or a compliant internship; a single self-rating cannot prove fit.",
+            "answer": "Write what assistance was provided and under what conditions. See whether another clinician could use your note to repeat the observation or spot a change.",
             "question": "Am I willing to document and re-evaluate?"
           },
           {
-            "answer": "Find evidence through a fictional washing case or a compliant internship; a single self-rating cannot prove fit.",
+            "answer": "When a planned activity stalls, ask what changed in the environment or in the client's priorities. Consider whether you can revisit the goal without rushing the person.",
             "question": "Can I handle differences and frustration?"
           },
           {
-            "answer": "Find evidence through a fictional washing case or a compliant internship; a single self-rating cannot prove fit.",
+            "answer": "Tie anatomy, cognition and activity analysis to a concrete task such as preparing a meal. Ask a supervisor to explain a judgment you could not make from the record.",
             "question": "Am I willing to learn medical and rehabilitation knowledge?"
           },
           {
-            "answer": "Find evidence through a fictional washing case or a compliant internship; a single self-rating cannot prove fit.",
+            "answer": "Check how you respond to unexpected pain, loss of balance or a request outside your authority. Good judgment includes pausing and involving the supervising clinician.",
             "question": "Can I recognize risk and stop?"
           },
           {
-            "answer": "Find evidence through a fictional washing case or a compliant internship; a single self-rating cannot prove fit.",
+            "answer": "Compare the handoff pace in inpatient care, the school-day schedule and the travel required for home visits. Decide which work pattern you can sustain.",
             "question": "Do I accept working across multiple settings?"
           },
           {
-            "answer": "Find evidence through a fictional washing case or a compliant internship; a single self-rating cannot prove fit.",
+            "answer": "Keep identifying information in the approved record system and confirm who may receive a handoff. Practice with examples containing no patient information.",
             "question": "Can I protect medical record privacy?"
           },
           {
-            "answer": "Find evidence through a fictional washing case or a compliant internship; a single self-rating cannot prove fit.",
+            "answer": "In a team handoff, state the client's activity goal, what you observed and which colleague will verify the next step. Ask how the team settles conflicting priorities.",
             "question": "Am I willing to collaborate with an interdisciplinary team?"
           },
           {
-            "answer": "Find evidence through a fictional washing case or a compliant internship; a single self-rating cannot prove fit.",
+            "answer": "Compare accredited programs by fieldwork scheduling and supervision. Budget time for the training, exam and state licensing process before committing.",
             "question": "Can I invest in the corresponding education and qualification path?"
           }
         ],
@@ -15515,10 +15112,10 @@
             "copy_key": "career.item.boundary-notice",
             "type": "prose"
           },
-          "source": "BLS and O*NET are U.S. occupational data; Chinese training and recruitment are used according to their own applicable scope.",
+          "source": "Use the U.S. references on this page.",
           "updated_at": "Verified by the author of the nine modules on 2026-10-12; each source's statistical period is retained separately."
         },
-        "note": "U.S. BLS 2025 wages and 2025—2035 projections do not represent Chinese income or individual outcomes; state licensure and Chinese employment rules must be verified separately.",
+        "note": "U.S.",
         "secondary_links": [
           {
             "href": {
@@ -15612,41 +15209,6 @@
       {
         "block": "path",
         "copy_key": "career.item.recruitment-sample",
-        "id": "occupational-therapists.path.recruitment-sample.2",
-        "location": "entry_decisions",
-        "type": "notice"
-      },
-      {
-        "block": "path",
-        "copy_key": "career.item.recruitment-sample",
-        "id": "occupational-therapists.path.recruitment-sample.3",
-        "location": "entry_decisions",
-        "type": "notice"
-      },
-      {
-        "block": "path",
-        "copy_key": "career.item.recruitment-sample",
-        "id": "occupational-therapists.path.recruitment-sample.4",
-        "location": "entry_decisions",
-        "type": "notice"
-      },
-      {
-        "block": "path",
-        "copy_key": "career.item.recruitment-sample",
-        "id": "occupational-therapists.path.recruitment-sample.5",
-        "location": "entry_decisions",
-        "type": "notice"
-      },
-      {
-        "block": "path",
-        "copy_key": "career.item.recruitment-sample",
-        "id": "occupational-therapists.path.recruitment-sample.6",
-        "location": "entry_decisions",
-        "type": "notice"
-      },
-      {
-        "block": "path",
-        "copy_key": "career.item.recruitment-sample",
         "id": "occupational-therapists.path.recruitment-sample.7",
         "location": "entry_decisions",
         "type": "notice"
@@ -15655,6 +15217,20 @@
         "block": "path",
         "copy_key": "career.item.recruitment-sample",
         "id": "occupational-therapists.path.recruitment-sample.8",
+        "location": "entry_decisions",
+        "type": "notice"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "occupational-therapists.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "occupational-therapists.entry-work-sample-data.2",
         "location": "entry_decisions",
         "type": "notice"
       }
@@ -15668,7 +15244,7 @@
     },
     "section_titles": {
       "ai-impact": "AI and occupational therapy tasks",
-      "china-salary": "Mainland China wage reference",
+      "china-salary": "Additional wage reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
       "market-signals": "Career outlook and transitions to related occupations",
@@ -15686,38 +15262,38 @@
     "facts": [
       {
         "derivation": null,
-        "display_value": "100,330 USD/year",
+        "display_value": "$100,330/year",
         "fact_id": "us-ot-wage-median-2025",
-        "market": "United States nationwide",
+        "market": "United States",
         "measure": "annual median wage",
-        "occupation_scope": "Occupational Therapists 29-1122 exact occupation; wage survey excludes self-employed",
+        "occupation_scope": "U.S. occupation SOC 29-1122",
         "period": "May 2025",
         "source_refs": [
-          "bls-ot-2025"
+          "wave1-source-1"
         ]
       },
       {
         "derivation": null,
-        "display_value": "71,690 USD/year",
+        "display_value": "$71,690/year",
         "fact_id": "us-ot-wage-p10-2025",
-        "market": "United States nationwide",
+        "market": "United States",
         "measure": "annual wage 10th percentile",
-        "occupation_scope": "Occupational Therapists 29-1122 exact occupation; wage survey excludes self-employed",
+        "occupation_scope": "U.S. occupation SOC 29-1122",
         "period": "May 2025",
         "source_refs": [
-          "bls-ot-2025"
+          "wave1-source-1"
         ]
       },
       {
         "derivation": null,
-        "display_value": "131,950 USD/year",
+        "display_value": "$131,950/year",
         "fact_id": "us-ot-wage-p90-2025",
-        "market": "United States nationwide",
+        "market": "United States",
         "measure": "annual wage 90th percentile",
-        "occupation_scope": "Occupational Therapists 29-1122 exact occupation; wage survey excludes self-employed",
+        "occupation_scope": "U.S. occupation SOC 29-1122",
         "period": "May 2025",
         "source_refs": [
-          "bls-ot-2025"
+          "wave1-source-1"
         ]
       },
       {
@@ -15745,30 +15321,6 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "146,266 yuan/year (pre-tax)",
-        "fact_id": "cn-health-nonprivate-2025",
-        "market": "Mainland China",
-        "measure": "Average annual wage for the health and social work industry in urban non-private units",
-        "occupation_scope": "Broad industry background for the medical rehabilitation employer direction, including other posts, not the occupational therapist wage; schools and other employers must be verified separately",
-        "period": "2025",
-        "source_refs": [
-          "nbs-2025-wages"
-        ]
-      },
-      {
-        "derivation": null,
-        "display_value": "75,631 yuan/year (pre-tax)",
-        "fact_id": "cn-health-private-2025",
-        "market": "Mainland China",
-        "measure": "Average annual wage for the health and social work industry in urban private units",
-        "occupation_scope": "Broad industry background for the medical rehabilitation employer direction, including other posts, not the occupational therapist wage; schools and other employers must be verified separately",
-        "period": "2025",
-        "source_refs": [
-          "nbs-2025-wages"
-        ]
-      },
-      {
         "derivation": "Official 169.6 thousand multiplied by 1000.",
         "display_value": "169,600",
         "fact_id": "us-ot-employment-2025",
@@ -15792,7 +15344,7 @@
     "badges": [
       "Occupational therapists · O*NET 29-1122.00",
       "Activity analysis · activity training · environmental adaptation",
-      "U.S. licensure and Chinese post requirements are verified separately"
+      "U.S. career reference"
     ],
     "metrics": [
       {
@@ -15820,10 +15372,10 @@
         "label": "U.S. average annual openings (including replacement)"
       },
       {
-        "availability": "available",
-        "fact_ref": "cn-health-nonprivate-2025",
+        "availability": "missing",
+        "fact_ref": null,
         "key": "china_pay",
-        "label": "Health and social work: annual average at urban non-private units"
+        "label": "Additional wage benchmark"
       }
     ]
   },
@@ -15831,17 +15383,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "How do occupational therapists observe daily activity, set goals and document changes? Compare mainland job examples, U.S. licensing and the OT-07 paper exercise."
+      "text": "Occupational therapists assess daily activities and help clients participate. Compare U.S. wages, OTR certification, state licensure and care settings."
     },
     "title": {
       "availability": "available",
-      "text": "Occupational therapists: duties, licensure, wages, and entry paths"
+      "text": "Occupational Therapist: Daily Activities, U.S. Pay and Licensing"
     }
   },
-  "source_content_sha256": "2e611ac655c7bc94dba1fcfdad24eaa5346012bfe7b5ca6acbb57e8468299791",
+  "source_content_sha256": "4dc3c801cbf01e162a715d2927911ebddcbcd48d4c6470ee39a8288252ec30b5",
   "subject": {
     "canonical_slug": "occupational-therapists",
     "name": "Occupational therapists",
-    "summary": "Occupational therapists identify meaningful daily tasks with clients, such as grooming, dressing or returning to school. They observe where a task breaks down, plan practice or environmental changes, and check participation over time. Mainland hiring and U.S. licensing are separate."
+    "summary": "Occupational therapists help people participate in tasks that matter to daily life. They document how the person, the activity and the environment interact, then reassess whether the person can carry out the task with the agreed supports."
   }
 }

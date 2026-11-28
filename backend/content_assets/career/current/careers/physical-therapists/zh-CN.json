@@ -65,6 +65,9 @@
       "fact:us-wage-q75-2025": {
         "status": "pending_mapping"
       },
+      "fact:wave1-cn-sector-2025": {
+        "status": "pending_mapping"
+      },
       "item:physical-therapists.ai-impact.ai-impact-table.10": {
         "status": "mapped"
       },
@@ -563,6 +566,9 @@
       "item:physical-therapists.china-salary.career-snapshot-primary-locale.9": {
         "status": "mapped"
       },
+      "item:physical-therapists.china-salary.wave1-national-sector.1": {
+        "status": "pending_mapping"
+      },
       "item:physical-therapists.direction-comparison.adjacent-career-comparison-table.10": {
         "status": "mapped"
       },
@@ -649,6 +655,9 @@
       },
       "item:physical-therapists.direction-comparison.adjacent-career-comparison-table.9": {
         "status": "mapped"
+      },
+      "item:physical-therapists.entry-work-sample-data.2": {
+        "status": "pending_mapping"
       },
       "item:physical-therapists.fit.personality-fit-block.1": {
         "status": "pending_mapping"
@@ -1259,9 +1268,6 @@
       "item:physical-therapists.path.employer-evidence.1": {
         "status": "pending_mapping"
       },
-      "item:physical-therapists.path.entry-portfolio.1": {
-        "status": "pending_mapping"
-      },
       "item:physical-therapists.path.entry-role-comparison.1": {
         "status": "mapped"
       },
@@ -1273,12 +1279,6 @@
       },
       "item:physical-therapists.path.recruitment-sample.1": {
         "status": "pending_mapping"
-      },
-      "item:physical-therapists.path.seven-day-decision.1": {
-        "status": "mapped"
-      },
-      "item:physical-therapists.path.seven-day-trial.1": {
-        "status": "mapped"
       },
       "item:physical-therapists.profile.career-quick-answers-block.1": {
         "status": "mapped"
@@ -13572,142 +13572,40 @@
         "status": "mapped"
       },
       "entry_decisions.entry-portfolio.entries.01.description.01": {
-        "ref": {
-          "id": "physical-therapists.path.entry-portfolio.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "requirements-matrix"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-portfolio.entries.01.title": {
-        "ref": {
-          "id": "physical-therapists.path.entry-portfolio.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "requirements-matrix"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-portfolio.entries.02.description.01": {
-        "ref": {
-          "id": "physical-therapists.path.entry-portfolio.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "independent-recheck"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-portfolio.entries.02.title": {
-        "ref": {
-          "id": "physical-therapists.path.entry-portfolio.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "independent-recheck"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-portfolio.entries.03.description.01": {
-        "ref": {
-          "id": "physical-therapists.path.entry-portfolio.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "report-summary"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-portfolio.entries.03.title": {
-        "ref": {
-          "id": "physical-therapists.path.entry-portfolio.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "report-summary"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-portfolio.entries.04.description.01": {
-        "ref": {
-          "id": "physical-therapists.path.entry-portfolio.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "tooling-note"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-portfolio.entries.04.title": {
-        "ref": {
-          "id": "physical-therapists.path.entry-portfolio.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "tooling-note"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-portfolio.title": {
-        "ref": {
-          "id": "physical-therapists.path.entry-portfolio.1",
-          "path": [
-            "title"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-role-comparison.headers.distinction": {
         "ref": {
@@ -14105,180 +14003,48 @@
         "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.01": {
-        "ref": {
-          "id": "physical-therapists.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-materials"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.02": {
-        "ref": {
-          "id": "physical-therapists.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-materials"
-            },
-            "values",
-            2
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.01.title": {
-        "ref": {
-          "id": "physical-therapists.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-materials"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.01": {
-        "ref": {
-          "id": "physical-therapists.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-task"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.02": {
-        "ref": {
-          "id": "physical-therapists.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-task"
-            },
-            "values",
-            2
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.02.title": {
-        "ref": {
-          "id": "physical-therapists.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-task"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.01": {
-        "ref": {
-          "id": "physical-therapists.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-approach"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.02": {
-        "ref": {
-          "id": "physical-therapists.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-approach"
-            },
-            "values",
-            2
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.03.title": {
-        "ref": {
-          "id": "physical-therapists.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-approach"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.04.description.01": {
-        "ref": {
-          "id": "physical-therapists.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-boundary"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.04.title": {
-        "ref": {
-          "id": "physical-therapists.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-boundary"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.title": {
         "ref": {
@@ -14557,332 +14323,96 @@
         "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.01": {
-        "ref": {
-          "id": "physical-therapists.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.02": {
-        "ref": {
-          "id": "physical-therapists.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.03": {
-        "ref": {
-          "id": "physical-therapists.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            2
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.04": {
-        "ref": {
-          "id": "physical-therapists.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            3
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.05": {
-        "ref": {
-          "id": "physical-therapists.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            4
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.06": {
-        "ref": {
-          "id": "physical-therapists.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            5
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.07": {
-        "ref": {
-          "id": "physical-therapists.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            6
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.title": {
-        "ref": {
-          "id": "physical-therapists.path.seven-day-decision.1",
-          "path": [
-            "title"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.01.description.01": {
-        "ref": {
-          "id": "physical-therapists.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-trial-day-1"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.01.title": {
-        "ref": {
-          "id": "physical-therapists.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-trial-day-1"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.02.description.01": {
-        "ref": {
-          "id": "physical-therapists.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-trial-day-2"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.02.title": {
-        "ref": {
-          "id": "physical-therapists.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-trial-day-2"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.03.description.01": {
-        "ref": {
-          "id": "physical-therapists.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-trial-day-3"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.03.title": {
-        "ref": {
-          "id": "physical-therapists.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-trial-day-3"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.04.description.01": {
-        "ref": {
-          "id": "physical-therapists.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-trial-day-4"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.04.title": {
-        "ref": {
-          "id": "physical-therapists.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-trial-day-4"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.05.description.01": {
-        "ref": {
-          "id": "physical-therapists.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-trial-day-5"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.05.title": {
-        "ref": {
-          "id": "physical-therapists.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-trial-day-5"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.06.description.01": {
-        "ref": {
-          "id": "physical-therapists.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-trial-day-6"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.06.title": {
-        "ref": {
-          "id": "physical-therapists.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-trial-day-6"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.07.description.01": {
-        "ref": {
-          "id": "physical-therapists.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-trial-day-7"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.07.title": {
-        "ref": {
-          "id": "physical-therapists.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-trial-day-7"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.title": {
-        "ref": {
-          "id": "physical-therapists.path.seven-day-trial.1",
-          "path": [
-            "title"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "faq_block.items.01.answer": {
         "ref": {
@@ -23070,7 +22600,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "如果你更愿意在明确计划下完成指定任务，或不想承担评估、记录和复测责任，可以先比较物理治疗师、物理治疗师助理与辅助人员。"
+              "一天排满治疗时，患者到诊时间、疲劳和辅具变动都会打断原定测量。若频繁体力协助、数次复测无进展和下班补写病历容易让你耗竭，先核对服务量和受保护的文书时间。"
             ]
           },
           "id": "physical-therapists.quick-decision.fit-decision-checklist.1",
@@ -23085,7 +22615,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "打开目录「入行、资格与职业发展」，找到「PT-06｜虚构功能训练记录」。只用纸面材料分清原计划、已完成、未开始和要报告的内容，再核参考。"
+              "先完成入行区的纸面工单，再对照问答中的样答。"
             ]
           },
           "id": "physical-therapists.quick-decision.fit-decision-checklist.2",
@@ -23130,7 +22660,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "若你愿意承担评估、计划、治疗与复测责任，下一步核美国DPT项目、临床实践、目标州执照或中国目标岗位要求，再比较成本和临床场景。若更想在治疗师计划下实施指定治疗，应比较物理治疗师助理路径。"
+              "先完成入行区的纸面工单，再对照问答中的样答。"
             ]
           },
           "id": "physical-therapists.quick-decision.fermat-decision-card.7",
@@ -23183,7 +22713,7 @@
           "data": {
             "entries": [
               "计划、准备或实施单独设计的物理治疗方案，以维持、改善或恢复身体功能，减轻疼痛，或防止患者身体功能失调。",
-              "进行初步检查并进行记录，评估数据以发现问题，在干预前确定诊断。",
+              "美国法域参照：进行初步检查并进行记录，评估数据以发现问题，在干预前确定诊断。",
               "记录预后，治疗，反应，以及病人图表的进展或者将信息输入计算机。",
               "指示病人和家庭在治疗程序继续在家。"
             ]
@@ -23229,7 +22759,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "DPT学位、州执照与PT/PTA职责边界"
+              "美国法域参照：DPT学位、州执照与PT/PTA职责边界"
             ]
           },
           "id": "physical-therapists.profile.onet-structured-fields-block.2",
@@ -23345,7 +22875,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "物理治疗师负责评估、制定和调整计划；PTA在监督下实施指定治疗；aide主要提供非治疗支持。"
+              "美国法域参照：物理治疗师负责评估、制定和调整计划；PTA在监督下实施指定治疗；aide主要提供非治疗支持。"
             ]
           },
           "id": "physical-therapists.profile.career-quick-answers-block.7",
@@ -23376,7 +22906,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "PT设定目标与计划，PTA落实指定治疗，aide准备场地和器具。"
+              "美国法域参照：PT设定目标与计划，PTA落实指定治疗，aide准备场地和器具。"
             ]
           },
           "id": "physical-therapists.profile.career-quick-answers-block.9",
@@ -23391,7 +22921,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "物理治疗师负责评估、计划和复测；PTA按计划治疗并反馈，aide不能冒用PTA或PT职责。"
+              "美国法域参照：物理治疗师负责评估、计划和复测；PTA按计划治疗并反馈，aide不能冒用PTA或PT职责。"
             ]
           },
           "id": "physical-therapists.profile.career-quick-answers-block.10",
@@ -23421,7 +22951,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "物理治疗师评估患者的功能和活动能力，制定、实施并调整物理治疗计划，复测治疗反应，教育患者并记录与团队交接。"
+              "骨科运动康复会用 关节角度计 记录 ROM，结合徒手肌力测试 MMT 和 疼痛量表 整理基线。神经康复常观察 步态、助行器 使用和转移能力，视机构流程选起立行走计时或 十米步行测试。交接写清测量条件、异常情况和复测记录，供有权限的治疗人员判断。"
             ]
           },
           "id": "physical-therapists.profile.definition-block.11",
@@ -23437,7 +22967,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "核心过程差异是PT评估与调整计划、PTA实施与报告、aide支持治疗场地。"
+              "美国法域参照：核心过程差异是PT评估与调整计划、PTA实施与报告、aide支持治疗场地。"
             ]
           },
           "id": "physical-therapists.profile.career-quick-answers-block.12",
@@ -23467,7 +22997,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "PT产出评估和治疗计划；PTA产出指定治疗与进展记录；aide产出场地支持。"
+              "美国法域参照：PT产出评估和治疗计划；PTA产出指定治疗与进展记录；aide产出场地支持。"
             ]
           },
           "id": "physical-therapists.profile.career-quick-answers-block.14",
@@ -23527,7 +23057,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "PT承担专业评估与计划调整责任；PTA只在州法规及治疗计划范围内实施。"
+              "美国法域参照：PT承担专业评估与计划调整责任；PTA只在州法规及治疗计划范围内实施。"
             ]
           },
           "id": "physical-therapists.profile.career-quick-answers-block.18",
@@ -23645,7 +23175,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "临床训练应有现场导师反馈，虚构练习不等于真实临床实践。"
+              "临床训练应有现场导师反馈，练习不等于真实临床实践。"
             ]
           },
           "id": "physical-therapists.profile.career-quick-answers-block.26",
@@ -23703,7 +23233,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "核雇主授权的患者类型、评估与治疗职责、PTA监督、会诊转介和异常升级安排。"
+              "美国法域参照：核雇主授权的患者类型、评估与治疗职责、PTA监督、会诊转介和异常升级安排。"
             ]
           },
           "id": "physical-therapists.profile.career-quick-answers-block.30",
@@ -23718,7 +23248,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "用完全虚构的评估问题清单、目标与复测样本展示思路，不能替代DPT和执照。 美国职业预测非中国岗位需求。"
+              "用完全的评估问题清单、目标与复测样本展示思路，不能替代DPT和执照。 美国职业预测非中国岗位需求。"
             ]
           },
           "id": "physical-therapists.profile.career-quick-answers-block.31",
@@ -23941,7 +23471,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "BLS指出aide多接受岗位培训；其职责不等同PTA直接治疗或PT临床判断。"
+              "美国法域参照：BLS指出aide多接受岗位培训；其职责不等同PTA直接治疗或PT临床判断。"
             ]
           },
           "id": "physical-therapists.direction-comparison.adjacent-career-comparison-table.15",
@@ -24059,7 +23589,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "监督关系和资格体系独立于PT与PTA。"
+              "美国法域参照：监督关系和资格体系独立于PT与PTA。"
             ]
           },
           "id": "physical-therapists.direction-comparison.adjacent-career-comparison-table.23",
@@ -24407,7 +23937,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先练功能评估、目标、复测与安全记录；工具只用于完全虚构资料。"
+              "先练功能评估、目标、复测与安全记录；工具只用于完全资料。"
             ]
           },
           "id": "physical-therapists.ai-impact.ai-impact-table.11",
@@ -24514,7 +24044,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI 可以辅助草拟记录或整理复测表；真实评估、治疗调整和异常判断由有权人员按流程完成。未测量职业采用率、时间节省或岗位替代。"
+              "自动化可整理测量日期、侧别和缺项。是否是同一动作、同一辅具和同等协助水平，要由治疗人员核实。"
             ]
           },
           "id": "physical-therapists.ai-impact.ai-impact-table.18",
@@ -25128,7 +24658,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "模型能整理公开资料或虚构病例的记录草稿，但生成文字不证明它识别了真实患者的疼痛、平衡、疲劳或禁忌。O*NET列出的患者练习指导与治疗反应观察需要现场核对、专业训练和执照及机构规范。"
+              "模型能整理公开资料或病例的记录草稿，但生成文字不证明它识别了真实患者的疼痛、平衡、疲劳或禁忌。O*NET列出的患者练习指导与治疗反应观察需要现场核对、专业训练和执照及机构规范。"
             ]
           },
           "id": "physical-therapists.ai-impact.ai-impact-table.61",
@@ -25233,7 +24763,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "公开资料检索、虚构教学材料和经机构许可的记录草稿可能得到辅助；必须核来源、患者身份和遗漏。真实患者检查、治疗计划及现场安全不能只凭模型输出。"
+              "公开资料检索、教学材料和经机构许可的记录草稿可能得到辅助；必须核来源、患者身份和遗漏。真实患者检查、治疗计划及现场安全不能只凭模型输出。"
             ]
           },
           "id": "physical-therapists.ai-impact.ai-impact-table.68",
@@ -25350,7 +24880,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先核DPT项目、临床训练与目标州执照，再学习患者安全、功能评估、复测记录、团队交接和异常升级。机构若允许AI，只用获准系统和数据；虚构练习不接触真实患者。"
+              "先核DPT项目、临床训练与目标州执照，再学习患者安全、功能评估、复测记录、团队交接和异常升级。机构若允许AI，只用获准系统和数据；练习不接触真实患者。"
             ]
           },
           "id": "physical-therapists.ai-impact.ai-impact-table.76",
@@ -25409,7 +24939,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先限公开资料、虚构教学或经批准的文书草稿。"
+              "先限公开资料、教学或经批准的文书草稿。"
             ]
           },
           "id": "physical-therapists.ai-impact.ai-impact-table.80",
@@ -26790,6 +26320,17 @@
             "bls"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "国家统计局 2025 年表 7 规模以上企业就业人员年平均工资：卫生和社会工作 108,309 元。这是行业及企业规模口径，不能当作该职业工资或当地报价。比较录用时，分开看基本工资、绩效、周末排班和单日治疗量。"
+            ]
+          },
+          "id": "physical-therapists.china-salary.wave1-national-sector.1",
+          "type": "prose"
         }
       ]
     },
@@ -26974,7 +26515,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 2025年物理治疗师单列职业就业基期；非PTA与aide合计。；BLS职业展望或预测表｜https://www.bls.gov/ooh/healthcare/physical-therapists.htm"
+              "美国法域参照：BLS 2025年物理治疗师单列职业就业基期；非PTA与aide合计。；BLS职业展望或预测表｜https://www.bls.gov/ooh/healthcare/physical-therapists.htm"
             ]
           },
           "id": "physical-therapists.us-salary.career-snapshot-secondary-locale.20",
@@ -28071,7 +27612,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "PTA资格与PT的DPT和执照不同"
+              "美国法域参照：PTA资格与PT的DPT和执照不同"
             ]
           },
           "id": "physical-therapists.fit.personality-fit-block.30",
@@ -28086,7 +27627,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "PTA与辅助员合并比较"
+              "美国法域参照：PTA与辅助员合并比较"
             ]
           },
           "id": "physical-therapists.fit.personality-fit-block.31",
@@ -28116,7 +27657,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "合并页须分别核PTA治疗资格与aide非治疗职责，非单一辅助员执照。"
+              "美国法域参照：合并页须分别核PTA治疗资格与aide非治疗职责，非单一辅助员执照。"
             ]
           },
           "id": "physical-therapists.fit.personality-fit-block.33",
@@ -28446,7 +27987,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "做完全虚构的评估与复测记录样本，写明禁忌和转介点，并请合格人员反馈。"
+              "做完全的评估与复测记录样本，写明禁忌和转介点，并请合格人员反馈。"
             ]
           },
           "id": "physical-therapists.fit.personality-fit-block.55",
@@ -28490,7 +28031,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "先做无真实患者信息的虚构评估与复测记录，邀请合格从业者检查判断、记录和风险升级边界。"
+              "先做无真实患者信息的评估与复测记录，邀请合格从业者检查判断、记录和风险升级边界。"
             ]
           },
           "id": "physical-therapists.fit.personality-fit-block.58",
@@ -28560,7 +28101,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "比较PTA按计划实施、观察和记录与PT评估制定计划的任务边界。"
+              "美国法域参照：比较PTA按计划实施、观察和记录与PT评估制定计划的任务边界。"
             ]
           },
           "id": "physical-therapists.fit.personality-fit-block.63",
@@ -29178,37 +28719,37 @@
               [
                 "DPT项目申请者",
                 "核DPT课程、临床训练与目标州执照条件",
-                "准确解释PT、PTA和aide职责差异",
-                "完成资格核对表与虚构评估问题清单",
+                "美国法域参照：准确解释PT、PTA和aide职责差异",
+                "完成资格核对表与评估问题清单",
                 "尚未取得执业资格，不能治疗真实患者"
               ],
               [
                 "门诊PT学生",
                 "在临床导师监督下学习评估、设目标与指导练习",
                 "导师核对功能测量与安全判断",
-                "用完全虚构样本展示评估和复测思路",
+                "用完全样本展示评估和复测思路",
                 "门诊侧重连续治疗与功能目标"
               ],
               [
                 "住院康复PT学生",
                 "在临床导师监督下评估转移和步行",
                 "能说明何时协作、转介与停止治疗",
-                "用虚构转移风险清单展示判断",
+                "用转移风险清单展示判断",
                 "更重即时安全和跨专业交接"
               ],
               [
                 "居家康复PT学生",
                 "在导师指导下评估居家功能与环境",
                 "准确记录环境和患者功能变化",
-                "用虚构居家场景写访问记录",
+                "用居家场景写访问记录",
                 "出诊规则及雇主授权另核"
               ],
               [
                 "物理治疗师助理方向",
                 "按治疗师计划实施指定治疗与记录",
-                "需另行完成PTA课程和州级资格",
-                "比较PT与PTA任务和资格差别",
-                "属于另一职业，PT学位不自动替代PTA岗位规则"
+                "美国法域参照：需另行完成PTA课程和州级资格",
+                "美国法域参照：比较PT与PTA任务和资格差别",
+                "美国法域参照：属于另一职业，PT学位不自动替代PTA岗位规则"
               ]
             ]
           },
@@ -29254,7 +28795,7 @@
                 "id": "tools",
                 "values": [
                   "可展示作品",
-                  "用虚构病例做计划核对、练习记录和异常上报样本，不含真实患者资料。",
+                  "用病例做计划核对、练习记录和异常上报样本，不含真实患者资料。",
                   "请合格从业者检查停练点与交接清楚程度。"
                 ]
               }
@@ -29276,35 +28817,24 @@
           "data": {
             "entries": [
               {
-                "id": "exercise-materials",
+                "id": "wave1-trial-1",
                 "values": [
-                  "PT-06｜虚构功能训练记录",
-                  "A1｜纸面计划 V2：林甲，09:30，拟记录坐站 5 次与步行 10 米，需有指定保护人员；头晕伴站立不稳或新发胸痛须停练并报告。交接单未填写保护人员姓名和辅助器具。",
-                  "A2｜模拟事后记录：开始时疼痛记录为 2/10；09:34，完成第 3 次坐站后说“头晕”，观察栏写“站立不稳”。步行栏写“未开始”，上报栏空白。",
-                  "费马测试编辑部设计虚构题设；次数、距离和停止条件只属于本题。家庭病床标准仅用于理解机构风险背景。"
+                  "题设",
+                  "甲与乙均在同一路段的中间 10 米计时，使用手杖，以舒适速度行走，均无人工协助；甲 12 秒，乙 10 秒。丙同样以舒适速度在这段计时，无人工协助，用时 9 秒，辅具栏空白。题设要求只比较计时区间、配速指令和协助条件都一致且记录完整的两行。"
                 ]
               },
               {
-                "id": "exercise-task",
+                "id": "wave1-trial-2",
                 "values": [
-                  "任务｜一页交接",
-                  "列计划版本、预定动作、实际完成、未开始、报告状态及要核实的保护人员和器具。",
-                  "按题设写是否继续、找哪个角色复核，再给接班人写两句话；不推断头晕原因。"
+                  "任务",
+                  "找出可比两行、算出用时差，再用一行写下待核字段和交接对象。"
                 ]
               },
               {
-                "id": "exercise-approach",
+                "id": "wave1-trial-3",
                 "values": [
-                  "参考｜先独立写再对照",
-                  "V2 计划与实际分开：实际完成 3 次，步行未开始；保留 09:34 主诉、观察和起始记录。题设满足停点，剩余任务暂停，报告给负责治疗和安全的临床人员；未见已报记录，不能写成已完成。",
-                  "示例：「09:34 完成第 3 次后患者称头晕，站立不稳，步行未开始。请负责治疗的临床人员复核计划与安全条件，并确认接收；器具及保护人员尚未核实。」"
-                ]
-              },
-              {
-                "id": "exercise-boundary",
-                "values": [
-                  "边界｜纸面记录",
-                  "不使用真实人、器具或病历；真实异常由相应人员按机构程序处理。"
+                  "交接",
+                  "全程只核对题设记录。无需接触患者、实施测试、判断疗效或提出运动处方。"
                 ]
               }
             ]
@@ -29314,52 +28844,21 @@
             "editor",
             "pt-homebed-893"
           ],
-          "title": "虚构评估练习",
+          "title": "纸面试做：检查步行记录的可比性",
           "type": "cards"
         },
         {
           "availability": "available",
-          "copy_key": "career.item.entry-portfolio",
+          "copy_key": "career.item.entry-work-sample-data",
           "data": {
-            "entries": [
-              {
-                "id": "requirements-matrix",
-                "values": [
-                  "计划核对包",
-                  "摘录A1中的动作、剂量、保护和停练条件，未知项明确提出。",
-                  "复核是否把计划外动作当成已授权。"
-                ]
-              },
-              {
-                "id": "independent-recheck",
-                "values": [
-                  "异常处理包",
-                  "按纸面 A1 与 A2 对照，写是否触发停点及下一位接收人。",
-                  "复核是否自行诊断或继续训练。"
-                ]
-              },
-              {
-                "id": "report-summary",
-                "values": [
-                  "进展记录包",
-                  "区分实际完成量、未开始动作和患者主诉。"
-                ]
-              },
-              {
-                "id": "tooling-note",
-                "values": [
-                  "交接说明卡",
-                  "写时间、主诉和观察，标“未见报告记录”、拟接收角色及接收是否确认。"
-                ]
-              }
+            "paragraphs": [
+              "甲、乙的计时区间、舒适配速指令、无人工协助与手杖条件一致。用时差为 12－10＝2 秒。丙的辅具记录缺失，不能并入比较。把丙单列交主管治疗师核对原始记录，不据此判断疗效。"
             ]
           },
-          "id": "physical-therapists.path.entry-portfolio.1",
-          "source_refs": [
-            "editor"
-          ],
-          "title": "入门时可以准备哪些可复核的作品材料？",
-          "type": "cards"
+          "id": "physical-therapists.entry-work-sample-data.2",
+          "title": "纸面样答：检查步行记录的可比性",
+          "type": "notice",
+          "visibility": "public"
         },
         {
           "availability": "available",
@@ -29411,90 +28910,6 @@
           ],
           "title": "面试与试用期可能考察什么，哪些结论不能推断？",
           "type": "table"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.seven-day-trial",
-          "data": {
-            "entries": [
-              {
-                "id": "entry-trial-day-1",
-                "values": [
-                  "第一日",
-                  "看职业来源，写清 PT、PTA 与辅助人员的分工。"
-                ]
-              },
-              {
-                "id": "entry-trial-day-2",
-                "values": [
-                  "第二日",
-                  "按拟就业地区列资格和培训待核项，区分美国州许可与大陆职称。"
-                ]
-              },
-              {
-                "id": "entry-trial-day-3",
-                "values": [
-                  "第三日",
-                  "阅读虚构A1计划，写患者、动作、剂量及停练条件核对表。"
-                ]
-              },
-              {
-                "id": "entry-trial-day-4",
-                "values": [
-                  "第四日",
-                  "读 A2，和 A1 的停点对照后写是否继续及上报对象。"
-                ]
-              },
-              {
-                "id": "entry-trial-day-5",
-                "values": [
-                  "第五日",
-                  "只记录实际完成量、主诉和客观观察；分开标未开始动作、报告状态与待核项。"
-                ]
-              },
-              {
-                "id": "entry-trial-day-6",
-                "values": [
-                  "第六日",
-                  "先对照参考自核。有合适同伴时，可请对方指出交接遗漏；保留修改原因。"
-                ]
-              },
-              {
-                "id": "entry-trial-day-7",
-                "values": [
-                  "第七日",
-                  "复盘是否愿意持续近距离治疗、记录和团队协作；列出下一步资格核查。"
-                ]
-              }
-            ]
-          },
-          "id": "physical-therapists.path.seven-day-trial.1",
-          "source_refs": [
-            "editor"
-          ],
-          "title": "七天体验PT工作",
-          "type": "timeline"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.seven-day-decision",
-          "data": {
-            "entries": [
-              "问自己：愿意反复核计划和实际完成量，还是更想在既定计划下协助？",
-              "对照 PT-06，记录哪一步最愿意重复：核资料、观察并记录、还是交接。",
-              "如果希望承担功能评估和计划责任，了解当地 PT 或康复治疗岗位的临床训练。",
-              "如果更愿执行已分配任务，比较助理与辅助岗位并核相应教育和监督。",
-              "自查纸面计划的版本和停点写清了吗？",
-              "自查记录是否分开预定、已完成和未开始，并保留主诉与观察。",
-              "能否清楚交代报告状态与接收角色？真实临床判断和处理须由有权人员按机构程序完成。"
-            ]
-          },
-          "id": "physical-therapists.path.seven-day-decision.1",
-          "source_refs": [
-            "editor"
-          ],
-          "title": "七天结束时如何判断要不要继续",
-          "type": "list"
         },
         {
           "availability": "available",
@@ -29595,7 +29010,7 @@
             "paragraphs": [
               "完成课程、临床实习、州许可和雇主岗位授权是不同状态；不得因课程结业就独立开展治疗。",
               "BLS说明美国PT通常需要DPT学位与州执照；PTA及aide的教育与权限不可混用。",
-              "真实患者信息必须按机构隐私规则处理；本页虚构练习不使用患者资料。",
+              "真实患者信息必须按机构隐私规则处理；本页练习不使用患者资料。",
               "中国康复治疗相关岗位需按所在地专业、培训和机构规则核对；不宣称美国PT资格互认。"
             ]
           },
@@ -29674,7 +29089,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "虚构作品不替代临床训练、执照或雇主授权。中国康复治疗岗位另核当地培养与权限；不承诺中美资格互认。"
+              "作品不替代临床训练、执照或雇主授权。中国康复治疗岗位另核当地培养与权限；不承诺中美资格互认。"
             ]
           },
           "id": "physical-therapists.path.career-path-block.11",
@@ -29689,7 +29104,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "核DPT、州执照与患者安全；仅用虚构材料练习。"
+              "核DPT、州执照与患者安全；仅用材料练习。"
             ]
           },
           "id": "physical-therapists.path.career-path-block.12",
@@ -29805,7 +29220,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在美国，常见路径是完成DPT学位和课程要求的临床训练，并满足所在州物理治疗师执照要求。先核目标州与项目条件，再用完全虚构情境练习评估问题、治疗目标、复测与风险记录。"
+              "在美国，常见路径是完成DPT学位和课程要求的临床训练，并满足所在州物理治疗师执照要求。先核目标州与项目条件，再用完全情境练习评估问题、治疗目标、复测与风险记录。"
             ]
           },
           "id": "physical-therapists.path.career-path-block.20",
@@ -29820,14 +29235,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "DPT学位、临床训练、州执照和雇主授权是不同状态；缺少执照不能独立治疗患者，也不能凭课程结业承担临床判断。"
+              "中国大陆可查 康复医学治疗技术 卫生专业技术资格及用人机构要求。康复治疗师负责授权范围内的功能测量、执行既定康复方案、复测记录和异常上报。执业医师负责医学诊查、诊断及诊疗处置。美国 O*NET 的 PT/PTA 职责仅作美国法域参照。"
             ]
           },
           "id": "physical-therapists.path.career-path-block.21",
           "source_refs": [
-            "bls",
-            "editor",
-            "privacy"
+            "r3-nhc-rehab"
           ],
           "type": "prose"
         },
@@ -29909,7 +29322,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "避免将PT与PTA学历、权限混用。"
+              "美国法域参照：避免将PT与PTA学历、权限混用。"
             ]
           },
           "id": "physical-therapists.path.career-path-block.27",
@@ -29952,7 +29365,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "匿名虚构病例中的计划核对表和禁忌问题清单。"
+              "匿名病例中的计划核对表和禁忌问题清单。"
             ]
           },
           "id": "physical-therapists.path.career-path-block.30",
@@ -30244,7 +29657,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "匿名虚构病例中的计划核对表和禁忌问题清单。"
+              "匿名病例中的计划核对表和禁忌问题清单。"
             ]
           },
           "id": "physical-therapists.path.career-path-block.50",
@@ -30536,7 +29949,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "匿名虚构病例中的计划核对表和禁忌问题清单。"
+              "匿名病例中的计划核对表和禁忌问题清单。"
             ]
           },
           "id": "physical-therapists.path.career-path-block.70",
@@ -31271,7 +30684,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "须核目标州PTA认可副学士课程、考试与许可或认证；PT学位和执照不自动替代PTA岗位规则。"
+              "美国法域参照：须核目标州PTA认可副学士课程、考试与许可或认证；PT学位和执照不自动替代PTA岗位规则。"
             ]
           },
           "id": "physical-therapists.market-signals.market-signal-card.34",
@@ -31316,7 +30729,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "该页包含PTA与aide，须分别核教育、许可、监督和非治疗职责，非单一aide职业。"
+              "美国法域参照：该页包含PTA与aide，须分别核教育、许可、监督和非治疗职责，非单一aide职业。"
             ]
           },
           "id": "physical-therapists.market-signals.market-signal-card.37",
@@ -31644,13 +31057,16 @@
                 "question_key": "career.faq.physical-therapists.daily-work"
               },
               {
-                "answer": "物理治疗师负责评估、制定和调整计划；物理治疗师助理在监督下实施指定治疗并报告反应。两者教育、许可和临床责任不同；辅助人员主要做非治疗支持。",
+                "answer": "美国法域参照：PT 负责专业评估和治疗计划，PTA 在州法和监督范围内执行指定环节，辅助员做支持工作。中国大陆应按本地机构分别核对康复治疗师承担的功能测量、方案实施记录，以及执业医师承担的医学诊断和处置。",
                 "id": "physical-therapists.faq.2",
-                "question": "物理治疗师与助理有什么区别？",
-                "question_key": "career.faq.physical-therapists.comparison"
+                "question": "美国 PT/PTA 的分工与大陆岗位有什么区别？",
+                "question_key": "career.faq.physical-therapists.comparison",
+                "source_refs": [
+                  "r3-nhc-rehab"
+                ]
               },
               {
-                "answer": "观察自己是否愿意近距离沟通、分析功能测量、承担治疗计划判断并长期复测记录。可用完全虚构情境练习评估问题清单，再核真实DPT训练、临床实践与执照要求。",
+                "answer": "观察自己是否愿意近距离沟通、分析功能测量、承担治疗计划判断并长期复测记录。可用完全情境练习评估问题清单，再核真实DPT训练、临床实践与执照要求。",
                 "id": "physical-therapists.faq.3",
                 "question": "怎样判断自己适不适合做物理治疗师？",
                 "question_key": "career.faq.physical-therapists.fit"
@@ -31760,7 +31176,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本页解释美国Physical Therapists职业范围，不建立中美资格互认。完全虚构的练习仅展示记录与风险识别，不提供诊疗建议，也不使用真实患者信息。"
+              "本页解释美国Physical Therapists职业范围，不建立中美资格互认。完全的练习仅展示记录与风险识别，不提供诊疗建议，也不使用真实患者信息。"
             ]
           },
           "id": "physical-therapists.sources.source-card.4",
@@ -32033,7 +31449,7 @@
               {
                 "accessed_at": "2026-09-26",
                 "details": [
-                  "虚构练习与来源解释",
+                  "练习与来源解释",
                   "不是官方统计或真实患者训练"
                 ],
                 "evidence_type": "编辑归纳",
@@ -32349,6 +31765,30 @@
                 "publisher": "美国劳工部就业与培训管理局",
                 "scope": "exact",
                 "url": "https://creativecommons.org/licenses/by/4.0/"
+              },
+              {
+                "details": [],
+                "id": "wave1-source-1",
+                "name": "国家统计局《2025 年城镇单位就业人员年平均工资情况》表 7",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [],
+                "id": "wave1-source-2",
+                "name": "国家卫生健康委人才交流服务中心｜卫生专业技术资格考试",
+                "url": "https://wjw.fujian.gov.cn/jggk/csxx/rsc/gzdt/202512/P020251212753866907793.pdf"
+              },
+              {
+                "details": [],
+                "id": "wave1-source-3",
+                "name": "O*NET Physical Therapists 职业任务",
+                "url": "https://www.onetonline.org/link/details/29-1123.00"
+              },
+              {
+                "details": [],
+                "id": "r3-nhc-rehab",
+                "name": "国家卫生健康委员会《综合医院康复医学科建设与管理指南》",
+                "url": "https://www.nhc.gov.cn/wjw/gfxwj/201105/0fa3554447e84949aa129e88bb1cc7b6.shtml"
               }
             ]
           },
@@ -34889,6 +34329,12 @@
         ]
       },
       "career_snapshot_primary_locale": {
+        "callout": {
+          "$item": "physical-therapists.china-salary.wave1-national-sector.1",
+          "block": "china-salary",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "type": "prose"
+        },
         "salary": {
           "bls_table": [
             {
@@ -37221,10 +36667,10 @@
       },
       {
         "block": "path",
-        "copy_key": "career.item.entry-portfolio",
-        "id": "physical-therapists.path.entry-portfolio.1",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "physical-therapists.entry-work-sample-data.2",
         "location": "entry_decisions",
-        "type": "cards"
+        "type": "notice"
       },
       {
         "block": "path",
@@ -37232,20 +36678,6 @@
         "id": "physical-therapists.path.interview-probation.1",
         "location": "entry_decisions",
         "type": "table"
-      },
-      {
-        "block": "path",
-        "copy_key": "career.item.seven-day-trial",
-        "id": "physical-therapists.path.seven-day-trial.1",
-        "location": "entry_decisions",
-        "type": "timeline"
-      },
-      {
-        "block": "path",
-        "copy_key": "career.item.seven-day-decision",
-        "id": "physical-therapists.path.seven-day-decision.1",
-        "location": "entry_decisions",
-        "type": "list"
       },
       {
         "block": "path",
@@ -37552,6 +36984,18 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "卫生和社会工作 108,309 元",
+        "fact_id": "wave1-cn-sector-2025",
+        "market": "中国大陆",
+        "measure": "行业就业人员年平均工资",
+        "occupation_scope": "规模以上企业行业门类，非本职业",
+        "period": "2025",
+        "source_refs": [
+          "wave1-source-1"
+        ]
       }
     ]
   },
@@ -37604,17 +37048,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "物理治疗师如何评估功能、记录训练与复测？比较大陆康复岗位、美国 DPT 与州许可，再做一次虚构 PT-06 交接练习。"
+      "text": "物理治疗师记录关节活动度、肌力和移动能力，再用可比的复测条件判断功能变化应由谁复核。骨科术后与神经康复岗位的评估重点不同。"
     },
     "title": {
       "availability": "available",
-      "text": "物理治疗师"
+      "text": "物理治疗师｜运动功能评估、薪资与资格"
     }
   },
-  "source_content_sha256": "28ce6a7646fcb7677c00bde349d545915200a88ce38b3e33e7edd881f5f952d8",
+  "source_content_sha256": "70f155c35ccdf14a4ee5a116c5f8563f0b870d13d3908378fe1db2f00b4ecd4d",
   "subject": {
     "canonical_slug": "physical-therapists",
     "name": "物理治疗师",
-    "summary": "物理治疗师通过功能评估、目标、治疗与复测帮助患者改善活动。选择职业时先看能否持续与患者沟通、记录反应、调整计划，再核各地资格。美国 PT 与大陆医院的康复治疗师按任务对照。"
+    "summary": "物理治疗师记录关节活动度、肌力和移动能力，再用可比的复测条件判断功能变化应由谁复核。骨科术后与神经康复岗位的评估重点不同。"
   }
 }

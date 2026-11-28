@@ -26,6 +26,9 @@
       "fact:us-wage-p90": {
         "status": "pending_mapping"
       },
+      "fact:wave1-cn-sector-2025": {
+        "status": "pending_mapping"
+      },
       "item:information-security-engineers.ai-impact.ai-impact-table.1": {
         "status": "pending_mapping"
       },
@@ -62,6 +65,9 @@
       "item:information-security-engineers.china-salary.career-snapshot-primary-locale.4": {
         "status": "pending_mapping"
       },
+      "item:information-security-engineers.china-salary.wave1-national-sector.1": {
+        "status": "pending_mapping"
+      },
       "item:information-security-engineers.direction-comparison.adjacent-career-comparison-table.1": {
         "status": "pending_mapping"
       },
@@ -75,6 +81,9 @@
         "status": "pending_mapping"
       },
       "item:information-security-engineers.direction-comparison.adjacent-career-comparison-table.5": {
+        "status": "pending_mapping"
+      },
+      "item:information-security-engineers.entry-work-sample-data.2": {
         "status": "pending_mapping"
       },
       "item:information-security-engineers.fit.riasec-fit-block.1": {
@@ -141,6 +150,9 @@
         "status": "pending_mapping"
       },
       "item:information-security-engineers.path.career-path-block.8": {
+        "status": "pending_mapping"
+      },
+      "item:information-security-engineers.path.entry-work-sample-data.1": {
         "status": "pending_mapping"
       },
       "item:information-security-engineers.profile.career-quick-answers-block.8": {
@@ -7246,7 +7258,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "工作需要把技术控制与业务要求接起来：说明资产与风险，记录拟采用的控制及核验方法，并向有权限的决策者说明未决问题。技术发现本身不授予访问或生产变更权限。"
+              "先完成入行区的纸面工单，再对照问答中的样答。"
             ]
           },
           "id": "information-security-engineers.quick-decision.fermat-decision-card.2",
@@ -7260,7 +7272,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "虚构访问控制与证据核对练习。输入：WEB-A是公开目录，API-B是内部服务，LOG-C是审计记录库。业务规则：访客仅可访问WEB-A；WEB-A可调用API-B；只有指定运维角色可读LOG-C。题设批准的变更时窗为20:00—20:30，仅做纸面评审。记录：09:00访客→WEB-A获准；09:02访客→API-B被拒；09:05未知角色请求LOG-C，未记录处理结果。待审方案：允许访客直接访问API-B；拟19:55实施；未写回退负责人或验证方法；把09:05写成“已确认数据泄露”。交付：访问矩阵、三项纸面测试及预期、事实与推断分开的时间线、未知项和需批准问题表。参考核对：访客直连违反API-B题设规则；19:55超出题设时窗；回退负责人和验证方法缺失；09:05不足以证明访问成功或泄露。拒绝记录不等于成功入侵，不补造缺失结果。资产、规则及时间均为编辑题设，不是法律要求或生产规程。不扫描、访问或修改真实系统；本练习用于探索细致核验的兴趣，不能证明岗位胜任或授予权限。"
+              "先完成入行区的纸面工单，再对照问答中的样答。"
             ]
           },
           "id": "information-security-engineers.quick-decision.fermat-decision-card.3",
@@ -7296,13 +7308,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "信息安全工程师O*NET15-1299.05制定并监督信息安全制度，构建维护安全技术，设计控制、监测响应与开展取证调查；可能监督系统评估。典型流程为编辑任务归纳。官方工资与就业展示Computer Occupations, All Other父组，本页列该父组并明确非精确职业，不用安全分析师代作本职业数值。"
+              "安全工程交付常包括 WAF 规则复核、EDR 告警处置交接、IAM 权限矩阵、防火墙 变更单和 漏洞修复 回归证据。等保 2.0 的 GB/T 22239 提供基本要求；数据安全法 约束数据处理活动。把 Terraform 策略差异、审批人和回退条件一起交给值班组，能减少下次追溯成本。"
             ]
           },
           "id": "information-security-engineers.profile.definition-block.1",
           "source_refs": [
-            "onet-exact",
-            "onet-parent-summary"
+            "wave1-source-2",
+            "wave1-source-3"
           ],
           "type": "prose"
         },
@@ -7545,7 +7557,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页尚未建立可核验的本职业任务级AI效果依据，暂不提供量化影响分数。虚构记录整理、配置差异说明和报告草稿仅是待验证的编辑试验情景，不据此推断生产安全效果、采用率、节时或岗位减少。"
+              "自动化可汇总资产和工单差异。负责变更的人仍要确认适用系统、补偿控制和验收证据。"
             ]
           },
           "id": "information-security-engineers.ai-impact.ai-impact-table.2",
@@ -7603,7 +7615,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可选择把草稿与本页WEB-A/API-B/LOG-C题设逐项比对，核每个断言、区分未知项；真实获授权场景仍须另行评估效果。本页未建立节时或安全结果。"
+              "先核审批日期和权限责任人，自动摘要可辅助整理。"
             ]
           },
           "id": "information-security-engineers.ai-impact.ai-impact-table.6",
@@ -7653,7 +7665,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国分类列有信息安全工程技术人员（2-02-10-07），职责与本页职业有重合，但不是已核实的一对一跨国对应。人社部原表标注2025年的全国企业抽样调查中，该中国分类职业第50分位工资为8.00万元/年，不代表所有安全岗位、城市起薪或个人收入。"
+              "本职业全国工资分位数待核，行业年均工资仅作范围对照。"
             ]
           },
           "id": "information-security-engineers.china-salary.career-snapshot-primary-locale.1",
@@ -7668,13 +7680,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国工资参考全国企业抽样调查的中国分类职业，不是O*NET精确跨国工资。原表工资价位包括基本工资、奖金、津贴补贴、加班及特殊情况下工资；本页未取得该职业样本人数、税前税后说明或明确报告期起止日。"
+              "中国大陆部分采用国家统计局发布的行业平均工资作背景。本页未取得可复核的信息安全工程技术人员职业级分位；当地报价应按岗位职责、职级与值班条件比较。"
             ]
           },
           "id": "information-security-engineers.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
-            "cn-enterprise-wages-2025",
-            "cn-classification-2022"
+            "wave1-source-1"
           ],
           "type": "prose"
         },
@@ -7683,13 +7694,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "原表2021007“信息安全工程技术人员”第10、25、50、75、90分位分别为4.10、5.40、8.00、12.84、20.72万元/年。分位为工资排序位置，不是资历等级；不能填作城市月薪、个人实发收入或全部安全岗位工资。"
+              "本页没有取得可复核的信息安全工程技术人员全国工资五分位。比较录用条件时，按同城、同职级和同类雇主核对固定年收、值班补贴和奖金兑现。"
             ]
           },
           "id": "information-security-engineers.china-salary.career-snapshot-primary-locale.3",
           "source_refs": [
-            "cn-enterprise-wages-2025",
-            "cn-classification-2022"
+            "wave1-source-1"
           ],
           "type": "prose"
         },
@@ -7705,6 +7715,17 @@
           "source_refs": [
             "review-nist-ai-rmf"
           ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "国家统计局 2025 年表 7 规模以上企业就业人员年平均工资：信息传输、软件和信息技术服务业 242,019 元。这是行业及企业规模口径，不能当作该职业工资或当地报价。比较岗位时，把固定年收、值班补贴和项目奖金分开，再对照变更审批权。"
+            ]
+          },
+          "id": "information-security-engineers.china-salary.wave1-national-sector.1",
           "type": "prose"
         }
       ]
@@ -7738,7 +7759,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025父组全国年度10/25/50/75/90工资分位55,940/79,370/116,580/157,500/188,470美元，时薪中位56.05美元；非15-1299.05精确工资。 O*NET15-1299.05官方展示父组Computer Occupations, All Other（SOC15-1299）：2025就业471,200人至2035预计495,300人，增长5%，2025—2035年均空缺27,000个；含增长与替换，非精确工程师预测。"
+              "共同判断口径见职业原证。"
             ]
           },
           "fact_refs": [
@@ -7891,7 +7912,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "用给定WEB-A/API-B/LOG-C练习形成访问矩阵、三项纸面测试、事实/推断时间线及核实问题表，对照参考，不把纸面设计写成已执行测试或变更。"
+              "检查你是否愿意逐条核对有效期和归属，并留一条责任人待确认记录。"
             ]
           },
           "id": "information-security-engineers.fit.riasec-fit-block.5",
@@ -8081,13 +8102,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "学历、训练、考试、录用与生产权限分开。高校课程只能作为学习例子，不是全国准入规则。广州2026官方考试问答列中级“信息安全工程师”，报名不受学历、资历、年龄限制；这是考试报名条件，不证明能力、录用条件或访问系统权限。相邻数据安全标准不建立本职业的准入条件。"
+              "从系统、网络或云平台运维入手，跟一次权限变更的发起、审批、验收和回退。软考信息安全工程师属中级，用人单位可按有关规定聘任相应专业技术职务。CISP 是中国信息安全测评中心的人员能力认定。测试、生产访问与变更权限由项目书面授权。"
             ]
           },
           "id": "information-security-engineers.path.career-path-block.4",
           "source_refs": [
-            "review-gz-exam",
-            "review-nuist"
+            "wave1-source-4",
+            "wave1-source-5",
+            "wave1-source-6"
           ],
           "type": "prose"
         },
@@ -8096,7 +8118,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "核虚构资产表、给定访问规则及纸面评审范围；真实岗位应先核分配范围，再处理系统或数据。"
+              "核资产表、给定访问规则及纸面评审范围；真实岗位应先核分配范围，再处理系统或数据。"
             ]
           },
           "id": "information-security-engineers.path.career-path-block.5",
@@ -8110,7 +8132,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "保留本页纸面题的资产规则表、访问矩阵、三项拟定测试、事实/推断时间线及未知项，注明虚构且未执行。"
+              "交一页权限复核表，注明状态、到期依据、缺项和接手方。"
             ]
           },
           "id": "information-security-engineers.path.career-path-block.6",
@@ -8150,6 +8172,51 @@
             "nist-ssdf"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "wave1-trial-1",
+                "values": [
+                  "题设",
+                  "核对日期为 6 月 10 日。记录 A：报表只读审批到 6 月 12 日；B：工资报表只读审批到 6 月 8 日；C：构建发布角色无责任人。题设要求过期的交撤销复核，无责任人的先确认归属。"
+                ]
+              },
+              {
+                "id": "wave1-trial-2",
+                "values": [
+                  "任务",
+                  "把三条记录归入保留、撤销复核或确认归属，并统计需要后续处理的条目。只写复核登记。"
+                ]
+              },
+              {
+                "id": "wave1-trial-3",
+                "values": [
+                  "交接",
+                  "使用纸面记录，不登录、不扫描、不修改任何账户、服务或策略。"
+                ]
+              }
+            ]
+          },
+          "id": "information-security-engineers.path.entry-work-sample-data.1",
+          "title": "纸面试做：核对三条权限登记",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "A 保留，其审批到 6 月 12 日；B 的审批 6 月 8 日到期，交权限审批人复核撤销；C 缺责任人，交服务登记负责人确认归属。待跟进两条，分别记录到期日和缺失字段。反馈前，两条都保持待处理状态。"
+            ]
+          },
+          "id": "information-security-engineers.entry-work-sample-data.2",
+          "title": "纸面样答：核对三条权限登记",
+          "type": "notice",
+          "visibility": "public"
         }
       ]
     },
@@ -8180,7 +8247,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET15-1299.05官方展示父组Computer Occupations, All Other（SOC15-1299）：2025就业471,200人至2035预计495,300人，增长5%，2025—2035年均空缺27,000个；含增长与替换，非精确工程师预测。 中国精确需求未取得；NIST治理与Secure by Design原则不建立需求贡献大小或因果。"
+              "中国精确需求未取得；NIST治理与Secure by Design原则不建立需求贡献大小或因果。"
             ]
           },
           "id": "information-security-engineers.market-signals.market-signal-card.2",
@@ -8281,7 +8348,7 @@
                 ]
               },
               {
-                "answer": "本页尚未建立可核验的本职业任务级AI效果依据，暂不提供量化影响分数。虚构记录整理、配置差异说明和报告草稿仅是待验证的编辑试验情景，不据此推断生产安全效果、采用率、节时或岗位减少。",
+                "answer": "本页尚未建立可核验的本职业任务级AI效果依据，暂不提供量化影响分数。记录整理、配置差异说明和报告草稿仅是待验证的编辑试验情景，不据此推断生产安全效果、采用率、节时或岗位减少。",
                 "id": "information-security-engineers.faq.4",
                 "question": "AI 会如何影响这个职业？",
                 "question_key": "career.faq.information-security-engineers.ai-impact",
@@ -8302,22 +8369,21 @@
                 ]
               },
               {
-                "answer": "原表2021007“信息安全工程技术人员”第10、25、50、75、90分位分别为4.10、5.40、8.00、12.84、20.72万元/年。分位为工资排序位置，不是资历等级；不能填作城市月薪、个人实发收入或全部安全岗位工资。该中国职业样本不能视为美国职业的精确等价；企业抽样不代表全部机关事业单位或自雇人员。",
+                "answer": "国家统计局表 7 的 2025 年规上企业信息传输、软件和信息技术服务业年均工资为 242,019 元。它是行业口径。本职业的全国工资分位数待核，不用行业均值替补。",
                 "id": "information-security-engineers.faq.6",
                 "question": "中国大陆薪资证据是什么？",
                 "question_key": "career.faq.information-security-engineers.china-pay",
                 "source_refs": [
-                  "cn-enterprise-wages-2025",
-                  "cn-classification-2022"
+                  "wave1-source-1"
                 ]
               },
               {
-                "answer": "O*NET为15-1299.05展示的工资来自15-1299父组：2025年年薪中位116,580美元，第10分位55,940美元、第90分位188,470美元，中位时薪56.05美元。这不是信息安全工程师单列工资，分位不等于起薪、职级或个人实发收入。",
+                "answer": "2025 年 5 月美国 BLS OEWS 的 15-1299 上位计算机职业组中位年薪为 116,580 美元。它是 O*NET 为该工程职业引用的关联序列，并非岗位单列工资。",
                 "id": "information-security-engineers.faq.7",
                 "question": "美国薪资证据是什么？",
                 "question_key": "career.faq.information-security-engineers.us-pay",
                 "source_refs": [
-                  "source-pack-onet-localwages"
+                  "r3-us-parent"
                 ]
               },
               {
@@ -8350,7 +8416,7 @@
                 ]
               },
               {
-                "answer": "先做本页完整WEB-A/API-B/LOG-C虚构练习并对照参考，探索证据核对兴趣，不据此推断录用适配或生产操作胜任。",
+                "answer": "试做后对照样答，检查哪些权限登记还需追踪。",
                 "id": "information-security-engineers.faq.11",
                 "question": "这个职业值得进一步试验吗？",
                 "question_key": "career.faq.information-security-engineers.career-worth",
@@ -8360,7 +8426,7 @@
                 ]
               },
               {
-                "answer": "中国、美国、全球与具体法域证据分别陈述；工资、就业、资格、安全和 AI 结论不得跨范围拼接。；信息安全工程师页面提供职业决策与安全试验信息，不替代所在地法律、医疗、金融、安全、执业或其他专业意见。；任何「证据不足」都只表示有界检索后未建立安全数据，不允许用代理或模型记忆伪造数字。本页只覆盖 O*NET/SOC 15-1299.05「信息安全工程师」这一精确职业。",
+                "answer": "纸面试做检验你能否识别到期和缺失记录。真实系统的访问、变更和验收先确认工单及书面授权。",
                 "id": "information-security-engineers.faq.boundary",
                 "question": "页面使用边界是什么？",
                 "question_key": "career.faq.information-security-engineers.boundary",
@@ -8746,7 +8812,7 @@
               },
               {
                 "details": [
-                  "本页尚未建立可核验的本职业任务级AI效果依据，暂不提供量化影响分数。虚构记录整理、配置差异说明和报告草稿仅是待验证的编辑试验情景，不据此推断生产安全效果、采用率、节时或岗位减少。",
+                  "本页尚未建立可核验的本职业任务级AI效果依据，暂不提供量化影响分数。记录整理、配置差异说明和报告草稿仅是待验证的编辑试验情景，不据此推断生产安全效果、采用率、节时或岗位减少。",
                   "控制设计、部署监测及响应恢复三项原档位均待核，原67%估算撤回。"
                 ],
                 "evidence_type": "编辑模型估算方法",
@@ -8776,13 +8842,13 @@
               {
                 "accessed_at": "2026-11-08",
                 "details": [
-                  "表1-3职业2021007及附注：全国企业抽样工资分位。"
+                  "作为调查资料入口保留，本页未引用该职业的工资数值。"
                 ],
                 "evidence_type": "official enterprise wage survey",
                 "id": "cn-enterprise-wages-2025",
-                "limitation": "按原文分组、人群和期间使用，不推出个人录用、收入或城市起薪。",
+                "limitation": "信息安全工程技术人员的全国职业级五分位未取得可复核数据。",
                 "market": "中国大陆",
-                "name": "企业薪酬调查信息（2025年）",
+                "name": "人力资源和社会保障部｜企业职业工资调查资料入口",
                 "period": "原表2025年；2026-07-08发布",
                 "publisher": "人力资源和社会保障部",
                 "scope": "contextual",
@@ -9023,6 +9089,48 @@
                 "publisher": "美国劳工部就业与培训管理局",
                 "scope": "exact",
                 "url": "https://creativecommons.org/licenses/by/4.0/"
+              },
+              {
+                "details": [],
+                "id": "wave1-source-1",
+                "name": "国家统计局《2025 年城镇单位就业人员年平均工资情况》表 7",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [],
+                "id": "wave1-source-2",
+                "name": "国家标准 GB/T 22239-2019",
+                "url": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=BAFB47E8874764186BDB7865E8344DAF"
+              },
+              {
+                "details": [],
+                "id": "wave1-source-3",
+                "name": "《中华人民共和国数据安全法》",
+                "url": "https://wap.miit.gov.cn/zwgk/zcwj/flfg/art/2022/art_284b390b84484f10b0e43eeafaad0f6d.html"
+              },
+              {
+                "details": [],
+                "id": "wave1-source-4",
+                "name": "工信部计算机技术与软件专业技术资格考试暂行规定",
+                "url": "https://www.miit.gov.cn/jgsj/rjj/rcgz/art/2020/art_9697b8faa3894e4ba1b27b641970bc62.html"
+              },
+              {
+                "details": [],
+                "id": "wave1-source-5",
+                "name": "工信部新增信息安全工程师考试专业通知",
+                "url": "https://www.miit.gov.cn/jgsj/rjj/rcgz/art/2020/art_3e4b908ac3424f518e923ed268124004.html"
+              },
+              {
+                "details": [],
+                "id": "wave1-source-6",
+                "name": "中国信息安全测评中心人员注册",
+                "url": "https://www.itsec.gov.cn/ryzc/"
+              },
+              {
+                "details": [],
+                "id": "r3-us-parent",
+                "name": "O*NET 引用 BLS 的 15-1299 美国全国工资行",
+                "url": "https://www.onetonline.org/link/localwages/15-1299.05"
               }
             ]
           },
@@ -9216,7 +9324,7 @@
         "action_rows": [
           {
             "人群": "入行者",
-            "应对重点": "用完整WEB-A/API-B/LOG-C纸面题及参考核对。"
+            "应对重点": "先核记录范围、到期时间和后续交接。"
           },
           {
             "人群": "在岗者",
@@ -9297,12 +9405,12 @@
         },
         "difference_rows": [
           {
-            "AI主要改变": "虚构输入上的待验证试验，效果未建立",
+            "AI主要改变": "输入上的待验证试验，效果未建立",
             "仍由人负责": "责任与授权",
             "方向": "安全工程与落地"
           },
           {
-            "AI主要改变": "虚构输入上的待验证试验，效果未建立",
+            "AI主要改变": "输入上的待验证试验，效果未建立",
             "仍由人负责": "原始记录核对",
             "方向": "监测与响应"
           }
@@ -9624,7 +9732,7 @@
       },
       "career_ai_description_block": {
         "body": [
-          "本页尚未建立可核验的本职业任务级AI效果依据，暂不提供量化影响分数。虚构记录整理、配置差异说明和报告草稿仅是待验证的编辑试验情景，不据此推断生产安全效果、采用率、节时或岗位减少。"
+          "本页尚未建立可核验的本职业任务级AI效果依据，暂不提供量化影响分数。记录整理、配置差异说明和报告草稿仅是待验证的编辑试验情景，不据此推断生产安全效果、采用率、节时或岗位减少。"
         ],
         "heading": "信息安全工程师的工作对象与 AI 边界"
       },
@@ -10166,22 +10274,28 @@
         ]
       },
       "career_snapshot_primary_locale": {
+        "callout": {
+          "$item": "information-security-engineers.china-salary.wave1-national-sector.1",
+          "block": "china-salary",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "type": "prose"
+        },
         "salary": {
           "bls_table": [
             {
-              "指标": "中国分类职业企业样本·第10分位（原表2025年）",
-              "数值": "4.10万元/年",
-              "说明": "信息安全工程技术人员2021007，全国企业抽样；非城市起薪或个人收入。"
+              "指标": "职业工资原表",
+              "数值": "待核",
+              "说明": "行业均值见工资正文。"
             },
             {
-              "指标": "中国分类职业企业样本·第50分位（原表2025年）",
-              "数值": "8.00万元/年",
-              "说明": "信息安全工程技术人员2021007，全国企业抽样；非城市起薪或个人收入。"
+              "指标": "职业工资原表",
+              "数值": "待核",
+              "说明": "行业均值见工资正文。"
             },
             {
-              "指标": "中国分类职业企业样本·第90分位（原表2025年）",
-              "数值": "20.72万元/年",
-              "说明": "信息安全工程技术人员2021007，全国企业抽样；非城市起薪或个人收入。"
+              "指标": "职业工资原表",
+              "数值": "待核",
+              "说明": "行业均值见工资正文。"
             }
           ],
           "china_ai_row": {
@@ -10239,8 +10353,8 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "中国分类列有信息安全工程技术人员（2-02-10-07），职责与本页职业有重合，但不是已核实的一对一跨国对应。人社部原表标注2025年的全国企业抽样调查中，该中国分类职业第50分位工资为8.00万元/年，不代表所有安全岗位、城市起薪或个人收入。行业均值另作背景，不能代替职业分位。",
-          "china_ref": "人社部2025年企业职业工资原表：https://www.mohrss.gov.cn/SYrlzyhshbzb/laodongguanxi_/fwyd/202607/t20260708_579822.html",
+          "china_open": "本职业全国工资分位数待核，行业年均工资仅作范围对照。",
+          "china_ref": "中国大陆行业工资背景见国家统计局 2025 年城镇单位就业人员平均工资。",
           "china_salary_note": "中国大陆口径与美国、全球及具体单位分开，不能跨市场拼接。",
           "china_salary_table": [
             {
@@ -10475,7 +10589,7 @@
         "title": "哪些人可能愿意进一步了解信息安全工程工作？"
       },
       "fit_decision_checklist": {
-        "boundary": "这是工作样本核对，不是人格诊断或录用结论。",
+        "boundary": "不完整的资产台账会让你反复找系统负责人；变更窗口又常定在晚间。一条规则既要让业务继续运行，又要向运维和审计解释范围。若长期值守、责任边界争议和逐条复核让你难以恢复精力，先试单一系统的治理岗位。",
         "how": {
           "$item": "information-security-engineers.quick-decision.fermat-decision-card.3",
           "block": "quick-decision",
@@ -10872,7 +10986,7 @@
             "question": "是否有可观察交付？"
           },
           {
-            "answer": "先做本页完整虚构访问控制题，逐项对照参考，记录哪些任务让你愿意继续了解及尚不明确之处。",
+            "answer": "先做本页完整访问控制题，逐项对照参考，记录哪些任务让你愿意继续了解及尚不明确之处。",
             "question": "下一步试验是什么？"
           }
         ],
@@ -11223,7 +11337,7 @@
           "source": "O*NET工资与趋势；BLS OEWS概念；人社部2025年表列企业工资；2022中国职业分类。具体链接见来源登记。",
           "updated_at": "2026年11月9日核对；各来源期间与限制另列。"
         },
-        "note": "美国工资与趋势为O*NET展示的15-1299父组；中国工资为2021007分类职业的全国企业抽样数据，不作精确等价。城市、学历分组工资和实际AI工资影响仍未取得。"
+        "note": "美国工资采用 15-1299 上位职业组。中国大陆部分引用国家统计局行业平均工资，提供行业背景；本页未取得该职业全国工资分位。"
       },
       "work_context_block": {
         "$item": "information-security-engineers.profile.work-context-block.5",
@@ -11244,6 +11358,20 @@
         "id": "information-security-engineers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "information-security-engineers.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "information-security-engineers.entry-work-sample-data.2",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": "/zh/career/jobs/information-security-engineers",
@@ -11351,14 +11479,26 @@
       },
       {
         "derivation": null,
-        "display_value": "8.00万元/年（原表2025年企业样本第50分位）",
+        "display_value": "未取得可复核的本职业全国工资分位数",
         "fact_id": "cn-2021007-wage-p50-2025",
         "market": "中国大陆",
-        "measure": "企业从业人员年度工资价位第50分位",
-        "occupation_scope": "中国信息安全工程技术人员（2021007）企业调查样本",
-        "period": "原表2025年；2026-07-08发布",
+        "measure": "公开职业工资原证缺口",
+        "occupation_scope": "信息安全工程技术人员职业口径待核",
+        "period": "2025",
         "source_refs": [
-          "cn-enterprise-wages-2025"
+          "wave1-source-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "信息传输、软件和信息技术服务业 242,019 元",
+        "fact_id": "wave1-cn-sector-2025",
+        "market": "中国大陆",
+        "measure": "行业就业人员年平均工资",
+        "occupation_scope": "规模以上企业行业门类，非本职业",
+        "period": "2025",
+        "source_refs": [
+          "wave1-source-1"
         ]
       }
     ]
@@ -11402,9 +11542,9 @@
       },
       {
         "availability": "available",
-        "fact_ref": "cn-2021007-wage-p50-2025",
+        "fact_ref": "wave1-cn-sector-2025",
         "key": "china_pay",
-        "label": "中国分类职业·企业样本工资中位（2025）"
+        "label": "规模以上企业信息服务业年均工资（2025年）"
       }
     ]
   },
@@ -11412,17 +11552,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "了解信息安全工程师的工作任务、入行训练与授权边界。美国统计使用O*NET展示的15-1299父组；中国工资参考人社部2025年表列信息安全工程技术人员企业样本，中美分类不视为一一对应。"
+      "text": "信息安全工程师负责把访问和数据保护要求落实为可回退的变更。接到应用上线工单时，先厘清系统范围、策略所有人、验证证据和回退审批。"
     },
     "title": {
       "availability": "available",
-      "text": "信息安全工程师职业判断：工作、入行与风险边界"
+      "text": "信息安全工程师｜安全控制、薪资与入行"
     }
   },
-  "source_content_sha256": "9faabdc70fa909a95d1aa0614a5e726a6fefe829218285a18b547fc52464eb2f",
+  "source_content_sha256": "b85a6bb793bceccd80ac620f56dbf0563a9ffba24a42a7ee514d749d6921c725",
   "subject": {
     "canonical_slug": "information-security-engineers",
     "name": "信息安全工程师",
-    "summary": "信息安全工程师制定安全制度，构建和维护防护技术，并设计、评估系统与数据的安全控制。工作可涉及监测、事件响应和取证调查，具体职责与权限按岗位核对。下方美国工资与就业属于15-1299父组，不是信息安全工程师单列统计。"
+    "summary": "信息安全工程师负责把访问和数据保护要求落实为可回退的变更。接到应用上线工单时，先厘清系统范围、策略所有人、验证证据和回退审批。"
   }
 }

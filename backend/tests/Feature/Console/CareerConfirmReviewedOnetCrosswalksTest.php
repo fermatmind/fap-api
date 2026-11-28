@@ -74,7 +74,7 @@ final class CareerConfirmReviewedOnetCrosswalksTest extends TestCase
 
     public function test_batch_three_binds_the_live_body_and_confirms_only_matching_rows(): void
     {
-        $path = database_path('data/career_onet_crosswalk_review_batch3_20261111.json');
+        $path = database_path('data/career_onet_crosswalk_review_batch3_wave1_20261128.json');
         $report = json_decode(file_get_contents($path), true, flags: JSON_THROW_ON_ERROR);
         $this->bindHistoricalManifest($report['career_manifest_sha256']);
         $rows = array_values(array_filter($report['rows'], static fn (array $row): bool => $row['status'] === 'review_pass'));
@@ -97,6 +97,20 @@ final class CareerConfirmReviewedOnetCrosswalksTest extends TestCase
         $receipt = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
         $this->assertSame([], $receipt['changed_or_planned']);
         $this->assertSame([$rows[0]['slug']], $receipt['already_confirmed_slugs']);
+
+        $historical = json_decode(file_get_contents(database_path('data/career_onet_crosswalk_review_batch3_20261111.json')), true, flags: JSON_THROW_ON_ERROR);
+        $historical['career_manifest_sha256'] = $report['career_manifest_sha256'];
+        $stale = tempnam(sys_get_temp_dir(), 'career-stale-body');
+        try {
+            file_put_contents($stale, json_encode($historical, JSON_THROW_ON_ERROR));
+            $this->assertSame(1, Artisan::call('career:confirm-reviewed-onet-crosswalks', [
+                '--report' => $stale,
+                '--sha256' => hash_file('sha256', $stale),
+            ]));
+            $this->assertStringContainsString('Invalid mapping evidence', Artisan::output());
+        } finally {
+            unlink($stale);
+        }
     }
 
     public function test_batch_five_dry_run_binds_evidence_and_is_idempotent(): void

@@ -2,9 +2,6 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:us-employment": {
         "status": "pending_mapping"
       },
@@ -23,6 +20,21 @@
       "fact:us-wage-p90": {
         "status": "pending_mapping"
       },
+      "fact:wave1-b3-wage-p10": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b3-wage-p25": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b3-wage-p50": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b3-wage-p75": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b3-wage-p90": {
+        "status": "pending_mapping"
+      },
       "item:landscape-architects.ai-impact.ai-impact-table.1": {
         "status": "pending_mapping"
       },
@@ -35,9 +47,6 @@
       "item:landscape-architects.ai-impact.ai-impact-table.4": {
         "status": "pending_mapping"
       },
-      "item:landscape-architects.ai-impact.ai-impact-table.5": {
-        "status": "pending_mapping"
-      },
       "item:landscape-architects.ai-impact.ai-impact-table.6": {
         "status": "pending_mapping"
       },
@@ -45,18 +54,6 @@
         "status": "pending_mapping"
       },
       "item:landscape-architects.ai-impact.ai-impact-table.8": {
-        "status": "pending_mapping"
-      },
-      "item:landscape-architects.china-salary.career-snapshot-primary-locale.1": {
-        "status": "pending_mapping"
-      },
-      "item:landscape-architects.china-salary.career-snapshot-primary-locale.2": {
-        "status": "pending_mapping"
-      },
-      "item:landscape-architects.china-salary.career-snapshot-primary-locale.3": {
-        "status": "pending_mapping"
-      },
-      "item:landscape-architects.china-salary.career-snapshot-primary-locale.4": {
         "status": "pending_mapping"
       },
       "item:landscape-architects.direction-comparison.adjacent-career-comparison-table.1": {
@@ -74,6 +71,9 @@
       "item:landscape-architects.direction-comparison.adjacent-career-comparison-table.5": {
         "status": "pending_mapping"
       },
+      "item:landscape-architects.entry-work-sample-data.2": {
+        "status": "pending_mapping"
+      },
       "item:landscape-architects.fit.riasec-fit-block.1": {
         "status": "pending_mapping"
       },
@@ -87,9 +87,6 @@
         "status": "pending_mapping"
       },
       "item:landscape-architects.fit.riasec-fit-block.5": {
-        "status": "pending_mapping"
-      },
-      "item:landscape-architects.fit.riasec-fit-block.6": {
         "status": "pending_mapping"
       },
       "item:landscape-architects.fit.riasec-fit-block.7": {
@@ -138,6 +135,9 @@
         "status": "pending_mapping"
       },
       "item:landscape-architects.path.career-path-block.8": {
+        "status": "pending_mapping"
+      },
+      "item:landscape-architects.path.entry-work-sample-data.1": {
         "status": "pending_mapping"
       },
       "item:landscape-architects.profile.career-quick-answers-block.8": {
@@ -201,9 +201,6 @@
         "status": "pending_mapping"
       },
       "item:landscape-architects.us-salary.career-snapshot-secondary-locale.1": {
-        "status": "pending_mapping"
-      },
-      "item:landscape-architects.us-salary.career-snapshot-secondary-locale.2": {
         "status": "pending_mapping"
       },
       "item:landscape-architects.us-salary.career-snapshot-secondary-locale.3": {
@@ -7228,12 +7225,11 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Caution signal | This page corresponds to O*NET-SOC 17-1012.00 \"Landscape Architects\". The official scope is: planning and designing land and outdoor spaces for projects such as parks and other recreational facilities, airports, highways, hospitals, schools, land subdivisions, and commercial, industrial, and residential sites. Typical tasks include communicating requirements with clients and engineering parties, surveying and analyzing site data such as topography and drainage, developing site plans and planting and materials schemes, preparing specifications and cost estimates, and checking during construction whether the site conforms to the drawings. The core deliverable is well-founded, reviewable design documents and implementation check records, not \"drawing a nice-looking picture\". Risks come from licensed practice and seal authority, professional ethics, the accuracy of site data and drainage analysis, the environment and public safety, and the documentation of design changes and contractor communication. The U.S. figures use the BLS OOH new-period framing (2025 employment 23,500; 2025—2035 growth 4%, average annual openings about 1,700; the May 2025 median annual wage 79,870 USD; main industry professional, scientific, and technical services). For the China wage evidence boundary, see the China salary section. If you find it hard to bear multi-disciplinary coordination, repeated client changes, and schedule pressure, you should treat these as real costs that need careful weighing."
+              "Compare the work setting and its handoff demands."
             ]
           },
           "id": "landscape-architects.quick-decision.fermat-decision-card.1",
           "source_refs": [
-            "source-pack-onet-details",
             "bls-ooh",
             "asla-ethics"
           ],
@@ -7244,12 +7240,11 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Ownership of judgment | Real fit comes from whether you can accomplish three things within the same job: make the design real (check the site and client requirements, analyze topography, drainage, and existing conditions, develop site plans and planting and materials schemes, prepare specifications and cost estimates, and produce reviewable design documents); keep licensing and ethics under control (practice within the licensed scope, seal within authorized limits, follow professional ethics and conflict-of-interest rules, comply with codes and public health, safety, and welfare requirements, and act according to the laws and licensing board rules of each jurisdiction); and bear a definable position responsibility (be responsible for the basis of your own designs and documents, and refer matters beyond your practice scope or requiring another professional's signature through the proper process). It is recommended that you test this with a verifiable experience (using public base maps and a fictional site to complete a conditions analysis, two sketch schemes, and a self-check list), rather than relying only on the conclusions of an interest questionnaire."
+              "See the related work example for the shared criteria."
             ]
           },
           "id": "landscape-architects.quick-decision.fermat-decision-card.2",
           "source_refs": [
-            "source-pack-onet-details",
             "bls-ooh",
             "asla-ethics",
             "asla-licensure"
@@ -7261,12 +7256,11 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Judging suitability | Use the fixed Z site of 200, T / U and the two lines, recompute A6400 exceeding 400 and crossing T, and B5800 leaving 200 but crossing U, which is pending verification; revise the \"constructible\" draft; see the path for the four works and the seven-day plan of 20—30 minutes per day. Use only paper-based fictional materials, and make no real code judgment, drainage compliance finding, or construction seal."
+              "Complete the entry worksheet before checking the worked answer."
             ]
           },
           "id": "landscape-architects.quick-decision.fermat-decision-card.3",
           "source_refs": [
-            "source-pack-onet-details",
             "clarb-process"
           ],
           "type": "prose"
@@ -7281,7 +7275,6 @@
           },
           "id": "landscape-architects.quick-decision.fermat-decision-card.4",
           "source_refs": [
-            "source-pack-onet-details",
             "bls-ooh",
             "asla-ethics",
             "asla-licensure"
@@ -7301,13 +7294,10 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Landscape architects design outdoor places such as parks, campuses and public spaces. They consider how people move, what can grow and how the site functions. Design, construction and maintenance responsibilities are distinct."
+              "See the related work example for the shared criteria."
             ]
           },
           "id": "landscape-architects.profile.definition-block.1",
-          "source_refs": [
-            "source-pack-onet-summary"
-          ],
           "type": "prose"
         },
         {
@@ -7315,7 +7305,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Confer with clients, engineering personnel, or architects on landscape projects.",
+              "Tie Grading and Drainage sheets to the planting plan, accessibility routes and erosion-control notes. Check whether an NPDES construction stormwater permit applies and whether a SITES framework is part of the client's brief.",
               "Analyze data on conditions such as site location, drainage, or structure location for environmental reports or landscaping plans.",
               "Inspect landscape work to ensure compliance with specifications, evaluate quality of materials or work, or advise clients or construction personnel.",
               "Prepare site plans, specifications, or cost estimates for land development."
@@ -7323,7 +7313,13 @@
           },
           "id": "landscape-architects.profile.responsibilities-block.2",
           "source_refs": [
-            "batch52-onet-core"
+            "wave1-b3-3",
+            "wave1-b3-4",
+            "wave1-b3-5",
+            "wave1-b3-6",
+            "wave1-b3-7",
+            "wave1-b3-8",
+            "wave1-b3-9"
           ],
           "type": "list"
         },
@@ -7332,13 +7328,10 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "Key judgments | The O*NET work context shows: email 100% every day, indoors environmentally controlled 85% every day, telephone conversations 65% every day, face-to-face discussions 53% every day, work with a group or team 63% extremely important, time pressure 60% at least once a week but not every day, exactness or accuracy 50% very important, decision freedom 50% some freedom. The basis for judgment is site and existing-conditions data, code and public safety requirements, and the boundaries of licensed scope and professional ethics. For the environment and rhythm see also: Environment and rhythm | The work alternates mainly between office design and on-site checking: sitting 55% more than half the time, work week 65% more than 40 hours, written letters and memos 50% at least once a week but not every day, contact with others most of the time 40%, coordinating or leading others 37% very important, dealing with external customers 40% very important, task priorities and goals 40% some freedom. The rhythm is driven by bids, approvals, and construction milestones. These are U.S. respondent distributions, not uniform working hours or rhythm for every position in China."
+              "Key judgments | The O*NET work context shows: email 100% every day, indoors environmentally controlled 85% every day, telephone conversations 65% every day, face-to-face discussions 53% every day, work with a group or team 63% extremely important, time pressure 60% at least once a week but not every day, exactness or accuracy 50% very important, decision freedom 50% some freedom. The basis for judgment is site and existing-conditions data, code and public safety requirements, and the boundaries of licensed scope and professional ethics. For the environment and rhythm see also: Environment and rhythm | The work alternates mainly between office design and on-site checking: sitting 55% more than half the time, work week 65% more than 40 hours, written letters and memos 50% at least once a week but not every day, contact with others most of the time 40%, coordinating or leading others 37% very important, dealing with external customers 40% very important, task priorities and goals 40% some freedom. The rhythm is driven by bids, approvals, and construction milestones."
             ]
           },
           "id": "landscape-architects.profile.work-context-block.5",
-          "source_refs": [
-            "source-pack-onet-details"
-          ],
           "type": "prose"
         },
         {
@@ -7350,9 +7343,6 @@
             ]
           },
           "id": "landscape-architects.profile.work-context-block.6",
-          "source_refs": [
-            "onet-details"
-          ],
           "type": "prose",
           "visibility": "internal"
         },
@@ -7366,8 +7356,6 @@
           },
           "id": "landscape-architects.profile.onet-structured-fields-block.7",
           "source_refs": [
-            "source-pack-onet-details",
-            "source-pack-onet-summary",
             "source-pack-onet-localwages",
             "bls-ooh",
             "onet-trends"
@@ -7379,13 +7367,10 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Use a fictional site to show access, circulation, shade and drainage constraints. Compare two designs and explain which measurements or approvals would be needed before construction."
+              "Use a  site to show access, circulation, shade and drainage constraints. Compare two designs and explain which measurements or approvals would be needed before construction."
             ]
           },
           "id": "landscape-architects.profile.career-quick-answers-block.8",
-          "source_refs": [
-            "source-pack-onet-summary"
-          ],
           "type": "prose"
         },
         {
@@ -7397,9 +7382,6 @@
             ]
           },
           "id": "landscape-architects.profile.career-quick-answers-block.9",
-          "source_refs": [
-            "source-pack-onet-summary"
-          ],
           "type": "prose"
         },
         {
@@ -7407,13 +7389,10 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Adjacent duty boundaries | This page covers only the precise O*NET-SOC 17-1012.00 occupation \"Landscape Architects\". Adjacent occupations such as architects (except landscape and naval), architects, agricultural engineers, and architectural and civil drafters differ in work objects, licensed scope, and responsibility boundaries, and cannot be swapped based only on job titles, nor can proxy framings replace jurisdictional licensing, seal authority, and professional ethics requirements. This page does not constitute legal or practice advice."
+              "Adjacent duty boundaries | This page covers only the precise O*NET-SOC 17-1012.00 occupation \"Landscape Architects\". Adjacent occupations such as architects , architects, agricultural engineers, and architectural and civil drafters differ in work objects, licensed scope, and responsibility boundaries, and cannot be swapped based only on job titles, nor can proxy framings replace jurisdictional licensing, seal authority, and professional ethics requirements. This page does not constitute legal or practice advice."
             ]
           },
           "id": "landscape-architects.profile.definition-block.10",
-          "source_refs": [
-            "onet-details"
-          ],
           "type": "prose",
           "visibility": "internal"
         }
@@ -7431,7 +7410,7 @@
           "data": {
             "entries": [
               {
-                "entity": "Architects (except landscape and naval)",
+                "entity": "Architects",
                 "id": "landscape-architects.parity.adjacent.1",
                 "relation": "adjacent-career",
                 "url": "/en/career/jobs/architects"
@@ -7457,9 +7436,6 @@
             ]
           },
           "id": "landscape-architects.direction-comparison.adjacent-career-comparison-table.1",
-          "source_refs": [
-            "onet-details"
-          ],
           "type": "links"
         },
         {
@@ -7467,14 +7443,10 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Architects (except landscape and naval) direction | The core output is building and interior space design with structural and MEP coordination. This occupation focuses on land and outdoor space, landscape elements, and site drainage; the objects and licensing systems differ, and titles alone cannot be swapped."
+              "Architects  direction | The core output is building and interior space design with structural and MEP coordination. This occupation focuses on land and outdoor space, landscape elements, and site drainage; the objects and licensing systems differ, and titles alone cannot be swapped."
             ]
           },
           "id": "landscape-architects.direction-comparison.adjacent-career-comparison-table.2",
-          "source_refs": [
-            "adj-architects",
-            "source-pack-onet-details"
-          ],
           "type": "prose"
         },
         {
@@ -7486,10 +7458,6 @@
             ]
           },
           "id": "landscape-architects.direction-comparison.adjacent-career-comparison-table.3",
-          "source_refs": [
-            "adj-architects",
-            "source-pack-onet-details"
-          ],
           "type": "prose"
         },
         {
@@ -7501,10 +7469,6 @@
             ]
           },
           "id": "landscape-architects.direction-comparison.adjacent-career-comparison-table.4",
-          "source_refs": [
-            "adj-agricultural",
-            "source-pack-onet-details"
-          ],
           "type": "prose"
         },
         {
@@ -7516,10 +7480,6 @@
             ]
           },
           "id": "landscape-architects.direction-comparison.adjacent-career-comparison-table.5",
-          "source_refs": [
-            "adj-drafters",
-            "source-pack-onet-details"
-          ],
           "type": "prose"
         }
       ]
@@ -7539,9 +7499,6 @@
             ]
           },
           "id": "landscape-architects.ai-impact.ai-impact-table.1",
-          "source_refs": [
-            "onet-details"
-          ],
           "type": "prose"
         },
         {
@@ -7549,13 +7506,11 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Generative AI can trial approved fictional record summaries, scheme text, or list drafts; mentions of conventional CAD/GIS design software differ from generative AI adoption. Check back against the original site, codes, and versions, and do not claim efficiency gains without measurement. Supported tasks under supervision and independent practice are separate, and licensing and sealing follow jurisdictional rules; the model confers no authority, and final professional responsibility cannot rest on outputs alone. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+75+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Check back against the original site, codes, and versions, and do not claim efficiency gains without measurement. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+75+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "landscape-architects.ai-impact.ai-impact-table.2",
           "source_refs": [
-            "source-pack-onet-details",
-            "source-pack-onet-hot_tech",
             "ilo-genai",
             "nist-genai-profile",
             "asla-ethics",
@@ -7573,8 +7528,6 @@
           },
           "id": "landscape-architects.ai-impact.ai-impact-table.3",
           "source_refs": [
-            "source-pack-onet-details",
-            "source-pack-onet-hot_tech",
             "ilo-genai",
             "nist-genai-profile",
             "asla-ethics",
@@ -7587,33 +7540,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Difference note | You may use Z to compare the time and errors of manual work and tool-based checking of 200, 6400 / 5800, the T / U conflict, and the erroneous draft; the text being checkable is only a test design condition, and no acceleration is claimed without measurement."
+              "Write down which level is higher and which input still needs survey confirmation."
             ]
           },
           "id": "landscape-architects.ai-impact.ai-impact-table.4",
           "source_refs": [
-            "source-pack-onet-details",
-            "source-pack-onet-hot_tech",
             "ilo-genai",
             "nist-genai-profile",
             "asla-ethics",
             "clarb-process"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.ai-impact-table",
-          "data": {
-            "paragraphs": [
-              "Chain of responsibility | From confirming site data and authorization, through tool processing, human review, and finalizing the design and documents, to construction checking and changes, every step must be clear about who is responsible, and traceable evidence must be retained; design documents and seals must not rely on model outputs alone."
-            ]
-          },
-          "id": "landscape-architects.ai-impact.ai-impact-table.5",
-          "source_refs": [
-            "asla-ethics",
-            "clarb-process",
-            "source-pack-onet-details"
           ],
           "type": "prose"
         },
@@ -7627,8 +7562,6 @@
           },
           "id": "landscape-architects.ai-impact.ai-impact-table.6",
           "source_refs": [
-            "source-pack-onet-details",
-            "source-pack-onet-hot_tech",
             "ilo-genai",
             "nist-genai-profile",
             "asla-ethics",
@@ -7645,9 +7578,6 @@
             ]
           },
           "id": "landscape-architects.ai-impact.ai-impact-table.7",
-          "source_refs": [
-            "onet-details"
-          ],
           "type": "prose"
         },
         {
@@ -7660,8 +7590,6 @@
           },
           "id": "landscape-architects.ai-impact.ai-impact-table.8",
           "source_refs": [
-            "source-pack-onet-details",
-            "source-pack-onet-hot_tech",
             "ilo-genai",
             "nist-genai-profile",
             "asla-ethics",
@@ -7672,72 +7600,11 @@
       ]
     },
     {
-      "availability": "available",
+      "availability": "missing",
       "content_state": "enhanced",
       "copy_key": "career.block.china-salary",
       "id": "china-salary",
-      "items": [
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "Occupation comparison | The U.S. 17-1012.00 on this page is only compared on tasks with landscape design positions in China, and this round established no precise national wage mapping; NBS industry or broad occupational group averages cannot replace a national occupational median or percentile."
-            ]
-          },
-          "id": "landscape-architects.china-salary.career-snapshot-primary-locale.1",
-          "source_refs": [
-            "nbs-wage",
-            "source-pack-onet-summary"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "China scope | Chinese enterprise design qualifications, individual professional titles, employer hiring, and specific document responsibility are each checked separately. The Fuzhou landscaping center reply concerns the professional titles of personnel for enterprise design qualifications and explains the Fujian review scope, and cannot be generalized into a uniform national individual license or mapped onto U.S. licensure. The Beijing Institute of Architectural Design 2026 campus recruitment announcement was published on 2025-09-29: it includes landscape design, requires a bachelor's degree or above in a related field for 2026 graduates, and sets general requirements for code compliance, software, and collaboration; the online application window 2025-09-24—10-24 has closed. It lists no landscape headcount or salary and does not prove current hiring or a national threshold. One line of the text mentions 2024 campus recruitment, which is inconsistent with the title's target window; the explicit 2026 cohort and the 2025 application dates are used instead, without guessing the reason."
-            ]
-          },
-          "id": "landscape-architects.china-salary.career-snapshot-primary-locale.2",
-          "source_refs": [
-            "fuzhou-design-title",
-            "biad-campus-2026"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "Insufficient evidence: this round established no Chinese national occupational wage percentile or starting pay precisely corresponding to U.S. 17-1012.00. The National Bureau of Statistics 2025 tables are industry and broad occupational group pretax annual averages and exclude the self-employed and freelancers; industry averages, U.S. percentiles, and a single posting cannot fill the gap. The Beijing Institute of Architectural Design sample lists no landscape salary, and restricted access does not mean China has no wage statistics."
-            ]
-          },
-          "id": "landscape-architects.china-salary.career-snapshot-primary-locale.3",
-          "source_refs": [
-            "nbs-wage",
-            "biad-campus-2026"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "AI and wages | This round established no causal data on generative AI adoption, efficiency, and wages for this occupation; no pay increase is predicted from software mentions or exposure, nor is it claimed that pay necessarily stays unchanged."
-            ]
-          },
-          "id": "landscape-architects.china-salary.career-snapshot-primary-locale.4",
-          "source_refs": [
-            "ilo-genai",
-            "source-pack-onet-hot_tech"
-          ],
-          "type": "prose"
-        }
-      ]
+      "items": []
     },
     {
       "availability": "available",
@@ -7767,25 +7634,6 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Direct answer | In 2025 the U.S. annual wages at the 10/25/50/75/90 percentiles were 54,770, 64,170, 79,870, 104,090, and 130,190 USD; the official hourly wages were 26.33, 30.85, 38.40, 50.04, and 62.59 USD. The new BLS period runs from 2025 employment of 23,500 to 24,500 in 2035, growth 4%, net gain 1,000; average annual openings about 1,700 including growth and replacements. In 2025 the industries were professional, scientific, and technical services 51% and administrative support 20%; the remaining 29% is only the difference and does not establish a government share. The distribution is not an industry wage."
-            ]
-          },
-          "fact_refs": [
-            "us-wage-p10"
-          ],
-          "id": "landscape-architects.us-salary.career-snapshot-secondary-locale.2",
-          "source_refs": [
-            "source-pack-onet-localwages",
-            "bls-ooh",
-            "source-pack-onet-details"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "data": {
-            "paragraphs": [
               "OEWS covers employer wages and includes incentive pay, excludes overtime pay, non-production bonuses, and employer-paid benefits, and excludes the self-employed; percentiles are not starting pay, after-tax pay, or a personal quote, and official hourly wages are disclosed separately."
             ]
           },
@@ -7801,7 +7649,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Interpretation note | This framing can be used to understand the wage distribution and demand direction for this occupation, but not as a personal quote, and it cannot be compared directly with mainland China or any other market; licensing, employer type, and project type affect actual income, and statistical percentiles do not correspond to a specific position."
+              "Use the U.S. scope described in this section."
             ]
           },
           "id": "landscape-architects.us-salary.career-snapshot-secondary-locale.4",
@@ -7816,12 +7664,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Industry framing | In 2025 the industries were professional, scientific, and technical services 51% and administrative support 20%; the remaining 29% is only the difference and does not establish a government share. BLS2025 employment by industry was architectural, engineering, and related services 50%, landscape services 20%, self-employed 17%, government 8%, and construction 1%, which are finer industries plus the self-employed classification. In 2025 the industry median annual wages were government 107410, architectural, engineering, and related services 82290, construction 71990, and landscape services 65150 USD, and these cannot be applied to the 51/20 broad categories or to self-employed income."
+              "BLS2025 employment by industry was architectural, engineering, and related services 50%, landscape services 20%, self-employed 17%, government 8%, and construction 1%, which are finer industries plus the self-employed classification. In 2025 the industry median annual wages were government 107410, architectural, engineering, and related services 82290, construction 71990, and landscape services 65150 USD, and these cannot be applied to the 51/20 broad categories or to self-employed income."
             ]
           },
           "id": "landscape-architects.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "source-pack-onet-details",
             "bls-ooh"
           ],
           "type": "prose"
@@ -7858,9 +7705,6 @@
             ]
           },
           "id": "landscape-architects.fit.riasec-fit-block.1",
-          "source_refs": [
-            "onet-details"
-          ],
           "type": "prose"
         },
         {
@@ -7868,13 +7712,10 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "Direct answer | The fit signal is a willingness to compare spatial schemes under site constraints, check topography and drainage data, turn client feedback into drawing revisions, and track implementation quality, while complying with the licensed scope and professional ethics, rather than a personality label. Interest and personality tools can only help design exercises and cannot judge licensing qualifications or performance."
+              "Interest and personality tools can only help design exercises and cannot judge licensing qualifications or performance."
             ]
           },
           "id": "landscape-architects.fit.riasec-fit-block.2",
-          "source_refs": [
-            "onet-details"
-          ],
           "type": "prose"
         },
         {
@@ -7886,9 +7727,6 @@
             ]
           },
           "id": "landscape-architects.fit.riasec-fit-block.3",
-          "source_refs": [
-            "onet-details"
-          ],
           "type": "prose"
         },
         {
@@ -7900,9 +7738,6 @@
             ]
           },
           "id": "landscape-architects.fit.riasec-fit-block.4",
-          "source_refs": [
-            "onet-details"
-          ],
           "type": "prose"
         },
         {
@@ -7910,27 +7745,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "Paper exercise | Recompute Z 200, A6400 exceeding 400 and crossing T, and B5800 leaving 200 but crossing U, write a conditions matrix, and revise \"constructible\"; the path has a fixed prompt, a reference deliverable, four works, and a seven-day plan. The works do not prove on-site code compliance, personality performance, or licensing."
+              "Write down which level is higher and which input still needs survey confirmation."
             ]
           },
           "id": "landscape-architects.fit.riasec-fit-block.5",
           "source_refs": [
-            "source-pack-onet-details",
             "clarb-process"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.riasec-fit-block",
-          "data": {
-            "paragraphs": [
-              "Conclusion | The activity preference is closer to a combination of Realistic, Investigative, and Artistic (the O*NET interest code RIA, including the nature and outdoors direction); but an interest code can only help design exercises and cannot judge licensing qualifications or performance."
-            ]
-          },
-          "id": "landscape-architects.fit.riasec-fit-block.6",
-          "source_refs": [
-            "onet-details"
           ],
           "type": "prose"
         },
@@ -7943,9 +7763,6 @@
             ]
           },
           "id": "landscape-architects.fit.riasec-fit-block.7",
-          "source_refs": [
-            "onet-details"
-          ],
           "type": "prose"
         },
         {
@@ -7957,9 +7774,6 @@
             ]
           },
           "id": "landscape-architects.fit.riasec-fit-block.8",
-          "source_refs": [
-            "onet-details"
-          ],
           "type": "prose"
         }
       ]
@@ -7980,8 +7794,7 @@
           },
           "id": "landscape-architects.risk.career-risk-cards.1",
           "source_refs": [
-            "asla-ethics",
-            "onet-details"
+            "asla-ethics"
           ],
           "type": "prose"
         },
@@ -8009,7 +7822,6 @@
           },
           "id": "landscape-architects.risk.career-risk-cards.3",
           "source_refs": [
-            "source-pack-onet-details",
             "asla-ethics"
           ],
           "type": "prose"
@@ -8024,7 +7836,6 @@
           },
           "id": "landscape-architects.risk.career-risk-cards.4",
           "source_refs": [
-            "source-pack-onet-details",
             "asla-ethics"
           ],
           "type": "prose"
@@ -8039,7 +7850,6 @@
           },
           "id": "landscape-architects.risk.career-risk-cards.5",
           "source_refs": [
-            "source-pack-onet-details",
             "asla-ethics"
           ],
           "type": "prose"
@@ -8063,8 +7873,7 @@
           "id": "landscape-architects.path.career-path-block.1",
           "source_refs": [
             "asla-licensure",
-            "clarb-process",
-            "source-pack-onet-details"
+            "clarb-process"
           ],
           "type": "prose"
         },
@@ -8073,13 +7882,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Entry check | First check the specific education, experience, examination, and licensing conditions of the target jurisdiction; do not uniformly treat a bachelor's degree as the only path or assume the exam must come after finishing an internship. The Beijing Institute of Architectural Design 2026 campus recruitment announcement was published on 2025-09-29: it includes landscape design, requires a bachelor's degree or above in a related field for 2026 graduates, and sets general requirements for code compliance, software, and collaboration; the online application window 2025-09-24—10-24 has closed. It lists no landscape headcount or salary and does not prove current hiring or a national threshold. One line of the text mentions 2024 campus recruitment, which is inconsistent with the title's target window; the explicit 2026 cohort and the 2025 application dates are used instead, without guessing the reason."
+              "Compare the day-to-day duties and the scope of supervised assignments before choosing training."
             ]
           },
           "id": "landscape-architects.path.career-path-block.2",
           "source_refs": [
-            "clarb-process",
-            "biad-campus-2026"
+            "clarb-process"
           ],
           "type": "prose"
         },
@@ -8088,14 +7896,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Jurisdiction requirements | All 50 U.S. states and the District of Columbia license landscape architects. Typical education includes an accredited bachelor's or master's degree in landscape architecture, and some jurisdictions allow alternative paths; education, supervised experience, and examination conditions are set separately by the target jurisdiction, and most allow sitting the exam while accumulating experience. Passing the four parts of the LARE satisfies the examination requirements of member jurisdictions and does not automatically confer a license or seal authority. Job Zone4 is a general description of occupational preparation and cannot replace licensing law. Chinese enterprise design qualifications, individual professional titles, employer hiring, and specific document responsibility are each checked separately. The Fuzhou landscaping center reply concerns the professional titles of personnel for enterprise design qualifications and explains the Fujian review scope, and cannot be generalized into a uniform national individual license or mapped onto U.S. licensure."
+              "Jurisdiction requirements | All 50 U.S. states and the District of Columbia license landscape architects. Typical education includes an accredited bachelor's or master's degree in landscape architecture, and some jurisdictions allow alternative paths; education, supervised experience, and examination conditions are set separately by the target jurisdiction, and most allow sitting the exam while accumulating experience. Passing the four parts of the LARE satisfies the examination requirements of member jurisdictions and does not automatically confer a license or seal authority. Job Zone4 is a general description of occupational preparation and cannot replace licensing law. The Fuzhou landscaping center reply concerns the professional titles of personnel for enterprise design qualifications and explains the Fujian review scope, and cannot be generalized into a uniform national individual license or mapped onto U.S. licensure."
             ]
           },
           "id": "landscape-architects.path.career-path-block.3",
           "source_refs": [
             "asla-licensure",
-            "clarb-process",
-            "fuzhou-design-title"
+            "clarb-process"
           ],
           "type": "prose"
         },
@@ -8104,13 +7911,17 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Qualification boundaries | Education, supervised experience, examination, licensing, employer hiring, and specific sealing are different states; ASLA member rules also require direct professional knowledge or supervisory control, and no one signs work without a basis."
+              "All 50 U.S. states license landscape architects. LAAB-accredited education is a common route and CLARB administers the L.A.R.E. California LATC and Texas TBAE set their own application, scope and sealing rules. A seal follows an applicable license and responsible charge."
             ]
           },
           "id": "landscape-architects.path.career-path-block.4",
           "source_refs": [
-            "clarb-process",
-            "asla-ethics"
+            "wave1-b3-4",
+            "wave1-b3-5",
+            "wave1-b3-6",
+            "wave1-b3-7",
+            "wave1-b3-8",
+            "wave1-b3-9"
           ],
           "type": "prose"
         },
@@ -8119,13 +7930,10 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Paper exercise Z | Entirely fictional, and not to be used for field measurement, construction, or code compliance findings. The simulated site runs from southwest (0,0) to northeast (20,10), area 200 simulated m²; the retained tree zone T is x=8—10, y=4—6, and the utility pending-verification zone U is x=14—16, y=7—9. Scheme A has 80 hardscape and 120 planting, with a circulation line (0,5)→(20,5); scheme B has 60 hardscape and 140 planting, with a circulation polyline (0,5)→(0,8)→(20,8)→(20,5). Simulated unit prices are 50 for hardscape and 20 for planting in budget units per m², with a budget of 6000; excludes survey and maintenance. The given rules: Z1 the circulation line may not cross T; Z2 crossing U must be pending verification and must not be marked constructible; Z3 the two area types totaling 200 and a list ≤6000 only means the simulated budget is met. Task: draw the two lines and T / U, recompute the area and cost of both schemes, list violations and pending items, and write the reason for continuing the comparison; the erroneous draft \"B is cheaper and already approved, constructible\" must be corrected. Without elevation, soil, actual utility, and drainage data, do not design real slopes, drainage, or safety codes."
+              "Use the entry work sample to practice one handoff."
             ]
           },
           "id": "landscape-architects.path.career-path-block.5",
-          "source_refs": [
-            "source-pack-onet-details"
-          ],
           "type": "prose"
         },
         {
@@ -8133,13 +7941,10 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Reference deliverable | A area 80+120=200, cost 80×50+120×20=6400, over budget by 400; the y=5 horizontal line crosses T and does not satisfy Z1/Z3. B area 60+140=200, cost 60×50+140×20=5800, remaining 200; the y=8 horizontal line avoids T but crosses U, Z1/Z3 is satisfied, and Z2 utilities are still pending verification. You may continue comparing B and request utility and other materials, but cannot judge either scheme constructible; the unknown must not be treated as nonexistent. Correct the draft to \"B satisfies only the given area and simulated budget; utilities and the real site/codes are pending verification, and no construction documents have been issued\". Four works: a conditions/constraints and schematic drawing marking T / U and the two lines, a cost list for both schemes, a matrix of satisfied/violated/pending conditions, and the unissued version with the reason for choice and the information request. The paper areas do not prove the real layout, plant suitability, or drainage safety, and do not confer sealing qualification."
+              "Write down which level is higher and which input still needs survey confirmation."
             ]
           },
           "id": "landscape-architects.path.career-path-block.6",
-          "source_refs": [
-            "source-pack-onet-details"
-          ],
           "type": "prose"
         },
         {
@@ -8147,12 +7952,11 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Seven-day plan | 20—30 minutes per day: day 1 draw the 200 site and T / U; day 2 draw the A / B circulation lines; day 3 check 200 and 6400 / 5800; day 4 check A crossing T, B crossing U, and the pending items; day 5 correct \"already approved and constructible\" and list the information requests; day 6 ask a peer to cross-check only the four paper works and keep versions; day 7 assemble the deliverable, and separately check the target jurisdiction's degree/experience/examination/licensing and the specific employer's requirements. No field construction, drainage testing, or automatic qualification conclusion."
+              "Write down which level is higher and which input still needs survey confirmation."
             ]
           },
           "id": "landscape-architects.path.career-path-block.7",
           "source_refs": [
-            "source-pack-onet-details",
             "clarb-process"
           ],
           "type": "prose"
@@ -8166,12 +7970,52 @@
             ]
           },
           "id": "landscape-architects.path.career-path-block.8",
-          "source_refs": [
-            "adj-architects",
-            "adj-agricultural",
-            "adj-drafters"
-          ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "wave1-trial-1",
+                "values": [
+                  "Given:",
+                  "The sketch gives spot elevations of 102.4 at P and 101.9 at Q. Assume an unobstructed downward surface directly between them."
+                ]
+              },
+              {
+                "id": "wave1-trial-2",
+                "values": [
+                  "Task:",
+                  "Write the fall and the direction to show on the sketch."
+                ]
+              },
+              {
+                "id": "wave1-trial-3",
+                "values": [
+                  "Handoff:",
+                  "Use only the given section. Do not calculate a design slope or issue a drainage approval."
+                ]
+              }
+            ]
+          },
+          "id": "landscape-architects.path.entry-work-sample-data.1",
+          "title": "Check a surface drainage arrow",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "The fall is 0.5 in the drawing's elevation units, from P toward Q. Mark it for the designer to cross-check."
+            ]
+          },
+          "id": "landscape-architects.entry-work-sample-data.2",
+          "title": "Worked answer: Check a surface drainage arrow",
+          "type": "notice",
+          "visibility": "public"
         }
       ]
     },
@@ -8191,7 +8035,6 @@
           },
           "id": "landscape-architects.market-signals.market-signal-card.1",
           "source_refs": [
-            "onet-demand",
             "bls-ooh"
           ],
           "type": "prose"
@@ -8201,14 +8044,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The new BLS period runs from 2025 employment of 23,500 to 24,500 in 2035, growth 4%, net gain 1,000; average annual openings about 1,700 including growth and replacements. O*NET is currently also on the same 2025—2035 framing, and the shared old-period register and FAQ retain historical values. The Beijing Institute of Architectural Design 2026 campus recruitment announcement was published on 2025-09-29: it includes landscape design, requires a bachelor's degree or above in a related field for 2026 graduates, and sets general requirements for code compliance, software, and collaboration; the online application window 2025-09-24—10-24 has closed. It lists no landscape headcount or salary and does not prove current hiring or a national threshold. One line of the text mentions 2024 campus recruitment, which is inconsistent with the title's target window; the explicit 2026 cohort and the 2025 application dates are used instead, without guessing the reason. No precise national demand for China was established, and historical postings do not stand in for current vacancies."
+              "O*NET is currently also on the same 2025—2035 framing, and the shared old-period register and FAQ retain historical values. It lists no landscape headcount or salary and does not prove current hiring or a national threshold. One line of the text mentions 2024 campus recruitment, which is inconsistent with the title's target window; the explicit 2026 cohort and the 2025 application dates are used instead, without guessing the reason."
             ]
           },
           "id": "landscape-architects.market-signals.market-signal-card.2",
           "source_refs": [
             "bls-ooh",
-            "onet-trends",
-            "biad-campus-2026"
+            "onet-trends"
           ],
           "type": "prose"
         },
@@ -8217,7 +8059,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "New-period employment outlook | The new BLS period runs from 2025 employment of 23,500 to 24,500 in 2035, growth 4%, net gain 1,000; average annual openings about 1,700 including growth and replacements. O*NET and BLS share the same framing and are not added together as hiring scale."
+              "O*NET and BLS share the same framing and are not added together as hiring scale."
             ]
           },
           "id": "landscape-architects.market-signals.market-signal-card.3",
@@ -8236,11 +8078,6 @@
             ]
           },
           "id": "landscape-architects.market-signals.market-signal-card.4",
-          "source_refs": [
-            "adj-architects",
-            "adj-agricultural",
-            "adj-drafters"
-          ],
           "type": "prose"
         },
         {
@@ -8252,11 +8089,6 @@
             ]
           },
           "id": "landscape-architects.market-signals.market-signal-card.5",
-          "source_refs": [
-            "adj-architects",
-            "adj-agricultural",
-            "adj-drafters"
-          ],
           "type": "prose"
         }
       ]
@@ -8273,131 +8105,21 @@
           "data": {
             "entries": [
               {
-                "answer": "Key judgments | The O*NET work context shows: email 100% every day, indoors environmentally controlled 85% every day, telephone conversations 65% every day, face-to-face discussions 53% every day, work with a group or team 63% extremely important, time pressure 60% at least once a week but not every day, exactness or accuracy 50% very important, decision freedom 50% some freedom. The basis for judgment is site and existing-conditions data, code and public safety requirements, and the boundaries of licensed scope and professional ethics. For the environment and rhythm see also: Environment and rhythm | The work alternates mainly between office design and on-site checking: sitting 55% more than half the time, work week 65% more than 40 hours, written letters and memos 50% at least once a week but not every day, contact with others most of the time 40%, coordinating or leading others 37% very important, dealing with external customers 40% very important, task priorities and goals 40% some freedom. The rhythm is driven by bids, approvals, and construction milestones. These are U.S. respondent distributions, not uniform working hours or rhythm for every position in China.",
-                "id": "landscape-architects.faq.1",
-                "question": "What are the daily work and working hours like?",
-                "question_key": "career.faq.landscape-architects.daily-work",
+                "answer": "The May 2025 national median was $79,870 a year. Compare a local offer by guaranteed hours and separately stated variable pay.",
+                "id": "landscape-architects.faq.batch3-pay-us",
+                "question": "What is the U.S. median wage?",
+                "question_key": "career.faq.landscape-architects.batch3-pay-us",
                 "source_refs": [
-                  "onet-details",
-                  "source-pack-onet-custom"
+                  "wave1-b3-1"
                 ]
               },
               {
-                "answer": "This occupation plans and designs land and outdoor spaces. Architects (except landscape and naval) handle the design of individual buildings and building groups, agricultural engineers handle engineering schemes such as agricultural production systems and irrigation, and architectural and civil drafters draft and revise drawings according to the design intent. Judgment should be based on the design object, licensed scope, and responsibility level, not on job titles alone. This page does not constitute legal or practice advice.",
-                "id": "landscape-architects.faq.2",
-                "question": "How is this occupation distinguished from adjacent occupations?",
-                "question_key": "career.faq.landscape-architects.role-comparison",
+                "answer": "See work fit evidence for the shared criteria.",
+                "id": "landscape-architects.faq.batch3-fit",
+                "question": "What is a useful site-design work sample?",
+                "question_key": "career.faq.landscape-architects.batch3-fit",
                 "source_refs": [
-                  "source-pack-onet-details",
-                  "adj-architects",
-                  "adj-agricultural",
-                  "adj-drafters"
-                ]
-              },
-              {
-                "answer": "The fit signal is a willingness to compare spatial schemes under site constraints, check topography and drainage data, turn client feedback into drawing revisions, and track implementation quality, while complying with the licensed scope and professional ethics. Interest and personality tools can only help design exercises and cannot judge licensing qualifications or performance.",
-                "id": "landscape-architects.faq.3",
-                "question": "What signals suggest I might be suited?",
-                "question_key": "career.faq.landscape-architects.fit",
-                "source_refs": [
-                  "onet-details",
-                  "source-pack-onet-summary"
-                ]
-              },
-              {
-                "answer": "Generative AI can trial approved fictional record summaries, scheme text, or list drafts; mentions of conventional CAD/GIS design software differ from generative AI adoption. Check back against the original site, codes, and versions, and do not claim efficiency gains without measurement. Supported tasks under supervision and independent practice are separate, and licensing and sealing follow jurisdictional rules; the model confers no authority, and final professional responsibility cannot rest on outputs alone.",
-                "id": "landscape-architects.faq.4",
-                "question": "How will AI affect this occupation?",
-                "question_key": "career.faq.landscape-architects.ai-impact",
-                "source_refs": [
-                  "ilo-genai",
-                  "nist-genai-profile",
-                  "source-pack-onet-hot_tech"
-                ]
-              },
-              {
-                "answer": "Tool outputs cannot replace site judgment and design responsibility. People must check the site and code bases, review key design judgments, and take responsibility for site analysis, scheme trade-offs, code application, and documents sealed under license; matters beyond the practice scope must be co-signed or referred.",
-                "id": "landscape-architects.faq.5",
-                "question": "Which judgments must remain the responsibility of people?",
-                "question_key": "career.faq.landscape-architects.human-control",
-                "source_refs": [
-                  "asla-ethics",
-                  "source-pack-onet-details"
-                ]
-              },
-              {
-                "answer": "Insufficient evidence: this round established no Chinese national occupational wage percentile or starting pay precisely corresponding to U.S. 17-1012.00. The National Bureau of Statistics 2025 tables are industry and broad occupational group pretax annual averages and exclude the self-employed and freelancers; industry averages, U.S. percentiles, and a single posting cannot fill the gap. The Beijing Institute of Architectural Design sample lists no landscape salary, and restricted access does not mean China has no wage statistics. The Beijing Institute of Architectural Design 2026 campus recruitment announcement was published on 2025-09-29: it includes landscape design, requires a bachelor's degree or above in a related field for 2026 graduates, and sets general requirements for code compliance, software, and collaboration; the online application window 2025-09-24—10-24 has closed. It lists no landscape headcount or salary and does not prove current hiring or a national threshold. One line of the text mentions 2024 campus recruitment, which is inconsistent with the title's target window; the explicit 2026 cohort and the 2025 application dates are used instead, without guessing the reason.",
-                "id": "landscape-architects.faq.6",
-                "question": "What is the mainland China salary evidence?",
-                "question_key": "career.faq.landscape-architects.china-pay",
-                "source_refs": [
-                  "nbs-wage",
-                  "biad-campus-2026"
-                ]
-              },
-              {
-                "answer": "In 2025 the U.S. annual wages at the 10/25/50/75/90 percentiles were 54,770, 64,170, 79,870, 104,090, and 130,190 USD; the official hourly wages were 26.33, 30.85, 38.40, 50.04, and 62.59 USD. OEWS covers employer wages and includes incentive pay, excludes overtime pay, non-production bonuses, and employer-paid benefits, and excludes the self-employed; percentiles are not starting pay, after-tax pay, or a personal quote, and official hourly wages are disclosed separately.",
-                "id": "landscape-architects.faq.7",
-                "question": "What is the U.S. salary evidence?",
-                "question_key": "career.faq.landscape-architects.us-pay",
-                "source_refs": [
-                  "source-pack-onet-localwages",
-                  "bls-oews-methods"
-                ]
-              },
-              {
-                "answer": "All 50 U.S. states and the District of Columbia license landscape architects. Typical education includes an accredited bachelor's or master's degree in landscape architecture, and some jurisdictions allow alternative paths; education, supervised experience, and examination conditions are set separately by the target jurisdiction, and most allow sitting the exam while accumulating experience. Passing the four parts of the LARE satisfies the examination requirements of member jurisdictions and does not automatically confer a license or seal authority. Job Zone4 is a general description of occupational preparation and cannot replace licensing law. Chinese enterprise design qualifications, individual professional titles, employer hiring, and specific document responsibility are each checked separately. The Fuzhou landscaping center reply concerns the professional titles of personnel for enterprise design qualifications and explains the Fujian review scope, and cannot be generalized into a uniform national individual license or mapped onto U.S. licensure. The Beijing Institute of Architectural Design 2026 campus recruitment announcement was published on 2025-09-29: it includes landscape design, requires a bachelor's degree or above in a related field for 2026 graduates, and sets general requirements for code compliance, software, and collaboration; the online application window 2025-09-24—10-24 has closed. It lists no landscape headcount or salary and does not prove current hiring or a national threshold. One line of the text mentions 2024 campus recruitment, which is inconsistent with the title's target window; the explicit 2026 cohort and the 2025 application dates are used instead, without guessing the reason.",
-                "id": "landscape-architects.faq.8",
-                "question": "What are the entry and training paths?",
-                "question_key": "career.faq.landscape-architects.education-path",
-                "source_refs": [
-                  "asla-licensure",
-                  "clarb-process",
-                  "fuzhou-design-title",
-                  "biad-campus-2026"
-                ]
-              },
-              {
-                "answer": "Licensing, site data, public safety, changes, and interests are controlled separately; when the site or codes are in doubt, pause the affected steps and mark them pending with the responsible discipline. The ASLA code applies to members; the consequences of complaints differ between should ethical standards and shall rules of conduct. R1.203 interests must be disclosed, and not all conflicts must be avoided; R1.108 multiple-party fees require the written consent of all parties. Specific situations such as government-related business or a public reviewer's own financial or family interests are avoided according to the rules; improper influence through contract gifts and false statements of qualification are prohibited. State law and contracts are checked separately.",
-                "id": "landscape-architects.faq.9",
-                "question": "What are the main risks and control boundaries?",
-                "question_key": "career.faq.landscape-architects.risk-boundary",
-                "source_refs": [
-                  "source-pack-onet-details",
-                  "asla-ethics",
-                  "clarb-process"
-                ]
-              },
-              {
-                "answer": "The new BLS period runs from 2025 employment of 23,500 to 24,500 in 2035, growth 4%, net gain 1,000; average annual openings about 1,700 including growth and replacements. BLS Table 1.2: U.S. occupation 17-1012 had about 23,500 jobs in 2025 and is projected to have about 24,500 in 2035 (+4.4%), with about 1,700 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring. The Beijing Institute of Architectural Design 2026 campus recruitment announcement was published on 2025-09-29: it includes landscape design, requires a bachelor's degree or above in a related field for 2026 graduates, and sets general requirements for code compliance, software, and collaboration; the online application window 2025-09-24—10-24 has closed. It lists no landscape headcount or salary and does not prove current hiring or a national threshold. One line of the text mentions 2024 campus recruitment, which is inconsistent with the title's target window; the explicit 2026 cohort and the 2025 application dates are used instead, without guessing the reason.",
-                "id": "landscape-architects.faq.10",
-                "question": "How should the market signals be understood?",
-                "question_key": "career.faq.landscape-architects.outlook-transition",
-                "source_refs": [
-                  "bls-ooh",
-                  "onet-trends",
-                  "biad-campus-2026",
-                  "bls-design-ep"
-                ]
-              },
-              {
-                "answer": "Paper exercise Z | Entirely fictional, and not to be used for field measurement, construction, or code compliance findings. The simulated site runs from southwest (0,0) to northeast (20,10), area 200 simulated m²; the retained tree zone T is x=8—10, y=4—6, and the utility pending-verification zone U is x=14—16, y=7—9. Scheme A has 80 hardscape and 120 planting, with a circulation line (0,5)→(20,5); scheme B has 60 hardscape and 140 planting, with a circulation polyline (0,5)→(0,8)→(20,8)→(20,5). Simulated unit prices are 50 for hardscape and 20 for planting in budget units per m², with a budget of 6000; excludes survey and maintenance. The given rules: Z1 the circulation line may not cross T; Z2 crossing U must be pending verification and must not be marked constructible; Z3 the two area types totaling 200 and a list ≤6000 only means the simulated budget is met. Task: draw the two lines and T / U, recompute the area and cost of both schemes, list violations and pending items, and write the reason for continuing the comparison; the erroneous draft \"B is cheaper and already approved, constructible\" must be corrected. Without elevation, soil, actual utility, and drainage data, do not design real slopes, drainage, or safety codes. Reference deliverable | A area 80+120=200, cost 80×50+120×20=6400, over budget by 400; the y=5 horizontal line crosses T and does not satisfy Z1/Z3. B area 60+140=200, cost 60×50+140×20=5800, remaining 200; the y=8 horizontal line avoids T but crosses U, Z1/Z3 is satisfied, and Z2 utilities are still pending verification. You may continue comparing B and request utility and other materials, but cannot judge either scheme constructible; the unknown must not be treated as nonexistent. Correct the draft to \"B satisfies only the given area and simulated budget; utilities and the real site/codes are pending verification, and no construction documents have been issued\". Four works: a conditions/constraints and schematic drawing marking T / U and the two lines, a cost list for both schemes, a matrix of satisfied/violated/pending conditions, and the unissued version with the reason for choice and the information request. The paper areas do not prove the real layout, plant suitability, or drainage safety, and do not confer sealing qualification. Seven-day plan | 20—30 minutes per day: day 1 draw the 200 site and T / U; day 2 draw the A / B circulation lines; day 3 check 200 and 6400 / 5800; day 4 check A crossing T, B crossing U, and the pending items; day 5 correct \"already approved and constructible\" and list the information requests; day 6 ask a peer to cross-check only the four paper works and keep versions; day 7 assemble the deliverable, and separately check the target jurisdiction's degree/experience/examination/licensing and the specific employer's requirements. No field construction, drainage testing, or automatic qualification conclusion.",
-                "id": "landscape-architects.faq.11",
-                "question": "Is this occupation worth further testing?",
-                "question_key": "career.faq.landscape-architects.career-worth",
-                "source_refs": [
-                  "source-pack-onet-details",
-                  "clarb-process"
-                ]
-              },
-              {
-                "answer": "China, U.S., global, and specific-jurisdiction evidence are stated separately; wage, employment, qualification, safety, and AI conclusions must not be spliced across scopes.; The landscape architect page provides career decision and safety exercise information and does not constitute legal or practice advice, nor does it replace local licensing, code, safety, or other professional advice.; Any \"insufficient evidence\" means only that no safe data was established after a bounded search, and proxy values or model memory must not be used to fabricate numbers. This page covers only the precise O*NET-SOC 17-1012.00 occupation \"Landscape Architects\".",
-                "id": "landscape-architects.faq.boundary",
-                "question": "What are the page usage boundaries?",
-                "question_key": "career.faq.landscape-architects.boundary",
-                "source_refs": [
-                  "source-pack-onet-details",
-                  "nbs-wage"
+                  "wave1-b3-3"
                 ]
               }
             ]
@@ -8410,7 +8132,7 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "China, U.S., global, and specific-jurisdiction evidence are stated separately; wage, employment, qualification, safety, and AI conclusions must not be spliced across scopes.",
+              "Use the U.S. scope described in this section.",
               "The landscape architect page provides career decision and safety exercise information and does not constitute legal or practice advice, nor does it replace local licensing, code, safety, or other professional advice.",
               "Any \"insufficient evidence\" means only that no safe data was established after a bounded search, and proxy values or model memory must not be used to fabricate numbers."
             ]
@@ -8454,12 +8176,6 @@
                 "id": "landscape-architects.navigation.4",
                 "relation": "career.section",
                 "url": "#career-content-ai-impact"
-              },
-              {
-                "entity": "Landscape Architect",
-                "id": "landscape-architects.navigation.5",
-                "relation": "career.section",
-                "url": "#career-content-china-salary"
               },
               {
                 "entity": "Landscape Architect",
@@ -8582,54 +8298,6 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "2025 urban unit industry / broad occupational group pretax annual average wages; science and technology non-private 182064, private 83560, construction non-private 92036, private 66275, none of which are landscape occupational wages.",
-                  "Excludes the self-employed and freelancers; this round established no precise national percentile for landscape architects, which does not prove that no Chinese statistics exist at all."
-                ],
-                "evidence_type": "official broad wage statistics",
-                "id": "nbs-wage",
-                "limitation": "Industry and broad occupational group averages cannot replace a national percentile or starting pay for this occupation.",
-                "market": "Mainland China",
-                "name": "Average annual wages of urban unit employees in 2025",
-                "period": "2025 wages; published on the page 2026-05-16 16:00, and this round checked the original full tables 2/5 and the methodology",
-                "publisher": "National Bureau of Statistics",
-                "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
-              },
-              {
-                "accessed_at": "2026-10-03",
-                "details": [
-                  "Software skill sample signal.",
-                  "Not a statutory requirement or evidence about the Chinese market."
-                ],
-                "evidence_type": "job-posting software signal",
-                "id": "onet-demand",
-                "limitation": "Not a statutory requirement or evidence about the Chinese market.",
-                "market": "United States",
-                "name": "In Demand Software Skills: Landscape Architects",
-                "period": "Software mentions in the only U.S. job posting from 2025-01-01—12-31; this round checked the original hot technologies page",
-                "publisher": "O*NET / Lightcast",
-                "scope": "market_signal",
-                "url": "https://www.onetonline.org/link/demand/17-1012.00"
-              },
-              {
-                "accessed_at": "2026-10-03",
-                "details": [
-                  "Identity, tasks, work context, and risk control points.",
-                  "U.S. material; does not establish Chinese entry or wages."
-                ],
-                "evidence_type": "official occupation profile",
-                "id": "onet-details",
-                "limitation": "U.S. material; does not establish Chinese entry or wages.",
-                "market": "United States",
-                "name": "17-1012.00 - Landscape Architects",
-                "period": "O*NET updated 2026",
-                "publisher": "O*NET",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/details/17-1012.00"
-              },
-              {
-                "accessed_at": "2026-10-03",
-                "details": [
                   "Median and percentile annual wages.",
                   "Not equal to starting pay; self-employment coverage is limited."
                 ],
@@ -8642,102 +8310,6 @@
                 "publisher": "O*NET / BLS",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/17-1012.00"
-              },
-              {
-                "accessed_at": "2026-09-01",
-                "details": [
-                  "Used to check the occupation scope, tasks, skills, and work context of O*NET 17-1012.00.",
-                  "Applies only to this O*NET occupation and the U.S. market; does not establish a China mapping, Chinese wages, or practice authorization."
-                ],
-                "evidence_type": "official custom occupation profile",
-                "id": "source-pack-onet-custom",
-                "limitation": "Applies only to this O*NET occupation and the U.S. market; does not establish a China mapping, Chinese wages, or practice authorization.",
-                "market": "United States",
-                "name": "17-1012.00 - Landscape Architects",
-                "period": "current page; accessed 2026-09-01",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/custom/17-1012.00"
-              },
-              {
-                "accessed_at": "2026-10-03",
-                "details": [
-                  "Used to check the occupational identity, tasks, work activities, and work context.",
-                  "Applies only to this O*NET occupation and the U.S. market; does not establish a China mapping, Chinese wages, or practice authorization."
-                ],
-                "evidence_type": "official occupation details",
-                "id": "source-pack-onet-details",
-                "limitation": "Applies only to this O*NET occupation and the U.S. market; does not establish a China mapping, Chinese wages, or practice authorization.",
-                "market": "United States",
-                "name": "17-1012.00 - Landscape Architects",
-                "period": "current page; accessed 2026-09-01",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/details/17-1012.00"
-              },
-              {
-                "accessed_at": "2026-10-03",
-                "details": [
-                  "Used to check the hot technologies list related to this occupation.",
-                  "A technology mention is not equivalent to ability, adoption, or degree of automation."
-                ],
-                "evidence_type": "official technology profile",
-                "id": "source-pack-onet-hot_tech",
-                "limitation": "Applies only to this O*NET occupation and the U.S. market; does not establish a China mapping, Chinese wages, or practice authorization.",
-                "market": "United States",
-                "name": "Hot Technologies: 17-1012.00 - Landscape Architects",
-                "period": "Software mentions in the only U.S. job posting from 2025-01-01—12-31; this round checked the original hot technologies page",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/hot_tech/17-1012.00"
-              },
-              {
-                "accessed_at": "2026-10-11",
-                "details": [
-                  "In 2025 the industries were professional, scientific, and technical services 51% and administrative support 20%; the remaining 29% is only the difference and does not establish a government share.",
-                  "The industry distribution does not establish a China mapping."
-                ],
-                "evidence_type": "official industry distribution",
-                "id": "source-pack-onet-industry",
-                "limitation": "Applies only to this O*NET occupation and the U.S. market; does not establish a China mapping, Chinese wages, or practice authorization.",
-                "market": "United States",
-                "name": "Industries: 17-1012.00 - Landscape Architects",
-                "period": "2025 industry distribution, details checked on 2026-10-11; not an industry wage",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/industry/17-1012.00"
-              },
-              {
-                "accessed_at": "2026-09-01",
-                "details": [
-                  "Used to check the national certificate search entry points related to this occupation.",
-                  "Certificates or training are not equivalent to jurisdictional licensing or seal authority."
-                ],
-                "evidence_type": "official certification discovery",
-                "id": "source-pack-onet-localcert",
-                "limitation": "Applies only to this O*NET occupation and the U.S. market; does not establish a China mapping, Chinese wages, or practice authorization.",
-                "market": "United States",
-                "name": "National Certifications: 17-1012.00 - Landscape Architects",
-                "period": "current page; accessed 2026-09-01",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/localcert/17-1012.00"
-              },
-              {
-                "accessed_at": "2026-09-01",
-                "details": [
-                  "Used to check the training and preparation paths related to this occupation.",
-                  "Training does not replace the degree, internship, examination, and jurisdictional licensing."
-                ],
-                "evidence_type": "official local training discovery",
-                "id": "source-pack-onet-localtraining",
-                "limitation": "Applies only to this O*NET occupation and the U.S. market; does not establish a China mapping, Chinese wages, or practice authorization.",
-                "market": "United States",
-                "name": "National Training: 17-1012.00 - Landscape Architects",
-                "period": "current page; accessed 2026-09-01",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtraining/17-1012.00"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -8754,22 +8326,6 @@
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/17-1012.00"
-              },
-              {
-                "accessed_at": "2026-10-03",
-                "details": [
-                  "Used to check the occupational identity, entry, and employment outlook entry points (employment and outlook under the precise 17-1012.00 occupation framing).",
-                  "Applies only to this O*NET occupation and the U.S. market; does not establish a China mapping, Chinese wages, or practice authorization."
-                ],
-                "evidence_type": "official occupation summary",
-                "id": "source-pack-onet-summary",
-                "limitation": "Applies only to this O*NET occupation and the U.S. market; does not establish a China mapping, Chinese wages, or practice authorization.",
-                "market": "United States",
-                "name": "17-1012.00 - Landscape Architects",
-                "period": "2025–2035",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -8852,103 +8408,6 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-10-03",
-                "details": [
-                  "Positions include landscape design; 2026 graduates with a bachelor's degree or above in a related field, with general software, code, and communication and collaboration requirements; the 3-hour online examination for landscape and others applies only to this announcement.",
-                  "It lists no landscape headcount or salary, and is not current hiring, a national threshold, or practice licensing. One line of leftover 2024 campus recruitment text in the body is inconsistent with the explicit title/object/window; the explicit 2026 cohort and 2025 application dates are used, without guessing the editorial reason."
-                ],
-                "evidence_type": "official source",
-                "id": "biad-campus-2026",
-                "limitation": "It lists no landscape headcount or salary, and is not current hiring, a national threshold, or practice licensing. One line of leftover 2024 campus recruitment text in the body is inconsistent with the explicit title/object/window; the explicit 2026 cohort and 2025 application dates are used, without guessing the editorial reason.",
-                "market": "Mainland China, Beijing",
-                "name": "Beijing Institute of Architectural Design 2026 campus recruitment announcement",
-                "period": "Published 2025-09-29; the online application window 2025-09-24—10-24 has closed; this round checked the full text",
-                "publisher": "Beijing Institute of Architectural Design Co., Ltd.",
-                "scope": "job_sample",
-                "url": "https://www.biad.com.cn/view/id/233/"
-              },
-              {
-                "accessed_at": "2026-10-03",
-                "details": [
-                  "Professional titles for enterprise design qualifications require authorized evaluation; the reply explains the Fujian Min G / Min Z series and the restrictions on the non-public township series.",
-                  "Professional titles for enterprise qualification personnel are not equivalent to a U.S. individual license; the Fujian reply is not generalized into a uniform qualification for every practitioner nationwide."
-                ],
-                "evidence_type": "official source",
-                "id": "fuzhou-design-title",
-                "limitation": "Professional titles for enterprise qualification personnel are not equivalent to a U.S. individual license; the Fujian reply is not generalized into a uniform qualification for every practitioner nationwide.",
-                "market": "Mainland China, Fujian",
-                "name": "Fuzhou landscaping center: reply on professional titles for landscape design qualification personnel",
-                "period": "The page shows 2025-12-12 13:56; this round checked the full text",
-                "publisher": "Fuzhou Landscaping Center",
-                "scope": "local_requirement",
-                "url": "https://www.fuzhou.gov.cn/zgfzhd/znhd/sylzx/jsxmsjyszlsp/202512/t20251229_5263320.htm"
-              },
-              {
-                "accessed_at": "2026-10-03",
-                "details": [
-                  "U.S. 17-1011.00 objects and outputs are used for direction comparison.",
-                  "Does not confer Chinese qualifications; the two frozen architecture directions are the same architecture field comparison / special topic and do not construct two independent SOC codes."
-                ],
-                "evidence_type": "official source",
-                "id": "adj-architects",
-                "limitation": "Does not confer Chinese qualifications; the two frozen architecture directions are the same architecture field comparison / special topic and do not construct two independent SOC codes.",
-                "market": "United States",
-                "name": "Architects (except landscape and naval) responsibilities",
-                "period": "This round checked the official definition",
-                "publisher": "O*NET",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/17-1011.00"
-              },
-              {
-                "accessed_at": "2026-10-03",
-                "details": [
-                  "U.S. 17-2021.00 objects and outputs are used for direction comparison.",
-                  "Does not confer Chinese qualifications; the two frozen architecture directions are the same architecture field comparison / special topic and do not construct two independent SOC codes."
-                ],
-                "evidence_type": "official source",
-                "id": "adj-agricultural",
-                "limitation": "Does not confer Chinese qualifications; the two frozen architecture directions are the same architecture field comparison / special topic and do not construct two independent SOC codes.",
-                "market": "United States",
-                "name": "Agricultural engineers responsibilities",
-                "period": "This round checked the official definition",
-                "publisher": "O*NET",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/17-2021.00"
-              },
-              {
-                "accessed_at": "2026-10-03",
-                "details": [
-                  "U.S. 17-3011.00 objects and outputs are used for direction comparison.",
-                  "Does not confer Chinese qualifications; the two frozen architecture directions are the same architecture field comparison / special topic and do not construct two independent SOC codes."
-                ],
-                "evidence_type": "official source",
-                "id": "adj-drafters",
-                "limitation": "Does not confer Chinese qualifications; the two frozen architecture directions are the same architecture field comparison / special topic and do not construct two independent SOC codes.",
-                "market": "United States",
-                "name": "Architectural and civil drafters responsibilities",
-                "period": "This round checked the official definition",
-                "publisher": "O*NET",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/17-3011.00"
-              },
-              {
-                "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+75+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Survey terrain and drainage — 0/100; weight=1/3; landscape-architects.profile.responsibilities-block.4[0]",
-                  "Design landscape plans and planting schemes — 75/100; weight=1/3; landscape-architects.profile.responsibilities-block.4[0]",
-                  "Prepare specifications and check construction changes — 50/100; weight=1/3; landscape-architects.profile.responsibilities-block.4[0]"
-                ],
-                "evidence_type": "Editorial model estimation method",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
-              },
-              {
                 "accessed_at": "2026-11-09",
                 "details": [
                   "BLS Table 1.2: U.S. occupation 17-1012 had about 23,500 jobs in 2025 and is projected to have about 24,500 in 2035 (+4.4%), with about 1,700 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring."
@@ -8985,6 +8444,60 @@
                 "publisher": "U.S. Department of Labor, Employment and Training Administration",
                 "scope": "exact",
                 "url": "https://creativecommons.org/licenses/by/4.0/"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-1",
+                "name": "BLS May 2025 OEWS national profile",
+                "url": "https://data.bls.gov/oesprofile/?areas=INDUSTRY,STATE,MSA&major_group=170000&measure=13&occupation=171012&year=2025"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-2",
+                "name": "BLS May 2025 OEWS technical notes",
+                "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-3",
+                "name": "O*NET occupation and duties",
+                "url": "https://www.onetonline.org/link/summary/17-1012.00"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-4",
+                "name": "LAAB accreditation",
+                "url": "https://www.latc.ca.gov/candidates/colleges_and_universities/"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-5",
+                "name": "CLARB requirements",
+                "url": "https://www.clarb.org/become-a-landscape-architect/requirements-process/"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-6",
+                "name": "California LATC",
+                "url": "https://www.latc.ca.gov/"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-7",
+                "name": "Texas TBAE landscape architects",
+                "url": "https://www.tbae.texas.gov/laregbyexam/"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-8",
+                "name": "EPA construction stormwater",
+                "url": "https://www.epa.gov/npdes/stormwater-discharges-construction-activities"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-9",
+                "name": "SITES rating system",
+                "url": "https://www.gbci.org/press-kit-sites"
               }
             ]
           },
@@ -9027,68 +8540,8 @@
         "conclusion": "Adjacent occupations require filling in tool, qualification, and responsibility evidence separately.",
         "evidence_links": [
           {
-            "href": {
-              "$source": "source-pack-onet-details",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "landscape-architects.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-details",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "landscape-architects.source-register.published.1"
-            }
-          },
-          {
-            "href": {
-              "$source": "adj-architects",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "landscape-architects.source-register.published.1"
-            },
-            "label": {
-              "$source": "adj-architects",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "landscape-architects.source-register.published.1"
-            }
-          },
-          {
-            "href": {
-              "$source": "adj-agricultural",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "landscape-architects.source-register.published.1"
-            },
-            "label": {
-              "$source": "adj-agricultural",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "landscape-architects.source-register.published.1"
-            }
-          },
-          {
-            "href": {
-              "$source": "adj-drafters",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "landscape-architects.source-register.published.1"
-            },
-            "label": {
-              "$source": "adj-drafters",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "landscape-architects.source-register.published.1"
-            }
+            "href": "https://www.bls.gov/ooh/architecture-and-engineering/landscape-architects.htm",
+            "label": "Landscape Architects - Occupational Outlook Handbook"
           }
         ],
         "evidence_note": "Adjacent relationships are used only for direction comparison and do not represent automatic transfer or mutual recognition of qualifications.",
@@ -9104,7 +8557,7 @@
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
             },
-            "职业方向": "Architects (except landscape and naval)"
+            "职业方向": "Architects"
           },
           {
             "关键区别": "The core output is the overall design of individual buildings and building groups.",
@@ -9201,22 +8654,10 @@
             }
           },
           {
-            "来源": {
-              "$source": "source-pack-onet-hot_tech",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "landscape-architects.source-register.published.1"
-            },
+            "来源": "Source detail not stated.",
             "类型": "Original research / official sources",
             "适用范围": "Recruitment software is not an AI effect",
-            "链接": {
-              "$source": "source-pack-onet-hot_tech",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "landscape-architects.source-register.published.1"
-            }
+            "链接": null
           }
         ],
         "difference_intro": {
@@ -9284,22 +8725,10 @@
           },
           {
             "使用限制": "Not generative AI adoption",
-            "来源": {
-              "$source": "source-pack-onet-hot_tech",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "landscape-architects.source-register.published.1"
-            },
+            "来源": "Source detail not stated.",
             "研究对象": "Software mentions in U.S. 2025 postings",
             "结论": "CAD and other posting keywords",
-            "链接": {
-              "$source": "source-pack-onet-hot_tech",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "landscape-architects.source-register.published.1"
-            }
+            "链接": null
           }
         ],
         "heading": {
@@ -9360,7 +8789,7 @@
             "问题": "Can layoff timing be derived from task exposure?"
           },
           {
-            "回答": "Generative AI can trial approved fictional record summaries, scheme text, or list drafts; mentions of conventional CAD/GIS design software differ from generative AI adoption. Check back against the original site, codes, and versions, and do not claim efficiency gains without measurement. Supported tasks under supervision and independent practice are separate, and licensing and sealing follow jurisdictional rules; the model confers no authority, and final professional responsibility cannot rest on outputs alone.",
+            "回答": "Check back against the original site, codes, and versions, and do not claim efficiency gains without measurement.",
             "来源": {
               "$source": "nist-genai-profile",
               "block": "source-register",
@@ -9378,12 +8807,7 @@
             "问题": "Can AI replace site judgment and sealing responsibility?"
           }
         ],
-        "responsibility_intro": {
-          "$item": "landscape-architects.ai-impact.ai-impact-table.5",
-          "block": "ai-impact",
-          "copy_key": "career.item.ai-impact-table",
-          "type": "prose"
-        },
+        "responsibility_intro": "Use AI to index coordination notices. Verify any level and flow relationship against the current survey and drawing.",
         "responsibility_steps": [
           {
             "步骤": "Check the inputs",
@@ -9499,13 +8923,6 @@
           "$link": "landscape-architects.navigation.links.1",
           "block": "navigation",
           "copy_key": "career.item.navigation-links",
-          "entry": "landscape-architects.navigation.5",
-          "field": "url"
-        },
-        {
-          "$link": "landscape-architects.navigation.links.1",
-          "block": "navigation",
-          "copy_key": "career.item.navigation-links",
           "entry": "landscape-architects.navigation.6",
           "field": "url"
         },
@@ -9583,7 +9000,7 @@
       },
       "career_ai_description_block": {
         "body": [
-          "Generative AI can trial approved fictional record summaries, scheme text, or list drafts; mentions of conventional CAD/GIS design software differ from generative AI adoption. Check back against the original site, codes, and versions, and do not claim efficiency gains without measurement. Supported tasks under supervision and independent practice are separate, and licensing and sealing follow jurisdictional rules; the model confers no authority, and final professional responsibility cannot rest on outputs alone."
+          "Generative AI can trial approved  record summaries, scheme text, or list drafts; mentions of conventional CAD/GIS design software differ from generative AI adoption. Check back against the original site, codes, and versions, and do not claim efficiency gains without measurement. Supported tasks under supervision and independent practice are separate, and licensing and sealing follow jurisdictional rules; the model confers no authority, and final professional responsibility cannot rest on outputs alone."
         ],
         "heading": "The work objects of a landscape architect and the AI boundary"
       },
@@ -9595,7 +9012,7 @@
             "stage": "Input check"
           },
           {
-            "description": "Check 6400 / 5800 and the violations and pending items; do not mark constructible.",
+            "description": "Write down which level is higher and which input still needs survey confirmation.",
             "stage": "Process control"
           },
           {
@@ -9626,7 +9043,7 @@
             "copy_key": "career.item.career-path-block",
             "type": "prose"
           },
-          "jurisdiction": "Mainland China / United States (state-by-state licensing system)",
+          "jurisdiction": "Use the U.S. scope described in this section.",
           "summary": {
             "$item": "landscape-architects.path.career-path-block.3",
             "block": "path",
@@ -9637,94 +9054,40 @@
         "schema_version": "career.career_progression.v1",
         "source_links": [
           {
-            "href": {
-              "$source": "asla-licensure",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "landscape-architects.source-register.published.1"
-            },
-            "id": "landscape-architects.review.asla-licensure",
-            "label": {
-              "$source": "asla-licensure",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "landscape-architects.source-register.published.1"
-            },
-            "scope": "50 states and DC"
+            "href": "https://www.latc.ca.gov/candidates/colleges_and_universities/",
+            "id": "wave1-b3-4",
+            "label": "LAAB accreditation",
+            "scope": "Entry and practice"
           },
           {
-            "href": {
-              "$source": "clarb-process",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "landscape-architects.source-register.published.1"
-            },
-            "id": "landscape-architects.review.clarb-process",
-            "label": {
-              "$source": "clarb-process",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "landscape-architects.source-register.published.1"
-            },
-            "scope": "Bachelor's and master's plus alternative paths / experience and examination"
+            "href": "https://www.clarb.org/become-a-landscape-architect/requirements-process/",
+            "id": "wave1-b3-5",
+            "label": "CLARB requirements",
+            "scope": "Entry and practice"
           },
           {
-            "href": {
-              "$source": "fuzhou-design-title",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "landscape-architects.source-register.published.1"
-            },
-            "id": "landscape-architects.review.fuzhou-design-title",
-            "label": {
-              "$source": "fuzhou-design-title",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "landscape-architects.source-register.published.1"
-            },
-            "scope": "Fujian enterprise qualification personnel titles"
+            "href": "https://www.latc.ca.gov/",
+            "id": "wave1-b3-6",
+            "label": "California LATC",
+            "scope": "Entry and practice"
           },
           {
-            "href": {
-              "$source": "biad-campus-2026",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "landscape-architects.source-register.published.1"
-            },
-            "id": "landscape-architects.review.biad-campus-2026",
-            "label": {
-              "$source": "biad-campus-2026",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "landscape-architects.source-register.published.1"
-            },
-            "scope": "Historical employer entry point"
+            "href": "https://www.tbae.texas.gov/laregbyexam/",
+            "id": "wave1-b3-7",
+            "label": "Texas TBAE landscape architects",
+            "scope": "Entry and practice"
           },
           {
-            "href": {
-              "$source": "source-pack-onet-details",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "landscape-architects.source-register.published.1"
-            },
-            "id": "landscape-architects.review.source-pack-onet-details",
-            "label": {
-              "$source": "source-pack-onet-details",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "landscape-architects.source-register.published.1"
-            },
-            "scope": "Duties and preparation"
+            "href": "https://www.epa.gov/npdes/stormwater-discharges-construction-activities",
+            "id": "wave1-b3-8",
+            "label": "EPA construction stormwater",
+            "scope": "Entry and practice"
+          },
+          {
+            "href": "https://www.gbci.org/press-kit-sites",
+            "id": "wave1-b3-9",
+            "label": "SITES rating system",
+            "scope": "Entry and practice"
           }
         ],
         "tracks": [
@@ -10000,7 +9363,7 @@
             "label": "View the risk module"
           }
         ],
-        "direct_answer": "Risks must be handled by trigger, consequence, control, and escalation boundary.",
+        "direct_answer": "A planting change can obscure drainage access. Review maintenance clearance and the actual plan revision with the responsible designer.",
         "evidence_scope": "Based on this occupation's research inputs and the source register; must not be extrapolated across jurisdictions.",
         "heading": "Work risks and boundaries for landscape architects",
         "risks": [
@@ -10106,24 +9469,6 @@
         "source_links": [
           {
             "href": {
-              "$source": "source-pack-onet-details",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "landscape-architects.source-register.published.1"
-            },
-            "id": "landscape-architects.review.source-pack-onet-details",
-            "label": {
-              "$source": "source-pack-onet-details",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "landscape-architects.source-register.published.1"
-            },
-            "scope": "Task and site checking"
-          },
-          {
-            "href": {
               "$source": "asla-ethics",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
@@ -10175,592 +9520,69 @@
               "item": "landscape-architects.source-register.published.1"
             },
             "scope": "Jurisdictional licensing conditions"
+          },
+          {
+            "href": "https://www.asla.org/about/ethics-and-professional-conduct/code-of-professional-ethics",
+            "id": "asla-ethics",
+            "label": "ASLA Code of Professional Ethics"
           }
         ]
       },
       "career_snapshot_primary_locale": {
-        "salary": {
-          "bls_table": [
-            {
-              "指标": "2025 scientific research and technical services pretax annual average (industry proxy)",
-              "数值": "Non-private 182,064; private 83,560 yuan/year",
-              "说明": "NBS tables 2/5 urban unit employee industry averages, excluding the self-employed and freelancers; not a national landscape design wage or starting pay."
-            },
-            {
-              "指标": "2025 construction pretax annual average (industry proxy)",
-              "数值": "Non-private 92,036; private 66,275 yuan/year",
-              "说明": "NBS tables 2/5 broad industry averages, for reference on the industry environment of the project employer only, not a landscape occupational median."
-            },
-            {
-              "指标": "Beijing Institute of Architectural Design historical landscape design announcement",
-              "数值": "Salary and landscape headcount not listed",
-              "说明": "2026 cohort campus recruitment; 2025 applications closed, not a current vacancy."
-            }
-          ],
-          "china_ai_row": {
-            "$item": "landscape-architects.china-salary.career-snapshot-primary-locale.4",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "china_class_row": {
-            "$item": "landscape-architects.china-salary.career-snapshot-primary-locale.3",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "china_edu_table": [
-            {
-              "学历段": "Insufficient evidence: no safe mapping established (associate degree)",
-              "岗位方向": "Verified according to the competent department and employer rules",
-              "说明": "No proxy figures are used."
-            },
-            {
-              "学历段": "Single historical sample: bachelor's degree or above",
-              "岗位方向": "Beijing Institute of Architectural Design 2026 cohort landscape design",
-              "说明": "Not a national threshold or practice licensing; 2025 applications closed."
-            },
-            {
-              "学历段": "Insufficient evidence: no safe mapping established (master's degree)",
-              "岗位方向": "Verified according to the competent department and employer rules",
-              "说明": "No proxy figures are used."
-            },
-            {
-              "学历段": "Insufficient evidence: no safe mapping established (other)",
-              "岗位方向": "Verified according to the specific jurisdiction",
-              "说明": "No proxy figures are used."
-            }
-          ],
-          "china_industry_table": [
-            {
-              "行业": "Scientific research and technical services (industry category)",
-              "需求": "Industry environment reference: 2025 pretax annual average non-private 182,064 / private 83,560 yuan; not demand or an occupational wage."
-            },
-            {
-              "行业": "Construction (industry category)",
-              "需求": "Industry environment reference: 2025 pretax annual average non-private 92,036 / private 66,275 yuan; not demand or an occupational wage."
-            },
-            {
-              "行业": "Other industries not listed separately",
-              "需求": "No safe figure available yet"
-            }
-          ],
-          "china_intl": {
-            "$join": [
-              {
-                "$source": "source-pack-onet-summary",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "landscape-architects.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "source-pack-onet-summary",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "landscape-architects.source-register.published.1"
-              },
-              "；",
-              {
-                "$source": "nbs-wage",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "landscape-architects.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "nbs-wage",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "landscape-architects.source-register.published.1"
-              }
-            ],
-            "separator": ""
-          },
-          "china_name_row": {
-            "$item": "landscape-architects.china-salary.career-snapshot-primary-locale.1",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "china_open": "A bounded search established no safe figure; this item is not starting pay, take-home income, or a personal quote.",
-          "china_ref": {
-            "$join": [
-              {
-                "$source": "nbs-wage",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "landscape-architects.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "nbs-wage",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "landscape-architects.source-register.published.1"
-              },
-              "；",
-              {
-                "$source": "biad-campus-2026",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "landscape-architects.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "biad-campus-2026",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "landscape-architects.source-register.published.1"
-              }
-            ],
-            "separator": ""
-          },
-          "china_salary_note": "The mainland China framing is kept separate from the U.S., global, and specific-institution framings and must not be spliced across markets.",
-          "china_salary_table": [
-            {
-              "城市/区间": "Insufficient evidence: no safe mapping established",
-              "月薪参考": "No safe figure available yet"
-            },
-            {
-              "城市/区间": "Insufficient evidence: no safe mapping established",
-              "月薪参考": "No safe figure available yet"
-            },
-            {
-              "城市/区间": "Insufficient evidence: no safe mapping established",
-              "月薪参考": "No safe figure available yet"
-            }
-          ],
-          "china_soc_row": {
-            "$item": "landscape-architects.china-salary.career-snapshot-primary-locale.2",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "sources_note": {
-            "$join": [
-              {
-                "$source": "nbs-wage",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "landscape-architects.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "nbs-wage",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "landscape-architects.source-register.published.1"
-              },
-              "；",
-              {
-                "$source": "biad-campus-2026",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "landscape-architects.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "biad-campus-2026",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "landscape-architects.source-register.published.1"
-              }
-            ],
-            "separator": ""
-          },
-          "ui": {
-            "ai_heading": "AI and wage judgment boundaries",
-            "driver_heading": "Influencing factors",
-            "official_heading": "Official statistical framing",
-            "scenario_caption": "This scenario is only to illustrate the framing and is not a personal quote.",
-            "scenario_heading": "Scenario reference",
-            "scenario_interpretation_label": "Explanation",
-            "scenario_role_label": "Position scope",
-            "scenario_value_label": "Reference value"
-          },
-          "us_growth": "Local framing not applicable",
-          "us_median": "Local framing not applicable"
-        }
+        "availability": "unavailable",
+        "reason_code": "source_locale_unavailable"
       },
       "career_snapshot_secondary_locale": {
-        "authority_sources": {
-          "$join": [
-            {
-              "$source": "source-pack-onet-localwages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "landscape-architects.source-register.published.1"
-            },
-            "｜",
-            {
-              "$source": "source-pack-onet-localwages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "landscape-architects.source-register.published.1"
-            },
-            "；",
-            {
-              "$source": "bls-oews-methods",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "landscape-architects.source-register.published.1"
-            },
-            "｜",
-            {
-              "$source": "bls-oews-methods",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "landscape-architects.source-register.published.1"
-            }
-          ],
-          "separator": ""
-        },
+        "authority_sources": "https://data.bls.gov/oesprofile/?areas=INDUSTRY,STATE,MSA&major_group=170000&measure=13&occupation=171012&year=2025",
         "bls_table": [
           {
-            "指标": "Wage · 10th percentile",
-            "数值": "54,770 USD/year (10th percentile)",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "source-pack-onet-localwages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "source-pack-onet-localwages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "；",
-                {
-                  "$source": "bls-oews-methods",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "bls-oews-methods",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "landscape-architects.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "fact_ref": "wave1-b3-wage-p10",
+            "指标": "10th percentile",
+            "数值": "$54,770/year",
+            "说明": "Read within the original statistical scope."
           },
           {
-            "指标": "Wage · 25th percentile",
-            "数值": "64,170 USD/year (25th percentile)",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "source-pack-onet-localwages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "source-pack-onet-localwages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "；",
-                {
-                  "$source": "bls-oews-methods",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "bls-oews-methods",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "landscape-architects.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "fact_ref": "wave1-b3-wage-p25",
+            "指标": "25th percentile",
+            "数值": "$64,170/year",
+            "说明": "Read within the original statistical scope."
           },
           {
-            "指标": "Wage · median",
-            "数值": "79,870 USD/year (median)",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "source-pack-onet-localwages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "source-pack-onet-localwages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "；",
-                {
-                  "$source": "bls-oews-methods",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "bls-oews-methods",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "landscape-architects.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "fact_ref": "wave1-b3-wage-p50",
+            "指标": "Median",
+            "数值": "$79,870/year",
+            "说明": "Read within the original statistical scope."
           },
           {
-            "指标": "Wage · 75th percentile",
-            "数值": "104,090 USD/year (75th percentile)",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "source-pack-onet-localwages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "source-pack-onet-localwages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "；",
-                {
-                  "$source": "bls-oews-methods",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "bls-oews-methods",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "landscape-architects.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "fact_ref": "wave1-b3-wage-p75",
+            "指标": "75th percentile",
+            "数值": "$104,090/year",
+            "说明": "Read within the original statistical scope."
           },
           {
-            "指标": "Wage · 90th percentile",
-            "数值": "130,190 USD/year (90th percentile)",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "source-pack-onet-localwages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "source-pack-onet-localwages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "；",
-                {
-                  "$source": "bls-oews-methods",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "bls-oews-methods",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "landscape-architects.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "fact_ref": "wave1-b3-wage-p90",
+            "指标": "90th percentile",
+            "数值": "$130,190/year",
+            "说明": "Read within the original statistical scope."
           },
           {
             "指标": "Employment · size",
             "数值": "23,500 people (2025)",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "bls-ooh",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "bls-ooh",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "；",
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "landscape-architects.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "说明": "Projection base-year employment"
           },
           {
             "指标": "Employment · growth",
             "数值": "4%（2025—2035）",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "bls-ooh",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "bls-ooh",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "；",
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "landscape-architects.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "说明": "Projected percentage change"
           },
           {
             "指标": "Employment · openings",
             "数值": "About 1,700 per year (2025—2035)",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "bls-ooh",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "bls-ooh",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "；",
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "landscape-architects.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "说明": "Average annual openings, including replacement"
           }
         ],
-        "boundary": "The U.S. precise occupation and the parent or proxy framings must be kept separate; the specific statistical scope follows the source labeling, and a percentile that was not obtained is not equal to zero.",
-        "direct_answer": {
-          "$item": "landscape-architects.us-salary.career-snapshot-secondary-locale.2",
-          "block": "us-salary",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "type": "prose"
-        },
+        "boundary": "Percentiles describe national wage distribution points. Compare a local offer by setting, responsibilities, and guaranteed pay.",
+        "direct_answer": "May 2025 OEWS covers U.S. wage and salary workers and excludes the self-employed.",
         "factor_rows": [
           {
             "answer": "Verified according to the specific jurisdiction.",
@@ -10797,24 +9619,24 @@
         "industry_period": "2025 BLS industry wages and the O*NET industry distribution, with the classifications explained separately",
         "industry_rows": [
           {
-            "industry": "Government (excluding state and local education and hospitals)",
-            "median": "107,410 USD/year",
-            "note": "2025 U.S. industry median; not the corresponding 51/20% broad industry classification or self-employed income."
+            "industry": "Occupation",
+            "median": "No comparable figure is cited here.",
+            "note": "Confirm the definition and any broader grouping."
           },
           {
-            "industry": "Architectural, engineering, and related services",
-            "median": "82,290 USD/year",
-            "note": "2025 U.S. industry median; not the corresponding 51/20% broad industry classification or self-employed income."
+            "industry": "Employment",
+            "median": "No comparable figure is cited here.",
+            "note": "Check whether self-employment is included."
           },
           {
-            "industry": "Construction",
-            "median": "71,990 USD/year",
-            "note": "2025 U.S. industry median; not the corresponding 51/20% broad industry classification or self-employed income."
+            "industry": "Survey period",
+            "median": "No comparable figure is cited here.",
+            "note": "Keep the month or year with the quoted figure."
           },
           {
-            "industry": "Landscape services",
-            "median": "65,150 USD/year",
-            "note": "2025 U.S. industry median; not the corresponding 51/20% broad industry classification or self-employed income."
+            "industry": "Geography",
+            "median": "No comparable figure is cited here.",
+            "note": "Compare local figures within the same survey."
           }
         ],
         "industry_value_label": "2025 industry median annual wage",
@@ -10826,23 +9648,23 @@
         },
         "interpretation_rows": [
           {
-            "answer": "Percentiles are not take-home pay, starting pay, or a personal quote.",
-            "question": "Is this a personal quote?"
+            "answer": "Confirm the definition and any broader grouping.",
+            "question": "Occupation"
           },
           {
-            "answer": "U.S. 17-1012 precise occupation, excluding the self-employed.",
-            "question": "Does this cover the precise occupation?"
+            "answer": "Check whether self-employment is included.",
+            "question": "Employment"
           },
           {
-            "answer": "The 2025 wages and the new and old projections are explained separately.",
-            "question": "What is the period?"
+            "answer": "Keep the month or year with the quoted figure.",
+            "question": "Survey period"
           },
           {
-            "answer": "Different market currencies cannot be spliced directly.",
-            "question": "Can it be compared across markets?"
+            "answer": "Compare local figures within the same survey.",
+            "question": "Geography"
           }
         ],
-        "median": "79,870 USD/year (May 2025, precise occupation framing)",
+        "median": "$79,870/year",
         "outlook_heading": "Employment outlook and job openings",
         "outlook_period": "Current precise occupation projection for 2025—2035; the protected FAQ and the shared old-period register are not synchronized",
         "wage_column_labels": [
@@ -10859,22 +9681,34 @@
         },
         "wage_tiers": [
           {
-            "equivalent": "26.33 USD/hour (hourly framing disclosed by O*NET)",
-            "interpretation": "A statistical position, not starting pay or personal take-home income.",
-            "label": "Low percentile",
-            "value": "54,770 USD/year (10th percentile)"
+            "equivalent": "USD/year",
+            "interpretation": "Lower end of the distribution",
+            "label": "10th percentile",
+            "value": "$54,770/year"
           },
           {
-            "equivalent": "38.40 USD/hour (hourly framing disclosed by O*NET)",
-            "interpretation": "A statistical position, not starting pay or personal take-home income.",
+            "equivalent": "USD/year",
+            "interpretation": "First quartile",
+            "label": "25th percentile",
+            "value": "$64,170/year"
+          },
+          {
+            "equivalent": "USD/year",
+            "interpretation": "Middle of the distribution",
             "label": "Median",
-            "value": "79,870 USD/year (median)"
+            "value": "$79,870/year"
           },
           {
-            "equivalent": "62.59 USD/hour (hourly framing disclosed by O*NET)",
-            "interpretation": "A statistical position, not starting pay or personal take-home income.",
-            "label": "High percentile",
-            "value": "130,190 USD/year (90th percentile)"
+            "equivalent": "USD/year",
+            "interpretation": "Third quartile",
+            "label": "75th percentile",
+            "value": "$104,090/year"
+          },
+          {
+            "equivalent": "USD/year",
+            "interpretation": "Upper end of the published range",
+            "label": "90th percentile",
+            "value": "$130,190/year"
           }
         ]
       },
@@ -10908,7 +9742,7 @@
         "title": "What kind of person is suited to landscape architecture?"
       },
       "fit_decision_checklist": {
-        "boundary": "This is a work sample check, not a personality diagnosis or a hiring conclusion.",
+        "boundary": "If revisions to ground levels feel like redoing a finished drawing, consider how often survey updates, utility conflicts and drainage comments reopen the site plan.",
         "how": {
           "$item": "landscape-architects.quick-decision.fermat-decision-card.3",
           "block": "quick-decision",
@@ -10956,7 +9790,7 @@
           {
             "geography": "United States",
             "horizon": "2025—2035",
-            "interpretation": "The new BLS period runs from 2025 employment of 23,500 to 24,500 in 2035, growth 4%, net gain 1,000; average annual openings about 1,700 including growth and replacements.",
+            "interpretation": "See the occupation evidence for the shared criteria.",
             "limitation": "Periods are not mixed; samples are not current vacancies or national statistics.",
             "metric": "Employment / growth / average annual openings",
             "occupation_scope": "17-1012 precise occupation",
@@ -10977,12 +9811,12 @@
             "value": "2025 employment 23,500 → 2035 24,500, growth 4%, average annual openings 1,700."
           },
           {
-            "geography": "China, Beijing",
+            "geography": "Use the U.S. scope described in this section.",
             "horizon": "2025 applications / 2026 cohort",
-            "interpretation": "The Beijing Institute of Architectural Design 2026 campus recruitment announcement was published on 2025-09-29: it includes landscape design, requires a bachelor's degree or above in a related field for 2026 graduates, and sets general requirements for code compliance, software, and collaboration; the online application window 2025-09-24—10-24 has closed. It lists no landscape headcount or salary and does not prove current hiring or a national threshold. One line of the text mentions 2024 campus recruitment, which is inconsistent with the title's target window; the explicit 2026 cohort and the 2025 application dates are used instead, without guessing the reason.",
+            "interpretation": "It lists no landscape headcount or salary and does not prove current hiring or a national threshold.",
             "limitation": "Periods are not mixed; samples are not current vacancies or national statistics.",
             "metric": "Historical recruitment sample",
-            "occupation_scope": "Beijing Institute of Architectural Design landscape design",
+            "occupation_scope": "Use the U.S. scope described in this section.",
             "value": "Landscape headcount / salary not listed; applications have closed"
           }
         ],
@@ -11025,40 +9859,14 @@
             "scope": "Old period kept separate"
           },
           {
-            "href": {
-              "$source": "biad-campus-2026",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "landscape-architects.source-register.published.1"
-            },
-            "id": "landscape-architects.review.biad-campus-2026",
-            "label": {
-              "$source": "biad-campus-2026",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "landscape-architects.source-register.published.1"
-            },
-            "scope": "Historical single announcement, not a current vacancy"
+            "href": "https://www.asla.org/about/ethics-and-professional-conduct/code-of-professional-ethics",
+            "id": "asla-ethics",
+            "label": "ASLA Code of Professional Ethics"
           },
           {
-            "href": {
-              "$source": "source-pack-onet-hot_tech",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "landscape-architects.source-register.published.1"
-            },
-            "id": "landscape-architects.review.source-pack-onet-hot_tech",
-            "label": {
-              "$source": "source-pack-onet-hot_tech",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "landscape-architects.source-register.published.1"
-            },
-            "scope": "2025 software mentions"
+            "href": "https://www.asla.org/about/advocacy/licensure",
+            "id": "asla-licensure",
+            "label": "Professional Landscape Architects Protect Public Health, Safety, and Welfare"
           }
         ],
         "transitions": [
@@ -11075,15 +9883,15 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/architects",
+            "target_href": "/en/career/jobs/architects",
             "target_slug": "architects",
-            "target_title": "Architects (except landscape and naval)",
+            "target_title": "Architects",
             "transition_distance": "Evidence to be added"
           },
           {
             "capability_gaps": "Architectural licensing and structural and fire responsibility",
             "shared_capabilities": "Architecture and spatial design foundations",
-            "target_href": "/zh/career/jobs/architects-except-landscape-and-naval",
+            "target_href": "/en/career/jobs/architects-except-landscape-and-naval",
             "target_slug": "architects-except-landscape-and-naval",
             "target_title": "Architects",
             "transition_distance": "Medium; architectural licensing evidence to be added"
@@ -11091,7 +9899,7 @@
           {
             "capability_gaps": "Agricultural systems engineering and calculations",
             "shared_capabilities": "Irrigation and soil and water knowledge",
-            "target_href": "/zh/career/jobs/agricultural-engineers",
+            "target_href": "/en/career/jobs/agricultural-engineers",
             "target_slug": "agricultural-engineers",
             "target_title": "Agricultural engineers",
             "transition_distance": "Distant; engineering and calculation evidence to be added"
@@ -11099,7 +9907,7 @@
           {
             "capability_gaps": "Add detailed drawings, version control, materials, and engineering knowledge; does not confer independent design sealing.",
             "shared_capabilities": "Drawing representation and software use",
-            "target_href": "/zh/career/jobs/architectural-and-civil-drafters",
+            "target_href": "/en/career/jobs/architectural-and-civil-drafters",
             "target_slug": "architectural-and-civil-drafters",
             "target_title": "Architectural and civil drafters",
             "transition_distance": "Close; duties focus on drafting support"
@@ -11107,15 +9915,15 @@
           {
             "capability_gaps": "Overall architectural design and licensing system",
             "shared_capabilities": "Architectural document coordination special topic: same as the first target",
-            "target_href": "/zh/career/jobs/architects",
+            "target_href": "/en/career/jobs/architects",
             "target_slug": "architects",
-            "target_title": "Architects (except landscape and naval)",
+            "target_title": "Architects",
             "transition_distance": "Medium; architectural licensing evidence to be added"
           },
           {
             "capability_gaps": "Architectural structural and MEP interfaces",
             "shared_capabilities": "Architectural interface special topic: same as the second target",
-            "target_href": "/zh/career/jobs/architects-except-landscape-and-naval",
+            "target_href": "/en/career/jobs/architects-except-landscape-and-naval",
             "target_slug": "architects-except-landscape-and-naval",
             "target_title": "Architects",
             "transition_distance": "Medium; structural and MEP interface evidence to be added"
@@ -11143,13 +9951,8 @@
       "personality_fit_block": {
         "assessments": [
           {
-            "answer": {
-              "$item": "landscape-architects.fit.riasec-fit-block.6",
-              "block": "fit",
-              "copy_key": "career.item.riasec-fit-block",
-              "type": "prose"
-            },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "answer": "Show spot levels, a flow arrow, one maintenance access constraint and where you would ask a civil partner to review.",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start the career interest exercise",
             "evidence_level": "Editorial paper suggestion; the validity of scales for performance in this occupation was not verified",
             "id": "riasec",
@@ -11168,7 +9971,7 @@
               "copy_key": "career.item.riasec-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start the career interest exercise",
             "evidence_level": "Editorial paper suggestion; the validity of scales for performance in this occupation was not verified",
             "id": "big-five",
@@ -11187,7 +9990,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start the career interest exercise",
             "evidence_level": "Editorial paper suggestion; the validity of scales for performance in this occupation was not verified",
             "id": "mbti",
@@ -11201,7 +10004,7 @@
           },
           {
             "answer": "Keep the revision records and do not treat cheaper as constructible.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start the career interest exercise",
             "evidence_level": "Editorial paper suggestion; the validity of scales for performance in this occupation was not verified",
             "id": "enneagram",
@@ -11214,8 +10017,8 @@
             "watchout": "Paper does not confer licensing or prove that real site design is compliant."
           },
           {
-            "answer": "A6400 over 400, B5800 remaining 200; both areas are 200.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "answer": "Write down which level is higher and which input still needs survey confirmation.",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start the career interest exercise",
             "evidence_level": "Editorial paper suggestion; the validity of scales for performance in this occupation was not verified",
             "id": "iq",
@@ -11229,7 +10032,7 @@
           },
           {
             "answer": "Explain that B crosses U, is pending material verification, and that no construction has been released.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start the career interest exercise",
             "evidence_level": "Editorial paper suggestion; the validity of scales for performance in this occupation was not verified",
             "id": "eq",
@@ -11289,36 +10092,36 @@
         },
         "questions": [
           {
-            "answer": "Compare spatial representation, arithmetic, and coordination preferences.",
-            "question": "Which tasks do you like?"
+            "answer": "See work fit evidence for the shared criteria.",
+            "question": "What is a useful site-design work sample?"
           },
           {
-            "answer": "Record only the Z paper time, not an on-site working-hours assessment.",
-            "question": "Can you bear the work rhythm?"
+            "answer": "Notice how often the team reopens a handoff when an earlier assumption changes. Ask who confirms the new decision.",
+            "question": "What should I notice in a job shadow?"
           },
           {
-            "answer": "The two schemes and the T / U matrix are traceable.",
-            "question": "Are you willing to record the process?"
+            "answer": "Pick a regular deliverable and repeat it with the same review standard.",
+            "question": "Which assignment would I repeat?"
           },
           {
-            "answer": "B's utilities are unknown; do not write \"no utilities\".",
-            "question": "Can you escalate when uncertain?"
+            "answer": "Note your last confirmed detail before responding to the interruption.",
+            "question": "How do I handle an interruption?"
           },
           {
-            "answer": "Licensing and supervisory support are checked separately.",
-            "question": "Do you understand the authorization boundaries?"
+            "answer": "Keep both versions and identify the person who can settle the discrepancy.",
+            "question": "How do I respond to conflicting inputs?"
           },
           {
-            "answer": "Correct the draft that equates cheaper with constructible.",
-            "question": "Can you review failures?"
+            "answer": "Compare the written shift terms with when you can work reliably.",
+            "question": "Would the work schedule suit me?"
           },
           {
-            "answer": "Submit the four works with consistent numbers.",
-            "question": "Are there observable deliverables?"
+            "answer": "Describe what you would route to a qualified reviewer.",
+            "question": "Can I set a boundary on requests?"
           },
           {
-            "answer": "After seven days, check the real jurisdiction and the employer's requirements.",
-            "question": "What is the next test?"
+            "answer": "Ask a receiver which detail lets them continue without guessing.",
+            "question": "What makes a handoff useful?"
           }
         ],
         "schema_version": "career.fit_decision_center.v1",
@@ -11360,40 +10163,6 @@
         "source_links": [
           {
             "href": {
-              "$source": "source-pack-onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "landscape-architects.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "landscape-architects.source-register.published.1"
-            },
-            "usage": "Official RIA"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-details",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "landscape-architects.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-details",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "landscape-architects.source-register.published.1"
-            },
-            "usage": "Task context"
-          },
-          {
-            "href": {
               "$source": "asla-ethics",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
@@ -11425,6 +10194,14 @@
               "item": "landscape-architects.source-register.published.1"
             },
             "usage": "Jurisdictional education, experience, and examination"
+          },
+          {
+            "href": "https://www.asla.org/about/ethics-and-professional-conduct/code-of-professional-ethics",
+            "label": "ASLA Code of Professional Ethics"
+          },
+          {
+            "href": "https://www.asla.org/about/advocacy/licensure",
+            "label": "Professional Landscape Architects Protect Public Health, Safety, and Welfare"
           }
         ]
       },
@@ -11461,22 +10238,10 @@
       "source_card": {
         "eeat_signals": {
           "author": "FermatMind research workflow",
-          "source": {
-            "$source": "source-pack-onet-details",
-            "block": "source-register",
-            "copy_key": "career.item.published-sources",
-            "field": "name",
-            "item": "landscape-architects.source-register.published.1"
-          },
-          "updated_at": {
-            "$source": "source-pack-onet-details",
-            "block": "source-register",
-            "copy_key": "career.item.published-sources",
-            "field": "period",
-            "item": "landscape-architects.source-register.published.1"
-          }
+          "source": "See the dated source register for market and evidence scope.",
+          "updated_at": "2026-11-12"
         },
-        "note": "Source note | Official RIA/JobZone4 / not marked Bright, the 2025 five wage percentiles and the official hourly wages are retained; BLS and O*NET are both currently on 2025—2035, the industry distribution was updated in 2025, and broad-industry and fine-industry wages are kept separate. The old-period register cited by the protected FAQ is not synchronized. ASLA member ethics, U.S. jurisdictional licensing, and Chinese enterprise qualification titles are not interchangeable; CLARB covers bachelor's and master's degrees and jurisdictional alternative paths, and passing the examination is not a license. The NBS official broad-industry pretax annual average already lists two proxy references, which are not national landscape occupational wages; the Beijing Institute of Architectural Design historical application has closed, and headcount and salary are not listed. ILO/NIST are general research and risk material, and CAD software in postings is not a generative AI effect. Z is entirely fictional, with 200 and 6400 / 5800, the T / U conditions, and the unissued-version four works over seven days; it does not serve as construction compliance or qualification proof. The NIST shared judicial wording is protected by the FAQ, and this round keeps the registration and records the conflict."
+        "note": "Write down which level is higher and which input still needs survey confirmation."
       },
       "work_context_block": {
         "$item": "landscape-architects.profile.work-context-block.5",
@@ -11490,7 +10255,7 @@
       "interface.fit.directions_heading": "Comparison of landscape design work directions",
       "interface.fit.interest_code_heading": "Official interest code RIA"
     },
-    "locale": "zh-CN",
+    "locale": "en",
     "native_items": [
       {
         "block": "source-register",
@@ -11498,12 +10263,26 @@
         "id": "landscape-architects.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "landscape-architects.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "landscape-architects.entry-work-sample-data.2",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": "/en/career/jobs/landscape-architects",
     "section_titles": {
       "ai-impact": "AI Impact Score",
-      "china-salary": "Mainland China salary",
+      "china-salary": "Additional wage reference",
       "direction-comparison": "Adjacent occupation comparison",
       "fit": "Fit signals",
       "market-signals": "Market signals",
@@ -11557,72 +10336,120 @@
       },
       {
         "derivation": null,
-        "display_value": "Median annual wage 79,870 USD (May 2025, BLS OEWS, 17-1012.00 precise occupation)",
+        "display_value": "$79,870/year",
         "fact_id": "us-wage-median",
         "market": "United States",
-        "measure": "Median annual wage",
-        "occupation_scope": "Landscape Architects, O*NET 17-1012.00",
-        "period": "2025 wage data",
+        "measure": "Annual wage — Median",
+        "occupation_scope": "U.S. occupation SOC 17-1012",
+        "period": "May 2025",
         "source_refs": [
-          "source-pack-onet-localwages"
+          "wave1-b3-1"
         ]
       },
       {
         "derivation": null,
-        "display_value": "10th percentile annual wage 54,770 USD (May 2025, BLS OEWS, 17-1012.00 precise occupation)",
+        "display_value": "$54,770/year",
         "fact_id": "us-wage-p10",
         "market": "United States",
-        "measure": "10th percentile annual wage",
-        "occupation_scope": "Landscape Architects, O*NET 17-1012.00",
-        "period": "2025 wage data",
+        "measure": "Annual wage — 10th percentile",
+        "occupation_scope": "U.S. occupation SOC 17-1012",
+        "period": "May 2025",
         "source_refs": [
-          "source-pack-onet-localwages"
+          "wave1-b3-1"
         ]
       },
       {
         "derivation": null,
-        "display_value": "90th percentile annual wage 130,190 USD (May 2025, BLS OEWS, 17-1012.00 precise occupation)",
+        "display_value": "$130,190/year",
         "fact_id": "us-wage-p90",
         "market": "United States",
-        "measure": "90th percentile annual wage",
-        "occupation_scope": "Landscape Architects, O*NET 17-1012.00",
-        "period": "2025 wage data",
+        "measure": "Annual wage — 90th percentile",
+        "occupation_scope": "U.S. occupation SOC 17-1012",
+        "period": "May 2025",
         "source_refs": [
-          "source-pack-onet-localwages"
+          "wave1-b3-1"
         ]
       },
       {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+75+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "42%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Landscape Architect",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "derivation": null,
+        "display_value": "$54,770/year",
+        "fact_id": "wave1-b3-wage-p10",
+        "market": "United States",
+        "measure": "Annual wage — 10th percentile",
+        "occupation_scope": "U.S. occupation SOC 17-1012",
+        "period": "May 2025",
         "source_refs": [
-          "source-fermatmind-ai-rubric"
+          "wave1-b3-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "$64,170/year",
+        "fact_id": "wave1-b3-wage-p25",
+        "market": "United States",
+        "measure": "Annual wage — 25th percentile",
+        "occupation_scope": "U.S. occupation SOC 17-1012",
+        "period": "May 2025",
+        "source_refs": [
+          "wave1-b3-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "$79,870/year",
+        "fact_id": "wave1-b3-wage-p50",
+        "market": "United States",
+        "measure": "Annual wage — Median",
+        "occupation_scope": "U.S. occupation SOC 17-1012",
+        "period": "May 2025",
+        "source_refs": [
+          "wave1-b3-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "$104,090/year",
+        "fact_id": "wave1-b3-wage-p75",
+        "market": "United States",
+        "measure": "Annual wage — 75th percentile",
+        "occupation_scope": "U.S. occupation SOC 17-1012",
+        "period": "May 2025",
+        "source_refs": [
+          "wave1-b3-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "$130,190/year",
+        "fact_id": "wave1-b3-wage-p90",
+        "market": "United States",
+        "measure": "Annual wage — 90th percentile",
+        "occupation_scope": "U.S. occupation SOC 17-1012",
+        "period": "May 2025",
+        "source_refs": [
+          "wave1-b3-1"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
       "label": "AI Impact Score"
     },
     "badges": [
       "Landscape Architect · site design, licensing, and public safety boundaries",
       "Source scope · statistical framing · human review",
-      "The mainland China precise occupation wage gap is preserved as evidence"
+      "Use the U.S. scope described in this section."
     ],
     "metrics": [
       {
         "availability": "available",
-        "fact_ref": "us-wage-median",
+        "fact_ref": "wave1-b3-wage-p50",
         "key": "us_pay",
-        "label": "U.S. median annual wage (2025-05, precise occupation framing)"
+        "label": "U.S. May 2025 median wage"
       },
       {
         "availability": "available",
@@ -11646,7 +10473,7 @@
         "availability": "missing",
         "fact_ref": null,
         "key": "china_pay",
-        "label": "Mainland China precise occupation wages (not obtained)"
+        "label": "Additional wage benchmark"
       }
     ]
   },
@@ -11654,17 +10481,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Learn how landscape architects analyze sites, develop plans and compare their work with landscape maintenance."
+      "text": "Landscape architects coordinate land use, levels, runoff and planting into a site design that can be reviewed and built."
     },
     "title": {
       "availability": "available",
-      "text": "Landscape Architect: Site Planning, Planting and Design"
+      "text": "Landscape Architects: Site Plans, State Licenses and Pay"
     }
   },
-  "source_content_sha256": "df8fcbd2032c4c5f740f701cadce5dae62d4ef40240b93181750e23608744727",
+  "source_content_sha256": "7746314bd95d438a1ffe34990115afc6c573a734682d844e0f1bc73171dc5397",
   "subject": {
     "canonical_slug": "landscape-architects",
-    "name": "Landscape Architect",
-    "summary": "Landscape architects design outdoor places such as parks, campuses and public spaces. They consider how people move, what can grow and how the site functions. Design, construction and maintenance responsibilities are distinct."
+    "name": "Landscape Architects",
+    "summary": "Landscape architects coordinate land use, levels, runoff and planting into a site design that can be reviewed and built."
   }
 }

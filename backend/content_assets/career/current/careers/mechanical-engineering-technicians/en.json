@@ -2,18 +2,6 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
-      "fact:cn-manufacturing-nonprivate-wage": {
-        "status": "pending_mapping"
-      },
-      "fact:cn-manufacturing-private-wage": {
-        "status": "pending_mapping"
-      },
-      "fact:cn-national-nonprivate-wage": {
-        "status": "pending_mapping"
-      },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
@@ -24,6 +12,21 @@
         "status": "pending_mapping"
       },
       "fact:us-wage-median": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b4-wage-p10": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b4-wage-p25": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b4-wage-p50": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b4-wage-p75": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b4-wage-p90": {
         "status": "pending_mapping"
       },
       "item:mechanical-engineering-technicians.ai-impact.ai-impact-table.1": {
@@ -38,9 +41,6 @@
       "item:mechanical-engineering-technicians.ai-impact.ai-impact-table.4": {
         "status": "pending_mapping"
       },
-      "item:mechanical-engineering-technicians.ai-impact.ai-impact-table.5": {
-        "status": "pending_mapping"
-      },
       "item:mechanical-engineering-technicians.ai-impact.ai-impact-table.6": {
         "status": "pending_mapping"
       },
@@ -48,18 +48,6 @@
         "status": "pending_mapping"
       },
       "item:mechanical-engineering-technicians.ai-impact.ai-impact-table.8": {
-        "status": "pending_mapping"
-      },
-      "item:mechanical-engineering-technicians.china-salary.career-snapshot-primary-locale.1": {
-        "status": "pending_mapping"
-      },
-      "item:mechanical-engineering-technicians.china-salary.career-snapshot-primary-locale.2": {
-        "status": "pending_mapping"
-      },
-      "item:mechanical-engineering-technicians.china-salary.career-snapshot-primary-locale.3": {
-        "status": "pending_mapping"
-      },
-      "item:mechanical-engineering-technicians.china-salary.career-snapshot-primary-locale.4": {
         "status": "pending_mapping"
       },
       "item:mechanical-engineering-technicians.direction-comparison.adjacent-career-comparison-table.1": {
@@ -75,6 +63,9 @@
         "status": "pending_mapping"
       },
       "item:mechanical-engineering-technicians.direction-comparison.adjacent-career-comparison-table.5": {
+        "status": "pending_mapping"
+      },
+      "item:mechanical-engineering-technicians.entry-work-sample-data.2": {
         "status": "pending_mapping"
       },
       "item:mechanical-engineering-technicians.fit.riasec-fit-block.1": {
@@ -93,9 +84,6 @@
         "status": "pending_mapping"
       },
       "item:mechanical-engineering-technicians.fit.riasec-fit-block.6": {
-        "status": "pending_mapping"
-      },
-      "item:mechanical-engineering-technicians.fit.riasec-fit-block.7": {
         "status": "pending_mapping"
       },
       "item:mechanical-engineering-technicians.fit.riasec-fit-block.8": {
@@ -141,6 +129,9 @@
         "status": "pending_mapping"
       },
       "item:mechanical-engineering-technicians.path.career-path-block.8": {
+        "status": "pending_mapping"
+      },
+      "item:mechanical-engineering-technicians.path.entry-work-sample-data.1": {
         "status": "pending_mapping"
       },
       "item:mechanical-engineering-technicians.profile.career-quick-answers-block.8": {
@@ -210,9 +201,6 @@
         "status": "pending_mapping"
       },
       "item:mechanical-engineering-technicians.us-salary.career-snapshot-secondary-locale.1": {
-        "status": "pending_mapping"
-      },
-      "item:mechanical-engineering-technicians.us-salary.career-snapshot-secondary-locale.2": {
         "status": "pending_mapping"
       },
       "item:mechanical-engineering-technicians.us-salary.career-snapshot-secondary-locale.3": {
@@ -7224,7 +7212,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "The following judgments address the daily work of mechanical engineering technologists and technicians who test, modify, and develop mechanical equipment under the direction of engineers or physical scientists; they do not predict hiring, qualifications, authorization, or engineering sign-off responsibility."
+              "Compare the work setting and its handoff demands."
             ]
           },
           "id": "mechanical-engineering-technicians.quick-decision.fermat-decision-card.1",
@@ -7239,14 +7227,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "The core of the work of mechanical engineering technologists and technicians is applying mechanical engineering theory and principles to machinery and equipment that must actually run: assembling and disassembling mechanical systems, building and operating test stands to drawings and specifications, measuring performance and strength, analyzing test data, designing tooling, fixtures, and special-purpose equipment, recording results, and assisting engineers with design and manufacturing. The work combines office analysis, test stands, and shop floor settings, and requires precision, traceability, and escalation within authorized boundaries."
+              "Mechanical engineering technicians support drawings, fixtures and tests, and preserve the measurements an engineer needs for review."
             ]
           },
           "id": "mechanical-engineering-technicians.quick-decision.fermat-decision-card.2",
           "source_refs": [
-            "onet-summary",
-            "onet-tasks",
-            "onet-context"
+            "onet-tasks"
           ],
           "type": "prose"
         },
@@ -7255,7 +7241,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "A fully fictional task package: given a fictional mechanical component test input (containing 1 test purpose and acceptance criteria, 1 set of fictional measurement data, and 1 abnormal reading to be judged), write within 60 minutes the assembly and testing steps, the data recording format, the basis for judging abnormalities, and the situations that must be submitted to an engineer for confirmation; do not use real clients, enterprise data, or unpublished drawings."
+              "Complete the entry worksheet before checking the worked answer."
             ]
           },
           "id": "mechanical-engineering-technicians.quick-decision.fermat-decision-card.3",
@@ -7274,8 +7260,7 @@
           },
           "id": "mechanical-engineering-technicians.quick-decision.fermat-decision-card.4",
           "source_refs": [
-            "onet-tasks",
-            "onet-context"
+            "onet-tasks"
           ],
           "type": "prose"
         }
@@ -7292,13 +7277,10 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Mechanical engineering technicians support engineers by preparing prototypes, taking measurements and recording test results. They identify deviations and route issues for review. Assignments vary with the lab or production setting."
+              "Mechanical engineering technicians support drawings, fixtures and tests, and preserve the measurements an engineer needs for review."
             ]
           },
           "id": "mechanical-engineering-technicians.profile.definition-block.1",
-          "source_refs": [
-            "onet-summary"
-          ],
           "type": "prose"
         },
         {
@@ -7306,13 +7288,14 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Inputs: engineering drawings, specifications and project instructions, machinery and components awaiting testing, test stands and instruments, measurement data, tooling and fixture and die requirements, material and cost information, and the performance and acceptance criteria set by engineers."
+              "Use SolidWorks or AutoCAD to check drawing changes and GD&T. On a supervised test rig, review strain gauges or calipers and CMM records against the test plan. FEA can support engineering review; keep simulated and measured results identifiable."
             ]
           },
           "id": "mechanical-engineering-technicians.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-tasks",
-            "onet-details"
+            "wave1-b4-3",
+            "wave1-b4-4",
+            "wave1-b4-5"
           ],
           "type": "list"
         },
@@ -7355,8 +7338,7 @@
           },
           "id": "mechanical-engineering-technicians.profile.work-context-block.5",
           "source_refs": [
-            "onet-tasks",
-            "onet-context"
+            "onet-tasks"
           ],
           "type": "prose"
         },
@@ -7369,9 +7351,6 @@
             ]
           },
           "id": "mechanical-engineering-technicians.profile.work-context-block.6",
-          "source_refs": [
-            "onet-context"
-          ],
           "type": "prose",
           "visibility": "internal"
         },
@@ -7380,7 +7359,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "Research inputs: 17-3027.00 tasks, context, RIC, and JobZone3; 2025 wages and 2025—2035 employment projections. Both BLS and O*NET use United States occupation scopes and do not prove Chinese qualifications, wages, or industry mapping."
+              "Research inputs: 17-3027.00 tasks, context, RIC, and JobZone3; 2025 wages and 2025—2035 employment projections."
             ]
           },
           "id": "mechanical-engineering-technicians.profile.onet-structured-fields-block.7",
@@ -7394,13 +7373,10 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Use a fictional component. List the revision, test conditions, instrument, deviation and person responsible for review. Explain what you would flag before continuing."
+              "Use a  component. List the revision, test conditions, instrument, deviation and person responsible for review. Explain what you would flag before continuing."
             ]
           },
           "id": "mechanical-engineering-technicians.profile.career-quick-answers-block.8",
-          "source_refs": [
-            "onet-summary"
-          ],
           "type": "prose"
         },
         {
@@ -7412,9 +7388,6 @@
             ]
           },
           "id": "mechanical-engineering-technicians.profile.career-quick-answers-block.9",
-          "source_refs": [
-            "onet-summary"
-          ],
           "type": "prose"
         },
         {
@@ -7426,9 +7399,6 @@
             ]
           },
           "id": "mechanical-engineering-technicians.profile.definition-block.10",
-          "source_refs": [
-            "onet-summary"
-          ],
           "type": "prose",
           "visibility": "internal"
         }
@@ -7478,9 +7448,6 @@
             ]
           },
           "id": "mechanical-engineering-technicians.direction-comparison.adjacent-career-comparison-table.1",
-          "source_refs": [
-            "onet-summary"
-          ],
           "type": "links"
         },
         {
@@ -7492,9 +7459,6 @@
             ]
           },
           "id": "mechanical-engineering-technicians.direction-comparison.adjacent-career-comparison-table.2",
-          "source_refs": [
-            "onet-summary"
-          ],
           "type": "prose"
         },
         {
@@ -7506,9 +7470,6 @@
             ]
           },
           "id": "mechanical-engineering-technicians.direction-comparison.adjacent-career-comparison-table.3",
-          "source_refs": [
-            "onet-summary"
-          ],
           "type": "prose"
         },
         {
@@ -7520,9 +7481,6 @@
             ]
           },
           "id": "mechanical-engineering-technicians.direction-comparison.adjacent-career-comparison-table.4",
-          "source_refs": [
-            "onet-summary"
-          ],
           "type": "prose"
         },
         {
@@ -7534,9 +7492,6 @@
             ]
           },
           "id": "mechanical-engineering-technicians.direction-comparison.adjacent-career-comparison-table.5",
-          "source_refs": [
-            "onet-summary"
-          ],
           "type": "prose"
         }
       ]
@@ -7609,20 +7564,6 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Responsibility process: from verifying inputs and limiting tasks to engineering review and recording escalation."
-            ]
-          },
-          "id": "mechanical-engineering-technicians.ai-impact.ai-impact-table.5",
-          "source_refs": [
-            "ilo-genai"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.ai-impact-table",
-          "data": {
-            "paragraphs": [
               "Usage boundaries: tool output must be traceable to the original inputs, test conditions, and the real object."
             ]
           },
@@ -7663,80 +7604,11 @@
       ]
     },
     {
-      "availability": "available",
+      "availability": "missing",
       "content_state": "enhanced",
       "copy_key": "career.block.china-salary",
       "id": "china-salary",
-      "items": [
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "This page does not obtain a national occupational wage median for mechanical engineering technologists and technicians in mainland China. The NBS manufacturing industry average is used as employer background for manufacturing enterprises; actual employers may also belong to industries such as technical services, and United States classifications are not used to presume China's main industries."
-            ]
-          },
-          "fact_refs": [
-            "cn-manufacturing-nonprivate-wage"
-          ],
-          "id": "mechanical-engineering-technicians.china-salary.career-snapshot-primary-locale.1",
-          "source_refs": [
-            "nbs-wages"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "Scope note: average annual wages of employed persons in manufacturing in 2025 from the National Bureau of Statistics of China, {{fact:cn-manufacturing-nonprivate-wage}} for urban non-private units and {{fact:cn-manufacturing-private-wage}} for urban private units; the national total for urban non-private units is {{fact:cn-national-nonprivate-wage}}. All are industry scopes and are not equal to the median or starting pay for this occupation."
-            ]
-          },
-          "fact_refs": [
-            "cn-manufacturing-private-wage"
-          ],
-          "id": "mechanical-engineering-technicians.china-salary.career-snapshot-primary-locale.2",
-          "source_refs": [
-            "nbs-wages"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "Category boundaries: enterprise compensation survey information from the Ministry of Human Resources and Social Security is released by occupation and position category and can be used to look up pay for engineering technology and manufacturing related positions, but this page does not obtain an entry precisely corresponding to O*NET 17-3027.00 and does not use it as the national median for this occupation; the releases of the competent authorities prevail."
-            ]
-          },
-          "fact_refs": [
-            "cn-national-nonprivate-wage"
-          ],
-          "id": "mechanical-engineering-technicians.china-salary.career-snapshot-primary-locale.3",
-          "source_refs": [
-            "nbs-wages"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "Insufficient evidence: no national occupational wage median for mechanical engineering technologists and technicians in mainland China was obtained (2025 official public scope); this page only presents the manufacturing industry proxy and marks it as an industry scope, and does not fill the gap with proxy numbers or United States figures."
-            ]
-          },
-          "fact_refs": [
-            "cn-manufacturing-private-wage"
-          ],
-          "id": "mechanical-engineering-technicians.china-salary.career-snapshot-primary-locale.4",
-          "source_refs": [
-            "nbs-wages"
-          ],
-          "type": "prose"
-        }
-      ]
+      "items": []
     },
     {
       "availability": "available",
@@ -7753,20 +7625,6 @@
             ]
           },
           "id": "mechanical-engineering-technicians.us-salary.career-snapshot-secondary-locale.1",
-          "source_refs": [
-            "onet-wages"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "data": {
-            "paragraphs": [
-              "United States 17-3027 in 2025: annual wages P10/P25/P50/P75/P90 are 48,400 / 59,510 / 74,510 / 88,110 / 106,050 USD; hourly 23.27 / 28.61 / 35.82 / 42.36 / 50.99 USD. Employment of 36,900 in 2025 and a projected 37,400 in 2035, growth of 1% and a net increase of 500, with 3,100 average annual openings including replacements. Percentiles are not seniority or take-home income."
-            ]
-          },
-          "id": "mechanical-engineering-technicians.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
             "onet-wages"
           ],
@@ -7845,9 +7703,6 @@
             ]
           },
           "id": "mechanical-engineering-technicians.fit.riasec-fit-block.1",
-          "source_refs": [
-            "onet-context"
-          ],
           "type": "prose"
         },
         {
@@ -7859,9 +7714,6 @@
             ]
           },
           "id": "mechanical-engineering-technicians.fit.riasec-fit-block.2",
-          "source_refs": [
-            "onet-context"
-          ],
           "type": "prose"
         },
         {
@@ -7873,9 +7725,6 @@
             ]
           },
           "id": "mechanical-engineering-technicians.fit.riasec-fit-block.3",
-          "source_refs": [
-            "onet-context"
-          ],
           "type": "prose"
         },
         {
@@ -7887,9 +7736,6 @@
             ]
           },
           "id": "mechanical-engineering-technicians.fit.riasec-fit-block.4",
-          "source_refs": [
-            "onet-context"
-          ],
           "type": "prose"
         },
         {
@@ -7901,9 +7747,6 @@
             ]
           },
           "id": "mechanical-engineering-technicians.fit.riasec-fit-block.5",
-          "source_refs": [
-            "onet-context"
-          ],
           "type": "prose"
         },
         {
@@ -7915,23 +7758,6 @@
             ]
           },
           "id": "mechanical-engineering-technicians.fit.riasec-fit-block.6",
-          "source_refs": [
-            "onet-context"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.riasec-fit-block",
-          "data": {
-            "paragraphs": [
-              "The RIASEC interest code RIC describes activity preferences: preference for hands-on work with physical objects (Realistic), analysis and reasoning (Investigative), and handling data per procedure (Conventional)."
-            ]
-          },
-          "id": "mechanical-engineering-technicians.fit.riasec-fit-block.7",
-          "source_refs": [
-            "onet-context"
-          ],
           "type": "prose"
         },
         {
@@ -7943,9 +7769,6 @@
             ]
           },
           "id": "mechanical-engineering-technicians.fit.riasec-fit-block.8",
-          "source_refs": [
-            "onet-context"
-          ],
           "type": "prose"
         }
       ]
@@ -7965,9 +7788,6 @@
             ]
           },
           "id": "mechanical-engineering-technicians.risk.career-risk-cards.1",
-          "source_refs": [
-            "onet-context"
-          ],
           "type": "prose"
         },
         {
@@ -7993,9 +7813,6 @@
             ]
           },
           "id": "mechanical-engineering-technicians.risk.career-risk-cards.3",
-          "source_refs": [
-            "onet-context"
-          ],
           "type": "prose"
         },
         {
@@ -8021,9 +7838,6 @@
             ]
           },
           "id": "mechanical-engineering-technicians.risk.career-risk-cards.5",
-          "source_refs": [
-            "onet-context"
-          ],
           "type": "prose"
         }
       ]
@@ -8039,7 +7853,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Realistic entry point: entry samples for mechanical engineering technologists and technicians use only public or fictional data, demonstrating assembly, testing, data recording, and conclusion recommendations; first confirm the first-year tasks and the engineering review method of the target position."
+              "Realistic entry point: entry samples for mechanical engineering technologists and technicians use only public or  data, demonstrating assembly, testing, data recording, and conclusion recommendations; first confirm the first-year tasks and the engineering review method of the target position."
             ]
           },
           "id": "mechanical-engineering-technicians.path.career-path-block.1",
@@ -8054,7 +7868,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The United States BLS for this occupation usually requires postsecondary training such as an associate degree or a vocational technical school certificate, and some employers prefer a bachelor's degree or an accredited program; the general experience and training notes in JobZone3 are not a specific duration. Entry in China must be verified against the target position's corresponding education, training, and qualifications, and no unified national mapping has been established."
+              "Compare the day-to-day duties and the scope of supervised assignments before choosing training."
             ]
           },
           "id": "mechanical-engineering-technicians.path.career-path-block.2",
@@ -8068,7 +7882,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "No-experience work sample: one fully fictional component test input; within 60 minutes write the assembly and testing steps, the data recording format, the basis for judging abnormalities, and the situations that must be confirmed with an engineer, without using real client and enterprise data."
+              "No-experience work sample: one fully  component test input; within 60 minutes write the assembly and testing steps, the data recording format, the basis for judging abnormalities, and the situations that must be confirmed with an engineer, without using real client and enterprise data."
             ]
           },
           "id": "mechanical-engineering-technicians.path.career-path-block.3",
@@ -8082,12 +7896,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Education, professional certification, employer appointment, and engineering review authority are separate. BLS lists optional certifications, and some fire protection system inspections may have dedicated certifications; this is not used to presume that all positions require no certificate or that China has a unified qualification."
+              "Common preparation includes ABET-accredited associate or bachelor's engineering technology programs and supervised testing. NICET covers particular technical disciplines where relevant to a job. Engineering decisions and equipment work follow project authorization."
             ]
           },
           "id": "mechanical-engineering-technicians.path.career-path-block.4",
           "source_refs": [
-            "onet-education"
+            "wave1-b4-4",
+            "wave1-b4-5"
           ],
           "type": "prose"
         },
@@ -8096,7 +7911,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Seven-day trial: on the first two days understand the test purpose, specifications, and safety requirements, over the middle three days complete one fictional component test and recording exercise, on the sixth day ask someone else to challenge the test conditions and data, and on the seventh day write down the evidence for continuing, stopping, or changing direction."
+              "Document the measurement conditions and keep out-of-limit readings visible for engineering review."
             ]
           },
           "id": "mechanical-engineering-technicians.path.career-path-block.5",
@@ -8146,6 +7961,51 @@
             "onet-education"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "wave1-trial-1",
+                "values": [
+                  "Given:",
+                  "The paper tolerance allows a maximum offset of 0.30 mm. Sample P reads 0.28 mm and Q reads 0.36 mm."
+                ]
+              },
+              {
+                "id": "wave1-trial-2",
+                "values": [
+                  "Task:",
+                  "Classify P and Q and compute Q's excess."
+                ]
+              },
+              {
+                "id": "wave1-trial-3",
+                "values": [
+                  "Handoff:",
+                  "Only use the provided readings. Do not adjust equipment or issue an acceptance certificate."
+                ]
+              }
+            ]
+          },
+          "id": "mechanical-engineering-technicians.path.entry-work-sample-data.1",
+          "title": "Compare two fixture readings",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "P is within the limit. Q exceeds 0.30 mm by 0.06 mm and needs engineering review."
+            ]
+          },
+          "id": "mechanical-engineering-technicians.entry-work-sample-data.2",
+          "title": "Worked answer: Compare two fixture readings",
+          "type": "notice",
+          "visibility": "public"
         }
       ]
     },
@@ -8189,7 +8049,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "36,900 people in 2025; a projected 37,400 in 2035, growth of 1% and a net increase of 500 from 2025 to 2035."
+              "See market scope for the shared criteria."
             ]
           },
           "id": "mechanical-engineering-technicians.market-signals.market-signal-card.3",
@@ -8240,115 +8100,22 @@
           "data": {
             "entries": [
               {
-                "answer": "Mainly an indoor controlled environment (about 77% daily), with uncontrolled environments as well (about 31% daily); about 50% use the telephone to communicate daily, about 43% are exposed to noise daily; about 60% report usually working more than 40 hours per week, and precision or high accuracy is rated extremely important (about 40%).",
-                "id": "mechanical-engineering-technicians.faq.1",
-                "question": "What are the daily work and working hours like?",
-                "question_key": "career.faq.mechanical-engineering-technicians.daily-work",
+                "answer": "The May 2025 national median was $74,510 a year. Compare a local offer by guaranteed hours and separately stated variable pay.",
+                "id": "mechanical-engineering-technicians.faq.batch4-pay-us",
+                "question": "What is the U.S. median wage?",
+                "question_key": "career.faq.mechanical-engineering-technicians.batch4-pay-us",
                 "source_refs": [
-                  "onet-context"
+                  "wave1-b4-1"
                 ]
               },
               {
-                "answer": "Mechanical engineers handle design decisions and sign-off; mechanical drafters handle drawing output and modeling; industrial engineering technologists focus on production systems and efficiency; mechanical engineering technologists and technicians handle assembly, testing, data recording, and equipment improvement under engineer direction.",
-                "id": "mechanical-engineering-technicians.faq.2",
-                "question": "How is this occupation distinguished from adjacent occupations?",
-                "question_key": "career.faq.mechanical-engineering-technicians.role-comparison",
+                "answer": "Name the specimen and equipment revisions, record units and conditions, then flag the uncertain reading.",
+                "id": "mechanical-engineering-technicians.faq.batch4-fit",
+                "question": "How can I show that a test is reproducible?",
+                "question_key": "career.faq.mechanical-engineering-technicians.batch4-fit",
                 "source_refs": [
-                  "onet-summary"
+                  "wave1-b4-3"
                 ]
-              },
-              {
-                "answer": "Look at observable behavior: whether you can test repeatedly per procedure and record faithfully, whether you can organize test data into reviewable records, whether you stop and escalate first when data are abnormal, and whether you work within engineering and safety boundaries; the RIC interest code only describes activity preferences and cannot determine competence or qualification.",
-                "id": "mechanical-engineering-technicians.faq.3",
-                "question": "What signals suggest I might be suited?",
-                "question_key": "career.faq.mechanical-engineering-technicians.fit",
-                "source_refs": [
-                  "onet-context",
-                  "onet-details"
-                ]
-              },
-              {
-                "answer": "Organizing test data, retrieving specifications, and drafting records are more easily assisted by software; judging test conditions, failure analysis conclusions, and engineering sign-off remain mainly human, and the available materials do not prove that institutions generally replace test decisions with automation.",
-                "id": "mechanical-engineering-technicians.faq.4",
-                "question": "How will AI affect this occupation?",
-                "question_key": "career.faq.mechanical-engineering-technicians.ai-impact",
-                "source_refs": [
-                  "onet-tasks",
-                  "ilo-genai"
-                ]
-              },
-              {
-                "answer": "Test conditions and safety boundaries, judging failure causes, whether specifications are met, and engineering sign-off must be the responsibility of technicians and engineers according to their duties.",
-                "id": "mechanical-engineering-technicians.faq.5",
-                "question": "Which judgments must remain the responsibility of people?",
-                "question_key": "career.faq.mechanical-engineering-technicians.human-control",
-                "source_refs": [
-                  "onet-context",
-                  "onet-tasks"
-                ]
-              },
-              {
-                "answer": "Average annual wages by manufacturing industry category in 2025 from the National Bureau of Statistics of China: 113,594 yuan per year for urban non-private units and 76,055 yuan per year for private units, with a national non-private total of 129,441 yuan per year; these are industry scopes, and no national occupational median for this occupation was obtained.",
-                "id": "mechanical-engineering-technicians.faq.6",
-                "question": "What is the salary evidence for mainland China?",
-                "question_key": "career.faq.mechanical-engineering-technicians.china-pay",
-                "source_refs": [
-                  "nbs-wages"
-                ]
-              },
-              {
-                "answer": "BLS 2025 wage data: median 74,510 USD per year (35.82 USD per hour), with the 10th percentile at 48,400, the 25th percentile at 59,510, the 75th percentile at 88,110, and the 90th percentile at 106,050 USD per year; percentiles are statistical positions and do not cover individual take-home income.",
-                "id": "mechanical-engineering-technicians.faq.7",
-                "question": "What is the salary evidence for the United States?",
-                "question_key": "career.faq.mechanical-engineering-technicians.us-pay",
-                "source_refs": [
-                  "onet-wages"
-                ]
-              },
-              {
-                "answer": "United States Job Zone 3: usually requires vocational school training, related on-the-job experience, or an associate degree, with about one to two years of training, and recognized apprenticeships may exist; in mainland China this is determined by the employer and the relevant occupational qualification requirements.",
-                "id": "mechanical-engineering-technicians.faq.8",
-                "question": "What are the entry and training paths?",
-                "question_key": "career.faq.mechanical-engineering-technicians.education-path",
-                "source_refs": [
-                  "onet-jobzone",
-                  "onet-education"
-                ]
-              },
-              {
-                "answer": "The main risks are wrong test conditions or specifications, incomplete data records, conditions changed without retesting, and judgments beyond authority; the responses are verifying specifications and instruments, recording data per format, retesting per the change process, and referring to engineers along the authorization chain.",
-                "id": "mechanical-engineering-technicians.faq.9",
-                "question": "What are the main risks and control boundaries?",
-                "question_key": "career.faq.mechanical-engineering-technicians.risk-boundary",
-                "source_refs": [
-                  "onet-context",
-                  "onet-tasks"
-                ]
-              },
-              {
-                "answer": "BLS Table 1.2: U.S. occupation 17-3027 had about 36,900 jobs in 2025 and is projected to have about 37,400 in 2035 (+1.3%), with about 3,100 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring.",
-                "id": "mechanical-engineering-technicians.faq.10",
-                "question": "How should market signals be understood?",
-                "question_key": "career.faq.mechanical-engineering-technicians.outlook-transition",
-                "source_refs": [
-                  "onet-trends",
-                  "bls-design-ep"
-                ]
-              },
-              {
-                "answer": "If you can complete one assembly, testing, and recording exercise using a fully fictional component test input, and can work to specifications and safety requirements and escalate when something is abnormal, it is worth further testing; the specific position requirements are governed by the employer and the competent authorities.",
-                "id": "mechanical-engineering-technicians.faq.11",
-                "question": "Is this occupation worth further testing?",
-                "question_key": "career.faq.mechanical-engineering-technicians.career-worth",
-                "source_refs": [
-                  "onet-summary"
-                ]
-              },
-              {
-                "answer": "Evidence under Chinese, United States, and specific institutional scopes is stated separately: wages, employment, qualifications and credentials, standards, and AI conclusions must not be stitched across scopes; the United States statistics on this page use the 17-3027.00 scope and do not replace adjacent occupations. Mechanical engineering testing involves engineering and safety standards, and this page provides occupation judgment and research exercise information that does not replace local laws, employer requirements, engineering standards, or other professional advice. Any note of insufficient evidence only means that no safely corresponding data was established after a bounded search, and proxy or remembered fabricated numbers are not used.",
-                "id": "mechanical-engineering-technicians.faq.12",
-                "question": "What are the usage boundaries of this page?",
-                "question_key": "career.faq.mechanical-engineering-technicians.boundary"
               }
             ]
           },
@@ -8360,7 +8127,7 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "Evidence under Chinese, United States, and specific institutional scopes is stated separately: wages, employment, qualifications and credentials, standards, and AI conclusions must not be stitched across scopes; the United States statistics on this page use the 17-3027.00 scope and do not replace adjacent occupations.",
+              "Use the U.S. scope described in this section.",
               "Mechanical engineering testing involves engineering and safety standards, and this page provides occupation judgment and research exercise information that does not replace local laws, employer requirements, engineering standards, or other professional advice.",
               "Any note of insufficient evidence only means that no safely corresponding data was established after a bounded search, and proxy or remembered fabricated numbers are not used."
             ]
@@ -8404,12 +8171,6 @@
                 "id": "mechanical-engineering-technicians.navigation.4",
                 "relation": "career.section",
                 "url": "#career-content-ai-impact"
-              },
-              {
-                "entity": "Mechanical engineering technologists and technicians",
-                "id": "mechanical-engineering-technicians.navigation.5",
-                "relation": "career.section",
-                "url": "#career-content-china-salary"
               },
               {
                 "entity": "Mechanical engineering technologists and technicians",
@@ -8468,22 +8229,6 @@
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "Official occupation description, reported job titles, interest code, and Job Zone.",
-                  "This is a United States occupation scope and does not presume a corresponding relationship in mainland China."
-                ],
-                "evidence_type": "official occupation summary",
-                "id": "onet-summary",
-                "limitation": "United States occupation scope; no exact equivalent mapping in mainland China is presumed.",
-                "market": "United States",
-                "name": "O*NET 17-3027.00 summary (occupation identity and description)",
-                "period": "O*NET 2026 occupation profile; consulted on 2026-09-25",
-                "publisher": "O*NET OnLine, U.S. Department of Labor",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/17-3027.00"
-              },
-              {
-                "accessed_at": "2026-09-25",
-                "details": [
                   "A task list for assembly and disassembly, building and running tests, recording data, failure analysis, and tooling design.",
                   "The task sample does not mean every position performs all tasks."
                 ],
@@ -8496,22 +8241,6 @@
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/17-3027.00#Tasks"
-              },
-              {
-                "accessed_at": "2026-09-25",
-                "details": [
-                  "Distribution of indoor or uncontrolled environments, working hours, noise exposure, precision, and collaboration.",
-                  "United States work context does not replace Chinese laws and employer requirements."
-                ],
-                "evidence_type": "official occupation profile",
-                "id": "onet-context",
-                "limitation": "United States work context does not replace Chinese laws and employer requirements.",
-                "market": "United States",
-                "name": "O*NET 17-3027.00 work context",
-                "period": "O*NET 2026 occupation profile; consulted on 2026-09-25",
-                "publisher": "O*NET OnLine, U.S. Department of Labor",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/details/17-3027.00#WorkContext"
               },
               {
                 "accessed_at": "2026-09-25",
@@ -8612,38 +8341,6 @@
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "Provides average annual wages by industry category for urban non-private and private units (including manufacturing).",
-                  "Industry averages are not occupational medians and exclude self-employed individuals and freelancers."
-                ],
-                "evidence_type": "official industry wage statistics",
-                "id": "nbs-wages",
-                "limitation": "Industry averages are not occupational medians and exclude self-employed individuals and freelancers.",
-                "market": "Mainland China national scope",
-                "name": "Average annual wages of urban unit employees in 2025",
-                "period": "2025 annual wages; released 2026-05-15; consulted 2026-09-25",
-                "publisher": "National Bureau of Statistics of China",
-                "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
-              },
-              {
-                "accessed_at": "2026-09-25",
-                "details": [
-                  "Releases enterprise compensation survey information by occupation and position category.",
-                  "No entry precisely corresponding to O*NET 17-3027.00 was obtained."
-                ],
-                "evidence_type": "official wage survey entry",
-                "id": "mohrss-wage",
-                "limitation": "No entry precisely corresponding to O*NET 17-3027.00 was obtained.",
-                "market": "Mainland China national scope",
-                "name": "Enterprise compensation survey information (2024)",
-                "period": "2024 survey; released 2025-06-27; consulted 2026-09-25",
-                "publisher": "Ministry of Human Resources and Social Security of the People's Republic of China",
-                "scope": "industry_proxy",
-                "url": "https://www.mohrss.gov.cn/SYrlzyhshbzb/laodongguanxi_/fwyd/202506/t20250627_544623.html"
-              },
-              {
-                "accessed_at": "2026-09-25",
-                "details": [
                   "Assesses occupational exposure to generative AI at the task level.",
                   "The exposure index is not equal to adoption rates, job outcomes, or hiring probability."
                 ],
@@ -8674,39 +8371,6 @@
                 "url": null
               },
               {
-                "accessed_at": "2026-10-11",
-                "details": [
-                  "The 2025 occupation-by-industry wages and 2025—2035 employment for 17-3027; associate degree or postsecondary technical training.",
-                  "Does not prove Chinese occupation mapping, qualifications, or generative AI effects."
-                ],
-                "evidence_type": "official occupation profile",
-                "id": "bls-mechanical-technicians-ooh",
-                "limitation": "United States occupation scope; detailed industry wages are not equal to the whole major industry value or an individual quote.",
-                "market": "United States national",
-                "name": "BLS OOH mechanical engineering technicians: education, industry wages, and employment",
-                "period": "2025 wages; 2025—2035 projections; consulted 2026-10-11",
-                "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "exact",
-                "url": "https://www.bls.gov/ooh/architecture-and-engineering/mechanical-engineering-technicians.htm"
-              },
-              {
-                "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+75+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Build the test stand and run the test — 0/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
-                  "Record data and analyze failures — 75/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
-                  "Design tooling, fixtures, and special-purpose equipment — 50/100; weight=1/3; display.ai_impact_table.task_rows.2[0]"
-                ],
-                "evidence_type": "Editorial model estimation method",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
-              },
-              {
                 "accessed_at": "2026-11-09",
                 "details": [
                   "BLS Table 1.2: U.S. occupation 17-3027 had about 36,900 jobs in 2025 and is projected to have about 37,400 in 2035 (+1.3%), with about 3,100 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring."
@@ -8717,6 +8381,36 @@
                 "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "details": [],
+                "id": "wave1-b4-1",
+                "name": "BLS May 2025 OEWS national profile",
+                "url": "https://data.bls.gov/oesprofile/?areas=INDUSTRY,STATE,MSA&major_group=170000&measure=13&occupation=173027&year=2025"
+              },
+              {
+                "details": [],
+                "id": "wave1-b4-2",
+                "name": "BLS May 2025 OEWS technical notes",
+                "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
+              },
+              {
+                "details": [],
+                "id": "wave1-b4-3",
+                "name": "O*NET occupation and duties",
+                "url": "https://www.onetonline.org/link/summary/17-3027.00"
+              },
+              {
+                "details": [],
+                "id": "wave1-b4-4",
+                "name": "ABET accredited programs",
+                "url": "https://amspub.abet.org/aps/"
+              },
+              {
+                "details": [],
+                "id": "wave1-b4-5",
+                "name": "NICET certification programs",
+                "url": "https://www.nicet.org/certification-programs/"
               }
             ]
           },
@@ -8759,14 +8453,8 @@
         "conclusion": "Adjacent occupations need tools, qualifications, and responsibility evidence supplied separately.",
         "evidence_links": [
           {
-            "href": {
-              "$source": "mohrss-wage",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechanical-engineering-technicians.source-register.published.1"
-            },
-            "label": "Sources for this occupation"
+            "href": "https://www.onetonline.org/link/details/17-3027.00#Tasks",
+            "label": "O*NET 17-3027.00 tasks"
           }
         ],
         "evidence_note": "Adjacency is only for direction comparison and does not mean automatic transfer or mutual recognition of qualifications.",
@@ -8861,22 +8549,10 @@
             }
           },
           {
-            "来源": {
-              "$source": "onet-context",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechanical-engineering-technicians.source-register.published.1"
-            },
+            "来源": "Source detail not stated.",
             "类型": "Official or research sources",
             "适用范围": "Use only under the original scope of the source",
-            "链接": {
-              "$source": "onet-context",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechanical-engineering-technicians.source-register.published.1"
-            }
+            "链接": null
           },
           {
             "来源": {
@@ -8943,22 +8619,10 @@
           },
           {
             "使用限制": "Work context is survey result data; it does not replace employer and local regulations.",
-            "来源": {
-              "$source": "onet-context",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechanical-engineering-technicians.source-register.published.1"
-            },
+            "来源": "Source detail not stated.",
             "研究对象": "Work context (O*NET 17-3027.00)",
             "结论": "Indoor and on-site mix, working hours, and noise exposure vary by position",
-            "链接": {
-              "$source": "onet-context",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechanical-engineering-technicians.source-register.published.1"
-            }
+            "链接": null
           },
           {
             "使用限制": "Not equal to uniform hiring or assessment standards.",
@@ -9056,12 +8720,7 @@
             "问题": "Which evidence should be used to judge the impact?"
           }
         ],
-        "responsibility_intro": {
-          "$item": "mechanical-engineering-technicians.ai-impact.ai-impact-table.5",
-          "block": "ai-impact",
-          "copy_key": "career.item.ai-impact-table",
-          "type": "prose"
-        },
+        "responsibility_intro": "AI can format test results. A technician validates recorded conditions, units and sample identification.",
         "responsibility_steps": [
           {
             "步骤": "Verify inputs",
@@ -9177,13 +8836,6 @@
           "$link": "mechanical-engineering-technicians.navigation.links.1",
           "block": "navigation",
           "copy_key": "career.item.navigation-links",
-          "entry": "mechanical-engineering-technicians.navigation.5",
-          "field": "url"
-        },
-        {
-          "$link": "mechanical-engineering-technicians.navigation.links.1",
-          "block": "navigation",
-          "copy_key": "career.item.navigation-links",
           "entry": "mechanical-engineering-technicians.navigation.6",
           "field": "url"
         },
@@ -9273,7 +8925,7 @@
         "heading": "The work objects of mechanical engineering technologists and technicians and the AI boundary"
       },
       "career_path_block": {
-        "boundary": "The three tracks and four stages are an editorial growth example, not automatic promotion, a unified curriculum, or engineering authority; portfolios and seven-day paper exercises do not prove safe operation or licensure.",
+        "boundary": "Document the measurement conditions and keep out-of-limit readings visible for engineering review.",
         "competence_ladder": [
           {
             "description": "Confirm test purpose, specifications, and instrument status.",
@@ -9311,7 +8963,7 @@
             "copy_key": "career.item.career-path-block",
             "type": "prose"
           },
-          "jurisdiction": "United States BLS postsecondary technical education for this occupation; in China verify against the target position, and do not presume Chinese thresholds from JobZone.",
+          "jurisdiction": "Use the U.S. scope described in this section.",
           "summary": {
             "$item": "mechanical-engineering-technicians.path.career-path-block.6",
             "block": "path",
@@ -9322,94 +8974,26 @@
         "schema_version": "career.career_progression.v1",
         "source_links": [
           {
-            "href": {
-              "$source": "onet-jobzone",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechanical-engineering-technicians.source-register.published.1"
-            },
-            "id": "mechanical-engineering-technicians.display.source.0",
-            "label": {
-              "$source": "onet-jobzone",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechanical-engineering-technicians.source-register.published.1"
-            },
-            "scope": "Each source is used separately under its United States or Chinese education, wage, employment, or task scope, not as a unified qualification, duration, or transfer effect."
+            "href": "https://amspub.abet.org/aps/",
+            "id": "wave1-b4-4",
+            "label": "ABET accredited programs",
+            "scope": "Entry and practice"
           },
           {
-            "href": {
-              "$source": "onet-education",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechanical-engineering-technicians.source-register.published.1"
-            },
-            "id": "mechanical-engineering-technicians.display.source.1",
-            "label": {
-              "$source": "onet-education",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechanical-engineering-technicians.source-register.published.1"
-            },
-            "scope": "Each source is used separately under its United States or Chinese education, wage, employment, or task scope, not as a unified qualification, duration, or transfer effect."
+            "href": "https://www.nicet.org/certification-programs/",
+            "id": "wave1-b4-5",
+            "label": "NICET certification programs",
+            "scope": "Entry and practice"
           },
           {
-            "href": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechanical-engineering-technicians.source-register.published.1"
-            },
-            "id": "mechanical-engineering-technicians.display.source.2",
-            "label": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechanical-engineering-technicians.source-register.published.1"
-            },
-            "scope": "Each source is used separately under its United States or Chinese education, wage, employment, or task scope, not as a unified qualification, duration, or transfer effect."
+            "href": "https://www.onetonline.org/link/details/17-3027.00#Tasks",
+            "id": "onet-tasks",
+            "label": "O*NET 17-3027.00 tasks"
           },
           {
-            "href": {
-              "$source": "onet-details",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechanical-engineering-technicians.source-register.published.1"
-            },
-            "id": "mechanical-engineering-technicians.display.source.3",
-            "label": {
-              "$source": "onet-details",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechanical-engineering-technicians.source-register.published.1"
-            },
-            "scope": "Each source is used separately under its United States or Chinese education, wage, employment, or task scope, not as a unified qualification, duration, or transfer effect."
-          },
-          {
-            "href": {
-              "$source": "bls-mechanical-technicians-ooh",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechanical-engineering-technicians.source-register.published.1"
-            },
-            "id": "mechanical-engineering-technicians.display.source.ooh",
-            "label": {
-              "$source": "bls-mechanical-technicians-ooh",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechanical-engineering-technicians.source-register.published.1"
-            },
-            "scope": "United States education for this occupation and 2025—2035 projections; not Chinese qualifications or AI effects."
+            "href": "https://www.onetonline.org/link/details/17-3027.00#Education",
+            "id": "onet-education",
+            "label": "O*NET 17-3027.00 education and job preparation"
           }
         ],
         "tracks": [
@@ -9685,7 +9269,7 @@
             "label": "View the risk module"
           }
         ],
-        "direct_answer": "Risks must be handled by trigger, consequence, control, and escalation boundary, and editorial synthesis does not replace engineering and safety standards.",
+        "direct_answer": "Tie every measurement to units and equipment state. If the conditions differ, keep results separate for an engineer to review.",
         "evidence_scope": "Editorial risk analysis: O*NET tasks for this occupation support checking specifications, instruments, data, and engineering collaboration; the consequences and escalation are task control assumptions, not accident rates, statutory sign-off, or unified engineering standards.",
         "heading": "Work risks and boundaries of mechanical engineering technologists and technicians",
         "risks": [
@@ -9803,42 +9387,6 @@
           },
           {
             "href": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechanical-engineering-technicians.source-register.published.1"
-            },
-            "id": "mechanical-engineering-technicians.display.source.1",
-            "label": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechanical-engineering-technicians.source-register.published.1"
-            },
-            "scope": "Occupation identity and adjacent scope; not a sign-off system."
-          },
-          {
-            "href": {
-              "$source": "onet-context",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechanical-engineering-technicians.source-register.published.1"
-            },
-            "id": "mechanical-engineering-technicians.display.source.2",
-            "label": {
-              "$source": "onet-context",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechanical-engineering-technicians.source-register.published.1"
-            },
-            "scope": "United States respondent environment, protection, noise, and hours; not law."
-          },
-          {
-            "href": {
               "$source": "onet-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
@@ -9854,426 +9402,74 @@
               "item": "mechanical-engineering-technicians.source-register.published.1"
             },
             "scope": "Skills and knowledge; not authorization or risk incidence."
+          },
+          {
+            "href": "https://www.onetonline.org/link/details/17-3027.00#Tasks",
+            "id": "onet-tasks",
+            "label": "O*NET 17-3027.00 tasks"
+          },
+          {
+            "href": "https://www.onetonline.org/link/details/17-3027.00#Education",
+            "id": "onet-education",
+            "label": "O*NET 17-3027.00 education and job preparation"
           }
         ]
       },
       "career_snapshot_primary_locale": {
-        "salary": {
-          "bls_table": [
-            {
-              "指标": "Mainland China salary scope",
-              "数值": "Manufacturing non-private 113,594 yuan per year (industry proxy)",
-              "说明": "Not the median for this occupation."
-            },
-            {
-              "指标": "Mainland China salary scope",
-              "数值": "Manufacturing private 76,055 yuan per year (industry proxy)",
-              "说明": "Not the median for this occupation."
-            },
-            {
-              "指标": "Mainland China salary scope",
-              "数值": "National non-private total 129,441 yuan per year (total proxy)",
-              "说明": "Not the median for this occupation."
-            }
-          ],
-          "china_ai_row": {
-            "$item": "mechanical-engineering-technicians.china-salary.career-snapshot-primary-locale.4",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "china_class_row": {
-            "$item": "mechanical-engineering-technicians.china-salary.career-snapshot-primary-locale.3",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "china_edu_table": [
-            {
-              "学历段": "Vocational school training",
-              "岗位方向": "Technician and test positions",
-              "说明": "United States JobZone general preparation classification, not a Chinese education threshold."
-            },
-            {
-              "学历段": "Associate degree (two-year)",
-              "岗位方向": "Engineering technician positions",
-              "说明": "BLS for this occupation in the United States usually requires an associate degree or postsecondary training, not a Chinese requirement."
-            },
-            {
-              "学历段": "Related on-the-job experience",
-              "岗位方向": "Testing and process support",
-              "说明": "Whether related experience substitutes for education depends on the specific employer; the JobZone group description does not prove general substitution."
-            },
-            {
-              "学历段": "Recognized apprenticeships",
-              "岗位方向": "Testing and process",
-              "说明": "O*NET lists four recognized apprenticeship titles, and no specific program duration was obtained; the JobZone range of 1–2 years is not a uniform apprenticeship duration."
-            }
-          ],
-          "china_industry_table": [
-            {
-              "行业": "Manufacturing",
-              "需求": "Editorial employer settings; no Chinese industry share or demand for this occupation was obtained."
-            },
-            {
-              "行业": "Professional, scientific, and technical services",
-              "需求": "Editorial employer settings; no Chinese industry share or demand for this occupation was obtained."
-            },
-            {
-              "行业": "Wholesale trade and administrative support, among others",
-              "需求": "Editorial employer settings; no Chinese industry share or demand for this occupation was obtained."
-            }
-          ],
-          "china_intl": {
-            "$join": [
-              {
-                "$source": "mohrss-wage",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "mechanical-engineering-technicians.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "mohrss-wage",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "mechanical-engineering-technicians.source-register.published.1"
-              }
-            ],
-            "separator": ""
-          },
-          "china_name_row": {
-            "$item": "mechanical-engineering-technicians.china-salary.career-snapshot-primary-locale.1",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "china_open": "No national occupational wage for this occupation was obtained; this item is not starting pay, take-home income, or a personal quote.",
-          "china_ref": {
-            "$join": [
-              {
-                "$source": "nbs-wages",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "mechanical-engineering-technicians.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "nbs-wages",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "mechanical-engineering-technicians.source-register.published.1"
-              }
-            ],
-            "separator": ""
-          },
-          "china_salary_note": "The mainland China scope is kept separate from United States, global, and specific-unit scopes and cannot be stitched across markets.",
-          "china_salary_table": [
-            {
-              "城市/区间": "National industry scope",
-              "月薪参考": "See official industry statistics"
-            },
-            {
-              "城市/区间": "Regional differences",
-              "月薪参考": "No data for this occupation was obtained"
-            },
-            {
-              "城市/区间": "Single-project quote",
-              "月薪参考": "No data for this occupation was obtained"
-            }
-          ],
-          "china_soc_row": {
-            "$item": "mechanical-engineering-technicians.china-salary.career-snapshot-primary-locale.2",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "sources_note": {
-            "$join": [
-              {
-                "$source": "nbs-wages",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "mechanical-engineering-technicians.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "nbs-wages",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "mechanical-engineering-technicians.source-register.published.1"
-              }
-            ],
-            "separator": ""
-          },
-          "ui": {
-            "ai_heading": "Boundaries of AI and wage judgments",
-            "driver_heading": "Influencing factors",
-            "official_heading": "Official statistical scope",
-            "scenario_caption": "This scenario is only for explaining scope and is not a personal quote.",
-            "scenario_heading": "Scenario-based reference",
-            "scenario_interpretation_label": "Explanation",
-            "scenario_role_label": "Position scope",
-            "scenario_value_label": "Reference value"
-          },
-          "us_growth": "Local scope does not apply",
-          "us_median": "Local scope does not apply"
-        }
+        "availability": "unavailable",
+        "reason_code": "source_locale_unavailable"
       },
       "career_snapshot_secondary_locale": {
-        "authority_sources": {
-          "$join": [
-            {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "mechanical-engineering-technicians.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "mechanical-engineering-technicians.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            },
-            "；",
-            {
-              "$join": [
-                {
-                  "$source": "bls-mechanical-technicians-ooh",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "mechanical-engineering-technicians.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "bls-mechanical-technicians-ooh",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "mechanical-engineering-technicians.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
-          ],
-          "separator": ""
-        },
+        "authority_sources": "https://data.bls.gov/oesprofile/?areas=INDUSTRY,STATE,MSA&major_group=170000&measure=13&occupation=173027&year=2025",
         "bls_table": [
           {
-            "指标": "Wages · 10th percentile",
-            "数值": "48,400 USD per year",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "mechanical-engineering-technicians.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "mechanical-engineering-technicians.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "fact_ref": "wave1-b4-wage-p10",
+            "指标": "10th percentile",
+            "数值": "$48,400/year",
+            "说明": "Read within the original statistical scope."
           },
           {
-            "指标": "Wages · 25th percentile",
-            "数值": "59,510 USD per year",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "mechanical-engineering-technicians.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "mechanical-engineering-technicians.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "fact_ref": "wave1-b4-wage-p25",
+            "指标": "25th percentile",
+            "数值": "$59,510/year",
+            "说明": "Read within the original statistical scope."
           },
           {
-            "指标": "Wages · median",
-            "数值": "74,510 USD per year",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "mechanical-engineering-technicians.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "mechanical-engineering-technicians.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "fact_ref": "wave1-b4-wage-p50",
+            "指标": "Median",
+            "数值": "$74,510/year",
+            "说明": "Read within the original statistical scope."
           },
           {
-            "指标": "Wages · 75th percentile",
-            "数值": "88,110 USD per year",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "mechanical-engineering-technicians.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "mechanical-engineering-technicians.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "fact_ref": "wave1-b4-wage-p75",
+            "指标": "75th percentile",
+            "数值": "$88,110/year",
+            "说明": "Read within the original statistical scope."
           },
           {
-            "指标": "Wages · 90th percentile",
-            "数值": "106,050 USD per year",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "mechanical-engineering-technicians.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "mechanical-engineering-technicians.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "fact_ref": "wave1-b4-wage-p90",
+            "指标": "90th percentile",
+            "数值": "$106,050/year",
+            "说明": "Read within the original statistical scope."
           },
           {
             "指标": "Employment · size",
             "数值": "36,900 people (2025); projected 37,400 people (2035)",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "bls-mechanical-technicians-ooh",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "mechanical-engineering-technicians.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "bls-mechanical-technicians-ooh",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "mechanical-engineering-technicians.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "说明": "Projection base-year employment"
           },
           {
             "指标": "Employment · growth",
             "数值": "Growth of 1% (2025—2035); net increase of 500 people",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "bls-mechanical-technicians-ooh",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "mechanical-engineering-technicians.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "bls-mechanical-technicians-ooh",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "mechanical-engineering-technicians.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "说明": "Projected percentage change"
           },
           {
             "指标": "Employment · openings",
             "数值": "3,100 per year (2025—2035)",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "bls-mechanical-technicians-ooh",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "mechanical-engineering-technicians.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "bls-mechanical-technicians-ooh",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "mechanical-engineering-technicians.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "说明": "Average annual openings, including replacement"
           }
         ],
-        "boundary": "The exact United States occupation and adjacent occupation scopes must be kept separate; percentiles are statistical positions and are not equal to an individual's take-home income.",
-        "direct_answer": {
-          "$item": "mechanical-engineering-technicians.us-salary.career-snapshot-secondary-locale.2",
-          "block": "us-salary",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "type": "prose"
-        },
+        "boundary": "Percentiles describe national wage distribution points. Compare a local offer by setting, responsibilities, and guaranteed pay.",
+        "direct_answer": "May 2025 OEWS covers U.S. wage and salary workers and excludes the self-employed.",
         "factor_rows": [
           {
             "answer": "United States Job Zone 3; certification is not equal to engineering sign-off authority.",
@@ -10310,29 +9506,24 @@
         "industry_period": "Current O*NET industry page; consulted 2026-10-11",
         "industry_rows": [
           {
-            "industry": "Scientific research and development services",
-            "median": "86,860 USD per year",
-            "note": "The BLS2025 median annual wage for this occupation by detailed industry; not the whole major industry value or a personal quote."
+            "industry": "Occupation",
+            "median": "No comparable figure is cited here.",
+            "note": "Confirm the definition and any broader grouping."
           },
           {
-            "industry": "Transportation equipment manufacturing",
-            "median": "77,320 USD per year",
-            "note": "The BLS2025 median annual wage for this occupation by detailed industry; not the whole major industry value or a personal quote."
+            "industry": "Employment",
+            "median": "No comparable figure is cited here.",
+            "note": "Check whether self-employment is included."
           },
           {
-            "industry": "Computer and electronic product manufacturing",
-            "median": "75,340 USD per year",
-            "note": "The BLS2025 median annual wage for this occupation by detailed industry; not the whole major industry value or a personal quote."
+            "industry": "Survey period",
+            "median": "No comparable figure is cited here.",
+            "note": "Keep the month or year with the quoted figure."
           },
           {
-            "industry": "Architectural, engineering, and related services",
-            "median": "72,110 USD per year",
-            "note": "The BLS2025 median annual wage for this occupation by detailed industry; not the whole major industry value or a personal quote."
-          },
-          {
-            "industry": "Machinery manufacturing",
-            "median": "68,220 USD per year",
-            "note": "The BLS2025 median annual wage for this occupation by detailed industry; not the whole major industry value or a personal quote."
+            "industry": "Geography",
+            "median": "No comparable figure is cited here.",
+            "note": "Compare local figures within the same survey."
           }
         ],
         "industry_value_label": "2025 median annual wage for this occupation by industry",
@@ -10344,23 +9535,23 @@
         },
         "interpretation_rows": [
           {
-            "answer": "No, percentiles are statistical positions.",
-            "question": "Is this a personal quote?"
+            "answer": "Confirm the definition and any broader grouping.",
+            "question": "Occupation"
           },
           {
-            "answer": "It is the national scope for the exact occupation 17-3027.00.",
-            "question": "Does this cover the exact occupation?"
+            "answer": "Check whether self-employment is included.",
+            "question": "Employment"
           },
           {
-            "answer": "2025 wages; 2025—2035 projections, and the general automation discussion is not treated as generative AI causality.",
-            "question": "What is the period?"
+            "answer": "Keep the month or year with the quoted figure.",
+            "question": "Survey period"
           },
           {
-            "answer": "It cannot be stitched directly.",
-            "question": "Can it be compared across markets?"
+            "answer": "Compare local figures within the same survey.",
+            "question": "Geography"
           }
         ],
-        "median": "74,510 USD per year",
+        "median": "$74,510/year",
         "outlook_heading": "Employment outlook and job openings",
         "outlook_period": "2025—2035",
         "wage_column_labels": [
@@ -10377,22 +9568,34 @@
         },
         "wage_tiers": [
           {
-            "equivalent": "About 23.27 USD per hour",
-            "interpretation": "It is the 10th percentile statistical position.",
-            "label": "Low percentile",
-            "value": "48,400 USD per year"
+            "equivalent": "USD/year",
+            "interpretation": "Lower end of the distribution",
+            "label": "10th percentile",
+            "value": "$48,400/year"
           },
           {
-            "equivalent": "About 35.82 USD per hour",
-            "interpretation": "It is the median of the 2025 wage data.",
+            "equivalent": "USD/year",
+            "interpretation": "First quartile",
+            "label": "25th percentile",
+            "value": "$59,510/year"
+          },
+          {
+            "equivalent": "USD/year",
+            "interpretation": "Middle of the distribution",
             "label": "Median",
-            "value": "74,510 USD per year"
+            "value": "$74,510/year"
           },
           {
-            "equivalent": "About 50.99 USD per hour",
-            "interpretation": "It is the 90th percentile statistical position.",
-            "label": "High percentile",
-            "value": "106,050 USD per year"
+            "equivalent": "USD/year",
+            "interpretation": "Third quartile",
+            "label": "75th percentile",
+            "value": "$88,110/year"
+          },
+          {
+            "equivalent": "USD/year",
+            "interpretation": "Upper end of the published range",
+            "label": "90th percentile",
+            "value": "$106,050/year"
           }
         ]
       },
@@ -10426,7 +9629,7 @@
         "title": "What kind of people are suited to mechanical engineering technologists and technicians?"
       },
       "fit_decision_checklist": {
-        "boundary": "This is a work sample check, not a personality diagnosis or hiring conclusion.",
+        "boundary": "You may spend most of a day aligning logs and detecting measurement inconsistencies. If repetitive setup documentation frustrates you, lab support can feel slow.",
         "how": {
           "$item": "mechanical-engineering-technicians.quick-decision.fermat-decision-card.3",
           "block": "quick-decision",
@@ -10522,25 +9725,7 @@
               "field": "name",
               "item": "mechanical-engineering-technicians.source-register.published.1"
             },
-            "scope": "Each source is used separately under its United States or Chinese education, wage, employment, or task scope, not as a unified qualification, duration, or transfer effect."
-          },
-          {
-            "href": {
-              "$source": "nbs-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechanical-engineering-technicians.source-register.published.1"
-            },
-            "id": "mechanical-engineering-technicians.display.source.1",
-            "label": {
-              "$source": "nbs-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechanical-engineering-technicians.source-register.published.1"
-            },
-            "scope": "Each source is used separately under its United States or Chinese education, wage, employment, or task scope, not as a unified qualification, duration, or transfer effect."
+            "scope": "Use the U.S. scope described in this section."
           },
           {
             "href": {
@@ -10558,7 +9743,7 @@
               "field": "name",
               "item": "mechanical-engineering-technicians.source-register.published.1"
             },
-            "scope": "Each source is used separately under its United States or Chinese education, wage, employment, or task scope, not as a unified qualification, duration, or transfer effect."
+            "scope": "Use the U.S. scope described in this section."
           },
           {
             "href": {
@@ -10576,25 +9761,12 @@
               "field": "name",
               "item": "mechanical-engineering-technicians.source-register.published.1"
             },
-            "scope": "Each source is used separately under its United States or Chinese education, wage, employment, or task scope, not as a unified qualification, duration, or transfer effect."
+            "scope": "Use the U.S. scope described in this section."
           },
           {
-            "href": {
-              "$source": "bls-mechanical-technicians-ooh",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechanical-engineering-technicians.source-register.published.1"
-            },
-            "id": "mechanical-engineering-technicians.display.source.ooh",
-            "label": {
-              "$source": "bls-mechanical-technicians-ooh",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechanical-engineering-technicians.source-register.published.1"
-            },
-            "scope": "United States education for this occupation and 2025—2035 projections; not Chinese qualifications or AI effects."
+            "href": "https://www.onetonline.org/link/details/17-3027.00#Tasks",
+            "id": "onet-tasks",
+            "label": "O*NET 17-3027.00 tasks"
           }
         ],
         "transitions": [
@@ -10611,7 +9783,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/mechanical-engineers",
+            "target_href": "/en/career/jobs/mechanical-engineers",
             "target_slug": "mechanical-engineers",
             "target_title": "Mechanical engineers",
             "transition_distance": "Evidence to be supplied"
@@ -10619,7 +9791,7 @@
           {
             "capability_gaps": "Drawing output and modeling standards must be filled in.",
             "shared_capabilities": "Understanding mechanical drawings, tolerances, and version management.",
-            "target_href": "/zh/career/jobs/mechanical-drafters",
+            "target_href": "/en/career/jobs/mechanical-drafters",
             "target_slug": "mechanical-drafters",
             "target_title": "Mechanical drafters",
             "transition_distance": "Evidence to be supplied"
@@ -10627,7 +9799,7 @@
           {
             "capability_gaps": "Production systems and efficiency analysis must be filled in.",
             "shared_capabilities": "Process understanding, data, and improvement methods.",
-            "target_href": "/zh/career/jobs/industrial-engineers",
+            "target_href": "/en/career/jobs/industrial-engineers",
             "target_slug": "industrial-engineers",
             "target_title": "Industrial engineers",
             "transition_distance": "Evidence to be supplied"
@@ -10635,7 +9807,7 @@
           {
             "capability_gaps": "Electrical, control, and system integration must be filled in.",
             "shared_capabilities": "Mechanical assembly and control basics.",
-            "target_href": "/zh/career/jobs/mechatronics-engineers",
+            "target_href": "/en/career/jobs/mechatronics-engineers",
             "target_slug": "mechatronics-engineers",
             "target_title": "Mechatronics engineers",
             "transition_distance": "Evidence to be supplied"
@@ -10643,7 +9815,7 @@
           {
             "capability_gaps": "Manufacturing processes and production line design must be filled in.",
             "shared_capabilities": "Process understanding and test collaboration.",
-            "target_href": "/zh/career/jobs/manufacturing-engineers",
+            "target_href": "/en/career/jobs/manufacturing-engineers",
             "target_slug": "manufacturing-engineers",
             "target_title": "Manufacturing engineers",
             "transition_distance": "Evidence to be supplied"
@@ -10651,7 +9823,7 @@
           {
             "capability_gaps": "Aviation standards and structural knowledge must be filled in.",
             "shared_capabilities": "Mechanical testing and specification understanding.",
-            "target_href": "/zh/career/jobs/aerospace-engineers",
+            "target_href": "/en/career/jobs/aerospace-engineers",
             "target_slug": "aerospace-engineers",
             "target_title": "Aerospace engineers",
             "transition_distance": "Evidence to be supplied"
@@ -10679,13 +9851,8 @@
       "personality_fit_block": {
         "assessments": [
           {
-            "answer": {
-              "$item": "mechanical-engineering-technicians.fit.riasec-fit-block.7",
-              "block": "fit",
-              "copy_key": "career.item.riasec-fit-block",
-              "type": "prose"
-            },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "answer": "Name the specimen and equipment revisions, record units and conditions, then flag the uncertain reading.",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Go to the career interest exercise and design observations",
             "evidence_level": "Editorial self-check; not validity evidence for this occupation",
             "id": "riasec",
@@ -10704,7 +9871,7 @@
               "copy_key": "career.item.riasec-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Go to the career interest exercise and design observations",
             "evidence_level": "Editorial self-check; not validity evidence for this occupation",
             "id": "big-five",
@@ -10723,7 +9890,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Go to the career interest exercise and design observations",
             "evidence_level": "Editorial self-check; not validity evidence for this occupation",
             "id": "mbti",
@@ -10737,7 +9904,7 @@
           },
           {
             "answer": "First verify real tasks, standards, and responsibility boundaries, then decide whether to continue.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Go to the career interest exercise and design observations",
             "evidence_level": "Editorial self-check; not validity evidence for this occupation",
             "id": "enneagram",
@@ -10751,7 +9918,7 @@
           },
           {
             "answer": "First verify real tasks, standards, and responsibility boundaries, then decide whether to continue.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Go to the career interest exercise and design observations",
             "evidence_level": "Editorial self-check; not validity evidence for this occupation",
             "id": "iq",
@@ -10765,7 +9932,7 @@
           },
           {
             "answer": "First verify real tasks, standards, and responsibility boundaries, then decide whether to continue.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Go to the career interest exercise and design observations",
             "evidence_level": "Editorial self-check; not validity evidence for this occupation",
             "id": "eq",
@@ -10825,36 +9992,36 @@
         },
         "questions": [
           {
-            "answer": "Check with the work sample experience on this page.",
-            "question": "Are you willing to test repeatedly per procedure and record faithfully?"
+            "answer": "Name the specimen and equipment revisions, record units and conditions, then flag the uncertain reading.",
+            "question": "How can I show that a test is reproducible?"
           },
           {
-            "answer": "Check with a fictional test task.",
-            "question": "Can you build and run tests per specifications?"
+            "answer": "Notice how often the team reopens a handoff when an earlier assumption changes. Ask who confirms the new decision.",
+            "question": "What should I notice in a job shadow?"
           },
           {
-            "answer": "Check against format and traceability requirements.",
-            "question": "Can you organize test data into reviewable records?"
+            "answer": "Pick a regular deliverable and repeat it with the same review standard.",
+            "question": "Which assignment would I repeat?"
           },
           {
-            "answer": "Stop, record, and escalate first.",
-            "question": "What would you do if you found an abnormal reading?"
+            "answer": "Note your last confirmed detail before responding to the interruption.",
+            "question": "How do I handle an interruption?"
           },
           {
-            "answer": "Check against the standards checklist.",
-            "question": "Can you follow safety and process standards?"
+            "answer": "Keep both versions and identify the person who can settle the discrepancy.",
+            "question": "How do I respond to conflicting inputs?"
           },
           {
-            "answer": "Assess record-keeping and traceability awareness.",
-            "question": "Can you keep test and change records?"
+            "answer": "Compare the written shift terms with when you can work reliably.",
+            "question": "Would the work schedule suit me?"
           },
           {
-            "answer": "They are reviewed and approved by an engineering reviewer according to employer responsibilities; a unified issuance system is not presumed from the occupation catalog.",
-            "question": "How are your test conclusions reviewed?"
+            "answer": "Describe what you would route to a qualified reviewer.",
+            "question": "Can I set a boundary on requests?"
           },
           {
-            "answer": "Complete one test and recording exercise using a fully fictional component test input.",
-            "question": "How to run the next trial?"
+            "answer": "Ask a receiver which detail lets them continue without guessing.",
+            "question": "What makes a handoff useful?"
           }
         ],
         "schema_version": "career.fit_decision_center.v1",
@@ -10913,40 +10080,6 @@
           },
           {
             "href": {
-              "$source": "mohrss-wage",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechanical-engineering-technicians.source-register.published.1"
-            },
-            "label": {
-              "$source": "mohrss-wage",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechanical-engineering-technicians.source-register.published.1"
-            },
-            "usage": "Source scope and limitations"
-          },
-          {
-            "href": {
-              "$source": "onet-context",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechanical-engineering-technicians.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-context",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechanical-engineering-technicians.source-register.published.1"
-            },
-            "usage": "Source scope and limitations"
-          },
-          {
-            "href": {
               "$source": "onet-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
@@ -10998,23 +10131,6 @@
           },
           {
             "href": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechanical-engineering-technicians.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechanical-engineering-technicians.source-register.published.1"
-            },
-            "usage": "Source scope and limitations"
-          },
-          {
-            "href": {
               "$source": "onet-tasks",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
@@ -11040,23 +10156,6 @@
             },
             "label": {
               "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechanical-engineering-technicians.source-register.published.1"
-            },
-            "usage": "Source scope and limitations"
-          },
-          {
-            "href": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechanical-engineering-technicians.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-summary",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -11159,23 +10258,6 @@
             },
             "label": {
               "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechanical-engineering-technicians.source-register.published.1"
-            },
-            "usage": "Source scope and limitations"
-          },
-          {
-            "href": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechanical-engineering-technicians.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-summary",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -11247,22 +10329,10 @@
       "source_card": {
         "eeat_signals": {
           "author": "FermatMind research workflow",
-          "source": {
-            "$source": "onet-summary",
-            "block": "source-register",
-            "copy_key": "career.item.published-sources",
-            "field": "name",
-            "item": "mechanical-engineering-technicians.source-register.published.1"
-          },
-          "updated_at": {
-            "$source": "onet-summary",
-            "block": "source-register",
-            "copy_key": "career.item.published-sources",
-            "field": "period",
-            "item": "mechanical-engineering-technicians.source-register.published.1"
-          }
+          "source": "See the dated source register for market and evidence scope.",
+          "updated_at": "2026-09-25"
         },
-        "note": "O*NET17-3027 identity, tasks, RIC, and JobZone3 have been verified; the 2025 five-percentile and hourly original values are correctly retained. Current employment runs from 36900 to 37400, with growth of 1%, a net increase of 500, and 3100 average annual openings; the industry split is 51/30/19. A different BLS OOH document adds this occupation's five detailed industry wages and postsecondary education, and is not a breakdown of the national percentiles; the NBS manufacturing 113594/76055 and the national non-private 129441 have been verified and are only industry background. The ILO is used only for the exposure concept, and evidence on tool capability and adoption is still missing. The FAQ/Hero and shared registry legacy projections and the JobZone duration are retained, and the partial basis does not sign off whole-page consistency."
+        "note": "O*NET17-3027 identity, tasks, RIC, and JobZone3 have been verified; the 2025 five-percentile and hourly original values are correctly retained. Current employment runs from 36900 to 37400, with growth of 1%, a net increase of 500, and 3100 average annual openings; the industry split is 51/30/19. The ILO is used only for the exposure concept, and evidence on tool capability and adoption is still missing. The FAQ/Hero and shared registry legacy projections and the JobZone duration are retained, and the partial basis does not sign off whole-page consistency."
       },
       "work_context_block": {
         "$item": "mechanical-engineering-technicians.profile.work-context-block.5",
@@ -11272,7 +10342,7 @@
       }
     },
     "contract_version": "career.detail.display.v1",
-    "locale": "zh-CN",
+    "locale": "en",
     "native_items": [
       {
         "block": "source-register",
@@ -11280,12 +10350,26 @@
         "id": "mechanical-engineering-technicians.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "mechanical-engineering-technicians.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "mechanical-engineering-technicians.entry-work-sample-data.2",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": "/en/career/jobs/mechanical-engineering-technicians",
     "section_titles": {
       "ai-impact": "AI Impact Score",
-      "china-salary": "Mainland China salaries",
+      "china-salary": "Additional wage reference",
       "direction-comparison": "Adjacent occupation comparison",
       "fit": "Fit signals",
       "market-signals": "Market signals",
@@ -11302,15 +10386,15 @@
   "fact_register": {
     "facts": [
       {
-        "derivation": "The median of the BLS 2025 wage data shown on the O*NET national wage page.",
-        "display_value": "74,510 USD per year (about 35.82 USD per hour)",
+        "derivation": null,
+        "display_value": "$74,510/year",
         "fact_id": "us-wage-median",
         "market": "United States",
-        "measure": "2025 median annual wage",
-        "occupation_scope": "Mechanical Engineering Technologists and Technicians（17-3027.00）",
-        "period": "2025 wage data; consulted on 2026-09-25",
+        "measure": "Annual wage — Median",
+        "occupation_scope": "U.S. occupation SOC 17-3027",
+        "period": "May 2025",
         "source_refs": [
-          "onet-wages"
+          "wave1-b4-1"
         ]
       },
       {
@@ -11350,59 +10434,71 @@
         ]
       },
       {
-        "derivation": "National Bureau of Statistics of China 2025 table by industry category.",
-        "display_value": "113,594 yuan per year",
-        "fact_id": "cn-manufacturing-nonprivate-wage",
-        "market": "Mainland China national urban unit scope (industry category manufacturing, not this occupation)",
-        "measure": "Average annual wages of employed persons in manufacturing urban non-private units",
-        "occupation_scope": "Industry category proxy, not the median for this occupation",
-        "period": "2025 annual wages; released 2026-05-15; consulted 2026-09-25",
+        "derivation": null,
+        "display_value": "$48,400/year",
+        "fact_id": "wave1-b4-wage-p10",
+        "market": "United States",
+        "measure": "Annual wage — 10th percentile",
+        "occupation_scope": "U.S. occupation SOC 17-3027",
+        "period": "May 2025",
         "source_refs": [
-          "nbs-wages"
+          "wave1-b4-1"
         ]
       },
       {
-        "derivation": "National Bureau of Statistics of China 2025 table by industry category.",
-        "display_value": "76,055 yuan per year",
-        "fact_id": "cn-manufacturing-private-wage",
-        "market": "Mainland China national urban unit scope (industry category manufacturing, not this occupation)",
-        "measure": "Average annual wages of employed persons in manufacturing urban private units",
-        "occupation_scope": "Industry category proxy, not the median for this occupation",
-        "period": "2025 annual wages; released 2026-05-15; consulted 2026-09-25",
+        "derivation": null,
+        "display_value": "$59,510/year",
+        "fact_id": "wave1-b4-wage-p25",
+        "market": "United States",
+        "measure": "Annual wage — 25th percentile",
+        "occupation_scope": "U.S. occupation SOC 17-3027",
+        "period": "May 2025",
         "source_refs": [
-          "nbs-wages"
+          "wave1-b4-1"
         ]
       },
       {
-        "derivation": "National Bureau of Statistics of China 2025 industry category total for urban non-private units.",
-        "display_value": "129,441 yuan per year",
-        "fact_id": "cn-national-nonprivate-wage",
-        "market": "Mainland China national urban unit scope (national total, not this occupation)",
-        "measure": "Average annual wages of employed persons in national urban non-private units",
-        "occupation_scope": "National total proxy, not the median for this occupation",
-        "period": "2025 annual wages; released 2026-05-15; consulted 2026-09-25",
+        "derivation": null,
+        "display_value": "$74,510/year",
+        "fact_id": "wave1-b4-wage-p50",
+        "market": "United States",
+        "measure": "Annual wage — Median",
+        "occupation_scope": "U.S. occupation SOC 17-3027",
+        "period": "May 2025",
         "source_refs": [
-          "nbs-wages"
+          "wave1-b4-1"
         ]
       },
       {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+75+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "42%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Mechanical engineering technologists and technicians",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "derivation": null,
+        "display_value": "$88,110/year",
+        "fact_id": "wave1-b4-wage-p75",
+        "market": "United States",
+        "measure": "Annual wage — 75th percentile",
+        "occupation_scope": "U.S. occupation SOC 17-3027",
+        "period": "May 2025",
         "source_refs": [
-          "source-fermatmind-ai-rubric"
+          "wave1-b4-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "$106,050/year",
+        "fact_id": "wave1-b4-wage-p90",
+        "market": "United States",
+        "measure": "Annual wage — 90th percentile",
+        "occupation_scope": "U.S. occupation SOC 17-3027",
+        "period": "May 2025",
+        "source_refs": [
+          "wave1-b4-1"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
       "label": "AI Impact Score"
     },
@@ -11414,9 +10510,9 @@
     "metrics": [
       {
         "availability": "available",
-        "fact_ref": "us-wage-median",
+        "fact_ref": "wave1-b4-wage-p50",
         "key": "us_pay",
-        "label": "United States salary reference"
+        "label": "U.S. May 2025 median wage"
       },
       {
         "availability": "available",
@@ -11440,7 +10536,7 @@
         "availability": "missing",
         "fact_ref": null,
         "key": "china_pay",
-        "label": "Mainland China salary reference"
+        "label": "Additional wage benchmark"
       }
     ]
   },
@@ -11448,17 +10544,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "See how mechanical engineering technicians support testing and how their work differs from engineering design."
+      "text": "Mechanical engineering technicians support drawings, fixtures and tests, and preserve the measurements an engineer needs for review."
     },
     "title": {
       "availability": "available",
-      "text": "Mechanical Engineering Technician: Prototypes, Measurements and Test Records"
+      "text": "Mechanical Engineering Technicians | Duties, Pay and Entry"
     }
   },
-  "source_content_sha256": "7a92d96388be35459102f18c33c72a2f045008a519acdee919687af067d8d2c3",
+  "source_content_sha256": "1180953f0854ad11e15df8fcc69b2a6a7fcc88f8da9249bcdd911f1e1d1390a2",
   "subject": {
     "canonical_slug": "mechanical-engineering-technicians",
-    "name": "Mechanical Engineering Technician",
-    "summary": "Mechanical engineering technicians support engineers by preparing prototypes, taking measurements and recording test results. They identify deviations and route issues for review. Assignments vary with the lab or production setting."
+    "name": "Mechanical Engineering Technicians",
+    "summary": "Mechanical engineering technicians support drawings, fixtures and tests, and preserve the measurements an engineer needs for review."
   }
 }

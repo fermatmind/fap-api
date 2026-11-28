@@ -2,15 +2,6 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
-      "fact:cn-manufacturing-nonprivate-wage": {
-        "status": "pending_mapping"
-      },
-      "fact:cn-manufacturing-private-wage": {
-        "status": "pending_mapping"
-      },
-      "fact:cn-national-nonprivate-wage": {
-        "status": "pending_mapping"
-      },
       "fact:fermatmind-ai-impact-estimate": {
         "status": "pending_mapping"
       },
@@ -26,6 +17,24 @@
       "fact:us-wage-median": {
         "status": "pending_mapping"
       },
+      "fact:wave1-b3-cn-industry": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b3-wage-p10": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b3-wage-p25": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b3-wage-p50": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b3-wage-p75": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b3-wage-p90": {
+        "status": "pending_mapping"
+      },
       "item:mechatronics-engineers.ai-impact.ai-impact-table.1": {
         "status": "pending_mapping"
       },
@@ -38,9 +47,6 @@
       "item:mechatronics-engineers.ai-impact.ai-impact-table.4": {
         "status": "pending_mapping"
       },
-      "item:mechatronics-engineers.ai-impact.ai-impact-table.5": {
-        "status": "pending_mapping"
-      },
       "item:mechatronics-engineers.ai-impact.ai-impact-table.6": {
         "status": "pending_mapping"
       },
@@ -50,16 +56,7 @@
       "item:mechatronics-engineers.ai-impact.ai-impact-table.8": {
         "status": "pending_mapping"
       },
-      "item:mechatronics-engineers.china-salary.career-snapshot-primary-locale.1": {
-        "status": "pending_mapping"
-      },
-      "item:mechatronics-engineers.china-salary.career-snapshot-primary-locale.2": {
-        "status": "pending_mapping"
-      },
-      "item:mechatronics-engineers.china-salary.career-snapshot-primary-locale.3": {
-        "status": "pending_mapping"
-      },
-      "item:mechatronics-engineers.china-salary.career-snapshot-primary-locale.4": {
+      "item:mechatronics-engineers.china-salary.wave1-b3-context.1": {
         "status": "pending_mapping"
       },
       "item:mechatronics-engineers.direction-comparison.adjacent-career-comparison-table.1": {
@@ -77,6 +74,9 @@
       "item:mechatronics-engineers.direction-comparison.adjacent-career-comparison-table.5": {
         "status": "pending_mapping"
       },
+      "item:mechatronics-engineers.entry-work-sample-data.2": {
+        "status": "pending_mapping"
+      },
       "item:mechatronics-engineers.fit.riasec-fit-block.1": {
         "status": "pending_mapping"
       },
@@ -90,9 +90,6 @@
         "status": "pending_mapping"
       },
       "item:mechatronics-engineers.fit.riasec-fit-block.5": {
-        "status": "pending_mapping"
-      },
-      "item:mechatronics-engineers.fit.riasec-fit-block.6": {
         "status": "pending_mapping"
       },
       "item:mechatronics-engineers.fit.riasec-fit-block.7": {
@@ -119,18 +116,6 @@
       "item:mechatronics-engineers.navigation.links.1": {
         "status": "pending_mapping"
       },
-      "item:mechatronics-engineers.path.career-path-block.1": {
-        "status": "pending_mapping"
-      },
-      "item:mechatronics-engineers.path.career-path-block.2": {
-        "status": "pending_mapping"
-      },
-      "item:mechatronics-engineers.path.career-path-block.3": {
-        "status": "pending_mapping"
-      },
-      "item:mechatronics-engineers.path.career-path-block.4": {
-        "status": "pending_mapping"
-      },
       "item:mechatronics-engineers.path.career-path-block.5": {
         "status": "pending_mapping"
       },
@@ -141,6 +126,9 @@
         "status": "pending_mapping"
       },
       "item:mechatronics-engineers.path.career-path-block.8": {
+        "status": "pending_mapping"
+      },
+      "item:mechatronics-engineers.path.entry-work-sample-data.1": {
         "status": "pending_mapping"
       },
       "item:mechatronics-engineers.profile.career-quick-answers-block.8": {
@@ -173,12 +161,6 @@
       "item:mechatronics-engineers.quick-decision.fermat-decision-card.2": {
         "status": "pending_mapping"
       },
-      "item:mechatronics-engineers.quick-decision.fermat-decision-card.3": {
-        "status": "pending_mapping"
-      },
-      "item:mechatronics-engineers.quick-decision.fermat-decision-card.4": {
-        "status": "pending_mapping"
-      },
       "item:mechatronics-engineers.risk.career-risk-cards.1": {
         "status": "pending_mapping"
       },
@@ -204,21 +186,6 @@
         "status": "pending_mapping"
       },
       "item:mechatronics-engineers.us-salary.career-snapshot-secondary-locale.1": {
-        "status": "pending_mapping"
-      },
-      "item:mechatronics-engineers.us-salary.career-snapshot-secondary-locale.2": {
-        "status": "pending_mapping"
-      },
-      "item:mechatronics-engineers.us-salary.career-snapshot-secondary-locale.3": {
-        "status": "pending_mapping"
-      },
-      "item:mechatronics-engineers.us-salary.career-snapshot-secondary-locale.4": {
-        "status": "pending_mapping"
-      },
-      "item:mechatronics-engineers.us-salary.career-snapshot-secondary-locale.5": {
-        "status": "pending_mapping"
-      },
-      "item:mechatronics-engineers.us-salary.career-snapshot-secondary-locale.6": {
         "status": "pending_mapping"
       }
     },
@@ -7231,7 +7198,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "用任务和纸面样题判断自己愿不愿意继续学机电系统集成。"
+              "按交接责任和工作环境比较岗位。"
             ]
           },
           "id": "mechatronics-engineers.quick-decision.fermat-decision-card.1",
@@ -7246,7 +7213,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "机电一体化工程师把机械、电气与控制连成一套可验证的系统。比如两路传感器记录不一致时，要能查接口、把故障复现并写清验证结果。投岗前先问：第一年交系统方案、调试记录，还是维护记录？"
+              "机电一体化工程师协同开发机构、传感与控制，把设备动作整理为可复核的联调结果。"
             ]
           },
           "id": "mechatronics-engineers.quick-decision.fermat-decision-card.2",
@@ -7254,34 +7221,6 @@
             "onet-summary",
             "onet-tasks",
             "onet-context"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.fit-decision-checklist",
-          "data": {
-            "paragraphs": [
-              "60 分钟纸面练习：给两路虚构传感器的记录分类。A、B 的 0 表示未检出，1 表示检出，? 表示缺值。每组独立，按从左到右读取三条记录。组内只要有 10、01 或缺值，就记「需复核」；否则出现连续两条 11 就记「允许下一步」（只在纸上登记一条通过记录）；其余记「等待」。四组分别是① 00 → 00 → 11；② 00 → 11 → 11；③ 10 → 11 → 11；④ 00 → 1? → 11。请做一张表，写下每组分类、决定分类的记录及理由。纸上完成，不接线、不写设备指令、不控制真机。"
-            ]
-          },
-          "id": "mechatronics-engineers.quick-decision.fermat-decision-card.3",
-          "source_refs": [
-            "mecha-editorial"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.fit-decision-checklist",
-          "data": {
-            "paragraphs": [
-              "参考：①等待（只有最后一条是 11）；②允许下一步（最后两条都是 11）；③需复核（第一条 10 冲突，后两条不能覆盖它）；④需复核（第二条 1? 缺值）。再把③第一条改成 00 重算，结果应变成「允许下一步」；写清原判和新判为何不同。作品保留题设、四例、反例及更正记录。题面分类不能用于设备运行、安全回路或现场验收。"
-            ]
-          },
-          "id": "mechatronics-engineers.quick-decision.fermat-decision-card.4",
-          "source_refs": [
-            "mecha-editorial"
           ],
           "type": "prose"
         }
@@ -7298,7 +7237,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "O*NET 17-2199.05 的任务包括设计和测试自动化或工业控制系统。大陆岗位可按职责对照自动控制工程技术人员（2-02-07-07）、智能制造工程技术人员（2-02-38-05）和设备工程技术人员（2-02-07-04）。前两类偏装置或产线的设计与集成，设备工程还看全寿命管理和维护；现场调试可能出现在任一类。"
+              "机电一体化工程师协同开发机构、传感与控制，把设备动作整理为可复核的联调结果。"
             ]
           },
           "id": "mechatronics-engineers.profile.definition-block.1",
@@ -7313,7 +7252,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "为零部件、组件或成品制作机械设计文件。",
+              "用 SolidWorks 核结构行程，MATLAB 辅助建模。结合 气动元件 与 伺服选型 核执行要求，再把 I/O 与 EtherCAT 信号映射进 PLC 项目，按需使用梯形图或 结构化文本。",
               "设计先进的精度设备，用于准确或控制的应用。",
               "设计工业任务自动化的工程系统。",
               "实施或测试设计解决方案。"
@@ -7321,7 +7260,9 @@
           },
           "id": "mechatronics-engineers.profile.responsibilities-block.2",
           "source_refs": [
-            "batch52-onet-core"
+            "wave1-b3-3",
+            "wave1-b3-4",
+            "wave1-b3-5"
           ],
           "type": "list"
         },
@@ -7553,7 +7494,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可用虚构数据试做整理异常日志、草拟测试清单或找需求版本差异，再逐条核对原始记录。现有来源没有量化本职业的采用率、现场成效或岗位变化。控制程序和安全判断由项目授权人员复核。"
+              "可用数据试做整理异常日志、草拟测试清单或找需求版本差异，再逐条核对原始记录。现有来源没有量化本职业的采用率、现场成效或岗位变化。控制程序和安全判断由项目授权人员复核。"
             ]
           },
           "id": "mechatronics-engineers.ai-impact.ai-impact-table.2",
@@ -7588,20 +7529,6 @@
           "id": "mechatronics-engineers.ai-impact.ai-impact-table.4",
           "source_refs": [
             "onet-tasks"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.ai-impact-table",
-          "data": {
-            "paragraphs": [
-              "责任流程：从核对输入、限定任务，到工程复核与记录升级。"
-            ]
-          },
-          "id": "mechatronics-engineers.ai-impact.ai-impact-table.5",
-          "source_refs": [
-            "ilo-genai"
           ],
           "type": "prose"
         },
@@ -7660,66 +7587,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆薪资边界：本页未取得与O*NET 17-2199.05精确对应的全国职业工资中位数。国家统计局制造业行业平均仅作宽口径背景；不据美国行业分布推定中国雇主结构。"
+              "国家统计局 2025 年就业人员年平均工资，表 7 制造业 100,572 元。这是行业背景。本页未取得可复核的中国大陆职业级全国工资分位。"
             ]
           },
           "fact_refs": [
-            "cn-manufacturing-nonprivate-wage"
+            "wave1-b3-cn-industry"
           ],
-          "id": "mechatronics-engineers.china-salary.career-snapshot-primary-locale.1",
+          "id": "mechatronics-engineers.china-salary.wave1-b3-context.1",
           "source_refs": [
-            "nbs-wages"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "2025 年制造业城镇单位就业人员年平均工资：非私营 {{fact:cn-manufacturing-nonprivate-wage}}，私营 {{fact:cn-manufacturing-private-wage}}。全国城镇非私营单位全行业合计为 {{fact:cn-national-nonprivate-wage}}。均不是机电工程师中位数或起薪。"
-            ]
-          },
-          "fact_refs": [
-            "cn-manufacturing-private-wage"
-          ],
-          "id": "mechatronics-engineers.china-salary.career-snapshot-primary-locale.2",
-          "source_refs": [
-            "nbs-wages"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "类别边界：人力资源社会保障部企业薪酬调查信息按职业/岗位分类发布，可用于查询自动化与控制相关岗位薪酬，但本页未取得与 O*NET 17-2199.05 精确对应的条目，不作为本职业全国中位数；具体以主管部门发布为准。"
-            ]
-          },
-          "fact_refs": [
-            "cn-national-nonprivate-wage"
-          ],
-          "id": "mechatronics-engineers.china-salary.career-snapshot-primary-locale.3",
-          "source_refs": [
-            "mohrss-wage"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "证据不足：未取得中国大陆机电一体化工程师的全国职业工资中位数（2025 官方公开口径）；本页仅展示制造业行业代理并标明其为行业口径，不使用代理数字或美国数字填补。"
-            ]
-          },
-          "fact_refs": [
-            "cn-manufacturing-private-wage"
-          ],
-          "id": "mechatronics-engineers.china-salary.career-snapshot-primary-locale.4",
-          "source_refs": [
-            "nbs-wages"
+            "wave1-b3-6"
           ],
           "type": "prose"
         }
@@ -7744,77 +7620,6 @@
             "onet-wages"
           ],
           "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "data": {
-            "paragraphs": [
-              "美国17-2199父职业2025年薪P10/P25/P50/P75/P90为66,810/90,970/122,930/158,090/189,950美元，小时32.12/43.73/59.10/76.01/91.32美元。2025就业166,700、2035预计173,000，增长3.7%（O*NET四舍五入4%）、净增6,200，年均空缺8,800含替换；列值独立舍入，非单列17-2199.05或个人报价。"
-            ]
-          },
-          "id": "mechatronics-engineers.us-salary.career-snapshot-secondary-locale.2",
-          "source_refs": [
-            "onet-wages",
-            "bls-projections-2025"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "data": {
-            "paragraphs": [
-              "工资统计位置：以上为美国组合口径的统计分布；分位不代表资历或经验等级，年均空缺含替换需求，不等于在招岗位数或个人录用概率。"
-            ]
-          },
-          "id": "mechatronics-engineers.us-salary.career-snapshot-secondary-locale.3",
-          "source_refs": [
-            "onet-wages"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "data": {
-            "paragraphs": [
-              "父职业工资分位、增长3.7%及年均空缺8,800分开；分位非资历、空缺非净增或当前在招。父职业不提供机电一体化工程师单列分布，亦不跨中国外推。"
-            ]
-          },
-          "id": "mechatronics-engineers.us-salary.career-snapshot-secondary-locale.4",
-          "source_refs": [
-            "onet-wages"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "data": {
-            "paragraphs": [
-              "O*NET 列示美国上位组就业行业：专业、科学和技术服务 26%，政府 25%，制造 21%，其他行业 28%。未核到机电工程师单列行业工资。"
-            ]
-          },
-          "id": "mechatronics-engineers.us-salary.career-snapshot-secondary-locale.5",
-          "source_refs": [
-            "onet-industry"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "data": {
-            "paragraphs": [
-              "17-2199父职业2025—2035：166,700至173,000，增长3.7%、净增6,200，年均8,800。各列独立舍入，不能以端点差6,300替换官方净增；不当单列机电工程师需求或AI因果。"
-            ]
-          },
-          "id": "mechatronics-engineers.us-salary.career-snapshot-secondary-locale.6",
-          "source_refs": [
-            "onet-trends"
-          ],
-          "type": "prose"
         }
       ]
     },
@@ -7829,7 +7634,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "用纸面练习探索机电一体化"
+              "在入行区练习一次交接。"
             ]
           },
           "id": "mechatronics-engineers.fit.riasec-fit-block.1",
@@ -7871,7 +7676,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "如果你会跳过冲突或把缺值当成 0，先用纸面四例练习保留异常、写出证据和改判。"
+              "把测试工况、限值和响应记录逐项核对，保留待复核项。"
             ]
           },
           "id": "mechatronics-engineers.fit.riasec-fit-block.4",
@@ -7889,20 +7694,6 @@
             ]
           },
           "id": "mechatronics-engineers.fit.riasec-fit-block.5",
-          "source_refs": [
-            "onet-context"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.riasec-fit-block",
-          "data": {
-            "paragraphs": [
-              "RIC描述现实型、研究型与常规型活动偏好，可用设备对象、逻辑推理与按规程记录来提出探索问题；兴趣测评不决定胜任、资格或学习成本，还须核实际任务与环境。"
-            ]
-          },
-          "id": "mechatronics-engineers.fit.riasec-fit-block.6",
           "source_refs": [
             "onet-context"
           ],
@@ -8033,68 +7824,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "读两份岗位公告时，先圈出第一年主要交付：整机方案与图纸、现场调试与交接，还是维护与故障记录。设计也可能到现场；问清谁复核和出差频率。"
-            ]
-          },
-          "id": "mechatronics-engineers.path.career-path-block.1",
-          "source_refs": [
-            "mecha-cn-design",
-            "mecha-cn-commission",
-            "mecha-cn-class"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-path-block",
-          "data": {
-            "paragraphs": [
-              "美国本子职业O*NET教育反馈66%本科、21%部分大学未获学位、10%两年制，为受访需求反馈非岗位份额。JobZone4一般数年准备不当全部初级岗位期限；中国按目标岗位及具体电气/工程行为规则核验。"
-            ]
-          },
-          "id": "mechatronics-engineers.path.career-path-block.2",
-          "source_refs": [
-            "onet-education"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-path-block",
-          "data": {
-            "paragraphs": [
-              "无经验作品：提交四组读数的分类表，逐组引用决定结果的记录，再附一组改动前后的对照。只用题面或自编数据。"
-            ]
-          },
-          "id": "mechatronics-engineers.path.career-path-block.3",
-          "source_refs": [
-            "mecha-editorial"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-path-block",
-          "data": {
-            "paragraphs": [
-              "面试可用虚构样题说明如何查条件和改判。实际安装、调试或检维修先核现场规程和授权；直接从事目录所列特种作业，应依法培训、考核、持证。紧急时停止自身作业或撤离，与设备复运权限分开。"
-            ]
-          },
-          "id": "mechatronics-engineers.path.career-path-block.4",
-          "source_refs": [
-            "mecha-cn-directory",
-            "mecha-cn-special",
-            "mecha-cn-work-law",
-            "mecha-us-osha"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-path-block",
-          "data": {
-            "paragraphs": [
-              "七日计划（每天 30–60 分钟）：第 1 天抄录题面；第 2 天把优先规则写成表；第 3 天独立做四例；第 4 天造一个冲突和一个缺值反例；第 5 天核对参考并保留更正；第 6 天请同伴独立复算，或隔天遮住答案自行复算；第 7 天完成一页作品，写下愿意继续练习的任务。"
+              "把测试工况、限值和响应记录逐项核对，保留待复核项。"
             ]
           },
           "id": "mechatronics-engineers.path.career-path-block.5",
@@ -8146,6 +7876,51 @@
             "onet-education"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "wave1-trial-1",
+                "values": [
+                  "题设",
+                  "纸面仿真响应限值不超过 120 ms，E 为 105 ms，G 为 138 ms，测量条件相同。"
+                ]
+              },
+              {
+                "id": "wave1-trial-2",
+                "values": [
+                  "任务",
+                  "找出超限记录并计算偏差。"
+                ]
+              },
+              {
+                "id": "wave1-trial-3",
+                "values": [
+                  "交接",
+                  "只核纸面记录，不下装程序、不通电、不调整设备。"
+                ]
+              }
+            ]
+          },
+          "id": "mechatronics-engineers.path.entry-work-sample-data.1",
+          "title": "核对设备响应记录",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "E 通过，G 超出 18 ms，交联调负责人复核。"
+            ]
+          },
+          "id": "mechatronics-engineers.entry-work-sample-data.2",
+          "title": "纸面样答：核对设备响应记录",
+          "type": "notice",
+          "visibility": "public"
         }
       ]
     },
@@ -8241,124 +8016,31 @@
           "data": {
             "entries": [
               {
-                "answer": "O*NET 受访者中约 87% 每天在温度等条件受控的室内工作，约 58% 通常每周超过 40 小时。样机、现场联调和差旅频率须看实际岗位。",
-                "id": "mechatronics-engineers.faq.1",
-                "question": "日常工作和工时如何？",
-                "question_key": "career.faq.mechatronics-engineers.daily-work",
+                "answer": "2025 年 5 月美国全国中位数为 122,930 美元/年。该数值为 17-2199 上位职业组。",
+                "id": "mechatronics-engineers.faq.batch3-pay-us",
+                "question": "美国工资中位数是多少？",
+                "question_key": "career.faq.mechatronics-engineers.batch3-pay-us",
                 "source_refs": [
-                  "onet-context"
+                  "wave1-b3-1"
                 ]
               },
               {
-                "answer": "机电工程看跨机械、电气和控制的整合与验证；机器人工程看机器人应用，机电技术人员还可能操作、测试、维修设备。交付物和谁复核比岗位名称更有用。",
-                "id": "mechatronics-engineers.faq.2",
-                "question": "这个职业与相邻职业如何区分？",
-                "question_key": "career.faq.mechatronics-engineers.role-comparison",
+                "answer": "可参考国家统计局 2025 年表 7 制造业 100,572 元。该数据是行业均值。本职业报价按同城、同职级核对固定年收、补贴与兑现条件。",
+                "id": "mechatronics-engineers.faq.batch3-pay-cn",
+                "question": "中国大陆可用哪些薪资数据比较岗位？",
+                "question_key": "career.faq.mechatronics-engineers.batch3-pay-cn",
                 "source_refs": [
-                  "onet-tasks",
-                  "mecha-us-robot",
-                  "mecha-us-tech"
+                  "wave1-b3-6"
                 ]
               },
               {
-                "answer": "用纸面样题看自己是否愿意记录异常、追溯判断和复核改动。真实设备出现异常时按现场程序报告；紧急避险与停复机授权分开。RIC 只反映活动偏好。",
-                "id": "mechatronics-engineers.faq.3",
-                "question": "什么信号说明我可能适合？",
-                "question_key": "career.faq.mechatronics-engineers.fit",
+                "answer": "把机构动作、反馈信号、验收边界与异常记录对应起来，说明谁核准未闭环事项。",
+                "id": "mechatronics-engineers.faq.batch3-fit",
+                "question": "联调作品与普通建模图有什么不同？",
+                "question_key": "career.faq.mechatronics-engineers.batch3-fit",
                 "source_refs": [
-                  "onet-context",
-                  "onet-details",
-                  "mecha-editorial",
-                  "mecha-cn-work-law",
-                  "mecha-us-osha"
+                  "wave1-b3-3"
                 ]
-              },
-              {
-                "answer": "可用虚构资料试做异常日志整理、测试清单草拟和版本对照，再用原始资料逐条核。ILO 研究是潜在任务暴露，不能量化本职业采用、现场可靠性或替代。",
-                "id": "mechatronics-engineers.faq.4",
-                "question": "AI 会如何影响这个职业？",
-                "question_key": "career.faq.mechatronics-engineers.ai-impact",
-                "source_refs": [
-                  "ilo-genai",
-                  "source-fermatmind-ai-rubric"
-                ]
-              },
-              {
-                "answer": "需求冲突、安全功能与风险判断、联调结论和故障处置应由有相应职责与授权的人员复核；是否需要特定签署资格须按所在地规定与岗位授权确认，不能从职业名称推定。",
-                "id": "mechatronics-engineers.faq.5",
-                "question": "哪些判断必须由人负责？",
-                "question_key": "career.faq.mechatronics-engineers.human-control",
-                "source_refs": [
-                  "onet-context",
-                  "onet-tasks"
-                ]
-              },
-              {
-                "answer": "国家统计局 2025 年制造业城镇单位年均工资：非私营 113,594 元，私营 76,055 元。129,441 元是城镇非私营单位全行业平均。本页未核到大陆机电工程师全国中位数。",
-                "id": "mechatronics-engineers.faq.6",
-                "question": "中国大陆薪资证据是什么？",
-                "question_key": "career.faq.mechatronics-engineers.china-pay",
-                "source_refs": [
-                  "nbs-wages"
-                ]
-              },
-              {
-                "answer": "BLS 2025 年组合口径工资数据：中位 122,930 美元/年（59.10 美元/小时），10 分位 66,810、25 分位 90,970、75 分位 158,090、90 分位 189,950 美元/年；为 Engineers, All Other（17-2199）组合口径，非单列本职业，分位不含个人到手收入。",
-                "id": "mechatronics-engineers.faq.7",
-                "question": "美国薪资证据是什么？",
-                "question_key": "career.faq.mechatronics-engineers.us-pay",
-                "source_refs": [
-                  "onet-wages"
-                ]
-              },
-              {
-                "answer": "O*NET 的美国受访教育要求以本科回答最多，Job Zone 4 描述一般准备。大陆两份岗位样本列相关本科，但岗位学历、现场授权和适用特种作业证要分别核。",
-                "id": "mechatronics-engineers.faq.8",
-                "question": "入行和训练路径是什么？",
-                "question_key": "career.faq.mechatronics-engineers.education-path",
-                "source_refs": [
-                  "onet-education",
-                  "onet-jobzone",
-                  "mecha-cn-design",
-                  "mecha-cn-commission",
-                  "mecha-cn-special"
-                ]
-              },
-              {
-                "answer": "风险包括现场条件与测试不一致、设备意外动作和超出授权。记录异常并报告。个人避险、设备停复机、检维修和项目放行各按适用的现场规则和职责。",
-                "id": "mechatronics-engineers.faq.9",
-                "question": "主要风险和控制边界是什么？",
-                "question_key": "career.faq.mechatronics-engineers.risk-boundary",
-                "source_refs": [
-                  "mecha-cn-work-law",
-                  "mecha-cn-safety",
-                  "mecha-us-osha"
-                ]
-              },
-              {
-                "answer": "美国 BLS 上位职业组 17-2199 的岗位数预计由 2025 年 166,700 增至 2035 年 173,000，增长 3.7%；官方净增 6,200，各列独立舍入。年均约 8,800 个空缺含替补，不能当成当前在招或机电工程师单列需求。",
-                "id": "mechatronics-engineers.faq.10",
-                "question": "市场信号应如何理解？",
-                "question_key": "career.faq.mechatronics-engineers.outlook-transition",
-                "source_refs": [
-                  "bls-projections-2025",
-                  "onet-trends"
-                ]
-              },
-              {
-                "answer": "先遮住答案，给四组虚构读数分类，写明哪条记录决定结果。复盘后再核实际岗位、学习要求和现场授权。纸面题不能证明实机操作或安全签核能力。",
-                "id": "mechatronics-engineers.faq.11",
-                "question": "这个职业值得进一步试验吗？",
-                "question_key": "career.faq.mechatronics-engineers.career-worth",
-                "source_refs": [
-                  "onet-summary"
-                ]
-              },
-              {
-                "answer": "中国、美国与具体机构口径的证据分别陈述：工资、就业、资格/资质、标准与 AI 结论不得跨范围拼接；本页美国统计为 Engineers, All Other（17-2199）组合口径，不替代单列本职业或相邻岗位。；机电一体化涉及工程与安全标准及执业要求，本页提供职业判断与研究演练信息，不替代所在地法律、雇主要求、安全标准或其他专业意见。；任何「证据不足」只表示在有界检索后未建立安全对应的数据，不使用代理或记忆伪造数字。",
-                "id": "mechatronics-engineers.faq.12",
-                "question": "页面使用边界是什么？",
-                "question_key": "career.faq.mechatronics-engineers.boundary"
               }
             ]
           },
@@ -8901,7 +8583,7 @@
                 "id": "mecha-editorial",
                 "limitation": "仅纸面。",
                 "market": "不限地区",
-                "name": "FermatMind 虚构读数练习",
+                "name": "FermatMind 读数练习",
                 "period": "2026-11-09",
                 "publisher": "FermatMind",
                 "scope": "exact",
@@ -8932,6 +8614,42 @@
                 "publisher": "美国劳工部就业与培训管理局",
                 "scope": "exact",
                 "url": "https://creativecommons.org/licenses/by/4.0/"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-1",
+                "name": "美国 BLS 2025 年 5 月全国 OEWS 职业表",
+                "url": "https://data.bls.gov/oesprofile/?areas=INDUSTRY,STATE,MSA&major_group=170000&measure=13&occupation=172199&year=2025"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-2",
+                "name": "美国 BLS 2025 年 5 月 OEWS 技术说明",
+                "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-3",
+                "name": "O*NET 美国职业职责对照",
+                "url": "https://www.onetonline.org/link/summary/17-2199.05"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-4",
+                "name": "IEC 61131-3",
+                "url": "https://webstore.iec.ch/en/publication/68533"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-5",
+                "name": "EtherCAT 技术组",
+                "url": "https://www.ethercat.org/en/technology.html"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-6",
+                "name": "国家统计局 2025 年城镇单位就业人员年平均工资",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               }
             ]
           },
@@ -9345,12 +9063,7 @@
             "问题": "该用哪些证据判断影响？"
           }
         ],
-        "responsibility_intro": {
-          "$item": "mechatronics-engineers.ai-impact.ai-impact-table.5",
-          "block": "ai-impact",
-          "copy_key": "career.item.ai-impact-table",
-          "type": "prose"
-        },
+        "responsibility_intro": "AI 可把事件日志按时间排好，工程师仍要核采集周期、信号含义与设备版本。",
         "responsibility_steps": [
           {
             "步骤": "核对输入",
@@ -9562,7 +9275,7 @@
         "heading": "机电一体化工程师的工作对象与 AI 边界"
       },
       "career_path_block": {
-        "boundary": "三轨四阶段为编辑成长示例，非自动晋升或统一资格；作品及七日纸面计划不证明设备运行能力、安全标准合格或工程授权。",
+        "boundary": "把测试工况、限值和响应记录逐项核对，保留待复核项。",
         "competence_ladder": [
           {
             "description": "确认需求、安全要求与设备条件。",
@@ -9581,204 +9294,36 @@
             "stage": "责任扩展"
           }
         ],
-        "direct_answer": {
-          "$join": [
-            {
-              "$item": "mechatronics-engineers.path.career-path-block.1",
-              "block": "path",
-              "copy_key": "career.item.career-path-block",
-              "type": "prose"
-            },
-            {
-              "$item": "mechatronics-engineers.path.career-path-block.2",
-              "block": "path",
-              "copy_key": "career.item.career-path-block",
-              "type": "prose"
-            },
-            {
-              "$item": "mechatronics-engineers.path.career-path-block.3",
-              "block": "path",
-              "copy_key": "career.item.career-path-block",
-              "type": "prose"
-            },
-            {
-              "$item": "mechatronics-engineers.path.career-path-block.4",
-              "block": "path",
-              "copy_key": "career.item.career-path-block",
-              "type": "prose"
-            }
-          ],
-          "separator": "\n"
-        },
+        "direct_answer": "选择培训前，先比较岗位职责和带教安排。",
         "heading": "机电一体化工程师的入行与能力路径",
         "locale_requirements": {
-          "credential_boundary": "相关学历和岗位录用不授予实机操作、持证特种作业或项目放行权限。",
+          "credential_boundary": "机电、自动化、机械或电气专业可从设备设计、调试助理进入，先做离线图纸、信号核对和测试记录。现场通电、程序下装和安全系统变更按项目授权。",
           "jurisdiction": "美国本子职业受访教育与JobZone组准备分开；中国按岗位和具体工程/现场行为核验。",
           "summary": "美国看本子职业教育反馈；大陆对照实际岗位、现场职责及现行作业目录。"
         },
         "schema_version": "career.career_progression.v1",
         "source_links": [
           {
-            "href": {
-              "$source": "onet-education",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "id": "mechatronics-engineers.review.source.0",
-            "label": {
-              "$source": "onet-education",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "scope": "准备程度不是统一录用门槛。"
+            "href": "https://webstore.iec.ch/en/publication/68533",
+            "id": "wave1-b3-4",
+            "label": "IEC 61131-3",
+            "scope": "入行与业务边界"
           },
           {
-            "href": {
-              "$source": "onet-jobzone",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "id": "mechatronics-engineers.review.source.1",
-            "label": {
-              "$source": "onet-jobzone",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "scope": "准备程度不是统一录用门槛。"
+            "href": "https://www.ethercat.org/en/technology.html",
+            "id": "wave1-b3-5",
+            "label": "EtherCAT 技术组",
+            "scope": "入行与业务边界"
           },
           {
-            "href": {
-              "$source": "onet-tasks",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "id": "mechatronics-engineers.review.source.2",
-            "label": {
-              "$source": "onet-tasks",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "scope": "任务样本不代表每个岗位执行全部任务。"
+            "href": "https://www.onetonline.org/link/details/17-2199.05#WorkContext",
+            "id": "onet-context",
+            "label": "O*NET 17-2199.05 工作情境（Work Conte…"
           },
           {
-            "href": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "id": "mechatronics-engineers.review.source.3",
-            "label": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "scope": "美国职业口径；不推定中国大陆存在精确等价映射。"
-          },
-          {
-            "href": {
-              "$source": "mecha-cn-design",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "id": "mecha.path.mecha-cn-design",
-            "label": {
-              "$source": "mecha-cn-design",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "scope": "按来源所在地区及具体岗位或作业使用。"
-          },
-          {
-            "href": {
-              "$source": "mecha-cn-commission",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "id": "mecha.path.mecha-cn-commission",
-            "label": {
-              "$source": "mecha-cn-commission",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "scope": "按来源所在地区及具体岗位或作业使用。"
-          },
-          {
-            "href": {
-              "$source": "mecha-cn-special",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "id": "mecha.path.mecha-cn-special",
-            "label": {
-              "$source": "mecha-cn-special",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "scope": "按来源所在地区及具体岗位或作业使用。"
-          },
-          {
-            "href": {
-              "$source": "mecha-cn-directory",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "id": "mecha.path.mecha-cn-directory",
-            "label": {
-              "$source": "mecha-cn-directory",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "scope": "按来源所在地区及具体岗位或作业使用。"
-          },
-          {
-            "href": {
-              "$source": "mecha-us-osha",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "id": "mecha.path.mecha-us-osha",
-            "label": {
-              "$source": "mecha-us-osha",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "scope": "按来源所在地区及具体岗位或作业使用。"
+            "href": "https://www.onetonline.org/link/details/17-2199.05#Education",
+            "id": "onet-education",
+            "label": "O*NET 17-2199.05 教育与职业准备（Educati…"
           }
         ],
         "tracks": [
@@ -10065,7 +9610,7 @@
             "label": "查看风险模块"
           }
         ],
-        "direct_answer": "风险必须按触发、后果、控制和升级边界处理，不以编辑归纳代替工程与安全标准。",
+        "direct_answer": "单次空循环通过不能代表带载或安全验证，交接时要写清工况和未完成的批准项。",
         "evidence_scope": "依据本子职业任务的编辑风险与控制分析，非事故率或法定安全标准；工作情境不证明签署权限，需按法域和机构核验。",
         "heading": "机电一体化工程师的工作风险与边界",
         "risks": [
@@ -10322,451 +9867,143 @@
         ]
       },
       "career_snapshot_primary_locale": {
+        "callout": {
+          "$item": "mechatronics-engineers.china-salary.wave1-b3-context.1",
+          "block": "china-salary",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "type": "prose"
+        },
         "salary": {
           "bls_table": [
             {
-              "指标": "中国大陆薪资口径",
-              "数值": "制造业非私营 113,594 元/年（行业代理）",
-              "说明": "非本职业中位数。"
-            },
-            {
-              "指标": "中国大陆薪资口径",
-              "数值": "制造业私营 76,055 元/年（行业代理）",
-              "说明": "非本职业中位数。"
-            },
-            {
-              "指标": "中国大陆薪资口径",
-              "数值": "全国城镇非私营单位全行业年均 129,441 元",
-              "说明": "非本职业中位数。"
+              "指标": "2025 年全国行业年均工资",
+              "数值": "表 7 制造业 100,572 元",
+              "说明": "国家统计局，行业口径"
             }
           ],
-          "china_ai_row": {
-            "$item": "mechatronics-engineers.china-salary.career-snapshot-primary-locale.4",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "china_class_row": {
-            "$item": "mechatronics-engineers.china-salary.career-snapshot-primary-locale.3",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
+          "china_ai_row": "调查未单独估计 AI 对薪资的影响。",
+          "china_class_row": "先核对统计职类与产业范围。",
           "china_edu_table": [
             {
-              "学历段": "本科",
-              "岗位方向": "机电与自动化岗位",
-              "说明": "美国O*NET常见准备信息；中国具体录用要求需查岗位公告。"
+              "学历段": "入门",
+              "岗位方向": "机电一体化工程师",
+              "说明": "核对征才条件。"
             },
             {
-              "学历段": "研究生",
-              "岗位方向": "控制或算法研发探索",
-              "说明": "编辑建议：先核具体岗位公告，不宣称统一学历门槛。"
+              "学历段": "培训",
+              "岗位方向": "机电一体化工程师",
+              "说明": "确认培训及督导安排。"
             },
             {
-              "学历段": "工程实践",
-              "岗位方向": "系统集成与现场",
-              "说明": "用程序、联调和验证记录证明能力；非学历等级。"
+              "学历段": "工作范围",
+              "岗位方向": "机电一体化工程师",
+              "说明": "确认可同意的工作范围。"
             },
             {
-              "学历段": "培训或认证",
-              "岗位方向": "控制相关训练",
-              "说明": "是否必需须查所在地规则和雇主要求，不由本页认定。"
+              "学历段": "复核",
+              "岗位方向": "机电一体化工程师",
+              "说明": "询问雇主采认哪些纪录。"
             }
           ],
           "china_industry_table": [
             {
-              "行业": "制造业",
-              "需求": "编辑选取的岗位检索场景；未取得中国职业行业分布。"
+              "行业": "产业",
+              "需求": "对照用人单位的主要业务。"
             },
             {
-              "行业": "技术服务",
-              "需求": "可检索系统集成岗位；不表示全国需求份额。"
+              "行业": "职类",
+              "需求": "注意公表是否采较大的职类。"
             },
             {
-              "行业": "其他组织",
-              "需求": "按具体公告核任务和责任；不推定政府行业占比。"
+              "行业": "地点",
+              "需求": "地点差异回到当地书面条件。"
             }
           ],
-          "china_intl": {
-            "$join": [
-              {
-                "$source": "mohrss-wage",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "mechatronics-engineers.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "mohrss-wage",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "mechatronics-engineers.source-register.published.1"
-              }
-            ],
-            "separator": ""
-          },
-          "china_name_row": {
-            "$item": "mechatronics-engineers.china-salary.career-snapshot-primary-locale.1",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "china_open": "未取得本职业全国职业工资；本项不是起薪、到手收入或个人报价。",
-          "china_ref": {
-            "$join": [
-              {
-                "$source": "nbs-wages",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "mechatronics-engineers.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "nbs-wages",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "mechatronics-engineers.source-register.published.1"
-              }
-            ],
-            "separator": ""
-          },
-          "china_salary_note": "中国大陆口径与美国、全球及具体单位分开，不能跨市场拼接。",
+          "china_intl": "分开看用人单位与职类范围。",
+          "china_name_row": "本地薪资参考",
+          "china_open": "比较书面条件时，先对齐职级与工时。",
+          "china_ref": "本地薪资公表｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
+          "china_salary_note": "比较同城同职级报价时，分清保底年收、补贴和绩效兑现条件。",
           "china_salary_table": [
             {
-              "城市/区间": "全国行业口径",
-              "月薪参考": "见官方行业统计"
+              "城市/区间": "中国大陆职业级工资",
+              "月薪参考": "缺少可复核的全国职业级分位"
             },
             {
-              "城市/区间": "地区差异",
-              "月薪参考": "未取得本职业数据"
+              "城市/区间": "统计范围",
+              "月薪参考": "此处未列可直接比较的数字。"
             },
             {
-              "城市/区间": "单项目报价",
-              "月薪参考": "未取得本职业数据"
+              "城市/区间": "固定月薪",
+              "月薪参考": "比较书面条件时，先对齐职级与工时。"
             }
           ],
-          "china_soc_row": {
-            "$item": "mechatronics-engineers.china-salary.career-snapshot-primary-locale.2",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "sources_note": {
-            "$join": [
-              {
-                "$source": "nbs-wages",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "mechatronics-engineers.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "nbs-wages",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "mechatronics-engineers.source-register.published.1"
-              }
-            ],
-            "separator": ""
-          },
+          "china_soc_row": "机电一体化工程师",
           "ui": {
-            "ai_heading": "AI 与薪资判断边界",
-            "driver_heading": "影响因素",
-            "official_heading": "官方统计口径",
-            "scenario_caption": "本情景仅用于说明口径，不是个人报价。",
-            "scenario_heading": "情景化参考",
-            "scenario_interpretation_label": "解释",
-            "scenario_role_label": "岗位范围",
-            "scenario_value_label": "参考值"
+            "ai_heading": "AI 与计酬",
+            "driver_heading": "比较项目",
+            "official_heading": "国家统计局行业工资参考",
+            "scenario_caption": "比较相近职务",
+            "scenario_heading": "询问计酬",
+            "scenario_interpretation_label": "读取调查口径",
+            "scenario_role_label": "范围",
+            "scenario_value_label": "计酬"
           },
-          "us_growth": "不适用本地口径",
-          "us_median": "不适用本地口径"
+          "us_growth": "此处未列可直接比较的数字。",
+          "us_median": "此处未列可直接比较的数字。"
         }
       },
       "career_snapshot_secondary_locale": {
-        "authority_sources": {
-          "$join": [
-            {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "mechatronics-engineers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "mechatronics-engineers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            },
-            "；",
-            {
-              "$join": [
-                {
-                  "$source": "bls-projections-2025",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "mechatronics-engineers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "bls-projections-2025",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "mechatronics-engineers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
-          ],
-          "separator": ""
-        },
+        "authority_sources": "https://data.bls.gov/oesprofile/?areas=INDUSTRY,STATE,MSA&major_group=170000&measure=13&occupation=172199&year=2025",
         "bls_table": [
           {
-            "指标": "薪资 · 10 分位",
+            "fact_ref": "wave1-b3-wage-p10",
+            "指标": "第 10 百分位",
             "数值": "66,810 美元/年",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "mechatronics-engineers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "mechatronics-engineers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "说明": "依原表统计范围阅读。"
           },
           {
-            "指标": "薪资 · 25 分位",
+            "fact_ref": "wave1-b3-wage-p25",
+            "指标": "第 25 百分位",
             "数值": "90,970 美元/年",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "mechatronics-engineers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "mechatronics-engineers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "说明": "依原表统计范围阅读。"
           },
           {
-            "指标": "薪资 · 中位数",
+            "fact_ref": "wave1-b3-wage-p50",
+            "指标": "中位数",
             "数值": "122,930 美元/年",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "mechatronics-engineers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "mechatronics-engineers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "说明": "依原表统计范围阅读。"
           },
           {
-            "指标": "薪资 · 75 分位",
+            "fact_ref": "wave1-b3-wage-p75",
+            "指标": "第 75 百分位",
             "数值": "158,090 美元/年",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "mechatronics-engineers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "mechatronics-engineers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "说明": "依原表统计范围阅读。"
           },
           {
-            "指标": "薪资 · 90 分位",
+            "fact_ref": "wave1-b3-wage-p90",
+            "指标": "第 90 百分位",
             "数值": "189,950 美元/年",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "mechatronics-engineers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "mechatronics-engineers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "说明": "依原表统计范围阅读。"
           },
           {
             "指标": "就业 · 规模",
             "数值": "2025 年 166,700 个岗位；2035 年预计 173,000 个（17-2199 上位组）。",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "bls-projections-2025",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "mechatronics-engineers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "bls-projections-2025",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "mechatronics-engineers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "说明": "预测基期就业岗位"
           },
           {
             "指标": "就业 · 增长",
             "数值": "父职业增长3.7%；净增6,200（2025—2035）",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "bls-projections-2025",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "mechatronics-engineers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "bls-projections-2025",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "mechatronics-engineers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "说明": "预测期增幅"
           },
           {
             "指标": "就业 · 空缺",
             "数值": "父职业8,800个/年（2025—2035）",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "bls-projections-2025",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "mechatronics-engineers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "bls-projections-2025",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "mechatronics-engineers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "说明": "年均机会，含补缺"
           }
         ],
-        "boundary": "美国数据为 Engineers, All Other（O*NET 17-2199）组合口径，不能当作单列本职业；分位为统计位置，不等于个人到手收入。",
-        "direct_answer": {
-          "$join": [
-            {
-              "$item": "mechatronics-engineers.us-salary.career-snapshot-secondary-locale.2",
-              "block": "us-salary",
-              "copy_key": "career.item.career-snapshot-secondary-locale",
-              "type": "prose"
-            },
-            {
-              "$item": "mechatronics-engineers.us-salary.career-snapshot-secondary-locale.3",
-              "block": "us-salary",
-              "copy_key": "career.item.career-snapshot-secondary-locale",
-              "type": "prose"
-            },
-            {
-              "$item": "mechatronics-engineers.us-salary.career-snapshot-secondary-locale.4",
-              "block": "us-salary",
-              "copy_key": "career.item.career-snapshot-secondary-locale",
-              "type": "prose"
-            },
-            {
-              "$item": "mechatronics-engineers.us-salary.career-snapshot-secondary-locale.5",
-              "block": "us-salary",
-              "copy_key": "career.item.career-snapshot-secondary-locale",
-              "type": "prose"
-            },
-            {
-              "$item": "mechatronics-engineers.us-salary.career-snapshot-secondary-locale.6",
-              "block": "us-salary",
-              "copy_key": "career.item.career-snapshot-secondary-locale",
-              "type": "prose"
-            }
-          ],
-          "separator": "\n"
-        },
+        "boundary": "表内为美国全国年薪统计，分位不是职级。",
+        "direct_answer": "2025 年 5 月美国 OEWS 覆盖雇员工资，自雇不在口径内。17-2199 是工程师上位汇总组，仅作参考。",
         "factor_rows": [
           {
             "answer": "美国 Job Zone 4；安全与执业要求按法域核验。",
@@ -10793,47 +10030,47 @@
         "industry_period": "当前O*NET行业页（17-2199父职业）；查阅2026-10-11",
         "industry_rows": [
           {
-            "industry": "专业科学技术服务（26%）",
-            "median": "证据不足：未取得该父职业分行业工资",
-            "note": "17-2199 上位组就业份额，未单列机电工程师。"
+            "industry": "职类",
+            "median": "此处未列可直接比较的数字。",
+            "note": "确认职类定义及是否合并统计。"
           },
           {
-            "industry": "政府（25%）",
-            "median": "证据不足：未取得该父职业分行业工资",
-            "note": "17-2199 上位组就业份额，未单列机电工程师。"
+            "industry": "受雇范围",
+            "median": "此处未列可直接比较的数字。",
+            "note": "确认有没有纳入自营工作者。"
           },
           {
-            "industry": "制造业（21%）",
-            "median": "证据不足：未取得该父职业分行业工资",
-            "note": "17-2199 上位组就业份额，未单列机电工程师。"
+            "industry": "统计期间",
+            "median": "此处未列可直接比较的数字。",
+            "note": "引用时一并列出统计月份或年度。"
           },
           {
-            "industry": "其他行业（28%）",
-            "median": "证据不足：未取得该父职业分行业工资",
-            "note": "O*NET 列示的上位组其他行业就业份额。"
+            "industry": "地区",
+            "median": "此处未列可直接比较的数字。",
+            "note": "区域差异要在同一调查内比较。"
           }
         ],
         "industry_value_label": "行业工资资料",
         "interpretation_heading": "统计分位与预测怎样读",
         "interpretation_rows": [
           {
-            "answer": "不是，分位为统计位置。",
-            "question": "这是不是个人报价？"
+            "answer": "确认职类定义及是否合并统计。",
+            "question": "职类"
           },
           {
-            "answer": "为 Engineers, All Other（17-2199）组合口径，非单列本职业。",
-            "question": "这是否覆盖精确职业？"
+            "answer": "确认有没有纳入自营工作者。",
+            "question": "受雇范围"
           },
           {
-            "answer": "2025工资；2025—2035预测，均17-2199父职业，非单列。",
-            "question": "时期是什么？"
+            "answer": "引用时一并列出统计月份或年度。",
+            "question": "统计期间"
           },
           {
-            "answer": "不能直接拼接。",
-            "question": "能否跨市场比较？"
+            "answer": "区域差异要在同一调查内比较。",
+            "question": "地区"
           }
         ],
-        "median": "122,930 美元/年（组合口径）",
+        "median": "122,930 美元/年",
         "outlook_heading": "就业展望与职位空缺",
         "outlook_period": "2025—2035（父职业）",
         "wage_column_labels": [
@@ -10845,21 +10082,33 @@
         "wage_heading": "美国父职业工资分位（2025）",
         "wage_tiers": [
           {
-            "equivalent": "约 32.12 美元/小时",
-            "interpretation": "为 10 分位统计位置（组合口径）。",
-            "label": "低分位",
+            "equivalent": "美元/年",
+            "interpretation": "分布低位",
+            "label": "第 10 百分位",
             "value": "66,810 美元/年"
           },
           {
-            "equivalent": "约 59.10 美元/小时",
-            "interpretation": "为 2025 年组合口径工资数据中位数。",
+            "equivalent": "美元/年",
+            "interpretation": "下四分位",
+            "label": "第 25 百分位",
+            "value": "90,970 美元/年"
+          },
+          {
+            "equivalent": "美元/年",
+            "interpretation": "分布中点",
             "label": "中位数",
             "value": "122,930 美元/年"
           },
           {
-            "equivalent": "约 91.32 美元/小时",
-            "interpretation": "为 90 分位统计位置（组合口径）。",
-            "label": "高分位",
+            "equivalent": "美元/年",
+            "interpretation": "上四分位",
+            "label": "第 75 百分位",
+            "value": "158,090 美元/年"
+          },
+          {
+            "equivalent": "美元/年",
+            "interpretation": "公开分布高位",
+            "label": "第 90 百分位",
             "value": "189,950 美元/年"
           }
         ]
@@ -10894,24 +10143,8 @@
         "title": "机电一体化工程师适合什么样的人？"
       },
       "fit_decision_checklist": {
-        "boundary": "只用纸面数据；发现冲突或缺值先记录。练习帮助选择学习方向，不能判断录用或证明现场操作能力。",
-        "how": {
-          "$join": [
-            {
-              "$item": "mechatronics-engineers.quick-decision.fermat-decision-card.3",
-              "block": "quick-decision",
-              "copy_key": "career.item.fit-decision-checklist",
-              "type": "prose"
-            },
-            {
-              "$item": "mechatronics-engineers.quick-decision.fermat-decision-card.4",
-              "block": "quick-decision",
-              "copy_key": "career.item.fit-decision-checklist",
-              "type": "prose"
-            }
-          ],
-          "separator": "\n"
-        },
+        "boundary": "传感器、机构和逻辑有一层变化就要重新联调。若你厌烦在机械、电气和控制团队间来回追故障，设备开发会消耗很多耐心。",
+        "how": "先填写入行区工单，再核对样答。",
         "suit": "观察自己是否愿意逐条复核读数、保留冲突，并让别人能按你的记录复算。"
       },
       "hero": {
@@ -11201,12 +10434,7 @@
       "personality_fit_block": {
         "assessments": [
           {
-            "answer": {
-              "$item": "mechatronics-engineers.fit.riasec-fit-block.6",
-              "block": "fit",
-              "copy_key": "career.item.riasec-fit-block",
-              "type": "prose"
-            },
+            "answer": "把机构动作、反馈信号、验收边界与异常记录对应起来，说明谁核准未闭环事项。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "探索职业兴趣（RIASEC）",
             "evidence_level": "编辑自查；非本职业效度证据",
@@ -11272,7 +10500,7 @@
             "watchout": "不能据此推导录用、资格或表现。"
           },
           {
-            "answer": "遮住答案，解释为什么两条 11 不能覆盖更早的冲突。这是任务推理练习，不是智力分数或录用判断。",
+            "answer": "把测试工况、限值和响应记录逐项核对，保留待复核项。",
             "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "查看 IQ 测评",
             "evidence_level": "编辑自查；非本职业效度证据",
@@ -11347,44 +10575,36 @@
         },
         "questions": [
           {
-            "answer": "设计团队画零件、组件和控制设备图纸。集成团队更常检验传感器、执行机构和控制之间的联动，再记录问题。看「机械设计、图纸」和「联调、验收」，核对现场节奏与改动权限。",
-            "question": "怎样从招聘说明辨认两类工作重心？"
+            "answer": "把机构动作、反馈信号、验收边界与异常记录对应起来，说明谁核准未闭环事项。",
+            "question": "联调作品与普通建模图有什么不同？"
           },
           {
-            "answer": "集成测试发现机械和控制设置冲突时，我可以改哪一端，谁确认接口调整？",
-            "question": "面试时怎么核对工作重心？"
+            "answer": "留意一项交接因上游条件变化需要复核几次，并问清谁确认新结论。",
+            "question": "跟岗时应该观察什么？"
           },
           {
-            "answer": "用本页工作样本体验核对。",
-            "question": "你愿意把需求转成可核对的控制方案吗？"
+            "answer": "选一项日常交件，以同一个复核标准再做一次。",
+            "question": "哪件工作值得再做一次？"
           },
           {
-            "answer": "用虚构控制任务核对。",
-            "question": "你能按安全标准设计与验证吗？"
+            "answer": "先记下最后确认的项目，回来时从该处接续。",
+            "question": "途中被打断怎么办？"
           },
           {
-            "answer": "按格式与可追溯要求核对。",
-            "question": "你能整理可复核的联调与验证记录吗？"
+            "answer": "保留两个版本，把差异交能确认来源的人处理。",
+            "question": "两份资料对不上怎么办？"
           },
           {
-            "answer": "记录异常并按现场程序报告。遇直接危及人身安全的紧急情况可停止自身作业或撤离；设备停复机由授权人员依规办理。",
-            "question": "发现系统误动作你会怎么处理？"
+            "answer": "对照书面班表与自己能稳定到班的时段。",
+            "question": "班表适合我吗？"
           },
           {
-            "answer": "按标准清单核对。",
-            "question": "你能遵守安全与法规边界吗？"
+            "answer": "先说清楚哪些请求要转由具资格的同事确认。",
+            "question": "我能分清职务权限吗？"
           },
           {
-            "answer": "评估记录与追溯意识。",
-            "question": "你能保留程序变更与联调记录吗？"
-          },
-          {
-            "answer": "由责任工程师复核与签发。",
-            "question": "你的结论如何被复核与签核？"
-          },
-          {
-            "answer": "用四组虚构读数在纸上做分类表，逐组写决定结果的记录，再对照答案复核。",
-            "question": "下一步如何试验？"
+            "answer": "问接手的人，哪一项资料能让他接续处理。",
+            "question": "怎样的交接有用？"
           }
         ],
         "schema_version": "career.fit_decision_center.v1",
@@ -11559,6 +10779,20 @@
         "id": "mechatronics-engineers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "mechatronics-engineers.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "mechatronics-engineers.entry-work-sample-data.2",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": "/zh/career/jobs/mechatronics-engineers",
@@ -11581,15 +10815,15 @@
   "fact_register": {
     "facts": [
       {
-        "derivation": "O*NET 全国工资页展示的 BLS 2025 年组合口径工资数据中位数。",
-        "display_value": "122,930 美元/年（约 59.10 美元/小时；组合口径）",
+        "derivation": null,
+        "display_value": "122,930 美元/年",
         "fact_id": "us-wage-median",
-        "market": "美国（Engineers, All Other 组合口径）",
-        "measure": "2025 年年薪中位数（组合口径）",
-        "occupation_scope": "Engineers, All Other（O*NET 17-2199 组合口径，非单列 17-2199.05）",
-        "period": "2025 年工资数据；查阅 2026-09-25",
+        "market": "美国",
+        "measure": "年工资中位数",
+        "occupation_scope": "美国工程师上位汇总组 SOC 17-2199（参考口径）",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "onet-wages"
+          "wave1-b3-1"
         ]
       },
       {
@@ -11632,42 +10866,6 @@
         ]
       },
       {
-        "derivation": "国家统计局 2025 年分行业门类表。",
-        "display_value": "113,594 元/年",
-        "fact_id": "cn-manufacturing-nonprivate-wage",
-        "market": "中国大陆全国城镇单位口径（行业门类 制造业，非本职业）",
-        "measure": "制造业城镇非私营单位就业人员年平均工资",
-        "occupation_scope": "行业门类代理，非本职业中位数",
-        "period": "2025 年度工资；发布 2026-05-15；查阅 2026-09-25",
-        "source_refs": [
-          "nbs-wages"
-        ]
-      },
-      {
-        "derivation": "国家统计局 2025 年分行业门类表。",
-        "display_value": "76,055 元/年",
-        "fact_id": "cn-manufacturing-private-wage",
-        "market": "中国大陆全国城镇单位口径（行业门类 制造业，非本职业）",
-        "measure": "制造业城镇私营单位就业人员年平均工资",
-        "occupation_scope": "行业门类代理，非本职业中位数",
-        "period": "2025 年度工资；发布 2026-05-15；查阅 2026-09-25",
-        "source_refs": [
-          "nbs-wages"
-        ]
-      },
-      {
-        "derivation": "国家统计局 2025 年城镇非私营单位分行业门类合计。",
-        "display_value": "129,441 元/年",
-        "fact_id": "cn-national-nonprivate-wage",
-        "market": "中国大陆全国城镇单位口径（全国合计，非本职业）",
-        "measure": "全国城镇非私营单位就业人员年平均工资",
-        "occupation_scope": "全国合计代理，非本职业中位数",
-        "period": "2025 年度工资；发布 2026-05-15；查阅 2026-09-25",
-        "source_refs": [
-          "nbs-wages"
-        ]
-      },
-      {
         "derivation": "缺少可复核的岗位任务效果数据，原编辑估算已撤回。",
         "display_value": "没有经核实的量化估计",
         "fact_id": "fermatmind-ai-impact-estimate",
@@ -11677,6 +10875,78 @@
         "period": "2026-11-09",
         "source_refs": [
           "source-fermatmind-ai-rubric"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "66,810 美元/年",
+        "fact_id": "wave1-b3-wage-p10",
+        "market": "美国",
+        "measure": "年工资第 10 百分位",
+        "occupation_scope": "美国工程师上位汇总组 SOC 17-2199（参考口径）",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "wave1-b3-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "90,970 美元/年",
+        "fact_id": "wave1-b3-wage-p25",
+        "market": "美国",
+        "measure": "年工资第 25 百分位",
+        "occupation_scope": "美国工程师上位汇总组 SOC 17-2199（参考口径）",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "wave1-b3-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "122,930 美元/年",
+        "fact_id": "wave1-b3-wage-p50",
+        "market": "美国",
+        "measure": "年工资中位数",
+        "occupation_scope": "美国工程师上位汇总组 SOC 17-2199（参考口径）",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "wave1-b3-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "158,090 美元/年",
+        "fact_id": "wave1-b3-wage-p75",
+        "market": "美国",
+        "measure": "年工资第 75 百分位",
+        "occupation_scope": "美国工程师上位汇总组 SOC 17-2199（参考口径）",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "wave1-b3-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "189,950 美元/年",
+        "fact_id": "wave1-b3-wage-p90",
+        "market": "美国",
+        "measure": "年工资第 90 百分位",
+        "occupation_scope": "美国工程师上位汇总组 SOC 17-2199（参考口径）",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "wave1-b3-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "表 7 制造业 100,572 元",
+        "fact_id": "wave1-b3-cn-industry",
+        "market": "中国大陆",
+        "measure": "行业就业人员年平均工资",
+        "occupation_scope": "国家统计局行业统计，非该职业",
+        "period": "2025",
+        "source_refs": [
+          "wave1-b3-6"
         ]
       }
     ]
@@ -11696,9 +10966,9 @@
     "metrics": [
       {
         "availability": "available",
-        "fact_ref": "us-wage-median",
+        "fact_ref": "wave1-b3-wage-p50",
         "key": "us_pay",
-        "label": "美国上位组工资中位数"
+        "label": "美国 2025 年 5 月工资中位数"
       },
       {
         "availability": "available",
@@ -11719,10 +10989,10 @@
         "label": "美国上位组预计年均空缺"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "wave1-b3-cn-industry",
         "key": "china_pay",
-        "label": "中国大陆薪资参考"
+        "label": "中国大陆行业工资背景（2025 年）"
       }
     ]
   },
@@ -11730,17 +11000,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "机电一体化工程师做什么？比较整机设计、现场联调与设备维护，查看大陆岗位样本和美国工资统计口径，做一组不用真机的纸面练习。"
+      "text": "机电一体化工程师协同开发机构、传感与控制，把设备动作整理为可复核的联调结果。现场联调可能涉及设备，具体环境和工时须核岗位；这些比例不能直接外推中国。"
     },
     "title": {
       "availability": "available",
-      "text": "机电一体化工程师：工作内容、美国工资与入行 | 费马测试"
+      "text": "机电一体化工程师：工作内容、薪资与入行"
     }
   },
-  "source_content_sha256": "9b537d792b90f9323cccb4020ab9e68fb403d1d3235ad5ef9030b68c2f4aa1aa",
+  "source_content_sha256": "01f1a5d877bda1865d63e9ccc8ee2ce61bd9579be113a2e67dd6a27b1f79f252",
   "subject": {
     "canonical_slug": "mechatronics-engineers",
     "name": "机电一体化工程师",
-    "summary": "机电一体化工程师把机械部件、传感器、执行机构和控制逻辑整合成可测试的系统，交付接口说明、控制方案或验证记录。"
+    "summary": "机电一体化工程师协同开发机构、传感与控制，把设备动作整理为可复核的联调结果。"
   }
 }

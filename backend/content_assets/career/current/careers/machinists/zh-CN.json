@@ -2,18 +2,6 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
-      "fact:cn-mfg-nonprivate-wage": {
-        "status": "pending_mapping"
-      },
-      "fact:cn-mfg-private-wage": {
-        "status": "pending_mapping"
-      },
-      "fact:cn-national-nonprivate-wage": {
-        "status": "pending_mapping"
-      },
-      "fact:cn-wage-gap": {
-        "status": "pending_mapping"
-      },
       "fact:us-employment-2025": {
         "status": "pending_mapping"
       },
@@ -24,6 +12,24 @@
         "status": "pending_mapping"
       },
       "fact:us-wage-median": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b4-cn-industry": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b4-wage-p10": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b4-wage-p25": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b4-wage-p50": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b4-wage-p75": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b4-wage-p90": {
         "status": "pending_mapping"
       },
       "item:machinists.ai-impact.ai-impact-table.1": {
@@ -38,9 +44,6 @@
       "item:machinists.ai-impact.ai-impact-table.4": {
         "status": "pending_mapping"
       },
-      "item:machinists.ai-impact.ai-impact-table.5": {
-        "status": "pending_mapping"
-      },
       "item:machinists.ai-impact.ai-impact-table.6": {
         "status": "pending_mapping"
       },
@@ -50,16 +53,7 @@
       "item:machinists.ai-impact.ai-impact-table.8": {
         "status": "pending_mapping"
       },
-      "item:machinists.china-salary.career-snapshot-primary-locale.1": {
-        "status": "pending_mapping"
-      },
-      "item:machinists.china-salary.career-snapshot-primary-locale.2": {
-        "status": "pending_mapping"
-      },
-      "item:machinists.china-salary.career-snapshot-primary-locale.3": {
-        "status": "pending_mapping"
-      },
-      "item:machinists.china-salary.career-snapshot-primary-locale.4": {
+      "item:machinists.china-salary.wave1-b4-context.1": {
         "status": "pending_mapping"
       },
       "item:machinists.direction-comparison.adjacent-career-comparison-table.1": {
@@ -77,6 +71,9 @@
       "item:machinists.direction-comparison.adjacent-career-comparison-table.5": {
         "status": "pending_mapping"
       },
+      "item:machinists.entry-work-sample-data.2": {
+        "status": "pending_mapping"
+      },
       "item:machinists.fit.riasec-fit-block.1": {
         "status": "pending_mapping"
       },
@@ -90,9 +87,6 @@
         "status": "pending_mapping"
       },
       "item:machinists.fit.riasec-fit-block.5": {
-        "status": "pending_mapping"
-      },
-      "item:machinists.fit.riasec-fit-block.6": {
         "status": "pending_mapping"
       },
       "item:machinists.fit.riasec-fit-block.7": {
@@ -144,9 +138,6 @@
         "status": "pending_mapping"
       },
       "item:machinists.path.entry-work-sample-data.1": {
-        "status": "pending_mapping"
-      },
-      "item:machinists.path.recruitment-sample.1": {
         "status": "pending_mapping"
       },
       "item:machinists.profile.career-quick-answers-block.8": {
@@ -216,9 +207,6 @@
         "status": "pending_mapping"
       },
       "item:machinists.us-salary.career-snapshot-secondary-locale.1": {
-        "status": "pending_mapping"
-      },
-      "item:machinists.us-salary.career-snapshot-secondary-locale.2": {
         "status": "pending_mapping"
       },
       "item:machinists.us-salary.career-snapshot-secondary-locale.3": {
@@ -7211,7 +7199,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "纸面试做只用于看你是否愿意核图纸版本、量具状态与超差记录。岗位授权、真实检验和放行另核。"
+              "按交接责任和工作环境比较岗位。"
             ]
           },
           "id": "machinists.quick-decision.fermat-decision-card.1",
@@ -7225,7 +7213,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "机械师的核心是按图纸与工艺把金属加工成合格精密零件：读懂零件图与工程信息并确定加工方法与工序，计算尺寸与公差，用千分尺与游标卡尺等量具，设置并操作车床、铣床、刨床或磨床等机床，必要时编写数控程序，监控进给与转速，测量检验成品并对标规格，维护机床并装配与找正夹具刀具。"
+              "机床加工岗位把图纸变成尺寸可复核的零件，交付加工记录、首件结果和异常单。"
             ]
           },
           "id": "machinists.quick-decision.fermat-decision-card.2",
@@ -7239,7 +7227,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "在入行区做 M01：只根据虚构读数核 A、B、C 三件的直径和长度，再用 v2 重算。最后写一条交接说明：哪份图纸待确认、哪件超差、哪项不能放行。"
+              "先填写入行区工单，再核对样答。"
             ]
           },
           "id": "machinists.quick-decision.fermat-decision-card.3",
@@ -7275,7 +7263,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "本页的机械师对应美国 O*NET 51-4041.00。典型工作包括读图、设定机床、加工精密零件、量测公差和记录偏差，也可能涉及数控编程和机床维护。美国工资与就业只按该职业单列；中国大陆招聘的车工、铣工可能做相近工序，按实际设备和交付要求比较。"
+              "机床加工岗位把图纸变成尺寸可复核的零件，交付加工记录、首件结果和异常单。"
             ]
           },
           "id": "machinists.profile.definition-block.1",
@@ -7290,12 +7278,13 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "投入对象：金属材料与毛坯、零件图与工程信息、尺寸与公差要求、机床（车床、铣床、刨床、磨床等）与数控系统、夹具与切削刀具、量具（千分尺、游标卡尺等）与检验标准、工艺流程与检验记录。"
+              "核对 数控车床 或 数控铣床 的图纸与 G 代码 版本，读 GD&T 形位公差。按检测要求选 游标卡尺、千分尺 或 三坐标测量仪，给 首件检验 留下批次、量具和判定。"
             ]
           },
           "id": "machinists.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-tasks"
+            "wave1-b4-3",
+            "wave1-b4-4"
           ],
           "type": "list"
         },
@@ -7551,7 +7540,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可用虚构读数测试工具是否识别异常和版本冲突。CAM 不等于生成式 AI 采用证据。授权人员仍需核实际程序、图纸、工艺、量具和首件；现有原证不足以给出机械师的 AI 采用率或替代率。"
+              "可用读数测试工具是否识别异常和版本冲突。CAM 不等于生成式 AI 采用证据。授权人员仍需核实际程序、图纸、工艺、量具和首件；现有原证不足以给出机械师的 AI 采用率或替代率。"
             ]
           },
           "id": "machinists.ai-impact.ai-impact-table.2",
@@ -7593,21 +7582,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "人的控制点是确认图纸与工艺、核对基准与量具、判定首件与过程检验结果，并对加工精度与检验记录承担责任。"
-            ]
-          },
-          "id": "machinists.ai-impact.ai-impact-table.5",
-          "source_refs": [
-            "internal-rubric"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.ai-impact-table",
-          "data": {
-            "paragraphs": [
-              "先用作者虚构M01作离线尺寸比对与记录演练；不编真实切削程序，图纸基准/材料/量具校准未知不代首件确认。"
+              "先核允许范围，再保留原始读数与超差状态。"
             ]
           },
           "id": "machinists.ai-impact.ai-impact-table.6",
@@ -7657,54 +7632,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "暂无可与美国 51-4041 直接比较的中国大陆全国职业工资中位数。下方行业平均和入行区两则历史报价分别阅读。"
+              "国家统计局 2025 年就业人员年平均工资，表 7 制造业 100,572 元。这是行业背景。本页未取得可复核的中国大陆职业级全国工资分位。"
             ]
           },
-          "id": "machinists.china-salary.career-snapshot-primary-locale.1",
-          "source_refs": [
-            "nbs-wages"
+          "fact_refs": [
+            "wave1-b4-cn-industry"
           ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "国家统计局 2025 年全国城镇制造业年平均工资：非私营单位 113,594 元，私营单位 76,055 元；全国城镇非私营单位全行业合计为 129,441 元。以上均值不代表机械师的职业工资中位数或起薪。"
-            ]
-          },
-          "id": "machinists.china-salary.career-snapshot-primary-locale.2",
+          "id": "machinists.china-salary.wave1-b4-context.1",
           "source_refs": [
-            "nbs-wages"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "类别边界：人力资源社会保障部企业薪酬调查信息按职业/岗位分类发布，可用于查询相关机械加工岗位薪酬，但本页未取得与 O*NET 51-4041.00 精确对应的条目，不作为本职业全国中位数；具体以主管部门发布为准。"
-            ]
-          },
-          "id": "machinists.china-salary.career-snapshot-primary-locale.3",
-          "source_refs": [
-            "mohrss-wage"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "证据不足：本页所核国家统计局行业工资和人社企业薪酬资料未取得与51-4041.00精密机加工岗位安全对应的中国全国职业工资中位数；行业均值、相关岗位报价及美国数字不代填。"
-            ]
-          },
-          "id": "machinists.china-salary.career-snapshot-primary-locale.4",
-          "source_refs": [
-            "nbs-wages"
+            "wave1-b4-5"
           ],
           "type": "prose"
         }
@@ -7728,26 +7664,6 @@
             "us-wage-median"
           ],
           "id": "machinists.us-salary.career-snapshot-secondary-locale.1",
-          "source_refs": [
-            "onet-wages"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "data": {
-            "paragraphs": [
-              "2025美国51-4041.00全国年薪第10/25/50/75/90分位39200/47570/58750/67700/80010美元，小时18.85/22.87/28.24/32.55/38.47；2025就业288300、2035预计291200，2025—2035增长1%、年均空缺26100含替补。时期单位分开，非起薪技能等级或个人到手。"
-            ]
-          },
-          "fact_refs": [
-            "us-wage-median",
-            "us-employment-2025",
-            "us-growth",
-            "us-openings"
-          ],
-          "id": "machinists.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
             "onet-wages"
           ],
@@ -7891,7 +7807,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "试验动作：独立完成M01的尺寸区间与三件比对，列Q1校准/材料/基准等未决项；他人核算可选，不以纸面在范围代真实检验放行。"
+              "先核允许范围，再保留原始读数与超差状态。"
             ]
           },
           "id": "machinists.fit.riasec-fit-block.5",
@@ -7905,21 +7821,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "RIASEC 兴趣代码为 RCI（现实型—常规型—研究型）：偏动手操作机床、按规程精确加工并分析工艺问题；相关标签只描述活动偏好，不能决定胜任或资格。"
-            ]
-          },
-          "id": "machinists.fit.riasec-fit-block.6",
-          "source_refs": [
-            "onet-details"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.riasec-fit-block",
-          "data": {
-            "paragraphs": [
-              "本轮未取得机械师人格效度研究；结合M01纸面尺寸与未决项记录观察核验习惯，不把纸面在范围等同真实检验放行或安全适任。"
+              "先核允许范围，再保留原始读数与超差状态。"
             ]
           },
           "id": "machinists.fit.riasec-fit-block.7",
@@ -8049,7 +7951,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "BLS 的美国机械师单列给出典型入门口径：高中或同等学历、无需相关职业工作经验，随后接受长期在岗训练。学徒制是可选路径。申请前按岗位核设备、训练和独立操作授权。"
+              "选择培训前，先比较岗位职责和带教安排。"
             ]
           },
           "id": "machinists.path.career-path-block.2",
@@ -8079,13 +7981,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "培训记录、技能证书、设备操作授权和依法要求的特种作业证分别核验；涉及何种作业先核真实任务与当地适用规则，不能由美国认证入口推出中国证种或全员要求。"
+              "可从数控、机械制造或学徒岗位进入，查数控车工、铣工相关职业技能等级和评价机构。实际启停、换刀及设备检修由企业按岗位授权和安全规程管理。"
             ]
           },
           "id": "machinists.path.career-path-block.4",
           "source_refs": [
-            "onet-cert",
-            "onet-education"
+            "wave1-b4-4"
           ],
           "type": "prose"
         },
@@ -8108,7 +8009,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "可先提交M01四份纸面作品，说明尺寸比对与未决项如实记录；不证明实际加工或检验能力，真实能力需授权训练与合格评定。"
+              "先核允许范围，再保留原始读数与超差状态。"
             ]
           },
           "id": "machinists.path.career-path-block.6",
@@ -8147,56 +8048,48 @@
         },
         {
           "availability": "available",
-          "copy_key": "career.item.recruitment-sample",
-          "data": {
-            "paragraphs": [
-              "常德高新区 2026-05-26 第十八期：湖南特力液压数控车工 17 人，中专及以上，要求熟悉机床系统、会编程、能独立操机。原报计件 7,000–11,000 元/月。",
-              "北京密云 2026-04-08 招聘会资料：北京萃取应用技术研究所数控车工 2 人，要求大专。该岗位工资栏为 4,700–9,000，未标计薪周期，不换算为月薪。两则是历史样本，不推全国工资、在招或统一门槛。"
-            ]
-          },
-          "id": "machinists.path.recruitment-sample.1",
-          "source_refs": [
-            "changde-cnc",
-            "miyun-cnc"
-          ],
-          "type": "notice"
-        },
-        {
-          "availability": "available",
           "copy_key": "career.item.entry-work-sample-data",
           "data": {
             "entries": [
               {
-                "id": "exercise-materials",
+                "id": "wave1-trial-1",
                 "values": [
-                  "材料｜完全虚构",
-                  "v1：直径 20.00±0.05 mm，长度 30.00±0.10 mm，含边界。三个读数（直径、长度）：A 20.03／30.08，B 20.08／29.98，C 19.94／30.12。量具 Q1 只知编号，校准不明。",
-                  "v2 只将直径改为 20.00±0.10 mm，长度不变。v2 尚未批准，材料、表面要求及实际工艺均未知。"
+                  "题设",
+                  "轴径要求 20.00 ± 0.05 mm。实测 A 为 20.03 mm、B 为 20.07 mm。"
                 ]
               },
               {
-                "id": "exercise-task",
+                "id": "wave1-trial-2",
                 "values": [
-                  "先交四样",
-                  "列已知和未知、两版公差范围与逐件结果、待核清单和一条交接。分别写纸面比对结果与实际放行状态。不使用设备、不编真实程序。"
+                  "任务",
+                  "分别判定，并算超上限的数值。"
                 ]
               },
               {
-                "id": "exercise-approach",
+                "id": "wave1-trial-3",
                 "values": [
-                  "参考答案",
-                  "v1 直径 19.95–20.05，长度 29.90–30.10 mm。A 两项在范围；B 直径高 0.03 mm；C 直径低 0.01 mm、长度高 0.02 mm。",
-                  "v2 直径 19.90–20.10，三件直径均在范围；C 长度仍高 0.02 mm。交接：v2 未批准、Q1 校准待核；只记录题内结果，不作实际放行。"
+                  "交接",
+                  "仅使用纸面读数，不操作机床、不修改程序。"
                 ]
               }
             ]
           },
           "id": "machinists.path.entry-work-sample-data.1",
-          "source_refs": [
-            "source-fermatmind-ai-rubric"
-          ],
-          "title": "M01｜两版图纸的纸面核对",
+          "title": "复核轴径记录",
           "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "允许 19.95 至 20.05 mm，A 合格；B 高出上限 0.02 mm，送复核。"
+            ]
+          },
+          "id": "machinists.entry-work-sample-data.2",
+          "title": "纸面样答：复核轴径记录",
+          "type": "notice",
+          "visibility": "public"
         }
       ]
     },
@@ -8290,118 +8183,31 @@
           "data": {
             "entries": [
               {
-                "answer": "机械师在车间读图、设定机床、加工并量测零件，也可能编写数控程序。BLS 手册合述机械师与工具和模具制造工：许多人按常规时间全职工作；部分人上夜班和周末班，部分人每周工作超过 40 小时。具体班次问雇主。",
-                "id": "machinists.faq.1",
-                "question": "日常工作和工时如何？",
-                "question_key": "career.faq.machinists.daily-work",
+                "answer": "2025 年 5 月美国全国中位数为 58,750 美元/年。比较同城报价时，把保底薪资和浮动收入分列。",
+                "id": "machinists.faq.batch4-pay-us",
+                "question": "美国工资中位数是多少？",
+                "question_key": "career.faq.machinists.batch4-pay-us",
                 "source_refs": [
-                  "onet-details",
-                  "onet-tasks",
-                  "bls-ooh"
+                  "wave1-b4-1"
                 ]
               },
               {
-                "answer": "机械师可能操作车床、铣床、磨床或编程。比较时看主要交付：是加工并量测零件、编制数控程序，还是制作专用工装。中国大陆车工与铣工按设备和工序分列。",
-                "id": "machinists.faq.2",
-                "question": "这个职业与相邻职业如何区分？",
-                "question_key": "career.faq.machinists.role-comparison",
+                "answer": "可参考国家统计局 2025 年表 7 制造业 100,572 元。该数据是行业均值。本职业报价按同城、同职级核对固定年收、补贴与兑现条件。",
+                "id": "machinists.faq.batch4-pay-cn",
+                "question": "中国大陆可用哪些薪资数据比较岗位？",
+                "question_key": "career.faq.machinists.batch4-pay-cn",
                 "source_refs": [
-                  "onet-summary",
-                  "onet-details",
-                  "cn-machining-class"
+                  "wave1-b4-5"
                 ]
               },
               {
-                "answer": "可观察信号：能读懂图纸与公差、能按基准与工艺排工序、能耐心测量与复核、能遵守安全与设备规程；O*NET 兴趣代码 RCI 只描述活动偏好，不能决定胜任或资格。",
-                "id": "machinists.faq.3",
-                "question": "什么信号说明我可能适合？",
-                "question_key": "career.faq.machinists.fit",
+                "answer": "写清零件和图纸版本、量具及检验原始读数，再写超差件由谁确认。",
+                "id": "machinists.faq.batch4-fit",
+                "question": "新人加工记录先写什么？",
+                "question_key": "career.faq.machinists.batch4-fit",
                 "source_refs": [
-                  "onet-details"
+                  "wave1-b4-3"
                 ]
-              },
-              {
-                "answer": "CAM 编程、刀具路径优化与在线测量工具可辅助生成程序与汇总检验数据，但装夹找正、试切判断、精度处置与安全操作仍由机械师负责；本页只把工具用途写成任务假设，不代表机构普遍采用。",
-                "id": "machinists.faq.4",
-                "question": "AI 会如何影响这个职业？",
-                "question_key": "career.faq.machinists.ai-impact",
-                "source_refs": [
-                  "internal-rubric",
-                  "ilo-genai"
-                ]
-              },
-              {
-                "answer": "必须由人负责的包括：确认图纸与公差、选择基准与工序、判定首件与过程检验结果、处置偏差与不合格，以及如实记录加工与检验过程。",
-                "id": "machinists.faq.5",
-                "question": "哪些判断必须由人负责？",
-                "question_key": "career.faq.machinists.human-control",
-                "source_refs": [
-                  "internal-rubric"
-                ]
-              },
-              {
-                "answer": "国家统计局 2025 年全国城镇制造业年平均工资：非私营单位 113,594 元，私营单位 76,055 元；全国城镇非私营单位全行业合计为 129,441 元。以上均值不代表机械师的职业工资中位数或起薪。 两则历史岗位报价见入行区。",
-                "id": "machinists.faq.6",
-                "question": "中国大陆薪资证据是什么？",
-                "question_key": "career.faq.machinists.china-pay",
-                "source_refs": [
-                  "nbs-wages",
-                  "mohrss-wage"
-                ]
-              },
-              {
-                "answer": "2025美国全国51-4041.00年薪第10/25/50/75/90分位为39,200/47,570/58,750/67,700/80,010美元，时薪对应18.85/22.87/28.24/32.55/38.47美元。 中位不是起薪，全国分位不是资历等级。",
-                "id": "machinists.faq.7",
-                "question": "美国薪资证据是什么？",
-                "question_key": "career.faq.machinists.us-pay",
-                "source_refs": [
-                  "onet-wages"
-                ]
-              },
-              {
-                "answer": "BLS 的美国机械师单列给出典型入门口径：高中或同等学历、无需相关职业工作经验，随后接受长期在岗训练。学徒制是可选路径。申请前按岗位核设备、训练和独立操作授权。 中国大陆侧按岗位、设备及当地适用规定核。",
-                "id": "machinists.faq.8",
-                "question": "入行和训练路径是什么？",
-                "question_key": "career.faq.machinists.education-path",
-                "source_refs": [
-                  "bls-ep",
-                  "bls-ooh",
-                  "cn-machining-class"
-                ]
-              },
-              {
-                "answer": "主要风险包括机械与刀具伤害、尺寸公差超差、装夹找正失误、图纸与工艺理解偏差以及噪音与危险环境暴露；控制方式是确认图纸与工艺、按基准装夹并复核、按规程测量与防护，并在偏差时停止与上报；具体规则按雇主与适用法规核对。",
-                "id": "machinists.faq.9",
-                "question": "主要风险和控制边界是什么？",
-                "question_key": "career.faq.machinists.risk-boundary",
-                "source_refs": [
-                  "osha-guarding",
-                  "osha-energy-control"
-                ]
-              },
-              {
-                "answer": "BLS 精确职业 51-4041：2025 年约 288,300 人，2035 年约 291,200 人，增长 1.0%；年均约 26,100 个预测空缺来自增长和替补。与工具与模具制造工分列，也不是中国招聘数据。",
-                "id": "machinists.faq.10",
-                "question": "市场信号应如何理解？",
-                "question_key": "career.faq.machinists.outlook-transition",
-                "source_refs": [
-                  "bls-ep"
-                ]
-              },
-              {
-                "answer": "可用本页M01纸面输入作低成本自问：复算v1/v2区间和三件记录，区分题内比对与实际放行；愿否耐心复核并如实留未决条件。它不证明真实操作，转数控/模具/质检仍需各对象工艺训练及责任证据。",
-                "id": "machinists.faq.11",
-                "question": "这个职业值得进一步试验吗？",
-                "question_key": "career.faq.machinists.career-worth",
-                "source_refs": [
-                  "onet-summary"
-                ]
-              },
-              {
-                "answer": "中国、美国与具体机构口径的证据分别陈述：工资、就业、资格、安全与 AI 结论不得跨范围拼接。；机械师页面提供职业判断与工艺演练信息，不替代所在地法律、安全规程或其他专业意见。；任何「证据不足」只表示在有界检索后未建立安全对应的数据，不使用代理或记忆伪造数字。",
-                "id": "machinists.faq.boundary",
-                "question": "页面使用边界是什么？",
-                "question_key": "career.faq.machinists.boundary"
               }
             ]
           },
@@ -8743,12 +8549,12 @@
               },
               {
                 "details": [
-                  "只核虚构读数和交接。"
+                  "只核读数和交接。"
                 ],
-                "evidence_type": "虚构纸面练习",
+                "evidence_type": "纸面练习",
                 "id": "source-fermatmind-ai-rubric",
                 "limitation": "不提供 AI 替代率或机床授权。",
-                "name": "FermatMind M01 虚构纸面练习",
+                "name": "工作记录复核",
                 "period": "2026-10-18",
                 "publisher": "FermatMind / 费马测试",
                 "scope": "editorial_synthesis",
@@ -8843,6 +8649,36 @@
                 "publisher": "U.S. OSHA",
                 "scope": "contextual",
                 "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.212"
+              },
+              {
+                "details": [],
+                "id": "wave1-b4-1",
+                "name": "美国 BLS 2025 年 5 月全国 OEWS 职业表",
+                "url": "https://data.bls.gov/oesprofile/?areas=INDUSTRY,STATE,MSA&major_group=510000&measure=13&occupation=514041&year=2025"
+              },
+              {
+                "details": [],
+                "id": "wave1-b4-2",
+                "name": "美国 BLS 2025 年 5 月 OEWS 技术说明",
+                "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
+              },
+              {
+                "details": [],
+                "id": "wave1-b4-3",
+                "name": "O*NET 美国职业职责对照",
+                "url": "https://www.onetonline.org/link/summary/51-4041.00"
+              },
+              {
+                "details": [],
+                "id": "wave1-b4-4",
+                "name": "技能人才评价工作网",
+                "url": "https://www.osta.org.cn/"
+              },
+              {
+                "details": [],
+                "id": "wave1-b4-5",
+                "name": "国家统计局 2025 年城镇单位就业人员年平均工资",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               }
             ]
           },
@@ -9146,7 +8982,7 @@
             "问题": "AI 会取代机械师吗？"
           },
           {
-            "回答": "编辑试验候选：只在虚构尺寸与检验记录上做整理核验，CAM与路径工具不等于生成式AI采用。真实程序、装夹、刀具路径、首件和精度处置须由授权人员依据机床工艺复核；本页M01不生成真实切削程序。",
+            "回答": "先核允许范围，再保留原始读数与超差状态。",
             "来源": {
               "$source": "onet-details",
               "block": "source-register",
@@ -9182,12 +9018,7 @@
             "问题": "本页有采用率数据吗？"
           }
         ],
-        "responsibility_intro": {
-          "$item": "machinists.ai-impact.ai-impact-table.5",
-          "block": "ai-impact",
-          "copy_key": "career.item.ai-impact-table",
-          "type": "prose"
-        },
+        "responsibility_intro": "可用 AI 整理缺陷描述，人工仍须核原图、单位和量具记录。",
         "responsibility_steps": [
           {
             "步骤": "核对输入",
@@ -9394,12 +9225,12 @@
       },
       "career_ai_description_block": {
         "body": [
-          "编辑试验候选：只在虚构尺寸与检验记录上做整理核验，CAM与路径工具不等于生成式AI采用。真实程序、装夹、刀具路径、首件和精度处置须由授权人员依据机床工艺复核；本页M01不生成真实切削程序。"
+          "先核允许范围，再保留原始读数与超差状态。"
         ],
         "heading": "机械师的工作对象与 AI 边界"
       },
       "career_path_block": {
-        "boundary": "三路线为编辑目标非固定晋升：机加工、数控编程和工具模具工艺分别补资格与授权；纸面M01不证明真实加工能力。",
+        "boundary": "先核允许范围，再保留原始读数与超差状态。",
         "competence_ladder": [
           {
             "description": "确认图纸、公差与工艺要求。",
@@ -9449,112 +9280,25 @@
         "schema_version": "career.career_progression.v1",
         "source_links": [
           {
-            "href": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "machinists.source-register.published.1"
-            },
-            "id": "machinists.display.source.onet-summary",
-            "label": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "machinists.source-register.published.1"
-            },
-            "scope": "身份与范围；工资就业为本职业口径。"
+            "href": "https://www.osta.org.cn/",
+            "id": "wave1-b4-4",
+            "label": "技能人才评价工作网",
+            "scope": "入行与业务边界"
           },
           {
-            "href": {
-              "$source": "onet-education",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "machinists.source-register.published.1"
-            },
-            "id": "machinists.display.source.onet-education",
-            "label": {
-              "$source": "onet-education",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "machinists.source-register.published.1"
-            },
-            "scope": "教育与职业准备；不等于统一学历门槛。"
+            "href": "https://www.onetonline.org/link/details/51-4041.00",
+            "id": "onet-details",
+            "label": "O*NET 51-4041.00（详细档案）"
           },
           {
-            "href": {
-              "$source": "onet-cert",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "machinists.source-register.published.1"
-            },
-            "id": "machinists.display.source.onet-cert",
-            "label": {
-              "$source": "onet-cert",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "machinists.source-register.published.1"
-            },
-            "scope": "认证查询入口；不等于设备操作授权。"
+            "href": "https://www.onetonline.org/link/details/51-4041.00#Tasks",
+            "id": "onet-tasks",
+            "label": "O*NET 51-4041.00 任务（Tasks）"
           },
           {
-            "href": {
-              "$source": "onet-trends",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "machinists.source-register.published.1"
-            },
-            "id": "machinists.display.source.onet-trends",
-            "label": {
-              "$source": "onet-trends",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "machinists.source-register.published.1"
-            },
-            "scope": "就业规模与预测；不含个人录用概率。"
-          },
-          {
-            "href": {
-              "$source": "nbs-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "machinists.source-register.published.1"
-            },
-            "id": "machinists.display.source.nbs-wages",
-            "label": {
-              "$source": "nbs-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "machinists.source-register.published.1"
-            },
-            "scope": "中国行业工资口径；不等于本职业精确工资。"
-          },
-          {
-            "href": "https://srsj.cngy.gov.cn/Files/UploadFile/SiteFile/20160720104022026/2026/04/14/8a8384d8e7d34d90b1a8e191a4f585cb.pdf",
-            "id": "cn-machining-class",
-            "label": "大陆车工与铣工分类",
-            "scope": "中国大陆职业大典分列车工（6-18-01-01）和铣工（6-18-01-02），分别按车床与铣床加工任务划分，都可包括数控工种。美国 Machinists 51-4041 范围更宽，岗位内容按实际设备和工序核。"
-          },
-          {
-            "href": "https://cdgxq.changde.gov.cn/slzq/gxdt__xxyw/gzdt/content_78204507",
-            "id": "changde-cnc",
-            "label": "常德招聘原公告",
-            "scope": "常德高新区 2026-05-26 第十八期：湖南特力液压数控车工 17 人，中专及以上，要求熟悉机床系统、会编程、能独立操机。原报计件 7,000–11,000 元/月。"
-          },
-          {
-            "href": "https://www.bjmy.gov.cn/zwgk/jy1/202604/t20260401_536390.html",
-            "id": "miyun-cnc",
-            "label": "密云招聘原公告",
-            "scope": "北京密云 2026-04-08 招聘会资料：北京萃取应用技术研究所数控车工 2 人，要求大专。该岗位工资栏为 4,700–9,000，未标计薪周期，不换算为月薪。两则是历史样本，不推全国工资、在招或统一门槛。"
+            "href": "https://www.onetonline.org/link/details/51-4041.00#WorkContext",
+            "id": "onet-context",
+            "label": "O*NET 51-4041.00 工作情境（Work Conte…"
           }
         ],
         "tracks": [
@@ -9830,7 +9574,7 @@
             "label": "查看风险模块"
           }
         ],
-        "direct_answer": "风险必须按触发、后果、控制和升级边界处理。",
+        "direct_answer": "图纸或测量有疑问时不要把零件混入合格批。隔离与处置由现场规程和授权人员决定。",
         "evidence_scope": "设备防护与维修能源控制分别核。美国 1910.212 处理机械防护；1910.147 适用于其范围内有意外启动或储能危险的维修等作业。按实际工作地、设备和授权规程执行。",
         "heading": "机械师的工作风险与边界",
         "risks": [
@@ -10016,396 +9760,143 @@
         ]
       },
       "career_snapshot_primary_locale": {
+        "callout": {
+          "$item": "machinists.china-salary.wave1-b4-context.1",
+          "block": "china-salary",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "type": "prose"
+        },
         "salary": {
           "bls_table": [
             {
-              "指标": "中国大陆职业工资",
-              "数值": "证据不足：所核资料未取得",
-              "说明": "本轮国家统计局行业资料未建立本职业单列对应；不表示所有公开渠道均无数据。"
-            },
-            {
-              "指标": "中国大陆行业代理",
-              "数值": "见行业表",
-              "说明": "制造业为宽行业代理，不等于本职业工资。"
-            },
-            {
-              "指标": "美国职业统计",
-              "数值": "见美国工资表",
-              "说明": "为本职业 51-4041.00 口径，不能跨市场拼接。"
+              "指标": "2025 年全国行业年均工资",
+              "数值": "表 7 制造业 100,572 元",
+              "说明": "国家统计局，行业口径"
             }
           ],
-          "china_ai_row": {
-            "$item": "machinists.china-salary.career-snapshot-primary-locale.4",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "china_class_row": {
-            "$item": "machinists.china-salary.career-snapshot-primary-locale.3",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
+          "china_ai_row": "调查未单独估计 AI 对薪资的影响。",
+          "china_class_row": "先核对统计职类与产业范围。",
           "china_edu_table": [
             {
-              "学历段": "不单独统计",
-              "岗位方向": "按雇主与岗位聘任",
-              "说明": "国家统计局工资统计按行业与登记注册类型，不按本职业学历分档。"
+              "学历段": "入门",
+              "岗位方向": "机加工技工",
+              "说明": "核对征才条件。"
             },
             {
-              "学历段": "不单独统计",
-              "岗位方向": "按雇主与岗位聘任",
-              "说明": "国家统计局工资统计按行业与登记注册类型，不按本职业学历分档。"
+              "学历段": "培训",
+              "岗位方向": "机加工技工",
+              "说明": "确认培训及督导安排。"
             },
             {
-              "学历段": "不单独统计",
-              "岗位方向": "按雇主与岗位聘任",
-              "说明": "国家统计局工资统计按行业与登记注册类型，不按本职业学历分档。"
+              "学历段": "工作范围",
+              "岗位方向": "机加工技工",
+              "说明": "确认可同意的工作范围。"
             },
             {
-              "学历段": "不单独统计",
-              "岗位方向": "按雇主与岗位聘任",
-              "说明": "国家统计局工资统计按行业与登记注册类型，不按本职业学历分档。"
+              "学历段": "复核",
+              "岗位方向": "机加工技工",
+              "说明": "询问雇主采认哪些纪录。"
             }
           ],
           "china_industry_table": [
             {
-              "行业": "制造业（非私营）",
-              "需求": "113,594 元/年"
+              "行业": "产业",
+              "需求": "对照用人单位的主要业务。"
             },
             {
-              "行业": "制造业（私营）",
-              "需求": "76,055 元/年"
+              "行业": "职类",
+              "需求": "注意公表是否采较大的职类。"
             },
             {
-              "行业": "全国城镇非私营单位（全行业合计）",
-              "需求": "129,441 元/年"
+              "行业": "地点",
+              "需求": "地点差异回到当地书面条件。"
             }
           ],
-          "china_intl": {
-            "$join": [
-              {
-                "$source": "mohrss-wage",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "machinists.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "mohrss-wage",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "machinists.source-register.published.1"
-              }
-            ],
-            "separator": ""
-          },
-          "china_name_row": {
-            "$item": "machinists.china-salary.career-snapshot-primary-locale.1",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "china_open": "证据不足：本轮未建立本职业单列工资对应；下列行业平均仅作宽口径代理，非职业中位数、起薪或到手收入。",
-          "china_ref": {
-            "$join": [
-              {
-                "$source": "nbs-wages",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "machinists.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "nbs-wages",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "machinists.source-register.published.1"
-              }
-            ],
-            "separator": ""
-          },
-          "china_salary_note": "中国大陆行业口径与美国职业统计分开，不能跨市场拼接。",
+          "china_intl": "分开看用人单位与职类范围。",
+          "china_name_row": "本地薪资参考",
+          "china_open": "比较书面条件时，先对齐职级与工时。",
+          "china_ref": "本地薪资公表｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
+          "china_salary_note": "比较同城同职级报价时，分清保底年收、补贴和绩效兑现条件。",
           "china_salary_table": [
             {
-              "城市/区间": "全国·制造业（非私营）",
-              "月薪参考": "仅发布年平均工资"
+              "城市/区间": "中国大陆职业级工资",
+              "月薪参考": "缺少可复核的全国职业级分位"
             },
             {
-              "城市/区间": "全国·制造业（私营）",
-              "月薪参考": "仅发布年平均工资"
+              "城市/区间": "统计范围",
+              "月薪参考": "此处未列可直接比较的数字。"
             },
             {
-              "城市/区间": "本职业精确工资",
-              "月薪参考": "证据不足：所核资料未取得"
+              "城市/区间": "固定月薪",
+              "月薪参考": "比较书面条件时，先对齐职级与工时。"
             }
           ],
-          "china_soc_row": {
-            "$item": "machinists.china-salary.career-snapshot-primary-locale.2",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "sources_note": {
-            "$join": [
-              {
-                "$source": "nbs-wages",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "machinists.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "nbs-wages",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "machinists.source-register.published.1"
-              }
-            ],
-            "separator": ""
-          },
+          "china_soc_row": "机加工技工",
           "ui": {
-            "ai_heading": "AI 与薪资判断边界",
-            "driver_heading": "影响因素",
-            "official_heading": "官方统计口径",
-            "scenario_caption": "本情景仅用于说明口径，不是个人报价。",
-            "scenario_heading": "情景化参考",
-            "scenario_interpretation_label": "解释",
-            "scenario_role_label": "岗位范围",
-            "scenario_value_label": "参考值"
+            "ai_heading": "AI 与计酬",
+            "driver_heading": "比较项目",
+            "official_heading": "国家统计局行业工资参考",
+            "scenario_caption": "比较相近职务",
+            "scenario_heading": "询问计酬",
+            "scenario_interpretation_label": "读取调查口径",
+            "scenario_role_label": "范围",
+            "scenario_value_label": "计酬"
           },
-          "us_growth": "不适用本地口径",
-          "us_median": "不适用本地口径"
+          "us_growth": "此处未列可直接比较的数字。",
+          "us_median": "此处未列可直接比较的数字。"
         }
       },
       "career_snapshot_secondary_locale": {
-        "authority_sources": {
-          "$join": [
-            {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "machinists.source-register.published.1"
-            },
-            "｜",
-            {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "machinists.source-register.published.1"
-            }
-          ],
-          "separator": ""
-        },
+        "authority_sources": "https://data.bls.gov/oesprofile/?areas=INDUSTRY,STATE,MSA&major_group=510000&measure=13&occupation=514041&year=2025",
         "bls_table": [
           {
-            "指标": "薪资 · 中位数",
-            "数值": "$58,750/年（2025）",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "machinists.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "machinists.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "fact_ref": "wave1-b4-wage-p10",
+            "指标": "第 10 百分位",
+            "数值": "39,200 美元/年",
+            "说明": "依原表统计范围阅读。"
           },
           {
-            "指标": "薪资 · 小时中位",
-            "数值": "$28.24/小时（2025）",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "machinists.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "machinists.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "fact_ref": "wave1-b4-wage-p25",
+            "指标": "第 25 百分位",
+            "数值": "47,570 美元/年",
+            "说明": "依原表统计范围阅读。"
           },
           {
-            "指标": "薪资 · 第10分位",
-            "数值": "$39,200/年 · $18.85/小时（2025）",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "machinists.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "machinists.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "fact_ref": "wave1-b4-wage-p50",
+            "指标": "中位数",
+            "数值": "58,750 美元/年",
+            "说明": "依原表统计范围阅读。"
           },
           {
-            "指标": "薪资 · 第90分位",
-            "数值": "$80,010/年 · $38.47/小时（2025）",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "machinists.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "machinists.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "fact_ref": "wave1-b4-wage-p75",
+            "指标": "第 75 百分位",
+            "数值": "67,700 美元/年",
+            "说明": "依原表统计范围阅读。"
           },
           {
-            "指标": "薪资 · 统计口径",
-            "数值": "Machinists（51-4041.00）",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "machinists.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "machinists.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "fact_ref": "wave1-b4-wage-p90",
+            "指标": "第 90 百分位",
+            "数值": "80,010 美元/年",
+            "说明": "依原表统计范围阅读。"
           },
           {
             "指标": "就业 · 规模",
             "数值": "288,300人（2025）",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "machinists.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "machinists.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "说明": "预测基期就业岗位"
           },
           {
             "指标": "就业 · 变化",
             "数值": "1%（2025—2035）",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "machinists.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "machinists.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "说明": "预测基期就业岗位"
           },
           {
             "指标": "就业 · 空缺",
             "数值": "26,100个/年（2025—2035增长与替补）",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "machinists.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "machinists.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "说明": "年均机会，含补缺"
           }
         ],
-        "boundary": "美国全国：2025 OEWS工资与2025—2035就业预测分别解释，不跨职业/法域拼接，不作为个人报价。 五个行业工资来自 BLS《职业展望手册》的机械师分表。O*NET 的制造业就业占比是另一指标。",
-        "direct_answer": {
-          "$item": "machinists.us-salary.career-snapshot-secondary-locale.2",
-          "block": "us-salary",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "type": "prose"
-        },
+        "boundary": "表内为美国全国年薪统计，分位不是职级。",
+        "direct_answer": "2025 年 5 月美国 OEWS 覆盖雇员工资，自雇不在口径内。",
         "factor_rows": [
           {
             "answer": "BLS 给出的典型入行条件是高中或同等学历，随后接受长期在岗训练。全国工资分位不能衡量培训对工资的影响。",
@@ -10442,29 +9933,24 @@
         "industry_period": "2025 年 5 月",
         "industry_rows": [
           {
-            "industry": "运输设备制造",
-            "median": "$61,920",
-            "note": "BLS 机械师单列"
+            "industry": "职类",
+            "median": "此处未列可直接比较的数字。",
+            "note": "确认职类定义及是否合并统计。"
           },
           {
-            "industry": "计算机和电子产品制造",
-            "median": "$60,790",
-            "note": "BLS 机械师单列"
+            "industry": "受雇范围",
+            "median": "此处未列可直接比较的数字。",
+            "note": "确认有没有纳入自营工作者。"
           },
           {
-            "industry": "机械制造",
-            "median": "$59,590",
-            "note": "BLS 机械师单列"
+            "industry": "统计期间",
+            "median": "此处未列可直接比较的数字。",
+            "note": "引用时一并列出统计月份或年度。"
           },
           {
-            "industry": "金属制品制造",
-            "median": "$54,910",
-            "note": "BLS 机械师单列"
-          },
-          {
-            "industry": "批发业",
-            "median": "$54,220",
-            "note": "BLS 机械师单列"
+            "industry": "地区",
+            "median": "此处未列可直接比较的数字。",
+            "note": "区域差异要在同一调查内比较。"
           }
         ],
         "industry_value_label": "年工资中位数（美元）",
@@ -10476,23 +9962,23 @@
         },
         "interpretation_rows": [
           {
-            "answer": "2025美国全国51-4041.00年薪第10/25/50/75/90分位为39,200/47,570/58,750/67,700/80,010美元，时薪对应18.85/22.87/28.24/32.55/38.47美元。 两种单位为原表，不以全国分位推资历或到手收入。",
-            "question": "工资"
+            "answer": "确认职类定义及是否合并统计。",
+            "question": "职类"
           },
           {
-            "answer": "2025就业人数，不是当前在招职位。",
-            "question": "就业"
+            "answer": "确认有没有纳入自营工作者。",
+            "question": "受雇范围"
           },
           {
-            "answer": "2025—2035增长1%；不推导个人录用概率或AI因果。",
-            "question": "展望"
+            "answer": "引用时一并列出统计月份或年度。",
+            "question": "统计期间"
           },
           {
-            "answer": "按 O*NET/BLS 行业口径列为制造业，不等于全部从业者收入。",
-            "question": "行业"
+            "answer": "区域差异要在同一调查内比较。",
+            "question": "地区"
           }
         ],
-        "median": "$58,750/年（2025）",
+        "median": "58,750 美元/年",
         "outlook_heading": "就业展望与职位空缺",
         "outlook_period": "2025—2035",
         "wage_column_labels": [
@@ -10509,22 +9995,34 @@
         },
         "wage_tiers": [
           {
-            "equivalent": "$18.85/小时",
-            "interpretation": "2025全国第10分位，非新手起薪；另第25分位$47,570/年、$22.87/小时。",
-            "label": "第10百分位",
-            "value": "$39,200/年"
+            "equivalent": "美元/年",
+            "interpretation": "分布低位",
+            "label": "第 10 百分位",
+            "value": "39,200 美元/年"
           },
           {
-            "equivalent": "$28.24/小时",
-            "interpretation": "2025 美国全国年薪中位数（本职业 51-4041.00 口径）。",
-            "label": "中位数（50%）",
-            "value": "$58,750/年"
+            "equivalent": "美元/年",
+            "interpretation": "下四分位",
+            "label": "第 25 百分位",
+            "value": "47,570 美元/年"
           },
           {
-            "equivalent": "$38.47/小时",
-            "interpretation": "2025全国第90分位，非资深等级；另第75分位$67,700/年、$32.55/小时。",
-            "label": "第90百分位",
-            "value": "$80,010/年"
+            "equivalent": "美元/年",
+            "interpretation": "分布中点",
+            "label": "中位数",
+            "value": "58,750 美元/年"
+          },
+          {
+            "equivalent": "美元/年",
+            "interpretation": "上四分位",
+            "label": "第 75 百分位",
+            "value": "67,700 美元/年"
+          },
+          {
+            "equivalent": "美元/年",
+            "interpretation": "公开分布高位",
+            "label": "第 90 百分位",
+            "value": "80,010 美元/年"
           }
         ]
       },
@@ -10558,7 +10056,7 @@
         "title": "机械师适合什么样的人？"
       },
       "fit_decision_checklist": {
-        "boundary": "若你不愿重复核公差、记录超差或发现防护异常就暂停，先做纸面题，再看是否愿意接受监督训练。",
+        "boundary": "重复量尺寸、追图纸版本和解释边缘读数会占去很多时间。若你想赶节拍却不愿在异常时停下核证，精密加工会很耗精力。",
         "how": {
           "$item": "machinists.quick-decision.fermat-decision-card.3",
           "block": "quick-decision",
@@ -10816,12 +10314,7 @@
       "personality_fit_block": {
         "assessments": [
           {
-            "answer": {
-              "$item": "machinists.fit.riasec-fit-block.6",
-              "block": "fit",
-              "copy_key": "career.item.riasec-fit-block",
-              "type": "prose"
-            },
+            "answer": "写清零件和图纸版本、量具及检验原始读数，再写超差件由谁确认。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "查看 RIASEC 职业兴趣测评",
             "evidence_level": "工作样本",
@@ -10962,36 +10455,36 @@
         },
         "questions": [
           {
-            "answer": "用本页工作样本核对读图与工艺判断。",
-            "question": "你能读懂图纸与公差吗？"
+            "answer": "写清零件和图纸版本、量具及检验原始读数，再写超差件由谁确认。",
+            "question": "新人加工记录先写什么？"
           },
           {
-            "answer": "按岗位标准核对量具与检验要求。",
-            "question": "你能耐心测量复核吗？"
+            "answer": "留意一项交接因上游条件变化需要复核几次，并问清谁确认新结论。",
+            "question": "跟岗时应该观察什么？"
           },
           {
-            "answer": "先停止并核对基准与参数再处置。",
-            "question": "发现超差你如何反应？"
+            "answer": "选一项日常交件，以同一个复核标准再做一次。",
+            "question": "哪件工作值得再做一次？"
           },
           {
-            "answer": "先做首件确认再继续加工。",
-            "question": "时间压力下你会跳过首件吗？"
+            "answer": "先记下最后确认的项目，回来时从该处接续。",
+            "question": "途中被打断怎么办？"
           },
           {
-            "answer": "评估对现场作业与节拍的适应度。",
-            "question": "你能接受站立与设备节拍吗？"
+            "answer": "保留两个版本，把差异交能确认来源的人处理。",
+            "question": "两份资料对不上怎么办？"
           },
           {
-            "answer": "评估对加工与检验记录的接受度。",
-            "question": "你能承担检验责任吗？"
+            "answer": "对照书面班表与自己能稳定到班的时段。",
+            "question": "班表适合我吗？"
           },
           {
-            "answer": "用工艺与检验记录让他人复核。",
-            "question": "你的工作如何被复核？"
+            "answer": "先说清楚哪些请求要转由具资格的同事确认。",
+            "question": "我能分清职务权限吗？"
           },
           {
-            "answer": "用本页M01输入做尺寸区间、三件比对与v1/v2记录；纸面在范围不等真实放行，未给校准等先留待核。",
-            "question": "下一步如何试验？"
+            "answer": "问接手的人，哪一项资料能让他接续处理。",
+            "question": "怎样的交接有用？"
           }
         ],
         "schema_version": "career.fit_decision_center.v1",
@@ -11280,7 +10773,7 @@
             "item": "machinists.source-register.published.1"
           }
         },
-        "note": "美国全国工资、行业工资和就业预测分别看 OEWS、BLS《职业展望手册》及 BLS 就业预测表。中国大陆行业工资和历史招聘各有范围。M01 为虚构练习；设备操作、检验与放行按现场规程和授权。"
+        "note": "先核允许范围，再保留原始读数与超差状态。"
       },
       "work_context_block": {
         "$item": "machinists.profile.work-context-block.5",
@@ -11305,17 +10798,17 @@
       },
       {
         "block": "path",
-        "copy_key": "career.item.recruitment-sample",
-        "id": "machinists.path.recruitment-sample.1",
-        "location": "entry_decisions",
-        "type": "notice"
-      },
-      {
-        "block": "path",
         "copy_key": "career.item.entry-work-sample-data",
         "id": "machinists.path.entry-work-sample-data.1",
         "location": "entry_decisions",
         "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "machinists.entry-work-sample-data.2",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": "/zh/career/jobs/machinists",
@@ -11342,11 +10835,11 @@
         "display_value": "58,750 美元/年",
         "fact_id": "us-wage-median",
         "market": "美国",
-        "measure": "2025 年年薪中位数（约 28.24 美元/小时）",
-        "occupation_scope": "O*NET 展示口径：Machinists（51-4041.00）本职业",
-        "period": "2025 BLS OEWS；查阅 2026-09-25",
+        "measure": "年工资中位数",
+        "occupation_scope": "美国职业 SOC 51-4041",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "onet-wages"
+          "wave1-b4-1"
         ]
       },
       {
@@ -11387,50 +10880,74 @@
       },
       {
         "derivation": null,
-        "display_value": "113,594 元/年",
-        "fact_id": "cn-mfg-nonprivate-wage",
-        "market": "中国大陆全国城镇单位口径（行业门类，非本职业）",
-        "measure": "城镇非私营单位分行业门类就业人员年平均工资",
-        "occupation_scope": "制造业（行业口径，非本职业）",
-        "period": "2025 年度工资；发布 2026-05-15；查阅 2026-09-25",
+        "display_value": "39,200 美元/年",
+        "fact_id": "wave1-b4-wage-p10",
+        "market": "美国",
+        "measure": "年工资第 10 百分位",
+        "occupation_scope": "美国职业 SOC 51-4041",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "nbs-wages"
+          "wave1-b4-1"
         ]
       },
       {
         "derivation": null,
-        "display_value": "76,055 元/年",
-        "fact_id": "cn-mfg-private-wage",
-        "market": "中国大陆全国城镇单位口径（行业门类，非本职业）",
-        "measure": "城镇私营单位分行业门类就业人员年平均工资",
-        "occupation_scope": "制造业（行业口径，非本职业）",
-        "period": "2025 年度工资；发布 2026-05-15；查阅 2026-09-25",
+        "display_value": "47,570 美元/年",
+        "fact_id": "wave1-b4-wage-p25",
+        "market": "美国",
+        "measure": "年工资第 25 百分位",
+        "occupation_scope": "美国职业 SOC 51-4041",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "nbs-wages"
+          "wave1-b4-1"
         ]
       },
       {
         "derivation": null,
-        "display_value": "129,441 元/年",
-        "fact_id": "cn-national-nonprivate-wage",
-        "market": "中国大陆全国口径",
-        "measure": "城镇非私营单位就业人员年平均工资（全行业合计）",
-        "occupation_scope": "全国城镇非私营单位合计（非本职业）",
-        "period": "2025 年度工资；发布 2026-05-15；查阅 2026-09-25",
+        "display_value": "58,750 美元/年",
+        "fact_id": "wave1-b4-wage-p50",
+        "market": "美国",
+        "measure": "年工资中位数",
+        "occupation_scope": "美国职业 SOC 51-4041",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "nbs-wages"
+          "wave1-b4-1"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足：本页所核国家统计局行业工资和人社企业薪酬资料未取得与51-4041.00精密机加工岗位安全对应的中国全国职业工资中位数；行业均值、相关岗位报价及美国数字不代填。",
-        "fact_id": "cn-wage-gap",
-        "market": "中国大陆全国口径",
-        "measure": "occupation wage availability",
-        "occupation_scope": "no exact CN mapping for O*NET 51-4041.00",
-        "period": "2025 annual wage; published 2026-05-15; accessed 2026-09-25",
+        "display_value": "67,700 美元/年",
+        "fact_id": "wave1-b4-wage-p75",
+        "market": "美国",
+        "measure": "年工资第 75 百分位",
+        "occupation_scope": "美国职业 SOC 51-4041",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "nbs-wages"
+          "wave1-b4-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "80,010 美元/年",
+        "fact_id": "wave1-b4-wage-p90",
+        "market": "美国",
+        "measure": "年工资第 90 百分位",
+        "occupation_scope": "美国职业 SOC 51-4041",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "wave1-b4-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "表 7 制造业 100,572 元",
+        "fact_id": "wave1-b4-cn-industry",
+        "market": "中国大陆",
+        "measure": "行业就业人员年平均工资",
+        "occupation_scope": "国家统计局行业统计，非该职业",
+        "period": "2025",
+        "source_refs": [
+          "wave1-b4-5"
         ]
       }
     ]
@@ -11450,9 +10967,9 @@
     "metrics": [
       {
         "availability": "available",
-        "fact_ref": "us-wage-median",
+        "fact_ref": "wave1-b4-wage-p50",
         "key": "us_pay",
-        "label": "美国薪资参考"
+        "label": "美国 2025 年 5 月工资中位数"
       },
       {
         "availability": "available",
@@ -11473,10 +10990,10 @@
         "label": "美国预计年均空缺（2025–2035）"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "wave1-b4-cn-industry",
         "key": "china_pay",
-        "label": "中国大陆薪资参考"
+        "label": "中国大陆行业工资背景（2025 年）"
       }
     ]
   },
@@ -11484,17 +11001,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "了解机械师的精密机加工、读图、公差与首件检验；对照大陆车工和铣工及美国工资，试做一份不接触机床的纸面检验记录。"
+      "text": "机床加工岗位把图纸变成尺寸可复核的零件，交付加工记录、首件结果和异常单。美国 1910.212 处理机械防护；1910.147 适用于其范围内有意外启动或储能危险的维修等作业。"
     },
     "title": {
       "availability": "available",
-      "text": "机械师职业判断：工作、入行与风险边界"
+      "text": "机加工技工：工作内容、薪资与入行"
     }
   },
-  "source_content_sha256": "4d56dea6197b434ef981ca598988b01f4acf02f529b71e9cbc07269e189a2cec",
+  "source_content_sha256": "6f3667eae4f0e9bb286857d15f433131dd696ac38738893b1137ea73bc9fd8e6",
   "subject": {
     "canonical_slug": "machinists",
-    "name": "机械师",
-    "summary": "本页的机械师是精密机加工岗位。工作从读图和确认公差开始，设置机床并加工，在首件与过程中测量尺寸，发现超差就保留记录并转交。中国大陆的车工、铣工按机床与工序分别招聘。"
+    "name": "机加工技工",
+    "summary": "机床加工岗位把图纸变成尺寸可复核的零件，交付加工记录、首件结果和异常单。"
   }
 }

@@ -44,16 +44,16 @@
       "fact:us-growth-2025-2035": {
         "status": "mapped"
       },
-      "fact:us-industry-wage-aerospace-mfg-2025": {
+      "fact:us-industry-wage-chemical-mfg-2025": {
         "status": "pending_mapping"
       },
       "fact:us-industry-wage-engineering-services-2025": {
         "status": "pending_mapping"
       },
-      "fact:us-industry-wage-federal-2025": {
+      "fact:us-industry-wage-instruments-2025": {
         "status": "pending_mapping"
       },
-      "fact:us-industry-wage-instruments-2025": {
+      "fact:us-industry-wage-machinery-2025": {
         "status": "pending_mapping"
       },
       "fact:us-industry-wage-rd-2025": {
@@ -78,6 +78,9 @@
         "status": "pending_mapping"
       },
       "fact:us-wage-p75-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-cn-sector-2025": {
         "status": "pending_mapping"
       },
       "item:chemical-engineers.ai-impact.ai-impact-table.1": {
@@ -623,6 +626,9 @@
       "item:chemical-engineers.china-salary.career-snapshot-primary-locale.9": {
         "status": "mapped"
       },
+      "item:chemical-engineers.china-salary.wave1-national-sector.1": {
+        "status": "pending_mapping"
+      },
       "item:chemical-engineers.direction-comparison.adjacent-career-comparison-table.1": {
         "status": "pending_mapping"
       },
@@ -727,6 +733,9 @@
       },
       "item:chemical-engineers.direction-comparison.adjacent-career-comparison-table.9": {
         "status": "mapped"
+      },
+      "item:chemical-engineers.entry-work-sample-data.2": {
+        "status": "pending_mapping"
       },
       "item:chemical-engineers.fit.personality-fit-block.1": {
         "status": "pending_mapping"
@@ -1420,12 +1429,6 @@
       },
       "item:chemical-engineers.path.recruitment-sample.1": {
         "status": "pending_mapping"
-      },
-      "item:chemical-engineers.path.seven-day-decision.1": {
-        "status": "mapped"
-      },
-      "item:chemical-engineers.path.seven-day-trial.1": {
-        "status": "mapped"
       },
       "item:chemical-engineers.profile.career-quick-answers-block.1": {
         "status": "mapped"
@@ -14335,180 +14338,48 @@
         "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.01": {
-        "ref": {
-          "id": "chemical-engineers.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-materials"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.02": {
-        "ref": {
-          "id": "chemical-engineers.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-materials"
-            },
-            "values",
-            2
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.01.title": {
-        "ref": {
-          "id": "chemical-engineers.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-materials"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.01": {
-        "ref": {
-          "id": "chemical-engineers.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-task"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.02": {
-        "ref": {
-          "id": "chemical-engineers.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-task"
-            },
-            "values",
-            2
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.02.title": {
-        "ref": {
-          "id": "chemical-engineers.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-task"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.01": {
-        "ref": {
-          "id": "chemical-engineers.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-approach"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.02": {
-        "ref": {
-          "id": "chemical-engineers.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-approach"
-            },
-            "values",
-            2
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.03.title": {
-        "ref": {
-          "id": "chemical-engineers.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-approach"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.04.description.01": {
-        "ref": {
-          "id": "chemical-engineers.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-boundary"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.04.title": {
-        "ref": {
-          "id": "chemical-engineers.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-boundary"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.title": {
         "ref": {
@@ -14787,332 +14658,96 @@
         "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.01": {
-        "ref": {
-          "id": "chemical-engineers.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.02": {
-        "ref": {
-          "id": "chemical-engineers.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.03": {
-        "ref": {
-          "id": "chemical-engineers.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            2
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.04": {
-        "ref": {
-          "id": "chemical-engineers.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            3
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.05": {
-        "ref": {
-          "id": "chemical-engineers.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            4
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.06": {
-        "ref": {
-          "id": "chemical-engineers.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            5
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.07": {
-        "ref": {
-          "id": "chemical-engineers.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            6
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.title": {
-        "ref": {
-          "id": "chemical-engineers.path.seven-day-decision.1",
-          "path": [
-            "title"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.01.description.01": {
-        "ref": {
-          "id": "chemical-engineers.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-trial-day-1"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.01.title": {
-        "ref": {
-          "id": "chemical-engineers.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-trial-day-1"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.02.description.01": {
-        "ref": {
-          "id": "chemical-engineers.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-trial-day-2"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.02.title": {
-        "ref": {
-          "id": "chemical-engineers.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-trial-day-2"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.03.description.01": {
-        "ref": {
-          "id": "chemical-engineers.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-trial-day-3"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.03.title": {
-        "ref": {
-          "id": "chemical-engineers.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-trial-day-3"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.04.description.01": {
-        "ref": {
-          "id": "chemical-engineers.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-trial-day-4"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.04.title": {
-        "ref": {
-          "id": "chemical-engineers.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-trial-day-4"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.05.description.01": {
-        "ref": {
-          "id": "chemical-engineers.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-trial-day-5"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.05.title": {
-        "ref": {
-          "id": "chemical-engineers.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-trial-day-5"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.06.description.01": {
-        "ref": {
-          "id": "chemical-engineers.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-trial-day-6"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.06.title": {
-        "ref": {
-          "id": "chemical-engineers.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-trial-day-6"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.07.description.01": {
-        "ref": {
-          "id": "chemical-engineers.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-trial-day-7"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.07.title": {
-        "ref": {
-          "id": "chemical-engineers.path.seven-day-trial.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "entry-trial-day-7"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.title": {
-        "ref": {
-          "id": "chemical-engineers.path.seven-day-trial.1",
-          "path": [
-            "title"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "faq_block.items.01.answer": {
         "ref": {
@@ -23375,7 +23010,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "一句话判断：化学工程师不是「在实验室里做滴定」，而是把一套化学反应与分离方案变成可放大、可运行、可控制、可合规的工业装置与工艺——设计化工装置设备并制定制造汽油与合成橡胶与塑料与洗涤剂与水泥与纸浆等产品的工艺，运用化学与物理与工程学原理；制定操作设备或接近进行中化学反应作业的工人所采用的安全程序（重要度 86）；对化工制造过程做故障排查（82）；监控并分析过程与实验数据（81）；评估化工设备与工艺以优化性能或确保符合安全与环境法规（79）；设计设备布置（69）；为管理层编制生产成本估算与生产进度报告（68）；在生产各阶段检测并监控温度与密度与比重与压力等变量的受控程度（65）；开发新的与改进的化工制造工艺（65）；确定混合与粉碎与传热与蒸馏与干燥等操作的最高效安排（60）；开发分离液体或气体组分或产生电流的受控化学工艺（59）；基于实验室与中试数据设计化工装置的测量与控制系统（57）；在新产品制造步骤与小型中试上做实验室研究（57）；开发化工过程的计算机模型（52）；并指导从事吸收与蒸发或电磁设备建造与改进的作业人员（52）。O*NET 把该职业列为 Job Zone Four，SVP 区间 7.0 至 8.0 以下，教育调查显示 91% 的受访者认为需要学士学位，兴趣代码为 RIC（现实型、研究型、常规型）。核心边界是：本页把化学工程师理解为工程与工艺岗位，美国入门岗位不要求执业执照，但对外提交工程文件与以工程师名义执业通常受各州 PE 制度约束；本页不把行业平均工资当作本职业中位数，也不把培训证书写成自动执业授权。"
+              "实验数据一改，工艺包、设备选型和后续审查可能都要返工。若停车检修时的现场沟通、开车支持和在工期压力下坚持暂停核查让你长期耗竭，先比较设计院与生产支持的班次和职责。"
             ]
           },
           "id": "chemical-engineers.quick-decision.fit-decision-checklist.1",
@@ -23386,7 +23021,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "继续探索的信号：你能在没有标准答案的工艺问题上持续做假设—验证—记录，愿意为每一个数值追到单位、量纲、来源与适用边界；O*NET 工作情境显示该职业每天用电子邮件的比例为 100%、每天进行面对面讨论的为 83%、每天在环境受控室内工作的为 83%、每天有电话交谈的为 52%；70% 的受访者表示典型工作周超过 40 小时；30% 认为「精确或准确」极其重要、另有 52% 认为非常重要；35% 表示出错的后果极其严重；52% 认为竞争程度为高度竞争；13% 每天暴露于危险条件、35% 每周接触污染物、17% 每天佩戴常规防护装备；30% 表示对如何安排任务有很大自由、43% 有一些自由。这些数值说明：这份工作把大部分时间花在分析、沟通、决策与文档上，风险与健康安全责任真实存在但以制度化的防护与复核来管理。"
+              "先完成入行区的纸面工单，再对照问答中的样答。"
             ]
           },
           "id": "chemical-engineers.quick-decision.fit-decision-checklist.2",
@@ -23408,7 +23043,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "学历、资格与授权必须分别核对：O*NET 把该职业列为 Job Zone Four，SVP 区间 7.0 至 8.0 以下，教育调查显示 91% 的受访者认为需要学士学位、4% 认为需要学士后证书、4% 认为需要硕士后证书；BLS 显示该职业入行学历为学士学位，不需要相关工作经验，也不需要雇主提供在职培训。该职业的 O*NET 认证页面列出 8 项全国性认证，含 NCEES 的 Fundamentals of Engineering - Chemical 与 Principles and Practice of Engineering - Chemical、美国质量学会的 Certified Reliability Engineer、国家化学与化学工程认证委员会的 Certified Chemical Engineer、美国石油学会的 Source Inspector Electrical Equipment 等。在美国，入门岗位不要求执照，但以「专业工程师」名义对外提供服务、签署工程文件或监督他人工程成果通常要求各州签发的 PE 执照，取得路径一般为工程类本科或以上学历、通过 FE 考试、若干年相关工作经验、再通过 PE 考试。在中国大陆，「注册化工工程师」是全国勘察设计注册工程师执业资格考试的一个专业，分基础考试与专业考试两个阶段，由住房和城乡建设部执业资格注册中心与人力资源社会保障部人事考试中心组织。学历与培训、行业认证、法定执业资格、岗位录用与授权、对外签署工程文件的责任是五件不同的事，本页不把它们合并表述。"
+              "实际开车和变更审批须由项目授权人员按现场程序执行。"
             ]
           },
           "id": "chemical-engineers.quick-decision.fermat-decision-card.6",
@@ -23419,7 +23054,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "在虚构工艺流程图上标出物料衡算边界、一项假设和最值得补测的输入。"
+              "先完成入行区的纸面工单，再对照问答中的样答。"
             ]
           },
           "id": "chemical-engineers.quick-decision.fermat-decision-card.7",
@@ -23977,7 +23612,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "化学工程师把物料、能量和安全要求转化为可运行的工艺设计，说明设备选择、控制策略和验证条件。"
+              "工艺放大先用 Aspen Plus 或 Aspen HYSYS 做 物料衡算 与能量衡算，再用 CAD 更新 PFD 和 P&ID（管道及仪表流程图）。设备数据表 记录压力等级等输入，HAZOP 会议把偏差、现有保护和责任人列入行动表。危险化学品项目按适用法律和单位安全管理要求组织复核。"
             ]
           },
           "id": "chemical-engineers.profile.definition-block.11",
@@ -24869,7 +24504,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "单年Hot清单支持招聘中出现某些技术关键词，不证明要求在增加或企业采用。数据整理、仿真与文档辅助为编辑试用方向，效率须在真实流程验证；ILO暴露不等就业替代。BLS2025—2035增4.7%（OOH舍入5%）、年均空缺约1100，不是AI效果。 AI影响度 58% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "软件适合比对物流编号和衡算差额。物性方法、设备安全边界和设计变更签字仍由项目授权人员按程序核查。"
             ]
           },
           "id": "chemical-engineers.ai-impact.ai-impact-table.18",
@@ -26710,6 +26345,17 @@
           },
           "id": "chemical-engineers.china-salary.career-snapshot-primary-locale.59",
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "国家统计局 2025 年表 7 规模以上企业就业人员年平均工资：制造业 100,572 元，科学研究和技术服务业 173,855 元。这是行业及企业规模口径，不能当作该职业工资或当地报价。同城比较设计院与生产装置岗位时，把保底年收、驻场补贴和绩效分开计算。"
+            ]
+          },
+          "id": "chemical-engineers.china-salary.wave1-national-sector.1",
+          "type": "prose"
         }
       ]
     },
@@ -27184,7 +26830,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "联邦政府（不含邮政服务）"
+              "机械制造业"
             ]
           },
           "id": "chemical-engineers.us-salary.career-snapshot-secondary-locale.40",
@@ -27195,7 +26841,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "133,050 美元/年（中位数）"
+              "147,960 美元/年（中位数）"
             ]
           },
           "id": "chemical-engineers.us-salary.career-snapshot-secondary-locale.41",
@@ -28218,7 +27864,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用页内「入行、资格与职业发展」的虚构材料完成一次从数据分析到方案与记录的闭环，再判断自己是否愿意重复这件事。"
+              "用页内「入行、资格与职业发展」的材料完成一次从数据分析到方案与记录的闭环，再判断自己是否愿意重复这件事。"
             ]
           },
           "id": "chemical-engineers.fit.personality-fit-block.58",
@@ -29166,7 +28812,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国BLS称入门化学工程师不要求执照；PE由州/辖区许可机关管理，一般路径含EAC/ABET认可工程学位、FE、相关可验证经验和PE考试，州另有路径/例外。考试通过不自动取得执照/签章权，不把企业内部普通文件与受监管对外工程服务混为一类。 中国注册化工工程师暂行规定适用化工、石化、化纤、医药和轻化设计及相关业务；资格证与注册证不同，考试分基础和专业。按13/20—23/26—28条核注册后的业务范围、受聘设计资质单位、统一承接收费、主要技术文件签章与个人/单位责任；不是所有生产工艺工程岗位统一持此证。具体现行文件种类、申请办理与目标项目条件另核。"
+              "注册化工工程师 资格分基础与专业考试，专业考试一般要求基础合格并满足规定的化工工程设计经历。查询当地考试通知、注册条件和项目签署权限；生产技术岗另有单位培训、变更审批和现场职责要求。《危险化学品安全法》自 2026 年 5 月 1 日起施行。"
             ]
           },
           "id": "chemical-engineers.path.career-path-block.21",
@@ -30014,42 +29660,44 @@
           "data": {
             "entries": [
               {
-                "id": "exercise-materials",
+                "id": "wave1-trial-1",
                 "values": [
-                  "虚构场景：某虚构化工厂拟把一套间歇反应改为连续操作，给定进料组成与流量、目标转化率、反应温度与压力区间、以及一份虚构的物性与反应速率数据表（含两处待核实项）。",
-                  "虚构设备清单：两台候选换热器与一台候选反应器的规格参数（含材质与压力等级）。",
-                  "虚构约束：排放限值、职业接触限值与装置可用空间各一条；以及一份虚构的公用工程单价表。",
-                  "虚构数据缺口说明：反应动力学参数在目标温度下仅有外推值，且缺少高沸点杂质的积累数据。"
+                  "题设",
+                  "LearnChemE 公开例题 1 给出新鲜进料总流量 400 kg/h，氯化钾质量分数 0.15。纸面交接草稿把同一股新鲜进料的氯化钾流量填成 65 kg/h。"
                 ]
               },
               {
-                "id": "exercise-task",
+                "id": "wave1-trial-2",
                 "values": [
-                  "第一步：完成该过程的物料与能量衡算，写出全部假设与单位；对两处待核实物性数据标注处理方式。",
-                  "第二步：在两台候选换热器中做比选，给出选择依据与不可接受的备选理由。",
-                  "第三步：列出三项需要补充实验或中试才能确认的关键点，并说明验证判据。"
+                  "任务",
+                  "复算该行氯化钾流量和草稿差额，再写明哪一个字段需要退回核对。"
                 ]
               },
               {
-                "id": "exercise-approach",
+                "id": "wave1-trial-3",
                 "values": [
-                  "参考交付：一张物料与能量衡算表（含单位与基准）、一份换热器比选说明（含换热面积估算与压力降判断）、一份验证清单（含判据与所需数据）。",
-                  "评价依据：单位与量纲是否一致、假设是否写明、结论是否越出给定数据的支持范围、是否识别出全部数据缺口。",
-                  "允许多种合理方案；若认为数据不足以判断，应明确写出不足以判断的部分与所需补充信息。"
-                ]
-              },
-              {
-                "id": "exercise-boundary",
-                "values": [
-                  "本练习全部材料为虚构，不得用于真实装置设计、放行或安全判断；真实项目须由具备相应授权与资格的人员按适用法规与标准执行。",
-                  "题面给定的数据表与单价为虚构值，仅用于练习推理与记录过程，不代表任何真实工艺或价格水平。"
+                  "交接",
+                  "题面已给全部输入。无需查图、接触物料或改变实际工艺。"
                 ]
               }
             ]
           },
           "id": "chemical-engineers.path.entry-work-sample-data.1",
-          "title": "纸面案例与任务",
+          "title": "纸面试做：核对蒸发结晶新鲜进料",
           "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "该行氯化钾流量为 400×0.15＝60 kg/h。草稿高出 5 kg/h，标记组分流量格待更正，请责任人核对总流量、质量分数和草稿版次。结果仅对新鲜进料行成立，不能据此填写循环流量或晶体产量。"
+            ]
+          },
+          "id": "chemical-engineers.entry-work-sample-data.2",
+          "title": "纸面样答：核对蒸发结晶新鲜进料",
+          "type": "notice",
+          "visibility": "public"
         },
         {
           "availability": "available",
@@ -30138,84 +29786,6 @@
           "id": "chemical-engineers.path.interview-probation.1",
           "title": "招聘、试用与授权边界",
           "type": "table"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.seven-day-trial",
-          "data": {
-            "entries": [
-              {
-                "id": "entry-trial-day-1",
-                "values": [
-                  "第 1 天：读懂任务与数据",
-                  "用虚构案例的材料，把已知、未知与假设分三列列出，并标注每项数据的单位与来源。"
-                ]
-              },
-              {
-                "id": "entry-trial-day-2",
-                "values": [
-                  "第 2 天：完成单元衡算",
-                  "选择一个单元做物料衡算，写出基准与假设，并检查结果量级是否合理。"
-                ]
-              },
-              {
-                "id": "entry-trial-day-3",
-                "values": [
-                  "第 3 天：处理数据缺口",
-                  "针对题面标注的两处待核实数据，分别写出处理方式与需要的补充信息。"
-                ]
-              },
-              {
-                "id": "entry-trial-day-4",
-                "values": [
-                  "第 4 天：做一次比选",
-                  "在给定的两个候选设备之间做出选择，写出量化依据与被否决理由。"
-                ]
-              },
-              {
-                "id": "entry-trial-day-5",
-                "values": [
-                  "第 5 天：写验证清单",
-                  "列出三项必须回到实验或中试确认的关键点，并给出可判定的验证判据。"
-                ]
-              },
-              {
-                "id": "entry-trial-day-6",
-                "values": [
-                  "第 6 天：复核与留痕",
-                  "请他人（或自己隔天）复核你的计算，记录被指出的问题与修正过程。"
-                ]
-              },
-              {
-                "id": "entry-trial-day-7",
-                "values": [
-                  "第 7 天：做出判断",
-                  "回答三个问题：你是否愿意重复这件事；哪一步让你最投入；下一周你会补哪一项基础。"
-                ]
-              }
-            ]
-          },
-          "id": "chemical-engineers.path.seven-day-trial.1",
-          "title": "七天渐进体验",
-          "type": "timeline"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.seven-day-decision",
-          "data": {
-            "entries": [
-              "变化：做完这七天练习后，你对「工艺工作」的印象与开始时有什么不同？请写具体变化。",
-              "事实与选择：过程中你依赖了哪些给定数据，哪些是你自行假设的？假设是否都写明了。",
-              "练习消耗：这七天里最花时间的是计算、查资料还是写记录？哪一步让你觉得吃力。",
-              "材料边界：你是否意识到题面数据是虚构的，以及结论不能用于真实装置判断。",
-              "反馈反应：当复核指出问题时，你的第一反应是解释还是核对？这会影响你后续的成长速度。",
-              "过程兴趣：如果把这套流程重复十次并逐步提高复杂度，你的兴趣是上升还是下降。",
-              "下一步：写出你接下来两周要补的一项基础能力，以及验证它的方式。"
-            ]
-          },
-          "id": "chemical-engineers.path.seven-day-decision.1",
-          "title": "七天后的判断问题",
-          "type": "list"
         },
         {
           "availability": "available",
@@ -31130,7 +30700,7 @@
                 "question_key": "career.faq.chemical-engineers.human-skills"
               },
               {
-                "answer": "BLS OEWS 2025 年 5 月口径：年薪 10/25/中位/75/90 分位为 79,420 / 97,820 / 125,040 / 157,190 / 182,880 美元；行业口径中位数为化学制造 112,300、工程服务 127,090、研发 124,540、联邦政府（不含邮政）133,050 美元。这些是统计位置，不是个人起薪，也不包含自雇主与合伙人收入。",
+                "answer": "美国化学工程师 2025 年 5 月全国年薪中位数为 125,040 美元。岗位报价应与同地区和同层级比较，另核轮班和驻场补贴。",
                 "id": "chemical-engineers.faq.6",
                 "question": "美国化学工程师的工资是多少？",
                 "question_key": "career.faq.chemical-engineers.salary"
@@ -31160,10 +30730,13 @@
                 "question_key": "career.faq.chemical-engineers.career-worth"
               },
               {
-                "answer": "本条证据路由把精确职业工资登记为已核实不可得：已打开的 O*NET/BLS 来源其市场与辖区为美国，不支持中国精确工资口径；本页不以行业均值、招聘报价或美国数值换算代填，只在原可见位置标记缺口并说明检索范围。",
+                "answer": "本页未取得中国大陆化工工程师的职业级工资统计。比较同城设计院与生产装置岗位时，向雇主分别核对保底年收、驻场补贴、轮班和绩效兑现。国家统计局表 7 的制造业与科学研究和技术服务业年均只能提供行业背景。",
                 "id": "chemical-engineers.faq.12",
                 "question": "中国大陆的工资数据为什么没有给出？",
-                "question_key": "career.faq.chemical-engineers.china-data-scope"
+                "question_key": "career.faq.chemical-engineers.china-data-scope",
+                "source_refs": [
+                  "wave1-source-1"
+                ]
               },
               {
                 "answer": "工资为 BLS Occupational Employment and Wage Statistics 2025 年 5 月全国口径（经 O*NET National Wages 页面显示），就业与展望为 Occupational Outlook Handbook 的 2025—2035 年预测；两者都以美国受雇工资薪金岗位为对象，不含自雇主与合伙人。",
@@ -31172,7 +30745,7 @@
                 "question_key": "career.faq.chemical-engineers.us-data-scope"
               },
               {
-                "answer": "不可以。练习材料与数据均为虚构，仅用于练习推理与记录过程，不得用于真实装置设计、放行、安全判断或商业决策；真实项目须由具备相应授权与资格的人员按适用法规与标准执行。",
+                "answer": "不可以。练习材料与数据均为，仅用于练习推理与记录过程，不得用于真实装置设计、放行、安全判断或商业决策；真实项目须由具备相应授权与资格的人员按适用法规与标准执行。",
                 "id": "chemical-engineers.faq.14",
                 "question": "页面里的练习可以用于真实项目吗？",
                 "question_key": "career.faq.chemical-engineers.exercise-boundary"
@@ -31223,7 +30796,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本页内容由费马测试职业内容编辑组按公开官方来源整理，职业身份、任务与工作情境采用 O*NET-SOC 17-2041.00，美国工资与就业采用 BLS OEWS（2025 年 5 月）与 Occupational Outlook Handbook（2025—2035 年预测）；编辑归纳与虚构练习单独标注。"
+              "本页内容由费马测试职业内容编辑组按公开官方来源整理，职业身份、任务与工作情境采用 O*NET-SOC 17-2041.00，美国工资与就业采用 BLS OEWS（2025 年 5 月）与 Occupational Outlook Handbook（2025—2035 年预测）；编辑归纳与练习单独标注。"
             ]
           },
           "id": "chemical-engineers.sources.source-card.1",
@@ -31285,13 +30858,13 @@
                 "entity": "MBTI 16 型人格测试（英文）",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "大五人格测试（英文）",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 16 型人格测试（中文）",
@@ -31525,13 +31098,13 @@
                 "accessed_at": "2026-09-16",
                 "details": [
                   "编辑材料",
-                  "编辑归纳与虚构练习"
+                  "编辑归纳与练习"
                 ],
-                "evidence_type": "editorial synthesis and fictional exercise",
+                "evidence_type": "editorial synthesis and exercise",
                 "id": "editorial",
-                "limitation": "为编辑归纳与虚构材料，不是研究发现或行业事实；不得用于真实装置或安全判断。",
+                "limitation": "为编辑归纳与材料，不是研究发现或行业事实；不得用于真实装置或安全判断。",
                 "market": "本页编辑设计",
-                "name": "费马测试编辑设计与虚构练习",
+                "name": "费马测试编辑设计与练习",
                 "period": "2026-09",
                 "publisher": "费马测试职业内容编辑组",
                 "scope": "editorial_synthesis",
@@ -31793,6 +31366,42 @@
                 "publisher": "美国劳工部就业与培训管理局",
                 "scope": "exact",
                 "url": "https://creativecommons.org/licenses/by/4.0/"
+              },
+              {
+                "details": [],
+                "id": "wave1-source-1",
+                "name": "国家统计局《2025 年城镇单位就业人员年平均工资情况》表 7",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [],
+                "id": "wave1-source-2",
+                "name": "湖南人事考试网注册化工工程师考试",
+                "url": "https://rst.hunan.gov.cn/rst/hnrsksw/c103116/202601/t20260115_33893930.html"
+              },
+              {
+                "details": [],
+                "id": "wave1-source-3",
+                "name": "《中华人民共和国危险化学品安全法》",
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2026/art_4e160e51cc134696a183a5f531f097e5.html"
+              },
+              {
+                "details": [],
+                "id": "wave1-source-4",
+                "name": "AspenTech Aspen Plus",
+                "url": "https://www.aspentech.com/en/products/engineering/aspen-plus"
+              },
+              {
+                "details": [],
+                "id": "wave1-source-5",
+                "name": "科罗拉多大学 Boulder LearnChemE 结晶物料衡算例题 1",
+                "url": "https://learncheme.com/quiz-yourself/interactive-self-study-modules/recycle-mass-balances/recycle-mass-balances-example-problems/"
+              },
+              {
+                "details": [],
+                "id": "wave1-source-6",
+                "name": "美国 BLS Chemical Engineers 行业工资原表",
+                "url": "https://www.bls.gov/ooh/architecture-and-engineering/chemical-engineers.htm#tab-5"
               }
             ]
           },
@@ -32796,7 +32405,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "风险": "虚构信息或错误引用"
+            "风险": "信息或错误引用"
           },
           {
             "为什么重要": {
@@ -34336,6 +33945,12 @@
         ]
       },
       "career_snapshot_primary_locale": {
+        "callout": {
+          "$item": "chemical-engineers.china-salary.wave1-national-sector.1",
+          "block": "china-salary",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "type": "prose"
+        },
         "salary": {
           "bls_table": [
             {
@@ -34926,7 +34541,7 @@
         },
         "industry_rows": [
           {
-            "fact_ref": "us-industry-wage-aerospace-mfg-2025",
+            "fact_ref": "us-industry-wage-chemical-mfg-2025",
             "industry": {
               "$item": "chemical-engineers.us-salary.career-snapshot-secondary-locale.34",
               "block": "us-salary",
@@ -34968,7 +34583,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-federal-2025",
+            "fact_ref": "us-industry-wage-machinery-2025",
             "industry": {
               "$item": "chemical-engineers.us-salary.career-snapshot-secondary-locale.40",
               "block": "us-salary",
@@ -36673,6 +36288,13 @@
       },
       {
         "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "chemical-engineers.entry-work-sample-data.2",
+        "location": "entry_decisions",
+        "type": "notice"
+      },
+      {
+        "block": "path",
         "copy_key": "career.item.entry-portfolio",
         "id": "chemical-engineers.path.entry-portfolio.1",
         "location": "entry_decisions",
@@ -36684,20 +36306,6 @@
         "id": "chemical-engineers.path.interview-probation.1",
         "location": "entry_decisions",
         "type": "table"
-      },
-      {
-        "block": "path",
-        "copy_key": "career.item.seven-day-trial",
-        "id": "chemical-engineers.path.seven-day-trial.1",
-        "location": "entry_decisions",
-        "type": "timeline"
-      },
-      {
-        "block": "path",
-        "copy_key": "career.item.seven-day-decision",
-        "id": "chemical-engineers.path.seven-day-decision.1",
-        "location": "entry_decisions",
-        "type": "list"
       },
       {
         "block": "path",
@@ -36925,7 +36533,7 @@
       {
         "derivation": null,
         "display_value": "112,300美元/年（化学制造业中位数）",
-        "fact_id": "us-industry-wage-aerospace-mfg-2025",
+        "fact_id": "us-industry-wage-chemical-mfg-2025",
         "market": "美国",
         "measure": "BLS OOH 行业工资中位数（行业口径）",
         "occupation_scope": "化学工程师",
@@ -36948,8 +36556,8 @@
       },
       {
         "derivation": null,
-        "display_value": "133,050美元/年（联邦政府（不含邮政）中位数）",
-        "fact_id": "us-industry-wage-federal-2025",
+        "display_value": "147,960美元/年（机械制造业中位数）",
+        "fact_id": "us-industry-wage-machinery-2025",
         "market": "美国",
         "measure": "BLS OOH 行业工资中位数（行业口径）",
         "occupation_scope": "化学工程师",
@@ -37065,6 +36673,18 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "制造业 100,572 元，科学研究和技术服务业 173,855 元",
+        "fact_id": "wave1-cn-sector-2025",
+        "market": "中国大陆",
+        "measure": "行业就业人员年平均工资",
+        "occupation_scope": "规模以上企业行业门类，非本职业",
+        "period": "2025",
+        "source_refs": [
+          "wave1-source-1"
+        ]
       }
     ]
   },
@@ -37117,17 +36737,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "化学工程师把物料、能量和安全要求转化为可运行的工艺设计，说明设备选择、控制策略和验证条件。 在虚构工艺流程图上标出物料衡算边界、一项假设和最值得补测的输入。"
+      "text": "化工工程师把物料和能量衡算变成可校审的工艺文件。实验放大、装置改造和生产支持各有重点，交付前先说明参数来源和未核实假设。"
     },
     "title": {
       "availability": "available",
-      "text": "化学工程师"
+      "text": "化工工程师｜流程设计、工资口径与注册"
     }
   },
-  "source_content_sha256": "700587ccc46ac28eff7d41587e427f5cad3fbe620bea310ff5a5fec275ff8e0c",
+  "source_content_sha256": "cdd7b0da9c960b48abe9bce408dae7a817b70421eb07714f2b5ad23ec0799a34",
   "subject": {
     "canonical_slug": "chemical-engineers",
     "name": "化学工程师",
-    "summary": "化学工程师把物料、能量和安全要求转化为可运行的工艺设计，说明设备选择、控制策略和验证条件。"
+    "summary": "化工工程师把物料和能量衡算变成可校审的工艺文件。实验放大、装置改造和生产支持各有重点，交付前先说明参数来源和未核实假设。"
   }
 }

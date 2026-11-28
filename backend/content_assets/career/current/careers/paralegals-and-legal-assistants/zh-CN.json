@@ -2,9 +2,6 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
-      "fact:china-professional-2025": {
-        "status": "pending_mapping"
-      },
       "fact:fermatmind-ai-impact-estimate": {
         "status": "pending_mapping"
       },
@@ -35,6 +32,24 @@
       "fact:us-wage-range-2025": {
         "status": "pending_mapping"
       },
+      "fact:wave1-b4-cn-industry": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b4-wage-p10": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b4-wage-p25": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b4-wage-p50": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b4-wage-p75": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b4-wage-p90": {
+        "status": "pending_mapping"
+      },
       "item:paralegals-and-legal-assistants.ai-impact.ai-impact-table.1": {
         "status": "mapped"
       },
@@ -59,16 +74,7 @@
       "item:paralegals-and-legal-assistants.ai-impact.ai-impact-table.8": {
         "status": "pending_mapping"
       },
-      "item:paralegals-and-legal-assistants.china-salary.career-snapshot-primary-locale.1": {
-        "status": "mapped"
-      },
-      "item:paralegals-and-legal-assistants.china-salary.career-snapshot-primary-locale.2": {
-        "status": "pending_mapping"
-      },
-      "item:paralegals-and-legal-assistants.china-salary.career-snapshot-primary-locale.3": {
-        "status": "pending_mapping"
-      },
-      "item:paralegals-and-legal-assistants.china-salary.career-snapshot-primary-locale.4": {
+      "item:paralegals-and-legal-assistants.china-salary.wave1-b4-context.1": {
         "status": "pending_mapping"
       },
       "item:paralegals-and-legal-assistants.direction-comparison.adjacent-career-comparison-table.1": {
@@ -86,6 +92,12 @@
       "item:paralegals-and-legal-assistants.direction-comparison.adjacent-career-comparison-table.5": {
         "status": "pending_mapping"
       },
+      "item:paralegals-and-legal-assistants.display.career_snapshot_secondary_locale.registered": {
+        "status": "pending_mapping"
+      },
+      "item:paralegals-and-legal-assistants.entry-work-sample-data.2": {
+        "status": "pending_mapping"
+      },
       "item:paralegals-and-legal-assistants.fit.personality-fit-block.2": {
         "status": "pending_mapping"
       },
@@ -97,9 +109,6 @@
       },
       "item:paralegals-and-legal-assistants.fit.personality-fit-block.6": {
         "status": "pending_mapping"
-      },
-      "item:paralegals-and-legal-assistants.fit.personality-fit-block.7": {
-        "status": "mapped"
       },
       "item:paralegals-and-legal-assistants.fit.personality-fit-block.8": {
         "status": "pending_mapping"
@@ -137,29 +146,11 @@
       "item:paralegals-and-legal-assistants.path.credential-decision.10": {
         "status": "pending_mapping"
       },
-      "item:paralegals-and-legal-assistants.path.employer-evidence.2": {
-        "status": "mapped"
-      },
-      "item:paralegals-and-legal-assistants.path.entry-portfolio.3": {
-        "status": "mapped"
-      },
       "item:paralegals-and-legal-assistants.path.entry-role-comparison.9": {
         "status": "pending_mapping"
       },
-      "item:paralegals-and-legal-assistants.path.entry-work-sample-data.11": {
+      "item:paralegals-and-legal-assistants.path.entry-work-sample-data.1": {
         "status": "pending_mapping"
-      },
-      "item:paralegals-and-legal-assistants.path.interview-probation.4": {
-        "status": "pending_mapping"
-      },
-      "item:paralegals-and-legal-assistants.path.recruitment-sample.1": {
-        "status": "pending_mapping"
-      },
-      "item:paralegals-and-legal-assistants.path.seven-day-decision.8": {
-        "status": "mapped"
-      },
-      "item:paralegals-and-legal-assistants.path.seven-day-trial.7": {
-        "status": "mapped"
       },
       "item:paralegals-and-legal-assistants.profile.career-quick-answers-block.4": {
         "status": "mapped"
@@ -197,9 +188,6 @@
       "item:paralegals-and-legal-assistants.risk.career-risk-cards.1": {
         "status": "mapped"
       },
-      "item:paralegals-and-legal-assistants.risk.career-risk-cards.2": {
-        "status": "pending_mapping"
-      },
       "item:paralegals-and-legal-assistants.risk.career-risk-cards.3": {
         "status": "pending_mapping"
       },
@@ -216,24 +204,6 @@
         "status": "pending_mapping"
       },
       "item:paralegals-and-legal-assistants.sources.faq-block.1": {
-        "status": "mapped"
-      },
-      "item:paralegals-and-legal-assistants.us-salary.career-snapshot-secondary-locale.1": {
-        "status": "mapped"
-      },
-      "item:paralegals-and-legal-assistants.us-salary.career-snapshot-secondary-locale.2": {
-        "status": "pending_mapping"
-      },
-      "item:paralegals-and-legal-assistants.us-salary.career-snapshot-secondary-locale.3": {
-        "status": "pending_mapping"
-      },
-      "item:paralegals-and-legal-assistants.us-salary.career-snapshot-secondary-locale.4": {
-        "status": "pending_mapping"
-      },
-      "item:paralegals-and-legal-assistants.us-salary.career-snapshot-secondary-locale.5": {
-        "status": "pending_mapping"
-      },
-      "item:paralegals-and-legal-assistants.us-salary.career-snapshot-secondary-locale.6": {
         "status": "pending_mapping"
       }
     },
@@ -3544,16 +3514,8 @@
         "status": "unfilled"
       },
       "career_snapshot_primary_locale.salary.bls_table.01.explanation": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.china-salary.career-snapshot-primary-locale.1",
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_primary_locale.salary.bls_table.01.headers.explanation": {
         "ref": null,
@@ -3602,18 +3564,8 @@
         "status": "unfilled"
       },
       "career_snapshot_primary_locale.salary.bls_table.02.metric": {
-        "ref": {
-          "path": [
-            "components",
-            "career_snapshot_primary_locale",
-            "salary",
-            "bls_table",
-            1,
-            "指标"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_primary_locale.salary.bls_table.02.value": {
         "ref": null,
@@ -3636,18 +3588,8 @@
         "status": "unfilled"
       },
       "career_snapshot_primary_locale.salary.bls_table.03.metric": {
-        "ref": {
-          "path": [
-            "components",
-            "career_snapshot_primary_locale",
-            "salary",
-            "bls_table",
-            2,
-            "指标"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_primary_locale.salary.bls_table.03.value": {
         "ref": null,
@@ -4034,16 +3976,8 @@
         "status": "unfilled"
       },
       "career_snapshot_secondary_locale.authority_sources.sources.01.href": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.us-salary.career-snapshot-secondary-locale.1",
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.authority_sources.sources.01.label": {
         "ref": null,
@@ -4131,17 +4065,8 @@
         "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.02.metric": {
-        "ref": {
-          "path": [
-            "components",
-            "career_snapshot_secondary_locale",
-            "bls_table",
-            1,
-            "指标"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.02.value": {
         "ref": null,
@@ -4172,17 +4097,8 @@
         "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.03.metric": {
-        "ref": {
-          "path": [
-            "components",
-            "career_snapshot_secondary_locale",
-            "bls_table",
-            2,
-            "指标"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.03.value": {
         "ref": null,
@@ -4213,17 +4129,8 @@
         "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.04.metric": {
-        "ref": {
-          "path": [
-            "components",
-            "career_snapshot_secondary_locale",
-            "bls_table",
-            3,
-            "指标"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.04.value": {
         "ref": null,
@@ -4254,17 +4161,8 @@
         "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.05.metric": {
-        "ref": {
-          "path": [
-            "components",
-            "career_snapshot_secondary_locale",
-            "bls_table",
-            4,
-            "指标"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.05.value": {
         "ref": null,
@@ -4295,17 +4193,8 @@
         "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.06.metric": {
-        "ref": {
-          "path": [
-            "components",
-            "career_snapshot_secondary_locale",
-            "bls_table",
-            5,
-            "指标"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.06.value": {
         "ref": null,
@@ -4336,17 +4225,8 @@
         "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.07.metric": {
-        "ref": {
-          "path": [
-            "components",
-            "career_snapshot_secondary_locale",
-            "bls_table",
-            6,
-            "指标"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.07.value": {
         "ref": null,
@@ -4377,17 +4257,8 @@
         "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.08.metric": {
-        "ref": {
-          "path": [
-            "components",
-            "career_snapshot_secondary_locale",
-            "bls_table",
-            7,
-            "指标"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.08.value": {
         "ref": null,
@@ -4441,15 +4312,8 @@
         "status": "unfilled"
       },
       "career_snapshot_secondary_locale.heading": {
-        "ref": {
-          "path": [
-            "components",
-            "career_snapshot_secondary_locale",
-            "heading"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.industry_heading": {
         "ref": {
@@ -4536,68 +4400,32 @@
         "status": "unfilled"
       },
       "career_snapshot_secondary_locale.interpretation_rows.01.question": {
-        "ref": {
-          "path": [
-            "components",
-            "career_snapshot_secondary_locale",
-            "interpretation_rows",
-            0,
-            "question"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.interpretation_rows.02.answer": {
         "ref": null,
         "status": "unfilled"
       },
       "career_snapshot_secondary_locale.interpretation_rows.02.question": {
-        "ref": {
-          "path": [
-            "components",
-            "career_snapshot_secondary_locale",
-            "interpretation_rows",
-            1,
-            "question"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.interpretation_rows.03.answer": {
         "ref": null,
         "status": "unfilled"
       },
       "career_snapshot_secondary_locale.interpretation_rows.03.question": {
-        "ref": {
-          "path": [
-            "components",
-            "career_snapshot_secondary_locale",
-            "interpretation_rows",
-            2,
-            "question"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.interpretation_rows.04.answer": {
         "ref": null,
         "status": "unfilled"
       },
       "career_snapshot_secondary_locale.interpretation_rows.04.question": {
-        "ref": {
-          "path": [
-            "components",
-            "career_snapshot_secondary_locale",
-            "interpretation_rows",
-            3,
-            "question"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.median": {
         "ref": null,
@@ -5254,100 +5082,28 @@
         "status": "unfilled"
       },
       "entry_decisions.employer-evidence.entries.01.description.01": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.path.employer-evidence.2",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "paralegals-and-legal-assistants.employer-evidence.1"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.employer-evidence.entries.01.title": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.path.employer-evidence.2",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "paralegals-and-legal-assistants.employer-evidence.1"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.employer-evidence.entries.02.description.01": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.path.employer-evidence.2",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "paralegals-and-legal-assistants.employer-evidence.2"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.employer-evidence.entries.02.title": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.path.employer-evidence.2",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "paralegals-and-legal-assistants.employer-evidence.2"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.employer-evidence.entries.03.description.01": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.path.employer-evidence.2",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "paralegals-and-legal-assistants.employer-evidence.3"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.employer-evidence.entries.03.title": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.path.employer-evidence.2",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "paralegals-and-legal-assistants.employer-evidence.3"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.employer-evidence.entries.04.description.01": {
         "ref": null,
@@ -5362,100 +5118,28 @@
         "status": "unfilled"
       },
       "entry_decisions.entry-portfolio.entries.01.description.01": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.path.entry-portfolio.3",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "portfolio-source-research"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-portfolio.entries.01.title": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.path.entry-portfolio.3",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "portfolio-source-research"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-portfolio.entries.02.description.01": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.path.entry-portfolio.3",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "portfolio-fictional-file"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-portfolio.entries.02.title": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.path.entry-portfolio.3",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "portfolio-fictional-file"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-portfolio.entries.03.description.01": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.path.entry-portfolio.3",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "portfolio-contract-redline"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-portfolio.entries.03.title": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.path.entry-portfolio.3",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "portfolio-contract-redline"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-portfolio.entries.04.description.01": {
         "ref": null,
@@ -5883,264 +5567,88 @@
         "status": "unfilled"
       },
       "entry_decisions.interview-probation.rows.01.boundary": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.path.interview-probation.4",
-          "path": [
-            "data",
-            "rows",
-            0,
-            3
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.interview-probation.rows.01.observed_evidence": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.path.interview-probation.4",
-          "path": [
-            "data",
-            "rows",
-            0,
-            2
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.interview-probation.rows.01.possible_check": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.path.interview-probation.4",
-          "path": [
-            "data",
-            "rows",
-            0,
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.interview-probation.rows.01.stage": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.path.interview-probation.4",
-          "path": [
-            "data",
-            "rows",
-            0,
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.interview-probation.rows.02.boundary": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.path.interview-probation.4",
-          "path": [
-            "data",
-            "rows",
-            1,
-            3
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.interview-probation.rows.02.observed_evidence": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.path.interview-probation.4",
-          "path": [
-            "data",
-            "rows",
-            1,
-            2
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.interview-probation.rows.02.possible_check": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.path.interview-probation.4",
-          "path": [
-            "data",
-            "rows",
-            1,
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.interview-probation.rows.02.stage": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.path.interview-probation.4",
-          "path": [
-            "data",
-            "rows",
-            1,
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.interview-probation.rows.03.boundary": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.path.interview-probation.4",
-          "path": [
-            "data",
-            "rows",
-            2,
-            3
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.interview-probation.rows.03.observed_evidence": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.path.interview-probation.4",
-          "path": [
-            "data",
-            "rows",
-            2,
-            2
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.interview-probation.rows.03.possible_check": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.path.interview-probation.4",
-          "path": [
-            "data",
-            "rows",
-            2,
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.interview-probation.rows.03.stage": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.path.interview-probation.4",
-          "path": [
-            "data",
-            "rows",
-            2,
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.interview-probation.rows.04.boundary": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.path.interview-probation.4",
-          "path": [
-            "data",
-            "rows",
-            3,
-            3
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.interview-probation.rows.04.observed_evidence": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.path.interview-probation.4",
-          "path": [
-            "data",
-            "rows",
-            3,
-            2
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.interview-probation.rows.04.possible_check": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.path.interview-probation.4",
-          "path": [
-            "data",
-            "rows",
-            3,
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.interview-probation.rows.04.stage": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.path.interview-probation.4",
-          "path": [
-            "data",
-            "rows",
-            3,
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.interview-probation.title": {
         "ref": null,
         "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.01": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.path.seven-day-decision.8",
-          "path": [
-            "data",
-            "entries",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.02": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.path.seven-day-decision.8",
-          "path": [
-            "data",
-            "entries",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.03": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.path.seven-day-decision.8",
-          "path": [
-            "data",
-            "entries",
-            2
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.04": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.path.seven-day-decision.8",
-          "path": [
-            "data",
-            "entries",
-            3
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.05": {
         "ref": null,
@@ -6159,132 +5667,36 @@
         "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.01.description.01": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.path.seven-day-trial.7",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "trial-day-1"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.01.title": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.path.seven-day-trial.7",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "trial-day-1"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.02.description.01": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.path.seven-day-trial.7",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "trial-day-2-3"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.02.title": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.path.seven-day-trial.7",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "trial-day-2-3"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.03.description.01": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.path.seven-day-trial.7",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "trial-day-4-5"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.03.title": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.path.seven-day-trial.7",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "trial-day-4-5"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.04.description.01": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.path.seven-day-trial.7",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "trial-day-6-7"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.04.title": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.path.seven-day-trial.7",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "trial-day-6-7"
-            },
-            "values",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.05.description.01": {
         "ref": null,
@@ -6315,244 +5727,68 @@
         "status": "unfilled"
       },
       "faq_block.items.01.answer": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.sources.faq-block.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "paralegals-and-legal-assistants.faq.1"
-            },
-            "answer"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "faq_block.items.01.question": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.sources.faq-block.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "paralegals-and-legal-assistants.faq.1"
-            },
-            "question"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "faq_block.items.02.answer": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.sources.faq-block.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "paralegals-and-legal-assistants.faq.2"
-            },
-            "answer"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "faq_block.items.02.question": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.sources.faq-block.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "paralegals-and-legal-assistants.faq.2"
-            },
-            "question"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "faq_block.items.03.answer": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.sources.faq-block.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "paralegals-and-legal-assistants.faq.3"
-            },
-            "answer"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "faq_block.items.03.question": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.sources.faq-block.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "paralegals-and-legal-assistants.faq.3"
-            },
-            "question"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "faq_block.items.04.answer": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.sources.faq-block.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "paralegals-and-legal-assistants.faq.4"
-            },
-            "answer"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "faq_block.items.04.question": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.sources.faq-block.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "paralegals-and-legal-assistants.faq.4"
-            },
-            "question"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "faq_block.items.05.answer": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.sources.faq-block.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "paralegals-and-legal-assistants.faq.5"
-            },
-            "answer"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "faq_block.items.05.question": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.sources.faq-block.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "paralegals-and-legal-assistants.faq.5"
-            },
-            "question"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "faq_block.items.06.answer": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.sources.faq-block.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "paralegals-and-legal-assistants.faq.6"
-            },
-            "answer"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "faq_block.items.06.question": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.sources.faq-block.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "paralegals-and-legal-assistants.faq.6"
-            },
-            "question"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "faq_block.items.07.answer": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.sources.faq-block.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "paralegals-and-legal-assistants.faq.7"
-            },
-            "answer"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "faq_block.items.07.question": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.sources.faq-block.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "paralegals-and-legal-assistants.faq.7"
-            },
-            "question"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "faq_block.items.08.answer": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.sources.faq-block.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "paralegals-and-legal-assistants.faq.8"
-            },
-            "answer"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "faq_block.items.08.question": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.sources.faq-block.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "paralegals-and-legal-assistants.faq.8"
-            },
-            "question"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "faq_block.items.09.answer": {
         "ref": null,
@@ -8268,16 +7504,8 @@
         "status": "mapped"
       },
       "personality_fit_block.assessments.01.answer": {
-        "ref": {
-          "id": "paralegals-and-legal-assistants.fit.personality-fit-block.7",
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "personality_fit_block.assessments.01.cta_href": {
         "ref": null,
@@ -8915,136 +8143,64 @@
         "status": "unfilled"
       },
       "personality_fit_block.questions.03.question": {
-        "ref": {
-          "path": [
-            "components",
-            "personality_fit_block",
-            "questions",
-            2,
-            "question"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "personality_fit_block.questions.04.answer": {
         "ref": null,
         "status": "unfilled"
       },
       "personality_fit_block.questions.04.question": {
-        "ref": {
-          "path": [
-            "components",
-            "personality_fit_block",
-            "questions",
-            3,
-            "question"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "personality_fit_block.questions.05.answer": {
         "ref": null,
         "status": "unfilled"
       },
       "personality_fit_block.questions.05.question": {
-        "ref": {
-          "path": [
-            "components",
-            "personality_fit_block",
-            "questions",
-            4,
-            "question"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "personality_fit_block.questions.06.answer": {
         "ref": null,
         "status": "unfilled"
       },
       "personality_fit_block.questions.06.question": {
-        "ref": {
-          "path": [
-            "components",
-            "personality_fit_block",
-            "questions",
-            5,
-            "question"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "personality_fit_block.questions.07.answer": {
         "ref": null,
         "status": "unfilled"
       },
       "personality_fit_block.questions.07.question": {
-        "ref": {
-          "path": [
-            "components",
-            "personality_fit_block",
-            "questions",
-            6,
-            "question"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "personality_fit_block.questions.08.answer": {
         "ref": null,
         "status": "unfilled"
       },
       "personality_fit_block.questions.08.question": {
-        "ref": {
-          "path": [
-            "components",
-            "personality_fit_block",
-            "questions",
-            7,
-            "question"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "personality_fit_block.questions.09.answer": {
         "ref": null,
         "status": "unfilled"
       },
       "personality_fit_block.questions.09.question": {
-        "ref": {
-          "path": [
-            "components",
-            "personality_fit_block",
-            "questions",
-            8,
-            "question"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "personality_fit_block.questions.10.answer": {
         "ref": null,
         "status": "unfilled"
       },
       "personality_fit_block.questions.10.question": {
-        "ref": {
-          "path": [
-            "components",
-            "personality_fit_block",
-            "questions",
-            9,
-            "question"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "personality_fit_block.schema_version": {
         "ref": {
@@ -12246,7 +11402,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "大陆全国同口径律师助理薪资分布未核实。应核对具体岗位的工作内容、律师监督、合同和实际薪酬。 国家统计局2025年规模以上企业专业技术人员税前年均155,491元，属于跨行业统计背景。法律检索这一项任务不能判定岗位统计归类，也不能据此估计助理薪酬。"
+              "按交接责任和工作环境比较岗位。"
             ]
           },
           "id": "paralegals-and-legal-assistants.quick-decision.fermat-decision-card.1",
@@ -12277,7 +11433,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "若想独立给客户法律意见、忽视律师监督或不能保护案卷隐私，应谨慎选择。"
+              "临近截止日期时，追引证、页码和附件比写摘要更耗时。若你常跳过版本或不愿核原文，卷宗整理会持续消耗精力。"
             ]
           },
           "id": "paralegals-and-legal-assistants.quick-decision.fit-decision-checklist.3",
@@ -12291,7 +11447,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "到入行区完成虚构案卷 P-17 的四行索引与复核提问，再对照参考。"
+              "先填写入行区工单，再核对样答。"
             ]
           },
           "id": "paralegals-and-legal-assistants.quick-decision.fit-decision-checklist.4",
@@ -12327,7 +11483,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "准备信件或其他文件，如法律邮件，并组织和维护文件在纸质或电子提交系统。",
+              "律师助理 用 威科先行、北大法宝 做 类案检索，按律师分工整理 证据目录 和 卷宗索引、辅助 庭前阅卷。实习律师 另按执业实习规则接受指导和考核。",
               "编写、编辑或审查法律文件，包括立法、书状、书状、上诉、遗嘱、合同和房地产结算声明。",
               "调查案件的事实和法律，并搜索相关来源，如公共记录和互联网来源，以确定诉讼原因和准备案件。",
               "通过组织展览等任务为审判做准备。"
@@ -12335,7 +11491,8 @@
           },
           "id": "paralegals-and-legal-assistants.profile.responsibilities-block.2",
           "source_refs": [
-            "batch52-onet-core"
+            "wave1-b4-3",
+            "wave1-b4-4"
           ],
           "type": "list"
         },
@@ -12628,57 +11785,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "暂未取得中国大陆律师助理这一细分职业的全国工资分布。先核招聘岗位、计薪周期、固定和浮动部分、税前后及工作地。"
+              "国家统计局 2025 年就业人员年平均工资，表 7 租赁和商务服务业 92,849 元。这是行业背景。本页未取得可复核的中国大陆职业级全国工资分位。"
             ]
           },
-          "id": "paralegals-and-legal-assistants.china-salary.career-snapshot-primary-locale.1",
-          "source_refs": [
-            "nbs-wages-2025"
+          "fact_refs": [
+            "wave1-b4-cn-industry"
           ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "中国“律师助理”“法务助理”等岗位名称、资格与雇主责任不必与美国分类一致。"
-            ]
-          },
-          "id": "paralegals-and-legal-assistants.china-salary.career-snapshot-primary-locale.2",
+          "id": "paralegals-and-legal-assistants.china-salary.wave1-b4-context.1",
           "source_refs": [
-            "nbs-reference-2025",
-            "law-current-2026"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "美国工资和学历要求不能直接套到中国合同或执业规则。"
-            ]
-          },
-          "id": "paralegals-and-legal-assistants.china-salary.career-snapshot-primary-locale.3",
-          "source_refs": [
-            "nbs-reference-2025",
-            "law-current-2026"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "比较中国岗位需核雇主、城市、事务类型、学历、监督和真实薪酬合同。"
-            ]
-          },
-          "id": "paralegals-and-legal-assistants.china-salary.career-snapshot-primary-locale.4",
-          "source_refs": [
-            "nbs-reference-2025",
-            "law-current-2026"
+            "wave1-b4-5"
           ],
           "type": "prose"
         }
@@ -12695,83 +11810,10 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "年薪与时薪均直接引用 OEWS 公布值。"
+              "美国法律助理工资与就业"
             ]
           },
-          "id": "paralegals-and-legal-assistants.us-salary.career-snapshot-secondary-locale.1",
-          "source_refs": [
-            "paralegal-oews-2025"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "data": {
-            "paragraphs": [
-              "年薪分位表的两端分别是第10和第90百分位阈值，不能用来划定起薪范围。"
-            ]
-          },
-          "id": "paralegals-and-legal-assistants.us-salary.career-snapshot-secondary-locale.2",
-          "source_refs": [
-            "bls-ooh-paralegals"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "data": {
-            "paragraphs": [
-              "OEWS 公布的中位时薪为30.24美元。"
-            ]
-          },
-          "id": "paralegals-and-legal-assistants.us-salary.career-snapshot-secondary-locale.3",
-          "source_refs": [
-            "paralegal-oews-2025"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "data": {
-            "paragraphs": [
-              "工资分布因地区、事务、雇主与经验而异；不等于个人报价。"
-            ]
-          },
-          "id": "paralegals-and-legal-assistants.us-salary.career-snapshot-secondary-locale.4",
-          "source_refs": [
-            "source-pack-onet-localwages"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "data": {
-            "paragraphs": [
-              "美国常见入门学历为副学士或法律助理课程证书，具体雇主要求不同。"
-            ]
-          },
-          "id": "paralegals-and-legal-assistants.us-salary.career-snapshot-secondary-locale.5",
-          "source_refs": [
-            "bls-ooh-paralegals"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "data": {
-            "paragraphs": [
-              "美国数据不能直接换算为中国岗位工资或资格。"
-            ]
-          },
-          "id": "paralegals-and-legal-assistants.us-salary.career-snapshot-secondary-locale.6",
-          "source_refs": [
-            "source-pack-onet-localwages"
-          ],
+          "id": "paralegals-and-legal-assistants.display.career_snapshot_secondary_locale.registered",
           "type": "prose"
         }
       ]
@@ -12879,20 +11921,6 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "探索资料研究、文书和团队服务兴趣，不证明执业资格。"
-            ]
-          },
-          "id": "paralegals-and-legal-assistants.fit.personality-fit-block.7",
-          "source_refs": [
-            "source-pack-onet-details"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.personality-fit-block",
-          "data": {
-            "paragraphs": [
               "编辑探索建议；未验证本测评对该职业的预测或比较效度。"
             ]
           },
@@ -12921,21 +11949,6 @@
           "id": "paralegals-and-legal-assistants.risk.career-risk-cards.1",
           "source_refs": [
             "law-current-2026"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-risk-cards",
-          "data": {
-            "paragraphs": [
-              "分别核虚假判例、过时规则、事实摘要、案卷外传、期限和越权意见。"
-            ]
-          },
-          "id": "paralegals-and-legal-assistants.risk.career-risk-cards.2",
-          "source_refs": [
-            "source-pack-onet-summary",
-            "editorial-guidance"
           ],
           "type": "prose"
         },
@@ -12994,133 +12007,6 @@
       "items": [
         {
           "availability": "available",
-          "copy_key": "career.item.recruitment-sample",
-          "data": {
-            "paragraphs": [
-              "苏州大学王健法学院2026年3月3日刊载的锦天城（苏州）样本列诉讼文书、法规与案例检索、证据整理，也包括合同初审与尽调支持。法学或法律本科以上，公告把通过司法考试列为优先。120元/天只写给实习生，律师助理薪资面议。",
-              "同济大学法学院2026年9月17日刊载的全职律师助理公告列法律检索、非诉尽调，协助主办律师草拟和校对文件。要求通过法考，研究生优先；薪酬面谈。",
-              "两份是历史公告，当前可投状态未核。问第一项交付是诉讼事实表、检索备忘还是非诉尽调清单，谁复核，以及何时可接触真实案卷。"
-            ]
-          },
-          "id": "paralegals-and-legal-assistants.path.recruitment-sample.1",
-          "source_refs": [
-            "paralegal-cn-suzhou",
-            "paralegal-cn-tongji"
-          ],
-          "type": "notice"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.employer-evidence",
-          "data": {
-            "entries": [
-              {
-                "id": "paralegals-and-legal-assistants.employer-evidence.1",
-                "values": [
-                  "诉讼检索与材料整理",
-                  "苏州大学王健法学院2026年3月3日刊载的锦天城（苏州）样本列诉讼文书、法规与案例检索、证据整理，也包括合同初审与尽调支持。法学或法律本科以上，公告把通过司法考试列为优先。120元/天只写给实习生，律师助理薪资面议。"
-                ]
-              },
-              {
-                "id": "paralegals-and-legal-assistants.employer-evidence.2",
-                "values": [
-                  "非诉尽调与文件校对",
-                  "同济大学法学院2026年9月17日刊载的全职律师助理公告列法律检索、非诉尽调，协助主办律师草拟和校对文件。要求通过法考，研究生优先；薪酬面谈。"
-                ]
-              },
-              {
-                "id": "paralegals-and-legal-assistants.employer-evidence.3",
-                "values": [
-                  "对比首项交付与复核人",
-                  "两份是历史公告，当前可投状态未核。问第一项交付是诉讼事实表、检索备忘还是非诉尽调清单，谁复核，以及何时可接触真实案卷。"
-                ]
-              }
-            ]
-          },
-          "id": "paralegals-and-legal-assistants.path.employer-evidence.2",
-          "source_refs": [
-            "paralegal-cn-suzhou",
-            "paralegal-cn-tongji"
-          ],
-          "type": "cards"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.entry-work-sample-data",
-          "data": {
-            "entries": [
-              {
-                "id": "actors-practice-materials",
-                "values": [
-                  "材料｜虚构案卷 P-17",
-                  "P-17 四份虚构材料：A01 草稿v1页眉3月4日，页脚标“已被替换”；A02 草稿v2页眉3月5日，附件中没有签署页；A03 内部收件登记3月6日写“收到v2”，未记签署；A04 3月7日便笺写“3月5日签了”，无原件或收件证明。日期仅用于练习。"
-                ]
-              },
-              {
-                "id": "actors-practice-task",
-                "values": [
-                  "任务｜证据索引和待核",
-                  "做四行证据索引（ID、文件所写日期、可核事实、不能确认），另写一段给负责律师的复核备忘，不发给客户、不判断真实期限。"
-                ]
-              },
-              {
-                "id": "actors-practice-reference",
-                "values": [
-                  "参考｜文件日期不等于签署",
-                  "参考：A01只证明v1被标作已替换；A02只证明v2页眉3月5日，签署未证；A03证明3月6日有收到v2的内部记录，不证明签署；A04是未核陈述。问负责律师能否调取签署页、签署原件和提交记录；签署日与最终有效版本暂记未知。"
-                ]
-              },
-              {
-                "id": "actors-practice-boundary",
-                "values": [
-                  "边界｜只做纸面复核",
-                  "不用真实客户、案号、记录或文书；不出具法律意见、不签发或递交材料，不从题面推实际法定期限。"
-                ]
-              }
-            ]
-          },
-          "id": "paralegals-and-legal-assistants.path.entry-work-sample-data.11",
-          "source_refs": [
-            "paralegal-editorial-case"
-          ],
-          "type": "cards"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.entry-portfolio",
-          "data": {
-            "entries": [
-              {
-                "id": "portfolio-source-research",
-                "values": [
-                  "四行索引",
-                  "用 A01–A04 区分文件日期、收件和签署证据。"
-                ]
-              },
-              {
-                "id": "portfolio-fictional-file",
-                "values": [
-                  "冲突备忘",
-                  "注明 A04 无原件，签署日和有效版本待核。"
-                ]
-              },
-              {
-                "id": "portfolio-contract-redline",
-                "values": [
-                  "复核提问",
-                  "列签署页、签署原件和提交记录三个请求；只给负责律师。"
-                ]
-              }
-            ]
-          },
-          "id": "paralegals-and-legal-assistants.path.entry-portfolio.3",
-          "source_refs": [
-            "paralegal-editorial-case"
-          ],
-          "type": "cards"
-        },
-        {
-          "availability": "available",
           "copy_key": "career.item.entry-role-comparison",
           "data": {
             "column_keys": [
@@ -13149,7 +12035,7 @@
                 "带教准备",
                 "事实表和证据索引",
                 "律师监督",
-                "虚构样本与反馈",
+                "样本与反馈",
                 "学习草稿"
               ],
               [
@@ -13203,7 +12089,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用本节 P-17 逐日完成证据索引、冲突备忘和待核提问，核参考后保留未确认的签署日。"
+              "记下附件缺页，由承办律师确认处理方式。"
             ]
           },
           "id": "paralegals-and-legal-assistants.path.career-path-block.6",
@@ -13211,115 +12097,6 @@
             "paralegal-editorial-case"
           ],
           "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.seven-day-trial",
-          "data": {
-            "entries": [
-              {
-                "id": "trial-day-1",
-                "values": [
-                  "第1天｜读四份材料",
-                  "列 A01–A04 和各自文件日期。"
-                ]
-              },
-              {
-                "id": "trial-day-2-3",
-                "values": [
-                  "第2–3天｜画时间线",
-                  "把版本、收到记录与签署陈述分开。"
-                ]
-              },
-              {
-                "id": "trial-day-4-5",
-                "values": [
-                  "第4–5天｜写待核清单",
-                  "核 A04 是否有原件，并问签署页和提交记录。"
-                ]
-              },
-              {
-                "id": "trial-day-6-7",
-                "values": [
-                  "第6–7天｜对照参考",
-                  "保留未知，写给负责律师，不发送或签署。"
-                ]
-              }
-            ]
-          },
-          "id": "paralegals-and-legal-assistants.path.seven-day-trial.7",
-          "source_refs": [
-            "paralegal-editorial-case"
-          ],
-          "type": "timeline"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.seven-day-decision",
-          "data": {
-            "entries": [
-              "四行索引是否把日期和证据分开？",
-              "是否把 A04 留为未核陈述？",
-              "签署日和最终版本是否留待核？",
-              "是否仅交负责律师纸面复核？"
-            ]
-          },
-          "id": "paralegals-and-legal-assistants.path.seven-day-decision.8",
-          "source_refs": [
-            "paralegal-editorial-case"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.interview-probation",
-          "data": {
-            "column_keys": [
-              "career.column.scenario",
-              "career.column.action",
-              "career.column.review",
-              "career.column.evidence"
-            ],
-            "column_labels": [
-              "情境",
-              "怎样处理",
-              "复核点",
-              "保留证据"
-            ],
-            "rows": [
-              [
-                "虚假引注",
-                "回查官方原文",
-                "核有效期和法域",
-                "原始链接和版本"
-              ],
-              [
-                "事实冲突",
-                "标记并请律师判断",
-                "核原始证据",
-                "冲突记录"
-              ],
-              [
-                "期限异常",
-                "立即升级并复核规则",
-                "核法院通知",
-                "时间线与回执"
-              ],
-              [
-                "隐私风险",
-                "停止外传并报告",
-                "核数据权限",
-                "处理记录"
-              ]
-            ]
-          },
-          "id": "paralegals-and-legal-assistants.path.interview-probation.4",
-          "source_refs": [
-            "source-pack-onet-summary",
-            "editorial-guidance",
-            "aba-supervision"
-          ],
-          "type": "table"
         },
         {
           "availability": "available",
@@ -13407,6 +12184,51 @@
             "aba-supervision"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "wave1-trial-1",
+                "values": [
+                  "题设",
+                  "证据 A 对应 B001–B003，证据 B 对应 B004–B006。练习包只有 B001 至 B005。"
+                ]
+              },
+              {
+                "id": "wave1-trial-2",
+                "values": [
+                  "任务",
+                  "指出缺页和应归属的证据。"
+                ]
+              },
+              {
+                "id": "wave1-trial-3",
+                "values": [
+                  "交接",
+                  "只核教学页标，不出具法律意见，也不提交文件。"
+                ]
+              }
+            ]
+          },
+          "id": "paralegals-and-legal-assistants.path.entry-work-sample-data.1",
+          "title": "核对证据目录",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "证据 B 缺 B006，登记缺页并交承办律师确认。"
+            ]
+          },
+          "id": "paralegals-and-legal-assistants.entry-work-sample-data.2",
+          "title": "纸面样答：核对证据目录",
+          "type": "notice",
+          "visibility": "public"
         }
       ]
     },
@@ -13500,84 +12322,30 @@
           "data": {
             "entries": [
               {
-                "answer": "在律师或法律团队指导下调查事实、检索法律资料、整理案卷并起草文件。",
-                "id": "paralegals-and-legal-assistants.faq.1",
-                "question": "律师助理做什么？",
-                "question_key": "career.faq.paralegals-and-legal-assistants.1",
+                "answer": "2025 年 5 月美国全国中位数为 62,890 美元/年。比较同城报价时，把保底薪资和浮动收入分列。",
+                "id": "paralegals-and-legal-assistants.faq.batch4-pay-us",
+                "question": "美国工资中位数是多少？",
+                "question_key": "career.faq.paralegals-and-legal-assistants.batch4-pay-us",
                 "source_refs": [
-                  "source-pack-onet-details"
+                  "wave1-b4-1"
                 ]
               },
               {
-                "answer": "中国大陆受聘助理、申请律师执业的登记实习和取得律师执业证是三个不同状态。现行《律师法》第16条限制无执业证人员以律师名义提供法律服务；诉讼代理或辩护保留法律另有规定。全国律协实习规则第23条针对正式执业实习，限制独自承办、以律师名义签发文书或发表代理辩护意见；辅助工作按指导、授权和程序核。 ABA示范指引区分律师负责的关系建立、费用和法律意见；美国具体规则按法域核。",
-                "id": "paralegals-and-legal-assistants.faq.2",
-                "question": "能独立给客户法律意见吗？",
-                "question_key": "career.faq.paralegals-and-legal-assistants.2",
+                "answer": "可参考国家统计局 2025 年表 7 租赁和商务服务业 92,849 元。该数据是行业均值。本职业报价按同城、同职级核对固定年收、补贴与兑现条件。",
+                "id": "paralegals-and-legal-assistants.faq.batch4-pay-cn",
+                "question": "中国大陆可用哪些薪资数据比较岗位？",
+                "question_key": "career.faq.paralegals-and-legal-assistants.batch4-pay-cn",
                 "source_refs": [
-                  "law-current-2026",
-                  "paralegal-cn-intern-rules",
-                  "paralegal-aba-model-guidelines",
-                  "paralegal-aba-definition"
+                  "wave1-b4-5"
                 ]
               },
               {
-                "answer": "法律秘书以排程、联络和办公室文件为主，也可能协助检索；paralegal主要交事实表、法律研究或供律师复核的草稿。职名重叠时问主要交付。",
-                "id": "paralegals-and-legal-assistants.faq.3",
-                "question": "与法律秘书有什么区别？",
-                "question_key": "career.faq.paralegals-and-legal-assistants.3",
+                "answer": "写明争点、检索范围和原文位置，把已核事实与待核解释分开。",
+                "id": "paralegals-and-legal-assistants.faq.batch4-fit",
+                "question": "类案检索如何交给承办律师？",
+                "question_key": "career.faq.paralegals-and-legal-assistants.batch4-fit",
                 "source_refs": [
-                  "paralegal-aba-definition",
-                  "paralegal-legal-secretary"
-                ]
-              },
-              {
-                "answer": "AI可辅助起草和检索。引注、法律现行有效性、事实和保密边界应逐项核对，最终专业判断由负责律师或有相应执业权限者复核。",
-                "id": "paralegals-and-legal-assistants.faq.4",
-                "question": "AI 能直接写最终法律文件吗？",
-                "question_key": "career.faq.paralegals-and-legal-assistants.4",
-                "source_refs": [
-                  "aba-ai",
-                  "editorial-guidance"
-                ]
-              },
-              {
-                "answer": "虚假引注、事实误读、隐私外泄、期限遗漏和越权法律意见。",
-                "id": "paralegals-and-legal-assistants.faq.5",
-                "question": "有哪些主要风险？",
-                "question_key": "career.faq.paralegals-and-legal-assistants.5",
-                "source_refs": [
-                  "editorial-guidance",
-                  "aba-ai",
-                  "aba-supervision"
-                ]
-              },
-              {
-                "answer": "暂未取得中国大陆律师助理这一细分职业的全国工资分布。先核招聘岗位、计薪周期、固定和浮动部分、税前后及工作地。 苏州公告120元/天只给实习生，律师助理薪资面议；同济刊载全职助理公告的薪酬面谈。两则均不代表现招或职业工资分布。",
-                "id": "paralegals-and-legal-assistants.faq.6",
-                "question": "中国工资是多少？",
-                "question_key": "career.faq.paralegals-and-legal-assistants.6",
-                "source_refs": [
-                  "nbs-wages-2025",
-                  "paralegal-cn-suzhou",
-                  "paralegal-cn-tongji"
-                ]
-              },
-              {
-                "answer": "美国2025年5月年薪中位数62,890美元、时薪中位30.24美元。P10、P25、P50、P75、P90年薪为44,740、50,340、62,890、80,080、101,500美元。",
-                "id": "paralegals-and-legal-assistants.faq.7",
-                "question": "美国工资和就业是多少？",
-                "question_key": "career.faq.paralegals-and-legal-assistants.7",
-                "source_refs": [
-                  "paralegal-oews-2025"
-                ]
-              },
-              {
-                "answer": "美国全国 23-2011：2025年约404,900个岗位，2035年预计403,800个，下降0.3%、净减约1,100个；年均约40,800个职业空缺。 职业空缺含转入其他职业、退出劳动力市场和净就业变化；不是净新增、当前招聘或个人录用率。",
-                "id": "paralegals-and-legal-assistants.faq.8",
-                "question": "美国未来机会如何？",
-                "question_key": "career.faq.paralegals-and-legal-assistants.8",
-                "source_refs": [
-                  "bls-ep-2025-2035"
+                  "wave1-b4-3"
                 ]
               }
             ]
@@ -13989,13 +12757,13 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "原公开虚构作品、时间线情景和资格核对保；工具输出作候选验证。"
+                  "原公开作品、时间线情景和资格核对保；工具输出作候选验证。"
                 ],
                 "evidence_type": "editorial task guidance",
                 "id": "editorial-guidance",
                 "limitation": "不是现场AI采用节时准确研究、实习经历或法定资格凭证。",
                 "market": "GLOBAL",
-                "name": "法律助理任务核验及虚构案例教学建议",
+                "name": "法律助理任务核验及案例教学建议",
                 "period": "本次作者任务审阅2026-10-02",
                 "publisher": "FermatMind",
                 "scope": "internal_rubric",
@@ -14003,11 +12771,11 @@
               },
               {
                 "details": [
-                  "一般隐私和虚构输出风险，不提供律师助理职业采用率或岗位替代率。"
+                  "一般隐私和输出风险，不提供律师助理职业采用率或岗位替代率。"
                 ],
                 "evidence_type": "official risk guidance",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "本页编辑练习只用虚构文件。",
+                "limitation": "本页编辑练习只用文件。",
                 "name": "NIST生成式AI风险指引",
                 "period": "2024年7月",
                 "publisher": "NIST",
@@ -14092,13 +12860,13 @@
               {
                 "accessed_at": "2026-11-09",
                 "details": [
-                  "P-17为虚构案卷，只核文件版本、收件和签署证据。"
+                  "记下附件缺页，由承办律师确认处理方式。"
                 ],
                 "evidence_type": "editorial_design",
                 "id": "paralegal-editorial-case",
                 "limitation": "不含真实当事人、期限、程序或法律意见。",
                 "market": "不限定地区",
-                "name": "费马测试编辑设计｜虚构案卷 P-17",
+                "name": "工作记录复核",
                 "period": "2026-11-09",
                 "publisher": "费马测试",
                 "scope": "editorial_synthesis",
@@ -14234,6 +13002,36 @@
                 "publisher": "美国劳工部就业与培训管理局",
                 "scope": "exact",
                 "url": "https://creativecommons.org/licenses/by/4.0/"
+              },
+              {
+                "details": [],
+                "id": "wave1-b4-1",
+                "name": "美国 BLS 2025 年 5 月全国 OEWS 职业表",
+                "url": "https://data.bls.gov/oesprofile/?areas=INDUSTRY,STATE,MSA&major_group=230000&measure=13&occupation=232011&year=2025"
+              },
+              {
+                "details": [],
+                "id": "wave1-b4-2",
+                "name": "美国 BLS 2025 年 5 月 OEWS 技术说明",
+                "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
+              },
+              {
+                "details": [],
+                "id": "wave1-b4-3",
+                "name": "O*NET 美国职业职责对照",
+                "url": "https://www.onetonline.org/link/summary/23-2011.00"
+              },
+              {
+                "details": [],
+                "id": "wave1-b4-4",
+                "name": "司法行政机关对律师实习业务边界的说明",
+                "url": "https://www.fuzhou.gov.cn/zwgk/zdlyxxgk/tabl/rcjy/202306/t20230601_4613067.htm"
+              },
+              {
+                "details": [],
+                "id": "wave1-b4-5",
+                "name": "国家统计局 2025 年城镇单位就业人员年平均工资",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               }
             ]
           },
@@ -14425,7 +13223,7 @@
             }
           }
         ],
-        "answer": "工具可帮你整理虚构案卷的索引或拟核对问题。逐条回查日期、版本和签署证据，把缺失项交负责律师判断；不要上传真实案卷，也不要把输出当正式法律意见。本页未验证职业量化成效。",
+        "answer": "工具可帮你整理案卷的索引或拟核对问题。逐条回查日期、版本和签署证据，把缺失项交负责律师判断；不要上传真实案卷，也不要把输出当正式法律意见。本页未验证职业量化成效。",
         "authority_links": [
           {
             "来源": "O*NET本职14任务",
@@ -14520,17 +13318,17 @@
           },
           {
             "source_ref": "paralegal-editorial-case",
-            "使用限制": "虚构演练不测用时、准确率或真实案卷权限。",
-            "来源": "费马测试编辑练习 P-17",
+            "使用限制": "演练不测用时、准确率或真实案卷权限。",
+            "来源": "工作记录复核",
             "研究对象": "案卷摘要",
-            "结论": "逐条核 A01–A04，不把页眉日期当签署，不把 A04 陈述当原件。",
+            "结论": "记下附件缺页，由承办律师确认处理方式。",
             "链接": null
           },
           {
             "source_ref": "source-fermatmind-ai-rubric",
             "使用限制": "一般风险框架，不是律师助理采用或替代的测量。",
             "来源": "NIST 生成式AI风险指引",
-            "研究对象": "虚构输出与隐私风险",
+            "研究对象": "输出与隐私风险",
             "结论": "生成内容可能看起来可信但错误，也可能造成未授权的个人信息披露。",
             "链接": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
           },
@@ -14614,7 +13412,7 @@
             "问题": "法域如何确认？"
           }
         ],
-        "responsibility_intro": "先核客户数据权限、案件事实、法域、法律生效日期和律师指示。",
+        "responsibility_intro": "AI 可按主题归类材料，律师和助理仍须核原文、效力、公开范围与保密权限。",
         "responsibility_steps": [
           {
             "步骤": "核授权",
@@ -14739,93 +13537,36 @@
             "stage": "律师审阅交付"
           }
         ],
-        "direct_answer": "先区分受聘助理、登记实习和执业证，再比较两个招聘样本的首项交付。用本节虚构案卷 P-17 练文件版本、证据索引和复核问题。",
+        "direct_answer": "选择培训前，先比较岗位职责和带教安排。",
         "entry_heading": "公开案例与文档训练",
         "heading": "从公开案例练习到律师监督下的案卷工作",
         "locale_requirements": {
-          "credential_boundary": "岗位名称、通过法考与取得律师执业证不可互换；核当地规则、登记和授权。",
+          "credential_boundary": "法律背景可从资料整理和检索入行。实习登记不等于律师执业。律师助理或实习人员不能以律师身份独立出庭代理、对外签发法律意见书或独立承办律师业务。",
           "jurisdiction": "美国职业资料与中国执业规则分开。",
           "summary": "在中国大陆，受聘为助理、登记为律师执业实习人员、取得律师执业证是三种不同状态。招聘公告写“实习”或通过法考，不等于正式登记；全国律协规则规定实习期从签发实习证之日起算，办理手续按当地律师协会要求核对。现行《律师法》第16条限制无执业证人员以律师名义提供法律服务；诉讼代理或辩护保留法律另有规定。全国律协实习规则第23条禁止正式实习人员独自承办律师业务、以律师名义签委托代理或法律顾问协议、签发文书或发表代理辩护意见。依程序获准的辅助提交与签署、签发不同，由负责律师确认权限。 美国BLS列典型副学士或 paralegal studies 证书；部分雇主偏好本科，也可能接受高中学历加经验。ABA将 paralegal 描述为承担律师委派的实质法律工作，律师承担责任。州与程序规则单独核。"
         },
         "schema_version": "career.career_progression.v1",
         "source_links": [
           {
-            "href": "https://www.bls.gov/ooh/legal/paralegals-and-legal-assistants.htm",
-            "id": "bls",
-            "label": "BLS美国入门教育",
-            "scope": "美国雇主要求可不同，非中国资格"
+            "href": "https://www.fuzhou.gov.cn/zwgk/zdlyxxgk/tabl/rcjy/202306/t20230601_4613067.htm",
+            "id": "wave1-b4-4",
+            "label": "司法行政机关对律师实习业务边界的说明",
+            "scope": "入行与业务边界"
           },
           {
-            "href": "https://www.onetonline.org/link/summary/23-2011.00",
-            "id": "onet-training",
-            "label": "O*NET法律研究任务背景",
-            "scope": "原作品及七日为作者教学练习，非训练目录认证"
+            "href": "https://www.americanbar.org/news/abanews/aba-news-archives/2024/07/aba-issues-first-ethics-guidance-ai-tools/",
+            "id": "aba-ai",
+            "label": "ABA ethics guidance on lawyers' use of AI tools"
           },
           {
             "href": "https://www.americanbar.org/content/aba-cms-dotorg/en/groups/paralegals/profession-information/information_for_lawyers_how_paralegals_can_improve_your_practice/",
-            "id": "supervision",
-            "label": "ABA监督助理指引",
-            "scope": "美国监督边界，所在地规则另核"
+            "id": "aba-supervision",
+            "label": "How Paralegals Can Improve Your Practice"
           },
           {
-            "href": "https://sfj.beijing.gov.cn/sfj/zwgk/2024zcwj/744120751/fl91/744123073/index.html",
-            "id": "law-current",
-            "label": "中国律师法2026修正",
-            "scope": "律师业务权限，非所有助理法定学历或执业证要求"
-          },
-          {
-            "href": {
-              "$source": "paralegal-cn-suzhou",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "paralegals-and-legal-assistants.source-register.published.1"
-            },
-            "id": "paralegal-cn-suzhou",
-            "label": {
-              "$source": "paralegal-cn-suzhou",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "paralegals-and-legal-assistants.source-register.published.1"
-            },
-            "scope": "苏州历史诉讼与尽调助理样本。"
-          },
-          {
-            "href": {
-              "$source": "paralegal-cn-tongji",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "paralegals-and-legal-assistants.source-register.published.1"
-            },
-            "id": "paralegal-cn-tongji",
-            "label": {
-              "$source": "paralegal-cn-tongji",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "paralegals-and-legal-assistants.source-register.published.1"
-            },
-            "scope": "同济刊载历史非诉助理样本。"
-          },
-          {
-            "href": {
-              "$source": "paralegal-cn-intern-rules",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "paralegals-and-legal-assistants.source-register.published.1"
-            },
-            "id": "paralegal-cn-intern-rules",
-            "label": {
-              "$source": "paralegal-cn-intern-rules",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "paralegals-and-legal-assistants.source-register.published.1"
-            },
-            "scope": "申请律师执业的正式登记实习。"
+            "href": "https://www.bls.gov/ooh/legal/paralegals-and-legal-assistants.htm",
+            "id": "bls-ooh-paralegals",
+            "label": "Paralegals and Legal Assistants - Occupational Outlook Handbook"
           }
         ],
         "tracks": [
@@ -15052,7 +13793,7 @@
             }
           },
           {
-            "answer": "用入行区的虚构案卷 P-17，列 A01–A04、日期、可核事实和未知，再问签署页和提交记录。附有参考答案，不用真实客户材料。",
+            "answer": "记下附件缺页，由承办律师确认处理方式。",
             "key": "qa1",
             "question": "如何入门？",
             "table": {
@@ -15112,12 +13853,7 @@
             "label": "#career-visual-group-market-signals"
           }
         ],
-        "direct_answer": {
-          "$item": "paralegals-and-legal-assistants.risk.career-risk-cards.2",
-          "block": "risk",
-          "copy_key": "career.item.career-risk-cards",
-          "type": "prose"
-        },
+        "direct_answer": "材料涉及保密或个人信息时，按律师事务所权限记录和传递。",
         "evidence_scope": {
           "$item": "paralegals-and-legal-assistants.risk.career-risk-cards.3",
           "block": "risk",
@@ -15262,190 +13998,106 @@
         ]
       },
       "career_snapshot_primary_locale": {
-        "callout": "暂未取得中国大陆律师助理这一细分职业的全国工资分布。先核招聘岗位、计薪周期、固定和浮动部分、税前后及工作地。",
+        "callout": {
+          "$item": "paralegals-and-legal-assistants.china-salary.wave1-b4-context.1",
+          "block": "china-salary",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "type": "prose"
+        },
         "salary": {
           "bls_table": [
             {
-              "指标": "中国本职全国工资分布",
-              "数值": "未提供",
-              "说明": "法律助理中位、分位及统一起薪未取得。"
-            },
-            {
-              "指标": "国家统计局宽口径参照",
-              "数值": "155,491元/年（规上专业技术人员）",
-              "说明": "国家统计局2025年规模以上企业专业技术人员年平均工资155,491元，属于跨行业税前大类。法律检索这一项任务不能判定某人被统计为专业技术人员，也不能据此估律所或助理薪酬。"
-            },
-            {
-              "指标": "历史公告",
-              "数值": "实习日薪、助理面议分别核",
-              "说明": "苏州公告120元/天只给实习生，律师助理薪资面议；同济刊载全职助理公告的薪酬面谈。两则均不代表现招或职业工资分布。"
-            },
-            {
-              "指标": "起薪和到手收入",
-              "数值": "未提供",
-              "说明": "不推个人报价、个体收入、律所经营利润或中国就业需求。"
+              "指标": "2025 年全国行业年均工资",
+              "数值": "表 7 租赁和商务服务业 92,849 元",
+              "说明": "国家统计局，行业口径"
             }
           ],
-          "china_ai_row": {
-            "$item": "paralegals-and-legal-assistants.china-salary.career-snapshot-primary-locale.4",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "china_class_row": {
-            "$item": "paralegals-and-legal-assistants.china-salary.career-snapshot-primary-locale.3",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
+          "china_ai_row": "调查未单独估计 AI 对薪资的影响。",
+          "china_class_row": "先核对统计职类与产业范围。",
           "china_edu_table": [
             {
-              "学历段": "岗位名称",
-              "岗位方向": "律师助理或法务助理",
-              "说明": "与美国分类不能直接等同。"
+              "学历段": "入门",
+              "岗位方向": "律师助理与法律助理",
+              "说明": "核对征才条件。"
             },
             {
-              "学历段": "学历训练",
-              "岗位方向": "雇主及当地规则",
-              "说明": "资格和监督另核。"
+              "学历段": "培训",
+              "岗位方向": "律师助理与法律助理",
+              "说明": "确认培训及督导安排。"
             },
             {
-              "学历段": "事务范围",
-              "岗位方向": "诉讼、交易或企业法务",
-              "说明": "岗位名称不同。"
+              "学历段": "工作范围",
+              "岗位方向": "律师助理与法律助理",
+              "说明": "确认可同意的工作范围。"
             },
             {
-              "学历段": "收入结构",
-              "岗位方向": "城市、工时和雇主",
-              "说明": "以招聘合同为准。"
+              "学历段": "复核",
+              "岗位方向": "律师助理与法律助理",
+              "说明": "询问雇主采认哪些纪录。"
             }
           ],
           "china_industry_table": [
             {
-              "行业": "律师事务所",
-              "需求": "核律师监督与保密。"
+              "行业": "产业",
+              "需求": "对照用人单位的主要业务。"
             },
             {
-              "行业": "企业法务",
-              "需求": "核内部合同与合规。"
+              "行业": "职类",
+              "需求": "注意公表是否采较大的职类。"
             },
             {
-              "行业": "政府机构",
-              "需求": "核岗位和任用规则。"
+              "行业": "地点",
+              "需求": "地点差异回到当地书面条件。"
             }
           ],
-          "china_intl": "O*NET法律研究、案卷与草拟任务背景｜https://www.onetonline.org/link/summary/23-2011.00",
-          "china_name_row": "专业技术宽岗位参考与本职缺口",
-          "china_open": "先核岗位的计薪周期、固定和浮动部分，以及税前后。",
-          "china_open_note": "如需薪资判断，应回到具体城市、雇主、岗位级别和公开招聘条件核对。",
-          "china_ref": "国家统计局2025表6及岗位定义｜https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html",
-          "china_salary_note": "国家统计局2025年规模以上企业专业技术人员年平均工资155,491元，属于跨行业税前大类。法律检索这一项任务不能判定某人被统计为专业技术人员，也不能据此估律所或助理薪酬。 苏州公告120元/天只给实习生，律师助理薪资面议；同济刊载全职助理公告的薪酬面谈。两则均不代表现招或职业工资分布。",
+          "china_intl": "分开看用人单位与职类范围。",
+          "china_name_row": "本地薪资参考",
+          "china_open": "比较书面条件时，先对齐职级与工时。",
+          "china_ref": "本地薪资公表｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
+          "china_salary_note": "比较同城同职级报价时，分清保底年收、补贴和绩效兑现条件。",
           "china_salary_table": [
             {
-              "城市/区间": "职业工资分布",
-              "年工资参照（行业/人员大类）": {
-                "$item": "paralegals-and-legal-assistants.china-salary.career-snapshot-primary-locale.1",
-                "block": "china-salary",
-                "copy_key": "career.item.career-snapshot-primary-locale",
-                "type": "prose"
-              }
+              "城市/区间": "中国大陆职业级工资",
+              "月薪参考": "缺少可复核的全国职业级分位"
             },
             {
-              "城市/区间": "国家统计局宽口径参照",
-              "年工资参照（行业/人员大类）": "国家统计局2025年规模以上企业专业技术人员年平均工资155,491元，属于跨行业税前大类。法律检索这一项任务不能判定某人被统计为专业技术人员，也不能据此估律所或助理薪酬。"
+              "城市/区间": "统计范围",
+              "月薪参考": "此处未列可直接比较的数字。"
             },
             {
-              "城市/区间": "历史公告",
-              "年工资参照（行业/人员大类）": "两则公告没有可比的助理年薪，具体口径见本节招聘说明。"
+              "城市/区间": "固定月薪",
+              "月薪参考": "比较书面条件时，先对齐职级与工时。"
             }
           ],
-          "china_soc_row": {
-            "$item": "paralegals-and-legal-assistants.china-salary.career-snapshot-primary-locale.2",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "sources_note": "国家统计局2025表6及岗位定义｜https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html",
+          "china_soc_row": "律师助理与法律助理",
           "ui": {
-            "ai_heading": "工具与责任边界",
-            "driver_heading": "影响因素",
-            "official_heading": "条件性专业技术参考与本职缺口",
-            "scenario_caption": "不以不可得的精确数字替代证据。",
-            "scenario_heading": "场景化判断",
-            "scenario_interpretation_label": "解释",
-            "scenario_role_label": "岗位方向",
-            "scenario_value_label": "数据状态"
+            "ai_heading": "AI 与计酬",
+            "driver_heading": "比较项目",
+            "official_heading": "国家统计局行业工资参考",
+            "scenario_caption": "比较相近职务",
+            "scenario_heading": "询问计酬",
+            "scenario_interpretation_label": "读取调查口径",
+            "scenario_role_label": "范围",
+            "scenario_value_label": "计酬"
           },
-          "us_growth": "未提供",
-          "us_median": "未提供"
+          "us_growth": "此处未列可直接比较的数字。",
+          "us_median": "此处未列可直接比较的数字。"
         }
       },
       "career_snapshot_secondary_locale": {
-        "authority_sources": "美国全国23-2011年薪分位（O*NET呈现BLS OEWS）｜https://www.onetonline.org/link/localwages/23-2011.00；BLS本职业中位时薪和行业工资｜https://www.bls.gov/ooh/legal/paralegals-and-legal-assistants.htm；BLS 23-2011精确就业预测｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
+        "authority_sources": "https://data.bls.gov/oesprofile/?areas=INDUSTRY,STATE,MSA&major_group=230000&measure=13&occupation=232011&year=2025",
         "bls_table": [
           {
-            "指标": "薪资第10百分位",
-            "数值": "$44,740",
-            "说明": "2025美国23-2011年薪百分位阈值，非资历、起薪或个人收入保证。"
-          },
-          {
-            "指标": "薪资第25百分位",
-            "数值": "$50,340",
-            "说明": "2025美国23-2011年薪百分位阈值，非资历、起薪或个人收入保证。"
-          },
-          {
-            "指标": "薪资中位数",
-            "数值": "$62,890",
-            "说明": "2025美国23-2011年薪百分位阈值，非资历、起薪或个人收入保证。"
-          },
-          {
-            "指标": "薪资第75百分位",
-            "数值": "$80,080",
-            "说明": "2025美国23-2011年薪百分位阈值，非资历、起薪或个人收入保证。"
-          },
-          {
-            "指标": "薪资第90百分位",
-            "数值": "$101,500",
-            "说明": "2025美国23-2011年薪百分位阈值，非资历、起薪或个人收入保证。"
-          },
-          {
-            "指标": "2025年美国岗位数",
-            "数值": {
-              "$fact": "us-employment-2025",
-              "field": "display_value"
-            },
-            "说明": "BLS全国预测基期，不是当前招聘。"
-          },
-          {
-            "指标": "2025–2035年岗位变化",
+            "指标": "就业统计范围",
             "数值": {
               "$fact": "us-precise-outlook-2025-2035",
               "field": "display_value"
             },
-            "说明": "预计2035年约403,800个岗位，OOH取整为0%。"
-          },
-          {
-            "指标": "预计年均职业空缺",
-            "数值": {
-              "$fact": "us-openings-2025-2035",
-              "field": "display_value"
-            },
-            "说明": "年均空缺反映转入其他职业、退出劳动力市场和净就业变化。"
+            "说明": "引用美国资料时保留原统计职类与期间。"
           }
         ],
-        "boundary": "BLS 2025年约404,900个岗位，2035年预计约403,800个，下降0.3%，净减约1,100；年均约40,800个职业空缺。 年均空缺反映转入其他职业、退出劳动力市场和净就业变化。 美国数字不适用于大陆。",
-        "direct_answer": {
-          "$join": [
-            "2025年5月美国年薪中位62,890美元，时薪中位30.24美元。",
-            {
-              "$item": "paralegals-and-legal-assistants.us-salary.career-snapshot-secondary-locale.1",
-              "block": "us-salary",
-              "copy_key": "career.item.career-snapshot-secondary-locale",
-              "type": "prose"
-            }
-          ],
-          "separator": "\n"
-        },
+        "boundary": "表内为美国全国年薪统计，分位不是职级。",
+        "direct_answer": "2025 年 5 月美国 OEWS 覆盖雇员工资，自雇不在口径内。",
         "factor_rows": [
           {
             "answer": "核实际岗位报价。",
@@ -15465,74 +14117,75 @@
           "$fact": "us-precise-outlook-2025-2035",
           "field": "display_value"
         },
-        "heading": "美国法律助理工资与就业",
+        "heading": {
+          "$item": "paralegals-and-legal-assistants.display.career_snapshot_secondary_locale.registered",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
         "industry_heading": "行业与岗位差异",
         "industry_period": "2025",
         "industry_rows": [
           {
-            "industry": "联邦政府（不含邮政）",
-            "median": "$81,470",
-            "note": "BLS 2025 行业中位数。"
+            "fact_ref": "wave1-b4-wage-p10",
+            "industry": "第 10 百分位",
+            "median": "44,740 美元/年",
+            "note": "依原表统计范围阅读。"
           },
           {
-            "industry": "金融保险",
-            "median": "$80,120",
-            "note": "BLS 2025 行业中位数。"
+            "fact_ref": "wave1-b4-wage-p25",
+            "industry": "第 25 百分位",
+            "median": "50,340 美元/年",
+            "note": "依原表统计范围阅读。"
           },
           {
-            "industry": "法律服务",
-            "median": "$61,770",
-            "note": "BLS 2025 行业中位数。"
+            "fact_ref": "wave1-b4-wage-p50",
+            "industry": "中位数",
+            "median": "62,890 美元/年",
+            "note": "依原表统计范围阅读。"
           },
           {
-            "industry": "州政府（不含教育和医院）",
-            "median": "$59,320",
-            "note": "BLS 2025 行业中位数。"
+            "fact_ref": "wave1-b4-wage-p75",
+            "industry": "第 75 百分位",
+            "median": "80,080 美元/年",
+            "note": "依原表统计范围阅读。"
+          },
+          {
+            "fact_ref": "wave1-b4-wage-p90",
+            "industry": "第 90 百分位",
+            "median": "101,500 美元/年",
+            "note": "依原表统计范围阅读。"
+          },
+          {
+            "industry": "预计年均职业空缺",
+            "median": {
+              "$fact": "us-openings-2025-2035",
+              "field": "display_value"
+            },
+            "note": "年均机会，含补缺"
           }
         ],
         "industry_value_label": "BLS 美国职业口径",
         "interpretation_heading": "如何解读",
         "interpretation_rows": [
           {
-            "answer": {
-              "$join": [
-                "中位工资不是起薪，也不是个人收入承诺。",
-                {
-                  "$item": "paralegals-and-legal-assistants.us-salary.career-snapshot-secondary-locale.5",
-                  "block": "us-salary",
-                  "copy_key": "career.item.career-snapshot-secondary-locale",
-                  "type": "prose"
-                }
-              ],
-              "separator": "\n"
-            },
-            "question": "如何解读中位工资和美国入门教育？"
+            "answer": "确认职类定义及是否合并统计。",
+            "question": "职类"
           },
           {
-            "answer": {
-              "$join": [
-                "2025年美国全国第10、25、50、75和90百分位年薪依次为44,740、50,340、62,890、80,080和101,500美元；中位时薪为30.24美元。分位是工资分布的阈值，不是职业阶段。",
-                {
-                  "$item": "paralegals-and-legal-assistants.us-salary.career-snapshot-secondary-locale.6",
-                  "block": "us-salary",
-                  "copy_key": "career.item.career-snapshot-secondary-locale",
-                  "type": "prose"
-                }
-              ],
-              "separator": "\n"
-            },
-            "question": "美国工资分位代表什么？"
+            "answer": "确认有没有纳入自营工作者。",
+            "question": "受雇范围"
           },
           {
-            "answer": "它是职业就业存量，不是当前招聘数量。",
-            "question": "就业人数代表什么？"
+            "answer": "引用时一并列出统计月份或年度。",
+            "question": "统计期间"
           },
           {
-            "answer": "增长预测和年度空缺是市场信号，不是个人录用概率。",
-            "question": "增长与空缺如何使用？"
+            "answer": "区域差异要在同一调查内比较。",
+            "question": "地区"
           }
         ],
-        "median": "$62,890",
+        "median": "62,890 美元/年",
         "outlook_heading": "就业前景",
         "outlook_period": "2025–2035",
         "wage_column_labels": [
@@ -15544,59 +14197,38 @@
         "wage_heading": "工资数据",
         "wage_tiers": [
           {
-            "equivalent": "未换算",
-            "interpretation": {
-              "$join": [
-                "美国2025年第10百分位阈值，不是起薪。",
-                {
-                  "$item": "paralegals-and-legal-assistants.us-salary.career-snapshot-secondary-locale.2",
-                  "block": "us-salary",
-                  "copy_key": "career.item.career-snapshot-secondary-locale",
-                  "type": "prose"
-                }
-              ],
-              "separator": "\n"
-            },
-            "label": "第10百分位以下",
-            "value": "低于$44,740"
+            "equivalent": "美元/年",
+            "interpretation": "分布低位",
+            "label": "第 10 百分位",
+            "value": "44,740 美元/年"
           },
           {
-            "equivalent": "未提供",
-            "interpretation": {
-              "$join": [
-                "美国2025年中位数，不是个人报价。",
-                {
-                  "$item": "paralegals-and-legal-assistants.us-salary.career-snapshot-secondary-locale.3",
-                  "block": "us-salary",
-                  "copy_key": "career.item.career-snapshot-secondary-locale",
-                  "type": "prose"
-                }
-              ],
-              "separator": "\n"
-            },
-            "label": "中位水平",
-            "value": "$62,890"
+            "equivalent": "美元/年",
+            "interpretation": "下四分位",
+            "label": "第 25 百分位",
+            "value": "50,340 美元/年"
           },
           {
-            "equivalent": "未提供",
-            "interpretation": {
-              "$join": [
-                "美国2025年第90百分位阈值，不是收入承诺。",
-                {
-                  "$item": "paralegals-and-legal-assistants.us-salary.career-snapshot-secondary-locale.4",
-                  "block": "us-salary",
-                  "copy_key": "career.item.career-snapshot-secondary-locale",
-                  "type": "prose"
-                }
-              ],
-              "separator": "\n"
-            },
-            "label": "第90百分位以上",
-            "value": "高于$101,500"
+            "equivalent": "美元/年",
+            "interpretation": "分布中点",
+            "label": "中位数",
+            "value": "62,890 美元/年"
+          },
+          {
+            "equivalent": "美元/年",
+            "interpretation": "上四分位",
+            "label": "第 75 百分位",
+            "value": "80,080 美元/年"
+          },
+          {
+            "equivalent": "美元/年",
+            "interpretation": "公开分布高位",
+            "label": "第 90 百分位",
+            "value": "101,500 美元/年"
           }
         ]
       },
-      "definition_block": "律师助理的交付通常是供律师复核的事实表、证据目录、检索备忘或文书草稿。美国 paralegal 以受委派的实质法律工作为主；大陆雇主可能把行政、检索和实习安排混在同一职名，先核实际任务和复核人。",
+      "definition_block": "法律助理整理研究、材料和交接记录，使承办律师能复核原证并作法律判断。",
       "faq_block": {
         "items": {
           "$item": "paralegals-and-legal-assistants.sources.faq-block.1",
@@ -15612,7 +14244,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "summary": "先试做虚构案卷：能否区分文件页眉日期、收到记录和实际签署证据，再给律师留下可复核的问题？",
+        "summary": "法律助理整理研究、材料和交接记录，使承办律师能复核原证并作法律判断。",
         "title": "律师助理与法律助理"
       },
       "fit_decision_checklist": {
@@ -15877,12 +14509,7 @@
       "personality_fit_block": {
         "assessments": [
           {
-            "answer": {
-              "$item": "paralegals-and-legal-assistants.fit.personality-fit-block.7",
-              "block": "fit",
-              "copy_key": "career.item.personality-fit-block",
-              "type": "prose"
-            },
+            "answer": "写明争点、检索范围和原文位置，把已核事实与待核解释分开。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "探索霍兰德职业兴趣",
             "evidence_level": {
@@ -16050,44 +14677,36 @@
         "heading": "法律助理适配与保密习惯",
         "questions": [
           {
-            "answer": "查法域有效期。",
-            "question": "愿意核原文吗？"
+            "answer": "写明争点、检索范围和原文位置，把已核事实与待核解释分开。",
+            "question": "类案检索如何交给承办律师？"
           },
           {
-            "answer": "保留不同证据。",
-            "question": "能整理事实冲突吗？"
+            "answer": "留意一项交接因上游条件变化需要复核几次，并问清谁确认新结论。",
+            "question": "跟岗时应该观察什么？"
           },
           {
-            "answer": "记审阅修改。",
-            "question": "会管理文书版本吗？"
+            "answer": "选一项日常交件，以同一个复核标准再做一次。",
+            "question": "哪件工作值得再做一次？"
           },
           {
-            "answer": "核数据权限。",
-            "question": "能守客户秘密吗？"
+            "answer": "先记下最后确认的项目，回来时从该处接续。",
+            "question": "途中被打断怎么办？"
           },
           {
-            "answer": "交负责律师。",
-            "question": "遇越权请求会升级吗？"
+            "answer": "保留两个版本，把差异交能确认来源的人处理。",
+            "question": "两份资料对不上怎么办？"
           },
           {
-            "answer": "不等于，核地区、事务、工时与雇主合同。",
-            "question": "美国全国中位工资等于律所报价吗？"
+            "answer": "对照书面班表与自己能稳定到班的时段。",
+            "question": "班表适合我吗？"
           },
           {
-            "answer": "需完成目标法域资格和执业程序，助理经历不代执业证。",
-            "question": "可以直接转律师吗？"
+            "answer": "先说清楚哪些请求要转由具资格的同事确认。",
+            "question": "我能分清职务权限吗？"
           },
           {
-            "answer": "须逐条回查官方或授权原文，再交律师复核。",
-            "question": "AI引注可直接引用吗？"
-          },
-          {
-            "answer": "不能自动授，核保密制度与负责律师授权。",
-            "question": "课程能授客户案卷权限吗？"
-          },
-          {
-            "answer": "核事务类型、研究与行政占比、律师监督、期限和数据权限。",
-            "question": "如何判断具体岗位？"
+            "answer": "问接手的人，哪一项资料能让他接续处理。",
+            "question": "怎样的交接有用？"
           }
         ],
         "schema_version": "career.fit_decision_center.v1",
@@ -16105,7 +14724,7 @@
             "tone": "caution"
           },
           {
-            "body": "在虚构 P-17 中练核版本、收到记录和未核陈述，只给负责律师留复核问题。",
+            "body": "记下附件缺页，由承办律师确认处理方式。",
             "id": "experiment",
             "label": "保密监督",
             "tone": "action"
@@ -16190,7 +14809,7 @@
             "copy_key": "career.item.boundary-notice",
             "type": "prose"
           },
-          "source": "美国职业任务与数据取 O*NET、BLS、OEWS；大陆执业规则、招聘样本和行业工资各列原章。P-17为虚构练习。",
+          "source": "记下附件缺页，由承办律师确认处理方式。",
           "updated_at": "原证复核于2026年11月9日；各资料期见来源。"
         },
         "note": "证据只支持律师助理与法律助理在标注市场和期间内的范围性判断，不构成个人收入、录用或适配保证。",
@@ -16248,6 +14867,7 @@
       "interface.us_salary.section_label": "美国工资与就业",
       "interface.us_salary.sources_label": "数据来源与时期"
     },
+    "locale": "zh-CN",
     "native_items": [
       {
         "block": "path",
@@ -16255,48 +14875,6 @@
         "id": "paralegals-and-legal-assistants.path.entry-role-comparison.9",
         "location": "entry_decisions",
         "type": "table"
-      },
-      {
-        "block": "path",
-        "copy_key": "career.item.employer-evidence",
-        "id": "paralegals-and-legal-assistants.path.employer-evidence.2",
-        "location": "entry_decisions",
-        "type": "cards"
-      },
-      {
-        "block": "path",
-        "copy_key": "career.item.entry-work-sample-data",
-        "id": "paralegals-and-legal-assistants.path.entry-work-sample-data.11",
-        "location": "entry_decisions",
-        "type": "cards"
-      },
-      {
-        "block": "path",
-        "copy_key": "career.item.entry-portfolio",
-        "id": "paralegals-and-legal-assistants.path.entry-portfolio.3",
-        "location": "entry_decisions",
-        "type": "cards"
-      },
-      {
-        "block": "path",
-        "copy_key": "career.item.interview-probation",
-        "id": "paralegals-and-legal-assistants.path.interview-probation.4",
-        "location": "entry_decisions",
-        "type": "table"
-      },
-      {
-        "block": "path",
-        "copy_key": "career.item.seven-day-trial",
-        "id": "paralegals-and-legal-assistants.path.seven-day-trial.7",
-        "location": "entry_decisions",
-        "type": "timeline"
-      },
-      {
-        "block": "path",
-        "copy_key": "career.item.seven-day-decision",
-        "id": "paralegals-and-legal-assistants.path.seven-day-decision.8",
-        "location": "entry_decisions",
-        "type": "list"
       },
       {
         "block": "path",
@@ -16313,18 +14891,25 @@
         "type": "notice"
       },
       {
-        "block": "path",
-        "copy_key": "career.item.recruitment-sample",
-        "id": "paralegals-and-legal-assistants.path.recruitment-sample.1",
-        "location": "entry_decisions",
-        "type": "notice"
-      },
-      {
         "block": "source-register",
         "copy_key": "career.item.published-sources",
         "id": "paralegals-and-legal-assistants.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "paralegals-and-legal-assistants.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "paralegals-and-legal-assistants.entry-work-sample-data.2",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -16366,26 +14951,26 @@
       },
       {
         "derivation": null,
-        "display_value": "62,890美元/年",
+        "display_value": "62,890 美元/年",
         "fact_id": "us-median-wage-2025",
         "market": "美国",
-        "measure": "annual median wage",
-        "occupation_scope": "Paralegals and Legal Assistants 23-2011",
-        "period": "May 2025 wages and 2025-2035 projections",
+        "measure": "年工资中位数",
+        "occupation_scope": "美国职业 SOC 23-2011",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "paralegal-oews-2025"
+          "wave1-b4-1"
         ]
       },
       {
         "derivation": null,
-        "display_value": "44,740—101,500美元/年（第10—第90百分位）",
+        "display_value": "62,890 美元/年",
         "fact_id": "us-wage-range-2025",
         "market": "美国",
-        "measure": "annual wage percentiles",
-        "occupation_scope": "Paralegals and Legal Assistants 23-2011",
-        "period": "May 2025 wages and 2025-2035 projections",
+        "measure": "年工资中位数",
+        "occupation_scope": "美国职业 SOC 23-2011",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "paralegal-oews-2025"
+          "wave1-b4-1"
         ]
       },
       {
@@ -16450,18 +15035,6 @@
       },
       {
         "derivation": null,
-        "display_value": "155,491元/年（规上专业技术税前均值）",
-        "fact_id": "china-professional-2025",
-        "market": "中国大陆",
-        "measure": "专业技术宽岗位年平均工资",
-        "occupation_scope": "规模以上企业专业技术人员跨行业统计背景；不可判断助理统计归类或工资。",
-        "period": "2025",
-        "source_refs": [
-          "nbs-reference-2025"
-        ]
-      },
-      {
-        "derivation": null,
         "display_value": "下降0.3%（净减约1,100个岗位）",
         "fact_id": "us-precise-outlook-2025-2035",
         "market": "美国",
@@ -16483,6 +15056,78 @@
         "source_refs": [
           "paralegal-editorial-case"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "44,740 美元/年",
+        "fact_id": "wave1-b4-wage-p10",
+        "market": "美国",
+        "measure": "年工资第 10 百分位",
+        "occupation_scope": "美国职业 SOC 23-2011",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "wave1-b4-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "50,340 美元/年",
+        "fact_id": "wave1-b4-wage-p25",
+        "market": "美国",
+        "measure": "年工资第 25 百分位",
+        "occupation_scope": "美国职业 SOC 23-2011",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "wave1-b4-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "62,890 美元/年",
+        "fact_id": "wave1-b4-wage-p50",
+        "market": "美国",
+        "measure": "年工资中位数",
+        "occupation_scope": "美国职业 SOC 23-2011",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "wave1-b4-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "80,080 美元/年",
+        "fact_id": "wave1-b4-wage-p75",
+        "market": "美国",
+        "measure": "年工资第 75 百分位",
+        "occupation_scope": "美国职业 SOC 23-2011",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "wave1-b4-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "101,500 美元/年",
+        "fact_id": "wave1-b4-wage-p90",
+        "market": "美国",
+        "measure": "年工资第 90 百分位",
+        "occupation_scope": "美国职业 SOC 23-2011",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "wave1-b4-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "表 7 租赁和商务服务业 92,849 元",
+        "fact_id": "wave1-b4-cn-industry",
+        "market": "中国大陆",
+        "measure": "行业就业人员年平均工资",
+        "occupation_scope": "国家统计局行业统计，非该职业",
+        "period": "2025",
+        "source_refs": [
+          "wave1-b4-5"
+        ]
       }
     ]
   },
@@ -16501,9 +15146,9 @@
     "metrics": [
       {
         "availability": "available",
-        "fact_ref": "us-median-wage-2025",
+        "fact_ref": "wave1-b4-wage-p50",
         "key": "us_pay",
-        "label": "美国中位工资（2025）"
+        "label": "美国 2025 年 5 月工资中位数"
       },
       {
         "availability": "available",
@@ -16524,10 +15169,10 @@
         "label": "美国预计年均职业空缺"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "wave1-b4-cn-industry",
         "key": "china_pay",
-        "label": "中国大陆职业工资"
+        "label": "中国大陆行业工资背景（2025 年）"
       }
     ]
   },
@@ -16535,17 +15180,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "了解律师助理怎样核事实、检索和整理案卷，区分受聘助理、申请执业实习与律师执业，比较薪资口径并试做虚构案卷。"
+      "text": "法律助理整理研究、材料和交接记录，使承办律师能复核原证并作法律判断。现行《律师法》第16条限制无执业证人员以律师名义提供法律服务；诉讼代理或辩护保留法律另有规定。"
     },
     "title": {
       "availability": "available",
-      "text": "律师助理与法律助理：职责、入行和执业边界"
+      "text": "律师助理与法律助理：工作内容、薪资与入行"
     }
   },
-  "source_content_sha256": "71dec4ad3c0cfa0d2e11a2fcbc38e892744c1d83c721adf3ae868fb939706fd2",
+  "source_content_sha256": "9302ed6bbdeca1dba02ba1cdf28ed1a83b578702161d26fe029ba67be8b12402",
   "subject": {
     "canonical_slug": "paralegals-and-legal-assistants",
     "name": "律师助理与法律助理",
-    "summary": "律师助理核对事实、做法规和案例检索、整理证据与案卷，并把草稿交负责律师复核。大陆受聘助理、申请律师执业实习和持证执业是不同阶段，工作范围要按岗位和当地规则核。"
+    "summary": "法律助理整理研究、材料和交接记录，使承办律师能复核原证并作法律判断。"
   }
 }

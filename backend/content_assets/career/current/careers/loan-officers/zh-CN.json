@@ -2,18 +2,6 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
-      "fact:cn-finance-nonprivate-wage": {
-        "status": "pending_mapping"
-      },
-      "fact:cn-finance-private-wage": {
-        "status": "pending_mapping"
-      },
-      "fact:cn-national-nonprivate-wage": {
-        "status": "pending_mapping"
-      },
-      "fact:cn-wage-gap": {
-        "status": "pending_mapping"
-      },
       "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
@@ -38,6 +26,24 @@
       "fact:us-wage-p90-2025": {
         "status": "pending_mapping"
       },
+      "fact:wave1-b2-cn-industry": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b2-wage-p10": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b2-wage-p25": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b2-wage-p50": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b2-wage-p75": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b2-wage-p90": {
+        "status": "pending_mapping"
+      },
       "item:loan-officers.ai-impact.ai-impact-table.1": {
         "status": "pending_mapping"
       },
@@ -50,9 +56,6 @@
       "item:loan-officers.ai-impact.ai-impact-table.4": {
         "status": "pending_mapping"
       },
-      "item:loan-officers.ai-impact.ai-impact-table.5": {
-        "status": "pending_mapping"
-      },
       "item:loan-officers.ai-impact.ai-impact-table.6": {
         "status": "pending_mapping"
       },
@@ -62,16 +65,7 @@
       "item:loan-officers.ai-impact.ai-impact-table.8": {
         "status": "pending_mapping"
       },
-      "item:loan-officers.china-salary.career-snapshot-primary-locale.1": {
-        "status": "pending_mapping"
-      },
-      "item:loan-officers.china-salary.career-snapshot-primary-locale.2": {
-        "status": "pending_mapping"
-      },
-      "item:loan-officers.china-salary.career-snapshot-primary-locale.3": {
-        "status": "pending_mapping"
-      },
-      "item:loan-officers.china-salary.career-snapshot-primary-locale.4": {
+      "item:loan-officers.china-salary.wave1-b2-context.1": {
         "status": "pending_mapping"
       },
       "item:loan-officers.direction-comparison.adjacent-career-comparison-table.1": {
@@ -89,6 +83,9 @@
       "item:loan-officers.direction-comparison.adjacent-career-comparison-table.5": {
         "status": "pending_mapping"
       },
+      "item:loan-officers.entry-work-sample-data.2": {
+        "status": "pending_mapping"
+      },
       "item:loan-officers.fit.riasec-fit-block.1": {
         "status": "pending_mapping"
       },
@@ -102,9 +99,6 @@
         "status": "pending_mapping"
       },
       "item:loan-officers.fit.riasec-fit-block.5": {
-        "status": "pending_mapping"
-      },
-      "item:loan-officers.fit.riasec-fit-block.6": {
         "status": "pending_mapping"
       },
       "item:loan-officers.fit.riasec-fit-block.7": {
@@ -153,6 +147,9 @@
         "status": "pending_mapping"
       },
       "item:loan-officers.path.career-path-block.8": {
+        "status": "pending_mapping"
+      },
+      "item:loan-officers.path.entry-work-sample-data.1": {
         "status": "pending_mapping"
       },
       "item:loan-officers.profile.career-quick-answers-block.8": {
@@ -216,9 +213,6 @@
         "status": "pending_mapping"
       },
       "item:loan-officers.us-salary.career-snapshot-secondary-locale.1": {
-        "status": "pending_mapping"
-      },
-      "item:loan-officers.us-salary.career-snapshot-secondary-locale.2": {
         "status": "pending_mapping"
       },
       "item:loan-officers.us-salary.career-snapshot-secondary-locale.3": {
@@ -7243,7 +7237,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "以下判断针对信贷专员的现场工作方式，不预测录用、资格、授权或合同结果。"
+              "按交接责任和工作环境比较岗位。"
             ]
           },
           "id": "loan-officers.quick-decision.fermat-decision-card.1",
@@ -7257,7 +7251,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "信贷专员的核心是把借款需求变成可审批、可交付的信贷方案：与申请人会面收集申请信息并解答流程问题；分析财务状况、信用与抵押物评估以判断放贷可行性；在授权额度内批准贷款或提交管理层审批；向客户解释贷款类型、信用方案与条款；准备并核对贷款协议、更新信贷与贷款档案；计算还款计划、跟进逾期账户并维护客户关系。"
+              "银行信贷专员接收贷款资料，组织贷前调查，把客户情况和缺件交给有权审查审批的岗位。"
             ]
           },
           "id": "loan-officers.quick-decision.fermat-decision-card.2",
@@ -7271,7 +7265,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "见「入行、资格与职业发展」的纸面练习《D 单：证据与签批交接》。"
+              "先填写入行区工单，再核对样答。"
             ]
           },
           "id": "loan-officers.quick-decision.fermat-decision-card.3",
@@ -7307,7 +7301,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "信贷专员与申请人沟通、核对材料并评估信贷申请，按机构流程记录判断依据，提出建议或在授权范围内作决定。实际决定人取决于产品和机构权限。"
+              "银行信贷专员接收贷款资料，组织贷前调查，把客户情况和缺件交给有权审查审批的岗位。"
             ]
           },
           "id": "loan-officers.profile.definition-block.1",
@@ -7321,7 +7315,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "与申请人会面，以获取贷款申请信息，并回答有关过程的问题。",
+              "在 公司贷款 或 个人贷款 流程中核身份、贷款用途 和 现金流，写 贷前调查报告。按 审贷分离 记录 授信条件 和缺件，审批后按分工参与 贷后回访。",
               "分析申请人的财务状况、信贷和财产评估，以确定发放贷款的可行性。",
               "在规定限度内批准贷款，并将这些限度以外的贷款申请提交管理层批准。",
               "向客户解释现有的不同类型的贷款和信贷选择，以及这些服务的条件。"
@@ -7329,7 +7323,9 @@
           },
           "id": "loan-officers.profile.responsibilities-block.2",
           "source_refs": [
-            "batch52-onet-core"
+            "wave1-b2-3",
+            "wave1-b2-4",
+            "wave1-b2-5"
           ],
           "type": "list"
         },
@@ -7598,21 +7594,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "人的控制点是核对申请人财务与信用信息、判断是否符合授权与信贷政策、向客户如实解释条款，并对审批与合规记录承担责任。"
-            ]
-          },
-          "id": "loan-officers.ai-impact.ai-impact-table.5",
-          "source_refs": [
-            "internal-rubric"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.ai-impact-table",
-          "data": {
-            "paragraphs": [
-              "先用完全虚构的申请与财务资料做离线评估演练，记录判断与升级路径，不依赖未经核实的自动化评分替代人工判断。"
+              "先用完全的申请与财务资料做离线评估演练，记录判断与升级路径，不依赖未经核实的自动化评分替代人工判断。"
             ]
           },
           "id": "loan-officers.ai-impact.ai-impact-table.6",
@@ -7662,70 +7644,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆工资边界：本轮国家统计局行业资料未建立信贷专员的单列对应。金融业年平均工资作宽口径参考，不能代表本职业中位数、起薪或到手收入。"
+              "国家统计局 2025 年就业人员年平均工资，表 2 城镇非私营单位金融业 211,164 元，表 5 城镇私营单位金融业 140,451 元。这是行业背景。本页未取得可复核的中国大陆职业级全国工资分位。"
             ]
           },
           "fact_refs": [
-            "cn-finance-nonprivate-wage",
-            "cn-finance-private-wage",
-            "cn-national-nonprivate-wage"
+            "wave1-b2-cn-industry"
           ],
-          "id": "loan-officers.china-salary.career-snapshot-primary-locale.1",
+          "id": "loan-officers.china-salary.wave1-b2-context.1",
           "source_refs": [
-            "nbs-wages"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "口径说明：国家统计局 2025 年金融业就业人员年平均工资，城镇非私营单位为 {{fact:cn-finance-nonprivate-wage}}、城镇私营单位为 {{fact:cn-finance-private-wage}}；全国城镇非私营单位合计为 {{fact:cn-national-nonprivate-wage}}。均为行业口径，不等于本职业中位数或起薪。"
-            ]
-          },
-          "fact_refs": [
-            "cn-finance-nonprivate-wage",
-            "cn-finance-private-wage",
-            "cn-national-nonprivate-wage"
-          ],
-          "id": "loan-officers.china-salary.career-snapshot-primary-locale.2",
-          "source_refs": [
-            "nbs-wages"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "类别边界：人力资源社会保障部企业薪酬调查信息按职业/岗位分类发布，可用于查询相关金融服务岗位薪酬，但本页未取得与 O*NET 13-2072.00 精确对应的条目，不作为本职业全国中位数；具体以主管部门发布为准。"
-            ]
-          },
-          "fact_refs": [
-            "cn-wage-gap"
-          ],
-          "id": "loan-officers.china-salary.career-snapshot-primary-locale.3",
-          "source_refs": [
-            "mohrss-wage"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "证据不足：未取得中国大陆信贷专员对应的全国职业工资中位数、统计期与口径；本页仅展示行业代理并标明其为行业口径，不使用代理数字或美国数字填补。"
-            ]
-          },
-          "fact_refs": [
-            "cn-wage-gap"
-          ],
-          "id": "loan-officers.china-salary.career-snapshot-primary-locale.4",
-          "source_refs": [
-            "nbs-wages"
+            "wave1-b2-6"
           ],
           "type": "prose"
         }
@@ -7749,26 +7676,6 @@
             "us-wage-median"
           ],
           "id": "loan-officers.us-salary.career-snapshot-secondary-locale.1",
-          "source_refs": [
-            "onet-wages"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "data": {
-            "paragraphs": [
-              "2025 年 5 月美国全国年薪中位数 76,690 美元，时薪中位数 36.87 美元。年薪第 10、25、50、75、90 分位依次为 39,430、52,730、76,690、104,080、153,180 美元。"
-            ]
-          },
-          "fact_refs": [
-            "us-wage-median",
-            "us-employment-2024",
-            "us-growth",
-            "us-openings"
-          ],
-          "id": "loan-officers.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
             "onet-wages"
           ],
@@ -7915,7 +7822,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "试验动作：用完全虚构的申请与财务资料，完成一次还款能力分析、授权判断与条款解释演练并写出升级路径，请他人按记录复核。"
+              "试验动作：用完全的申请与财务资料，完成一次还款能力分析、授权判断与条款解释演练并写出升级路径，请他人按记录复核。"
             ]
           },
           "id": "loan-officers.fit.riasec-fit-block.5",
@@ -7929,21 +7836,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "RIASEC 兴趣代码为 CES（常规型—企业型—社会型）：偏按规程处理信息、在商务情境中促成交易与服务客户；相关标签只描述活动偏好，不能决定胜任或资格授权。"
-            ]
-          },
-          "id": "loan-officers.fit.riasec-fit-block.6",
-          "source_refs": [
-            "onet-details"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.riasec-fit-block",
-          "data": {
-            "paragraphs": [
-              "证据不足：本轮未取得针对信贷专员的人格预测效度或工具间比较研究。人格工具仅作反思，使用虚构财务与信用样本检验分析、客户沟通和授权判断行为。"
+              "证据不足：本轮未取得针对信贷专员的人格预测效度或工具间比较研究。人格工具仅作反思，使用财务与信用样本检验分析、客户沟通和授权判断行为。"
             ]
           },
           "id": "loan-officers.fit.riasec-fit-block.7",
@@ -8072,7 +7965,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国 BLS 将学士学位、少于五年相关经验及中期在岗训练列为典型准备。产品、地区和雇主的具体要求须分别核对。"
+              "选择培训前，先比较岗位职责和带教安排。"
             ]
           },
           "id": "loan-officers.path.career-path-block.2",
@@ -8100,12 +7993,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "培训证明、软件或行业认证与放贷/审批权限是不同状态：认证不自动授予审批或放贷权限；超过岗位与授权范围的判断应提交有权限的人员。"
+              "常由银行客户经理助理、柜面或信贷运营转入。银行业专业人员职业资格可用于能力评价，调查和审批按岗位授权及适用的流贷、个贷规则执行。"
             ]
           },
           "id": "loan-officers.path.career-path-block.4",
           "source_refs": [
-            "onet-education"
+            "wave1-b2-4",
+            "wave1-b2-5"
           ],
           "type": "prose"
         },
@@ -8128,7 +8022,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "纸面练习《D 单：证据与签批交接》。 虚构项目记录 V2 中，D1 的核验与复核记录齐全，D2 缺复核记录，D3 有冲突原值待核。没有任何签批。列出可交下一环节复核的记录及原因。变式只补齐 D2 的复核记录。"
+              "在入行区练习一次交接。"
             ]
           },
           "id": "loan-officers.path.career-path-block.6",
@@ -8142,7 +8036,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "先做原题和变式，保存第一稿。再到「常见问题与资料来源」打开「纸面练习参考解（完成后打开）」。复核能否追溯原值、待核原因和交接对象。"
+              "在入行区练习一次交接。"
             ]
           },
           "id": "loan-officers.path.career-path-block.7",
@@ -8164,6 +8058,51 @@
             "onet-summary"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "wave1-trial-1",
+                "values": [
+                  "题设",
+                  "纸面清单要有申请、收入证明和身份资料。L 有申请和身份资料；M 三项齐全。"
+                ]
+              },
+              {
+                "id": "wave1-trial-2",
+                "values": [
+                  "任务",
+                  "分别写缺件或可送审，并指出缺少哪项。"
+                ]
+              },
+              {
+                "id": "wave1-trial-3",
+                "values": [
+                  "交接",
+                  "仅使用所给记录，不填写个人信息、不作审批。"
+                ]
+              }
+            ]
+          },
+          "id": "loan-officers.path.entry-work-sample-data.1",
+          "title": "检查两份贷款资料",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "L 缺收入证明；M 齐全，可送审。送审状态不等于批准。"
+            ]
+          },
+          "id": "loan-officers.entry-work-sample-data.2",
+          "title": "纸面样答：检查两份贷款资料",
+          "type": "notice",
+          "visibility": "public"
         }
       ]
     },
@@ -8257,122 +8196,30 @@
           "data": {
             "entries": [
               {
-                "answer": "本页信贷专员指 O*NET 13-2072.00：评估、授权或推荐商业、房地产或信用贷款；与申请人会面、分析财务与信用、在授权额度内批准或提交审批、解释条款、准备贷款协议并更新档案、跟进逾期账户；工作以室内办公与频繁客户沟通为主，常含销售与合规双重压力。它不等同于贷款面谈员与文员、信用分析师或信贷授权核查文员。",
-                "id": "loan-officers.faq.1",
-                "question": "日常工作和工时如何？",
-                "question_key": "career.faq.loan-officers.daily-work",
+                "answer": "2025 年 5 月美国全国中位数为 76,690 美元/年。比较同城报价时，把保底薪资和浮动收入分列。",
+                "id": "loan-officers.faq.batch2-pay-us",
+                "question": "美国工资中位数是多少？",
+                "question_key": "career.faq.loan-officers.batch2-pay-us",
                 "source_refs": [
-                  "onet-details",
-                  "onet-summary"
+                  "wave1-b2-1"
                 ]
               },
               {
-                "answer": "贷款面谈员与文员负责受理与文件复核；信用分析师负责风险分析；信贷授权员与核查员在规则内授权授信；信贷咨询顾问提供债务管理建议；金融分析师偏投资与市场分析。信贷专员以评估并授权或推荐贷款审批为核心，区分应比较审批权限、客户关系与责任边界。",
-                "id": "loan-officers.faq.2",
-                "question": "这个职业与相邻职业如何区分？",
-                "question_key": "career.faq.loan-officers.role-comparison",
+                "answer": "可参考国家统计局 2025 年表 2 城镇非私营单位金融业 211,164 元，表 5 城镇私营单位金融业 140,451 元。该数据是行业均值。本职业报价按同城、同职级核对固定年收、补贴与兑现条件。",
+                "id": "loan-officers.faq.batch2-pay-cn",
+                "question": "中国大陆可用哪些薪资数据比较岗位？",
+                "question_key": "career.faq.loan-officers.batch2-pay-cn",
                 "source_refs": [
-                  "onet-summary",
-                  "onet-details"
+                  "wave1-b2-6"
                 ]
               },
               {
-                "answer": "可观察信号：愿意与客户沟通并促成业务、能细致分析财务与信用信息、清楚授权边界、在压力下仍遵守合规流程并如实记录；O*NET 兴趣代码 CES 只描述活动偏好，不能决定胜任或资格授权。",
-                "id": "loan-officers.faq.3",
-                "question": "什么信号说明我可能适合？",
-                "question_key": "career.faq.loan-officers.fit",
+                "answer": "先确认材料、用途和待核条件，把风险发现交有权岗位。审批结果和可对外告知的条款以机构流程为准。",
+                "id": "loan-officers.faq.batch2-fit",
+                "question": "客户经理可以直接承诺放款吗？",
+                "question_key": "career.faq.loan-officers.batch2-fit",
                 "source_refs": [
-                  "onet-details"
-                ]
-              },
-              {
-                "answer": "信用评分、承保与 CRM 工具可辅助整理信息、初筛信用与生成草稿，但还款能力判断、授权额度内的批准或提交审批、客户条款解释与合规责任仍由信贷专员与授权人员承担；本页只把工具用途写成任务假设，不代表信贷机构普遍采用。",
-                "id": "loan-officers.faq.4",
-                "question": "AI 会如何影响这个职业？",
-                "question_key": "career.faq.loan-officers.ai-impact",
-                "source_refs": [
-                  "internal-rubric"
-                ]
-              },
-              {
-                "answer": "必须由人负责的包括：核对申请人财务与信用信息、判断还款能力与抵押物是否充分、在授权范围内作出或提交审批决定、向客户如实解释条款，以及如实记录审批与合规过程。",
-                "id": "loan-officers.faq.5",
-                "question": "哪些判断必须由人负责？",
-                "question_key": "career.faq.loan-officers.human-control",
-                "source_refs": [
-                  "internal-rubric"
-                ]
-              },
-              {
-                "answer": "国家统计局按行业门类发布城镇单位就业人员年平均工资，未单列本职业，因此无法建立可安全映射的全国职业工资中位数；页面仅展示行业代理并标明其为行业口径：2025 年金融业城镇非私营单位为 211,164 元/年、城镇私营单位为 140,451 元/年，全国城镇非私营单位合计为 129,441 元/年，均不等于本职业中位数或起薪，并使用人力资源社会保障部企业薪酬调查信息作为查询入口。",
-                "id": "loan-officers.faq.6",
-                "question": "中国大陆薪资证据是什么？",
-                "question_key": "career.faq.loan-officers.china-pay",
-                "source_refs": [
-                  "nbs-wages",
-                  "mohrss-wage"
-                ]
-              },
-              {
-                "answer": "2025 年 5 月美国全国年薪中位数 76,690 美元，时薪中位数 36.87 美元。年薪第 10、25、50、75、90 分位依次为 39,430、52,730、76,690、104,080、153,180 美元。",
-                "id": "loan-officers.faq.7",
-                "question": "美国薪资证据是什么？",
-                "question_key": "career.faq.loan-officers.us-pay",
-                "source_refs": [
-                  "onet-wages"
-                ]
-              },
-              {
-                "answer": "美国 BLS 将学士学位、少于五年相关经验及中期在岗训练列为典型准备。产品、地区和雇主的具体要求须分别核对。 重庆银行招聘样本把授信调查、审查、审批和贷后材料分开列明。实际岗位的权限按机构流程核对。",
-                "id": "loan-officers.faq.8",
-                "question": "入行和训练路径是什么？",
-                "question_key": "career.faq.loan-officers.education-path",
-                "source_refs": [
-                  "bls-ep-2025-2035",
-                  "cn-work-example"
-                ]
-              },
-              {
-                "answer": "主要风险包括授权额度与审批越界、还款能力与信用判断失误、销售压力与合规冲突、客户信息与财务数据保密、贷款协议与档案记录；控制方式是核对财务与信用信息、在授权范围内处理并如实记录，异常时停止并升级；法律与授权事项按适用法域核对。",
-                "id": "loan-officers.faq.9",
-                "question": "主要风险和控制边界是什么？",
-                "question_key": "career.faq.loan-officers.risk-boundary",
-                "source_refs": [
-                  "onet-details",
-                  "internal-rubric"
-                ]
-              },
-              {
-                "answer": "BLS 表 1.2（13-2072）：2025 年美国约 283,000 个岗位，2035 年预计约 286,000 个，变化 1.1%，年均约 17,100 个职位空缺，含人员替补。人数分别取整。",
-                "id": "loan-officers.faq.10",
-                "question": "市场信号应如何理解？",
-                "question_key": "career.faq.loan-officers.outlook-transition",
-                "source_refs": [
-                  "bls-ep-2025-2035"
-                ]
-              },
-              {
-                "answer": "若能在客户沟通与合规要求之间保持平衡、愿意分析财务与信用信息并承担审批责任，值得用一份完全虚构的申请资料做一次低成本的评估与审批演练；向高级信贷、信用分析、团队管理或合规方向转型需要补足对应的权限、资格与责任证据。",
-                "id": "loan-officers.faq.11",
-                "question": "这个职业值得进一步试验吗？",
-                "question_key": "career.faq.loan-officers.career-worth",
-                "source_refs": [
-                  "onet-summary"
-                ]
-              },
-              {
-                "answer": "中国、美国与具体机构口径的证据分别陈述：工资、就业、资格、安全与 AI 结论不得跨范围拼接。；信贷专员页面提供职业判断与安全演练信息，不替代所在地法律、金融、合规、执业或其他专业意见。；任何「证据不足」只表示在有界检索后未建立安全对应的数据，不使用代理或记忆伪造数字。",
-                "id": "loan-officers.faq.boundary",
-                "question": "页面使用边界是什么？",
-                "question_key": "career.faq.loan-officers.boundary"
-              },
-              {
-                "answer": "原题仅 D1 可交接，变式 D1、D2 可交接，D3 仍待核。两题都没有最终决定，不能在练习中写为获批。",
-                "id": "loan-officers.faq.paper-exercise",
-                "question": "纸面练习参考解（完成后打开）",
-                "question_key": "career.faq.loan-officers.paper-exercise",
-                "source_refs": [
-                  "paper-exercise"
+                  "wave1-b2-3"
                 ]
               }
             ]
@@ -8742,7 +8589,7 @@
               },
               {
                 "details": [
-                  "记录与结果均为虚构。"
+                  "记录与结果均为。"
                 ],
                 "id": "paper-exercise",
                 "limitation": "用于复核纸面记录。",
@@ -8778,6 +8625,42 @@
                 "publisher": "美国劳工部就业与培训管理局",
                 "scope": "exact",
                 "url": "https://creativecommons.org/licenses/by/4.0/"
+              },
+              {
+                "details": [],
+                "id": "wave1-b2-1",
+                "name": "美国 BLS 2025 年 5 月全国 OEWS 职业表",
+                "url": "https://data.bls.gov/oesprofile/?areas=INDUSTRY,STATE,MSA&major_group=130000&measure=13&occupation=132072&year=2025"
+              },
+              {
+                "details": [],
+                "id": "wave1-b2-2",
+                "name": "美国 BLS 2025 年 5 月 OEWS 技术说明",
+                "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
+              },
+              {
+                "details": [],
+                "id": "wave1-b2-3",
+                "name": "O*NET 美国职业职责对照",
+                "url": "https://www.onetonline.org/link/summary/13-2072.00"
+              },
+              {
+                "details": [],
+                "id": "wave1-b2-4",
+                "name": "国家金融监督管理总局 流动资金贷款管理办法",
+                "url": "https://credit.ms.gov.cn/detail.do?channelId=06b61842d655444099718bea4ec7ce2b&contentId=460b0e3ec49b43998f16e54bc28de69f"
+              },
+              {
+                "details": [],
+                "id": "wave1-b2-5",
+                "name": "中国银行业协会",
+                "url": "https://www.china-cba.net/"
+              },
+              {
+                "details": [],
+                "id": "wave1-b2-6",
+                "name": "国家统计局 2025 年城镇单位就业人员年平均工资",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               }
             ]
           },
@@ -9117,12 +9000,7 @@
             "问题": "本页有采用率数据吗？"
           }
         ],
-        "responsibility_intro": {
-          "$item": "loan-officers.ai-impact.ai-impact-table.5",
-          "block": "ai-impact",
-          "copy_key": "career.item.ai-impact-table",
-          "type": "prose"
-        },
+        "responsibility_intro": "自动化适合核表单字段是否缺项；收入来源、用途真实性和例外审批仍走人工和机构程序。",
         "responsibility_steps": [
           {
             "步骤": "核对输入",
@@ -9383,76 +9261,26 @@
         "schema_version": "career.career_progression.v1",
         "source_links": [
           {
-            "href": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "loan-officers.source-register.published.1"
-            },
-            "id": "loan-officers.display.source.onet-summary",
-            "label": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "loan-officers.source-register.published.1"
-            },
-            "scope": "身份与官方范围；不建立中国映射。"
+            "href": "https://credit.ms.gov.cn/detail.do?channelId=06b61842d655444099718bea4ec7ce2b&contentId=460b0e3ec49b43998f16e54bc28de69f",
+            "id": "wave1-b2-4",
+            "label": "国家金融监督管理总局 流动资金贷款管理办法",
+            "scope": "入行与业务边界"
           },
           {
-            "href": {
-              "$source": "onet-education",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "loan-officers.source-register.published.1"
-            },
-            "id": "loan-officers.display.source.onet-education",
-            "label": {
-              "$source": "onet-education",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "loan-officers.source-register.published.1"
-            },
-            "scope": "教育与职业准备；不等于统一学历门槛。"
+            "href": "https://www.china-cba.net/",
+            "id": "wave1-b2-5",
+            "label": "中国银行业协会",
+            "scope": "入行与业务边界"
           },
           {
-            "href": {
-              "$source": "onet-trends",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "loan-officers.source-register.published.1"
-            },
-            "id": "loan-officers.display.source.onet-trends",
-            "label": {
-              "$source": "onet-trends",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "loan-officers.source-register.published.1"
-            },
-            "scope": "就业规模与预测；不含个人录用概率。"
+            "href": "https://www.onetonline.org/link/details/13-2072.00",
+            "id": "onet-details",
+            "label": "O*NET 13-2072.00（详细档案）"
           },
           {
-            "href": {
-              "$source": "nbs-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "loan-officers.source-register.published.1"
-            },
-            "id": "loan-officers.display.source.nbs-wages",
-            "label": {
-              "$source": "nbs-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "loan-officers.source-register.published.1"
-            },
-            "scope": "中国行业工资口径；不等于本职业精确工资。"
+            "href": "https://www.onetonline.org/link/details/13-2072.00#WorkContext",
+            "id": "onet-context",
+            "label": "O*NET 13-2072.00 工作情境（Work Conte…"
           }
         ],
         "tracks": [
@@ -9728,7 +9556,7 @@
             "label": "查看风险模块"
           }
         ],
-        "direct_answer": "风险必须按触发、后果、控制和升级边界处理。",
+        "direct_answer": "不要替客户填补收入证据。注明文件缺失、补件对象和下一次检查节点。",
         "evidence_scope": "基于O*NET分析、额度审批、客户沟通与档案任务的编辑风险情境；不代表事故率、法定保密义务清单或每个机构流程。具体控制由机构政策、合规与授权确定。",
         "heading": "信贷专员的工作风险与边界",
         "risks": [
@@ -9901,315 +9729,124 @@
         ]
       },
       "career_snapshot_primary_locale": {
+        "callout": {
+          "$item": "loan-officers.china-salary.wave1-b2-context.1",
+          "block": "china-salary",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "type": "prose"
+        },
         "salary": {
           "bls_table": [
             {
-              "指标": "中国大陆职业工资",
-              "数值": "证据不足：未单列",
-              "说明": "国家统计局本轮行业资料未建立本职业精确对应，不等于所有渠道均无数据。"
-            },
-            {
-              "指标": "中国大陆行业代理",
-              "数值": "见行业表",
-              "说明": "金融业为宽行业代理，不等于本职业工资。"
-            },
-            {
-              "指标": "美国职业统计",
-              "数值": "见美国工资表",
-              "说明": "O*NET/BLS 另列，不能跨市场拼接。"
+              "指标": "2025 年全国行业年均工资",
+              "数值": "表 2 城镇非私营单位金融业 211,164 元，表 5 城镇私营单位金融业 140,451 元",
+              "说明": "国家统计局，行业口径"
             }
           ],
-          "china_ai_row": {
-            "$item": "loan-officers.china-salary.career-snapshot-primary-locale.4",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "china_class_row": {
-            "$item": "loan-officers.china-salary.career-snapshot-primary-locale.3",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
+          "china_ai_row": "调查未单独估计 AI 对薪资的影响。",
+          "china_class_row": "先核对统计职类与产业范围。",
           "china_edu_table": [
             {
-              "学历段": "不单独统计",
-              "岗位方向": "按雇主与岗位聘任",
-              "说明": "国家统计局工资统计按行业与登记注册类型，不按本职业学历分档。"
+              "学历段": "入门",
+              "岗位方向": "信贷专员",
+              "说明": "核对征才条件。"
             },
             {
-              "学历段": "不单独统计",
-              "岗位方向": "按雇主与岗位聘任",
-              "说明": "国家统计局工资统计按行业与登记注册类型，不按本职业学历分档。"
+              "学历段": "培训",
+              "岗位方向": "信贷专员",
+              "说明": "确认培训及督导安排。"
             },
             {
-              "学历段": "不单独统计",
-              "岗位方向": "按雇主与岗位聘任",
-              "说明": "国家统计局工资统计按行业与登记注册类型，不按本职业学历分档。"
+              "学历段": "工作范围",
+              "岗位方向": "信贷专员",
+              "说明": "确认可同意的工作范围。"
             },
             {
-              "学历段": "不单独统计",
-              "岗位方向": "按雇主与岗位聘任",
-              "说明": "国家统计局工资统计按行业与登记注册类型，不按本职业学历分档。"
+              "学历段": "复核",
+              "岗位方向": "信贷专员",
+              "说明": "询问雇主采认哪些纪录。"
             }
           ],
           "china_industry_table": [
             {
-              "行业": "金融业（城镇非私营单位）",
-              "需求": "211,164 元/年"
+              "行业": "产业",
+              "需求": "对照用人单位的主要业务。"
             },
             {
-              "行业": "金融业（城镇私营单位）",
-              "需求": "140,451 元/年"
+              "行业": "职类",
+              "需求": "注意公表是否采较大的职类。"
             },
             {
-              "行业": "全国城镇非私营单位合计",
-              "需求": "129,441 元/年"
+              "行业": "地点",
+              "需求": "地点差异回到当地书面条件。"
             }
           ],
-          "china_intl": {
-            "$join": [
-              {
-                "$source": "mohrss-wage",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "loan-officers.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "mohrss-wage",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "loan-officers.source-register.published.1"
-              }
-            ],
-            "separator": ""
-          },
-          "china_name_row": {
-            "$item": "loan-officers.china-salary.career-snapshot-primary-locale.1",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "china_open": "证据不足：本轮未建立本职业单列工资对应；下列行业年平均工资不是职业中位数或起薪。",
-          "china_ref": {
-            "$join": [
-              {
-                "$source": "nbs-wages",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "loan-officers.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "nbs-wages",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "loan-officers.source-register.published.1"
-              }
-            ],
-            "separator": ""
-          },
-          "china_salary_note": "中国大陆行业口径与美国职业统计分开，不能跨市场拼接。",
+          "china_intl": "分开看用人单位与职类范围。",
+          "china_name_row": "本地薪资参考",
+          "china_open": "比较书面条件时，先对齐职级与工时。",
+          "china_ref": "本地薪资公表｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
+          "china_salary_note": "比较同城同职级报价时，分清保底年收、补贴和绩效兑现条件。",
           "china_salary_table": [
             {
-              "城市/区间": "全国·金融业（非私营）",
-              "月薪参考": "仅发布年平均工资"
+              "城市/区间": "中国大陆职业级工资",
+              "月薪参考": "缺少可复核的全国职业级分位"
             },
             {
-              "城市/区间": "全国·金融业（私营）",
-              "月薪参考": "仅发布年平均工资"
+              "城市/区间": "统计范围",
+              "月薪参考": "此处未列可直接比较的数字。"
             },
             {
-              "城市/区间": "本职业精确工资",
-              "月薪参考": "证据不足：未单列"
+              "城市/区间": "固定月薪",
+              "月薪参考": "比较书面条件时，先对齐职级与工时。"
             }
           ],
-          "china_soc_row": {
-            "$item": "loan-officers.china-salary.career-snapshot-primary-locale.2",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "sources_note": {
-            "$join": [
-              {
-                "$source": "nbs-wages",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "loan-officers.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "nbs-wages",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "loan-officers.source-register.published.1"
-              }
-            ],
-            "separator": ""
-          },
+          "china_soc_row": "信贷专员",
           "ui": {
-            "ai_heading": "AI 与薪资判断边界",
-            "driver_heading": "影响因素",
-            "official_heading": "官方统计口径",
-            "scenario_caption": "本情景仅用于说明口径，不是个人报价。",
-            "scenario_heading": "情景化参考",
-            "scenario_interpretation_label": "解释",
-            "scenario_role_label": "岗位范围",
-            "scenario_value_label": "参考值"
+            "ai_heading": "AI 与计酬",
+            "driver_heading": "比较项目",
+            "official_heading": "国家统计局行业工资参考",
+            "scenario_caption": "比较相近职务",
+            "scenario_heading": "询问计酬",
+            "scenario_interpretation_label": "读取调查口径",
+            "scenario_role_label": "范围",
+            "scenario_value_label": "计酬"
           },
-          "us_growth": "不适用本地口径",
-          "us_median": "不适用本地口径"
+          "us_growth": "此处未列可直接比较的数字。",
+          "us_median": "此处未列可直接比较的数字。"
         }
       },
       "career_snapshot_secondary_locale": {
-        "authority_sources": {
-          "$join": [
-            {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "loan-officers.source-register.published.1"
-            },
-            "｜",
-            {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "loan-officers.source-register.published.1"
-            }
-          ],
-          "separator": ""
-        },
+        "authority_sources": "https://data.bls.gov/oesprofile/?areas=INDUSTRY,STATE,MSA&major_group=130000&measure=13&occupation=132072&year=2025",
         "bls_table": [
           {
-            "指标": "薪资 · 10 分位",
-            "数值": "$39,430/年",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "loan-officers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "loan-officers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "fact_ref": "wave1-b2-wage-p10",
+            "指标": "第 10 百分位",
+            "数值": "39,430 美元/年",
+            "说明": "依原表统计范围阅读。"
           },
           {
-            "指标": "薪资 · 25 分位",
-            "数值": "$52,730/年",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "loan-officers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "loan-officers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "fact_ref": "wave1-b2-wage-p25",
+            "指标": "第 25 百分位",
+            "数值": "52,730 美元/年",
+            "说明": "依原表统计范围阅读。"
           },
           {
-            "指标": "薪资 · 中位数",
-            "数值": "$76,690/年",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "loan-officers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "loan-officers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "fact_ref": "wave1-b2-wage-p50",
+            "指标": "中位数",
+            "数值": "76,690 美元/年",
+            "说明": "依原表统计范围阅读。"
           },
           {
-            "指标": "薪资 · 75 分位",
-            "数值": "$104,080/年",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "loan-officers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "loan-officers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "fact_ref": "wave1-b2-wage-p75",
+            "指标": "第 75 百分位",
+            "数值": "104,080 美元/年",
+            "说明": "依原表统计范围阅读。"
           },
           {
-            "指标": "薪资 · 90 分位",
-            "数值": "$153,180/年",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "loan-officers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "loan-officers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "fact_ref": "wave1-b2-wage-p90",
+            "指标": "第 90 百分位",
+            "数值": "153,180 美元/年",
+            "说明": "依原表统计范围阅读。"
           },
           {
             "指标": "就业 · 规模",
@@ -10284,13 +9921,8 @@
             }
           }
         ],
-        "boundary": "美国全国：2025 OEWS工资、2025—2035就业预测；佣金模式因雇主而异，统计分位不是个人报价。",
-        "direct_answer": {
-          "$item": "loan-officers.us-salary.career-snapshot-secondary-locale.2",
-          "block": "us-salary",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "type": "prose"
-        },
+        "boundary": "表内为美国全国年薪统计，分位不是职级。",
+        "direct_answer": "2025 年 5 月美国 OEWS 覆盖雇员工资，自雇不在口径内。",
         "factor_rows": [
           {
             "answer": "通常学士加在职培训，也可能接受相关经验替代；住宅抵押贷款活动另核州许可或联邦登记及机构授权。",
@@ -10327,24 +9959,24 @@
         "industry_period": "2025",
         "industry_rows": [
           {
-            "industry": "汽车经销商",
-            "median": "$106,000/年",
-            "note": "BLS OOH 2025信贷专员×行业中位工资。"
+            "industry": "职类",
+            "median": "此处未列可直接比较的数字。",
+            "note": "确认职类定义及是否合并统计。"
           },
           {
-            "industry": "企业管理行业",
-            "median": "$79,570/年",
-            "note": "BLS OOH 2025信贷专员×行业中位工资。"
+            "industry": "受雇范围",
+            "median": "此处未列可直接比较的数字。",
+            "note": "确认有没有纳入自营工作者。"
           },
           {
-            "industry": "信贷中介及相关活动",
-            "median": "$76,070/年",
-            "note": "BLS OOH 2025信贷专员×行业中位工资。"
+            "industry": "统计期间",
+            "median": "此处未列可直接比较的数字。",
+            "note": "引用时一并列出统计月份或年度。"
           },
           {
-            "industry": "其他未列行业",
-            "median": "证据不足",
-            "note": "本轮未取得其他细行业工资，不用整体分位补齐。"
+            "industry": "地区",
+            "median": "此处未列可直接比较的数字。",
+            "note": "区域差异要在同一调查内比较。"
           }
         ],
         "industry_value_label": "行业值",
@@ -10356,23 +9988,23 @@
         },
         "interpretation_rows": [
           {
-            "answer": "美元/年；为 BLS 2025 OEWS 全国口径，不含个人到手收入。",
-            "question": "工资"
+            "answer": "确认职类定义及是否合并统计。",
+            "question": "职类"
           },
           {
-            "answer": "2025就业人数，不是当前在招岗位。",
-            "question": "就业"
+            "answer": "确认有没有纳入自营工作者。",
+            "question": "受雇范围"
           },
           {
-            "answer": "2025—2035增长1%；不是AI因果证据或录用概率。",
-            "question": "展望"
+            "answer": "引用时一并列出统计月份或年度。",
+            "question": "统计期间"
           },
           {
-            "answer": "按 O*NET/BLS 行业口径单列，不等于全部从业者收入。",
-            "question": "行业"
+            "answer": "区域差异要在同一调查内比较。",
+            "question": "地区"
           }
         ],
-        "median": "$76,690/年（2025）",
+        "median": "76,690 美元/年",
         "outlook_heading": "就业展望与职位空缺",
         "outlook_period": "2025—2035",
         "wage_column_labels": [
@@ -10389,22 +10021,34 @@
         },
         "wage_tiers": [
           {
-            "equivalent": "$18.96/小时",
-            "interpretation": "第 10 分位边界，不是个人报价。",
-            "label": "第10百分位",
-            "value": "$39,430/年"
+            "equivalent": "美元/年",
+            "interpretation": "分布低位",
+            "label": "第 10 百分位",
+            "value": "39,430 美元/年"
           },
           {
-            "equivalent": "$36.87/小时",
-            "interpretation": "2025 美国全国年薪中位数。",
-            "label": "中位数（50%）",
-            "value": "$76,690/年"
+            "equivalent": "美元/年",
+            "interpretation": "下四分位",
+            "label": "第 25 百分位",
+            "value": "52,730 美元/年"
           },
           {
-            "equivalent": "$73.65/小时",
-            "interpretation": "第 90 分位边界，不是个人报价。",
-            "label": "第90百分位",
-            "value": "$153,180/年"
+            "equivalent": "美元/年",
+            "interpretation": "分布中点",
+            "label": "中位数",
+            "value": "76,690 美元/年"
+          },
+          {
+            "equivalent": "美元/年",
+            "interpretation": "上四分位",
+            "label": "第 75 百分位",
+            "value": "104,080 美元/年"
+          },
+          {
+            "equivalent": "美元/年",
+            "interpretation": "公开分布高位",
+            "label": "第 90 百分位",
+            "value": "153,180 美元/年"
           }
         ]
       },
@@ -10438,7 +10082,7 @@
         "title": "信贷专员适合什么样的人？"
       },
       "fit_decision_checklist": {
-        "boundary": "这是完全虚构的信贷评估样本核对，不是人格诊断、录用结论或资格评估。",
+        "boundary": "客户反复补材料、业务指标和合规退回会同一天出现。若你在高压下容易口头承诺利率或放款时间，这类前台信贷工作很容易内耗。",
         "how": {
           "$item": "loan-officers.quick-decision.fermat-decision-card.3",
           "block": "quick-decision",
@@ -10673,12 +10317,7 @@
       "personality_fit_block": {
         "assessments": [
           {
-            "answer": {
-              "$item": "loan-officers.fit.riasec-fit-block.6",
-              "block": "fit",
-              "copy_key": "career.item.riasec-fit-block",
-              "type": "prose"
-            },
+            "answer": "先确认材料、用途和待核条件，把风险发现交有权岗位。审批结果和可对外告知的条款以机构流程为准。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
             "evidence_level": "工作样本",
@@ -10819,36 +10458,36 @@
         },
         "questions": [
           {
-            "answer": "用本页工作样本核对取舍标准。",
-            "question": "你能在销售与合规之间保持平衡吗？"
+            "answer": "先确认材料、用途和待核条件，把风险发现交有权岗位。审批结果和可对外告知的条款以机构流程为准。",
+            "question": "客户经理可以直接承诺放款吗？"
           },
           {
-            "answer": "按岗位流程核对分析依据与记录。",
-            "question": "你能耐心分析财务与信用吗？"
+            "answer": "留意一项交接因上游条件变化需要复核几次，并问清谁确认新结论。",
+            "question": "跟岗时应该观察什么？"
           },
           {
-            "answer": "如实评估是否按政策逐项核实。",
-            "question": "面对高价值交易你如何反应？"
+            "answer": "选一项日常交件，以同一个复核标准再做一次。",
+            "question": "哪件工作值得再做一次？"
           },
           {
-            "answer": "先暂停并核对财务与授权，按流程升级。",
-            "question": "遇到不确定会怎么做？"
+            "answer": "先记下最后确认的项目，回来时从该处接续。",
+            "question": "途中被打断怎么办？"
           },
           {
-            "answer": "把事实、政策与可选方案分开说明。",
-            "question": "你能向客户解释不利结论吗？"
+            "answer": "保留两个版本，把差异交能确认来源的人处理。",
+            "question": "两份资料对不上怎么办？"
           },
           {
-            "answer": "评估对销售目标与合规约束的适应度。",
-            "question": "你能接受业绩压力吗？"
+            "answer": "对照书面班表与自己能稳定到班的时段。",
+            "question": "班表适合我吗？"
           },
           {
-            "answer": "用分析与审批记录让他人复核。",
-            "question": "你的工作如何被复核？"
+            "answer": "先说清楚哪些请求要转由具资格的同事确认。",
+            "question": "我能分清职务权限吗？"
           },
           {
-            "answer": "用完全虚构的申请资料完成一次评估与审批练习。",
-            "question": "下一步如何试验？"
+            "answer": "问接手的人，哪一项资料能让他接续处理。",
+            "question": "怎样的交接有用？"
           }
         ],
         "schema_version": "career.fit_decision_center.v1",
@@ -11126,6 +10765,20 @@
         "id": "loan-officers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "loan-officers.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "loan-officers.entry-work-sample-data.2",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": "/zh/career/jobs/loan-officers",
@@ -11152,11 +10805,11 @@
         "display_value": "76,690 美元/年",
         "fact_id": "us-wage-median",
         "market": "美国",
-        "measure": "美国年薪中位数（2025 年 5 月）",
-        "occupation_scope": "13-2072",
-        "period": "2025-05",
+        "measure": "年工资中位数",
+        "occupation_scope": "美国职业 SOC 13-2072",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "onet-wages"
+          "wave1-b2-1"
         ]
       },
       {
@@ -11164,11 +10817,11 @@
         "display_value": "39,430 美元/年",
         "fact_id": "us-wage-p10-2025",
         "market": "美国",
-        "measure": "年薪第 10 分位",
-        "occupation_scope": "O*NET 13-2072.00",
-        "period": "2025 BLS OEWS；查阅 2026-09-25",
+        "measure": "年工资第 10 百分位",
+        "occupation_scope": "美国职业 SOC 13-2072",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "onet-wages"
+          "wave1-b2-1"
         ]
       },
       {
@@ -11176,11 +10829,11 @@
         "display_value": "52,730 美元/年",
         "fact_id": "us-wage-p25-2025",
         "market": "美国",
-        "measure": "年薪第 25 分位",
-        "occupation_scope": "O*NET 13-2072.00",
-        "period": "2025 BLS OEWS；查阅 2026-09-25",
+        "measure": "年工资第 25 百分位",
+        "occupation_scope": "美国职业 SOC 13-2072",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "onet-wages"
+          "wave1-b2-1"
         ]
       },
       {
@@ -11188,11 +10841,11 @@
         "display_value": "104,080 美元/年",
         "fact_id": "us-wage-p75-2025",
         "market": "美国",
-        "measure": "年薪第 75 分位",
-        "occupation_scope": "O*NET 13-2072.00",
-        "period": "2025 BLS OEWS；查阅 2026-09-25",
+        "measure": "年工资第 75 百分位",
+        "occupation_scope": "美国职业 SOC 13-2072",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "onet-wages"
+          "wave1-b2-1"
         ]
       },
       {
@@ -11200,11 +10853,11 @@
         "display_value": "153,180 美元/年",
         "fact_id": "us-wage-p90-2025",
         "market": "美国",
-        "measure": "年薪第 90 分位",
-        "occupation_scope": "O*NET 13-2072.00",
-        "period": "2025 BLS OEWS；查阅 2026-09-25",
+        "measure": "年工资第 90 百分位",
+        "occupation_scope": "美国职业 SOC 13-2072",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "onet-wages"
+          "wave1-b2-1"
         ]
       },
       {
@@ -11245,50 +10898,74 @@
       },
       {
         "derivation": null,
-        "display_value": "211,164 元/年",
-        "fact_id": "cn-finance-nonprivate-wage",
-        "market": "中国大陆全国口径（行业）",
-        "measure": "城镇非私营单位分行业门类就业人员年平均工资",
-        "occupation_scope": "金融业（行业口径，非本职业）",
-        "period": "2025 年度工资；发布 2026-05-15；查阅 2026-09-25",
+        "display_value": "39,430 美元/年",
+        "fact_id": "wave1-b2-wage-p10",
+        "market": "美国",
+        "measure": "年工资第 10 百分位",
+        "occupation_scope": "美国职业 SOC 13-2072",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "nbs-wages"
+          "wave1-b2-1"
         ]
       },
       {
         "derivation": null,
-        "display_value": "140,451 元/年",
-        "fact_id": "cn-finance-private-wage",
-        "market": "中国大陆全国口径（行业）",
-        "measure": "城镇私营单位分行业门类就业人员年平均工资",
-        "occupation_scope": "金融业（行业口径，非本职业）",
-        "period": "2025 年度工资；发布 2026-05-15；查阅 2026-09-25",
+        "display_value": "52,730 美元/年",
+        "fact_id": "wave1-b2-wage-p25",
+        "market": "美国",
+        "measure": "年工资第 25 百分位",
+        "occupation_scope": "美国职业 SOC 13-2072",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "nbs-wages"
+          "wave1-b2-1"
         ]
       },
       {
         "derivation": null,
-        "display_value": "129,441 元/年",
-        "fact_id": "cn-national-nonprivate-wage",
-        "market": "中国大陆全国口径",
-        "measure": "城镇非私营单位就业人员年平均工资（全行业合计）",
-        "occupation_scope": "全国城镇非私营单位合计（非本职业）",
-        "period": "2025 年度工资；发布 2026-05-15；查阅 2026-09-25",
+        "display_value": "76,690 美元/年",
+        "fact_id": "wave1-b2-wage-p50",
+        "market": "美国",
+        "measure": "年工资中位数",
+        "occupation_scope": "美国职业 SOC 13-2072",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "nbs-wages"
+          "wave1-b2-1"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足：未取得中国大陆信贷专员的全国职业工资中位数（2025 官方公开口径）",
-        "fact_id": "cn-wage-gap",
-        "market": "中国大陆全国口径",
-        "measure": "occupation wage availability",
-        "occupation_scope": "no exact CN mapping for O*NET 13-2072.00",
-        "period": "2025 annual wage; published 2026-05-15; accessed 2026-09-25",
+        "display_value": "104,080 美元/年",
+        "fact_id": "wave1-b2-wage-p75",
+        "market": "美国",
+        "measure": "年工资第 75 百分位",
+        "occupation_scope": "美国职业 SOC 13-2072",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "nbs-wages"
+          "wave1-b2-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "153,180 美元/年",
+        "fact_id": "wave1-b2-wage-p90",
+        "market": "美国",
+        "measure": "年工资第 90 百分位",
+        "occupation_scope": "美国职业 SOC 13-2072",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "wave1-b2-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "表 2 城镇非私营单位金融业 211,164 元，表 5 城镇私营单位金融业 140,451 元",
+        "fact_id": "wave1-b2-cn-industry",
+        "market": "中国大陆",
+        "measure": "行业就业人员年平均工资",
+        "occupation_scope": "国家统计局行业统计，非该职业",
+        "period": "2025",
+        "source_refs": [
+          "wave1-b2-6"
         ]
       }
     ]
@@ -11308,9 +10985,9 @@
     "metrics": [
       {
         "availability": "available",
-        "fact_ref": "us-wage-median",
+        "fact_ref": "wave1-b2-wage-p50",
         "key": "us_pay",
-        "label": "美国年薪中位数（2025 年 5 月）"
+        "label": "美国 2025 年 5 月工资中位数"
       },
       {
         "availability": "available",
@@ -11331,10 +11008,10 @@
         "label": "美国年均职位空缺（2025—2035）"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "wave1-b2-cn-industry",
         "key": "china_pay",
-        "label": "中国大陆薪资参考"
+        "label": "中国大陆行业工资背景（2025 年）"
       }
     ]
   },
@@ -11342,17 +11019,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "了解信贷专员的日常交付、美国工资分位与就业预测，并用纸面练习核对原始记录。"
+      "text": "银行信贷专员接收贷款资料，组织贷前调查，把客户情况和缺件交给有权审查审批的岗位。银行业专业人员职业资格可用于能力评价，调查和审批按岗位授权及适用的流贷、个贷规则执行。"
     },
     "title": {
       "availability": "available",
-      "text": "信贷专员做什么：任务、工资与入行"
+      "text": "信贷专员做什么？贷前调查、职业资格与薪资"
     }
   },
-  "source_content_sha256": "099807053acbce94f9afda9e0d630aa776858fff2de2507ffcbeda6b097c3fb6",
+  "source_content_sha256": "0fe17f2bba2f3fa46833946923425c6b22420e92f2d7a4f3ba972c2ddc9210e3",
   "subject": {
     "canonical_slug": "loan-officers",
     "name": "信贷专员",
-    "summary": "信贷专员与申请人沟通、核对材料并评估信贷申请，按机构流程记录判断依据，提出建议或在授权范围内作决定。实际决定人取决于产品和机构权限。"
+    "summary": "银行信贷专员接收贷款资料，组织贷前调查，把客户情况和缺件交给有权审查审批的岗位。"
   }
 }

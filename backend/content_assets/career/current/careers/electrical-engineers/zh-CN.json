@@ -35,7 +35,37 @@
       "fact:median": {
         "status": "mapped"
       },
+      "fact:nbs-info": {
+        "status": "pending_mapping"
+      },
+      "fact:nbs-manufacturing": {
+        "status": "pending_mapping"
+      },
+      "fact:nbs-private-info": {
+        "status": "pending_mapping"
+      },
+      "fact:nbs-private-manufacturing": {
+        "status": "pending_mapping"
+      },
+      "fact:oews-industry-computer-electronic": {
+        "status": "pending_mapping"
+      },
+      "fact:oews-industry-electric-power": {
+        "status": "pending_mapping"
+      },
+      "fact:oews-industry-engineering-services": {
+        "status": "pending_mapping"
+      },
+      "fact:oews-industry-transportation": {
+        "status": "pending_mapping"
+      },
       "fact:openings": {
+        "status": "pending_mapping"
+      },
+      "fact:p25": {
+        "status": "pending_mapping"
+      },
+      "fact:p75": {
         "status": "pending_mapping"
       },
       "fact:posting-a28-shunde": {
@@ -1668,7 +1698,7 @@
         "status": "mapped"
       },
       "item:actors.sources.faq.1": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:actors.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -1687,6 +1717,9 @@
       },
       "item:actors.us-salary.career-snapshot-secondary-locale.6": {
         "status": "mapped"
+      },
+      "item:electrical-engineers.entry-work-sample-data.2": {
+        "status": "pending_mapping"
       }
     },
     "module_order": [
@@ -15831,7 +15864,7 @@
             "components",
             "career_snapshot_secondary_locale",
             "wage_tiers",
-            1,
+            2,
             "label"
           ],
           "source": "display"
@@ -15844,7 +15877,7 @@
             "components",
             "career_snapshot_secondary_locale",
             "wage_tiers",
-            1,
+            2,
             "equivalent"
           ],
           "source": "display"
@@ -15879,7 +15912,7 @@
             "components",
             "career_snapshot_secondary_locale",
             "wage_tiers",
-            2,
+            4,
             "label"
           ],
           "source": "display"
@@ -15892,7 +15925,7 @@
             "components",
             "career_snapshot_secondary_locale",
             "wage_tiers",
-            2,
+            4,
             "equivalent"
           ],
           "source": "display"
@@ -22547,7 +22580,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "更可能适合：愿意按标准计算并复核、能把假设与依据写清、"
+              "如果你愿意把电机功率追到回路、保护器件和验收记录，还能让同事照着你的假设复算，可以优先试供配电或设备电气。"
             ]
           },
           "id": "actors.quick-decision.fit-decision-checklist.1",
@@ -22561,7 +22594,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "这只验证工作方式偏好，"
+              "如果你最怕的是周末停线窗口挪来挪去、现场线号与图纸有出入、刚改完柜图又要复算保护，就谨慎选跟线调试和驻场交付。方案变更时，图纸、器件清单和测试记录要一起改，等工艺或设备厂回数也会耗掉精力。喜欢板级调试的人可以先看电源研发，不必默认选厂务。"
             ]
           },
           "id": "actors.quick-decision.fit-decision-checklist.2",
@@ -22575,12 +22608,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "再用本页的纸面练习与七天体验验证，而不是只看电路与设备是否「有意思」。"
+              "可一次做完，也可分七天。"
             ]
           },
           "id": "actors.quick-decision.fit-decision-checklist.3",
           "source_refs": [
-            "onet"
+            "cn-drawing"
           ],
           "type": "prose"
         },
@@ -22617,12 +22650,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "先判断自己是否愿意为设计结论负责、能耐心记录依据与假设，"
+              "在纸上复算两路出线。"
             ]
           },
           "id": "actors.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet"
+            "cn-drawing"
           ],
           "type": "prose"
         },
@@ -22631,12 +22664,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "本页不构成设计批准、执业资格或录用结论；设计文件与符合性结论只能由具备资质与授权的角色作出。"
+              "缺整定资料就标待核。"
             ]
           },
           "id": "actors.display.fermat_decision_card.caveat",
           "source_refs": [
-            "onet"
+            "cn-drawing"
           ],
           "type": "prose"
         },
@@ -22645,7 +22678,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "并在依据不明或超出授权时主动停止与升级的人。"
+              "遇到依据不明或超出授权的要求，愿意停下来请相应责任人复核，也是一项重要信号。"
             ]
           },
           "id": "actors.display.fit_decision_checklist.suit-detail",
@@ -22659,7 +22692,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "不测数学功底、不测执业资格、也不作录用结论。"
+              " 做选择时，先把你不愿承担的夜间停线、跨班交付和反复改图列出来。"
             ]
           },
           "id": "actors.display.fit_decision_checklist.boundary-detail",
@@ -22673,12 +22706,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "给你一份虚构需求与约束，看能否完成计算、写清假设与裕度，并按标准核对符合性。"
+              " 到入行区取原图、评分和样答。"
             ]
           },
           "id": "actors.display.fit_decision_checklist.how-detail",
           "source_refs": [
-            "onet"
+            "cn-drawing"
           ],
           "type": "prose"
         }
@@ -22695,12 +22728,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "设计完成指从需求与标准确认、输入与假设记录、计算与选型、输出与复核到验证与交付的完整链条；"
+              "设计草稿可用于提问、复算和内部复核，图号、版本和待核条件要写清楚。"
             ]
           },
           "id": "actors.profile.work-context-block.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-drawing"
           ],
           "type": "prose"
         },
@@ -22737,12 +22771,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "按项目阶段组织任务，关键节点（评审、出图、调试）集中加班。"
+              "任务安排｜出图、器件交期和现场验收各有时间点。"
             ]
           },
           "id": "actors.profile.work-context-block.4",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-drawing"
           ],
           "type": "prose"
         },
@@ -22765,12 +22800,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "现场查勘与调试可能涉及带电与高处环境，需遵守现场安全规定。"
+              "协作交接｜把图纸版次和未通过项一起传给下一班。"
             ]
           },
           "id": "actors.profile.work-context-block.6",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-drawing"
           ],
           "type": "prose"
         },
@@ -22779,12 +22815,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作以设计文件与符合性结论为中心，需与工艺、机械、施工与供应商协作。"
+              " 可以各看一次供配电出图和产线联调，再决定能接受哪种节奏。"
             ]
           },
           "id": "actors.profile.work-context-block.7",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-drawing"
           ],
           "type": "prose"
         },
@@ -22807,12 +22844,17 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "围绕电气系统的研究与设计展开：先确认需求与适用标准版本，再完成电气计算、设备选型与安全保障设计，输出图纸与技术文件，经校核审核与签署后交付，并通过测试验证符合性。"
+              "供配电、产线自动化和电源研发的考核看不同交件。先用单线图、I/O 表和波形报告确定想练的方向。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.systems.answer",
           "source_refs": [
-            "onet"
+            "tool-cad",
+            "tool-etap",
+            "tool-skm",
+            "tool-mathworks",
+            "tool-altium",
+            "tool-controls"
           ],
           "type": "prose"
         },
@@ -22821,7 +22863,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "工作对象"
+              "供配电与成套设备"
             ]
           },
           "id": "actors.display.career_quick_answers_block.systems.camera.label",
@@ -22835,12 +22877,17 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "电气设备、部件与系统"
+              "用 AutoCAD 按馈线与负荷表画单线图 → 在 ETAP 或 SKM 建模并复算短路电流 → 核对开关额定值与保护配合，再交审查"
             ]
           },
           "id": "actors.display.career_quick_answers_block.systems.camera.steps",
           "source_refs": [
-            "onet"
+            "tool-cad",
+            "tool-etap",
+            "tool-skm",
+            "tool-mathworks",
+            "tool-altium",
+            "tool-controls"
           ],
           "type": "prose"
         },
@@ -22849,12 +22896,17 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "含电力与配电、控制与自动化等方向"
+              "交负荷表、短路校核和保护曲线。按国内适用标准开展设计。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.systems.camera.output",
           "source_refs": [
-            "onet"
+            "tool-cad",
+            "tool-etap",
+            "tool-skm",
+            "tool-mathworks",
+            "tool-altium",
+            "tool-controls"
           ],
           "type": "prose"
         },
@@ -22863,7 +22915,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "主要动作"
+              "自动化和电源研发"
             ]
           },
           "id": "actors.display.career_quick_answers_block.systems.stage.label",
@@ -22877,12 +22929,17 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "研究、设计、开发、测试及按实际岗位监督工程实施"
+              "用 I/O 点表梳理 PLC 联锁及 SCADA 报警 → 用 MATLAB 和 Simulink 按题设工况查看控制响应 → 记录试车的通过项与复测项，再交下一班"
             ]
           },
           "id": "actors.display.career_quick_answers_block.systems.stage.steps",
           "source_refs": [
-            "onet"
+            "tool-cad",
+            "tool-etap",
+            "tool-skm",
+            "tool-mathworks",
+            "tool-altium",
+            "tool-controls"
           ],
           "type": "prose"
         },
@@ -22891,12 +22948,17 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "以设计文件与符合性结论为主要交付"
+              "交联锁矩阵和试车记录。做板级电源时另交 Altium 原理图、SPICE 结果与实测波形。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.systems.stage.output",
           "source_refs": [
-            "onet"
+            "tool-cad",
+            "tool-etap",
+            "tool-skm",
+            "tool-mathworks",
+            "tool-altium",
+            "tool-controls"
           ],
           "type": "prose"
         },
@@ -22919,7 +22981,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "可制造、可施工、可验证的设计与文件"
+              "两条路线都要交代使用哪版文件，以及谁负责下一项复核。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.systems.shared.value",
@@ -22947,12 +23009,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "任一环节缺依据、缺记录或缺签署，结论都不能向前传递。"
+              "用于现场施工、正式交付或法定签章的文件，按项目阶段和岗位权限完成审批。草稿应标明用途和未决项。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.answer",
           "source_refs": [
-            "onet"
+            "cn-reg",
+            "cn-epc",
+            "cn-nea",
+            "cn-neastaff"
           ],
           "type": "prose"
         },
@@ -22961,12 +23026,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "需求与标准"
+              "设计依据"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.purpose.label",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-drawing"
           ],
           "type": "prose"
         },
@@ -22975,12 +23041,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "合同、需求与标准版本一致"
+              "核对配电范围、设备清单和项目采用的规范版本。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.purpose.primary",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-drawing"
           ],
           "type": "prose"
         },
@@ -22989,12 +23056,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "记录依据与未决项，冲突时停止并升级"
+              "柜图和负荷表如果标了不同电压，先记下冲突并明确谁补图。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.purpose.secondary",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-drawing"
           ],
           "type": "prose"
         },
@@ -23003,12 +23071,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "输入与假设"
+              "输入条件"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.inputs.label",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-drawing"
           ],
           "type": "prose"
         },
@@ -23017,12 +23086,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "负荷、环境与接口条件写明"
+              "核对变压器容量、出线负荷、同时运行工况和末端短路数据。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.inputs.primary",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-drawing"
           ],
           "type": "prose"
         },
@@ -23031,12 +23101,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "记录来源与不确定度"
+              "在计算表上写明数据来自哪张图、哪次确认。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.inputs.secondary",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-drawing"
           ],
           "type": "prose"
         },
@@ -23045,12 +23116,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "计算与选型"
+              "选型与保护"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.process.label",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-drawing"
           ],
           "type": "prose"
         },
@@ -23059,12 +23131,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "按标准完成并保留参数"
+              "将支路电流与电缆载流量、开关额定值及脱扣曲线逐项核对。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.process.primary",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-drawing"
           ],
           "type": "prose"
         },
@@ -23073,12 +23146,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "记录裕度、降额与边界条件"
+              "电机启动条件和上下级配合没核完时，整定值留待复核。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.process.secondary",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-drawing"
           ],
           "type": "prose"
         },
@@ -23087,12 +23161,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "输出与复核"
+              "出图与复核"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.outputs.label",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-drawing"
           ],
           "type": "prose"
         },
@@ -23101,12 +23176,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "图纸与文件按规范输出"
+              "单线图、设备表和负荷表使用同一版，出图前检查柜号与回路号。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.outputs.primary",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-drawing"
           ],
           "type": "prose"
         },
@@ -23115,12 +23191,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "校核、审核与签署不可省略"
+              "在送审图上标用途和未决项，施工只用正式发布版。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.outputs.secondary",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-drawing"
           ],
           "type": "prose"
         },
@@ -23129,12 +23206,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "测试与验证"
+              "试验与验收"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.responsibility.label",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-drawing"
           ],
           "type": "prose"
         },
@@ -23143,12 +23221,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "按判据完成并记录偏差"
+              "把联锁试验工况、通过条件和异常复测留在验收记录中。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.responsibility.primary",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-drawing"
           ],
           "type": "prose"
         },
@@ -23157,12 +23236,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "不以整理后的数据替代原始记录"
+              "设备厂和现场人员交来的原始记录附在报告后。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.responsibility.secondary",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-drawing"
           ],
           "type": "prose"
         },
@@ -23176,7 +23256,8 @@
           },
           "id": "actors.display.career_quick_answers_block.comparison.cooperation.label",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-drawing"
           ],
           "type": "prose"
         },
@@ -23185,12 +23266,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "变更影响评估并复算"
+              "换电机或开关后复算支路负荷和保护配合。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.cooperation.primary",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-drawing"
           ],
           "type": "prose"
         },
@@ -23199,12 +23281,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "保留版本与批准记录"
+              "涉及停线或备件的变更，通知生产、采购及下一班。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.cooperation.secondary",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-drawing"
           ],
           "type": "prose"
         },
@@ -23213,12 +23296,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "交付归档"
+              "交付签审"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.boundary.label",
           "source_refs": [
-            "onet"
+            "cn-reg",
+            "cn-epc",
+            "cn-nea",
+            "cn-neastaff"
           ],
           "type": "prose"
         },
@@ -23227,12 +23313,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "设计文件进入受控台账"
+              "交付审查通过的单线图、负荷表和待办清单。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.boundary.primary",
           "source_refs": [
-            "onet"
+            "cn-reg",
+            "cn-epc",
+            "cn-nea",
+            "cn-neastaff"
           ],
           "type": "prose"
         },
@@ -23241,12 +23330,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "保留责任人与依据"
+              "需要法定签章的文件，由具备相应注册资格并承担职责的人签章。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.boundary.secondary",
           "source_refs": [
-            "onet"
+            "cn-reg",
+            "cn-epc",
+            "cn-nea",
+            "cn-neastaff"
           ],
           "type": "prose"
         },
@@ -23255,7 +23347,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "本职业与电子工程师、工程技师有什么不同？"
+              "配电设计、板级设计和测试记录分别由谁负责？"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.question",
@@ -23269,12 +23361,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "本职业专注电气方向的电力与电气系统研究与设计，承担设计计算与符合性结论；电子工程师（计算机除外）专注电路与器件；工程技师与技术员在工程人员指导下做设计支持与测试记录，不作独立设计批准。"
+              "电气工程师做供配电、控制或设备设计，提交负荷计算和保护校核。电子工程师多做电路、信号及板级产品，提交原理图和验证结果。工程技术员可搭测试台、测量和记录，也可按分工维护图纸。设计审批及法定签章依项目权限和个人注册范围办理。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.answer",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag",
+            "employer",
+            "cn-reg"
           ],
           "type": "prose"
         },
@@ -23353,7 +23448,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "中国大陆"
+              "大陆行业工资"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.05.question",
@@ -23367,12 +23462,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "未取得对应单职业分位"
+              "国家统计局按行业和单位类型给均值，制造业与信息技术服务业见工资部分。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.05.answer",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -23412,7 +23507,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作情境"
+              "板块标题｜工作现场"
             ]
           },
           "id": "actors.display.work_context_block.title",
@@ -23426,12 +23521,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "电气工程师以办公室设计工作为主，围绕项目完成需求梳理、计算与设计、文档输出与验证支持，并需到现场查勘与配合施工调试。"
+              "在设计院或成套设备厂，你会反复核对图纸、负荷表和设备参数。在制造厂务或自动化集成商，停线窗口决定何时能验证，换班前要把旁路、未通过项和回退条件交接清楚。去电源研发时，工位更靠近样机和测试报告，通常由波形与故障复现推动改版。"
             ]
           },
           "id": "actors.display.work_context_block.summary",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-drawing"
           ],
           "type": "prose"
         },
@@ -23440,12 +23536,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作地点：办公室为主，需到工厂、变电站或施工现场查勘与配合。"
+              "工作地点｜设计院、控制柜集成车间或研发实验室。现场时间取决于谁负责联调与验收。"
             ]
           },
           "id": "actors.display.work_context_block.locations",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-drawing"
           ],
           "type": "prose"
         },
@@ -23454,12 +23551,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "主要对象：电气设备、部件与系统，含配电、保护、控制与传动等方向。"
+              "工作对象｜开关柜、变压器、电机与控制回路，以及相应的单线图、负荷表和测试记录。"
             ]
           },
           "id": "actors.display.work_context_block.materials",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-drawing"
           ],
           "type": "prose"
         },
@@ -23468,12 +23566,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "需与工艺、机械、施工、采购与供应商交接。"
+              " 自动化团队跟生产排停线窗口，研发团队跟样机与改版计划。"
             ]
           },
           "id": "actors.display.work_context_block.organization",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-drawing"
           ],
           "type": "prose"
         },
@@ -23482,12 +23581,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作时间：多数全职，项目节点与调试阶段加班较多，现场作业需按规定防护。"
+              "工作时间｜确认是否要在换班、周末或停线时跟现场，驻场与办公室设计的节奏不同。"
             ]
           },
           "id": "actors.display.work_context_block.schedule",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-drawing"
           ],
           "type": "prose"
         },
@@ -23496,12 +23596,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "风险主要来自现场带电环境、施工交叉作业以及长期伏案带来的颈肩负担。"
+              " 设备、工艺和施工负责人共用同一图纸版本。试车前交接待检回路和停工条件。"
             ]
           },
           "id": "actors.display.work_context_block.collaboration",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-drawing"
           ],
           "type": "prose"
         },
@@ -23510,12 +23611,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工具与资料：设计计算与仿真软件、制图与文档系统、标准库与项目管理系统。"
+              "交件复核｜开关型号、额定数据与负荷表逐项对照，缺项列明谁来补。"
             ]
           },
           "id": "actors.display.work_context_block.review",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-drawing"
           ],
           "type": "prose"
         },
@@ -23524,12 +23626,15 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "现场电气作业按实际资格与授权核；产品设计内部权限和建设工程注册签章是不同层次，不把注册要求泛化全部研发。"
+              "责任｜建设项目按设计、施工与许可职责分工。设备产品内部审签另按企业的职责表走。"
             ]
           },
           "id": "actors.display.work_context_block.quality",
           "source_refs": [
-            "onet"
+            "cn-reg",
+            "cn-epc",
+            "cn-nea",
+            "cn-neastaff"
           ],
           "type": "prose"
         },
@@ -23566,12 +23671,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS OES／O*NET：2025 年全国中位年薪 120,630 美元（中位时薪 58.00 美元）；五分位 76,550／92,830／120,630／152,950／184,300 美元。"
+              "美国工资表使用 2025 年 5 月 OEWS 的 17-2071 雇员数据。谈录用条件前，先看当地同一职业的数据。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.bls",
           "source_refs": [
-            "onet"
+            "us-wage",
+            "oews"
           ],
           "type": "prose"
         },
@@ -23608,12 +23714,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "2025就业199,700人；2025—2035增长10%，年均空缺11,400，含更替；主要行业为制造与专业科学技术服务。"
+              "美国 BLS 2025 年电气工程师就业分布：工程服务占 22%，发输配电业与计算机和电子产品制造业各占 10%，运输设备制造业占 7%，建筑业占 6%。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.sag",
           "source_refs": [
-            "onet"
+            "bls-ooh-engineers"
           ],
           "type": "prose"
         },
@@ -23622,12 +23728,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "职业边界：本页按美国 O*NET-SOC 17-2071.00「Electrical Engineers」编写，指为商业、工业、军事或科研用途研究、设计、开发、测试或监督电气设备、部件与系统的制造与安装的岗位；与电子工程师（计算机除外，专注电路与器件）、电气与电子工程技师与技术员（工程支持与测试记录）以及电气与电子制图员（图纸交付）在责任层次上不同。"
+              "电气工程师把供电、控制或设备要求整理成能复核的计算、图纸和测试记录。比如修改馈线时，负荷表、断路器选型与单线图要对得上，交件时还要标明本次变更范围。"
             ]
           },
           "id": "actors.display.definition_block.definition",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-drawing"
           ],
           "type": "prose"
         }
@@ -23644,7 +23751,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "在工程人员指导下做设计支持、组装测试与维护排故。"
+              "协助按批准方案测试、制图和记录偏差。"
             ]
           },
           "id": "actors.direction-comparison.adjacent-career-comparison-table.1",
@@ -23737,7 +23844,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "电气与电子工程师（组合口径）"
+              "电工"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.01.career",
@@ -23751,7 +23858,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "设计、开发与测试电气和电子设备、部件与系统（含电气与电子两个方向）。"
+              "按作业授权安装、维护并记录现场状态。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.01.work",
@@ -23765,7 +23872,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "对象覆盖电气与电子两个子方向，本职业专注电气方向的电力与电气系统设计。"
+              "设计文件和现场作业许可分开；适用时核对相应作业资格。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.01.difference",
@@ -23779,7 +23886,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "目标是先明确方向偏好与课程证据，再选择更聚焦的岗位。"
+              "喜欢现场实作和故障复核，先访谈安装或维护团队。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.01.choice",
@@ -23793,7 +23900,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "电子工程师（计算机除外）"
+              "电子工程师"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.02.career",
@@ -23807,7 +23914,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "设计电子电路、器件与嵌入式系统的硬件部分。"
+              "交付电路、信号接口与验证证据。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.02.work",
@@ -23821,7 +23928,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "对象为电子电路与器件，设计重点在电路与信号而非电力系统。"
+              "设备供电条件由双方核对；电路设计与系统供电职责以项目分工为准。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.02.difference",
@@ -23835,7 +23942,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "目标是补足模拟与数字电路、电磁兼容与器件选型能力。"
+              "喜欢电路设计与验证可先看产品团队。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.02.choice",
@@ -23849,7 +23956,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "电气与电子工程技师与技术员"
+              "电气技术员"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.03.career",
@@ -23863,7 +23970,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "承担工程输入与测试记录，通常在工程师指导下工作，不作独立设计批准。"
+              "提供可复核的证据，设计结论与对外签署由有权责任人承担。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.03.difference",
@@ -23877,7 +23984,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "目标是补齐工程图纸、测试判据与记录能力；若目标为工程师，需补学位与设计责任。"
+              "喜欢把方案落实成测量或图纸记录，可先比这条路径。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.03.choice",
@@ -24031,7 +24138,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "下列职业都与电气或电子设备有关，但设计责任、交付物与准入不同；用它们核对方向，而不是互相当作替代。"
+              "电气工程师把设备供电与控制要求变成可评审的设计、选型依据和验收记录。电工通常按授权执行安装和维护，电子工程师更常负责电路与信号，电气技术员主要协助测试和记录。设计复核、现场作业和依法签署各有责任边界。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.intro",
@@ -24155,13 +24262,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑采用条件：资料、权限和审核制度须核；本轮无企业采用调查。"
+              "ETAP 文档说明如何比较短路电流与器件额定值。使用输出前要核对电源、变压器和馈线输入。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.5",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "tool-etap"
           ],
           "type": "prose"
         },
@@ -24245,13 +24351,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI 与数字化工具可辅助文献与标准检索、计算与仿真脚本草稿、图纸与文档初稿、测试数据分析；不能替代设计判断与标准符合性结论、安全与失效分析、现场条件确认与设计批准，也不承担签字与合规责任。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可先试用工具整理测试矩阵、检查设备位号。发布图纸前，工程人员仍须复核输入、测试限制和变更依据。费马的 50% 是对三个代表性任务等权估算的编辑指标，算法与范围见文末方法说明。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "source-fermatmind-ai-rubric",
+            "nist-rmf-1"
           ],
           "type": "prose"
         },
@@ -24305,13 +24411,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑采用条件"
+              "短路电流建模"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.2.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "tool-etap"
           ],
           "type": "prose"
         },
@@ -24320,13 +24425,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本轮未取得企业采用调查。"
+              "工具文档说明功能，未测量企业采用比例。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.2.limit",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "tool-etap"
           ],
           "type": "prose"
         },
@@ -24350,13 +24454,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "17-20712025就业199,700，2025—2035增长10%，年均空缺11,400，非AI因果。"
+              "BLS 对美国 17-2071 的就业预测：2025 年 199,700 人，2035 年预计 219,500 人，增长 9.9%，年均空缺 11,400 个（含替补）。预测未估计 AI 的因果影响。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.3.conclusion",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "bls"
           ],
           "type": "prose"
         },
@@ -24380,13 +24483,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "中国标准与建设工程注册规则"
+              "个人注册与签章"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "cn-reg"
           ],
           "type": "prose"
         },
@@ -24395,13 +24497,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "标准化法区分强制与推荐；MOHURD注册规定针对建设工程勘察设计，不能推所有电子产品或内部设计均需注册。"
+              "电气专业设计的签章范围见注册电气工程师制度。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.conclusion",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "cn-reg"
           ],
           "type": "prose"
         },
@@ -24530,13 +24631,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "学习 AI 工具对本职业有什么用？"
+              "怎么练仿真和模型复核？"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.3.question",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "tool-mathworks"
           ],
           "type": "prose"
         },
@@ -24545,13 +24645,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可试用检索、计算脚本及文档草稿，先核可复现性、准确性与用时，无加速实测。"
+              "先用电机或控制回路模型对照基准工况，再看哪里需要人工复核。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.3.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "tool-mathworks"
           ],
           "type": "prose"
         },
@@ -24665,13 +24764,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "官方职业档案"
+              "职业档案"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.onet.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -24680,13 +24778,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于核对本职业的任务、工具与准备层级，只适用于该美国职业口径。"
+              "用电气工程师职业档案核对这类工作的范围。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.onet.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -24695,13 +24792,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "官方工资与就业统计"
+              "美国工资调查"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.r2-ai.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "us-wage"
           ],
           "type": "prose"
         },
@@ -24710,13 +24806,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于核对中位工资、五分位、就业规模与展望，中位数不是起薪。"
+              "OEWS 提供雇员工资，比较时按职业和地区筛选。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.r2-ai.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "us-wage"
           ],
           "type": "prose"
         },
@@ -24725,13 +24820,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "建设工程注册工程师规则"
+              "工程任务"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "batch52-onet-core"
           ],
           "type": "prose"
         },
@@ -24740,13 +24834,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "MOHURD规则针对建设工程勘察设计注册与签章，不覆盖所有产品内部研发。"
+              "职业任务表列设计、计算、设备校核与测试，没有 AI 采用率。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "batch52-onet-core"
           ],
           "type": "prose"
         },
@@ -24755,13 +24848,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "NIST自愿AI风险管理框架"
+              "美国电气作业安全"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag-moa.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "us-electrical-safety"
           ],
           "type": "prose"
         },
@@ -24770,13 +24862,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "通用方法，不提供职业工资、采用实测或具体产品安全规范。"
+              "OSHA 文件说明美国电气作业安全要求。模型输出不能当现场工作许可，国内适用规则另查。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag-moa.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "us-electrical-safety"
           ],
           "type": "prose"
         },
@@ -24785,13 +24876,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "兴趣与职业探索工具"
+              "生成式 AI 风险"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.ratify.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "nist-ai-genai"
           ],
           "type": "prose"
         },
@@ -24800,13 +24890,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于探索兴趣方向，不作人格诊断或录用依据。"
+              "NIST 提醒输出可能看似可信却出错，建议验证结果。这是自愿性风险框架。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.ratify.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "nist-ai-genai"
           ],
           "type": "prose"
         },
@@ -24815,13 +24904,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "相邻职业官方档案"
+              "美国职业手册"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.bls.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "bls-ooh-engineers"
           ],
           "type": "prose"
         },
@@ -24830,13 +24918,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于核对相邻方向的差别，只适用于该相邻职业。"
+              "BLS 手册给出工作环境和典型入行准备。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.bls.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "bls-ooh-engineers"
           ],
           "type": "prose"
         },
@@ -24845,13 +24932,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "NIST自愿AI风险管理框架"
+              "自愿性 AI 风险框架"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.nist.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "nist-rmf-1"
           ],
           "type": "prose"
         },
@@ -24860,13 +24946,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "通用方法，不提供职业工资、采用实测或具体产品安全规范。"
+              "NIST 提供记录和复核 AI 风险的方法，没有电气工程师替代率。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.nist.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "nist-rmf-1"
           ],
           "type": "prose"
         },
@@ -25978,7 +26063,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得全国单职业口径"
+              "先分非私营和私营，再看单位所在行业。不要把行业均值当作同职级底薪。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.1",
@@ -26020,13 +26105,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本轮未取得中国精确职业全国工资；比较报价核行业、地区、合同与奖金，不能说官方未发布或注册保证加薪。"
+              "国家统计局 2025 年就业人员年平均工资显示，制造业城镇非私营单位为 113,594 元、私营单位为 76,055 元；信息传输、软件和信息技术服务业依次为 248,752 元和 128,166 元。这些是各行业门类就业人员均值。先按单位行业和统计类型查，再用本地同职级的录用条件估计个人工资。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.4",
           "source_refs": [
-            "nbs",
-            "cn-rule"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26035,7 +26119,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "如看到招聘数字，需先核对它是月薪、年薪、时薪、项目总额还是含福利口径。"
+              "比较同城同职级的录用条件，把固定月薪乘书面约定的发薪月数，再把项目奖、加班与出差补贴另列。谈定级时问清你是出图、复核还是负责专业交付，现场频率和回款挂钩的奖金也应单独写明。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.5",
@@ -26049,7 +26133,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本页所核国家统计局资料未取得与「电气工程师」精确对应的中国大陆全国单职业工资分位，仅到行业与人员大类口径。"
+              "中国大陆薪资口径与核对方式"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.heading",
@@ -26063,13 +26147,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              " 以上是两份历史公告。大陆职业工资中位数仍缺可比数据。"
+              "比较底薪前核发薪月数。两份录用条件用同一种年收算法，项目奖留到固定现金算完再比。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
           "source_refs": [
-            "a28-shunde",
-            "a28-zhengzhou"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26078,7 +26161,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：不以单条招聘报价替代职业工资"
+              "谈薪前先确认是否要出差和承担停线支持，再核工资里的相应补贴。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
@@ -26092,7 +26175,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国学历、经验与资格按岗位核；本轮未取得全国学历分布，不推统一本科或硕士门槛。"
+              "同城岗位若都叫电气工程师，先区分设备研发、设计出图和现场调试。核职级时看第一年独立交付什么。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.featured",
@@ -26106,13 +26189,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "在职训练集中于适用标准体系、专业设计软件、项目流程与单位设计审核制度。"
+              "驻场调试要问夜间到场费、出差补贴和停线后有没有换休。把出差报销另列。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.background",
           "source_refs": [
-            "nbs",
-            "cn-rule"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26121,13 +26203,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "建设工程勘察设计注册与签章须核MOHURD实际适用；电子产品研发、内部设计与雇主批准权限另核，不等同注册执业。"
+              "对新增计算复核或签审职责，核书面职级和固定工资何时生效。需要法定签章的工作还要核个人注册范围。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.theater",
           "source_refs": [
-            "nbs",
-            "cn-rule"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26136,7 +26217,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业级工资口径：证据不足，未取得全国单职业分布。"
+              "行业年平均工资已把多种工种合在同一门类。个人谈薪请按单位性质、城市和职责拆开。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.national",
@@ -26164,7 +26245,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "AI辅助检索和文档为编辑建议；中国本职业采用与工资/需求因果变化未取得。"
+              "行业工资数据没有把 AI 单列为薪资因素。若岗位新增自动化后的复核、签审或试车责任，用书面职级、本薪及补贴判断收入变化。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.ai-answer",
@@ -26178,13 +26259,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "公告只用于核对岗位职责和计薪方式。"
+              "现场保障岗位可把出差、加班和换休单列，项目奖看支付条件。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
           "source_refs": [
-            "a28-shunde",
-            "a28-zhengzhou"
+            "nbs"
           ],
           "type": "prose"
         }
@@ -26201,7 +26281,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国 O*NET-SOC 17-2071.00 单职业 2025 年全国中位年薪 120,630 美元（中位时薪 58.00 美元）；五分位同源，使用时保留职业、时期与单位口径。"
+              "美国 O*NET-SOC 17-2071.00 单职业 2025 年全国中位年薪 120,630 美元（中位时薪 58.00 美元）；五个百分位同源，使用时保留职业、时期与单位口径。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.1",
@@ -26396,13 +26476,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "141,160美元/年；该精确职业在航空航天产品及零件制造的工资中位，非行业所有人均值。"
+              "查看车辆、轨道或其他运输设备制造单位的用人范围。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.theater",
           "source_refs": [
-            "bls",
-            "oews"
+            "bls-ooh-engineers"
           ],
           "type": "prose"
         },
@@ -26411,13 +26490,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "135,230美元/年；该精确职业在研发服务的工资中位，非行业所有人均值。"
+              "该门类涵盖计算机及电子产品制造单位。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.education",
           "source_refs": [
-            "bls",
-            "oews"
+            "bls-ooh-engineers"
           ],
           "type": "prose"
         },
@@ -26426,13 +26504,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "122,430美元/年；该精确职业在发电输电配电的工资中位，非行业所有人均值。"
+              "这一列按发电、输电和配电单位分类。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.amusement",
           "source_refs": [
-            "bls",
-            "oews"
+            "bls-ooh-engineers"
           ],
           "type": "prose"
         },
@@ -26441,13 +26518,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "121,610美元/年；该精确职业在导航测量电医学控制仪器制造的工资中位，非行业所有人均值。"
+              "工程服务可作为咨询和设计单位的行业参照。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
           "source_refs": [
-            "bls",
-            "oews"
+            "bls-ooh-engineers"
           ],
           "type": "prose"
         },
@@ -26531,13 +26607,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "不代表中国大陆的工资水平或岗位需求，使用时须保留职业、地区、时期与单位口径。"
+              "美国 OEWS 调查覆盖受雇人员，排除自雇人员及非公司制企业的业主、合伙人。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.boundary.detail",
           "source_refs": [
-            "bls",
-            "oews"
+            "us-method"
           ],
           "type": "prose"
         }
@@ -26904,7 +26979,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用虚构任务观察是否先确认标准有效版本与适用范围。"
+              "可以用问题回看自己的工作习惯：两份图表对不上时，你会先写下哪个数据待补，还是先按手头资料继续？"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.big-five.answer",
@@ -27632,7 +27707,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "没有经验怎么入行？"
+              "哪条方向能更快看到工作结果？"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.interest.question",
@@ -27646,12 +27721,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用课程项目、实习或竞赛中的计算书与设计说明证明能力，并写清假设、依据与复核过程。"
+              "电源研发可以在台架上很快看到改动后的波形。配电设计有时要等设备参数和审图，自动化要等产线停机才好复测。先看你能适应哪种反馈节奏。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.interest.answer",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-drawing"
           ],
           "type": "prose"
         },
@@ -27660,7 +27736,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "会被自动化取代吗？"
+              "我更愿意追故障，还是做选型取舍？"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.outgoing.question",
@@ -27674,12 +27750,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "检索、文档与数据分析类任务可被工具辅助，但设计判断、安全与失效分析、符合性结论与设计批准仍由工程师负责。"
+              "调试时按首条告警找变化的联锁输入。设计时拿两款开关比较额定值、柜内空间和交期，再把取舍写给同事。想想你更愿意反复做哪类判断。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.outgoing.answer",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-drawing"
           ],
           "type": "prose"
         },
@@ -27716,7 +27793,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "工作环境怎么样？"
+              "驻场轮值和办公室设计，怎样比较作息？"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.schedule.question",
@@ -27730,12 +27807,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "以办公室设计工作为主，需到现场查勘、配合施工与调试；项目节点期间加班较多。"
+              "驻场调试先核停线窗口、夜间到场和复测怎样交给下一班。设计岗位先核现场查勘归谁、送审出图有几个集中节点。把值班表和补休安排放在一起比较。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.schedule.answer",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-drawing"
           ],
           "type": "prose"
         },
@@ -28053,7 +28131,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "六类风险与措施为编辑归纳；未取得职业事故率或降险实测，不能替设计指导或实际批准程序。"
+              "入行前 6–12 个月，如果你特别排斥规范复核、跨专业协调或整改后的重复验收，纯画图的职位想象容易落空。反例是职责清晰的研发团队：如果评审与变更有固定节奏，喜欢追溯要求的人反而可能适应。访谈时请对方展示一份去识别化的返工交接记录。"
             ]
           },
           "id": "actors.display.career_risk_cards.direct-answer",
@@ -28518,13 +28596,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于核对美国工资、就业与展望的统计口径。"
+              "ETAP 短路模型与器件额定值比较。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.sag",
           "source_refs": [
-            "sag",
-            "nist"
+            "tool-etap"
           ],
           "type": "prose"
         },
@@ -28533,13 +28610,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于检索职业安全的国际资料入口。"
+              "核输电、供电或受电设施的许可事项和单位适用范围。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.nist",
           "source_refs": [
-            "sag",
-            "nist"
+            "cn-nea"
           ],
           "type": "prose"
         }
@@ -28556,15 +28632,15 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "进入本职业不是只报一个课程：先核对目标地区的岗位定义、学历与专业要求、项目经验年限、执业资格与雇主条件，并记录公告日期与是否仍在招。"
+              "先用一份可复算的设备配电或联锁作品说明你能承担什么。"
             ]
           },
           "id": "actors.path.recruitment-sample.1",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "cn-drawing"
           ],
+          "title": "作品集怎样展示一份可复核的交件",
           "type": "notice"
         },
         {
@@ -28685,28 +28761,28 @@
                 "id": "scene",
                 "values": [
                   "作品一：纸面设计说明",
-                  "以虚构需求完成一份设计说明，含需求、接口、方案取舍与假设。"
+                  "想投自动化方向，可做一份输送线联锁的纸面作品，说明一个传感器断信号时预期怎么停。"
                 ]
               },
               {
                 "id": "rework",
                 "values": [
                   "作品二：计算与仿真记录",
-                  "记录模型假设、参数来源、边界条件与裕度分析。"
+                  "改动一个输入条件，写出改版前后的 PLC 联锁与 SCADA 报警逻辑。"
                 ]
               },
               {
                 "id": "materials",
                 "values": [
                   "作品三：符合性核对表",
-                  "按虚构标准条款逐项核对设计并记录符合性结论与偏差。"
+                  "交一张 I/O 点表和三项试车预期。用模型得到的结果加上“仿真”标注。"
                 ]
               },
               {
                 "id": "reflection",
                 "values": [
                   "作品四：变更与复核记录",
-                  "模拟一次设计变更，写清影响范围、复算项与批准角色。"
+                  "面试时讲清维保人员怎样确认报警解除，哪项异常仍需复测。"
                 ]
               }
             ]
@@ -28714,8 +28790,7 @@
           "id": "actors.path.entry-portfolio.1",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "tool-controls"
           ],
           "title": "没有项目经验，可以准备什么作品",
           "type": "cards"
@@ -28787,75 +28862,76 @@
             ],
             "column_labels": [
               "资格／准备项",
-              "主要适合谁",
-              "求职现实作用",
-              "是否普遍入职门槛",
-              "报名／办理条件",
-              "投入考虑",
-              "重要限制"
+              "主要适合谁：",
+              "求职现实作用：",
+              "是否普遍入职门槛：",
+              "报名／办理条件：",
+              "投入考虑：",
+              "重要限制："
             ],
             "rows": [
               [
-                "学士学位（相关工程领域）",
-                "多数入门岗位候选人",
-                "是：O*NET 调查中约 82% 回答需要学士",
-                "美国典型准备，非所有岗位统一法定门槛。",
-                "按院校与专业认证要求申请",
-                "四年学制与学费、项目与实习投入",
-                "学位不等于执业资格或设计批准权限"
+                "电气及相关专业训练",
+                "设备电气和设计新人",
+                "读图、计算、验证",
+                "按岗位",
+                "电路、电力或自动化项目",
+                "课程与实习",
+                "保留可复算的项目记录"
               ],
               [
-                "副学士学位加经验",
-                "部分技术型或制造型岗位",
-                "视岗位：可作为补充路径",
-                "否：不是普遍门槛",
-                "按院校与雇主认可度衡量",
-                "两年学制与在职训练投入",
-                "需额外证明设计能力与责任层次"
+                "基础考试",
+                "勘察设计注册方向",
+                "满足专业考试路径条件",
+                "按报考条件",
+                "核学历和本专业或相近专业",
+                "备考",
+                "成绩不直接授权签章"
               ],
               [
-                "硕士或博士学位",
-                "研发、算法或研究型岗位",
-                "视岗位：部分研发岗位要求",
-                "否：不是普遍门槛",
-                "按研究方向与导师资源申请",
-                "两至五年研究与论文投入",
-                "学历层次不等于岗位设计批准权限"
+                "发输变电／供配电专业考试",
+                "项目设计人员",
+                "按实际业务选方向",
+                "按报考条件",
+                "核基础考试及设计经历",
+                "积累设计项目",
+                "专业匹配项目范围"
               ],
               [
-                "专业工程师执照（PE）",
-                "对外提供工程服务或签署文件的岗位",
-                "视岗位与法域：部分岗位要求",
-                "否：按法域与岗位核验",
-                "需通过考试并满足经验年限要求",
-                "考试、经验年限与维持费用",
-                "仅在其适用法域与业务范围内有效"
+                "注册电气工程师",
+                "承接受监管设计职责的个人",
+                "按注册范围执业与签章",
+                "看项目责任",
+                "资格、聘用与注册",
+                "持续保留执业记录",
+                "签章责任由注册人员承担"
               ],
               [
-                "雇主内部设计审核授权",
-                "承担校核、审核与批准的设计岗位",
-                "是：单位内部授权",
-                "内部职责授权须具备；不是全国资格证，不等于无需授权。",
-                "按单位制度与评审记录授予",
-                "内部培训与责任期投入",
-                "不可由学位或职业名称推断"
+                "电力工程施工总承包资质",
+                "施工企业",
+                "匹配工程承包范围",
+                "看资质等级",
+                "资产、人员、业绩",
+                "核当前申报规则",
+                "企业资质"
               ],
               [
-                "行业认证与专项培训",
-                "特定产品、系统或标准领域岗位",
-                "视单位与产品：部分岗位要求",
-                "否：按产品与单位核验",
-                "按认证机构要求参加培训与考核",
-                "培训与维持费用投入",
-                "仅在其适用产品与体系内有效"
+                "承装（修、试）电力设施许可证",
+                "承装、承修或承试单位",
+                "对应类别与电压范围",
+                "看许可范围",
+                "技术、安全、技术人员及技能人员配置",
+                "维持实际人员条件",
+                "单位许可"
               ]
             ]
           },
           "id": "actors.path.credential-decision.1",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "cn-reg",
+            "cn-epc",
+            "cn-nea",
+            "cn-neastaff"
           ],
           "title": "训练、资格与材料怎么选择",
           "type": "table"
@@ -28865,17 +28941,18 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "招聘公告中的学历、专业、经验与资格要求必须逐条读取；一项可放宽不代表其他条件可替代。",
-              "本页建议的作品与七天体验只用于职业探索，不构成设计批准、执业资格或作业许可。",
-              "设计符合性结论与设计文件批准，只能由具备资质与授权的人员按适用标准与单位制度作出。",
-              "本页练习使用虚构材料，不代表任何真实项目、产品与设计结论。"
+              "先分清内部审图、依法签章和企业承包范围，各自需要的资格不同。",
+              "设计作品留出一页变更影响：图号、版本、器件选择和复测记录。",
+              "受监管设计文件签章前要核注册范围，承包和设施许可另查企业资质。",
+              "施工项目看实际发包范围，单独区分承装、承修和承试。"
             ]
           },
           "id": "actors.path.credential-boundary.1",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "cn-reg",
+            "cn-epc",
+            "cn-nea",
+            "cn-neastaff"
           ],
           "title": "训练、资格与合同边界",
           "type": "notice"
@@ -28885,14 +28962,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国典型准备为相关工程学士，PE非入门统一要求；中国岗位学历、建设工程注册与内部设计权限分别核，产品研发不自动要求注册。"
+              "供配电新人可交一张单线图和复算表，让审图人找到负荷、器件、假设和差异。"
             ]
           },
           "id": "actors.path.career-path-block.1",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "cn-drawing"
           ],
           "type": "prose"
         },
@@ -28901,14 +28977,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国典型准备为相关工程学士，PE非入门统一要求；中国岗位学历、建设工程注册与内部设计权限分别核，产品研发不自动要求注册。"
+              "自动化面试可以用一条联锁和一条报警说明信号怎样传递、故障怎样复测。"
             ]
           },
           "id": "actors.path.career-path-block.2",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "cn-drawing"
           ],
           "type": "prose"
         },
@@ -28917,14 +28992,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "MOHURD规则针对建设工程勘察设计注册、执业与签章；不泛化全部产品设计，1910.147不是工程师设计资格规定。"
+              "准备注册方向时，记录自己实际参与的设计工作、责任和复核材料。"
             ]
           },
           "id": "actors.path.career-path-block.3",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "cn-reg",
+            "cn-epc",
+            "cn-nea",
+            "cn-neastaff"
           ],
           "type": "prose"
         },
@@ -28937,44 +29013,58 @@
                 "id": "actors-practice-materials",
                 "values": [
                   "纸面工单材料",
-                  "虚构系统 S4，纸面作业。项目要求 V2 的响应时间不得超过 120 ms。报告 T11 对 V2 记录 135 ms，报告 T09 对旧版 V1 记录 110 ms。",
-                  "T11 有测试人员签字，未有验收负责人批准。规则约定：同一版本的记录可用于比较，设计负责人安排复核，验收负责人确认放行。",
-                  "只核对给定记录。练习没有设备操作，也没有提供偏差原因。"
+                  "用文末的河南省电力客户工程典型设计及造价咨询指引。公开图有 100 kVA 变压器及两路标为 100 A 的低压出线。练习取三相 0.4 kV，假设两路同时运行，工况分别为 30 kW、45 kW，功率因数都取 0.90。",
+                  "按 I = P ÷（√3 × U × 功率因数）求各路负荷电流，再用变压器容量和线电压求额定电流。标清两路的 100 A 是图示标称值。全程只读图、算数、写记录。",
+                  "用独立三栏写图示数据、练习计算和待复核项。"
                 ]
               },
               {
                 "id": "actors-practice-task",
                 "values": [
                   "交件要求",
-                  "交一页验证记录，列所用报告、差额、旧版记录能否采用及放行状态。",
-                  "写清复核和验收的接手人，以及还要确认的问题。"
+                  "交一页负荷计算与断路器整定复核单：分别列出图上数据、练习假设、支路与总电流，以及核定实际整定需要补齐的资料。",
+                  "图纸改版时同时检查负荷、器件范围和试验记录。"
                 ]
               },
               {
                 "id": "actors-practice-reference",
                 "values": [
                   "先完成独立答卷",
-                  "到「常见问题与资料来源」打开「验证记录参考答案（完成第六天后再打开）」。",
-                  "用其中的自核项记录一处差异与修订。"
+                  "交件后到常见问题打开「纸面样答：两路低压出线与整定待核项」。",
+                  "用下面的评分找一处漏项，再改交件。"
                 ]
               },
               {
                 "id": "actors-practice-boundary",
                 "values": [
-                  "材料四：交付与边界说明",
-                  "列出参考交付物与不得越界的范围（不涉及真实带电与高压作业）。"
+                  "试做评分",
+                  "每项一分：分图值与假设，算对两路电流，算对合计与变压器额定值，区分图上标称与实际整定，说明暂缓和补件。"
                 ]
               }
             ]
           },
           "id": "actors.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "cn-drawing"
           ],
-          "title": "入门案例材料",
+          "title": "纸面试做：复算两路低压出线",
           "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "图上标出 100 kVA 和两路 100 A。练习另设三相 0.4 kV、两路 30／45 kW 同时运行、功率因数均为 0.90。两路约为 48.1 A 和 72.2 A，合计约 120.3 A；100 kVA 变压器在 0.4 kV 下额定约 144.3 A。两支路分别低于图示的 100 A，合计低于变压器额定值。实际整定仍待复核：补电缆载流量、起动工况、断路器型号及脱扣曲线、末端最小和最大短路电流与上下级保护配合。"
+            ]
+          },
+          "id": "electrical-engineers.entry-work-sample-data.2",
+          "source_refs": [
+            "cn-drawing"
+          ],
+          "title": "纸面样答：两路低压出线与整定待核项",
+          "type": "notice",
+          "visibility": "public"
         },
         {
           "availability": "available",
@@ -28985,60 +29075,55 @@
                 "id": "day-1",
                 "values": [
                   "第 1 天",
-                  "列报告编号和版本。"
+                  "在图上标出两路出线。"
                 ]
               },
               {
                 "id": "day-2",
                 "values": [
                   "第 2 天",
-                  "用 V2 的要求算差额。"
+                  "分别算两路电流。"
                 ]
               },
               {
                 "id": "day-3",
                 "values": [
                   "第 3 天",
-                  "注明 V1 数据的使用范围。"
+                  "复算合计和变压器额定电流。"
                 ]
               },
               {
                 "id": "day-4",
                 "values": [
                   "第 4 天",
-                  "核对签字与待办角色。"
+                  "列出整定待核资料。"
                 ]
               },
               {
                 "id": "day-5",
                 "values": [
                   "第 5 天",
-                  "写完纸面验证记录。"
+                  "写一页交接单。"
                 ]
               },
               {
                 "id": "day-6",
                 "values": [
-                  "第六天：独立交件",
-                  "先不看参考，检查交件能否独立读懂。"
+                  "第 6 天",
+                  "独立交件。"
                 ]
               },
               {
                 "id": "day-7",
                 "values": [
-                  "第七天：打开参考并复盘",
-                  "到「常见问题与资料来源」打开「验证记录参考答案（完成第六天后再打开）」。写下一处差异与修订，再决定继续或暂缓。"
+                  "第 7 天",
+                  "对照 FAQ 样答。"
                 ]
               }
             ]
           },
           "id": "actors.path.seven-day-trial.1",
-          "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
-          ],
-          "title": "七天低成本职业体验",
+          "title": "可选：分七天完成",
           "type": "timeline"
         },
         {
@@ -29046,22 +29131,17 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "能用题面完成一页交接，并区分已核、待核和审批。",
-              "第 2 天：能否把需求拆成可核对的接口与约束，并标出未决项。",
-              "用纸面作业记录哪一步最费力，真实工作量另向雇主核对。",
-              "第 4 天：能否把「通过」写成可执行的判据而非笼统描述。",
-              "第 5 天：能否在不删数据的前提下标出偏差与条件缺失。",
-              "第 6 天：能否判断变更影响范围并列出必须复算的项目。",
-              "第七天对照折叠参考检查交件。有关键漏项先重做。真实培训及职责范围另向雇主确认。"
+              "标版次。",
+              "列题设。",
+              "带单位。",
+              "列缺项。",
+              "标待核。",
+              "指定复核人。",
+              "同事能复算吗？"
             ]
           },
           "id": "actors.path.seven-day-decision.1",
-          "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
-          ],
-          "title": "第七天如何判断是否继续",
+          "title": "做完后再决定",
           "type": "list"
         },
         {
@@ -29101,14 +29181,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "三方向四阶段为编辑发展示例，非统一晋升；学位、建设工程注册与内部授权分别核。"
+              "接到项目先分清谁做设计签章、谁接施工、谁承装承修承试。不同类型分别核个人执业与两类企业资质。"
             ]
           },
           "id": "actors.display.career_path_block.boundary",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "cn-reg",
+            "cn-epc",
+            "cn-nea",
+            "cn-neastaff"
           ],
           "type": "prose"
         },
@@ -29117,14 +29198,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "MOHURD规则针对建设工程勘察设计注册、执业与签章；不泛化全部产品设计，1910.147不是工程师设计资格规定。"
+              "施工企业对照住建部电力工程施工总承包资质的等级、资产、人员及业绩要求。涉及输电、供电、受电设施安装、维修或试验时，单位还要核对国家能源局《承装（修、试）电力设施许可证》的类别、等级和人员配置。三级新申请区分技术负责人、安全负责人、电力技术人员和电力技能人员。文末办事指南列各类人数和兼任条件。"
             ]
           },
           "id": "actors.display.career_path_block.locale.jurisdiction",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "cn-reg",
+            "cn-epc",
+            "cn-nea",
+            "cn-neastaff"
           ],
           "type": "prose"
         },
@@ -29133,14 +29215,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国：O*NET 调查中约 82% 回答需要学士学位、11% 需要副学士、7% 需要硕士；Job Zone Four，通常需要数年工作相关经验与在职训练。"
+              "供配电、产线自动化和电源研发的考核看不同交件。先用单线图、I/O 表和波形报告确定想练的方向。"
             ]
           },
           "id": "actors.display.career_path_block.locale.summary",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "cn-drawing"
           ],
           "type": "prose"
         },
@@ -29149,14 +29230,18 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "学位、执业资格与单位内部授权是不同层次：学位不等于执业资格，执业资格不等于岗位设计批准权限。"
+              "设备电气和自动化的入行作品可以是电机回路图、I/O 点表和一页异常复测记录。做建设工程勘察设计时，人社和住建体系下设注册电气工程师发输变电、供配电两个专业方向。按学历、专业及设计经历核对基础与专业考试条件，取得资格后按规定注册，在获准范围内执业并对依法应签章的技术文件签章。 跨境项目按执业地核对。IEEE 可作短路计算方法的参考，NEC 对应采用该规范的美国项目，NCEES 负责美国相关执照考试。大陆工程仍按本地适用标准及注册电气工程师制度办理。"
             ]
           },
           "id": "actors.display.career_path_block.locale.credentials",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "cn-reg",
+            "cn-epc",
+            "cn-nea",
+            "cn-neastaff",
+            "us-exam",
+            "us-ieee",
+            "us-nec"
           ],
           "type": "prose"
         },
@@ -30301,14 +30386,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于核对本职业的工资、就业与展望。"
+              "BLS 就业预测表 1.2：美国 17-2071 就业、增长和空缺。"
             ]
           },
           "id": "actors.display.career_path_block.source.bls",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "bls"
           ],
           "type": "prose"
         },
@@ -30317,14 +30400,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于核对本职业的任务与工作活动。"
+              "美国 O*NET 17-2071 任务与工具目录，用于职业内容参照。"
             ]
           },
           "id": "actors.display.career_path_block.source.employer",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "onet"
           ],
           "type": "prose"
         },
@@ -30349,14 +30430,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于核对美国工资统计方法与单位口径。"
+              "国家统计局表 2 和表 5 按行业及单位类型报告平均工资。"
             ]
           },
           "id": "actors.display.career_path_block.source.r2-pay-3",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "nbs"
           ],
           "type": "prose"
         }
@@ -30373,13 +30452,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "17-20712025就业199,700，2025—2035增长10%，年均空缺11,400，含更替。"
+              "BLS 对美国 17-2071 的就业预测：2025 年 199,700 人，2035 年预计 219,500 人，增长 9.9%，年均空缺 11,400 个（含替补）。预测未估计 AI 的因果影响。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.1",
           "source_refs": [
-            "bls",
-            "oews"
+            "bls"
           ],
           "type": "prose"
         },
@@ -30868,13 +30946,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于核对本职业的工资、五分位、就业、增长与空缺。"
+              "BLS 就业预测表 1.2：美国 17-2071 就业、增长和空缺。"
             ]
           },
           "id": "actors.display.market_signal_card.source.bls",
           "source_refs": [
-            "bls",
-            "oews"
+            "bls"
           ],
           "type": "prose"
         },
@@ -30883,13 +30960,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于核对本职业的任务与工作活动。"
+              "O*NET 电气工程师任务及工作活动。"
             ]
           },
           "id": "actors.display.market_signal_card.source.ratify",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet"
           ],
           "type": "prose"
         },
@@ -30898,13 +30974,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于核对美国工资与就业统计方法与口径。"
+              "国家统计局表 2 和表 5 按行业及单位类型报告平均工资。"
             ]
           },
           "id": "actors.display.market_signal_card.source.employer",
           "source_refs": [
-            "bls",
-            "oews"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -30913,13 +30988,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于核对电气标准与执业要求的适用范围。"
+              "美国职业手册的工作环境与用人行业。"
             ]
           },
           "id": "actors.display.market_signal_card.source.onet",
           "source_refs": [
-            "bls",
-            "oews"
+            "bls-ooh-engineers"
           ],
           "type": "prose"
         }
@@ -30937,39 +31011,50 @@
           "data": {
             "entries": [
               {
-                "answer": "把系统需求变成电气方案和验证计划，核对设备选型、测试结果及变更记录，交接还未满足的要求。",
+                "answer": "先把设备额定值追到回路和负荷表，再说明开关为什么这样选。控制工程的对应交件是联锁逻辑和试车记录，电源研发则是原理图、波形和器件应力验证。",
                 "id": "actors.faq.1",
                 "question": "电气工程师主要做什么？",
                 "question_key": "career.faq.electrical-engineers.1",
                 "source_refs": [
-                  "a28-onet"
+                  "onet",
+                  "cn-drawing"
                 ]
               },
               {
-                "answer": "电气工程可以涉及供配电、控制和设备系统。电子工程岗位更常围绕电路、信号和板级产品。具体职责按产品、验证要求和签发分工确认。",
+                "answer": "配电改造时，电气工程师复算回路和保护。电子工程师验证原理图、电路板和信号。工程技术员可按分工搭台测试、记录异常或更新图纸。设计发布和依法签章按项目权限与个人注册范围确定。",
                 "id": "actors.faq.2",
-                "question": "它和电子工程师、工程技师有什么不同？",
+                "question": "电气工程师、电子工程师和工程技术员有什么不同？",
                 "question_key": "career.faq.electrical-engineers.2",
                 "source_refs": [
-                  "a28-onet"
+                  "onet",
+                  "sag",
+                  "employer",
+                  "cn-reg"
                 ]
               },
               {
-                "answer": "美国 O*NET-SOC 17-2071.00「Electrical Engineers」单职业口径，属电气与电子工程师职业族中的电气方向，O*NET 标注 Bright Outlook。",
+                "answer": "供配电交单线图、短路校核与开关选择依据；自动化交 PLC 联锁逻辑、SCADA 告警矩阵及复测记录；电源研发交原理图、PCB 和关键波形。选择前先各看一页实际交付物，判断自己愿意反复复核哪类问题。",
                 "id": "actors.faq.3",
-                "question": "美国统计口径是什么？",
+                "question": "供配电、自动化和电源研发的交付物有什么不同？",
                 "question_key": "career.faq.electrical-engineers.3",
                 "source_refs": [
-                  "onet"
+                  "onet",
+                  "tool-cad",
+                  "tool-etap",
+                  "tool-skm",
+                  "tool-mathworks",
+                  "tool-altium",
+                  "tool-controls"
                 ]
               },
               {
-                "answer": "BLS OES／O*NET 显示 2025 年全国中位年薪 120,630 美元（中位时薪 58.00 美元）；五分位为 76,550／92,830／120,630／152,950／184,300 美元。",
+                "answer": "先选同一地区和同一职业，再看录用条件落在工资分布的什么位置。第 25 和第 75 百分位给出中间一半工资的区间，不能直接当作初级和高级职级。把加班、项目奖和其他福利从比较中单列。",
                 "id": "actors.faq.4",
-                "question": "美国工资是多少？",
+                "question": "美国五档工资怎样用来比较录用条件？",
                 "question_key": "career.faq.electrical-engineers.4",
                 "source_refs": [
-                  "onet"
+                  "us-wage",
+                  "us-method"
                 ]
               },
               {
@@ -30982,59 +31067,58 @@
                 ]
               },
               {
-                "answer": "顺德岗位标 8,501–10,000 元/月，职责含电气系统方案评审、设备选型、图纸及生产调试。 郑州岗位列 5 人、本科，含 PLC 程序、原理图、选型和调试。标 6,000–10,000 元，计薪周期未注明。 以上是两份历史公告。大陆职业工资中位数仍缺可比数据。",
+                "answer": "拿制造设备研发和产线调试两份录用条件对比，先把固定月薪及保底发薪月数折成年收入，再看项目奖条件、出差天数、加班补偿和换休。国家统计局行业均值帮你辨别行业和单位口径。用同城同职级的书面条件重算差额。每周只照旧图改号、独立复核负荷与保护、负责专业交付是三种职责。若招聘写着工程师，实际只分配改号，也说不清何时能做复核，先问清培养和调级条件。",
                 "id": "actors.faq.6",
-                "question": "中国大陆的工资能查到吗？",
+                "question": "同城两份电气岗位的薪资怎么比？",
                 "question_key": "career.faq.electrical-engineers.6",
                 "source_refs": [
-                  "a28-shunde",
-                  "a28-zhengzhou"
+                  "nbs"
                 ]
               },
               {
-                "answer": "美国 O*NET 调查中约 82% 回答需要学士学位、7% 需要硕士；中国大陆的学历与资格要求按目标单位招聘公告与主管部门规定逐项核对，本页未取得可对外引用的全国统一条件；对外提供建设工程勘察、设计及有关业务活动时，依《勘察设计注册工程师管理规定》（建设部令第 137 号）须经考试取得资格证书并注册、取得注册证书与执业印章后方可执业，其他单位内部岗位仍按雇主要求核验。",
+                "answer": "企业承接电力工程施工总承包时，核对住建部门的电力工程施工总承包资质。涉及许可证范围内的电力设施承装、承修或承试，还要核对国家能源局的对应类别和等级。个人做受监管的电气专业设计，则看发输变电或供配电方向的注册和签章资格。看招聘条件时，先问清单位要求你出图、做现场工作，还是对法定文件签章。",
                 "id": "actors.faq.7",
-                "question": "需要什么学历和资格？",
+                "question": "注册电气工程师证能代替企业资质吗？",
                 "question_key": "career.faq.electrical-engineers.7",
                 "source_refs": [
-                  "onet",
-                  "cn-rule"
+                  "cn-reg",
+                  "cn-epc",
+                  "cn-nea",
+                  "cn-neastaff"
                 ]
               },
               {
-                "answer": "检索、文档与数据分析类任务可被工具辅助，但设计判断、安全与失效分析、符合性结论与设计批准仍需由工程师负责；公开来源不足以给出岗位数量变化结论。",
+                "answer": "2026 年可以让工具比对柜图修订、整理 I/O 点表或拟测试工况。若互感器变比、变压器阻抗或现场线号录错，成批生成的计算和测试项也会错。工程人员仍要据原件复核输入、解释冲突，并按职责签审。",
                 "id": "actors.faq.8",
-                "question": "会被自动化或 AI 取代吗？",
+                "question": "2026 年哪些工程工作能交给自动化工具？",
                 "question_key": "career.faq.electrical-engineers.8",
                 "source_refs": [
-                  "onet"
+                  "nist-rmf-1",
+                  "tool-cad",
+                  "tool-etap",
+                  "tool-skm",
+                  "tool-mathworks",
+                  "tool-altium",
+                  "tool-controls"
                 ]
               },
               {
-                "answer": "以办公室设计工作为主，需到工厂、变电站或施工现场查勘与配合调试；项目节点与调试阶段加班较多。",
+                "answer": "设计和成套设备岗位可能在出图前去核设备铭牌和回路号。设备调试要配合产线停机及验收时点。电源研发的验证可在台架完成，遇到样机装配或故障批次也可能去生产端。看招聘说明是否把试车和出差写成常设职责。",
                 "id": "actors.faq.9",
-                "question": "工作环境怎么样？",
+                "question": "哪些工作需要离开办公室去现场？",
                 "question_key": "career.faq.electrical-engineers.9",
                 "source_refs": [
-                  "onet"
+                  "onet",
+                  "cn-drawing"
                 ]
               },
               {
-                "answer": "只能作为方向参考。就业与工资是统计口径，空缺不等于录用概率，美国数字不能外推中国大陆；实际要求以适用标准、执业规定与岗位公告为准。",
+                "answer": "先确认写的是税前月薪还是年度总现金。若用年度总包沟通，要求把固定发薪、绩效条件和报销单列，再用月均工时比较两份书面条件。若复核计算或主持停线交接是新增职责，确认书面职级、固定工资及夜间到场补贴分别涨多少。仅提高浮动奖金上限，固定收入可能原封不动。",
                 "id": "actors.faq.10",
-                "question": "这些数字能用来选专业或求职吗？",
+                "question": "如何判断录用条件里的工资口径？",
                 "question_key": "career.faq.electrical-engineers.10",
                 "source_refs": [
-                  "onet"
-                ]
-              },
-              {
-                "answer": "T11 对应 V2，135 ms 比上限多 15 ms，未达题设要求。T09 的 110 ms 属 V1，不能替代 V2 验证。记录 S4、V2、T11、差额和待查原因。请设计负责人安排复核，放行待验收负责人确认。自核四项：报告版本、差额、旧版排除、复核与放行交接。每项齐全计一项。题设为虚构，来源提供职业背景。",
-                "id": "actors.faq.11",
-                "question": "验证记录参考答案（完成第六天后再打开）",
-                "question_key": "career.faq.electrical-engineers.11",
-                "source_refs": [
-                  "a28-onet"
+                  "nbs"
                 ]
               }
             ]
@@ -31050,14 +31134,17 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "招聘公告中的学历、专业、项目经验与资格要求必须逐条读取；一项可放宽不代表其他条件可替代。",
-              "美国17-2071工资2025年5月、预测2025—2035；非电气电子组合，也非中国精确职业。",
-              "本页不构成设计批准、执业资格或作业许可；设计符合性结论与设计文件批准只能由具备资质与授权的人员按适用标准与单位制度作出。"
+              "国家统计局行业均值用于比较单位和行业，不能代入个人录用条件。",
+              "施工资质、单位许可与个人注册分别查对应规定。"
             ]
           },
           "id": "actors.sources.boundary.1",
           "source_refs": [
-            "onet"
+            "nbs",
+            "cn-reg",
+            "cn-epc",
+            "cn-nea",
+            "cn-neastaff"
           ],
           "type": "list"
         },
@@ -31080,12 +31167,17 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本页来源登记与事实登记（O*NET、BLS OES、国家统计局等）"
+              "国家统计局、住建部、国家能源局、注册制度与公开变配电系统图"
             ]
           },
           "id": "actors.display.source_card.source",
           "source_refs": [
-            "onet"
+            "nbs",
+            "cn-reg",
+            "cn-epc",
+            "cn-nea",
+            "cn-neastaff",
+            "cn-drawing"
           ],
           "type": "prose"
         },
@@ -31094,7 +31186,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-09-20"
+              "2026-11-27"
             ]
           },
           "id": "actors.display.source_card.updated-at",
@@ -31108,12 +31200,16 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "已核精确职业2025工资、2025—2035预测；行业、注册与内部权限分别核，保护FAQ未签全页一致。"
+              "文末标出工资统计范围、行业来源，以及企业和个人执业资料。"
             ]
           },
           "id": "actors.display.source_card.note",
           "source_refs": [
-            "onet"
+            "nbs",
+            "cn-reg",
+            "cn-epc",
+            "cn-nea",
+            "cn-neastaff"
           ],
           "type": "prose"
         }
@@ -31228,7 +31324,7 @@
                 "limitation": "入口页不承载本职业数值。",
                 "market": "美国",
                 "name": "O*NET OnLine — 相邻职业能力迁移核对入口",
-                "period": "current portal; accessed 2026-09-20",
+                "period": "2026-09-20 查阅入口",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/"
@@ -31244,7 +31340,7 @@
                 "limitation": "不承载本职业工资或需求数值。",
                 "market": "全球",
                 "name": "国际劳工组织 — 工作条件与职业安全资料入口",
-                "period": "current portal; accessed 2026-09-20",
+                "period": "2026-09-20 查阅入口",
                 "publisher": "International Labour Organization",
                 "scope": "contextual",
                 "url": "https://www.ilo.org/"
@@ -31260,7 +31356,7 @@
                 "limitation": "入口页不承载本职业数值。",
                 "market": "美国",
                 "name": "BLS OOH — 职业查找器（Occupation Finder）",
-                "period": "current page; accessed 2026-09-20",
+                "period": "2026-09-20 核对",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/ooh/occupation-finder.htm"
@@ -31268,7 +31364,7 @@
               {
                 "accessed_at": "2026-11-10",
                 "details": [
-                  "美国 BLS 17-2071 预计 2025 年约 199,700 人、2035 年约 219,500 人（+9.9%），年均约 11,400 个空缺，含替补。"
+                  "表 1.2 按美国 17-2071 列出就业人数和预测人数，用于比较两个年份。"
                 ],
                 "evidence_type": "official occupational outlook",
                 "id": "bls",
@@ -31307,7 +31403,7 @@
                 "limitation": "不承载本职业采用率或岗位结果数据。",
                 "market": "全球",
                 "name": "国际劳工组织 — 数字化与技能资料入口",
-                "period": "current portal; accessed 2026-09-20",
+                "period": "2026-09-20 查阅入口",
                 "publisher": "International Labour Organization",
                 "scope": "contextual",
                 "url": "https://www.ilo.org/"
@@ -31323,7 +31419,7 @@
                 "limitation": "只适用于相邻职业，用于说明跨专业差异。",
                 "market": "美国",
                 "name": "O*NET OnLine — 17-2141.00 机械工程师",
-                "period": "current page; accessed 2026-09-20",
+                "period": "2026-09-20 核对",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/17-2141.00"
@@ -31339,7 +31435,7 @@
                 "limitation": "只适用于相邻职业，用于说明方向差异。",
                 "market": "美国",
                 "name": "O*NET OnLine — 17-2061.00 计算机硬件工程师",
-                "period": "current page; accessed 2026-09-20",
+                "period": "2026-09-20 核对",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/17-2061.00"
@@ -31355,7 +31451,7 @@
                 "limitation": "只适用于相邻职业，用于说明方向差异。",
                 "market": "美国",
                 "name": "O*NET OnLine — 47-2111.00 电工",
-                "period": "current page; accessed 2026-09-20",
+                "period": "2026-09-20 核对",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/47-2111.00"
@@ -31371,7 +31467,7 @@
                 "limitation": "只适用于相邻职业，用于说明责任差异。",
                 "market": "美国",
                 "name": "O*NET OnLine — 17-3023.00 电气与电子工程技师与技术员",
-                "period": "current page; accessed 2026-09-20",
+                "period": "2026-09-20 核对",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/17-3023.00"
@@ -31387,7 +31483,7 @@
                 "limitation": "入口页不承载职业级工资分布。",
                 "market": "中国",
                 "name": "国家统计局 — 统计资料公开入口",
-                "period": "current portal; accessed 2026-09-20",
+                "period": "2026-09-20 查阅入口",
                 "publisher": "国家统计局",
                 "scope": "contextual",
                 "url": "https://www.stats.gov.cn/"
@@ -31403,7 +31499,7 @@
                 "limitation": "兴趣结果不作能力或录用结论。",
                 "market": "美国",
                 "name": "O*NET OnLine — 兴趣与职业探索入口",
-                "period": "current portal; accessed 2026-09-20",
+                "period": "2026-09-20 查阅入口",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/"
@@ -31435,7 +31531,7 @@
                 "limitation": "国际资料不提供本职业采用率或替代率数据。",
                 "market": "全球",
                 "name": "国际劳工组织 — 人工智能与工作的研究资料入口",
-                "period": "current portal; accessed 2026-09-20",
+                "period": "2026-09-20 查阅入口",
                 "publisher": "International Labour Organization",
                 "scope": "contextual",
                 "url": "https://www.ilo.org/"
@@ -31467,7 +31563,7 @@
                 "limitation": "只适用于该单职业，不代表职业族或中国岗位。",
                 "market": "美国",
                 "name": "O*NET OnLine — 17-2071.00 Electrical Engineers",
-                "period": "current page; accessed 2026-09-20",
+                "period": "2026-09-20 核对",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/17-2071.00"
@@ -31483,7 +31579,7 @@
                 "limitation": "不提供本职业采用率或岗位变化数据。",
                 "market": "全球",
                 "name": "国际劳工组织 — 新技术与工作条件资料入口",
-                "period": "current portal; accessed 2026-09-20",
+                "period": "2026-09-20 查阅入口",
                 "publisher": "International Labour Organization",
                 "scope": "contextual",
                 "url": "https://www.ilo.org/"
@@ -31491,34 +31587,33 @@
               {
                 "accessed_at": "2026-09-20",
                 "details": [
-                  "核对相邻电子方向全国工资五分位。",
+                  "核对相邻电子方向全国工资五个百分位。",
                   "只适用于该相邻职业。"
                 ],
                 "evidence_type": "official wage statistics",
                 "id": "r2-pay-1",
                 "limitation": "只适用于相邻职业，不用于本职业工资结论。",
                 "market": "美国",
-                "name": "O*NET OnLine — 17-2072.00 全国工资五分位",
+                "name": "O*NET OnLine — 17-2072.00 全国工资五个百分位",
                 "period": "2025 wage data; accessed 2026-09-20",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/17-2072.00"
               },
               {
-                "accessed_at": "2026-09-20",
+                "accessed_at": "2026-11-27",
                 "details": [
-                  "核对典型入口学历与雇主要求。",
-                  "不提供职业级工资分位。"
+                  "“如何入行”一节介绍美国同行常见的学历、实践与执照路径。"
                 ],
-                "evidence_type": "official entry requirements",
+                "evidence_type": "官方职业手册",
                 "id": "r2-pay-2",
-                "limitation": "只适用于美国组合口径；不代表中国大陆学历要求。",
+                "limitation": "用于了解美国入行路径。国内注册和签章要求见本页大陆制度来源。",
                 "market": "美国",
-                "name": "BLS OOH — 入行与教育要求（组合页入行分区）",
-                "period": "current page; accessed 2026-09-20",
+                "name": "美国 BLS 职业手册：电气与电子工程师的教育与入行",
+                "period": "2026-11-27",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "contextual",
-                "url": "https://www.bls.gov/ooh/installation-maintenance-and-repair/electrical-and-electronics-installers-and-repairers.htm"
+                "url": "https://www.bls.gov/ooh/architecture-and-engineering/electrical-and-electronics-engineers.htm#tab-4"
               },
               {
                 "accessed_at": "2026-09-20",
@@ -31547,7 +31642,7 @@
                 "limitation": "不替代具体国家或雇主的作业许可与标准。",
                 "market": "全球",
                 "name": "国际劳工组织 — 职业安全与健康资料入口",
-                "period": "current portal; accessed 2026-09-20",
+                "period": "2026-09-20 查阅入口",
                 "publisher": "International Labour Organization",
                 "scope": "contextual",
                 "url": "https://www.ilo.org/"
@@ -31563,7 +31658,7 @@
                 "limitation": "只适用于相邻职业，用于说明方向差异。",
                 "market": "美国",
                 "name": "O*NET OnLine — 17-2072.00 Electronics Engineers, Except Computer",
-                "period": "current page; accessed 2026-09-20",
+                "period": "2026-09-20 核对",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/17-2072.00"
@@ -31571,14 +31666,14 @@
               {
                 "accessed_at": "2026-09-20",
                 "details": [
-                  "核对本职业全国工资五分位。",
+                  "核对本职业全国工资五个百分位。",
                   "只适用于该单职业的全国口径。"
                 ],
                 "evidence_type": "official wage statistics",
                 "id": "sag-moa",
                 "limitation": "只适用于该单职业；分位不是资历等级。",
                 "market": "美国",
-                "name": "O*NET OnLine — 17-2071.00 全国工资五分位",
+                "name": "O*NET OnLine — 17-2071.00 全国工资五个百分位",
                 "period": "2025 wage data; accessed 2026-09-20",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
@@ -31595,7 +31690,7 @@
                 "limitation": "只适用于相邻职业，用于说明交付差异。",
                 "market": "美国",
                 "name": "O*NET OnLine — 17-3012.00 电气与电子制图员",
-                "period": "current page; accessed 2026-09-20",
+                "period": "2026-09-20 核对",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/17-3012.00"
@@ -31612,7 +31707,7 @@
                 "name": "BLS OOH Electrical and Electronics Engineers",
                 "period": "2025年5月工资；2025—2035预测",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "broader",
+                "scope": "contextual",
                 "url": "https://www.bls.gov/ooh/architecture-and-engineering/electrical-and-electronics-engineers.htm"
               },
               {
@@ -31649,9 +31744,9 @@
                 "details": [
                   "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
                   "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "完成电气计算与仿真 — 75/100; weight=1/3; actors.display.ai_impact_table.tasks.2.task[0]",
-                  "完成系统设计与设备选型 — 50/100; weight=1/3; actors.display.ai_impact_table.tasks.3.task[0]",
-                  "组织测试并判定符合性 — 25/100; weight=1/3; actors.display.ai_impact_table.tasks.5.task[0]"
+                  "电气计算与仿真评 75/100，权重三分之一。",
+                  "系统设计与设备选型评 50/100，权重三分之一。",
+                  "测试计划与符合性复核评 25/100，权重三分之一。"
                 ],
                 "evidence_type": "编辑模型估算方法",
                 "id": "source-fermatmind-ai-rubric",
@@ -31674,13 +31769,13 @@
                 "name": "美国 17-2071",
                 "period": "2026",
                 "publisher": "O*NET",
-                "scope": "exact_occupation",
+                "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/17-2071.00"
               },
               {
                 "accessed_at": "2026-11-10",
                 "details": [
-                  "美国 BLS 17-2071 预计 2025 年约 199,700 人、2035 年约 219,500 人（+9.9%），年均约 11,400 个空缺，含替补。"
+                  "同表的年均空缺列包括替补需求，不能读成每年净增岗位。"
                 ],
                 "evidence_type": "职业任务原始资料",
                 "id": "a28-bls",
@@ -31689,7 +31784,7 @@
                 "name": "BLS 表 1.2",
                 "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "exact_occupation",
+                "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
@@ -31747,6 +31842,255 @@
                 "publisher": "美国劳工部就业与培训管理局",
                 "scope": "exact",
                 "url": "https://creativecommons.org/licenses/by/4.0/"
+              },
+              {
+                "accessed_at": "2026-11-23",
+                "details": [
+                  "2-02-11-01 电工电器工程技术人员可作任务映射，分类代码不能替代招聘或执业资格。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cn-class",
+                "limitation": "2-02-11-01 电工电器工程技术人员可作任务映射，分类代码不能替代招聘或执业资格。",
+                "market": "中国大陆",
+                "name": "《中华人民共和国职业分类大典（2022年版）》",
+                "period": "2022 年版",
+                "publisher": "人力资源和社会保障部门",
+                "scope": "contextual",
+                "url": "https://rsj.xlgl.gov.cn/rsj/zwgk/gsgg/2025042911363847198/2025042911360419576.pdf"
+              },
+              {
+                "accessed_at": "2026-11-23",
+                "details": [
+                  "工程系列职称用于专业能力评价，注册执业权限另行核对。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cn-title",
+                "limitation": "工程系列职称用于专业能力评价，注册执业权限另行核对。",
+                "market": "中国大陆",
+                "name": "工程技术人才职称制度改革指导意见",
+                "period": "2019 年",
+                "publisher": "人力资源社会保障部、工业和信息化部",
+                "scope": "contextual",
+                "url": "https://www.mohrss.gov.cn/xxgk2020/fdzdgknr/zcfg/gfxwj/rcrs/201902/t20190222_310736.html"
+              },
+              {
+                "accessed_at": "2026-11-23",
+                "details": [
+                  "按制度及实际项目核对注册执业范围和签署责任。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cn-reg",
+                "limitation": "按制度及实际项目核对注册执业范围和签署责任。",
+                "market": "中国大陆",
+                "name": "注册电气工程师执业资格制度暂行规定",
+                "period": "人发〔2003〕25 号",
+                "publisher": "北京市人力资源和社会保障局",
+                "scope": "contextual",
+                "url": "https://rsj.beijing.gov.cn/xxgk/2024zcwj/202406/t20240617_3717377.html"
+              },
+              {
+                "accessed_at": "2026-11-27",
+                "details": [],
+                "evidence_type": "一手来源",
+                "id": "tool-cad",
+                "limitation": null,
+                "market": "跨市场厂商文档",
+                "name": "Autodesk AutoCAD Electrical",
+                "period": null,
+                "publisher": "Autodesk AutoCAD Electrical",
+                "url": "https://help.autodesk.com/cloudhelp/2026/ENU/AutoCAD-Electrical/files/GUID-54861097-CA39-4D32-AB52-DCE2972D7C24.htm"
+              },
+              {
+                "accessed_at": "2026-11-27",
+                "details": [],
+                "evidence_type": "一手来源",
+                "id": "tool-etap",
+                "limitation": null,
+                "market": "跨市场厂商文档",
+                "name": "ETAP short-circuit analysis",
+                "period": null,
+                "publisher": "ETAP short-circuit analysis",
+                "url": "https://etap.com/product/short-circuit-software"
+              },
+              {
+                "accessed_at": "2026-11-27",
+                "details": [],
+                "evidence_type": "一手来源",
+                "id": "tool-skm",
+                "limitation": null,
+                "market": "跨市场厂商文档",
+                "name": "SKM PowerTools short-circuit study",
+                "period": null,
+                "publisher": "SKM PowerTools short-circuit study",
+                "url": "https://skm.com/faq_ptw19.html"
+              },
+              {
+                "accessed_at": "2026-11-27",
+                "details": [],
+                "evidence_type": "一手来源",
+                "id": "tool-mathworks",
+                "limitation": null,
+                "market": "跨市场厂商文档",
+                "name": "MathWorks Simscape Electrical / Simulink",
+                "period": null,
+                "publisher": "MathWorks Simscape Electrical / Simulink",
+                "url": "https://www.mathworks.com/products/simscape-electrical.html"
+              },
+              {
+                "accessed_at": "2026-11-27",
+                "details": [],
+                "evidence_type": "一手来源",
+                "id": "tool-altium",
+                "limitation": null,
+                "market": "跨市场厂商文档",
+                "name": "Altium circuit simulation and SPICE",
+                "period": null,
+                "publisher": "Altium circuit simulation and SPICE",
+                "url": "https://www.altium.com/documentation/altium-designer/circuit-simulation"
+              },
+              {
+                "accessed_at": "2026-11-27",
+                "details": [],
+                "evidence_type": "一手来源",
+                "id": "tool-controls",
+                "limitation": null,
+                "market": "跨市场厂商文档",
+                "name": "Siemens SIMATIC WinCC architecture",
+                "period": null,
+                "publisher": "Siemens SIMATIC WinCC architecture",
+                "url": "https://cache.industry.siemens.com/dl/files/026/32107026/att_109699/v1/SIMATIC_WinCC_System_Description_en-US.pdf"
+              },
+              {
+                "accessed_at": "2026-11-27",
+                "details": [],
+                "evidence_type": "一手来源",
+                "id": "cn-drawing",
+                "limitation": null,
+                "market": "中国大陆",
+                "name": "河南省电力客户工程典型设计及造价咨询指引（下册），第 48 页左图",
+                "period": null,
+                "publisher": "河南省电力客户工程典型设计及造价咨询指引（下册），第 48 页左图",
+                "url": "https://www.pds.gov.cn/upload/files/2023/6/5/11.%E5%9B%BD%E7%BD%91%E6%B2%B3%E5%8D%97%E7%9C%81%E7%94%B5%E5%8A%9B%E5%85%AC%E5%8F%B8%E4%B8%9A%E6%89%A9%E5%8F%97%E7%94%B5%E5%B7%A5%E7%A8%8B%E5%85%B8%E5%9E%8B%E8%AE%BE%E8%AE%A1%E5%8F%8A%E9%80%A0%E4%BB%B7%E5%92%A8%E8%AF%A2%E6%8C%87%E5%BC%95%EF%BC%88%E4%B8%8B%E5%86%8C%EF%BC%89.pdf#page=48"
+              },
+              {
+                "accessed_at": "2026-11-27",
+                "details": [],
+                "evidence_type": "官方统计方法",
+                "id": "us-method",
+                "limitation": null,
+                "market": "美国",
+                "name": "BLS May 2025 OEWS survey methods",
+                "period": null,
+                "publisher": "BLS",
+                "url": "https://www.bls.gov/oes/methods_25.pdf"
+              },
+              {
+                "accessed_at": "2026-11-27",
+                "details": [],
+                "evidence_type": "一手来源",
+                "id": "cn-epc",
+                "limitation": null,
+                "market": "中国大陆",
+                "name": "住房城乡建设部《建筑业企业资质标准》",
+                "period": null,
+                "publisher": "住房城乡建设部《建筑业企业资质标准》",
+                "url": "https://www.mohurd.gov.cn/file/old/2014/20141106/W020191022031714.pdf"
+              },
+              {
+                "accessed_at": "2026-11-27",
+                "details": [],
+                "evidence_type": "一手来源",
+                "id": "cn-nea",
+                "limitation": null,
+                "market": "中国大陆",
+                "name": "国家能源局：承装（修、试）电力设施许可证管理办法",
+                "period": null,
+                "publisher": "国家能源局",
+                "url": "https://www.nea.gov.cn/20250513/250d4adb56ac498ab4690408355cbed6/c.html"
+              },
+              {
+                "accessed_at": "2026-11-27",
+                "details": [],
+                "evidence_type": "一手来源",
+                "id": "cn-neastaff",
+                "limitation": null,
+                "market": "中国大陆",
+                "name": "国家能源局华北监管局：三级许可人员配置",
+                "period": null,
+                "publisher": "国家能源局华北监管局",
+                "url": "https://hbj.nea.gov.cn/zxbs/dlywzzxkhnyhyxyyw/blsm/202609/t20260911_308585.html"
+              },
+              {
+                "accessed_at": "2026-11-27",
+                "details": [],
+                "evidence_type": "官方工资统计",
+                "id": "us-wage",
+                "limitation": null,
+                "market": "United States",
+                "name": "美国 2025 年 5 月电气工程师全国工资五档（SOC 17-2071）",
+                "period": "May 2025",
+                "publisher": "BLS OEWS（O*NET 美国全国表）",
+                "url": "https://www.onetonline.org/link/localwages/17-2071.00"
+              },
+              {
+                "accessed_at": "2026-11-27",
+                "details": [],
+                "evidence_type": "一手来源",
+                "id": "us-electrical-safety",
+                "limitation": null,
+                "market": "United States",
+                "name": "OSHA 1910.333 electrical work practices",
+                "period": null,
+                "publisher": "OSHA",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.333"
+              },
+              {
+                "accessed_at": "2026-11-27",
+                "details": [],
+                "evidence_type": "一手来源",
+                "id": "nist-ai-genai",
+                "limitation": null,
+                "market": "United States",
+                "name": "NIST AI 600-1 Generative AI Profile",
+                "period": "2024-07",
+                "publisher": "NIST",
+                "url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence"
+              },
+              {
+                "accessed_at": "2026-11-27",
+                "details": [],
+                "evidence_type": "考试机构原文",
+                "id": "us-exam",
+                "limitation": null,
+                "market": "美国",
+                "name": "NCEES 美国电气与计算机专业工程师考试",
+                "period": null,
+                "publisher": "NCEES",
+                "url": "https://ncees.org/exams/pe-exam/electrical-and-computer/"
+              },
+              {
+                "accessed_at": "2026-11-27",
+                "details": [],
+                "evidence_type": "一手来源",
+                "id": "us-ieee",
+                "limitation": null,
+                "market": "美国",
+                "name": "IEEE 3002.3: industrial and commercial short-circuit studies",
+                "period": null,
+                "publisher": "IEEE",
+                "url": "https://standards.ieee.org/ieee/3002.3/4774/"
+              },
+              {
+                "accessed_at": "2026-11-27",
+                "details": [],
+                "evidence_type": "一手来源",
+                "id": "us-nec",
+                "limitation": null,
+                "market": "美国",
+                "name": "NFPA: NEC adoption by state",
+                "period": null,
+                "publisher": "NFPA",
+                "url": "https://www.nfpa.org/education-and-research/electrical/nec-enforcement-maps"
               }
             ]
           },
@@ -32095,7 +32439,7 @@
           },
           {
             "来源": {
-              "$source": "nist-rmf-1",
+              "$source": "us-wage",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32114,7 +32458,7 @@
               "type": "prose"
             },
             "链接": {
-              "$source": "nist-rmf-1",
+              "$source": "us-wage",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32123,7 +32467,7 @@
           },
           {
             "来源": {
-              "$source": "cn-rule",
+              "$source": "batch52-onet-core",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32142,7 +32486,7 @@
               "type": "prose"
             },
             "链接": {
-              "$source": "cn-rule",
+              "$source": "batch52-onet-core",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32151,7 +32495,7 @@
           },
           {
             "来源": {
-              "$source": "sag-moa",
+              "$source": "us-electrical-safety",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32170,7 +32514,7 @@
               "type": "prose"
             },
             "链接": {
-              "$source": "sag-moa",
+              "$source": "us-electrical-safety",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32179,7 +32523,7 @@
           },
           {
             "来源": {
-              "$source": "standardization-law",
+              "$source": "nist-ai-genai",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32198,7 +32542,7 @@
               "type": "prose"
             },
             "链接": {
-              "$source": "standardization-law",
+              "$source": "nist-ai-genai",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32373,7 +32717,7 @@
             }
           },
           {
-            "source_ref": "onet",
+            "source_ref": "tool-etap",
             "使用限制": {
               "$item": "actors.display.ai_impact_table.evidence.2.limit",
               "block": "ai-impact",
@@ -32381,7 +32725,7 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "onet",
+              "$source": "tool-etap",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32399,16 +32743,10 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "链接": {
-              "$source": "onet",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "actors.source-register.published.1"
-            }
+            "链接": "原文见下方链接"
           },
           {
-            "source_ref": "onet",
+            "source_ref": "bls",
             "使用限制": {
               "$item": "actors.display.ai_impact_table.evidence.3.limit",
               "block": "ai-impact",
@@ -32416,7 +32754,7 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "onet",
+              "$source": "bls",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32435,7 +32773,7 @@
               "type": "prose"
             },
             "链接": {
-              "$source": "onet",
+              "$source": "bls",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32443,7 +32781,7 @@
             }
           },
           {
-            "source_ref": "standardization-law",
+            "source_ref": "cn-reg",
             "使用限制": {
               "$item": "actors.display.ai_impact_table.evidence.4.limit",
               "block": "ai-impact",
@@ -32451,7 +32789,7 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "standardization-law",
+              "$source": "cn-reg",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32469,13 +32807,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "链接": {
-              "$source": "standardization-law",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "actors.source-register.published.1"
-            }
+            "链接": "原文见下方链接"
           },
           {
             "source_ref": "nist-rmf-1",
@@ -32594,7 +32926,7 @@
             }
           },
           {
-            "source_ref": "nist-rmf-1",
+            "source_ref": "cn-reg",
             "回答": {
               "$item": "actors.display.ai_impact_table.questions.2.answer",
               "block": "ai-impact",
@@ -32602,19 +32934,13 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "nist-rmf-1",
+              "$source": "cn-reg",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "actors.source-register.published.1"
             },
-            "链接": {
-              "$source": "nist-rmf-1",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "actors.source-register.published.1"
-            },
+            "链接": "原文见下方链接",
             "问题": {
               "$item": "actors.display.ai_impact_table.questions.2.question",
               "block": "ai-impact",
@@ -32623,7 +32949,7 @@
             }
           },
           {
-            "source_ref": "sag-moa",
+            "source_ref": "tool-mathworks",
             "回答": {
               "$item": "actors.display.ai_impact_table.questions.3.answer",
               "block": "ai-impact",
@@ -32631,19 +32957,13 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "sag-moa",
+              "$source": "tool-mathworks",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "actors.source-register.published.1"
             },
-            "链接": {
-              "$source": "sag-moa",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "actors.source-register.published.1"
-            },
+            "链接": "原文见下方链接",
             "问题": {
               "$item": "actors.display.ai_impact_table.questions.3.question",
               "block": "ai-impact",
@@ -32652,7 +32972,7 @@
             }
           },
           {
-            "source_ref": "sag-moa",
+            "source_ref": "onet",
             "回答": {
               "$item": "actors.ai-impact.ai-impact-table.6",
               "block": "ai-impact",
@@ -32660,14 +32980,14 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "sag-moa",
+              "$source": "onet",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "actors.source-register.published.1"
             },
             "链接": {
-              "$source": "sag-moa",
+              "$source": "onet",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32710,7 +33030,7 @@
             }
           },
           {
-            "source_ref": "cn-rule",
+            "source_ref": "onet",
             "回答": {
               "$item": "actors.display.ai_impact_table.questions.6.answer",
               "block": "ai-impact",
@@ -32718,14 +33038,14 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "cn-rule",
+              "$source": "onet",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "actors.source-register.published.1"
             },
             "链接": {
-              "$source": "cn-rule",
+              "$source": "onet",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32739,7 +33059,7 @@
             }
           },
           {
-            "source_ref": "nist-rmf-1",
+            "source_ref": "bls",
             "回答": {
               "$item": "actors.display.ai_impact_table.questions.7.answer",
               "block": "ai-impact",
@@ -32747,14 +33067,14 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "nist-rmf-1",
+              "$source": "bls",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "actors.source-register.published.1"
             },
             "链接": {
-              "$source": "nist-rmf-1",
+              "$source": "bls",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33267,7 +33587,7 @@
                 "type": "prose"
               }
             ],
-            "separator": ""
+            "separator": "\n"
           }
         },
         "schema_version": "career.career_progression.v1",
@@ -33297,7 +33617,7 @@
           },
           {
             "href": {
-              "$source": "employer",
+              "$source": "onet",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33305,7 +33625,7 @@
             },
             "id": "employer",
             "label": {
-              "$source": "employer",
+              "$source": "onet",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -33343,7 +33663,7 @@
           },
           {
             "href": {
-              "$source": "r2-pay-3",
+              "$source": "nbs",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33351,7 +33671,7 @@
             },
             "id": "r2-pay-3",
             "label": {
-              "$source": "r2-pay-3",
+              "$source": "nbs",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -33363,6 +33683,54 @@
               "copy_key": "career.item.career-path-block",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://rsj.xlgl.gov.cn/rsj/zwgk/gsgg/2025042911363847198/2025042911360419576.pdf",
+            "id": "cn-class",
+            "label": "《中华人民共和国职业分类大典（2022年版）》",
+            "scope": "2-02-11-01 电工电器工程技术人员可作任务映射，分类代码不能替代招聘或执业资格。"
+          },
+          {
+            "href": "https://www.mohrss.gov.cn/xxgk2020/fdzdgknr/zcfg/gfxwj/rcrs/201902/t20190222_310736.html",
+            "id": "cn-title",
+            "label": "工程技术人才职称制度改革指导意见",
+            "scope": "工程系列职称用于专业能力评价，注册执业权限另行核对。"
+          },
+          {
+            "href": "https://rsj.beijing.gov.cn/xxgk/2024zcwj/202406/t20240617_3717377.html",
+            "id": "cn-reg",
+            "label": "注册电气工程师执业资格制度暂行规定",
+            "scope": "按制度及实际项目核对注册执业范围和签署责任。"
+          },
+          {
+            "href": "https://www.bls.gov/ooh/architecture-and-engineering/electrical-and-electronics-engineers.htm#tab-4",
+            "id": "r2-pay-2",
+            "label": "美国 BLS 职业手册：电气与电子工程师的教育与入行",
+            "scope": "用于了解美国入行路径。国内注册和签章要求见本页大陆制度来源。"
+          },
+          {
+            "href": "https://www.mohurd.gov.cn/file/old/2014/20141106/W020191022031714.pdf",
+            "id": "cn-epc",
+            "label": "住房城乡建设部《建筑业企业资质标准》",
+            "scope": "中国大陆"
+          },
+          {
+            "href": "https://www.nea.gov.cn/20250513/250d4adb56ac498ab4690408355cbed6/c.html",
+            "id": "cn-nea",
+            "label": "国家能源局：承装（修、试）电力设施许可证管理办法",
+            "scope": "中国大陆"
+          },
+          {
+            "href": "https://hbj.nea.gov.cn/zxbs/dlywzzxkhnyhyxyyw/blsm/202609/t20260911_308585.html",
+            "id": "cn-neastaff",
+            "label": "国家能源局华北监管局：三级许可人员配置",
+            "scope": "中国大陆"
+          },
+          {
+            "href": "https://www.pds.gov.cn/upload/files/2023/6/5/11.%E5%9B%BD%E7%BD%91%E6%B2%B3%E5%8D%97%E7%9C%81%E7%94%B5%E5%8A%9B%E5%85%AC%E5%8F%B8%E4%B8%9A%E6%89%A9%E5%8F%97%E7%94%B5%E5%B7%A5%E7%A8%8B%E5%85%B8%E5%9E%8B%E8%AE%BE%E8%AE%A1%E5%8F%8A%E9%80%A0%E4%BB%B7%E5%92%A8%E8%AF%A2%E6%8C%87%E5%BC%95%EF%BC%88%E4%B8%8B%E5%86%8C%EF%BC%89.pdf#page=48",
+            "id": "cn-drawing",
+            "label": "河南省电力客户工程典型设计及造价咨询指引（下册），第 48 页左图",
+            "scope": "中国大陆"
           }
         ],
         "tracks": [
@@ -34486,7 +34854,7 @@
           },
           {
             "href": {
-              "$source": "sag-moa",
+              "$source": "tool-etap",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34494,7 +34862,7 @@
             },
             "id": "sag-moa",
             "label": {
-              "$source": "sag-moa",
+              "$source": "tool-etap",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34509,7 +34877,7 @@
           },
           {
             "href": {
-              "$source": "nist",
+              "$source": "cn-nea",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34517,7 +34885,7 @@
             },
             "id": "nist",
             "label": {
-              "$source": "nist",
+              "$source": "cn-nea",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34578,44 +34946,48 @@
         "salary": {
           "bls_table": [
             {
-              "指标": "数据类型",
-              "数值": "证据不足：未取得与本职业精确对应的中国大陆全国单职业工资分布",
-              "说明": "现有官方来源为行业与人员大类聚合，不能替代职业级工资。"
+              "fact_ref": "nbs-manufacturing",
+              "指标": "制造业 · 城镇非私营单位",
+              "数值": "113,594 元/年",
+              "说明": "城镇单位行业全体就业人员"
             },
             {
-              "指标": "岗位口径",
-              "数值": "查看下方有日期的两份岗位样本。",
-              "说明": "电气设计、配电与自动化工程等岗位边界需按单位核对。"
+              "fact_ref": "nbs-info",
+              "指标": "信息传输、软件和信息技术服务业 · 城镇非私营单位",
+              "数值": "248,752 元/年",
+              "说明": "城镇单位行业全体就业人员"
             },
             {
-              "指标": "计酬单位",
-              "数值": "月薪、年薪、时薪与项目报价不可混用",
-              "说明": "公告若按项目或日价披露，不能换算为稳定月薪。"
+              "fact_ref": "nbs-private-manufacturing",
+              "指标": "制造业 · 城镇私营单位",
+              "数值": "76,055 元/年",
+              "说明": "城镇单位行业全体就业人员"
             },
             {
-              "指标": "统计时期",
-              "数值": "按来源发布期核对，不合并不同年份",
-              "说明": "不同年份的行业均值不可直接比较。"
+              "fact_ref": "nbs-private-info",
+              "指标": "信息传输、软件和信息技术服务业 · 城镇私营单位",
+              "数值": "128,166 元/年",
+              "说明": "城镇单位行业全体就业人员"
             },
             {
-              "指标": "行业覆盖",
-              "数值": "制造、电力、工程服务等行业口径不同",
-              "说明": "行业均值不能代表本职业工资。"
+              "指标": "统计单位",
+              "数值": "全年平均工资，元／人",
+              "说明": "月薪与全年工资采用不同计算方式"
             },
             {
-              "指标": "地区差异",
-              "数值": "城市与地区差异明显，需按工作地核对",
-              "说明": "全国均值不能代表具体城市。"
+              "指标": "地区比较",
+              "数值": "同城、同职级",
+              "说明": "看书面录用条件与出差工时"
             },
             {
-              "指标": "样本边界",
-              "数值": "招聘报价为单雇主样本，不构成职业中位数",
-              "说明": "不以单条报价替代职业工资。"
+              "指标": "工作范围",
+              "数值": "出图、联锁调试或项目交付",
+              "说明": "根据承担的责任记录定级条件"
             },
             {
-              "指标": "行业与职业对比",
-              "数值": "行业与职业口径不互换，也不做跨市场换算",
-              "说明": "中美统计口径不作自动等同。"
+              "指标": "录用条件",
+              "数值": "固定年收入、项目奖及出差补贴",
+              "说明": "按同城同职级逐项比较"
             }
           ],
           "china_ai_row": {
@@ -34624,7 +34996,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_class_row": "公开材料分类",
+          "china_class_row": "城镇单位行业全体就业人员",
           "china_edu_table": [
             {
               "学历段": "入口要求",
@@ -34724,7 +35096,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "下列为有日期的招聘样本，另列全国职业工资口径缺口。",
+          "china_open": "先分单位统计类型和所属行业，再把固定月薪、约定发薪月数及项目奖金拆开。",
           "china_open_note": {
             "$item": "actors.china-salary.career-snapshot-primary-locale.5",
             "block": "china-salary",
@@ -34759,7 +35131,7 @@
           },
           "china_salary_table": [
             {
-              "城市/区间": "全国单职业",
+              "城市/区间": "行业统计口径",
               "月薪参考": {
                 "$item": "actors.china-salary.career-snapshot-primary-locale.1",
                 "block": "china-salary",
@@ -34768,13 +35140,10 @@
               }
             },
             {
-              "城市/区间": "大陆招聘样本",
+              "城市/区间": "同城录用条件",
               "月薪参考": {
                 "$join": [
-                  {
-                    "$fact": "china-jiaojiang-featured-daily-2026",
-                    "field": "display_value"
-                  },
+                  "",
                   {
                     "$item": "actors.display.career_snapshot_primary_locale.quote-limits",
                     "block": "china-salary",
@@ -34786,7 +35155,7 @@
               }
             },
             {
-              "城市/区间": "招聘报价（不可替代）",
+              "城市/区间": "工程方向",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -34795,11 +35164,13 @@
               }
             }
           ],
-          "china_soc_row": "中国薪资口径",
+          "china_soc_row": "城镇私营和非私营单位，按行业门类",
           "edu": "训练与资格见入行模块",
           "fact_refs": [
-            "posting-a28-shunde",
-            "posting-a28-zhengzhou"
+            "nbs-manufacturing",
+            "nbs-info",
+            "nbs-private-manufacturing",
+            "nbs-private-info"
           ],
           "sources_note": {
             "$join": [
@@ -34824,9 +35195,9 @@
           "ui": {
             "ai_heading": "AI 会直接改变本职业的收入吗？",
             "driver_heading": "核对中国大陆同类岗位报酬时应看什么？",
-            "official_heading": "行业统计与招聘样本的范围",
-            "scenario_caption": "未取得全国单职业精确工资，不以行业平均值或招聘报价替代。",
-            "scenario_heading": "中国大陆同类岗位的口径能直接比较吗？",
+            "official_heading": "官方行业工资",
+            "scenario_caption": "城镇单位行业全体就业人员",
+            "scenario_heading": "行业工资与同城录用条件",
             "scenario_interpretation_label": "适用范围与缺口",
             "scenario_role_label": "岗位或范围",
             "scenario_value_label": "计酬与披露情况"
@@ -34860,14 +35231,14 @@
             {
               "$join": [
                 {
-                  "$source": "oews",
+                  "$source": "us-wage",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
                   "item": "actors.source-register.published.1"
                 },
                 {
-                  "$source": "oews",
+                  "$source": "us-wage",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -34881,7 +35252,7 @@
         },
         "bls_table": [
           {
-            "fact_ref": "median",
+            "fact_ref": "low",
             "指标": "薪资 · 10 分位",
             "数值": {
               "$fact": "low",
@@ -34890,6 +35261,7 @@
             "说明": "全国第 10 百分位；不是入职起薪。"
           },
           {
+            "fact_ref": "p25",
             "指标": "薪资 · 25 分位",
             "数值": "92,830美元/年（2025，第25百分位）",
             "说明": "全国第 25 百分位，来自同一工资统计口径。"
@@ -34904,12 +35276,13 @@
             "说明": "全国中位（2025 年 5 月）；一半从业者低于、一半高于该值。"
           },
           {
+            "fact_ref": "p75",
             "指标": "薪资 · 75 分位",
             "数值": "152,950美元/年（2025，第75百分位）",
             "说明": "全国第 75 百分位，来自同一工资统计口径。"
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "high",
             "指标": "薪资 · 90 分位",
             "数值": {
               "$fact": "high",
@@ -34918,21 +35291,30 @@
             "说明": "全国第 90 百分位，不代表连续有薪时数或总收入。"
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "employment",
             "指标": "2025就业·精确职业人数",
-            "数值": "199,700人",
+            "数值": {
+              "$fact": "employment",
+              "field": "display_value"
+            },
             "说明": "精确子职业，不套工程师组合，非AI归因或净增。"
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "growth",
             "指标": "2025—2035总体增长",
-            "数值": "10%",
+            "数值": {
+              "$fact": "growth",
+              "field": "display_value"
+            },
             "说明": "精确子职业，不套工程师组合，非AI归因或净增。"
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "openings",
             "指标": "2025—2035年均空缺",
-            "数值": "11,400个/年（含更替）",
+            "数值": {
+              "$fact": "openings",
+              "field": "display_value"
+            },
             "说明": "精确子职业，不套工程师组合，非AI归因或净增。"
           }
         ],
@@ -34951,7 +35333,7 @@
               "type": "prose"
             }
           ],
-          "separator": ""
+          "separator": "\n"
         },
         "direct_answer": {
           "$item": "actors.us-salary.career-snapshot-secondary-locale.1",
@@ -34994,7 +35376,10 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "growth": "10%（2025—2035，非AI归因）",
+        "growth": {
+          "$fact": "growth",
+          "field": "display_value"
+        },
         "heading": {
           "$item": "actors.display.career_snapshot_secondary_locale.heading",
           "block": "us-salary",
@@ -35010,9 +35395,9 @@
         "industry_period": "2025 年 5 月工资数据",
         "industry_rows": [
           {
-            "fact_ref": "median",
-            "industry": "航空航天产品及零件制造（2025年5月）",
-            "median": "141,160美元/年（行业内该职业中位）",
+            "fact_ref": "oews-industry-transportation",
+            "industry": "运输设备制造业",
+            "median": "129,210 美元/年",
             "note": {
               "$item": "actors.display.career_snapshot_secondary_locale.industry.theater",
               "block": "us-salary",
@@ -35021,9 +35406,9 @@
             }
           },
           {
-            "fact_ref": "median",
-            "industry": "研发服务（2025年5月）",
-            "median": "135,230美元/年（行业内该职业中位）",
+            "fact_ref": "oews-industry-computer-electronic",
+            "industry": "计算机和电子产品制造业",
+            "median": "128,320 美元/年",
             "note": {
               "$item": "actors.display.career_snapshot_secondary_locale.industry.education",
               "block": "us-salary",
@@ -35032,9 +35417,9 @@
             }
           },
           {
-            "fact_ref": "median",
-            "industry": "发电输电配电（2025年5月）",
-            "median": "122,430美元/年（行业内该职业中位）",
+            "fact_ref": "oews-industry-electric-power",
+            "industry": "发电、输电与配电业",
+            "median": "122,430 美元/年",
             "note": {
               "$item": "actors.display.career_snapshot_secondary_locale.industry.amusement",
               "block": "us-salary",
@@ -35043,8 +35428,9 @@
             }
           },
           {
-            "industry": "导航测量电医学控制仪器制造（2025年5月）",
-            "median": "121,610美元/年（行业内该职业中位）",
+            "fact_ref": "oews-industry-engineering-services",
+            "industry": "工程服务业",
+            "median": "105,780 美元/年",
             "note": {
               "$item": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
               "block": "us-salary",
@@ -35098,7 +35484,10 @@
             "question": "如何使用？"
           }
         ],
-        "median": "74,490 美元/年（35.81 美元/时，2025 年 5 月）",
+        "median": {
+          "$fact": "median",
+          "field": "display_value"
+        },
         "outlook_heading": {
           "$item": "actors.display.career_snapshot_secondary_locale.outlook-heading",
           "block": "us-salary",
@@ -35134,6 +35523,15 @@
             }
           },
           {
+            "equivalent": "美国全国第 25 百分位",
+            "interpretation": "约四分之一的调查工资低于此值。",
+            "label": "第 25 百分位",
+            "value": {
+              "$fact": "p25",
+              "field": "display_value"
+            }
+          },
+          {
             "equivalent": "全国中位数",
             "interpretation": {
               "$item": "actors.display.career_snapshot_secondary_locale.tier.median",
@@ -35144,6 +35542,15 @@
             "label": "中位",
             "value": {
               "$fact": "median",
+              "field": "display_value"
+            }
+          },
+          {
+            "equivalent": "美国全国第 75 百分位",
+            "interpretation": "约四分之三的调查工资低于此值。",
+            "label": "第 75 百分位",
+            "value": {
+              "$fact": "p75",
               "field": "display_value"
             }
           },
@@ -35308,6 +35715,7 @@
         },
         "outlook_evidence": [
           {
+            "fact_ref": "growth",
             "geography": "美国",
             "horizon": "2025–2035",
             "interpretation": {
@@ -35324,10 +35732,11 @@
             },
             "metric": "就业增长",
             "occupation_scope": "O*NET-SOC 17-2071.00（电气工程师）",
-            "source_id": "a28-bls",
+            "source_id": "bls",
             "value": "9.9%"
           },
           {
+            "fact_ref": "employment",
             "geography": "美国",
             "horizon": "2025",
             "interpretation": {
@@ -35344,10 +35753,11 @@
             },
             "metric": "就业规模",
             "occupation_scope": "O*NET-SOC 17-2071.00（电气工程师）",
-            "source_id": "a28-bls",
+            "source_id": "bls",
             "value": "199,700"
           },
           {
+            "fact_ref": "openings",
             "geography": "美国",
             "horizon": "2025–2035",
             "interpretation": {
@@ -35364,7 +35774,7 @@
             },
             "metric": "预计空缺",
             "occupation_scope": "O*NET-SOC 17-2071.00（电气工程师）",
-            "source_id": "a28-bls",
+            "source_id": "bls",
             "value": "11,400"
           }
         ],
@@ -35395,7 +35805,7 @@
           },
           {
             "href": {
-              "$source": "ratify",
+              "$source": "onet",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -35403,7 +35813,7 @@
             },
             "id": "ratify",
             "label": {
-              "$source": "ratify",
+              "$source": "onet",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -35418,7 +35828,7 @@
           },
           {
             "href": {
-              "$source": "employer",
+              "$source": "nbs",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -35426,7 +35836,7 @@
             },
             "id": "employer",
             "label": {
-              "$source": "employer",
+              "$source": "nbs",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -35441,7 +35851,7 @@
           },
           {
             "href": {
-              "$source": "onet",
+              "$source": "bls-ooh-engineers",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -35449,7 +35859,7 @@
             },
             "id": "onet",
             "label": {
-              "$source": "onet",
+              "$source": "bls-ooh-engineers",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -36651,19 +37061,19 @@
         "secondary_links": [
           {
             "href": "/zh/tests/holland-career-interest-test-riasec",
-            "label": "测我的职业兴趣是否适合电气工程师"
+            "label": "霍兰德职业兴趣测试 60 题"
           },
           {
-            "href": "/zh/tests/big-five-personality-test-ocean-model",
-            "label": "了解我的大五特质"
+            "href": "/zh/tests/career-planning-and-work-style-test",
+            "label": "职业测试 94 题"
           },
           {
-            "href": "/zh/tests/mbti-personality-test-16-personality-types",
-            "label": "了解我的人格类型"
+            "href": "/zh/career/compare",
+            "label": "C1 自由对比"
           },
           {
-            "href": "/zh/tests/career-anchor-schein-test",
-            "label": "了解我的职业锚"
+            "href": "/zh/career/interest-worksheet",
+            "label": "C2 免费探索工作表"
           }
         ]
       },
@@ -36707,7 +37117,7 @@
           },
           {
             "$join": [
-              "任务组织方式｜",
+              "",
               {
                 "$item": "actors.profile.work-context-block.4",
                 "block": "profile",
@@ -36731,7 +37141,7 @@
           },
           {
             "$join": [
-              "协作与汇报关系｜",
+              "",
               {
                 "$item": "actors.profile.work-context-block.6",
                 "block": "profile",
@@ -36901,6 +37311,13 @@
       },
       {
         "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "electrical-engineers.entry-work-sample-data.2",
+        "location": "entry_decisions",
+        "type": "notice"
+      },
+      {
+        "block": "path",
         "copy_key": "career.item.seven-day-trial",
         "id": "actors.path.seven-day-trial.1",
         "location": "entry_decisions",
@@ -37003,7 +37420,7 @@
     },
     "section_titles": {
       "ai-impact": "AI影响度",
-      "china-salary": "中国大陆薪资参考",
+      "china-salary": "中国大陆薪资口径与核对方式",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
       "market-signals": "职业前景与相关职业转向",
@@ -37025,7 +37442,7 @@
         "fact_id": "identity",
         "market": "美国",
         "measure": "职业身份与口径",
-        "occupation_scope": "电气与电子设备安装维修人员（O*NET-SOC 组合口径）",
+        "occupation_scope": "电气工程师 (SOC 17-2071)",
         "period": "2025—2026 职业档案",
         "source_refs": [
           "onet"
@@ -37037,10 +37454,11 @@
         "fact_id": "median",
         "market": "美国",
         "measure": "美国薪资中位数",
-        "occupation_scope": "电气与电子设备安装维修人员（O*NET-SOC 组合口径）",
+        "occupation_scope": "电气工程师 (SOC 17-2071)",
         "period": "2025 年 5 月",
         "source_refs": [
-          "onet"
+          "us-wage",
+          "oews"
         ]
       },
       {
@@ -37049,10 +37467,11 @@
         "fact_id": "low",
         "market": "美国",
         "measure": "美国薪资低位",
-        "occupation_scope": "电气与电子设备安装维修人员（O*NET-SOC 组合口径）",
+        "occupation_scope": "电气工程师 (SOC 17-2071)",
         "period": "2025 年 5 月",
         "source_refs": [
-          "sag-moa"
+          "us-wage",
+          "oews"
         ]
       },
       {
@@ -37061,10 +37480,11 @@
         "fact_id": "high",
         "market": "美国",
         "measure": "美国薪资高位",
-        "occupation_scope": "电气与电子设备安装维修人员（O*NET-SOC 组合口径）",
+        "occupation_scope": "电气工程师 (SOC 17-2071)",
         "period": "2025 年 5 月",
         "source_refs": [
-          "sag-moa"
+          "us-wage",
+          "oews"
         ]
       },
       {
@@ -37109,7 +37529,7 @@
         "fact_id": "industry-theater",
         "market": "美国",
         "measure": "主要行业一",
-        "occupation_scope": "电气与电子设备安装维修人员（O*NET-SOC 组合口径）",
+        "occupation_scope": "电气工程师 (SOC 17-2071)",
         "period": "2024",
         "source_refs": [
           "onet"
@@ -37121,7 +37541,7 @@
         "fact_id": "industry-education",
         "market": "美国",
         "measure": "主要行业二",
-        "occupation_scope": "电气与电子设备安装维修人员（O*NET-SOC 组合口径）",
+        "occupation_scope": "电气工程师 (SOC 17-2071)",
         "period": "2024",
         "source_refs": [
           "onet"
@@ -37133,7 +37553,7 @@
         "fact_id": "industry-amusement",
         "market": "美国",
         "measure": "主要行业披露范围",
-        "occupation_scope": "电气与电子设备安装维修人员（O*NET-SOC 组合口径）",
+        "occupation_scope": "电气工程师 (SOC 17-2071)",
         "period": "2024",
         "source_refs": [
           "onet"
@@ -37141,15 +37561,14 @@
       },
       {
         "derivation": "中国精确职业数据未取得；不进行换算。",
-        "display_value": "顺德岗位标 8,501–10,000 元/月，职责含电气系统方案评审、设备选型、图纸及生产调试。 郑州岗位列 5 人、本科，含 PLC 程序、原理图、选型和调试。标 6,000–10,000 元，计薪周期未注明。",
+        "display_value": "比较同城同职级的录用条件，把固定月薪乘书面约定的发薪月数，再把项目奖、加班与出差补贴另列。谈定级时问清你是出图、复核还是负责专业交付，现场频率和回款挂钩的奖金也应单独写明。",
         "fact_id": "china-jiaojiang-featured-daily-2026",
-        "market": "中国",
-        "measure": "中国大陆口径",
-        "occupation_scope": "两份历史招聘公告",
-        "period": "2026",
+        "market": "中国大陆",
+        "measure": "制造业年平均工资（行业参考）",
+        "occupation_scope": "城镇单位行业全体就业人员",
+        "period": "2025",
         "source_refs": [
-          "a28-shunde",
-          "a28-zhengzhou"
+          "nbs"
         ]
       },
       {
@@ -37166,26 +37585,148 @@
       },
       {
         "derivation": null,
-        "display_value": "顺德岗位标 8,501–10,000 元/月，职责含电气系统方案评审、设备选型、图纸及生产调试。",
+        "display_value": "比较同城同职级的录用条件，把固定月薪乘书面约定的发薪月数，再把项目奖、加班与出差补贴另列。谈定级时问清你是出图、复核还是负责专业交付，现场频率和回款挂钩的奖金也应单独写明。",
         "fact_id": "posting-a28-shunde",
         "market": "中国大陆",
-        "measure": "招聘样本",
-        "occupation_scope": "电气工程师",
-        "period": "2026-09-30",
+        "measure": "制造业年平均工资（行业参考）",
+        "occupation_scope": "城镇单位行业全体就业人员",
+        "period": "2025",
         "source_refs": [
-          "a28-shunde"
+          "nbs"
         ]
       },
       {
         "derivation": null,
-        "display_value": "郑州岗位列 5 人、本科，含 PLC 程序、原理图、选型和调试。标 6,000–10,000 元，计薪周期未注明。",
+        "display_value": "比较同城同职级的录用条件，把固定月薪乘书面约定的发薪月数，再把项目奖、加班与出差补贴另列。谈定级时问清你是出图、复核还是负责专业交付，现场频率和回款挂钩的奖金也应单独写明。",
         "fact_id": "posting-a28-zhengzhou",
         "market": "中国大陆",
-        "measure": "招聘样本",
-        "occupation_scope": "自动化电气工程师",
-        "period": "2026-02-27",
+        "measure": "制造业年平均工资（行业参考）",
+        "occupation_scope": "城镇单位行业全体就业人员",
+        "period": "2025",
         "source_refs": [
-          "a28-zhengzhou"
+          "nbs"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "92,830 美元/年",
+        "fact_id": "p25",
+        "market": "United States",
+        "measure": "第 25 百分位",
+        "occupation_scope": "Electrical engineers (SOC 17-2071)",
+        "period": "May 2025",
+        "source_refs": [
+          "us-wage",
+          "oews"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "152,950 美元/年",
+        "fact_id": "p75",
+        "market": "United States",
+        "measure": "第 75 百分位",
+        "occupation_scope": "Electrical engineers (SOC 17-2071)",
+        "period": "May 2025",
+        "source_refs": [
+          "us-wage",
+          "oews"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "129,210 美元/年",
+        "fact_id": "oews-industry-transportation",
+        "market": "United States",
+        "measure": "运输设备制造业 · 行业内本职业年薪中位数",
+        "occupation_scope": "Electrical engineers (SOC 17-2071)",
+        "period": "2025",
+        "source_refs": [
+          "bls-ooh-engineers"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "128,320 美元/年",
+        "fact_id": "oews-industry-computer-electronic",
+        "market": "United States",
+        "measure": "计算机和电子产品制造业 · 行业内本职业年薪中位数",
+        "occupation_scope": "Electrical engineers (SOC 17-2071)",
+        "period": "2025",
+        "source_refs": [
+          "bls-ooh-engineers"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "122,430 美元/年",
+        "fact_id": "oews-industry-electric-power",
+        "market": "United States",
+        "measure": "发电、输电与配电业 · 行业内本职业年薪中位数",
+        "occupation_scope": "Electrical engineers (SOC 17-2071)",
+        "period": "2025",
+        "source_refs": [
+          "bls-ooh-engineers"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "105,780 美元/年",
+        "fact_id": "oews-industry-engineering-services",
+        "market": "United States",
+        "measure": "工程服务业 · 行业内本职业年薪中位数",
+        "occupation_scope": "Electrical engineers (SOC 17-2071)",
+        "period": "2025",
+        "source_refs": [
+          "bls-ooh-engineers"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "113,594 元/年",
+        "fact_id": "nbs-manufacturing",
+        "market": "中国大陆",
+        "measure": "制造业 · 城镇非私营单位就业人员年平均工资",
+        "occupation_scope": "城镇单位行业全体就业人员",
+        "period": "2025",
+        "source_refs": [
+          "nbs"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "248,752 元/年",
+        "fact_id": "nbs-info",
+        "market": "中国大陆",
+        "measure": "信息传输、软件和信息技术服务业 · 城镇非私营单位就业人员年平均工资",
+        "occupation_scope": "城镇单位行业全体就业人员",
+        "period": "2025",
+        "source_refs": [
+          "nbs"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "76,055 元/年",
+        "fact_id": "nbs-private-manufacturing",
+        "market": "中国大陆",
+        "measure": "制造业 · 城镇私营单位就业人员年平均工资",
+        "occupation_scope": "城镇单位行业全体就业人员",
+        "period": "2025",
+        "source_refs": [
+          "nbs"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "128,166 元/年",
+        "fact_id": "nbs-private-info",
+        "market": "中国大陆",
+        "measure": "信息传输、软件和信息技术服务业 · 城镇私营单位就业人员年平均工资",
+        "occupation_scope": "城镇单位行业全体就业人员",
+        "period": "2025",
+        "source_refs": [
+          "nbs"
         ]
       }
     ]
@@ -37195,12 +37736,12 @@
       "availability": "available",
       "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 任务辅助（编辑评分）"
     },
     "badges": [
       "电气设备、部件与系统的研究与设计 · O*NET-SOC 17-2071.00",
-      "2025 年美国工资数据 · 中位年薪 120,630 美元（中位时薪 58.00 美元）",
-      "2024 年就业约 192,000 人 · 2024—2034 年预计增长远快于平均（7% 或更高） · 兴趣代码 RIC"
+      "国家统计局 2025 年非私营单位制造业平均年工资 113,594 元",
+      "三个去向：供配电、产线自动化与电源研发"
     ],
     "metrics": [
       {
@@ -37231,7 +37772,7 @@
         "availability": "missing",
         "fact_ref": null,
         "key": "china_pay",
-        "label": "中国大陆薪资参考（证据不足）"
+        "label": "全国单一电气工程师职类工资"
       }
     ]
   },
@@ -37239,17 +37780,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "了解电气工程师的方案、验收与交接职责，对照顺德和郑州招聘，并做一份纸面验证记录。"
+      "text": "了解中国大陆电气工程师的交付物、入行要求和薪资统计口径，对照电工、电子工程师和电气技术员，附一周桌面试做。确认需求、适用标准版本与项目约束，记录依据与未决项。"
     },
     "title": {
       "availability": "available",
-      "text": "电气工程师：职责、工资与入行路径"
+      "text": "电气工程师是做什么的？职责、入行要求和薪资口径"
     }
   },
-  "source_content_sha256": "3bf8b02905fab022116f710910abf38021512fd732950447346abc9f556dcaf0",
+  "source_content_sha256": "f39e22a3f79fbbe5a2c5d8df178aa77bb82f1989a746e12b8b8781af633d6be4",
   "subject": {
     "canonical_slug": "electrical-engineers",
     "name": "电气工程师",
-    "summary": "把系统需求变成电气方案和验证计划，核对设备选型、测试结果及变更记录，交接还未满足的要求。"
+    "summary": "产线要加一台电机，旧配电图却和柜内设备清单对不上。电气工程师要算负荷、重做选型校核、改图，并明确哪项可以交付、哪项还要等数据。选供配电、自动化或电源研发，差别在于你日常核对什么、最后交出什么。"
   }
 }

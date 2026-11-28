@@ -600,7 +600,7 @@ final class CareerJobPublicApiTest extends TestCase
                 $page = app(\App\Domain\Career\Display\CareerPageProjector::class)->read($slug, $locale);
                 $this->getJson('/api/v0.5/career-jobs/'.$slug.'/seo?locale='.$locale)
                     ->assertOk()
-                    ->assertJsonPath('meta.title', $page['subject']['name'])
+                    ->assertJsonPath('meta.title', $page['seo']['title']['text'] ?? $page['subject']['name'])
                     ->assertJsonPath('meta.description', $page['seo']['description']['text'])
                     ->assertJsonPath('meta.canonical', $canonical)
                     ->assertJsonPath('meta.alternates', $alternates)

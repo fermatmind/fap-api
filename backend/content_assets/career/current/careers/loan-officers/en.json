@@ -2,18 +2,6 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
-      "fact:cn-finance-nonprivate-wage": {
-        "status": "pending_mapping"
-      },
-      "fact:cn-finance-private-wage": {
-        "status": "pending_mapping"
-      },
-      "fact:cn-national-nonprivate-wage": {
-        "status": "pending_mapping"
-      },
-      "fact:cn-wage-gap": {
-        "status": "pending_mapping"
-      },
       "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
@@ -38,6 +26,21 @@
       "fact:us-wage-p90-2025": {
         "status": "pending_mapping"
       },
+      "fact:wave1-b2-wage-p10": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b2-wage-p25": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b2-wage-p50": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b2-wage-p75": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b2-wage-p90": {
+        "status": "pending_mapping"
+      },
       "item:loan-officers.ai-impact.ai-impact-table.1": {
         "status": "pending_mapping"
       },
@@ -50,9 +53,6 @@
       "item:loan-officers.ai-impact.ai-impact-table.4": {
         "status": "pending_mapping"
       },
-      "item:loan-officers.ai-impact.ai-impact-table.5": {
-        "status": "pending_mapping"
-      },
       "item:loan-officers.ai-impact.ai-impact-table.6": {
         "status": "pending_mapping"
       },
@@ -60,18 +60,6 @@
         "status": "pending_mapping"
       },
       "item:loan-officers.ai-impact.ai-impact-table.8": {
-        "status": "pending_mapping"
-      },
-      "item:loan-officers.china-salary.career-snapshot-primary-locale.1": {
-        "status": "pending_mapping"
-      },
-      "item:loan-officers.china-salary.career-snapshot-primary-locale.2": {
-        "status": "pending_mapping"
-      },
-      "item:loan-officers.china-salary.career-snapshot-primary-locale.3": {
-        "status": "pending_mapping"
-      },
-      "item:loan-officers.china-salary.career-snapshot-primary-locale.4": {
         "status": "pending_mapping"
       },
       "item:loan-officers.direction-comparison.adjacent-career-comparison-table.1": {
@@ -89,6 +77,9 @@
       "item:loan-officers.direction-comparison.adjacent-career-comparison-table.5": {
         "status": "pending_mapping"
       },
+      "item:loan-officers.entry-work-sample-data.2": {
+        "status": "pending_mapping"
+      },
       "item:loan-officers.fit.riasec-fit-block.1": {
         "status": "pending_mapping"
       },
@@ -102,9 +93,6 @@
         "status": "pending_mapping"
       },
       "item:loan-officers.fit.riasec-fit-block.5": {
-        "status": "pending_mapping"
-      },
-      "item:loan-officers.fit.riasec-fit-block.6": {
         "status": "pending_mapping"
       },
       "item:loan-officers.fit.riasec-fit-block.7": {
@@ -153,6 +141,9 @@
         "status": "pending_mapping"
       },
       "item:loan-officers.path.career-path-block.8": {
+        "status": "pending_mapping"
+      },
+      "item:loan-officers.path.entry-work-sample-data.1": {
         "status": "pending_mapping"
       },
       "item:loan-officers.profile.career-quick-answers-block.8": {
@@ -216,9 +207,6 @@
         "status": "pending_mapping"
       },
       "item:loan-officers.us-salary.career-snapshot-secondary-locale.1": {
-        "status": "pending_mapping"
-      },
-      "item:loan-officers.us-salary.career-snapshot-secondary-locale.2": {
         "status": "pending_mapping"
       },
       "item:loan-officers.us-salary.career-snapshot-secondary-locale.3": {
@@ -7243,7 +7231,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "The following assessments concern work practices for loan officers; they do not predict hiring, qualifications, authorization, or contract outcomes."
+              "Compare the work setting and its handoff demands."
             ]
           },
           "id": "loan-officers.quick-decision.fermat-decision-card.1",
@@ -7257,7 +7245,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Loan officers turn borrowing needs into credit proposals ready for approval and delivery: meeting applicants to collect application information and answer process questions, analyzing finances, credit, and collateral appraisals to assess lending feasibility, approving loans within authorized limits or submitting them to management, explaining loan types, credit options, and terms, preparing and checking loan agreements, updating credit and loan files, calculating repayment schedules, following up overdue accounts, and maintaining customer relationships."
+              "Loan officers gather borrower information, check completeness and communicate next steps within the lender's process."
             ]
           },
           "id": "loan-officers.quick-decision.fermat-decision-card.2",
@@ -7271,7 +7259,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Find “Sheet D: Evidence and approval handoff” under “Entering the field, qualifications, and career development.”"
+              "Complete the entry worksheet before checking the worked answer."
             ]
           },
           "id": "loan-officers.quick-decision.fermat-decision-card.3",
@@ -7289,9 +7277,6 @@
             ]
           },
           "id": "loan-officers.quick-decision.fermat-decision-card.4",
-          "source_refs": [
-            "onet-tasks"
-          ],
           "type": "prose"
         }
       ]
@@ -7307,7 +7292,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Loan officers work with applicants, review materials and evaluate requests. They document their reasoning and recommend an outcome or decide within delegated authority. Decision rights depend on the product and institution."
+              "Loan officers gather borrower information, check completeness and communicate next steps within the lender's process."
             ]
           },
           "id": "loan-officers.profile.definition-block.1",
@@ -7321,7 +7306,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Meet with applicants to obtain information for loan applications and to answer questions about the process.",
+              "For residential mortgage intake, reconcile Form 1003 (URLA) fields with supporting documents and route gaps to underwriting. A Term Sheet can help summarize commercial terms. The SAFE Act and NMLS distinguish licensing from federal registration; covered mortgage work must account for CFPB ATR and QM rules.",
               "Analyze applicants' financial status, credit, and property evaluations to determine feasibility of granting loans.",
               "Approve loans within specified limits, and refer loan applications outside those limits to management for approval.",
               "Explain to customers the different types of loans and credit options that are available, as well as the terms of those services."
@@ -7329,7 +7314,11 @@
           },
           "id": "loan-officers.profile.responsibilities-block.2",
           "source_refs": [
-            "batch52-onet-core"
+            "wave1-b2-3",
+            "wave1-b2-4",
+            "wave1-b2-5",
+            "wave1-b2-6",
+            "wave1-b2-7"
           ],
           "type": "list"
         },
@@ -7342,9 +7331,6 @@
             ]
           },
           "id": "loan-officers.profile.work-context-block.5",
-          "source_refs": [
-            "onet-context"
-          ],
           "type": "prose"
         },
         {
@@ -7356,9 +7342,6 @@
             ]
           },
           "id": "loan-officers.profile.work-context-block.6",
-          "source_refs": [
-            "onet-context"
-          ],
           "type": "prose",
           "visibility": "internal"
         },
@@ -7387,9 +7370,6 @@
             ]
           },
           "id": "loan-officers.profile.career-quick-answers-block.8",
-          "source_refs": [
-            "onet-tasks"
-          ],
           "type": "prose"
         },
         {
@@ -7401,9 +7381,6 @@
             ]
           },
           "id": "loan-officers.profile.career-quick-answers-block.9",
-          "source_refs": [
-            "onet-tasks"
-          ],
           "type": "prose"
         },
         {
@@ -7467,9 +7444,6 @@
             ]
           },
           "id": "loan-officers.direction-comparison.adjacent-career-comparison-table.1",
-          "source_refs": [
-            "onet-summary"
-          ],
           "type": "links"
         },
         {
@@ -7481,9 +7455,6 @@
             ]
           },
           "id": "loan-officers.direction-comparison.adjacent-career-comparison-table.2",
-          "source_refs": [
-            "onet-summary"
-          ],
           "type": "prose"
         },
         {
@@ -7495,9 +7466,6 @@
             ]
           },
           "id": "loan-officers.direction-comparison.adjacent-career-comparison-table.3",
-          "source_refs": [
-            "onet-summary"
-          ],
           "type": "prose"
         },
         {
@@ -7509,9 +7477,6 @@
             ]
           },
           "id": "loan-officers.direction-comparison.adjacent-career-comparison-table.4",
-          "source_refs": [
-            "onet-summary"
-          ],
           "type": "prose"
         },
         {
@@ -7523,9 +7488,6 @@
             ]
           },
           "id": "loan-officers.direction-comparison.adjacent-career-comparison-table.5",
-          "source_refs": [
-            "onet-summary"
-          ],
           "type": "prose"
         }
       ]
@@ -7556,7 +7518,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial suggestion: application-material organization, credit data checks, and document drafts may be controlled tool trials. The existence of credit scoring, underwriting, or CRM software does not establish generative AI functionality or adoption. Responsible personnel must verify repayment capacity, collateral, authorized limits, and terms against policy."
+              "Document tools can flag unsigned forms and missing fields on a U.S. mortgage application. A loan officer verifies borrower disclosures against the file, and underwriting or other authorized staff make credit decisions under the lender’s policies."
             ]
           },
           "id": "loan-officers.ai-impact.ai-impact-table.2",
@@ -7598,21 +7560,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Human control points include checking applicant financial and credit information, determining compliance with authorization and lending policies, explaining terms accurately to customers, and taking responsibility for approval and compliance records."
-            ]
-          },
-          "id": "loan-officers.ai-impact.ai-impact-table.5",
-          "source_refs": [
-            "internal-rubric"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.ai-impact-table",
-          "data": {
-            "paragraphs": [
-              "First use wholly fictional applications and financial information for an offline assessment exercise. Record judgments and escalation paths; do not let unverified automated scores replace human judgment."
+              "First use wholly  applications and financial information for an offline assessment exercise. Record judgments and escalation paths; do not let unverified automated scores replace human judgment."
             ]
           },
           "id": "loan-officers.ai-impact.ai-impact-table.6",
@@ -7652,84 +7600,11 @@
       ]
     },
     {
-      "availability": "available",
+      "availability": "missing",
       "content_state": "enhanced",
       "copy_key": "career.block.china-salary",
       "id": "china-salary",
-      "items": [
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "Mainland China wage boundary: National Bureau of Statistics industry materials reviewed this round established no separate correspondence for loan officers. Finance average annual wages provide a broad reference, not this occupation's median, starting pay, or take-home income."
-            ]
-          },
-          "fact_refs": [
-            "cn-finance-nonprivate-wage",
-            "cn-finance-private-wage",
-            "cn-national-nonprivate-wage"
-          ],
-          "id": "loan-officers.china-salary.career-snapshot-primary-locale.1",
-          "source_refs": [
-            "nbs-wages"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "Scope note: National Bureau of Statistics 2025 average annual finance wages were {{fact:cn-finance-nonprivate-wage}} for urban non-private units and {{fact:cn-finance-private-wage}} for urban private units; the national total for urban non-private units was {{fact:cn-national-nonprivate-wage}}. All are industry-scope figures, not this occupation's median or starting pay."
-            ]
-          },
-          "fact_refs": [
-            "cn-finance-nonprivate-wage",
-            "cn-finance-private-wage",
-            "cn-national-nonprivate-wage"
-          ],
-          "id": "loan-officers.china-salary.career-snapshot-primary-locale.2",
-          "source_refs": [
-            "nbs-wages"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "Category boundary: Ministry of Human Resources and Social Security enterprise remuneration surveys publish pay by occupation or position and can be used to look up related financial service roles. This page has not obtained an entry precisely matching O*NET 13-2072.00 and does not treat it as a national occupational median. Refer to the competent authority's publications."
-            ]
-          },
-          "fact_refs": [
-            "cn-wage-gap"
-          ],
-          "id": "loan-officers.china-salary.career-snapshot-primary-locale.3",
-          "source_refs": [
-            "mohrss-wage"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "Insufficient evidence: no mainland China national occupational median wage with a corresponding statistical period and scope has been obtained for loan officers. This page displays labeled industry proxies only and does not fill the gap with proxy or U.S. figures."
-            ]
-          },
-          "fact_refs": [
-            "cn-wage-gap"
-          ],
-          "id": "loan-officers.china-salary.career-snapshot-primary-locale.4",
-          "source_refs": [
-            "nbs-wages"
-          ],
-          "type": "prose"
-        }
-      ]
+      "items": []
     },
     {
       "availability": "available",
@@ -7759,26 +7634,6 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The May 2025 U.S. national median was USD 76,690 a year and USD 36.87 an hour. The annual 10th, 25th, 50th, 75th and 90th percentiles were USD 39,430, 52,730, 76,690, 104,080, 153,180."
-            ]
-          },
-          "fact_refs": [
-            "us-wage-median",
-            "us-employment-2024",
-            "us-growth",
-            "us-openings"
-          ],
-          "id": "loan-officers.us-salary.career-snapshot-secondary-locale.2",
-          "source_refs": [
-            "onet-wages"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "data": {
-            "paragraphs": [
               "BLS explains that compensation varies by employer: some provide fixed salaries, others base pay plus commissions or bonuses. Do not assume all loan officers receive performance commissions; national percentiles are not starting pay or take-home income."
             ]
           },
@@ -7787,8 +7642,7 @@
           ],
           "id": "loan-officers.us-salary.career-snapshot-secondary-locale.3",
           "source_refs": [
-            "onet-wages",
-            "bls-ooh-loan"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -7823,8 +7677,7 @@
           ],
           "id": "loan-officers.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "onet-industry",
-            "bls-ooh-loan"
+            "onet-industry"
           ],
           "type": "prose"
         },
@@ -7915,7 +7768,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "Trial action: use wholly fictional applications and financial information to practice repayment-capacity analysis, authorization judgments, and term explanations, and write escalation paths. Ask someone else to verify using the records."
+              "Trial action: use wholly  applications and financial information to practice repayment-capacity analysis, authorization judgments, and term explanations, and write escalation paths. Ask someone else to verify using the records."
             ]
           },
           "id": "loan-officers.fit.riasec-fit-block.5",
@@ -7929,21 +7782,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "The RIASEC interest code is CES (Conventional—Enterprising—Social), emphasizing procedural information processing, facilitating business transactions, and customer service. These labels describe activity preferences only and cannot determine competence, qualifications, or authorization."
-            ]
-          },
-          "id": "loan-officers.fit.riasec-fit-block.6",
-          "source_refs": [
-            "onet-details"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.riasec-fit-block",
-          "data": {
-            "paragraphs": [
-              "Insufficient evidence: this round obtained no research on personality predictive validity for loan officers or comparisons between tools. Use personality tools for reflection only, and fictional financial and credit samples to examine analysis, customer communication, and authorization judgments."
+              "Insufficient evidence: this round obtained no research on personality predictive validity for loan officers or comparisons between tools. Use personality tools for reflection only, and  financial and credit samples to examine analysis, customer communication, and authorization judgments."
             ]
           },
           "id": "loan-officers.fit.riasec-fit-block.7",
@@ -7997,9 +7836,6 @@
             ]
           },
           "id": "loan-officers.risk.career-risk-cards.2",
-          "source_refs": [
-            "onet-tasks"
-          ],
           "type": "prose"
         },
         {
@@ -8011,9 +7847,6 @@
             ]
           },
           "id": "loan-officers.risk.career-risk-cards.3",
-          "source_refs": [
-            "onet-context"
-          ],
           "type": "prose"
         },
         {
@@ -8025,9 +7858,6 @@
             ]
           },
           "id": "loan-officers.risk.career-risk-cards.4",
-          "source_refs": [
-            "onet-context"
-          ],
           "type": "prose"
         },
         {
@@ -8039,9 +7869,6 @@
             ]
           },
           "id": "loan-officers.risk.career-risk-cards.5",
-          "source_refs": [
-            "onet-summary"
-          ],
           "type": "prose"
         }
       ]
@@ -8061,10 +7888,6 @@
             ]
           },
           "id": "loan-officers.path.career-path-block.1",
-          "source_refs": [
-            "onet-education",
-            "onet-summary"
-          ],
           "type": "prose"
         },
         {
@@ -8072,7 +7895,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "BLS lists a bachelor’s degree, less than five years of related experience and moderate-term on-the-job training as typical preparation. Verify requirements for the product, jurisdiction and employer."
+              "Compare the day-to-day duties and the scope of supervised assignments before choosing training."
             ]
           },
           "id": "loan-officers.path.career-path-block.2",
@@ -8090,9 +7913,6 @@
             ]
           },
           "id": "loan-officers.path.career-path-block.3",
-          "source_refs": [
-            "cn-work-example"
-          ],
           "type": "prose"
         },
         {
@@ -8100,12 +7920,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Training records, software or industry certifications, and lending or approval authority are different statuses. Certification does not automatically grant approval or lending powers; judgments beyond the role and authorization scope must be submitted to authorized personnel."
+              "State-licensed mortgage loan originators generally need at least 20 hours of prelicensing education, the national SAFE test and applicable state steps. Covered employees of federally regulated institutions generally follow federal registration. Commercial lending and other roles have different requirements."
             ]
           },
           "id": "loan-officers.path.career-path-block.4",
           "source_refs": [
-            "onet-education"
+            "wave1-b2-4",
+            "wave1-b2-5",
+            "wave1-b2-6",
+            "wave1-b2-7"
           ],
           "type": "prose"
         },
@@ -8118,9 +7941,6 @@
             ]
           },
           "id": "loan-officers.path.career-path-block.5",
-          "source_refs": [
-            "onet-education"
-          ],
           "type": "prose"
         },
         {
@@ -8128,7 +7948,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Paper exercise “Sheet D: Evidence and approval handoff.” In fictional file V2, D1 has complete verification and review records. D2 lacks a review record. D3 has conflicting inputs to verify. Nothing has been approved. List records ready to hand off for the next review and explain why. In the variant, add only the missing D2 review record."
+              "Use the entry work sample to practice one handoff."
             ]
           },
           "id": "loan-officers.path.career-path-block.6",
@@ -8142,7 +7962,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Complete both cases and save your first draft. Then open “Paper exercise answer key (open after completing)” in “Frequently asked questions and sources.” Check whether someone can trace the original values, pending items and handoff owner."
+              "Use the entry work sample to practice one handoff."
             ]
           },
           "id": "loan-officers.path.career-path-block.7",
@@ -8160,10 +7980,52 @@
             ]
           },
           "id": "loan-officers.path.career-path-block.8",
-          "source_refs": [
-            "onet-summary"
-          ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "wave1-trial-1",
+                "values": [
+                  "Given:",
+                  "A paper checklist requires an application, income record and identity record. Packet L has the application and identity record. Packet M has all three."
+                ]
+              },
+              {
+                "id": "wave1-trial-2",
+                "values": [
+                  "Task:",
+                  "Mark each packet either missing information or ready for review and name the missing record."
+                ]
+              },
+              {
+                "id": "wave1-trial-3",
+                "values": [
+                  "Handoff:",
+                  "Do not enter personal data or make a lending decision."
+                ]
+              }
+            ]
+          },
+          "id": "loan-officers.path.entry-work-sample-data.1",
+          "title": "Check an application packet",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "L is missing the income record. M is ready for review because all three inputs are present. Neither status is an approval."
+            ]
+          },
+          "id": "loan-officers.entry-work-sample-data.2",
+          "title": "Worked answer: Check an application packet",
+          "type": "notice",
+          "visibility": "public"
         }
       ]
     },
@@ -8257,122 +8119,21 @@
           "data": {
             "entries": [
               {
-                "answer": "Loan officers on this page means O*NET 13-2072.00: evaluating, authorizing, or recommending commercial, real estate, or credit loans; meeting applicants, analyzing finances and credit, approving within authorized limits or submitting for approval, explaining terms, preparing loan agreements and updating files, and following up overdue accounts. Work is mainly indoors with frequent customer communication, often combining sales and compliance pressure. This is distinct from loan interviewers and clerks, credit analysts, and credit authorizers, checkers, and clerks.",
-                "id": "loan-officers.faq.1",
-                "question": "What are daily work and hours like?",
-                "question_key": "career.faq.loan-officers.daily-work",
+                "answer": "The May 2025 national median was $76,690 a year. Compare a local offer by guaranteed hours and separately stated variable pay.",
+                "id": "loan-officers.faq.batch2-pay-us",
+                "question": "What is the U.S. median wage?",
+                "question_key": "career.faq.loan-officers.batch2-pay-us",
                 "source_refs": [
-                  "onet-details",
-                  "onet-summary"
+                  "wave1-b2-1"
                 ]
               },
               {
-                "answer": "Loan interviewers and clerks handle intake and document reviews; credit analysts handle risk analysis; credit authorizers and checkers authorize credit within rules; credit counselors provide debt-management advice; financial analysts focus on investment and market analysis. Loan officers focus on evaluating and authorizing or recommending loan approvals. Compare approval authority, customer relationships, and responsibility boundaries.",
-                "id": "loan-officers.faq.2",
-                "question": "How does this occupation differ from related roles?",
-                "question_key": "career.faq.loan-officers.role-comparison",
+                "answer": "See work fit evidence for the shared criteria.",
+                "id": "loan-officers.faq.batch2-fit",
+                "question": "Where does intake end and approval begin?",
+                "question_key": "career.faq.loan-officers.batch2-fit",
                 "source_refs": [
-                  "onet-summary",
-                  "onet-details"
-                ]
-              },
-              {
-                "answer": "Observable signals include willingness to communicate with customers and develop business, careful financial and credit analysis, clear authorization boundaries, and compliance with processes and accurate records under pressure. O*NET interest code CES describes activity preferences only, not competence, qualifications, or authorization.",
-                "id": "loan-officers.faq.3",
-                "question": "What signals suggest I might fit?",
-                "question_key": "career.faq.loan-officers.fit",
-                "source_refs": [
-                  "onet-details"
-                ]
-              },
-              {
-                "answer": "Credit scoring, underwriting, and CRM tools may assist information organization, preliminary credit screening, and draft generation, but loan officers and authorized personnel remain responsible for repayment-capacity judgments, approval within authorized limits or submission for approval, customer term explanations, and compliance. This page presents tool uses only as task hypotheses, not evidence of widespread adoption by lending institutions.",
-                "id": "loan-officers.faq.4",
-                "question": "How might AI affect this occupation?",
-                "question_key": "career.faq.loan-officers.ai-impact",
-                "source_refs": [
-                  "internal-rubric"
-                ]
-              },
-              {
-                "answer": "Human responsibilities include checking applicant financial and credit information, assessing repayment capacity and collateral adequacy, making or submitting approval decisions within authorization, explaining terms accurately to customers, and accurately recording approval and compliance processes.",
-                "id": "loan-officers.faq.5",
-                "question": "Which judgments must remain human responsibilities?",
-                "question_key": "career.faq.loan-officers.human-control",
-                "source_refs": [
-                  "internal-rubric"
-                ]
-              },
-              {
-                "answer": "The National Bureau of Statistics publishes average annual wages of urban employees by industry category without separately reporting this occupation, so a safely mapped national occupational median cannot be established. The page displays labeled industry proxies only: 2025 finance wages averaged 211,164 yuan/year in urban non-private units and 140,451 yuan/year in urban private units; all urban non-private units nationally averaged 129,441 yuan/year. None is this occupation's median or starting pay. The Ministry of Human Resources and Social Security enterprise remuneration survey is provided as a lookup entry point.",
-                "id": "loan-officers.faq.6",
-                "question": "What is the mainland China pay evidence?",
-                "question_key": "career.faq.loan-officers.china-pay",
-                "source_refs": [
-                  "nbs-wages",
-                  "mohrss-wage"
-                ]
-              },
-              {
-                "answer": "The May 2025 U.S. national median was USD 76,690 a year and USD 36.87 an hour. The annual 10th, 25th, 50th, 75th and 90th percentiles were USD 39,430, 52,730, 76,690, 104,080, 153,180.",
-                "id": "loan-officers.faq.7",
-                "question": "What is the U.S. pay evidence?",
-                "question_key": "career.faq.loan-officers.us-pay",
-                "source_refs": [
-                  "onet-wages"
-                ]
-              },
-              {
-                "answer": "BLS lists a bachelor’s degree, less than five years of related experience and moderate-term on-the-job training as typical preparation. Verify requirements for the product, jurisdiction and employer. A Bank of Chongqing recruitment notice refers separately to credit investigation, review, approval and post-loan records. Verify a position’s actual authority with the employer.",
-                "id": "loan-officers.faq.8",
-                "question": "What are the entry and training paths?",
-                "question_key": "career.faq.loan-officers.education-path",
-                "source_refs": [
-                  "bls-ep-2025-2035",
-                  "cn-work-example"
-                ]
-              },
-              {
-                "answer": "Main risks include authorized limits and approval boundaries, repayment-capacity and credit judgment errors, sales pressure and compliance conflicts, customer information and financial data confidentiality, and loan agreement and file records. Controls include verifying financial and credit information, processing within authorization, accurate records, and stopping and escalating exceptions. Verify legal and authorization matters under the applicable jurisdiction.",
-                "id": "loan-officers.faq.9",
-                "question": "What are the main risks and control boundaries?",
-                "question_key": "career.faq.loan-officers.risk-boundary",
-                "source_refs": [
-                  "onet-details",
-                  "internal-rubric"
-                ]
-              },
-              {
-                "answer": "BLS Table 1.2 (13-2072) shows about 283,000 U.S. jobs in 2025 and projects 286,000 in 2035 (1.1%), with about 17,100 openings per year including replacements. Counts are rounded independently.",
-                "id": "loan-officers.faq.10",
-                "question": "How should market signals be interpreted?",
-                "question_key": "career.faq.loan-officers.outlook-transition",
-                "source_refs": [
-                  "bls-ep-2025-2035"
-                ]
-              },
-              {
-                "answer": "If you can balance customer communication and compliance requirements, are willing to analyze financial and credit information, and accept approval responsibility, try a low-cost assessment and approval exercise using wholly fictional application information. Moving toward senior lending, credit analysis, team management, or compliance requires additional evidence of the relevant authority, qualifications, and responsibilities.",
-                "id": "loan-officers.faq.11",
-                "question": "Is this career worth testing further?",
-                "question_key": "career.faq.loan-officers.career-worth",
-                "source_refs": [
-                  "onet-summary"
-                ]
-              },
-              {
-                "answer": "Evidence for China, the United States, and specific institutions is stated separately: wage, employment, qualification, safety, and AI conclusions must not be spliced across scopes. The Loan Officers page provides career evaluation and safety exercise information and does not replace local legal, financial, compliance, professional practice, or other professional advice. Any statement of insufficient evidence means only that safely corresponding data were not established after a bounded search; proxies or memory are not used to fabricate figures.",
-                "id": "loan-officers.faq.boundary",
-                "question": "What are the limits of this page?",
-                "question_key": "career.faq.loan-officers.boundary"
-              },
-              {
-                "answer": "Only D1 is ready for handoff in the original. D1 and D2 are ready in the variant. D3 remains pending. Neither case includes a final decision or approval.",
-                "id": "loan-officers.faq.paper-exercise",
-                "question": "Paper exercise answer key (open after completing)",
-                "question_key": "career.faq.loan-officers.paper-exercise",
-                "source_refs": [
-                  "paper-exercise"
+                  "wave1-b2-3"
                 ]
               }
             ]
@@ -8385,7 +8146,7 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "Evidence for China, the United States, and specific institutions is stated separately: wage, employment, qualification, safety, and AI conclusions must not be spliced across scopes.",
+              "Use the U.S. scope described in this section.",
               "The Loan Officers page provides career evaluation and safety exercise information and does not replace local legal, financial, compliance, professional practice, or other professional advice.",
               "Any statement of insufficient evidence means only that safely corresponding data were not established after a bounded search; proxies or memory are not used to fabricate figures."
             ]
@@ -8429,12 +8190,6 @@
                 "id": "loan-officers.navigation.4",
                 "relation": "career.section",
                 "url": "#career-content-ai-impact"
-              },
-              {
-                "entity": "Loan Officers",
-                "id": "loan-officers.navigation.5",
-                "relation": "career.section",
-                "url": "#career-content-china-salary"
               },
               {
                 "entity": "Loan Officers",
@@ -8493,22 +8248,6 @@
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "Provides occupational identity, descriptions, tasks, interest codes, education, and related occupations for 13-2072.00.",
-                  "Interpret the summary and detailed profile together."
-                ],
-                "evidence_type": "official occupation summary",
-                "id": "onet-summary",
-                "limitation": "For 13-2072.00 and the U.S. market only; establishes no Chinese mapping or legal authorization.",
-                "market": "United States",
-                "name": "O*NET 13-2072.00 Loan Officers (Summary)",
-                "period": "O*NET 2026 occupational profile; accessed 2026-09-25",
-                "publisher": "O*NET OnLine, U.S. Department of Labor",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/13-2072.00"
-              },
-              {
-                "accessed_at": "2026-09-25",
-                "details": [
                   "Provides details of tasks, work activities, work context, skills, and tools and technology for 13-2072.00.",
                   "Tasks and local authorization differ."
                 ],
@@ -8521,38 +8260,6 @@
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/13-2072.00"
-              },
-              {
-                "accessed_at": "2026-09-25",
-                "details": [
-                  "Provides a task list including meetings to collect information, financial and credit analysis, authorization or approval submission, term explanations, and file maintenance.",
-                  "Task samples do not mean every role performs every task."
-                ],
-                "evidence_type": "official occupation task list",
-                "id": "onet-tasks",
-                "limitation": "Task samples do not mean every role performs every task; establish no Chinese mapping.",
-                "market": "United States",
-                "name": "O*NET 13-2072.00 Tasks",
-                "period": "O*NET 2026 occupational profile; accessed 2026-09-25",
-                "publisher": "O*NET OnLine, U.S. Department of Labor",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/details/13-2072.00#Tasks"
-              },
-              {
-                "accessed_at": "2026-09-25",
-                "details": [
-                  "Describes customer and colleague contact, decision frequency, accuracy, indoor office work, and other contexts.",
-                  "U.S. work context does not replace Chinese regulations or employer procedures."
-                ],
-                "evidence_type": "official occupation profile",
-                "id": "onet-context",
-                "limitation": "U.S. work context does not replace Chinese regulations or employer procedures.",
-                "market": "United States",
-                "name": "O*NET 13-2072.00 Work Context",
-                "period": "O*NET 2026 occupational profile; accessed 2026-09-25",
-                "publisher": "O*NET OnLine, U.S. Department of Labor",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/details/13-2072.00#WorkContext"
               },
               {
                 "accessed_at": "2026-11-09",
@@ -8620,54 +8327,6 @@
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "Respondents' educational attainment distribution and Job Zone 4 (considerable preparation).",
-                  "The education distribution is not every employer's mandatory requirement."
-                ],
-                "evidence_type": "official occupation profile",
-                "id": "onet-education",
-                "limitation": "The education distribution is not every employer's mandatory requirement; establishes no Chinese mapping.",
-                "market": "United States",
-                "name": "O*NET 13-2072.00 Education and Job Preparation",
-                "period": "O*NET 2026 occupational profile; accessed 2026-09-25",
-                "publisher": "O*NET OnLine, U.S. Department of Labor",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/details/13-2072.00#Education"
-              },
-              {
-                "accessed_at": "2026-09-25",
-                "details": [
-                  "Provides average annual wages by industry category for urban non-private and private units to check China's publicly reported wage scope.",
-                  "Industry averages are not occupational medians and exclude individually operated businesses and freelancers."
-                ],
-                "evidence_type": "official industry wage statistics",
-                "id": "nbs-wages",
-                "limitation": "Industry averages are not occupational medians and exclude individually operated businesses and freelancers. No national wage distribution corresponding to the exact occupation has been established.",
-                "market": "Mainland China national scope",
-                "name": "Average Annual Wages of Employees in Urban Units in 2025",
-                "period": "2025 wages; published 2026-05-15; accessed 2026-09-25",
-                "publisher": "National Bureau of Statistics",
-                "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
-              },
-              {
-                "accessed_at": "2026-09-25",
-                "details": [
-                  "Ministry of Human Resources and Social Security enterprise remuneration survey information, a pay lookup entry point by occupation or position.",
-                  "Covers urban enterprises, excluding government agencies and public institutions. This page has not obtained an entry precisely matching 13-2072.00."
-                ],
-                "evidence_type": "official enterprise wage survey",
-                "id": "mohrss-wage",
-                "limitation": "Covers urban enterprises, excluding government agencies and public institutions. This page has not obtained an entry precisely matching this occupation and does not use it as a national median.",
-                "market": "Mainland China urban enterprises",
-                "name": "Enterprise Remuneration Survey Information (2024)",
-                "period": "2024; published 2025-06; accessed 2026-09-25",
-                "publisher": "Ministry of Human Resources and Social Security",
-                "scope": "parent_occupation_proxy",
-                "url": "https://www.mohrss.gov.cn/SYrlzyhshbzb/laodongguanxi_/fwyd/202506/t20250627_544623.html"
-              },
-              {
-                "accessed_at": "2026-09-25",
-                "details": [
                   "Tools may help organize records. Verify key information against the original.",
                   "Tools may help organize records. Verify key information against the original."
                 ],
@@ -8680,36 +8339,6 @@
                 "publisher": "FermatMind",
                 "scope": "Tasks on this page",
                 "url": null
-              },
-              {
-                "accessed_at": "2026-10-11",
-                "details": [
-                  "2025 loan officer wages by detailed industry, compensation systems, and entry boundaries"
-                ],
-                "evidence_type": "official agency reference",
-                "id": "bls-ooh-loan",
-                "limitation": "Establishes no Chinese qualification mapping; verify actual status and jurisdiction separately",
-                "market": "United States",
-                "name": "BLS OOH Loan Officers",
-                "period": "Current page, accessed 2026-10-11",
-                "publisher": "BLS",
-                "scope": "U.S. loan officer and mortgage activities",
-                "url": "https://www.bls.gov/ooh/business-and-financial/loan-officers.htm"
-              },
-              {
-                "accessed_at": "2026-10-11",
-                "details": [
-                  "U.S. residential mortgage licensing and registration paths"
-                ],
-                "evidence_type": "official agency reference",
-                "id": "cfpb-safe-act",
-                "limitation": "Establishes no Chinese qualification mapping; verify actual status and jurisdiction separately",
-                "market": "United States",
-                "name": "CFPB SAFE Act Licensing and Registration Materials",
-                "period": "Current page, accessed 2026-10-11",
-                "publisher": "CFPB",
-                "scope": "U.S. loan officer and mortgage activities",
-                "url": "https://www.consumerfinance.gov/compliance/compliance-resources/mortgage-resources/secure-fair-enforcement-for-mortgage-licensing-act/"
               },
               {
                 "accessed_at": "2026-11-09",
@@ -8727,22 +8356,8 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-11-09",
                 "details": [
-                  "A Bank of Chongqing recruitment notice refers separately to credit investigation, review, approval and post-loan records. Verify a position’s actual authority with the employer."
-                ],
-                "id": "cn-work-example",
-                "limitation": "This case does not establish national pay, entry requirements or hiring.",
-                "market": "Mainland China",
-                "name": "Bank of Chongqing: recruitment example on credit records",
-                "period": "2026-03",
-                "publisher": "Chongqing State-owned Assets Supervision and Administration Commission",
-                "scope": "Named work example",
-                "url": "https://gzw.cq.gov.cn/gqzp/202603/t20260313_15529174_wap.html"
-              },
-              {
-                "details": [
-                  "Inputs and results are fictional."
+                  "Inputs and results are."
                 ],
                 "id": "paper-exercise",
                 "limitation": "Checks the paper records only.",
@@ -8778,6 +8393,48 @@
                 "publisher": "U.S. Department of Labor, Employment and Training Administration",
                 "scope": "exact",
                 "url": "https://creativecommons.org/licenses/by/4.0/"
+              },
+              {
+                "details": [],
+                "id": "wave1-b2-1",
+                "name": "BLS May 2025 OEWS national profile",
+                "url": "https://data.bls.gov/oesprofile/?areas=INDUSTRY,STATE,MSA&major_group=130000&measure=13&occupation=132072&year=2025"
+              },
+              {
+                "details": [],
+                "id": "wave1-b2-2",
+                "name": "BLS May 2025 OEWS technical notes",
+                "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
+              },
+              {
+                "details": [],
+                "id": "wave1-b2-3",
+                "name": "O*NET occupation and duties",
+                "url": "https://www.onetonline.org/link/summary/13-2072.00"
+              },
+              {
+                "details": [],
+                "id": "wave1-b2-4",
+                "name": "NMLS prelicensing education",
+                "url": "https://mortgage.nationwidelicensingsystem.org/profreq/education/Pages/default.aspx"
+              },
+              {
+                "details": [],
+                "id": "wave1-b2-5",
+                "name": "CFPB Regulation Z §1026.43",
+                "url": "https://www.consumerfinance.gov/rules-policy/regulations/1026/43/"
+              },
+              {
+                "details": [],
+                "id": "wave1-b2-6",
+                "name": "CFPB Regulation G registration",
+                "url": "https://www.consumerfinance.gov/rules-policy/regulations/1007/"
+              },
+              {
+                "details": [],
+                "id": "wave1-b2-7",
+                "name": "Fannie Mae URLA",
+                "url": "https://singlefamily.fanniemae.com/delivering/uniform-mortgage-data-program/uniform-residential-loan-application"
               }
             ]
           },
@@ -8820,14 +8477,8 @@
         "conclusion": "First use verifiable financial and credit analysis records, repayment-capacity calculations, and approval explanations to check work objects, methods, and boundaries, then assess your direction. Do not assign a single ranking based on income or personality.",
         "evidence_links": [
           {
-            "href": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "loan-officers.source-register.published.1"
-            },
-            "label": "Sources for this occupation"
+            "href": "https://www.onetonline.org/link/details/13-2072.00",
+            "label": "O*NET 13-2072.00 (Detailed Profile)"
           }
         ],
         "evidence_note": "Related roles support directional comparisons only; they do not imply automatic transfers, mutual recognition of qualifications, or approval authorization.",
@@ -8904,22 +8555,10 @@
         },
         "authority_links": [
           {
-            "来源": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "loan-officers.source-register.published.1"
-            },
+            "来源": "Source detail not stated.",
             "类型": "Official or research sources",
             "适用范围": "Use only within the source's original scope",
-            "链接": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "loan-officers.source-register.published.1"
-            }
+            "链接": null
           },
           {
             "来源": {
@@ -8984,23 +8623,11 @@
         },
         "evidence_rows": [
           {
-            "使用限制": "An exact U.S. occupation; excludes Chinese licensing and wage definitions.",
-            "来源": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "loan-officers.source-register.published.1"
-            },
+            "使用限制": "Use the U.S. scope described in this section.",
+            "来源": "Source detail not stated.",
             "研究对象": "13-2072.00 identity and official scope",
             "结论": "Supports identity and task boundaries",
-            "链接": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "loan-officers.source-register.published.1"
-            }
+            "链接": null
           },
           {
             "使用限制": "Does not replace local authorization or compliance requirements.",
@@ -9064,20 +8691,8 @@
         "questions": [
           {
             "回答": "Task exposure, adoption, and job outcomes measure different things and cannot establish a date for job elimination.",
-            "来源": {
-              "$source": "onet-context",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "loan-officers.source-register.published.1"
-            },
-            "链接": {
-              "$source": "onet-context",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "loan-officers.source-register.published.1"
-            },
+            "来源": "Source detail not stated.",
+            "链接": null,
             "问题": "Will AI replace loan officers?"
           },
           {
@@ -9117,12 +8732,7 @@
             "问题": "Does this page provide adoption-rate data?"
           }
         ],
-        "responsibility_intro": {
-          "$item": "loan-officers.ai-impact.ai-impact-table.5",
-          "block": "ai-impact",
-          "copy_key": "career.item.ai-impact-table",
-          "type": "prose"
-        },
+        "responsibility_intro": "Automation can check whether required fields are present. Staff handle exceptions, verify supporting evidence and stay within approved borrower communication.",
         "responsibility_steps": [
           {
             "步骤": "Check inputs",
@@ -9232,13 +8842,6 @@
           "block": "navigation",
           "copy_key": "career.item.navigation-links",
           "entry": "loan-officers.navigation.4",
-          "field": "url"
-        },
-        {
-          "$link": "loan-officers.navigation.links.1",
-          "block": "navigation",
-          "copy_key": "career.item.navigation-links",
-          "entry": "loan-officers.navigation.5",
           "field": "url"
         },
         {
@@ -9372,7 +8975,7 @@
             "copy_key": "career.item.career-path-block",
             "type": "prose"
           },
-          "jurisdiction": "U.S. employer, state, and federal rules; in mainland China, check employer and financial institution requirements",
+          "jurisdiction": "Use the U.S. scope described in this section.",
           "summary": {
             "$item": "loan-officers.path.career-path-block.3",
             "block": "path",
@@ -9383,76 +8986,28 @@
         "schema_version": "career.career_progression.v1",
         "source_links": [
           {
-            "href": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "loan-officers.source-register.published.1"
-            },
-            "id": "loan-officers.display.source.onet-summary",
-            "label": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "loan-officers.source-register.published.1"
-            },
-            "scope": "Identity and official scope; establishes no Chinese mapping."
+            "href": "https://mortgage.nationwidelicensingsystem.org/profreq/education/Pages/default.aspx",
+            "id": "wave1-b2-4",
+            "label": "NMLS prelicensing education",
+            "scope": "Entry and practice"
           },
           {
-            "href": {
-              "$source": "onet-education",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "loan-officers.source-register.published.1"
-            },
-            "id": "loan-officers.display.source.onet-education",
-            "label": {
-              "$source": "onet-education",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "loan-officers.source-register.published.1"
-            },
-            "scope": "Education and job preparation; not a uniform education threshold."
+            "href": "https://www.consumerfinance.gov/rules-policy/regulations/1026/43/",
+            "id": "wave1-b2-5",
+            "label": "CFPB Regulation Z §1026.43",
+            "scope": "Entry and practice"
           },
           {
-            "href": {
-              "$source": "onet-trends",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "loan-officers.source-register.published.1"
-            },
-            "id": "loan-officers.display.source.onet-trends",
-            "label": {
-              "$source": "onet-trends",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "loan-officers.source-register.published.1"
-            },
-            "scope": "Employment size and projections; excludes individual hiring probabilities."
+            "href": "https://www.consumerfinance.gov/rules-policy/regulations/1007/",
+            "id": "wave1-b2-6",
+            "label": "CFPB Regulation G registration",
+            "scope": "Entry and practice"
           },
           {
-            "href": {
-              "$source": "nbs-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "loan-officers.source-register.published.1"
-            },
-            "id": "loan-officers.display.source.nbs-wages",
-            "label": {
-              "$source": "nbs-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "loan-officers.source-register.published.1"
-            },
-            "scope": "Chinese industry wage scope; not exact occupational wages."
+            "href": "https://singlefamily.fanniemae.com/delivering/uniform-mortgage-data-program/uniform-residential-loan-application",
+            "id": "wave1-b2-7",
+            "label": "Fannie Mae URLA",
+            "scope": "Entry and practice"
           }
         ],
         "tracks": [
@@ -9728,7 +9283,7 @@
             "label": "View the Risk Module"
           }
         ],
-        "direct_answer": "Address risks through their triggers, consequences, controls, and escalation boundaries.",
+        "direct_answer": "A term discussion is not a commitment. Record which document is missing and route it before the file can proceed.",
         "evidence_scope": "Editorial risk scenarios based on O*NET analysis, approval-limit, customer communication, and file tasks; not accident rates, a list of legal confidentiality duties, or every institution's workflow. Institutional policies, compliance, and authorization determine specific controls.",
         "heading": "Loan Officers: Work Risks and Boundaries",
         "risks": [
@@ -9845,371 +9400,58 @@
             "scope": "Tasks and work context; used only to propose risk hypotheses."
           },
           {
-            "href": {
-              "$source": "onet-tasks",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "loan-officers.source-register.published.1"
-            },
-            "id": "loan-officers.display.source.onet-tasks",
-            "label": {
-              "$source": "onet-tasks",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "loan-officers.source-register.published.1"
-            },
-            "scope": "Task list; used only to propose risk hypotheses."
+            "href": "https://www.onetonline.org/link/details/13-2072.00",
+            "id": "onet-details",
+            "label": "O*NET 13-2072.00 (Detailed Profile)"
           },
           {
-            "href": {
-              "$source": "onet-context",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "loan-officers.source-register.published.1"
-            },
-            "id": "loan-officers.display.source.onet-context",
-            "label": {
-              "$source": "onet-context",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "loan-officers.source-register.published.1"
-            },
-            "scope": "Work context; used only to propose risk hypotheses."
+            "href": "https://www.onetonline.org/link/localwages/13-2072.00",
+            "id": "onet-wages",
+            "label": "O*NET 13-2072.00 National Wages (BLS OEWS Display)"
           },
           {
-            "href": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "loan-officers.source-register.published.1"
-            },
-            "id": "loan-officers.display.source.onet-summary",
-            "label": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "loan-officers.source-register.published.1"
-            },
-            "scope": "Identity and official scope; does not replace compliance procedures."
+            "href": "https://www.onetonline.org/link/localtrends/13-2072.00",
+            "id": "onet-trends",
+            "label": "O*NET 13-2072.00 National Employment Trends"
           }
         ]
       },
       "career_snapshot_primary_locale": {
-        "salary": {
-          "bls_table": [
-            {
-              "指标": "Mainland China occupational pay",
-              "数值": "Insufficient evidence: not separately reported",
-              "说明": "National Bureau of Statistics industry materials reviewed this round established no exact correspondence for this occupation; this does not mean all channels lack data."
-            },
-            {
-              "指标": "Mainland China industry proxy",
-              "数值": "See the industry table",
-              "说明": "Finance is a broad industry proxy, not this occupation's wages."
-            },
-            {
-              "指标": "U.S. occupational statistics",
-              "数值": "See the U.S. pay table",
-              "说明": "O*NET/BLS data are listed separately and cannot be spliced across markets."
-            }
-          ],
-          "china_ai_row": {
-            "$item": "loan-officers.china-salary.career-snapshot-primary-locale.4",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "china_class_row": {
-            "$item": "loan-officers.china-salary.career-snapshot-primary-locale.3",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "china_edu_table": [
-            {
-              "学历段": "Not separately measured",
-              "岗位方向": "Appointment by employer and role",
-              "说明": "National Bureau of Statistics wage data are grouped by industry and registration type, not by educational level within this occupation."
-            },
-            {
-              "学历段": "Not separately measured",
-              "岗位方向": "Appointment by employer and role",
-              "说明": "National Bureau of Statistics wage data are grouped by industry and registration type, not by educational level within this occupation."
-            },
-            {
-              "学历段": "Not separately measured",
-              "岗位方向": "Appointment by employer and role",
-              "说明": "National Bureau of Statistics wage data are grouped by industry and registration type, not by educational level within this occupation."
-            },
-            {
-              "学历段": "Not separately measured",
-              "岗位方向": "Appointment by employer and role",
-              "说明": "National Bureau of Statistics wage data are grouped by industry and registration type, not by educational level within this occupation."
-            }
-          ],
-          "china_industry_table": [
-            {
-              "行业": "Finance (urban non-private units)",
-              "需求": "211,164 yuan/year"
-            },
-            {
-              "行业": "Finance (urban private units)",
-              "需求": "140,451 yuan/year"
-            },
-            {
-              "行业": "All urban non-private units nationwide",
-              "需求": "129,441 yuan/year"
-            }
-          ],
-          "china_intl": {
-            "$join": [
-              {
-                "$source": "mohrss-wage",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "loan-officers.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "mohrss-wage",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "loan-officers.source-register.published.1"
-              }
-            ],
-            "separator": ""
-          },
-          "china_name_row": {
-            "$item": "loan-officers.china-salary.career-snapshot-primary-locale.1",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "china_open": "Insufficient evidence: this round established no separate wage correspondence for this occupation. The following industry average annual wages are not occupational medians or starting pay.",
-          "china_ref": {
-            "$join": [
-              {
-                "$source": "nbs-wages",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "loan-officers.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "nbs-wages",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "loan-officers.source-register.published.1"
-              }
-            ],
-            "separator": ""
-          },
-          "china_salary_note": "Mainland China industry figures and U.S. occupational statistics are separate and cannot be spliced across markets.",
-          "china_salary_table": [
-            {
-              "城市/区间": "National: finance (non-private)",
-              "月薪参考": "Only average annual wages are published"
-            },
-            {
-              "城市/区间": "National: finance (private)",
-              "月薪参考": "Only average annual wages are published"
-            },
-            {
-              "城市/区间": "Exact occupational wages",
-              "月薪参考": "Insufficient evidence: not separately reported"
-            }
-          ],
-          "china_soc_row": {
-            "$item": "loan-officers.china-salary.career-snapshot-primary-locale.2",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "sources_note": {
-            "$join": [
-              {
-                "$source": "nbs-wages",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "loan-officers.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "nbs-wages",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "loan-officers.source-register.published.1"
-              }
-            ],
-            "separator": ""
-          },
-          "ui": {
-            "ai_heading": "Boundaries for AI and Pay Judgments",
-            "driver_heading": "Influencing factors",
-            "official_heading": "Official statistical scope",
-            "scenario_caption": "This scenario only illustrates the scope and is not a personal pay quote.",
-            "scenario_heading": "Scenario reference",
-            "scenario_interpretation_label": "Explanation",
-            "scenario_role_label": "Role scope",
-            "scenario_value_label": "Reference value"
-          },
-          "us_growth": "Not applicable to the local scope",
-          "us_median": "Not applicable to the local scope"
-        }
+        "availability": "unavailable",
+        "reason_code": "source_locale_unavailable"
       },
       "career_snapshot_secondary_locale": {
-        "authority_sources": {
-          "$join": [
-            {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "loan-officers.source-register.published.1"
-            },
-            "｜",
-            {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "loan-officers.source-register.published.1"
-            }
-          ],
-          "separator": ""
-        },
+        "authority_sources": "https://data.bls.gov/oesprofile/?areas=INDUSTRY,STATE,MSA&major_group=130000&measure=13&occupation=132072&year=2025",
         "bls_table": [
           {
-            "指标": "Pay · 10th percentile",
+            "fact_ref": "wave1-b2-wage-p10",
+            "指标": "10th percentile",
             "数值": "$39,430/year",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "loan-officers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "loan-officers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "说明": "Read within the original statistical scope."
           },
           {
-            "指标": "Pay · 25th percentile",
+            "fact_ref": "wave1-b2-wage-p25",
+            "指标": "25th percentile",
             "数值": "$52,730/year",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "loan-officers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "loan-officers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "说明": "Read within the original statistical scope."
           },
           {
-            "指标": "Pay · Median",
+            "fact_ref": "wave1-b2-wage-p50",
+            "指标": "Median",
             "数值": "$76,690/year",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "loan-officers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "loan-officers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "说明": "Read within the original statistical scope."
           },
           {
-            "指标": "Pay · 75th percentile",
+            "fact_ref": "wave1-b2-wage-p75",
+            "指标": "75th percentile",
             "数值": "$104,080/year",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "loan-officers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "loan-officers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "说明": "Read within the original statistical scope."
           },
           {
-            "指标": "Pay · 90th percentile",
+            "fact_ref": "wave1-b2-wage-p90",
+            "指标": "90th percentile",
             "数值": "$153,180/year",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "loan-officers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "loan-officers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "说明": "Read within the original statistical scope."
           },
           {
             "指标": "Employment · Size",
@@ -10284,13 +9526,8 @@
             }
           }
         ],
-        "boundary": "U.S. national: 2025 OEWS wages and 2025—2035 employment projections. Commission models vary by employer; statistical percentiles are not personal pay quotes.",
-        "direct_answer": {
-          "$item": "loan-officers.us-salary.career-snapshot-secondary-locale.2",
-          "block": "us-salary",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "type": "prose"
-        },
+        "boundary": "The estimates cover covered jobs and are national reference points.",
+        "direct_answer": "May 2025 OEWS covers U.S. wage and salary workers and excludes the self-employed.",
         "factor_rows": [
           {
             "answer": "Typically a bachelor's degree plus on-the-job training, with related experience sometimes accepted as an alternative. Residential mortgage activities require separate checks of state licensing or federal registration and institutional authorization.",
@@ -10327,24 +9564,24 @@
         "industry_period": "2025",
         "industry_rows": [
           {
-            "industry": "Automobile dealers",
-            "median": "$106,000/year",
-            "note": "BLS OOH 2025 loan officer median wage by industry."
+            "industry": "Occupation",
+            "median": "No comparable figure is cited here.",
+            "note": "Confirm the definition and any broader grouping."
           },
           {
-            "industry": "Management of companies and enterprises",
-            "median": "$79,570/year",
-            "note": "BLS OOH 2025 loan officer median wage by industry."
+            "industry": "Employment",
+            "median": "No comparable figure is cited here.",
+            "note": "Check whether self-employment is included."
           },
           {
-            "industry": "Credit intermediation and related activities",
-            "median": "$76,070/year",
-            "note": "BLS OOH 2025 loan officer median wage by industry."
+            "industry": "Survey period",
+            "median": "No comparable figure is cited here.",
+            "note": "Keep the month or year with the quoted figure."
           },
           {
-            "industry": "Other unlisted industries",
-            "median": "Insufficient evidence",
-            "note": "This round obtained no other detailed industry wages; do not fill gaps with overall percentiles."
+            "industry": "Geography",
+            "median": "No comparable figure is cited here.",
+            "note": "Compare local figures within the same survey."
           }
         ],
         "industry_value_label": "Industry value",
@@ -10356,23 +9593,23 @@
         },
         "interpretation_rows": [
           {
-            "answer": "USD/year; BLS 2025 OEWS national figures, excluding individual take-home income.",
-            "question": "Wages"
+            "answer": "Confirm the definition and any broader grouping.",
+            "question": "Occupation"
           },
           {
-            "answer": "2025 employment, not current advertised jobs.",
+            "answer": "Check whether self-employment is included.",
             "question": "Employment"
           },
           {
-            "answer": "1% growth for 2025—2035; not causal AI evidence or a hiring probability.",
-            "question": "Outlook"
+            "answer": "Keep the month or year with the quoted figure.",
+            "question": "Survey period"
           },
           {
-            "answer": "Listed separately by O*NET/BLS industry scope; not the income of all workers.",
-            "question": "Industry"
+            "answer": "Compare local figures within the same survey.",
+            "question": "Geography"
           }
         ],
-        "median": "$76,690/year (2025)",
+        "median": "$76,690/year",
         "outlook_heading": "Employment Outlook and Job Openings",
         "outlook_period": "2025—2035",
         "wage_column_labels": [
@@ -10389,20 +9626,32 @@
         },
         "wage_tiers": [
           {
-            "equivalent": "$18.96/hour",
-            "interpretation": "10th percentile boundary, not a personal pay quote.",
+            "equivalent": "USD/year",
+            "interpretation": "Lower end of the distribution",
             "label": "10th percentile",
             "value": "$39,430/year"
           },
           {
-            "equivalent": "$36.87/hour",
-            "interpretation": "2025 U.S. national median annual pay.",
-            "label": "Median (50%)",
+            "equivalent": "USD/year",
+            "interpretation": "First quartile",
+            "label": "25th percentile",
+            "value": "$52,730/year"
+          },
+          {
+            "equivalent": "USD/year",
+            "interpretation": "Middle of the distribution",
+            "label": "Median",
             "value": "$76,690/year"
           },
           {
-            "equivalent": "$73.65/hour",
-            "interpretation": "90th percentile boundary, not a personal pay quote.",
+            "equivalent": "USD/year",
+            "interpretation": "Third quartile",
+            "label": "75th percentile",
+            "value": "$104,080/year"
+          },
+          {
+            "equivalent": "USD/year",
+            "interpretation": "Upper end of the published range",
             "label": "90th percentile",
             "value": "$153,180/year"
           }
@@ -10438,7 +9687,7 @@
         "title": "Who might find loan officer work a good fit?"
       },
       "fit_decision_checklist": {
-        "boundary": "This is a wholly fictional credit assessment sample check, not a personality diagnosis, hiring conclusion, or qualification assessment.",
+        "boundary": "If recurring document follow-ups and sales goals frustrate you, loan origination may feel exhausting. A borrower can need several calls to clarify one income item before the file can move.",
         "how": {
           "$item": "loan-officers.quick-decision.fermat-decision-card.3",
           "block": "quick-decision",
@@ -10556,24 +9805,6 @@
           },
           {
             "href": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "loan-officers.source-register.published.1"
-            },
-            "id": "loan-officers.display.source.onet-summary",
-            "label": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "loan-officers.source-register.published.1"
-            },
-            "scope": "Identity and tasks; does not provide individual hiring probabilities."
-          },
-          {
-            "href": {
               "$source": "onet-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
@@ -10589,6 +9820,11 @@
               "item": "loan-officers.source-register.published.1"
             },
             "scope": "Tasks and work context; used only to propose transition hypotheses."
+          },
+          {
+            "href": "https://www.onetonline.org/link/details/13-2072.00",
+            "id": "onet-details",
+            "label": "O*NET 13-2072.00 (Detailed Profile)"
           }
         ],
         "transitions": [
@@ -10605,7 +9841,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/loan-interviewers-and-clerks",
+            "target_href": "/en/career/jobs/loan-interviewers-and-clerks",
             "target_slug": "loan-interviewers-and-clerks",
             "target_title": "Loan Interviewers and Clerks",
             "transition_distance": "More evidence needed"
@@ -10613,7 +9849,7 @@
           {
             "capability_gaps": "Requires additional risk analysis methods and statistical tools.",
             "shared_capabilities": "Intake and information, credit, and compliance foundations.",
-            "target_href": "/zh/career/jobs/credit-analysts",
+            "target_href": "/en/career/jobs/credit-analysts",
             "target_slug": "credit-analysts",
             "target_title": "Credit Analysts",
             "transition_distance": "More evidence needed"
@@ -10621,7 +9857,7 @@
           {
             "capability_gaps": "Requires additional authorization rules and credit-limit judgment.",
             "shared_capabilities": "Information verification and document processing.",
-            "target_href": "/zh/career/jobs/credit-authorizers-checkers-and-clerks",
+            "target_href": "/en/career/jobs/credit-authorizers-checkers-and-clerks",
             "target_slug": "credit-authorizers-checkers-and-clerks",
             "target_title": "Credit Authorizers, Checkers, and Clerks",
             "transition_distance": "More evidence needed"
@@ -10629,7 +9865,7 @@
           {
             "capability_gaps": "Requires additional debt-management and counseling methods.",
             "shared_capabilities": "Customer communication and financial analysis.",
-            "target_href": "/zh/career/jobs/credit-counselors",
+            "target_href": "/en/career/jobs/credit-counselors",
             "target_slug": "credit-counselors",
             "target_title": "Credit Counselors",
             "transition_distance": "More evidence needed"
@@ -10637,7 +9873,7 @@
           {
             "capability_gaps": "Requires additional investment and market analysis methods.",
             "shared_capabilities": "Financial analysis and compliance foundations.",
-            "target_href": "/zh/career/jobs/financial-and-investment-analysts",
+            "target_href": "/en/career/jobs/financial-and-investment-analysts",
             "target_slug": "financial-and-investment-analysts",
             "target_title": "Financial Analysts",
             "transition_distance": "More evidence needed"
@@ -10645,7 +9881,7 @@
           {
             "capability_gaps": "Requires additional financial planning knowledge and practice requirements.",
             "shared_capabilities": "Customer communication and financial planning foundations.",
-            "target_href": "/zh/career/jobs/personal-financial-advisors",
+            "target_href": "/en/career/jobs/personal-financial-advisors",
             "target_slug": "personal-financial-advisors",
             "target_title": "Personal Financial Advisors",
             "transition_distance": "More evidence needed"
@@ -10673,13 +9909,8 @@
       "personality_fit_block": {
         "assessments": [
           {
-            "answer": {
-              "$item": "loan-officers.fit.riasec-fit-block.6",
-              "block": "fit",
-              "copy_key": "career.item.riasec-fit-block",
-              "type": "prose"
-            },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "answer": "Capture what the borrower provided and flag missing evidence. Get approval through the lender's underwriting and delegated authority before communicating a binding decision.",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start a Career Interest Trial",
             "evidence_level": "Work sample",
             "id": "riasec",
@@ -10698,7 +9929,7 @@
               "copy_key": "career.item.riasec-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start a Career Interest Trial",
             "evidence_level": "Work sample",
             "id": "big-five",
@@ -10717,7 +9948,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start a Career Interest Trial",
             "evidence_level": "Work sample",
             "id": "mbti",
@@ -10731,7 +9962,7 @@
           },
           {
             "answer": "Continue checking against actual tasks, responsibility boundaries, and verifiable deliverables.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start a Career Interest Trial",
             "evidence_level": "Work sample",
             "id": "enneagram",
@@ -10745,7 +9976,7 @@
           },
           {
             "answer": "Continue checking against actual tasks, responsibility boundaries, and verifiable deliverables.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start a Career Interest Trial",
             "evidence_level": "Work sample",
             "id": "iq",
@@ -10759,7 +9990,7 @@
           },
           {
             "answer": "Continue checking against actual tasks, responsibility boundaries, and verifiable deliverables.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start a Career Interest Trial",
             "evidence_level": "Work sample",
             "id": "eq",
@@ -10819,36 +10050,36 @@
         },
         "questions": [
           {
-            "answer": "Use this page's work sample to check your decision criteria.",
-            "question": "Can you balance sales and compliance?"
+            "answer": "See work fit evidence for the shared criteria.",
+            "question": "Where does intake end and approval begin?"
           },
           {
-            "answer": "Check analytical evidence and records against job procedures.",
-            "question": "Can you analyze finances and credit patiently?"
+            "answer": "Notice how often the team reopens a handoff when an earlier assumption changes. Ask who confirms the new decision.",
+            "question": "What should I notice in a job shadow?"
           },
           {
-            "answer": "Honestly assess whether you verify each item according to policy.",
-            "question": "How do you respond to high-value transactions?"
+            "answer": "Pick a regular deliverable and repeat it with the same review standard.",
+            "question": "Which assignment would I repeat?"
           },
           {
-            "answer": "Pause first, check finances and authorization, and escalate through the process.",
-            "question": "What do you do when uncertain?"
+            "answer": "Note your last confirmed detail before responding to the interruption.",
+            "question": "How do I handle an interruption?"
           },
           {
-            "answer": "Explain facts, policies, and available options separately.",
-            "question": "Can you explain unfavorable conclusions to customers?"
+            "answer": "Keep both versions and identify the person who can settle the discrepancy.",
+            "question": "How do I respond to conflicting inputs?"
           },
           {
-            "answer": "Assess adaptation to sales targets and compliance constraints.",
-            "question": "Can you accept performance pressure?"
+            "answer": "Compare the written shift terms with when you can work reliably.",
+            "question": "Would the work schedule suit me?"
           },
           {
-            "answer": "Enable review through analysis and approval records.",
-            "question": "How can others verify your work?"
+            "answer": "Describe what you would route to a qualified reviewer.",
+            "question": "Can I set a boundary on requests?"
           },
           {
-            "answer": "Use wholly fictional application information to practice assessment and approval.",
-            "question": "How can you test this next?"
+            "answer": "Ask a receiver which detail lets them continue without guessing.",
+            "question": "What makes a handoff useful?"
           }
         ],
         "schema_version": "career.fit_decision_center.v1",
@@ -10890,23 +10121,6 @@
         "source_links": [
           {
             "href": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "loan-officers.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "loan-officers.source-register.published.1"
-            },
-            "usage": "Identity and official scope."
-          },
-          {
-            "href": {
               "$source": "onet-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
@@ -10921,40 +10135,6 @@
               "item": "loan-officers.source-register.published.1"
             },
             "usage": "Tasks and work context."
-          },
-          {
-            "href": {
-              "$source": "onet-tasks",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "loan-officers.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-tasks",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "loan-officers.source-register.published.1"
-            },
-            "usage": "Task list."
-          },
-          {
-            "href": {
-              "$source": "onet-context",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "loan-officers.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-context",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "loan-officers.source-register.published.1"
-            },
-            "usage": "Work context; used only to propose fit hypotheses."
           },
           {
             "href": {
@@ -11023,40 +10203,6 @@
               "item": "loan-officers.source-register.published.1"
             },
             "usage": "Industry distribution; not demand projections."
-          },
-          {
-            "href": {
-              "$source": "nbs-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "loan-officers.source-register.published.1"
-            },
-            "label": {
-              "$source": "nbs-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "loan-officers.source-register.published.1"
-            },
-            "usage": "Chinese industry wage scope."
-          },
-          {
-            "href": {
-              "$source": "mohrss-wage",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "loan-officers.source-register.published.1"
-            },
-            "label": {
-              "$source": "mohrss-wage",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "loan-officers.source-register.published.1"
-            },
-            "usage": "Chinese job pay lookup entry point."
           }
         ]
       },
@@ -11093,20 +10239,8 @@
       "source_card": {
         "eeat_signals": {
           "author": "FermatMind research workflow",
-          "source": {
-            "$source": "nbs-wages",
-            "block": "source-register",
-            "copy_key": "career.item.published-sources",
-            "field": "name",
-            "item": "loan-officers.source-register.published.1"
-          },
-          "updated_at": {
-            "$source": "nbs-wages",
-            "block": "source-register",
-            "copy_key": "career.item.published-sources",
-            "field": "period",
-            "item": "loan-officers.source-register.published.1"
-          }
+          "source": "See the dated source register for market and evidence scope.",
+          "updated_at": "2026-11-12"
         },
         "note": "O*NET describes the tasks, OEWS provides wage estimates, and BLS Table 1.2 provides employment projections."
       },
@@ -11118,7 +10252,7 @@
       }
     },
     "contract_version": "career.detail.display.v1",
-    "locale": "zh-CN",
+    "locale": "en",
     "native_items": [
       {
         "block": "source-register",
@@ -11126,12 +10260,26 @@
         "id": "loan-officers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "loan-officers.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "loan-officers.entry-work-sample-data.2",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": "/en/career/jobs/loan-officers",
     "section_titles": {
       "ai-impact": "AI tools and human review",
-      "china-salary": "Mainland China Pay",
+      "china-salary": "Additional wage reference",
       "direction-comparison": "Compare Related Occupations",
       "fit": "Fit Signals",
       "market-signals": "Market Signals",
@@ -11149,62 +10297,62 @@
     "facts": [
       {
         "derivation": null,
-        "display_value": "USD 76,690/year",
+        "display_value": "$76,690/year",
         "fact_id": "us-wage-median",
         "market": "United States",
-        "measure": "U.S. median annual wage (May 2025)",
-        "occupation_scope": "13-2072",
-        "period": "2025-05",
+        "measure": "Annual wage — Median",
+        "occupation_scope": "U.S. occupation SOC 13-2072",
+        "period": "May 2025",
         "source_refs": [
-          "onet-wages"
+          "wave1-b2-1"
         ]
       },
       {
         "derivation": null,
-        "display_value": "39,430 USD/year",
+        "display_value": "$39,430/year",
         "fact_id": "us-wage-p10-2025",
         "market": "United States",
-        "measure": "10th percentile annual pay",
-        "occupation_scope": "O*NET 13-2072.00",
-        "period": "2025 BLS OEWS; accessed 2026-09-25",
+        "measure": "Annual wage — 10th percentile",
+        "occupation_scope": "U.S. occupation SOC 13-2072",
+        "period": "May 2025",
         "source_refs": [
-          "onet-wages"
+          "wave1-b2-1"
         ]
       },
       {
         "derivation": null,
-        "display_value": "52,730 USD/year",
+        "display_value": "$52,730/year",
         "fact_id": "us-wage-p25-2025",
         "market": "United States",
-        "measure": "25th percentile annual pay",
-        "occupation_scope": "O*NET 13-2072.00",
-        "period": "2025 BLS OEWS; accessed 2026-09-25",
+        "measure": "Annual wage — 25th percentile",
+        "occupation_scope": "U.S. occupation SOC 13-2072",
+        "period": "May 2025",
         "source_refs": [
-          "onet-wages"
+          "wave1-b2-1"
         ]
       },
       {
         "derivation": null,
-        "display_value": "104,080 USD/year",
+        "display_value": "$104,080/year",
         "fact_id": "us-wage-p75-2025",
         "market": "United States",
-        "measure": "75th percentile annual pay",
-        "occupation_scope": "O*NET 13-2072.00",
-        "period": "2025 BLS OEWS; accessed 2026-09-25",
+        "measure": "Annual wage — 75th percentile",
+        "occupation_scope": "U.S. occupation SOC 13-2072",
+        "period": "May 2025",
         "source_refs": [
-          "onet-wages"
+          "wave1-b2-1"
         ]
       },
       {
         "derivation": null,
-        "display_value": "153,180 USD/year",
+        "display_value": "$153,180/year",
         "fact_id": "us-wage-p90-2025",
         "market": "United States",
-        "measure": "90th percentile annual pay",
-        "occupation_scope": "O*NET 13-2072.00",
-        "period": "2025 BLS OEWS; accessed 2026-09-25",
+        "measure": "Annual wage — 90th percentile",
+        "occupation_scope": "U.S. occupation SOC 13-2072",
+        "period": "May 2025",
         "source_refs": [
-          "onet-wages"
+          "wave1-b2-1"
         ]
       },
       {
@@ -11245,50 +10393,62 @@
       },
       {
         "derivation": null,
-        "display_value": "211,164 yuan/year",
-        "fact_id": "cn-finance-nonprivate-wage",
-        "market": "Mainland China national scope (industry)",
-        "measure": "Average annual wages of employees in urban non-private units by industry category",
-        "occupation_scope": "Finance (industry scope, not this occupation)",
-        "period": "2025 wages; published 2026-05-15; accessed 2026-09-25",
+        "display_value": "$39,430/year",
+        "fact_id": "wave1-b2-wage-p10",
+        "market": "United States",
+        "measure": "Annual wage — 10th percentile",
+        "occupation_scope": "U.S. occupation SOC 13-2072",
+        "period": "May 2025",
         "source_refs": [
-          "nbs-wages"
+          "wave1-b2-1"
         ]
       },
       {
         "derivation": null,
-        "display_value": "140,451 yuan/year",
-        "fact_id": "cn-finance-private-wage",
-        "market": "Mainland China national scope (industry)",
-        "measure": "Average annual wages of employees in urban private units by industry category",
-        "occupation_scope": "Finance (industry scope, not this occupation)",
-        "period": "2025 wages; published 2026-05-15; accessed 2026-09-25",
+        "display_value": "$52,730/year",
+        "fact_id": "wave1-b2-wage-p25",
+        "market": "United States",
+        "measure": "Annual wage — 25th percentile",
+        "occupation_scope": "U.S. occupation SOC 13-2072",
+        "period": "May 2025",
         "source_refs": [
-          "nbs-wages"
+          "wave1-b2-1"
         ]
       },
       {
         "derivation": null,
-        "display_value": "129,441 yuan/year",
-        "fact_id": "cn-national-nonprivate-wage",
-        "market": "Mainland China national scope",
-        "measure": "Average annual wages of employees in urban non-private units (all industries combined)",
-        "occupation_scope": "All urban non-private units nationwide (not this occupation)",
-        "period": "2025 wages; published 2026-05-15; accessed 2026-09-25",
+        "display_value": "$76,690/year",
+        "fact_id": "wave1-b2-wage-p50",
+        "market": "United States",
+        "measure": "Annual wage — Median",
+        "occupation_scope": "U.S. occupation SOC 13-2072",
+        "period": "May 2025",
         "source_refs": [
-          "nbs-wages"
+          "wave1-b2-1"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Insufficient evidence: no mainland China national occupational median wage obtained for loan officers (2025 official public scope)",
-        "fact_id": "cn-wage-gap",
-        "market": "Mainland China national scope",
-        "measure": "occupation wage availability",
-        "occupation_scope": "no exact CN mapping for O*NET 13-2072.00",
-        "period": "2025 annual wage; published 2026-05-15; accessed 2026-09-25",
+        "display_value": "$104,080/year",
+        "fact_id": "wave1-b2-wage-p75",
+        "market": "United States",
+        "measure": "Annual wage — 75th percentile",
+        "occupation_scope": "U.S. occupation SOC 13-2072",
+        "period": "May 2025",
         "source_refs": [
-          "nbs-wages"
+          "wave1-b2-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "$153,180/year",
+        "fact_id": "wave1-b2-wage-p90",
+        "market": "United States",
+        "measure": "Annual wage — 90th percentile",
+        "occupation_scope": "U.S. occupation SOC 13-2072",
+        "period": "May 2025",
+        "source_refs": [
+          "wave1-b2-1"
         ]
       }
     ]
@@ -11303,14 +10463,14 @@
     "badges": [
       "Loan Officers",
       "Wages and projections use separate tables",
-      "China occupational wage distribution unavailable"
+      "Use the U.S. scope described in this section."
     ],
     "metrics": [
       {
         "availability": "available",
-        "fact_ref": "us-wage-median",
+        "fact_ref": "wave1-b2-wage-p50",
         "key": "us_pay",
-        "label": "U.S. median annual wage (May 2025)"
+        "label": "U.S. May 2025 median wage"
       },
       {
         "availability": "available",
@@ -11334,7 +10494,7 @@
         "availability": "missing",
         "fact_ref": null,
         "key": "china_pay",
-        "label": "Mainland China pay reference"
+        "label": "Additional wage benchmark"
       }
     ]
   },
@@ -11342,17 +10502,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Explore loan officers tasks, U.S. wage percentiles and employment projections, with a paper exercise on checking records."
+      "text": "Loan officers gather borrower information, check completeness and communicate next steps within the lender's process. Verify role and employer requirements."
     },
     "title": {
       "availability": "available",
-      "text": "Loan Officers: Tasks, Pay and Training"
+      "text": "Loan Officers: Mortgage Licenses, Daily Work and U.S. Pay"
     }
   },
-  "source_content_sha256": "f14116be09b379934a806aab13ab0cfd8cf3c62f2bfcc787ed8920bc2bb829dc",
+  "source_content_sha256": "33fc67ca9b9732e2d0cc30f79d55d4dfebadc495ff0d41184ac35142d8b0721b",
   "subject": {
     "canonical_slug": "loan-officers",
     "name": "Loan Officers",
-    "summary": "Loan officers work with applicants, review materials and evaluate requests. They document their reasoning and recommend an outcome or decide within delegated authority. Decision rights depend on the product and institution."
+    "summary": "Loan officers gather borrower information, check completeness and communicate next steps within the lender's process."
   }
 }

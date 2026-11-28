@@ -23,6 +23,24 @@
       "fact:us-wage-p90": {
         "status": "pending_mapping"
       },
+      "fact:wave1-b3-cn-industry": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b3-wage-p10": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b3-wage-p25": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b3-wage-p50": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b3-wage-p75": {
+        "status": "pending_mapping"
+      },
+      "fact:wave1-b3-wage-p90": {
+        "status": "pending_mapping"
+      },
       "item:landscape-architects.ai-impact.ai-impact-table.1": {
         "status": "pending_mapping"
       },
@@ -35,9 +53,6 @@
       "item:landscape-architects.ai-impact.ai-impact-table.4": {
         "status": "pending_mapping"
       },
-      "item:landscape-architects.ai-impact.ai-impact-table.5": {
-        "status": "pending_mapping"
-      },
       "item:landscape-architects.ai-impact.ai-impact-table.6": {
         "status": "pending_mapping"
       },
@@ -47,16 +62,7 @@
       "item:landscape-architects.ai-impact.ai-impact-table.8": {
         "status": "pending_mapping"
       },
-      "item:landscape-architects.china-salary.career-snapshot-primary-locale.1": {
-        "status": "pending_mapping"
-      },
-      "item:landscape-architects.china-salary.career-snapshot-primary-locale.2": {
-        "status": "pending_mapping"
-      },
-      "item:landscape-architects.china-salary.career-snapshot-primary-locale.3": {
-        "status": "pending_mapping"
-      },
-      "item:landscape-architects.china-salary.career-snapshot-primary-locale.4": {
+      "item:landscape-architects.china-salary.wave1-b3-context.1": {
         "status": "pending_mapping"
       },
       "item:landscape-architects.direction-comparison.adjacent-career-comparison-table.1": {
@@ -74,6 +80,9 @@
       "item:landscape-architects.direction-comparison.adjacent-career-comparison-table.5": {
         "status": "pending_mapping"
       },
+      "item:landscape-architects.entry-work-sample-data.2": {
+        "status": "pending_mapping"
+      },
       "item:landscape-architects.fit.riasec-fit-block.1": {
         "status": "pending_mapping"
       },
@@ -87,9 +96,6 @@
         "status": "pending_mapping"
       },
       "item:landscape-architects.fit.riasec-fit-block.5": {
-        "status": "pending_mapping"
-      },
-      "item:landscape-architects.fit.riasec-fit-block.6": {
         "status": "pending_mapping"
       },
       "item:landscape-architects.fit.riasec-fit-block.7": {
@@ -138,6 +144,9 @@
         "status": "pending_mapping"
       },
       "item:landscape-architects.path.career-path-block.8": {
+        "status": "pending_mapping"
+      },
+      "item:landscape-architects.path.entry-work-sample-data.1": {
         "status": "pending_mapping"
       },
       "item:landscape-architects.profile.career-quick-answers-block.8": {
@@ -201,9 +210,6 @@
         "status": "pending_mapping"
       },
       "item:landscape-architects.us-salary.career-snapshot-secondary-locale.1": {
-        "status": "pending_mapping"
-      },
-      "item:landscape-architects.us-salary.career-snapshot-secondary-locale.2": {
         "status": "pending_mapping"
       },
       "item:landscape-architects.us-salary.career-snapshot-secondary-locale.3": {
@@ -7228,7 +7234,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "谨慎信号｜本页对应 O*NET-SOC 17-1012.00「Landscape Architects」。官方范围为：规划和设计公园与其他游憩设施、机场、公路、医院、学校、土地细分以及商业、工业与住宅用地等项目的土地与室外空间。典型任务包括与客户和工程方沟通需求、踏勘并分析地形与排水等场地数据、形成总平面与种植与材料方案、编制规格与成本估算、并在施工阶段核对现场是否符合图纸。核心交付是有依据、可复核的设计文件与实施核对记录，而不是「画一张好看的图」。风险来自许可执业与签章权限、职业伦理、场地数据与排水分析准确性、环境与公共安全，以及设计变更与承包商沟通的留痕。美国数值为 BLS OOH新期口径（2025 年就业 23,500 人；2025—2035 增长 4%、年均空缺约 1,700 个；2025 年 5 月中位年薪 79,870 美元；主要行业专业、科学与技术服务）。中国工资证据边界见中国薪资板块。若你难以承受多专业协调、客户反复与工期压力，应把这些作为需要认真权衡的现实成本。"
+              "按交接责任和工作环境比较岗位。"
             ]
           },
           "id": "landscape-architects.quick-decision.fermat-decision-card.1",
@@ -7244,7 +7250,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "承担判断｜真正的适配来自能不能在同一项工作中同时完成三件事：把设计做实（核对场地与客户需求、分析地形排水与现状条件、形成总平面与种植材料方案、编制规格与成本估算，产出可复核的设计文件）；把许可与伦理管住（按许可范围执业、在授权范围内签章、遵守职业伦理与利益冲突规则、遵循规范与公共健康安全福利要求，按各辖区法律与许可机构规定执行）；并承担可界定的岗位责任（对本人设计与文件依据负责，对超出执业范围或需要其他专业签署的事项按流程转交）。建议用一次可核验的体验（用公开底图与虚构场地完成一份现状分析、两个方案草图与自检清单）来检验，而不是仅依据兴趣问卷的结论。"
+              "风景园林设计要协调地形、步行、排水与植物，把意向落成可评审、可施工的场地资料。"
             ]
           },
           "id": "landscape-architects.quick-decision.fermat-decision-card.2",
@@ -7261,7 +7267,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "判断是否适合｜用Z固定200场地、T/U及两线，复算A6400超400且穿T、B5800余200但穿U待核，修“可施工”草稿；四作品及每天20—30分钟七日计划见路径。只用纸面虚构资料，不作真实规范、排水合格判断或施工签章。"
+              "先填写入行区工单，再核对样答。"
             ]
           },
           "id": "landscape-architects.quick-decision.fermat-decision-card.3",
@@ -7301,7 +7307,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "景观建筑师研究场地、水、植物和使用需求，形成室外空间方案及后续图纸。美国职业称谓和相关资格与大陆招聘常用的“景观设计师”不能直接对应；具体签署与施工责任另核。"
+              "风景园林设计要协调地形、步行、排水与植物，把意向落成可评审、可施工的场地资料。"
             ]
           },
           "id": "landscape-architects.profile.definition-block.1",
@@ -7317,7 +7323,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "与客户、工程人员或建筑师在景观项目上交谈。",
+              "用 CAD 做 竖向设计，衔接道路 标高 与排水，结合 海绵城市 的 径流控制 要求布置 雨水花园。将 植物配置 与管线、养护空间和 施工详图 一并复核。",
               "分析环境报告或景观计划的位置、排水或结构位置等条件的数据。",
               "检查景观工作，以确保符合规格，评估材料或工作质量，或咨询客户或建筑人员。",
               "准备土地开发的项目规划、规格或成本估算。"
@@ -7325,7 +7331,9 @@
           },
           "id": "landscape-architects.profile.responsibilities-block.2",
           "source_refs": [
-            "batch52-onet-core"
+            "wave1-b3-3",
+            "wave1-b3-4",
+            "wave1-b3-5"
           ],
           "type": "list"
         },
@@ -7381,7 +7389,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "用虚构场地画出流线、入口、遮阴和排水条件，说明方案的取舍和后续需要复核的资料。重庆具名招聘分方案助理和施工图助理，能帮助理解分工。"
+              "用场地画出流线、入口、遮阴和排水条件，说明方案的取舍和后续需要复核的资料。重庆具名招聘分方案助理和施工图助理，能帮助理解分工。"
             ]
           },
           "id": "landscape-architects.profile.career-quick-answers-block.8",
@@ -7554,7 +7562,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "生成AI可试做获准虚构记录摘要、方案文字或清单草稿；常规CAD/GIS设计软件提及不同于生成AI采用。回核原始场地、规范与版本，未实测不宣称已提效。监督下支持任务与独立执业分别，许可和签章依辖区规则；模型不授权限，最终专业责任不能仅凭输出承担。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+75+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "生成AI可试做获准记录摘要、方案文字或清单草稿；常规CAD/GIS设计软件提及不同于生成AI采用。回核原始场地、规范与版本，未实测不宣称已提效。监督下支持任务与独立执业分别，许可和签章依辖区规则；模型不授权限，最终专业责任不能仅凭输出承担。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+75+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "landscape-architects.ai-impact.ai-impact-table.2",
@@ -7592,7 +7600,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "差异说明｜可用Z比较人工与工具核200、6400/5800、T/U冲突及错误草稿的用时和错误；文本可核仅是试验设计条件，未经测量不说已加速。"
+              "记录高程方向，并注明哪些输入还需测绘复核。"
             ]
           },
           "id": "landscape-architects.ai-impact.ai-impact-table.4",
@@ -7603,22 +7611,6 @@
             "nist-genai-profile",
             "asla-ethics",
             "clarb-process"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.ai-impact-table",
-          "data": {
-            "paragraphs": [
-              "责任链｜从场地数据与授权确认、工具处理、人工复核、设计与文件定稿到施工核对与变更，每一步都要明确由谁负责，并保留可追溯证据；设计文件与签章不得仅依赖模型输出。"
-            ]
-          },
-          "id": "landscape-architects.ai-impact.ai-impact-table.5",
-          "source_refs": [
-            "asla-ethics",
-            "clarb-process",
-            "source-pack-onet-details"
           ],
           "type": "prose"
         },
@@ -7687,58 +7679,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业对照｜本页美国17-1012.00与中国景观设计岗位只作任务比较，本轮未建立精确全国工资映射；NBS行业/岗位大类均值不能代全国职业中位或分位。"
+              "国家统计局 2025 年就业人员年平均工资，表 7 科学研究和技术服务业 173,855 元。这是行业背景。本页未取得可复核的中国大陆职业级全国工资分位。"
             ]
           },
-          "id": "landscape-architects.china-salary.career-snapshot-primary-locale.1",
-          "source_refs": [
-            "nbs-wage",
-            "source-pack-onet-summary"
+          "fact_refs": [
+            "wave1-b3-cn-industry"
           ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "中国范围｜中国企业设计资质、人员专业职称、雇主录用和具体文件责任分别核。福州园林中心答复针对企业设计资质人员职称并说明福建评审范围，不能推成全国个人统一许可或套美国执照。北京建院2026校招公告2025-09-29发布：包含景观设计，2026应届相关专业本科及以上，通用要求规范技术、软件与协作；网申2025-09-24—10-24已结束。未列景观人数或薪资，不证明当前在招或全国门槛。原文一行2024校招与标题对象窗口不一致，以明确2026届及2025报名日期说明，不猜原因。"
-            ]
-          },
-          "id": "landscape-architects.china-salary.career-snapshot-primary-locale.2",
+          "id": "landscape-architects.china-salary.wave1-b3-context.1",
           "source_refs": [
-            "fuzhou-design-title",
-            "biad-campus-2026"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "证据不足：本轮未建立与美国17-1012.00精确对应的中国全国职业工资分位或起薪。国家统计局2025表为行业和岗位大类税前年均，排个体与自由职业；行业均值、美国分位和单一公告不能代填。北京建院样本未列景观薪资，访问受限不等中国不存在工资统计。"
-            ]
-          },
-          "id": "landscape-architects.china-salary.career-snapshot-primary-locale.3",
-          "source_refs": [
-            "nbs-wage",
-            "biad-campus-2026"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "AI与薪资｜本轮未建立本职业生成AI采用、效率与工资的因果数据；不据软件提及或暴露预测加薪，也不声称待遇必然不变。"
-            ]
-          },
-          "id": "landscape-architects.china-salary.career-snapshot-primary-locale.4",
-          "source_refs": [
-            "ilo-genai",
-            "source-pack-onet-hot_tech"
+            "wave1-b3-6"
           ],
           "type": "prose"
         }
@@ -7764,25 +7713,6 @@
           "id": "landscape-architects.us-salary.career-snapshot-secondary-locale.1",
           "source_refs": [
             "onet-wages"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "data": {
-            "paragraphs": [
-              "直接回答｜2025美国年薪10/25/50/75/90分位54,770、64,170、79,870、104,090、130,190美元；官方时薪26.33、30.85、38.40、50.04、62.59美元。BLS新期2025就业23,500→2035年24,500，增长4%、净增1,000；年均空缺约1,700含增长与替换。2025行业专业科学技术51%、行政支持20%；其余29%只是差额，不建立政府份额。分布不是行业工资。"
-            ]
-          },
-          "fact_refs": [
-            "us-wage-p10"
-          ],
-          "id": "landscape-architects.us-salary.career-snapshot-secondary-locale.2",
-          "source_refs": [
-            "source-pack-onet-localwages",
-            "bls-ooh",
-            "source-pack-onet-details"
           ],
           "type": "prose"
         },
@@ -7915,27 +7845,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "纸面试验｜Z复算200、A6400超400且穿T、B5800余200但穿U，写条件矩阵并改“可施工”；路径有固定题面、参考交付、四作品及七日计划。作品不证明现场规范合格、人格表现或许可。"
+              "记录高程方向，并注明哪些输入还需测绘复核。"
             ]
           },
           "id": "landscape-architects.fit.riasec-fit-block.5",
           "source_refs": [
             "source-pack-onet-details",
             "clarb-process"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.riasec-fit-block",
-          "data": {
-            "paragraphs": [
-              "结论｜活动偏好更接近现实型、研究型与艺术型的组合（O*NET 兴趣代码 RIA，含自然与户外方向）；但兴趣代码只能帮助设计试验，不能判断许可资格或表现。"
-            ]
-          },
-          "id": "landscape-architects.fit.riasec-fit-block.6",
-          "source_refs": [
-            "onet-details"
           ],
           "type": "prose"
         },
@@ -8078,7 +7994,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入口核对｜先核目标辖区具体学历、经验、应考与许可条件，不统一本科唯一或先实习结束再考试。北京建院2026校招公告2025-09-29发布：包含景观设计，2026应届相关专业本科及以上，通用要求规范技术、软件与协作；网申2025-09-24—10-24已结束。未列景观人数或薪资，不证明当前在招或全国门槛。原文一行2024校招与标题对象窗口不一致，以明确2026届及2025报名日期说明，不猜原因。"
+              "选择培训前，先比较岗位职责和带教安排。"
             ]
           },
           "id": "landscape-architects.path.career-path-block.2",
@@ -8109,13 +8025,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "资格边界｜学历、监督经验、考试、许可、雇主录用和具体签章为不同状态；ASLA会员规则还要求直接专业知识或监督控制，不签无依据作品。"
+              "可从风景园林、城乡规划或建筑相关专业进入方案与深化岗位。投标、施工图签署和专业协作按项目要求、单位资质及人员授权核定。"
             ]
           },
           "id": "landscape-architects.path.career-path-block.4",
           "source_refs": [
-            "clarb-process",
-            "asla-ethics"
+            "wave1-b3-4",
+            "wave1-b3-5"
           ],
           "type": "prose"
         },
@@ -8124,7 +8040,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "纸面练习Z｜全部虚构，不用于实地测量、施工或规范合格判定。模拟场地西南(0,0)、东北(20,10)，面积200模拟m²；保留树区T为x=8—10、y=4—6，管线待核区U为x=14—16、y=7—9。方案A硬地80、种植120，通行线(0,5)→(20,5)；方案B硬地60、种植140，通行折线(0,5)→(0,8)→(20,8)→(20,5)。模拟单位价硬地50、种植20预算单位/m²，预算6000；不含勘察及维护。题给规则Z1通行线不可穿T；Z2穿U须待核、不得标可施工；Z3两类面积合计200且清单≤6000只表示模拟预算满足。任务：画两线与T/U、复算两方案面积和成本、列违反与待核、写继续比较理由；错误草稿“B便宜且已通过、可施工”须修正。没有高程、土壤、实际管线与排水数据，不设计真实坡度、排水或安全规范。"
+              "在入行区练习一次交接。"
             ]
           },
           "id": "landscape-architects.path.career-path-block.5",
@@ -8138,7 +8054,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "参考交付｜A面积80+120=200，成本80×50+120×20=6400，超预算400；y=5横线穿T，不满足Z1/Z3。B面积60+140=200，成本60×50+140×20=5800，余200；y=8横线绕T却穿U，Z1/Z3满足、Z2管线仍待核。可继续比较B并申请管线等资料，不能判任一方案可施工；未知不得当不存在。修草稿“B仅满足题给面积和模拟预算，管线及真实场地/规范待核，未发布施工文件”。四作品：标T/U与两线的现状约束及示意图、两方案成本清单、条件满足/违反/待核矩阵、未发布版本与选择理由和资料请求。纸面面积不证明真实布置、植物适宜性或排水安全，不授签章资格。"
+              "记录高程方向，并注明哪些输入还需测绘复核。"
             ]
           },
           "id": "landscape-architects.path.career-path-block.6",
@@ -8152,7 +8068,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "七日计划｜每天20—30分钟：第1日画200场地和T/U；第2日画A/B通行线；第3日核200及6400/5800；第4日核A穿T、B穿U与待核；第5日修“已通过可施工”并列资料请求；第6日请同伴仅互核四件纸面作品并留版本；第7日组合交付，另核目标辖区学位/经验/考试/许可和具体雇主要求。无实地施工、排水测试或自动资格结论。"
+              "记录高程方向，并注明哪些输入还需测绘复核。"
             ]
           },
           "id": "landscape-architects.path.career-path-block.7",
@@ -8177,6 +8093,51 @@
             "adj-drafters"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "wave1-trial-1",
+                "values": [
+                  "题设",
+                  "剖面只给两点：P 标高 102.4、Q 标高 101.9。假设两点间地表连续且没有阻挡。"
+                ]
+              },
+              {
+                "id": "wave1-trial-2",
+                "values": [
+                  "任务",
+                  "写出高差和流水箭头方向。"
+                ]
+              },
+              {
+                "id": "wave1-trial-3",
+                "values": [
+                  "交接",
+                  "只判断给定图段，不签发排水方案。"
+                ]
+              }
+            ]
+          },
+          "id": "landscape-architects.path.entry-work-sample-data.1",
+          "title": "复核场地流水方向",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "高差为 0.5（按图示单位），箭头由 P 指向 Q。交设计负责人核对。"
+            ]
+          },
+          "id": "landscape-architects.entry-work-sample-data.2",
+          "title": "纸面样答：复核场地流水方向",
+          "type": "notice",
+          "visibility": "public"
         }
       ]
     },
@@ -8278,131 +8239,30 @@
           "data": {
             "entries": [
               {
-                "answer": "关键判断｜O*NET 工作情境显示：电子邮件 100% 每天、室内受控环境 85% 每天、电话交谈 65% 每天、面对面讨论 53% 每天、团队工作 63% 极其重要、时间压力60%每周至少一次但非每天、精确或准确 50% 非常重要、决策自由 50% 一些自由。判断依据是场地与现状数据、规范与公共安全要求，以及许可范围与职业伦理边界。环境与节奏另见：环境与节奏｜工作以办公室设计与现场核对交替为主：久坐 55% 超过一半时间、工作周 65% 超过 40 小时、书面信件与备忘录50%每周至少一次但非每天、与他人多数时间接触 40%、协调或带领他人 37% 非常重要、对外部客户 40% 非常重要、任务优先与目标 40% 一些自由。节奏受投标、审批与施工节点驱动。这些为美国受访分布，非所有中国岗位统一工时或节奏。",
-                "id": "landscape-architects.faq.1",
-                "question": "日常工作和工时如何？",
-                "question_key": "career.faq.landscape-architects.daily-work",
+                "answer": "2025 年 5 月美国全国中位数为 79,870 美元/年。比较同城报价时，把保底薪资和浮动收入分列。",
+                "id": "landscape-architects.faq.batch3-pay-us",
+                "question": "美国工资中位数是多少？",
+                "question_key": "career.faq.landscape-architects.batch3-pay-us",
                 "source_refs": [
-                  "onet-details",
-                  "source-pack-onet-custom"
+                  "wave1-b3-1"
                 ]
               },
               {
-                "answer": "本职业规划和设计土地与室外空间。建筑师（不含景观与船舶）负责建筑单体与群体设计，农业工程师负责农业生产系统与灌溉等工程方案，建筑土木制图员按设计意图绘制与修改图纸。应按设计对象、许可范围与责任层级判断，不能只按职位名称互换。本页不构成法律或执业意见。",
-                "id": "landscape-architects.faq.2",
-                "question": "这个职业与相邻职业如何区分？",
-                "question_key": "career.faq.landscape-architects.role-comparison",
+                "answer": "可参考国家统计局 2025 年表 7 科学研究和技术服务业 173,855 元。该数据是行业均值。本职业报价按同城、同职级核对固定年收、补贴与兑现条件。",
+                "id": "landscape-architects.faq.batch3-pay-cn",
+                "question": "中国大陆可用哪些薪资数据比较岗位？",
+                "question_key": "career.faq.landscape-architects.batch3-pay-cn",
                 "source_refs": [
-                  "source-pack-onet-details",
-                  "adj-architects",
-                  "adj-agricultural",
-                  "adj-drafters"
+                  "wave1-b3-6"
                 ]
               },
               {
-                "answer": "适配信号是愿意在现场约束下比较空间方案、核对地形与排水数据、把客户反馈转成图纸修改，并跟踪实施质量，同时遵守许可范围与职业伦理。兴趣与人格工具只能帮助设计试验，不能判断许可资格或表现。",
-                "id": "landscape-architects.faq.3",
-                "question": "什么信号说明我可能适合？",
-                "question_key": "career.faq.landscape-architects.fit",
+                "answer": "给一页竖向图、两处关键标高和易积水节点的复核问题，并说明从哪次测绘取值。",
+                "id": "landscape-architects.faq.batch3-fit",
+                "question": "场地作品集应交什么？",
+                "question_key": "career.faq.landscape-architects.batch3-fit",
                 "source_refs": [
-                  "onet-details",
-                  "source-pack-onet-summary"
-                ]
-              },
-              {
-                "answer": "生成AI可试做获准虚构记录摘要、方案文字或清单草稿；常规CAD/GIS设计软件提及不同于生成AI采用。回核原始场地、规范与版本，未实测不宣称已提效。监督下支持任务与独立执业分别，许可和签章依辖区规则；模型不授权限，最终专业责任不能仅凭输出承担。",
-                "id": "landscape-architects.faq.4",
-                "question": "AI 会如何影响这个职业？",
-                "question_key": "career.faq.landscape-architects.ai-impact",
-                "source_refs": [
-                  "ilo-genai",
-                  "nist-genai-profile",
-                  "source-pack-onet-hot_tech"
-                ]
-              },
-              {
-                "answer": "工具输出不能替代场地判断与设计责任。人类必须核对场地与规范依据、复核关键设计判断，并对场地分析、方案取舍、规范适用与依许可签章的文件承担责任；超出执业范围的事项须会签或转交。",
-                "id": "landscape-architects.faq.5",
-                "question": "哪些判断必须由人负责？",
-                "question_key": "career.faq.landscape-architects.human-control",
-                "source_refs": [
-                  "asla-ethics",
-                  "source-pack-onet-details"
-                ]
-              },
-              {
-                "answer": "证据不足：本轮未建立与美国17-1012.00精确对应的中国全国职业工资分位或起薪。国家统计局2025表为行业和岗位大类税前年均，排个体与自由职业；行业均值、美国分位和单一公告不能代填。北京建院样本未列景观薪资，访问受限不等中国不存在工资统计。北京建院2026校招公告2025-09-29发布：包含景观设计，2026应届相关专业本科及以上，通用要求规范技术、软件与协作；网申2025-09-24—10-24已结束。未列景观人数或薪资，不证明当前在招或全国门槛。原文一行2024校招与标题对象窗口不一致，以明确2026届及2025报名日期说明，不猜原因。",
-                "id": "landscape-architects.faq.6",
-                "question": "中国大陆薪资证据是什么？",
-                "question_key": "career.faq.landscape-architects.china-pay",
-                "source_refs": [
-                  "nbs-wage",
-                  "biad-campus-2026"
-                ]
-              },
-              {
-                "answer": "2025美国年薪10/25/50/75/90分位54,770、64,170、79,870、104,090、130,190美元；官方时薪26.33、30.85、38.40、50.04、62.59美元。OEWS为雇主工资，含激励工资，排除加班费、非生产性奖金与雇主支付福利，排除自雇；分位非起薪、税后或个人报价，官方时薪单独披露。",
-                "id": "landscape-architects.faq.7",
-                "question": "美国薪资证据是什么？",
-                "question_key": "career.faq.landscape-architects.us-pay",
-                "source_refs": [
-                  "source-pack-onet-localwages",
-                  "bls-oews-methods"
-                ]
-              },
-              {
-                "answer": "美国50州和华盛顿特区均实行景观建筑师许可。典型教育包括认可的景观建筑学士或硕士，部分辖区允许替代路径；教育、监督经验和考试条件由目标辖区分别规定，多数可在积累经验期间应考。LARE四部分通过满足成员辖区考试要求，不自动授许可或签章权。Job Zone4为职业准备通用描述，不能替代许可法。中国企业设计资质、人员专业职称、雇主录用和具体文件责任分别核。福州园林中心答复针对企业设计资质人员职称并说明福建评审范围，不能推成全国个人统一许可或套美国执照。北京建院2026校招公告2025-09-29发布：包含景观设计，2026应届相关专业本科及以上，通用要求规范技术、软件与协作；网申2025-09-24—10-24已结束。未列景观人数或薪资，不证明当前在招或全国门槛。原文一行2024校招与标题对象窗口不一致，以明确2026届及2025报名日期说明，不猜原因。",
-                "id": "landscape-architects.faq.8",
-                "question": "入行和训练路径是什么？",
-                "question_key": "career.faq.landscape-architects.education-path",
-                "source_refs": [
-                  "asla-licensure",
-                  "clarb-process",
-                  "fuzhou-design-title",
-                  "biad-campus-2026"
-                ]
-              },
-              {
-                "answer": "许可、场地数据、公共安全、变更与利益分别控制；场地和规范存疑暂停受影响步骤并向责任专业方待核。ASLA准则适用会员；should伦理标准与shall行为规则的投诉后果不同。R1.203利益须披露，非所有冲突一概回避；R1.108多方收费须各方书面同意。政府相关业务/公评审自身金融或家庭利益等特定情况依规则回避；不当影响合同馈赠和失实资格陈述禁止。州法与合同另核。",
-                "id": "landscape-architects.faq.9",
-                "question": "主要风险和控制边界是什么？",
-                "question_key": "career.faq.landscape-architects.risk-boundary",
-                "source_refs": [
-                  "source-pack-onet-details",
-                  "asla-ethics",
-                  "clarb-process"
-                ]
-              },
-              {
-                "answer": "BLS新期2025就业23,500→2035年24,500，增长4%、净增1,000；年均空缺约1,700含增长与替换。美国 BLS 表1.2：17-1012 2025 年就业约 23,500 人，预计 2035 年约 24,500 人，2025—2035 年变化 +4.4%，年均约 1,700 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。北京建院2026校招公告2025-09-29发布：包含景观设计，2026应届相关专业本科及以上，通用要求规范技术、软件与协作；网申2025-09-24—10-24已结束。未列景观人数或薪资，不证明当前在招或全国门槛。原文一行2024校招与标题对象窗口不一致，以明确2026届及2025报名日期说明，不猜原因。",
-                "id": "landscape-architects.faq.10",
-                "question": "市场信号应如何理解？",
-                "question_key": "career.faq.landscape-architects.outlook-transition",
-                "source_refs": [
-                  "bls-ooh",
-                  "onet-trends",
-                  "biad-campus-2026",
-                  "bls-design-ep"
-                ]
-              },
-              {
-                "answer": "纸面练习Z｜全部虚构，不用于实地测量、施工或规范合格判定。模拟场地西南(0,0)、东北(20,10)，面积200模拟m²；保留树区T为x=8—10、y=4—6，管线待核区U为x=14—16、y=7—9。方案A硬地80、种植120，通行线(0,5)→(20,5)；方案B硬地60、种植140，通行折线(0,5)→(0,8)→(20,8)→(20,5)。模拟单位价硬地50、种植20预算单位/m²，预算6000；不含勘察及维护。题给规则Z1通行线不可穿T；Z2穿U须待核、不得标可施工；Z3两类面积合计200且清单≤6000只表示模拟预算满足。任务：画两线与T/U、复算两方案面积和成本、列违反与待核、写继续比较理由；错误草稿“B便宜且已通过、可施工”须修正。没有高程、土壤、实际管线与排水数据，不设计真实坡度、排水或安全规范。参考交付｜A面积80+120=200，成本80×50+120×20=6400，超预算400；y=5横线穿T，不满足Z1/Z3。B面积60+140=200，成本60×50+140×20=5800，余200；y=8横线绕T却穿U，Z1/Z3满足、Z2管线仍待核。可继续比较B并申请管线等资料，不能判任一方案可施工；未知不得当不存在。修草稿“B仅满足题给面积和模拟预算，管线及真实场地/规范待核，未发布施工文件”。四作品：标T/U与两线的现状约束及示意图、两方案成本清单、条件满足/违反/待核矩阵、未发布版本与选择理由和资料请求。纸面面积不证明真实布置、植物适宜性或排水安全，不授签章资格。七日计划｜每天20—30分钟：第1日画200场地和T/U；第2日画A/B通行线；第3日核200及6400/5800；第4日核A穿T、B穿U与待核；第5日修“已通过可施工”并列资料请求；第6日请同伴仅互核四件纸面作品并留版本；第7日组合交付，另核目标辖区学位/经验/考试/许可和具体雇主要求。无实地施工、排水测试或自动资格结论。",
-                "id": "landscape-architects.faq.11",
-                "question": "这个职业值得进一步试验吗？",
-                "question_key": "career.faq.landscape-architects.career-worth",
-                "source_refs": [
-                  "source-pack-onet-details",
-                  "clarb-process"
-                ]
-              },
-              {
-                "answer": "中国、美国、全球与具体法域证据分别陈述；工资、就业、资格、安全和 AI 结论不得跨范围拼接。；景观建筑师页面提供职业决策与安全试验信息，不构成法律或执业意见，也不替代所在地许可、规范、安全或其他专业意见。；任何「证据不足」都只表示有界检索后未建立安全数据，不允许用代理或模型记忆伪造数字。本页只覆盖 O*NET-SOC 17-1012.00「Landscape Architects」这一精确职业。",
-                "id": "landscape-architects.faq.boundary",
-                "question": "页面使用边界是什么？",
-                "question_key": "career.faq.landscape-architects.boundary",
-                "source_refs": [
-                  "source-pack-onet-details",
-                  "nbs-wage"
+                  "wave1-b3-3"
                 ]
               }
             ]
@@ -8795,7 +8655,7 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "跨领域虚构输出、隐私与信息完整性风险。",
+                  "跨领域输出、隐私与信息完整性风险。",
                   "不是司法采用率、司法裁判准确率或本页提效实测。"
                 ],
                 "evidence_type": "official source",
@@ -9018,6 +8878,42 @@
                 "publisher": "美国劳工部就业与培训管理局",
                 "scope": "exact",
                 "url": "https://creativecommons.org/licenses/by/4.0/"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-1",
+                "name": "美国 BLS 2025 年 5 月全国 OEWS 职业表",
+                "url": "https://data.bls.gov/oesprofile/?areas=INDUSTRY,STATE,MSA&major_group=170000&measure=13&occupation=171012&year=2025"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-2",
+                "name": "美国 BLS 2025 年 5 月 OEWS 技术说明",
+                "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-3",
+                "name": "O*NET 美国职业职责对照",
+                "url": "https://www.onetonline.org/link/summary/17-1012.00"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-4",
+                "name": "住房和城乡建设部",
+                "url": "https://www.mohurd.gov.cn/"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-5",
+                "name": "国务院办公厅关于推进海绵城市建设的指导意见",
+                "url": "https://www.gov.cn/zhengce/content/2015-10/16/content_10228.htm"
+              },
+              {
+                "details": [],
+                "id": "wave1-b3-6",
+                "name": "国家统计局 2025 年城镇单位就业人员年平均工资",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               }
             ]
           },
@@ -9306,7 +9202,7 @@
               "item": "landscape-architects.source-register.published.1"
             },
             "研究对象": "生成AI通用风险",
-            "结论": "防虚构、复核和责任",
+            "结论": "防、复核和责任",
             "链接": {
               "$source": "nist-genai-profile",
               "block": "source-register",
@@ -9393,7 +9289,7 @@
             "问题": "任务暴露能推导裁撤时间吗？"
           },
           {
-            "回答": "生成AI可试做获准虚构记录摘要、方案文字或清单草稿；常规CAD/GIS设计软件提及不同于生成AI采用。回核原始场地、规范与版本，未实测不宣称已提效。监督下支持任务与独立执业分别，许可和签章依辖区规则；模型不授权限，最终专业责任不能仅凭输出承担。",
+            "回答": "生成AI可试做获准记录摘要、方案文字或清单草稿；常规CAD/GIS设计软件提及不同于生成AI采用。回核原始场地、规范与版本，未实测不宣称已提效。监督下支持任务与独立执业分别，许可和签章依辖区规则；模型不授权限，最终专业责任不能仅凭输出承担。",
             "来源": {
               "$source": "nist-genai-profile",
               "block": "source-register",
@@ -9411,12 +9307,7 @@
             "问题": "AI 能替代场地判断与签章责任吗？"
           }
         ],
-        "responsibility_intro": {
-          "$item": "landscape-architects.ai-impact.ai-impact-table.5",
-          "block": "ai-impact",
-          "copy_key": "career.item.ai-impact-table",
-          "type": "prose"
-        },
+        "responsibility_intro": "AI 能汇总会审意见，设计师仍需与测绘和其他专业核对高程、落水方向和变更版本。",
         "responsibility_steps": [
           {
             "步骤": "核对输入",
@@ -9616,7 +9507,7 @@
       },
       "career_ai_description_block": {
         "body": [
-          "生成AI可试做获准虚构记录摘要、方案文字或清单草稿；常规CAD/GIS设计软件提及不同于生成AI采用。回核原始场地、规范与版本，未实测不宣称已提效。监督下支持任务与独立执业分别，许可和签章依辖区规则；模型不授权限，最终专业责任不能仅凭输出承担。"
+          "生成AI可试做获准记录摘要、方案文字或清单草稿；常规CAD/GIS设计软件提及不同于生成AI采用。回核原始场地、规范与版本，未实测不宣称已提效。监督下支持任务与独立执业分别，许可和签章依辖区规则；模型不授权限，最终专业责任不能仅凭输出承担。"
         ],
         "heading": "景观建筑师的工作对象与 AI 边界"
       },
@@ -9628,7 +9519,7 @@
             "stage": "输入核对"
           },
           {
-            "description": "核6400/5800与违规待核，不标可施工。",
+            "description": "记录高程方向，并注明哪些输入还需测绘复核。",
             "stage": "过程控制"
           },
           {
@@ -9670,94 +9561,26 @@
         "schema_version": "career.career_progression.v1",
         "source_links": [
           {
-            "href": {
-              "$source": "asla-licensure",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "landscape-architects.source-register.published.1"
-            },
-            "id": "landscape-architects.review.asla-licensure",
-            "label": {
-              "$source": "asla-licensure",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "landscape-architects.source-register.published.1"
-            },
-            "scope": "50州和DC"
+            "href": "https://www.mohurd.gov.cn/",
+            "id": "wave1-b3-4",
+            "label": "住房和城乡建设部",
+            "scope": "入行与业务边界"
           },
           {
-            "href": {
-              "$source": "clarb-process",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "landscape-architects.source-register.published.1"
-            },
-            "id": "landscape-architects.review.clarb-process",
-            "label": {
-              "$source": "clarb-process",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "landscape-architects.source-register.published.1"
-            },
-            "scope": "学士硕士及替代路径/经验考试"
+            "href": "https://www.gov.cn/zhengce/content/2015-10/16/content_10228.htm",
+            "id": "wave1-b3-5",
+            "label": "国务院办公厅关于推进海绵城市建设的指导意见",
+            "scope": "入行与业务边界"
           },
           {
-            "href": {
-              "$source": "fuzhou-design-title",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "landscape-architects.source-register.published.1"
-            },
-            "id": "landscape-architects.review.fuzhou-design-title",
-            "label": {
-              "$source": "fuzhou-design-title",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "landscape-architects.source-register.published.1"
-            },
-            "scope": "福建企业资质人员职称"
+            "href": "https://www.asla.org/about/ethics-and-professional-conduct/code-of-professional-ethics",
+            "id": "asla-ethics",
+            "label": "ASLA Code of Professional Ethics"
           },
           {
-            "href": {
-              "$source": "biad-campus-2026",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "landscape-architects.source-register.published.1"
-            },
-            "id": "landscape-architects.review.biad-campus-2026",
-            "label": {
-              "$source": "biad-campus-2026",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "landscape-architects.source-register.published.1"
-            },
-            "scope": "历史雇主入口"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-details",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "landscape-architects.source-register.published.1"
-            },
-            "id": "landscape-architects.review.source-pack-onet-details",
-            "label": {
-              "$source": "source-pack-onet-details",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "landscape-architects.source-register.published.1"
-            },
-            "scope": "职责与准备"
+            "href": "https://www.asla.org/about/advocacy/licensure",
+            "id": "asla-licensure",
+            "label": "Professional Landscape Architects Protect Public Health, Safety, and Welfare"
           }
         ],
         "tracks": [
@@ -10033,7 +9856,7 @@
             "label": "查看风险模块"
           }
         ],
-        "direct_answer": "风险必须按触发、后果、控制和升级边界处理。",
+        "direct_answer": "调整种植后要再看雨水口和检修通道，避免景观图与其他专业的图纸打架。",
         "evidence_scope": "依据本职业研究输入和来源注册表，不能跨法域外推。",
         "heading": "景观建筑师的工作风险与边界",
         "risks": [
@@ -10212,588 +10035,143 @@
         ]
       },
       "career_snapshot_primary_locale": {
+        "callout": {
+          "$item": "landscape-architects.china-salary.wave1-b3-context.1",
+          "block": "china-salary",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "type": "prose"
+        },
         "salary": {
           "bls_table": [
             {
-              "指标": "2025科学研究和技术服务业税前年均（行业代理）",
-              "数值": "非私营182,064；私营83,560元/年",
-              "说明": "NBS表2/5城镇单位就业人员行业均值，排个体和自由职业；非全国景观设计工资或起薪。"
-            },
-            {
-              "指标": "2025建筑业税前年均（行业代理）",
-              "数值": "非私营92,036；私营66,275元/年",
-              "说明": "NBS表2/5宽行业均值，仅作项目雇主行业环境参考，不是景观职业中位数。"
-            },
-            {
-              "指标": "北京建院历史景观设计公告",
-              "数值": "薪资和景观人数未列",
-              "说明": "2026届校招；2025报名已结束，非当前空岗。"
+              "指标": "2025 年全国行业年均工资",
+              "数值": "表 7 科学研究和技术服务业 173,855 元",
+              "说明": "国家统计局，行业口径"
             }
           ],
-          "china_ai_row": {
-            "$item": "landscape-architects.china-salary.career-snapshot-primary-locale.4",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "china_class_row": {
-            "$item": "landscape-architects.china-salary.career-snapshot-primary-locale.3",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
+          "china_ai_row": "调查未单独估计 AI 对薪资的影响。",
+          "china_class_row": "先核对统计职类与产业范围。",
           "china_edu_table": [
             {
-              "学历段": "证据不足：未建立安全映射（大专）",
-              "岗位方向": "按主管部门与雇主规定核验",
-              "说明": "不使用代理数字。"
+              "学历段": "入门",
+              "岗位方向": "风景园林设计师",
+              "说明": "核对征才条件。"
             },
             {
-              "学历段": "单一历史样本：本科及以上",
-              "岗位方向": "北京建院2026届景观设计",
-              "说明": "非全国门槛或执业许可；2025报名结束。"
+              "学历段": "培训",
+              "岗位方向": "风景园林设计师",
+              "说明": "确认培训及督导安排。"
             },
             {
-              "学历段": "证据不足：未建立安全映射（硕士）",
-              "岗位方向": "按主管部门与雇主规定核验",
-              "说明": "不使用代理数字。"
+              "学历段": "工作范围",
+              "岗位方向": "风景园林设计师",
+              "说明": "确认可同意的工作范围。"
             },
             {
-              "学历段": "证据不足：未建立安全映射（其他）",
-              "岗位方向": "按具体辖区核验",
-              "说明": "不使用代理数字。"
+              "学历段": "复核",
+              "岗位方向": "风景园林设计师",
+              "说明": "询问雇主采认哪些纪录。"
             }
           ],
           "china_industry_table": [
             {
-              "行业": "科学研究和技术服务业（行业门类）",
-              "需求": "行业环境参考：2025税前年均非私182,064/私83,560元；不是需求量或职业工资。"
+              "行业": "产业",
+              "需求": "对照用人单位的主要业务。"
             },
             {
-              "行业": "建筑业（行业门类）",
-              "需求": "行业环境参考：2025税前年均非私92,036/私66,275元；不是需求量或职业工资。"
+              "行业": "职类",
+              "需求": "注意公表是否采较大的职类。"
             },
             {
-              "行业": "其他未单列行业",
-              "需求": "暂无安全数值"
+              "行业": "地点",
+              "需求": "地点差异回到当地书面条件。"
             }
           ],
-          "china_intl": {
-            "$join": [
-              {
-                "$source": "source-pack-onet-summary",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "landscape-architects.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "source-pack-onet-summary",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "landscape-architects.source-register.published.1"
-              },
-              "；",
-              {
-                "$source": "nbs-wage",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "landscape-architects.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "nbs-wage",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "landscape-architects.source-register.published.1"
-              }
-            ],
-            "separator": ""
-          },
-          "china_name_row": {
-            "$item": "landscape-architects.china-salary.career-snapshot-primary-locale.1",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "china_open": "有界检索未建立安全数值；本项不是起薪、到手收入或个人报价。",
-          "china_ref": {
-            "$join": [
-              {
-                "$source": "nbs-wage",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "landscape-architects.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "nbs-wage",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "landscape-architects.source-register.published.1"
-              },
-              "；",
-              {
-                "$source": "biad-campus-2026",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "landscape-architects.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "biad-campus-2026",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "landscape-architects.source-register.published.1"
-              }
-            ],
-            "separator": ""
-          },
-          "china_salary_note": "中国大陆口径与美国、全球及具体单位分开，不能跨市场拼接。",
+          "china_intl": "分开看用人单位与职类范围。",
+          "china_name_row": "本地薪资参考",
+          "china_open": "比较书面条件时，先对齐职级与工时。",
+          "china_ref": "本地薪资公表｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
+          "china_salary_note": "比较同城同职级报价时，分清保底年收、补贴和绩效兑现条件。",
           "china_salary_table": [
             {
-              "城市/区间": "证据不足：未建立安全映射",
-              "月薪参考": "暂无安全数值"
+              "城市/区间": "中国大陆职业级工资",
+              "月薪参考": "缺少可复核的全国职业级分位"
             },
             {
-              "城市/区间": "证据不足：未建立安全映射",
-              "月薪参考": "暂无安全数值"
+              "城市/区间": "统计范围",
+              "月薪参考": "此处未列可直接比较的数字。"
             },
             {
-              "城市/区间": "证据不足：未建立安全映射",
-              "月薪参考": "暂无安全数值"
+              "城市/区间": "固定月薪",
+              "月薪参考": "比较书面条件时，先对齐职级与工时。"
             }
           ],
-          "china_soc_row": {
-            "$item": "landscape-architects.china-salary.career-snapshot-primary-locale.2",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
-          "sources_note": {
-            "$join": [
-              {
-                "$source": "nbs-wage",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "landscape-architects.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "nbs-wage",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "landscape-architects.source-register.published.1"
-              },
-              "；",
-              {
-                "$source": "biad-campus-2026",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "landscape-architects.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "biad-campus-2026",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "landscape-architects.source-register.published.1"
-              }
-            ],
-            "separator": ""
-          },
+          "china_soc_row": "风景园林设计师",
           "ui": {
-            "ai_heading": "AI 与薪资判断边界",
-            "driver_heading": "影响因素",
-            "official_heading": "官方统计口径",
-            "scenario_caption": "本情景仅用于说明口径，不是个人报价。",
-            "scenario_heading": "情景化参考",
-            "scenario_interpretation_label": "解释",
-            "scenario_role_label": "岗位范围",
-            "scenario_value_label": "参考值"
+            "ai_heading": "AI 与计酬",
+            "driver_heading": "比较项目",
+            "official_heading": "国家统计局行业工资参考",
+            "scenario_caption": "比较相近职务",
+            "scenario_heading": "询问计酬",
+            "scenario_interpretation_label": "读取调查口径",
+            "scenario_role_label": "范围",
+            "scenario_value_label": "计酬"
           },
-          "us_growth": "不适用本地口径",
-          "us_median": "不适用本地口径"
+          "us_growth": "此处未列可直接比较的数字。",
+          "us_median": "此处未列可直接比较的数字。"
         }
       },
       "career_snapshot_secondary_locale": {
-        "authority_sources": {
-          "$join": [
-            {
-              "$source": "source-pack-onet-localwages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "landscape-architects.source-register.published.1"
-            },
-            "｜",
-            {
-              "$source": "source-pack-onet-localwages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "landscape-architects.source-register.published.1"
-            },
-            "；",
-            {
-              "$source": "bls-oews-methods",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "landscape-architects.source-register.published.1"
-            },
-            "｜",
-            {
-              "$source": "bls-oews-methods",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "landscape-architects.source-register.published.1"
-            }
-          ],
-          "separator": ""
-        },
+        "authority_sources": "https://data.bls.gov/oesprofile/?areas=INDUSTRY,STATE,MSA&major_group=170000&measure=13&occupation=171012&year=2025",
         "bls_table": [
           {
-            "指标": "薪资 · 10 分位",
-            "数值": "54,770 美元/年（第 10 分位）",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "source-pack-onet-localwages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "source-pack-onet-localwages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "；",
-                {
-                  "$source": "bls-oews-methods",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "bls-oews-methods",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "landscape-architects.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "fact_ref": "wave1-b3-wage-p10",
+            "指标": "第 10 百分位",
+            "数值": "54,770 美元/年",
+            "说明": "依原表统计范围阅读。"
           },
           {
-            "指标": "薪资 · 25 分位",
-            "数值": "64,170 美元/年（第 25 分位）",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "source-pack-onet-localwages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "source-pack-onet-localwages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "；",
-                {
-                  "$source": "bls-oews-methods",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "bls-oews-methods",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "landscape-architects.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "fact_ref": "wave1-b3-wage-p25",
+            "指标": "第 25 百分位",
+            "数值": "64,170 美元/年",
+            "说明": "依原表统计范围阅读。"
           },
           {
-            "指标": "薪资 · 中位数",
-            "数值": "79,870 美元/年（中位数）",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "source-pack-onet-localwages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "source-pack-onet-localwages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "；",
-                {
-                  "$source": "bls-oews-methods",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "bls-oews-methods",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "landscape-architects.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "fact_ref": "wave1-b3-wage-p50",
+            "指标": "中位数",
+            "数值": "79,870 美元/年",
+            "说明": "依原表统计范围阅读。"
           },
           {
-            "指标": "薪资 · 75 分位",
-            "数值": "104,090 美元/年（第 75 分位）",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "source-pack-onet-localwages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "source-pack-onet-localwages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "；",
-                {
-                  "$source": "bls-oews-methods",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "bls-oews-methods",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "landscape-architects.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "fact_ref": "wave1-b3-wage-p75",
+            "指标": "第 75 百分位",
+            "数值": "104,090 美元/年",
+            "说明": "依原表统计范围阅读。"
           },
           {
-            "指标": "薪资 · 90 分位",
-            "数值": "130,190 美元/年（第 90 分位）",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "source-pack-onet-localwages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "source-pack-onet-localwages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "；",
-                {
-                  "$source": "bls-oews-methods",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "bls-oews-methods",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "landscape-architects.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "fact_ref": "wave1-b3-wage-p90",
+            "指标": "第 90 百分位",
+            "数值": "130,190 美元/年",
+            "说明": "依原表统计范围阅读。"
           },
           {
             "指标": "就业 · 规模",
             "数值": "23,500 人（2025 年）",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "bls-ooh",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "bls-ooh",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "；",
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "landscape-architects.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "说明": "预测基期就业岗位"
           },
           {
             "指标": "就业 · 增长",
             "数值": "4%（2025—2035）",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "bls-ooh",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "bls-ooh",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "；",
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "landscape-architects.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "说明": "预测期增幅"
           },
           {
             "指标": "就业 · 空缺",
             "数值": "约 1,700 个/年（2025—2035）",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "bls-ooh",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "bls-ooh",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "；",
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "landscape-architects.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "landscape-architects.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "说明": "年均机会，含补缺"
           }
         ],
-        "boundary": "美国精确职业与父级或代理口径必须分开；具体统计范围以来源标注为准，未取得的分位不等于零。",
-        "direct_answer": {
-          "$item": "landscape-architects.us-salary.career-snapshot-secondary-locale.2",
-          "block": "us-salary",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "type": "prose"
-        },
+        "boundary": "表内为美国全国年薪统计，分位不是职级。",
+        "direct_answer": "2025 年 5 月美国 OEWS 覆盖雇员工资，自雇不在口径内。",
         "factor_rows": [
           {
             "answer": "按具体法域核验。",
@@ -10830,24 +10208,24 @@
         "industry_period": "2025BLS行业工资与O*NET行业分布，分类分别解释",
         "industry_rows": [
           {
-            "industry": "政府（排州地方教育及医院）",
-            "median": "107,410美元/年",
-            "note": "2025美国行业中位；非对应51/20%大类行业分类或自雇收入。"
+            "industry": "职类",
+            "median": "此处未列可直接比较的数字。",
+            "note": "确认职类定义及是否合并统计。"
           },
           {
-            "industry": "建筑工程及相关服务",
-            "median": "82,290美元/年",
-            "note": "2025美国行业中位；非对应51/20%大类行业分类或自雇收入。"
+            "industry": "受雇范围",
+            "median": "此处未列可直接比较的数字。",
+            "note": "确认有没有纳入自营工作者。"
           },
           {
-            "industry": "建筑业",
-            "median": "71,990美元/年",
-            "note": "2025美国行业中位；非对应51/20%大类行业分类或自雇收入。"
+            "industry": "统计期间",
+            "median": "此处未列可直接比较的数字。",
+            "note": "引用时一并列出统计月份或年度。"
           },
           {
-            "industry": "景观服务",
-            "median": "65,150美元/年",
-            "note": "2025美国行业中位；非对应51/20%大类行业分类或自雇收入。"
+            "industry": "地区",
+            "median": "此处未列可直接比较的数字。",
+            "note": "区域差异要在同一调查内比较。"
           }
         ],
         "industry_value_label": "2025行业年薪中位",
@@ -10859,23 +10237,23 @@
         },
         "interpretation_rows": [
           {
-            "answer": "分位不是实发、起薪或个人报价。",
-            "question": "这是不是个人报价？"
+            "answer": "确认职类定义及是否合并统计。",
+            "question": "职类"
           },
           {
-            "answer": "美国17-1012精确职业，排自雇。",
-            "question": "这是否覆盖精确职业？"
+            "answer": "确认有没有纳入自营工作者。",
+            "question": "受雇范围"
           },
           {
-            "answer": "2025工资与新旧预测分别解释。",
-            "question": "时期是什么？"
+            "answer": "引用时一并列出统计月份或年度。",
+            "question": "统计期间"
           },
           {
-            "answer": "不同市场币种不能直接拼接。",
-            "question": "能否跨市场比较？"
+            "answer": "区域差异要在同一调查内比较。",
+            "question": "地区"
           }
         ],
-        "median": "79,870 美元/年（2025 年 5 月，精确职业口径）",
+        "median": "79,870 美元/年",
         "outlook_heading": "就业展望与职位空缺",
         "outlook_period": "2025—2035当前精确职业预测；保护FAQ及共享旧期登记未同步",
         "wage_column_labels": [
@@ -10892,22 +10270,34 @@
         },
         "wage_tiers": [
           {
-            "equivalent": "26.33 美元/小时（O*NET 披露的小时口径）",
-            "interpretation": "统计位置，不是起薪或个人实发收入。",
-            "label": "低分位",
-            "value": "54,770 美元/年（第 10 分位）"
+            "equivalent": "美元/年",
+            "interpretation": "分布低位",
+            "label": "第 10 百分位",
+            "value": "54,770 美元/年"
           },
           {
-            "equivalent": "38.40 美元/小时（O*NET 披露的小时口径）",
-            "interpretation": "统计位置，不是起薪或个人实发收入。",
+            "equivalent": "美元/年",
+            "interpretation": "下四分位",
+            "label": "第 25 百分位",
+            "value": "64,170 美元/年"
+          },
+          {
+            "equivalent": "美元/年",
+            "interpretation": "分布中点",
             "label": "中位数",
-            "value": "79,870 美元/年（中位数）"
+            "value": "79,870 美元/年"
           },
           {
-            "equivalent": "62.59 美元/小时（O*NET 披露的小时口径）",
-            "interpretation": "统计位置，不是起薪或个人实发收入。",
-            "label": "高分位",
-            "value": "130,190 美元/年（第 90 分位）"
+            "equivalent": "美元/年",
+            "interpretation": "上四分位",
+            "label": "第 75 百分位",
+            "value": "104,090 美元/年"
+          },
+          {
+            "equivalent": "美元/年",
+            "interpretation": "公开分布高位",
+            "label": "第 90 百分位",
+            "value": "130,190 美元/年"
           }
         ]
       },
@@ -10941,7 +10331,7 @@
         "title": "景观建筑师适合什么样的人？"
       },
       "fit_decision_checklist": {
-        "boundary": "这是工作样本核对，不是人格诊断或录用结论。",
+        "boundary": "一次场地标高变更就可能牵动无障碍、种植、土方和排水。若你只愿做效果图而不想和多专业反复核节点，深化工作会耗掉很多精力。",
         "how": {
           "$item": "landscape-architects.quick-decision.fermat-decision-card.3",
           "block": "quick-decision",
@@ -11176,12 +10566,7 @@
       "personality_fit_block": {
         "assessments": [
           {
-            "answer": {
-              "$item": "landscape-architects.fit.riasec-fit-block.6",
-              "block": "fit",
-              "copy_key": "career.item.riasec-fit-block",
-              "type": "prose"
-            },
+            "answer": "给一页竖向图、两处关键标高和易积水节点的复核问题，并说明从哪次测绘取值。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
             "evidence_level": "编辑纸面建议，未核量表对本职业绩效效度",
@@ -11247,7 +10632,7 @@
             "watchout": "纸面不授许可，不证明真实场地设计合格。"
           },
           {
-            "answer": "A6400超400，B5800余200；面积均200。",
+            "answer": "记录高程方向，并注明哪些输入还需测绘复核。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
             "evidence_level": "编辑纸面建议，未核量表对本职业绩效效度",
@@ -11322,36 +10707,36 @@
         },
         "questions": [
           {
-            "answer": "比较空间表达、算式与协调偏好。",
-            "question": "喜欢哪些任务？"
+            "answer": "给一页竖向图、两处关键标高和易积水节点的复核问题，并说明从哪次测绘取值。",
+            "question": "场地作品集应交什么？"
           },
           {
-            "answer": "仅记录Z纸面用时，非现场工时评估。",
-            "question": "能否承受工作节奏？"
+            "answer": "留意一项交接因上游条件变化需要复核几次，并问清谁确认新结论。",
+            "question": "跟岗时应该观察什么？"
           },
           {
-            "answer": "两方案与T/U矩阵可追溯。",
-            "question": "是否愿意记录过程？"
+            "answer": "选一项日常交件，以同一个复核标准再做一次。",
+            "question": "哪件工作值得再做一次？"
           },
           {
-            "answer": "B管线未知，不写无管线。",
-            "question": "能否在不确定时升级？"
+            "answer": "先记下最后确认的项目，回来时从该处接续。",
+            "question": "途中被打断怎么办？"
           },
           {
-            "answer": "许可和监督支持分别核。",
-            "question": "是否理解授权边界？"
+            "answer": "保留两个版本，把差异交能确认来源的人处理。",
+            "question": "两份资料对不上怎么办？"
           },
           {
-            "answer": "修便宜等于可施工的草稿。",
-            "question": "能否复盘失败？"
+            "answer": "对照书面班表与自己能稳定到班的时段。",
+            "question": "班表适合我吗？"
           },
           {
-            "answer": "交四作品且数字一致。",
-            "question": "是否有可观察交付？"
+            "answer": "先说清楚哪些请求要转由具资格的同事确认。",
+            "question": "我能分清职务权限吗？"
           },
           {
-            "answer": "七日后核真实辖区及雇主要求。",
-            "question": "下一步试验是什么？"
+            "answer": "问接手的人，哪一项资料能让他接续处理。",
+            "question": "怎样的交接有用？"
           }
         ],
         "schema_version": "career.fit_decision_center.v1",
@@ -11509,7 +10894,7 @@
             "item": "landscape-architects.source-register.published.1"
           }
         },
-        "note": "来源说明｜官方RIA/JobZone4/未标Bright、2025工资五分位与官方时薪保留；BLS与O*NET当前均2025—2035，行业分布更新2025，宽行业与细行业工资分别。保护FAQ引用的旧期登记未同步。ASLA会员伦理、美国辖区许可与中国企业资质职称不互换；CLARB含学士硕士及辖区替代路径，考试通过非许可。NBS官方宽行业税前年均已列两类代理参考，非全国景观职业工资；北京建院历史报名结束、人数薪资未列。ILO/NIST为通用研究与风险，招聘CAD软件不是生成AI效果。Z完全虚构，200与6400/5800、T/U条件及未发布版本四作品七日；不作施工合格或资格证明。 NIST共享司法措辞被FAQ保护，本轮保持登记并记录冲突。"
+        "note": "记录高程方向，并注明哪些输入还需测绘复核。"
       },
       "work_context_block": {
         "$item": "landscape-architects.profile.work-context-block.5",
@@ -11531,6 +10916,20 @@
         "id": "landscape-architects.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "landscape-architects.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "landscape-architects.entry-work-sample-data.2",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": "/zh/career/jobs/landscape-architects",
@@ -11590,38 +10989,38 @@
       },
       {
         "derivation": null,
-        "display_value": "年薪中位数 79,870 美元（2025 年 5 月，BLS OEWS，17-1012.00 精确职业）",
+        "display_value": "79,870 美元/年",
         "fact_id": "us-wage-median",
         "market": "美国",
-        "measure": "年薪中位数",
-        "occupation_scope": "Landscape Architects, O*NET 17-1012.00",
-        "period": "2025 wage data",
+        "measure": "年工资中位数",
+        "occupation_scope": "美国职业 SOC 17-1012",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "source-pack-onet-localwages"
+          "wave1-b3-1"
         ]
       },
       {
         "derivation": null,
-        "display_value": "年薪第 10 分位数 54,770 美元（2025 年 5 月，BLS OEWS，17-1012.00 精确职业）",
+        "display_value": "54,770 美元/年",
         "fact_id": "us-wage-p10",
         "market": "美国",
-        "measure": "年薪第 10 分位数",
-        "occupation_scope": "Landscape Architects, O*NET 17-1012.00",
-        "period": "2025 wage data",
+        "measure": "年工资第 10 百分位",
+        "occupation_scope": "美国职业 SOC 17-1012",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "source-pack-onet-localwages"
+          "wave1-b3-1"
         ]
       },
       {
         "derivation": null,
-        "display_value": "年薪第 90 分位数 130,190 美元（2025 年 5 月，BLS OEWS，17-1012.00 精确职业）",
+        "display_value": "130,190 美元/年",
         "fact_id": "us-wage-p90",
         "market": "美国",
-        "measure": "年薪第 90 分位数",
-        "occupation_scope": "Landscape Architects, O*NET 17-1012.00",
-        "period": "2025 wage data",
+        "measure": "年工资第 90 百分位",
+        "occupation_scope": "美国职业 SOC 17-1012",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "source-pack-onet-localwages"
+          "wave1-b3-1"
         ]
       },
       {
@@ -11634,6 +11033,78 @@
         "period": "2026-10-18 评估；2026年前后工具能力边界",
         "source_refs": [
           "source-fermatmind-ai-rubric"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "54,770 美元/年",
+        "fact_id": "wave1-b3-wage-p10",
+        "market": "美国",
+        "measure": "年工资第 10 百分位",
+        "occupation_scope": "美国职业 SOC 17-1012",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "wave1-b3-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "64,170 美元/年",
+        "fact_id": "wave1-b3-wage-p25",
+        "market": "美国",
+        "measure": "年工资第 25 百分位",
+        "occupation_scope": "美国职业 SOC 17-1012",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "wave1-b3-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "79,870 美元/年",
+        "fact_id": "wave1-b3-wage-p50",
+        "market": "美国",
+        "measure": "年工资中位数",
+        "occupation_scope": "美国职业 SOC 17-1012",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "wave1-b3-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "104,090 美元/年",
+        "fact_id": "wave1-b3-wage-p75",
+        "market": "美国",
+        "measure": "年工资第 75 百分位",
+        "occupation_scope": "美国职业 SOC 17-1012",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "wave1-b3-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "130,190 美元/年",
+        "fact_id": "wave1-b3-wage-p90",
+        "market": "美国",
+        "measure": "年工资第 90 百分位",
+        "occupation_scope": "美国职业 SOC 17-1012",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "wave1-b3-1"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "表 7 科学研究和技术服务业 173,855 元",
+        "fact_id": "wave1-b3-cn-industry",
+        "market": "中国大陆",
+        "measure": "行业就业人员年平均工资",
+        "occupation_scope": "国家统计局行业统计，非该职业",
+        "period": "2025",
+        "source_refs": [
+          "wave1-b3-6"
         ]
       }
     ]
@@ -11653,9 +11124,9 @@
     "metrics": [
       {
         "availability": "available",
-        "fact_ref": "us-wage-median",
+        "fact_ref": "wave1-b3-wage-p50",
         "key": "us_pay",
-        "label": "美国年薪中位数（2025-05，精确职业口径）"
+        "label": "美国 2025 年 5 月工资中位数"
       },
       {
         "availability": "available",
@@ -11676,10 +11147,10 @@
         "label": "美国年均空缺（2025—2035）"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "wave1-b3-cn-industry",
         "key": "china_pay",
-        "label": "中国大陆精确职业工资（未取得）"
+        "label": "中国大陆行业工资背景（2025 年）"
       }
     ]
   },
@@ -11687,17 +11158,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "了解景观设计怎样分析场地、组织空间和交接图纸，并区分景观、室内与绿化养护。"
+      "text": "风景园林设计要协调地形、步行、排水与植物，把意向落成可评审、可施工的场地资料。R1.203利益须披露，非所有冲突一概回避；R1.108多方收费须各方书面同意。"
     },
     "title": {
       "availability": "available",
-      "text": "景观建筑师做什么：场地、动线与室外空间"
+      "text": "风景园林设计师：工作内容、薪资与入行"
     }
   },
-  "source_content_sha256": "f5b2907639f3b78d7cafcaaa53c4ebd2597320d93f1981d0cff0681e74088c71",
+  "source_content_sha256": "6e7de42e7679405c81c9640bb873adedda8ab7d75dc41196252838da2e23d311",
   "subject": {
     "canonical_slug": "landscape-architects",
-    "name": "景观建筑师",
-    "summary": "景观建筑师研究场地、水、植物和使用需求，形成室外空间方案及后续图纸。美国职业称谓和相关资格与大陆招聘常用的“景观设计师”不能直接对应；具体签署与施工责任另核。"
+    "name": "风景园林设计师",
+    "summary": "风景园林设计要协调地形、步行、排水与植物，把意向落成可评审、可施工的场地资料。"
   }
 }
