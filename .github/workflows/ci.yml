@@ -371,19 +371,21 @@ jobs:
         run: |
           php artisan test tests/Unit/ContentPromotion/PublicContent53PublicationTest.php tests/Unit/ContentPromotion/RiasecCodeSamplePublicationTest.php tests/Unit/ContentPromotion/PromotionAdapterCapabilityTest.php tests/Unit/ContentPromotion/PromotionBootstrapSignatureTest.php tests/Feature/V0_3/EnneagramTechnicalNoteContractTest.php tests/Feature/V0_3/RiasecTechnicalNoteContractTest.php tests/Feature/V0_5/TopicsPublicApiTest.php --no-ansi
           node --test ../.github/trunk/public-content-53-publication.test.mjs
+      - name: Install Career test dependency when selected
+        if: matrix.mode == 'legacy' && needs.classify.outputs.tests_changed == 'true'
+        run: |
+          set -euo pipefail
+          if [ -n "$(git diff --name-only '${{ needs.classify.outputs.base_sha }}' '${{ github.sha }}' -- backend/scripts/career/test_career_detail_pipeline.py)" ]; then
+            python3 -m venv "$RUNNER_TEMP/career-python"
+            printf '%s\n' 'opencc-python-reimplemented==0.1.7 --hash=sha256:41b3b92943c7bed291f448e9c7fad4b577c8c2eae30fcfe5a74edf8818493aa6' \
+              | "$RUNNER_TEMP/career-python/bin/python" -m pip install --only-binary=:all: --require-hashes --requirement /dev/stdin
+            printf '%s\n' "$RUNNER_TEMP/career-python/bin" >> "$GITHUB_PATH"
+          fi
       - name: Execute changed PHP JS Python and Shell tests with inherited FEATURE inputs
         if: needs.classify.outputs.tests_changed == 'true'
         env:
           TRUNK_TESTS_VERIFIED_SHA: ${{ github.sha }}
-        run: |
-          set -euo pipefail
-          if [ '${{ matrix.mode }}' = legacy ] && [ -n "$(git diff --name-only '${{ needs.classify.outputs.base_sha }}' '${{ github.sha }}' -- backend/scripts/career/test_career_detail_pipeline.py)" ]; then
-            python3 -m venv "$RUNNER_TEMP/career-python"
-            source "$RUNNER_TEMP/career-python/bin/activate"
-            printf '%s\n' 'opencc-python-reimplemented==0.1.7 --hash=sha256:41b3b92943c7bed291f448e9c7fad4b577c8c2eae30fcfe5a74edf8818493aa6' \
-              | python3 -m pip install --only-binary=:all: --require-hashes --requirement /dev/stdin
-          fi
-          node .github/trunk/run-changed-tests.mjs '${{ needs.classify.outputs.base_sha }}' '${{ github.sha }}' '${{ matrix.mode }}'
+        run: node .github/trunk/run-changed-tests.mjs '${{ needs.classify.outputs.base_sha }}' '${{ github.sha }}' '${{ matrix.mode }}'
       - if: needs.classify.outputs.deploy != 'true'
         run: echo "Docs/rules/tests-only scope does not deploy."
 
