@@ -285,13 +285,22 @@ final class EntertainmentActivityTest extends TestCase
         CarbonImmutable::setTestNow(CarbonImmutable::parse('2026-10-27T17:00:00Z'));
         try {
             $this->send($this->envelope('fun_start', 'solo', 'friendship-quiz', 'en'))->assertStatus(202);
+            $this->send($this->envelope('fun_complete'))->assertStatus(202);
             $catalog = app(EntertainmentActivity::class)->catalog();
             $totalRows = array_sum(array_map(fn (array $test): int => count($test['roles']) * 2, $catalog));
             \Filament\Facades\Filament::setCurrentPanel(app(\Filament\PanelRegistry::class)->get('ops'));
+            \Livewire\Livewire::test(EntertainmentStatisticsPage::class)
+                ->assertSet('rows.0.slug', 'what-dog-breed-am-i')
+                ->assertSet('rows.0.counts.fun_complete', 1);
+
             $component = \Livewire\Livewire::test(EntertainmentStatisticsWidget::class)
                 ->assertSet('fromDate', '2026-10-28')->assertSet('toDate', '2026-10-28')
                 ->assertSet('totalRows', $totalRows)->assertCount('rows', 50)
                 ->assertSet('summary.fun_start', 1)
+                ->assertSet('rows.0.slug', 'what-dog-breed-am-i')
+                ->assertSet('rows.0.counts.fun_complete', 1)->assertSeeHtml('aria-sort="descending"')
+                ->call('sortByMetric', 'complete')->assertSet('sortDirection', 'asc')
+                ->assertSet('rows.0.counts.fun_complete', 0)->assertSeeHtml('aria-sort="ascending"')
                 ->call('movePage', 1)->assertSet('offset', 50)->assertCount('rows', 50);
             $component->call('sortByMetric', 'start')->assertSet('offset', 0)
                 ->assertSet('sortDirection', 'desc')->assertSet('rows.0.slug', 'friendship-quiz')

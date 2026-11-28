@@ -22,7 +22,7 @@ trait InteractsWithEntertainmentStatistics
     ];
 
     #[Locked]
-    public ?string $sortColumn = null;
+    public ?string $sortColumn = 'complete';
 
     #[Locked]
     public string $sortDirection = 'desc';
